@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_rest_client.dart';
+part of 'partograma_rest_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'auth_rest_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _AuthRestClient implements AuthRestClient {
-  _AuthRestClient(
+class _PartogramaRestClient implements PartogramaRestClient {
+  _PartogramaRestClient(
     this._dio, {
     this.baseUrl,
   });
@@ -19,7 +19,7 @@ class _AuthRestClient implements AuthRestClient {
   String? baseUrl;
 
   @override
-  Future<String> login() async {
+  Future<String> get() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -32,32 +32,6 @@ class _AuthRestClient implements AuthRestClient {
         .compose(
           _dio.options,
           '/login',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-    final value = _result.data!;
-    return value;
-  }
-
-  @override
-  Future<String> post(UserAuthRequest userAuthRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = userAuthRequest;
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/register',
           queryParameters: queryParameters,
           data: _data,
         )
