@@ -5,7 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await loadEnvConfig();
+  //await loadEnvConfig();
   await initializeDependencies();
 
   runApp(
@@ -25,4 +25,5 @@ Future<void> loadEnvConfig() async {
     await dotenv.load(fileName: '.env.development');
   }
 }
+
 
