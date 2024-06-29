@@ -19,13 +19,14 @@ class _AuthService implements AuthService {
   String? baseUrl;
 
   @override
-  Future<AuthResponse> authenticate(AuthRequest request) async {
+  Future<ApiResponse<AuthenticateResponse>> authenticate(
+      AuthenticateRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AuthResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<AuthenticateResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -41,18 +42,22 @@ class _AuthService implements AuthService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AuthResponse.fromJson(_result.data!);
+    final value = ApiResponse<AuthenticateResponse>.fromJson(
+      _result.data!,
+      (json) => AuthenticateResponse.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
   @override
-  Future<ValidateTokenResponse> validateToken(String token) async {
+  Future<ApiResponse<AuthenticateResponse>> validateToken(
+      TokenRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = token;
+    final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ValidateTokenResponse>(Options(
+        _setStreamType<ApiResponse<AuthenticateResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -68,18 +73,21 @@ class _AuthService implements AuthService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ValidateTokenResponse.fromJson(_result.data!);
+    final value = ApiResponse<AuthenticateResponse>.fromJson(
+      _result.data!,
+      (json) => AuthenticateResponse.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
   @override
-  Future<LogoutResponse> logout(String token) async {
+  Future<ApiResponse<AuthenticateResponse>> logout(TokenRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = token;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LogoutResponse>(Options(
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<AuthenticateResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -95,7 +103,10 @@ class _AuthService implements AuthService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = LogoutResponse.fromJson(_result.data!);
+    final value = ApiResponse<AuthenticateResponse>.fromJson(
+      _result.data!,
+      (json) => AuthenticateResponse.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 

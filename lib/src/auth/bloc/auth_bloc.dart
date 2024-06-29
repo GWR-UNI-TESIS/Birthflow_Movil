@@ -1,24 +1,31 @@
 import 'package:birthflow_movil/src/auth/bloc/events/auth_event.dart';
 import 'package:birthflow_movil/src/auth/bloc/states/auth_state.dart';
-import 'package:birthflow_movil/src/auth/models/auth_request.dart';
+import 'package:birthflow_movil/src/auth/models/authenticate_request.dart';
+import 'package:birthflow_movil/src/auth/models/token_request.dart';
 import 'package:birthflow_movil/src/auth/service/auth_service.dart';
 import 'package:birthflow_movil/src/local_storage/token_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
+class AuthenticationBloc extends Bloc<AuthEvent, AuthState> {
   final AuthService _authService;
   final TokenStorage _tokenStorage = TokenStorage();
 
-  AuthBloc(this._authService) : super(const AuthState.initial()) {
-    on<LoginRequested>((event, emit) async {
+  AuthenticationBloc(this._authService) : super(const Uninitialized()) {
+    on<LoggedIn>((event, emit) async {
       emit(const AuthLoading());
       try {
-        final request =
-            AuthRequest(userName: event.username, password: event.password);
+        final request = AuthenticateRequest(
+          userName: event.username,
+          password: event.password,
+        );
         final response = await _authService.authenticate(request);
-        _tokenStorage.saveTokenSecurely(response.token);
 
-        emit(AuthSuccess(response: response));
+        if (response.response == null || response.statusMessage == 'Username or password is incorrect' ) {
+          emit(const Unauthenticated(message: 'Usuario o contraseña incorrectos'));
+        } else {
+          _tokenStorage.saveTokenSecurely(response.response!.token);
+          emit(AuthState.authenticated(response: response.response!));
+        }
       } catch (e) {
         emit(AuthFailure(error: e.toString()));
       }
@@ -27,27 +34,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LogoutRequested>((event, emit) async {
       emit(const AuthLoading());
       try {
-        await _authService.logout(event.token);
-        emit(const AuthInitial());
+        await _authService.logout(TokenRequest(token: event.token));
+        await _tokenStorage.removeTokenSecurely();
+        emit(const Unauthenticated());
       } catch (e) {
         emit(AuthFailure(error: e.toString()));
       }
     });
 
-    on<ValidateToken>((event, emit) async {
+    on<AuthenticationStatusChecked>((event, emit) async {
       emit(const AuthLoading());
       try {
         final token = await _tokenStorage.getTokenSecurely();
-
-        final result = await _authService.validateToken(token!);
-
-        if(result.isValid == true){
-         
-        }else{
-           emit(const AuthInitial());
+        if (token == null) {
+          emit(const Unauthenticated());
+          return;
         }
 
-       
+        final tokenRequest = TokenRequest(token: token);
+
+        final response = await _authService.validateToken(tokenRequest);
+
+        if (response.response == null) {
+          await _tokenStorage.removeTokenSecurely();
+          emit(const Unauthenticated());
+        } else {
+          if (response.response?.token != null) {
+            emit(AuthState.authenticated(response: response.response!));
+          } else {
+            emit(const Unauthenticated());
+          }
+        }
       } catch (e) {
         emit(AuthFailure(error: e.toString()));
       }

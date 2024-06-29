@@ -1,8 +1,8 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
 class RegisterScreen extends StatelessWidget {
+  const RegisterScreen();
+
   @override
   Widget build(BuildContext context) {
     return _RegisterView();
@@ -10,10 +10,12 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class _RegisterView extends StatelessWidget {
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register'),),
+      appBar: AppBar(
+        title: const Text('Register'),
+      ),
     );
   }
 }

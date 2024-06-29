@@ -4,14 +4,14 @@ part 'auth_event.freezed.dart';
 
 @freezed
 class AuthEvent with _$AuthEvent {
-  const factory AuthEvent.loginRequested({
+  const factory AuthEvent.loggedIn ({
     required String username,
     required String password,
-  }) = LoginRequested;
+  }) = LoggedIn;
 
   const factory AuthEvent.logoutRequested({required String token}) =
       LogoutRequested;
 
-  const factory AuthEvent.validateToken() =
-      ValidateToken;
+  const factory AuthEvent.authenticationStatusChecked() =
+      AuthenticationStatusChecked;
 }
