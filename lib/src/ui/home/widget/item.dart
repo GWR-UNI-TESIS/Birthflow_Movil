@@ -8,7 +8,7 @@ class ListItemWidget extends StatefulWidget {
     required this.subtitle,
   });
 
-  final int partographId;
+  final String partographId;
   final String title;
   final String subtitle;
 

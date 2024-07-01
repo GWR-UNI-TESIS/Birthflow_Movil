@@ -7,8 +7,9 @@ part 'auth_state.freezed.dart';
 class AuthState with _$AuthState {
   const factory AuthState.uninitialized() = Uninitialized;
   const factory AuthState.loading() = AuthLoading;
-  const factory AuthState.authenticated(
-      {required AuthenticateResponse response}) = Authenticated;
+  const factory AuthState.authenticated({
+    required AuthenticateResponse response,
+  }) = Authenticated;
   const factory AuthState.unauthenticated({String? message}) = Unauthenticated;
   const factory AuthState.failure({required String error}) = AuthFailure;
 }

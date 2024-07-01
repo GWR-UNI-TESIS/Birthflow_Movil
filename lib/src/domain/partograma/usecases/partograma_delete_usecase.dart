@@ -1,4 +1,4 @@
-import 'package:birthflow_movil/src/domain/lib/usecase.dart';
+import 'package:birthflow_movil/src/core/lib/usecase.dart';
 
 
 class PartogramaDeleteUseCase implements UseCase<void, String?> {
