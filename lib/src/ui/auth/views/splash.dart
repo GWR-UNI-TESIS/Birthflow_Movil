@@ -1,6 +1,6 @@
-import 'package:birthflow_movil/src/auth/bloc/auth_bloc.dart';
-import 'package:birthflow_movil/src/auth/bloc/events/auth_event.dart';
-import 'package:birthflow_movil/src/auth/bloc/states/auth_state.dart';
+import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/auth/bloc/events/authentication_event.dart';
+import 'package:birthflow_movil/src/auth/bloc/states/authentication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,9 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<AuthenticationBloc, AuthState>(
-        listener: (BuildContext context, AuthState state) {
-          if (state is AuthFailure) {
+      body: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (BuildContext context, AuthenticationState state) {
+          if (state is Failure) {
             // Mostrar un mensaje de error si hubo un problema de autenticación
             _showErrorSnackbar(context, state.error);
           }

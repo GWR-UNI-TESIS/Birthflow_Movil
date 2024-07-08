@@ -1,5 +1,5 @@
-import 'package:birthflow_movil/src/auth/bloc/auth_bloc.dart';
-import 'package:birthflow_movil/src/auth/service/auth_service.dart';
+import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/auth/service/authentication_service.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/app_router.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ class AppDev extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthenticationBloc>(
-      create: (_) => AuthenticationBloc(locator<AuthService>()),
+      create: (_) => AuthenticationBloc(locator<AuthenticationService>()),
       child: MaterialApp(
         home: AppEntry(),
       ),
@@ -27,6 +27,9 @@ class AppEntry extends StatelessWidget {
     return MaterialApp.router(
       title: 'Birthflow',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       routeInformationProvider: appRouter.router.routeInformationProvider,
       routerDelegate: appRouter.router.routerDelegate,
       routeInformationParser: appRouter.router.routeInformationParser,

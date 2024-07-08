@@ -1,15 +1,15 @@
-enum RutasNavegacion { home, splash, login, register, auth, partograma }
+enum RoutePaths { home, splash, login, register, auth, partograma }
 
-extension RutasNavegacionExtension on RutasNavegacion {
+extension RoutePathsExtension on RoutePaths {
   String get path {
     switch (this) {
-      case RutasNavegacion.home:
+      case RoutePaths.home:
         return '/';
-      case RutasNavegacion.partograma:
+      case RoutePaths.partograma:
         return '/partograma';
-      case RutasNavegacion.login:
+      case RoutePaths.login:
         return 'login';
-      case RutasNavegacion.register:
+      case RoutePaths.register:
         return 'register';
       default:
         return '/$name';

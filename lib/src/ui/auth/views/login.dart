@@ -1,6 +1,6 @@
-import 'package:birthflow_movil/src/auth/bloc/auth_bloc.dart';
-import 'package:birthflow_movil/src/auth/bloc/events/auth_event.dart';
-import 'package:birthflow_movil/src/auth/bloc/states/auth_state.dart';
+import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/auth/bloc/events/authentication_event.dart';
+import 'package:birthflow_movil/src/auth/bloc/states/authentication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +19,8 @@ class _LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<_LoginView> {
+  final _formKey = GlobalKey<FormState>();
+
   // Controladores para los campos de texto
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -27,8 +29,8 @@ class _LoginViewState extends State<_LoginView> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: BlocListener<AuthenticationBloc, AuthState>(
-        listener: (BuildContext context, AuthState state) {
+      body: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (BuildContext context, AuthenticationState state) {
           if (state is Unauthenticated) {
             if (state.message != null) {
               _showErrorSnackbar(context, state.message!);
@@ -36,92 +38,91 @@ class _LoginViewState extends State<_LoginView> {
           }
         },
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'BirthFlow',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 59, 20, 104),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35,
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Iniciar sesión',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Email
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.1,
-                  vertical: size.height * 0.02,
-                ),
-                child: TextField(
-                  controller: _usernameController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Usuario',
-                    labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 59, 20, 104),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              // Password
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.1,
-                  vertical: size.height * 0.02,
-                ),
-                child: TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Contraseña',
-                    labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 59, 20, 104),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Button
-              ElevatedButton(
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
-                    Color.fromARGB(255, 59, 20, 108),
-                  ),
-                ),
-                onPressed: () {
-                  final username = _usernameController.text;
-                  final password = _passwordController.text;
-
-                  // Dispara el evento del bloc con los valores ingresados
-                  context.read<AuthenticationBloc>().add(
-                        LoggedIn(username: username, password: password),
-                      );
-                },
-                child: const Text(
-                  'Continuar',
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'BirthFlow',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 59, 20, 104),
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: 35,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                const Text(
+                  'Iniciar sesión',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Email
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.1,
+                    vertical: size.height * 0.02,
+                  ),
+                  child: TextFormField(
+                    controller: _usernameController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Usuario',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Ingrese un usuario';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                // Password
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.1,
+                    vertical: size.height * 0.02,
+                  ),
+                  child: TextFormField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Contraseña',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Ingrese una contraseña';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Button
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      final username = _usernameController.text;
+                      final password = _passwordController.text;
+
+                      // Dispara el evento del bloc con los valores ingresados
+                      context.read<AuthenticationBloc>().add(
+                            LoggedIn(username: username, password: password),
+                          );
+                    }
+                  },
+                  child: const Text(
+                    'Continuar',
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

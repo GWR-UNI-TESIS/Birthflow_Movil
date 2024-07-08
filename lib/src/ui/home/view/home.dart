@@ -1,9 +1,9 @@
-import 'package:birthflow_movil/src/auth/bloc/auth_bloc.dart';
+import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
-import 'package:birthflow_movil/src/domain/partograma/usecases/partograma_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/home/bloc/bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/states_events/partogramas_event.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/states_events/partogramas_state.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_event.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,16 +14,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AuthenticationBloc>().state;
-    final user = state.maybeWhen(
-      authenticated: (response) => response.user.id,
-      orElse: () => '',
+    final int user = state.maybeWhen(
+      authenticated: (response) => response.user.id!,
+      orElse: () => 0,
     );
     return MultiBlocProvider(
       providers: [
-        BlocProvider<PartogramasBloc>(
-          create: (context) => PartogramasBloc(
-            locator<PartogramaGetUseCase>(),
-          )..add(PartogramasEvent.fetchPartogramas(userId: user)),
+        BlocProvider<PartographsBloc>(
+          create: (context) => PartographsBloc(
+            locator<PartographGetUseCase>(),
+          ),
         ),
       ],
       child: _HomeView(),
@@ -53,7 +53,7 @@ class _HomeView extends StatelessWidget {
               itemBuilder: (BuildContext context) => <PopupMenuEntry<_Options>>[
                 const PopupMenuItem<_Options>(
                   value: _Options.newPartograph,
-                  child: Text('Nuevo Partograma'),
+                  child: Text('Nuevo Partograph'),
                 ),
                 const PopupMenuItem<_Options>(
                   value: _Options.configuration,
@@ -76,7 +76,7 @@ class _HomeView extends StatelessWidget {
                 isScrollable: true,
                 tabs: <Widget>[
                   Tab(
-                    text: 'Partogramas',
+                    text: 'Partographs',
                   ),
                 ],
               ),
@@ -85,7 +85,7 @@ class _HomeView extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            BlocBuilder<PartogramasBloc, PartogramasState>(
+            BlocBuilder<PartographsBloc, PartographsState>(
               builder: (context, state) {
                 return state.when(
                   initial: () =>

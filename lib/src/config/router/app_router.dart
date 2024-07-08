@@ -1,14 +1,13 @@
 import 'dart:async';
-
-import 'package:birthflow_movil/src/auth/bloc/auth_bloc.dart';
-import 'package:birthflow_movil/src/auth/bloc/states/auth_state.dart';
+import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/auth/bloc/states/authentication_state.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/ui/auth/views/login.dart';
 import 'package:birthflow_movil/src/ui/auth/views/register.dart';
 import 'package:birthflow_movil/src/ui/auth/views/splash.dart';
 import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
-import 'package:birthflow_movil/src/ui/partograma/views/partograma.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/partograph.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,40 +49,40 @@ class AppRouter {
   }
 
   late final GoRouter router = GoRouter(
-    initialLocation: RutasNavegacion.splash.path,
+    initialLocation: RoutePaths.splash.path,
     routes: [
       _buildRoute(
-        path: RutasNavegacion.splash.path,
-        name: RutasNavegacion.splash.name,
+        path: RoutePaths.splash.path,
+        name: RoutePaths.splash.name,
         screen: const SplashScreen(),
       ),
       _buildRoute(
-        path: RutasNavegacion.home.path,
-        name: RutasNavegacion.home.name,
+        path: RoutePaths.home.path,
+        name: RoutePaths.home.name,
         screen: HomeScreen(),
       ),
       _buildRoute(
-        path: RutasNavegacion.auth.path,
-        name: RutasNavegacion.auth.name,
+        path: RoutePaths.auth.path,
+        name: RoutePaths.auth.name,
         screen: const WelcomeScreen(),
         routeBase: <RouteBase>[
           // Add child routes
           _buildRoute(
             path: 'login',
-            name: RutasNavegacion.login.name,
+            name: RoutePaths.login.name,
             screen: const LoginScreen(),
           ),
           _buildRoute(
             path: 'register',
-            name: RutasNavegacion.register.name,
+            name: RoutePaths.register.name,
             screen: const RegisterScreen(),
           ),
         ],
       ),
       _buildRoute(
-        path: RutasNavegacion.partograma.path,
-        name: RutasNavegacion.partograma.name,
-        screen: PartogramaScreen(),
+        path: RoutePaths.partograma.path,
+        name: RoutePaths.partograma.name,
+        screen: PartographScreen(),
       ),
     ],
     refreshListenable: _StreamToListenable([authBloc.stream]),
@@ -97,13 +96,13 @@ class AppRouter {
     final initAuth = authBloc.state is Uninitialized;
 
     final unauthenticatedPaths = [
-      RutasNavegacion.auth.path,
-      '${RutasNavegacion.auth.path}/login', // Ruta completa para login
-      '${RutasNavegacion.auth.path}/register',
+      RoutePaths.auth.path,
+      '${RoutePaths.auth.path}/login', // Ruta completa para login
+      '${RoutePaths.auth.path}/register',
     ];
 
     // Rutas que requieren autenticación
-    final authenticatedPaths = [RutasNavegacion.partograma.path];
+    final authenticatedPaths = [RoutePaths.partograma.path];
 
     final isUnauthenticatedPath = unauthenticatedPaths
         .any((path) => state.matchedLocation.contains(path));
@@ -112,23 +111,22 @@ class AppRouter {
         authenticatedPaths.any((path) => state.matchedLocation.contains(path));
 
     //Revisar el inicio
-    final initScreen =
-        state.matchedLocation.contains(RutasNavegacion.splash.path);
+    final initScreen = state.matchedLocation.contains(RoutePaths.splash.path);
 
     if (initAuth && initScreen) return null;
 
     if (isUnAuthenticated && !isUnauthenticatedPath) {
-      return RutasNavegacion.auth.path;
+      return RoutePaths.auth.path;
     }
 
     if (isUnAuthenticated && isAuthenticatedPath) {
-      return RutasNavegacion.auth.path;
+      return RoutePaths.auth.path;
     }
 
     // Redirigir a la página de inicio si el usuario está autenticado y
     // está tratando de acceder a una página de autenticación
     if (isAuthenticated && (isUnauthenticatedPath || initScreen)) {
-      return RutasNavegacion.home.path;
+      return RoutePaths.home.path;
     }
 
     // Permitir el acceso a la ruta solicitada
