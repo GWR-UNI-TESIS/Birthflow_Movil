@@ -12,23 +12,31 @@ import 'package:get_it/get_it.dart';
 final GetIt locator = GetIt.instance;
 
 Future<void> initializeDependencies() async {
+  // Obtiene la URL de la API desde el archivo .env (asumiendo que existe un paquete dotenv)
   final String? apiUrl = dotenv.env['API_URL'];
+
+  // Crea un cliente Dio para realizar llamadas HTTP a la API
   final dio = buildDioClient(apiUrl!);
 
+  // Registra el AuthenticationService como singleton en GetIt
   locator.registerSingleton<AuthenticationService>(AuthenticationService(dio));
 
+  // Registra el AuthenticationBloc como singleton en GetIt, inyectando AuthenticationService
   locator.registerSingleton<AuthenticationBloc>(
     AuthenticationBloc(locator<AuthenticationService>()),
   );
 
+  // Registra el PartographService como singleton en GetIt
   locator.registerSingleton<PartographService>(PartographService(dio));
 
+  // Registra el PartographRepositoryImplementation como singleton en GetIt, inyectando PartographService
   locator.registerSingleton<PartographRepository>(
     PartographRepositoryImplementation(
       partogramaService: locator<PartographService>(),
     ),
   );
 
+  // Registra el PartographGetUseCase como singleton en GetIt, inyectando PartographRepository
   locator.registerSingleton<PartographGetUseCase>(
     PartographGetUseCase(
       partogramaRepository: locator<PartographRepository>(),

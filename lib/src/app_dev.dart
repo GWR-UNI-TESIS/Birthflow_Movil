@@ -22,8 +22,6 @@ class AppEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();
     final AppRouter appRouter = AppRouter(authBloc: authBloc);
-    // Crea la instancia de AppRouter
-    // final AppRouter router = AppRouter(authBloc: authBloc);
     return MaterialApp.router(
       title: 'Birthflow',
       debugShowCheckedModeBanner: false,

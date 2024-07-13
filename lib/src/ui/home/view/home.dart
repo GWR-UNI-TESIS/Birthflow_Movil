@@ -3,7 +3,6 @@ import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/home/bloc/bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
 import 'package:flutter/material.dart';

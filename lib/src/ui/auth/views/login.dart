@@ -11,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) {
+         // Si el estado es Unauthenticated y hay un mensaje de error, muestra un SnackBar
         if (state is Unauthenticated) {
           if (state.message != null) {
             _showErrorSnackbar(context, state.message!);
@@ -40,8 +41,8 @@ class _LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<_LoginView> {
   final _formKey = GlobalKey<FormState>();
-
-  // Controladores para los campos de texto
+  
+  // Controladores para los campos de usuario y contraseña
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -134,6 +135,7 @@ class _LoginViewState extends State<_LoginView> {
               ),
             ),
           ),
+           // Muestra un indicador de progreso circular mientras se carga
           if (isLoading)
             Container(
               height: MediaQuery.of(context).size.height,

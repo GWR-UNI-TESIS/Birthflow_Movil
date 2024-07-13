@@ -18,6 +18,7 @@ class AppRouter {
 
   AppRouter({required this.authBloc});
 
+  // Construye una página con una transición predeterminada
   CustomTransitionPage _buildPageWithDefaultTransition<T>({
     required BuildContext context,
     required GoRouterState state,
@@ -32,6 +33,7 @@ class AppRouter {
     );
   }
 
+  // Construye una ruta con propiedades específicas
   GoRoute _buildRoute({
     required String path,
     required String name,
@@ -50,20 +52,25 @@ class AppRouter {
     );
   }
 
+  // Inicializa el enrutador GoRouter
   late final GoRouter router = GoRouter(
+    // Ubicación inicial de la aplicación (ruta del splash)
     initialLocation: RoutePaths.splash.path,
+    // Definición de rutas
     routes: [
+      // Ruta del splash
       _buildRoute(
         path: RoutePaths.splash.path,
         name: RoutePaths.splash.name,
         screen: const SplashScreen(),
       ),
+      // Ruta de inicio
       _buildRoute(
         path: RoutePaths.home.path,
         name: RoutePaths.home.name,
         screen: HomeScreen(),
         routeBase: <RouteBase>[
-          // Add child routes
+          // Rutas hijas de la ruta de inicio (se agregan aquí)
           _buildRoute(
             path: RoutePaths.createPartograph.path,
             name: RoutePaths.createPartograph.name,
@@ -71,12 +78,13 @@ class AppRouter {
           ),
         ],
       ),
+      // Ruta de autenticación
       _buildRoute(
         path: RoutePaths.auth.path,
         name: RoutePaths.auth.name,
         screen: const WelcomeScreen(),
         routeBase: <RouteBase>[
-          // Add child routes
+          // Rutas hijas de la ruta de autenticación (se agregan aquí)
           _buildRoute(
             path: 'login',
             name: RoutePaths.login.name,
@@ -89,20 +97,23 @@ class AppRouter {
           ),
         ],
       ),
+      // Ruta del partograma
       _buildRoute(
         path: RoutePaths.partograma.path,
         name: RoutePaths.partograma.name,
         screen: PartographScreen(),
       ),
     ],
+    // Escuchador para refrescar la lista de rutas basado en el stream del AuthenticationBloc
     refreshListenable: _StreamToListenable([authBloc.stream]),
+    // Función para redireccionamiento basado en el estado de autenticación
     redirect: _guard,
   );
 
   String? _guard(BuildContext context, GoRouterState state) {
+    // Verifica el estado de autenticación
     final isAuthenticated = authBloc.state is Authenticated;
     final isUnAuthenticated = authBloc.state is Unauthenticated;
-
     final initAuth = authBloc.state is Uninitialized;
 
     final unauthenticatedPaths = [

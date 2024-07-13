@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/auth/bloc/states/authentication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// Pantalla de Splash
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -14,11 +15,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // wait for 2 seconds to show splash screen
+    // Espera 2 segundos para mostrar la pantalla de splash
     Future.delayed(const Duration(seconds: 1), () {
+      // Verifica si el widget aún está en el árbol de widgets
       if (mounted) {
-        BlocProvider.of<AuthenticationBloc>(context)
-            .add(const AuthenticationStatusChecked());
+        // Dispara el evento AuthenticationStatusChecked del AuthenticationBloc
+        BlocProvider.of<AuthenticationBloc>(context).add(
+          const AuthenticationStatusChecked(),
+        );
       }
     });
     super.initState();
@@ -30,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (BuildContext context, AuthenticationState state) {
           if (state is Failure) {
-            // Mostrar un mensaje de error si hubo un problema de autenticación
+            // Muestra un SnackBar con el mensaje de error de autenticación
             _showErrorSnackbar(context, state.error);
           }
         },
@@ -42,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget _buildSplashContent() {
     return const Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido
         children: [
           Text(
             'BirthFlow',
@@ -53,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
             style: TextStyle(fontSize: 16),
           ),
           SizedBox(height: 20),
-          CircularProgressIndicator(),
+          CircularProgressIndicator(), // Muestra un indicador de progreso circular
         ],
       ),
     );
