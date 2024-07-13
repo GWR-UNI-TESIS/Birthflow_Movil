@@ -7,6 +7,7 @@ part 'authentication_state.freezed.dart';
 class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState.uninitialized() = Uninitialized;
   const factory AuthenticationState.loading() = AuthLoading;
+  const factory AuthenticationState.registrationSuccess() = RegistrationSuccess;
   const factory AuthenticationState.authenticated({
     required AuthenticationResponse response,
   }) = Authenticated;

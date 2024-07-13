@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,31 +7,45 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Birthflow',
-              style: TextStyle(
-                fontSize: 48.0,
-                fontWeight: FontWeight.bold,
-              ),
+            Image.asset(
+              'assets/welcome_illustration.png',
+              height: 260.0,
+              fit: BoxFit.fill,
             ),
-            
-            const SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Text(
+              'Bienvenido a Birthflow',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 5.0),
+            Text(
+              'Sistema de gestion de partogramas',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 80.0),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                ElevatedButton(
-                 onPressed: () => context.go('/auth/register'),
-                  child: const Text('Registrarse'),
+                SizedBox(
+                  width: size.width / 1.3,
+                  child: FilledButton(
+                    onPressed: () => context.goNamed(RoutePaths.register.name),
+                    child: const Text('Registrarse'),
+                  ),
                 ),
-                const SizedBox(width: 20.0),
-                ElevatedButton(
-                   onPressed: () => context.go('/auth/login'),
-                  child: const Text('Iniciar sesión'),
+                const SizedBox(width: 50.0),
+                SizedBox(
+                  width: size.width / 1.3,
+                  child: TextButton(
+                    onPressed: () => context.goNamed(RoutePaths.login.name),
+                    child: const Text('Iniciar sesión'),
+                  ),
                 ),
               ],
             ),

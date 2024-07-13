@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/ui/auth/views/login.dart';
 import 'package:birthflow_movil/src/ui/auth/views/register.dart';
 import 'package:birthflow_movil/src/ui/auth/views/splash.dart';
 import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
+import 'package:birthflow_movil/src/ui/home/view/create_partograph.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class AppRouter {
     return CustomTransitionPage<T>(
       key: state.pageKey,
       child: child,
+      transitionDuration: const Duration(milliseconds: 600),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           FadeTransition(opacity: animation, child: child),
     );
@@ -60,6 +62,14 @@ class AppRouter {
         path: RoutePaths.home.path,
         name: RoutePaths.home.name,
         screen: HomeScreen(),
+        routeBase: <RouteBase>[
+          // Add child routes
+          _buildRoute(
+            path: RoutePaths.createPartograph.path,
+            name: RoutePaths.createPartograph.name,
+            screen: CreatePartographScreen(),
+          ),
+        ],
       ),
       _buildRoute(
         path: RoutePaths.auth.path,
@@ -102,7 +112,10 @@ class AppRouter {
     ];
 
     // Rutas que requieren autenticación
-    final authenticatedPaths = [RoutePaths.partograma.path];
+    final authenticatedPaths = [
+      RoutePaths.partograma.path,
+      RoutePaths.createPartograph.path,
+    ];
 
     final isUnauthenticatedPath = unauthenticatedPaths
         .any((path) => state.matchedLocation.contains(path));

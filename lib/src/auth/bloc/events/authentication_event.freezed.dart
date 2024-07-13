@@ -20,6 +20,15 @@ mixin _$AuthenticationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function(String token) logoutRequested,
+    required TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)
+        register,
     required TResult Function() authenticationStatusChecked,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +36,15 @@ mixin _$AuthenticationEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function(String token)? logoutRequested,
+    TResult? Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult? Function()? authenticationStatusChecked,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +52,15 @@ mixin _$AuthenticationEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function(String token)? logoutRequested,
+    TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult Function()? authenticationStatusChecked,
     required TResult orElse(),
   }) =>
@@ -42,6 +69,7 @@ mixin _$AuthenticationEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Register value) register,
     required TResult Function(AuthenticationStatusChecked value)
         authenticationStatusChecked,
   }) =>
@@ -50,6 +78,7 @@ mixin _$AuthenticationEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Register value)? register,
     TResult? Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
   }) =>
@@ -58,6 +87,7 @@ mixin _$AuthenticationEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Register value)? register,
     TResult Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
     required TResult orElse(),
@@ -159,6 +189,15 @@ class _$LoggedInImpl implements LoggedIn {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function(String token) logoutRequested,
+    required TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)
+        register,
     required TResult Function() authenticationStatusChecked,
   }) {
     return loggedIn(username, password);
@@ -169,6 +208,15 @@ class _$LoggedInImpl implements LoggedIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function(String token)? logoutRequested,
+    TResult? Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult? Function()? authenticationStatusChecked,
   }) {
     return loggedIn?.call(username, password);
@@ -179,6 +227,15 @@ class _$LoggedInImpl implements LoggedIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function(String token)? logoutRequested,
+    TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult Function()? authenticationStatusChecked,
     required TResult orElse(),
   }) {
@@ -193,6 +250,7 @@ class _$LoggedInImpl implements LoggedIn {
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Register value) register,
     required TResult Function(AuthenticationStatusChecked value)
         authenticationStatusChecked,
   }) {
@@ -204,6 +262,7 @@ class _$LoggedInImpl implements LoggedIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Register value)? register,
     TResult? Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
   }) {
@@ -215,6 +274,7 @@ class _$LoggedInImpl implements LoggedIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Register value)? register,
     TResult Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
     required TResult orElse(),
@@ -305,6 +365,15 @@ class _$LogoutRequestedImpl implements LogoutRequested {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function(String token) logoutRequested,
+    required TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)
+        register,
     required TResult Function() authenticationStatusChecked,
   }) {
     return logoutRequested(token);
@@ -315,6 +384,15 @@ class _$LogoutRequestedImpl implements LogoutRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function(String token)? logoutRequested,
+    TResult? Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult? Function()? authenticationStatusChecked,
   }) {
     return logoutRequested?.call(token);
@@ -325,6 +403,15 @@ class _$LogoutRequestedImpl implements LogoutRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function(String token)? logoutRequested,
+    TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult Function()? authenticationStatusChecked,
     required TResult orElse(),
   }) {
@@ -339,6 +426,7 @@ class _$LogoutRequestedImpl implements LogoutRequested {
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Register value) register,
     required TResult Function(AuthenticationStatusChecked value)
         authenticationStatusChecked,
   }) {
@@ -350,6 +438,7 @@ class _$LogoutRequestedImpl implements LogoutRequested {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Register value)? register,
     TResult? Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
   }) {
@@ -361,6 +450,7 @@ class _$LogoutRequestedImpl implements LogoutRequested {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Register value)? register,
     TResult Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
     required TResult orElse(),
@@ -379,6 +469,261 @@ abstract class LogoutRequested implements AuthenticationEvent {
   String get token;
   @JsonKey(ignore: true)
   _$$LogoutRequestedImplCopyWith<_$LogoutRequestedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RegisterImplCopyWith<$Res> {
+  factory _$$RegisterImplCopyWith(
+          _$RegisterImpl value, $Res Function(_$RegisterImpl) then) =
+      __$$RegisterImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {int id,
+      String nombres,
+      String apellidos,
+      String nombreUsuario,
+      String email,
+      String? phoneNumber,
+      String passwordHash});
+}
+
+/// @nodoc
+class __$$RegisterImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$RegisterImpl>
+    implements _$$RegisterImplCopyWith<$Res> {
+  __$$RegisterImplCopyWithImpl(
+      _$RegisterImpl _value, $Res Function(_$RegisterImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? nombres = null,
+    Object? apellidos = null,
+    Object? nombreUsuario = null,
+    Object? email = null,
+    Object? phoneNumber = freezed,
+    Object? passwordHash = null,
+  }) {
+    return _then(_$RegisterImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      nombres: null == nombres
+          ? _value.nombres
+          : nombres // ignore: cast_nullable_to_non_nullable
+              as String,
+      apellidos: null == apellidos
+          ? _value.apellidos
+          : apellidos // ignore: cast_nullable_to_non_nullable
+              as String,
+      nombreUsuario: null == nombreUsuario
+          ? _value.nombreUsuario
+          : nombreUsuario // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordHash: null == passwordHash
+          ? _value.passwordHash
+          : passwordHash // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RegisterImpl implements Register {
+  const _$RegisterImpl(
+      {required this.id,
+      required this.nombres,
+      required this.apellidos,
+      required this.nombreUsuario,
+      required this.email,
+      this.phoneNumber,
+      required this.passwordHash});
+
+  @override
+  final int id;
+  @override
+  final String nombres;
+  @override
+  final String apellidos;
+  @override
+  final String nombreUsuario;
+  @override
+  final String email;
+  @override
+  final String? phoneNumber;
+  @override
+  final String passwordHash;
+
+  @override
+  String toString() {
+    return 'AuthenticationEvent.register(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RegisterImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.nombres, nombres) || other.nombres == nombres) &&
+            (identical(other.apellidos, apellidos) ||
+                other.apellidos == apellidos) &&
+            (identical(other.nombreUsuario, nombreUsuario) ||
+                other.nombreUsuario == nombreUsuario) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.passwordHash, passwordHash) ||
+                other.passwordHash == passwordHash));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, nombres, apellidos,
+      nombreUsuario, email, phoneNumber, passwordHash);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
+      __$$RegisterImplCopyWithImpl<_$RegisterImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String username, String password) loggedIn,
+    required TResult Function(String token) logoutRequested,
+    required TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)
+        register,
+    required TResult Function() authenticationStatusChecked,
+  }) {
+    return register(id, nombres, apellidos, nombreUsuario, email, phoneNumber,
+        passwordHash);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String username, String password)? loggedIn,
+    TResult? Function(String token)? logoutRequested,
+    TResult? Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
+    TResult? Function()? authenticationStatusChecked,
+  }) {
+    return register?.call(id, nombres, apellidos, nombreUsuario, email,
+        phoneNumber, passwordHash);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String username, String password)? loggedIn,
+    TResult Function(String token)? logoutRequested,
+    TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
+    TResult Function()? authenticationStatusChecked,
+    required TResult orElse(),
+  }) {
+    if (register != null) {
+      return register(id, nombres, apellidos, nombreUsuario, email, phoneNumber,
+          passwordHash);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoggedIn value) loggedIn,
+    required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Register value) register,
+    required TResult Function(AuthenticationStatusChecked value)
+        authenticationStatusChecked,
+  }) {
+    return register(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoggedIn value)? loggedIn,
+    TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Register value)? register,
+    TResult? Function(AuthenticationStatusChecked value)?
+        authenticationStatusChecked,
+  }) {
+    return register?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoggedIn value)? loggedIn,
+    TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Register value)? register,
+    TResult Function(AuthenticationStatusChecked value)?
+        authenticationStatusChecked,
+    required TResult orElse(),
+  }) {
+    if (register != null) {
+      return register(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Register implements AuthenticationEvent {
+  const factory Register(
+      {required final int id,
+      required final String nombres,
+      required final String apellidos,
+      required final String nombreUsuario,
+      required final String email,
+      final String? phoneNumber,
+      required final String passwordHash}) = _$RegisterImpl;
+
+  int get id;
+  String get nombres;
+  String get apellidos;
+  String get nombreUsuario;
+  String get email;
+  String? get phoneNumber;
+  String get passwordHash;
+  @JsonKey(ignore: true)
+  _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -426,6 +771,15 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function(String token) logoutRequested,
+    required TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)
+        register,
     required TResult Function() authenticationStatusChecked,
   }) {
     return authenticationStatusChecked();
@@ -436,6 +790,15 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function(String token)? logoutRequested,
+    TResult? Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult? Function()? authenticationStatusChecked,
   }) {
     return authenticationStatusChecked?.call();
@@ -446,6 +809,15 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function(String token)? logoutRequested,
+    TResult Function(
+            int id,
+            String nombres,
+            String apellidos,
+            String nombreUsuario,
+            String email,
+            String? phoneNumber,
+            String passwordHash)?
+        register,
     TResult Function()? authenticationStatusChecked,
     required TResult orElse(),
   }) {
@@ -460,6 +832,7 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Register value) register,
     required TResult Function(AuthenticationStatusChecked value)
         authenticationStatusChecked,
   }) {
@@ -471,6 +844,7 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Register value)? register,
     TResult? Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
   }) {
@@ -482,6 +856,7 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Register value)? register,
     TResult Function(AuthenticationStatusChecked value)?
         authenticationStatusChecked,
     required TResult orElse(),

@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
+import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/home/bloc/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_event.dart';
@@ -7,6 +8,7 @@ import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_state
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 enum _Options { newPartograph, configuration, information }
 
@@ -32,15 +34,24 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _HomeView extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 1,
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: const Text('BirthFlow'),
           elevation: 2,
           actions: <Widget>[
+            IconButton(
+              onPressed: () {
+                _scaffoldKey.currentState!.openEndDrawer();
+              },
+              icon: const Icon(Icons.notifications),
+            ),
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             PopupMenuButton<_Options>(
               padding: const EdgeInsets.all(12),
@@ -53,7 +64,7 @@ class _HomeView extends StatelessWidget {
               itemBuilder: (BuildContext context) => <PopupMenuEntry<_Options>>[
                 const PopupMenuItem<_Options>(
                   value: _Options.newPartograph,
-                  child: Text('Nuevo Partograph'),
+                  child: Text('Nuevo Partograma'),
                 ),
                 const PopupMenuItem<_Options>(
                   value: _Options.configuration,
@@ -63,20 +74,25 @@ class _HomeView extends StatelessWidget {
                   value: _Options.information,
                   child: Text('Informacion'),
                 ),
+                const PopupMenuItem<_Options>(
+                  value: _Options.information,
+                  child: Text('Cerrar sesion'),
+                ),
               ],
             ),
           ],
           bottom: const PreferredSize(
             preferredSize: Size.fromHeight(
               kToolbarHeight,
-            ), // Ajusta la altura según tu diseño
+            ),
             child: SizedBox(
               width: double.infinity,
               child: TabBar(
+                tabAlignment: TabAlignment.start,
                 isScrollable: true,
                 tabs: <Widget>[
                   Tab(
-                    text: 'Partographs',
+                    text: 'Partogramas',
                   ),
                 ],
               ),
@@ -130,12 +146,25 @@ class _HomeView extends StatelessWidget {
             ),
           ],
         ),
+        endDrawer: NotificationsDrawer(),
         floatingActionButton: FloatingActionButton(
           tooltip: 'Nuevo',
-          onPressed: () {},
+          onPressed: () => context.goNamed(RoutePaths.createPartograph.name),
           child: const Icon(Icons.add),
         ),
       ),
+    );
+  }
+}
+
+class NotificationsDrawer extends Drawer {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notificaciones'),
+      ),
+      body: Container(),
     );
   }
 }

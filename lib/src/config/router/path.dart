@@ -1,4 +1,4 @@
-enum RoutePaths { home, splash, login, register, auth, partograma }
+enum RoutePaths { home, splash, login, register, auth, partograma, createPartograph }
 
 extension RoutePathsExtension on RoutePaths {
   String get path {
@@ -11,6 +11,8 @@ extension RoutePathsExtension on RoutePaths {
         return 'login';
       case RoutePaths.register:
         return 'register';
+      case RoutePaths.createPartograph:
+        return 'createPartograph';
       default:
         return '/$name';
     }

@@ -9,7 +9,27 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _LoginView();
+    return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listener: (BuildContext context, AuthenticationState state) {
+        if (state is Unauthenticated) {
+          if (state.message != null) {
+            _showErrorSnackbar(context, state.message!);
+          }
+        }
+      },
+      child: _LoginView(),
+    );
+  }
+
+  void _showErrorSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(message),
+        backgroundColor: Colors.red,
+        showCloseIcon: true,
+      ),
+    );
   }
 }
 
@@ -28,112 +48,110 @@ class _LoginViewState extends State<_LoginView> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: BlocListener<AuthenticationBloc, AuthenticationState>(
-        listener: (BuildContext context, AuthenticationState state) {
-          if (state is Unauthenticated) {
-            if (state.message != null) {
-              _showErrorSnackbar(context, state.message!);
-            }
-          }
-        },
-        child: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'BirthFlow',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 59, 20, 104),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Iniciar sesión',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Email
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.1,
-                    vertical: size.height * 0.02,
-                  ),
-                  child: TextFormField(
-                    controller: _usernameController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Usuario',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Ingrese un usuario';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                // Password
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.1,
-                    vertical: size.height * 0.02,
-                  ),
-                  child: TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Contraseña',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Ingrese una contraseña';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Button
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      final username = _usernameController.text;
-                      final password = _passwordController.text;
+    final isLoading = context.watch<AuthenticationBloc>().state is AuthLoading;
 
-                      // Dispara el evento del bloc con los valores ingresados
-                      context.read<AuthenticationBloc>().add(
-                            LoggedIn(username: username, password: password),
-                          );
-                    }
-                  },
-                  child: const Text(
-                    'Continuar',
-                  ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            padding: const EdgeInsets.all(40.0),
+            child: Center(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'BirthFlow',
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Iniciar sesión',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 40),
+                    // Email
+                    TextFormField(
+                      controller: _usernameController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Usuario',
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ingrese un usuario';
+                        }
+                        return null;
+                      },
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Contraseña',
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ingrese una contraseña';
+                        }
+                        return null;
+                      },
+                    ),
+
+                    const SizedBox(height: 50),
+                    // Button
+                    SizedBox(
+                      width: size.width / 1.3,
+                      child: FilledButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final username = _usernameController.text;
+                            final password = _passwordController.text;
+
+                            // Dispara el evento del bloc con los valores ingresados
+                            context.read<AuthenticationBloc>().add(
+                                  LoggedIn(
+                                    username: username,
+                                    password: password,
+                                  ),
+                                );
+                          }
+                        },
+                        child: const Text(
+                          'Continuar',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
-  }
+          if (isLoading)
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: const Color.fromRGBO(249, 249, 249, 0.9),
+              child: const Center(
+                child: CircularProgressIndicator(
+                  backgroundColor:
+                      Colors.transparent, // Oculta el fondo del indicador
 
-  void _showErrorSnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.red,
+                  strokeWidth: 5.0, // Ajusta el grosor del indicador
+                  semanticsLabel: 'Cargando...', // Etiqueta para accesibilidad
+                ),
+              ),
+            )
+          else
+            Container(),
+        ],
       ),
     );
   }

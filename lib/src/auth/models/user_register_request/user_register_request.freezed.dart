@@ -1,0 +1,281 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'user_register_request.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+UserRegisterRequest _$UserRegisterRequestFromJson(Map<String, dynamic> json) {
+  return _UserRegisterRequest.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UserRegisterRequest {
+  int get id => throw _privateConstructorUsedError;
+  String get nombres => throw _privateConstructorUsedError;
+  String get apellidos => throw _privateConstructorUsedError;
+  String get nombreUsuario => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  int? get phoneNumber => throw _privateConstructorUsedError;
+  String get passwordHash => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UserRegisterRequestCopyWith<UserRegisterRequest> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserRegisterRequestCopyWith<$Res> {
+  factory $UserRegisterRequestCopyWith(
+          UserRegisterRequest value, $Res Function(UserRegisterRequest) then) =
+      _$UserRegisterRequestCopyWithImpl<$Res, UserRegisterRequest>;
+  @useResult
+  $Res call(
+      {int id,
+      String nombres,
+      String apellidos,
+      String nombreUsuario,
+      String email,
+      int? phoneNumber,
+      String passwordHash});
+}
+
+/// @nodoc
+class _$UserRegisterRequestCopyWithImpl<$Res, $Val extends UserRegisterRequest>
+    implements $UserRegisterRequestCopyWith<$Res> {
+  _$UserRegisterRequestCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? nombres = null,
+    Object? apellidos = null,
+    Object? nombreUsuario = null,
+    Object? email = null,
+    Object? phoneNumber = freezed,
+    Object? passwordHash = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      nombres: null == nombres
+          ? _value.nombres
+          : nombres // ignore: cast_nullable_to_non_nullable
+              as String,
+      apellidos: null == apellidos
+          ? _value.apellidos
+          : apellidos // ignore: cast_nullable_to_non_nullable
+              as String,
+      nombreUsuario: null == nombreUsuario
+          ? _value.nombreUsuario
+          : nombreUsuario // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      passwordHash: null == passwordHash
+          ? _value.passwordHash
+          : passwordHash // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$UserRegisterRequestImplCopyWith<$Res>
+    implements $UserRegisterRequestCopyWith<$Res> {
+  factory _$$UserRegisterRequestImplCopyWith(_$UserRegisterRequestImpl value,
+          $Res Function(_$UserRegisterRequestImpl) then) =
+      __$$UserRegisterRequestImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int id,
+      String nombres,
+      String apellidos,
+      String nombreUsuario,
+      String email,
+      int? phoneNumber,
+      String passwordHash});
+}
+
+/// @nodoc
+class __$$UserRegisterRequestImplCopyWithImpl<$Res>
+    extends _$UserRegisterRequestCopyWithImpl<$Res, _$UserRegisterRequestImpl>
+    implements _$$UserRegisterRequestImplCopyWith<$Res> {
+  __$$UserRegisterRequestImplCopyWithImpl(_$UserRegisterRequestImpl _value,
+      $Res Function(_$UserRegisterRequestImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? nombres = null,
+    Object? apellidos = null,
+    Object? nombreUsuario = null,
+    Object? email = null,
+    Object? phoneNumber = freezed,
+    Object? passwordHash = null,
+  }) {
+    return _then(_$UserRegisterRequestImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      nombres: null == nombres
+          ? _value.nombres
+          : nombres // ignore: cast_nullable_to_non_nullable
+              as String,
+      apellidos: null == apellidos
+          ? _value.apellidos
+          : apellidos // ignore: cast_nullable_to_non_nullable
+              as String,
+      nombreUsuario: null == nombreUsuario
+          ? _value.nombreUsuario
+          : nombreUsuario // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      passwordHash: null == passwordHash
+          ? _value.passwordHash
+          : passwordHash // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$UserRegisterRequestImpl implements _UserRegisterRequest {
+  const _$UserRegisterRequestImpl(
+      {required this.id,
+      required this.nombres,
+      required this.apellidos,
+      required this.nombreUsuario,
+      required this.email,
+      this.phoneNumber,
+      required this.passwordHash});
+
+  factory _$UserRegisterRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserRegisterRequestImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String nombres;
+  @override
+  final String apellidos;
+  @override
+  final String nombreUsuario;
+  @override
+  final String email;
+  @override
+  final int? phoneNumber;
+  @override
+  final String passwordHash;
+
+  @override
+  String toString() {
+    return 'UserRegisterRequest(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserRegisterRequestImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.nombres, nombres) || other.nombres == nombres) &&
+            (identical(other.apellidos, apellidos) ||
+                other.apellidos == apellidos) &&
+            (identical(other.nombreUsuario, nombreUsuario) ||
+                other.nombreUsuario == nombreUsuario) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.passwordHash, passwordHash) ||
+                other.passwordHash == passwordHash));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, nombres, apellidos,
+      nombreUsuario, email, phoneNumber, passwordHash);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserRegisterRequestImplCopyWith<_$UserRegisterRequestImpl> get copyWith =>
+      __$$UserRegisterRequestImplCopyWithImpl<_$UserRegisterRequestImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UserRegisterRequestImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _UserRegisterRequest implements UserRegisterRequest {
+  const factory _UserRegisterRequest(
+      {required final int id,
+      required final String nombres,
+      required final String apellidos,
+      required final String nombreUsuario,
+      required final String email,
+      final int? phoneNumber,
+      required final String passwordHash}) = _$UserRegisterRequestImpl;
+
+  factory _UserRegisterRequest.fromJson(Map<String, dynamic> json) =
+      _$UserRegisterRequestImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  String get nombres;
+  @override
+  String get apellidos;
+  @override
+  String get nombreUsuario;
+  @override
+  String get email;
+  @override
+  int? get phoneNumber;
+  @override
+  String get passwordHash;
+  @override
+  @JsonKey(ignore: true)
+  _$$UserRegisterRequestImplCopyWith<_$UserRegisterRequestImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

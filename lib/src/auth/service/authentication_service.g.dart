@@ -81,6 +81,37 @@ class _AuthenticationService implements AuthenticationService {
   }
 
   @override
+  Future<ApiResponse<UserAuthentication>> register(
+      UserRegisterRequest request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<UserAuthentication>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/Auth/Create/user',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<UserAuthentication>.fromJson(
+      _result.data!,
+      (json) => UserAuthentication.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<ApiResponse<AuthenticationResponse>> logout(
       TokenRequest request) async {
     final _extra = <String, dynamic>{};
