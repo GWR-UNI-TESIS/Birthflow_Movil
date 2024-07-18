@@ -1,3 +1,5 @@
+import 'package:birthflow_movil/src/domain/worktime/worktime.dart';
+import 'package:birthflow_movil/src/ui/widgets/worktime/worktime_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -13,6 +15,7 @@ class _CreatePartographState extends State<CreatePartographScreen>
   late TextEditingController _nameTextController;
   late TextEditingController _recordNumberTextController;
   late TextEditingController _dateTextController;
+  final WorkTime _workTime = WorkTime.init();
 
   @override
   void initState() {
@@ -116,6 +119,9 @@ class _CreatePartographState extends State<CreatePartographScreen>
               padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
               child: Column(
                 children: [
+                  WorkTimeTableWidget(
+                    currentWorkTime: _workTime,
+                  ),
                   FilledButton(
                     onPressed: () async {},
                     child: const Text('Guardar'),

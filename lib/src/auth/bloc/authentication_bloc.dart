@@ -50,10 +50,11 @@ class AuthenticationBloc
       emit(const AuthLoading());
       try {
         final request = UserRegisterRequest(
-          email: event.email,
-          id: 0,
+          // ignore: avoid_redundant_argument_values
+          id: null,
           nombres: event.nombres,
           apellidos: event.apellidos,
+          email: event.email,
           nombreUsuario: event.nombreUsuario,
           passwordHash: event.passwordHash,
           phoneNumber: int.tryParse(event.phoneNumber!),

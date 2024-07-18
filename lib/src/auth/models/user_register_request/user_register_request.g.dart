@@ -9,7 +9,7 @@ part of 'user_register_request.dart';
 _$UserRegisterRequestImpl _$$UserRegisterRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$UserRegisterRequestImpl(
-      id: (json['id'] as num).toInt(),
+      id: json['id'] as String?,
       nombres: json['nombres'] as String,
       apellidos: json['apellidos'] as String,
       nombreUsuario: json['nombreUsuario'] as String,

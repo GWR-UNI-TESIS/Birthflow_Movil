@@ -21,8 +21,11 @@ ApiResponse<T> _$ApiResponseFromJson<T>(
 
 /// @nodoc
 mixin _$ApiResponse<T> {
-  int get statusCode => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
+// Código de estado de la respuesta de la API (requerido)
+  int get statusCode =>
+      throw _privateConstructorUsedError; // Mensaje de la respuesta de la API (requerido)
+  String get message =>
+      throw _privateConstructorUsedError; // Objeto de datos de la respuesta (requerido)
   T? get response => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
@@ -128,10 +131,13 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
       _$$ApiResponseImplFromJson(json, fromJsonT);
 
+// Código de estado de la respuesta de la API (requerido)
   @override
   final int statusCode;
+// Mensaje de la respuesta de la API (requerido)
   @override
   final String message;
+// Objeto de datos de la respuesta (requerido)
   @override
   final T? response;
 
@@ -179,11 +185,11 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
       _$ApiResponseImpl<T>.fromJson;
 
-  @override
+  @override // Código de estado de la respuesta de la API (requerido)
   int get statusCode;
-  @override
+  @override // Mensaje de la respuesta de la API (requerido)
   String get message;
-  @override
+  @override // Objeto de datos de la respuesta (requerido)
   T? get response;
   @override
   @JsonKey(ignore: true)

@@ -9,27 +9,29 @@ part of 'partograph_response.dart';
 _$PartographResponseImpl _$$PartographResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$PartographResponseImpl(
-      partogramaId: json['partogramaId'] as String?,
-      creadoPor: json['creadoPor'] as String?,
-      nombre: json['nombre'] as String?,
-      expediente: json['expediente'] as String?,
-      fecha: json['fecha'] as String?,
-      observacion: json['observacion'] as String?,
-      fechaCreacion: json['fechaCreacion'] as String?,
-      fechaModificacion: json['fechaModificacion'] as String?,
-      eliminado: json['eliminado'] as bool?,
+      partographId: json['partographId'] as String,
+      name: json['name'] as String,
+      recordName: json['recordName'] as String,
+      date: json['date'] as String,
+      observation: json['observation'] as String,
+      isDelete: json['isDelete'] as bool,
+      createdAt: json['createdAt'] as String,
+      createdBy: json['createdBy'] as String,
+      deletedAt: json['deletedAt'] as String?,
+      deletedBy: json['deletedBy'] as String?,
     );
 
 Map<String, dynamic> _$$PartographResponseImplToJson(
         _$PartographResponseImpl instance) =>
     <String, dynamic>{
-      'partogramaId': instance.partogramaId,
-      'creadoPor': instance.creadoPor,
-      'nombre': instance.nombre,
-      'expediente': instance.expediente,
-      'fecha': instance.fecha,
-      'observacion': instance.observacion,
-      'fechaCreacion': instance.fechaCreacion,
-      'fechaModificacion': instance.fechaModificacion,
-      'eliminado': instance.eliminado,
+      'partographId': instance.partographId,
+      'name': instance.name,
+      'recordName': instance.recordName,
+      'date': instance.date,
+      'observation': instance.observation,
+      'isDelete': instance.isDelete,
+      'createdAt': instance.createdAt,
+      'createdBy': instance.createdBy,
+      'deletedAt': instance.deletedAt,
+      'deletedBy': instance.deletedBy,
     };

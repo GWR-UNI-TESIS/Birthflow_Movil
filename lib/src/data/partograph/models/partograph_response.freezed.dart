@@ -20,15 +20,16 @@ PartographResponse _$PartographResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PartographResponse {
-  String? get partogramaId => throw _privateConstructorUsedError;
-  String? get creadoPor => throw _privateConstructorUsedError;
-  String? get nombre => throw _privateConstructorUsedError;
-  String? get expediente => throw _privateConstructorUsedError;
-  String? get fecha => throw _privateConstructorUsedError;
-  String? get observacion => throw _privateConstructorUsedError;
-  String? get fechaCreacion => throw _privateConstructorUsedError;
-  String? get fechaModificacion => throw _privateConstructorUsedError;
-  bool? get eliminado => throw _privateConstructorUsedError;
+  String get partographId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get recordName => throw _privateConstructorUsedError;
+  String get date => throw _privateConstructorUsedError;
+  String get observation => throw _privateConstructorUsedError;
+  bool get isDelete => throw _privateConstructorUsedError;
+  String get createdAt => throw _privateConstructorUsedError;
+  String get createdBy => throw _privateConstructorUsedError;
+  String? get deletedAt => throw _privateConstructorUsedError;
+  String? get deletedBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,15 +44,16 @@ abstract class $PartographResponseCopyWith<$Res> {
       _$PartographResponseCopyWithImpl<$Res, PartographResponse>;
   @useResult
   $Res call(
-      {String? partogramaId,
-      String? creadoPor,
-      String? nombre,
-      String? expediente,
-      String? fecha,
-      String? observacion,
-      String? fechaCreacion,
-      String? fechaModificacion,
-      bool? eliminado});
+      {String partographId,
+      String name,
+      String recordName,
+      String date,
+      String observation,
+      bool isDelete,
+      String createdAt,
+      String createdBy,
+      String? deletedAt,
+      String? deletedBy});
 }
 
 /// @nodoc
@@ -67,53 +69,58 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? partogramaId = freezed,
-    Object? creadoPor = freezed,
-    Object? nombre = freezed,
-    Object? expediente = freezed,
-    Object? fecha = freezed,
-    Object? observacion = freezed,
-    Object? fechaCreacion = freezed,
-    Object? fechaModificacion = freezed,
-    Object? eliminado = freezed,
+    Object? partographId = null,
+    Object? name = null,
+    Object? recordName = null,
+    Object? date = null,
+    Object? observation = null,
+    Object? isDelete = null,
+    Object? createdAt = null,
+    Object? createdBy = null,
+    Object? deletedAt = freezed,
+    Object? deletedBy = freezed,
   }) {
     return _then(_value.copyWith(
-      partogramaId: freezed == partogramaId
-          ? _value.partogramaId
-          : partogramaId // ignore: cast_nullable_to_non_nullable
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      recordName: null == recordName
+          ? _value.recordName
+          : recordName // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      observation: null == observation
+          ? _value.observation
+          : observation // ignore: cast_nullable_to_non_nullable
+              as String,
+      isDelete: null == isDelete
+          ? _value.isDelete
+          : isDelete // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: null == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      creadoPor: freezed == creadoPor
-          ? _value.creadoPor
-          : creadoPor // ignore: cast_nullable_to_non_nullable
+      deletedBy: freezed == deletedBy
+          ? _value.deletedBy
+          : deletedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      nombre: freezed == nombre
-          ? _value.nombre
-          : nombre // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expediente: freezed == expediente
-          ? _value.expediente
-          : expediente // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fecha: freezed == fecha
-          ? _value.fecha
-          : fecha // ignore: cast_nullable_to_non_nullable
-              as String?,
-      observacion: freezed == observacion
-          ? _value.observacion
-          : observacion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fechaCreacion: freezed == fechaCreacion
-          ? _value.fechaCreacion
-          : fechaCreacion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fechaModificacion: freezed == fechaModificacion
-          ? _value.fechaModificacion
-          : fechaModificacion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      eliminado: freezed == eliminado
-          ? _value.eliminado
-          : eliminado // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ) as $Val);
   }
 }
@@ -127,15 +134,16 @@ abstract class _$$PartographResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? partogramaId,
-      String? creadoPor,
-      String? nombre,
-      String? expediente,
-      String? fecha,
-      String? observacion,
-      String? fechaCreacion,
-      String? fechaModificacion,
-      bool? eliminado});
+      {String partographId,
+      String name,
+      String recordName,
+      String date,
+      String observation,
+      bool isDelete,
+      String createdAt,
+      String createdBy,
+      String? deletedAt,
+      String? deletedBy});
 }
 
 /// @nodoc
@@ -149,53 +157,58 @@ class __$$PartographResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? partogramaId = freezed,
-    Object? creadoPor = freezed,
-    Object? nombre = freezed,
-    Object? expediente = freezed,
-    Object? fecha = freezed,
-    Object? observacion = freezed,
-    Object? fechaCreacion = freezed,
-    Object? fechaModificacion = freezed,
-    Object? eliminado = freezed,
+    Object? partographId = null,
+    Object? name = null,
+    Object? recordName = null,
+    Object? date = null,
+    Object? observation = null,
+    Object? isDelete = null,
+    Object? createdAt = null,
+    Object? createdBy = null,
+    Object? deletedAt = freezed,
+    Object? deletedBy = freezed,
   }) {
     return _then(_$PartographResponseImpl(
-      partogramaId: freezed == partogramaId
-          ? _value.partogramaId
-          : partogramaId // ignore: cast_nullable_to_non_nullable
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      recordName: null == recordName
+          ? _value.recordName
+          : recordName // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      observation: null == observation
+          ? _value.observation
+          : observation // ignore: cast_nullable_to_non_nullable
+              as String,
+      isDelete: null == isDelete
+          ? _value.isDelete
+          : isDelete // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: null == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      creadoPor: freezed == creadoPor
-          ? _value.creadoPor
-          : creadoPor // ignore: cast_nullable_to_non_nullable
+      deletedBy: freezed == deletedBy
+          ? _value.deletedBy
+          : deletedBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      nombre: freezed == nombre
-          ? _value.nombre
-          : nombre // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expediente: freezed == expediente
-          ? _value.expediente
-          : expediente // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fecha: freezed == fecha
-          ? _value.fecha
-          : fecha // ignore: cast_nullable_to_non_nullable
-              as String?,
-      observacion: freezed == observacion
-          ? _value.observacion
-          : observacion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fechaCreacion: freezed == fechaCreacion
-          ? _value.fechaCreacion
-          : fechaCreacion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fechaModificacion: freezed == fechaModificacion
-          ? _value.fechaModificacion
-          : fechaModificacion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      eliminado: freezed == eliminado
-          ? _value.eliminado
-          : eliminado // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
   }
 }
@@ -204,41 +217,44 @@ class __$$PartographResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PartographResponseImpl implements _PartographResponse {
   const _$PartographResponseImpl(
-      {this.partogramaId,
-      this.creadoPor,
-      this.nombre,
-      this.expediente,
-      this.fecha,
-      this.observacion,
-      this.fechaCreacion,
-      this.fechaModificacion,
-      this.eliminado});
+      {required this.partographId,
+      required this.name,
+      required this.recordName,
+      required this.date,
+      required this.observation,
+      required this.isDelete,
+      required this.createdAt,
+      required this.createdBy,
+      this.deletedAt,
+      this.deletedBy});
 
   factory _$PartographResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartographResponseImplFromJson(json);
 
   @override
-  final String? partogramaId;
+  final String partographId;
   @override
-  final String? creadoPor;
+  final String name;
   @override
-  final String? nombre;
+  final String recordName;
   @override
-  final String? expediente;
+  final String date;
   @override
-  final String? fecha;
+  final String observation;
   @override
-  final String? observacion;
+  final bool isDelete;
   @override
-  final String? fechaCreacion;
+  final String createdAt;
   @override
-  final String? fechaModificacion;
+  final String createdBy;
   @override
-  final bool? eliminado;
+  final String? deletedAt;
+  @override
+  final String? deletedBy;
 
   @override
   String toString() {
-    return 'PartographResponse(partogramaId: $partogramaId, creadoPor: $creadoPor, nombre: $nombre, expediente: $expediente, fecha: $fecha, observacion: $observacion, fechaCreacion: $fechaCreacion, fechaModificacion: $fechaModificacion, eliminado: $eliminado)';
+    return 'PartographResponse(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, isDelete: $isDelete, createdAt: $createdAt, createdBy: $createdBy, deletedAt: $deletedAt, deletedBy: $deletedBy)';
   }
 
   @override
@@ -246,37 +262,30 @@ class _$PartographResponseImpl implements _PartographResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PartographResponseImpl &&
-            (identical(other.partogramaId, partogramaId) ||
-                other.partogramaId == partogramaId) &&
-            (identical(other.creadoPor, creadoPor) ||
-                other.creadoPor == creadoPor) &&
-            (identical(other.nombre, nombre) || other.nombre == nombre) &&
-            (identical(other.expediente, expediente) ||
-                other.expediente == expediente) &&
-            (identical(other.fecha, fecha) || other.fecha == fecha) &&
-            (identical(other.observacion, observacion) ||
-                other.observacion == observacion) &&
-            (identical(other.fechaCreacion, fechaCreacion) ||
-                other.fechaCreacion == fechaCreacion) &&
-            (identical(other.fechaModificacion, fechaModificacion) ||
-                other.fechaModificacion == fechaModificacion) &&
-            (identical(other.eliminado, eliminado) ||
-                other.eliminado == eliminado));
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.recordName, recordName) ||
+                other.recordName == recordName) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.observation, observation) ||
+                other.observation == observation) &&
+            (identical(other.isDelete, isDelete) ||
+                other.isDelete == isDelete) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.deletedAt, deletedAt) ||
+                other.deletedAt == deletedAt) &&
+            (identical(other.deletedBy, deletedBy) ||
+                other.deletedBy == deletedBy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      partogramaId,
-      creadoPor,
-      nombre,
-      expediente,
-      fecha,
-      observacion,
-      fechaCreacion,
-      fechaModificacion,
-      eliminado);
+  int get hashCode => Object.hash(runtimeType, partographId, name, recordName,
+      date, observation, isDelete, createdAt, createdBy, deletedAt, deletedBy);
 
   @JsonKey(ignore: true)
   @override
@@ -295,37 +304,40 @@ class _$PartographResponseImpl implements _PartographResponse {
 
 abstract class _PartographResponse implements PartographResponse {
   const factory _PartographResponse(
-      {final String? partogramaId,
-      final String? creadoPor,
-      final String? nombre,
-      final String? expediente,
-      final String? fecha,
-      final String? observacion,
-      final String? fechaCreacion,
-      final String? fechaModificacion,
-      final bool? eliminado}) = _$PartographResponseImpl;
+      {required final String partographId,
+      required final String name,
+      required final String recordName,
+      required final String date,
+      required final String observation,
+      required final bool isDelete,
+      required final String createdAt,
+      required final String createdBy,
+      final String? deletedAt,
+      final String? deletedBy}) = _$PartographResponseImpl;
 
   factory _PartographResponse.fromJson(Map<String, dynamic> json) =
       _$PartographResponseImpl.fromJson;
 
   @override
-  String? get partogramaId;
+  String get partographId;
   @override
-  String? get creadoPor;
+  String get name;
   @override
-  String? get nombre;
+  String get recordName;
   @override
-  String? get expediente;
+  String get date;
   @override
-  String? get fecha;
+  String get observation;
   @override
-  String? get observacion;
+  bool get isDelete;
   @override
-  String? get fechaCreacion;
+  String get createdAt;
   @override
-  String? get fechaModificacion;
+  String get createdBy;
   @override
-  bool? get eliminado;
+  String? get deletedAt;
+  @override
+  String? get deletedBy;
   @override
   @JsonKey(ignore: true)
   _$$PartographResponseImplCopyWith<_$PartographResponseImpl> get copyWith =>

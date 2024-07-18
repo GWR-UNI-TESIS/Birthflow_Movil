@@ -21,7 +21,8 @@ AuthenticationResponse _$AuthenticationResponseFromJson(
 
 /// @nodoc
 mixin _$AuthenticationResponse {
-  String get token => throw _privateConstructorUsedError;
+  String get token =>
+      throw _privateConstructorUsedError; // Token de autenticación
   UserAuthentication get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -133,6 +134,7 @@ class _$AuthenticationResponseImpl implements _AuthenticationResponse {
 
   @override
   final String token;
+// Token de autenticación
   @override
   final UserAuthentication user;
 
@@ -179,7 +181,7 @@ abstract class _AuthenticationResponse implements AuthenticationResponse {
 
   @override
   String get token;
-  @override
+  @override // Token de autenticación
   UserAuthentication get user;
   @override
   @JsonKey(ignore: true)

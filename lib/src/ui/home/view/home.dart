@@ -3,6 +3,7 @@ import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/home/bloc/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
 import 'package:flutter/material.dart';
@@ -11,21 +12,30 @@ import 'package:go_router/go_router.dart';
 
 enum _Options { newPartograph, configuration, information }
 
+class AppBarCubit extends Cubit<bool> {
+  AppBarCubit() : super(false);
+
+  void changeValue(bool booleanToChange) {
+    emit(booleanToChange);
+  }
+}
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AuthenticationBloc>().state;
-    final int user = state.maybeWhen(
+    final String user = state.maybeWhen(
       authenticated: (response) => response.user.id!,
-      orElse: () => 0,
+      orElse: () => '',
     );
     return MultiBlocProvider(
       providers: [
         BlocProvider<PartographsBloc>(
           create: (context) => PartographsBloc(
             locator<PartographGetUseCase>(),
-          ),
+          )..add(FetchPartographs(userId: user)),
         ),
+        BlocProvider(create: (context) => AppBarCubit()),
       ],
       child: _HomeView(),
     );
@@ -51,7 +61,10 @@ class _HomeView extends StatelessWidget {
               },
               icon: const Icon(Icons.notifications),
             ),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.search),
+            ),
             PopupMenuButton<_Options>(
               padding: const EdgeInsets.all(12),
               position: PopupMenuPosition.under,
@@ -119,13 +132,12 @@ class _HomeView extends StatelessWidget {
                                   title: Text('Archivados'),
                                 );
                               } else {
-                                // Aquí deberías utilizar los datos generales que obtuviste del Bloc
                                 final item = data[index - 1];
                                 return ListItemWidget(
-                                  partographId: item.partogramaId,
-                                  title: item.nombre,
+                                  partographId: item.partographId!,
+                                  title: item.name,
                                   subtitle:
-                                      '${item.expediente}-${item.fecha.toIso8601String()}',
+                                      '${item.recordName}-${item.date.toIso8601String()}',
                                 );
                               }
                             },

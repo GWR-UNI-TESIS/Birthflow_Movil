@@ -4,6 +4,6 @@ part 'partographs_event.freezed.dart';
 
 @freezed
 class PartographsEvent with _$PartographsEvent {
-  const factory PartographsEvent.fetchPartographs({int? userId}) =
+  const factory PartographsEvent.fetchPartographs({String? userId}) =
       FetchPartographs;
 }

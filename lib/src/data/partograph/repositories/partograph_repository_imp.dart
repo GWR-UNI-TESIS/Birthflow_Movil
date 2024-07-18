@@ -35,12 +35,12 @@ class PartographRepositoryImplementation implements PartographRepository {
       final tokenGuardado = await _tokenStorage.getTokenSecurely();
       final token = 'Bearer $tokenGuardado';
       final result = await _partogramaService.get(token, userId);
-      if (result.response!.isEmpty) return [];
+
+      if (result.response == null) return [];
+
       return PartographMapper.toEntityList(result.response!);
     } catch (error) {
-      // ignore: avoid_print
-      print(error);
-      return null;
+      return [];
     }
   }
 

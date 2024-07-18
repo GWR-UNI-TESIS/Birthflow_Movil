@@ -10,9 +10,9 @@ part 'partograph_service.g.dart';
 abstract class PartographService {
   factory PartographService(Dio dio, {String baseUrl}) = _PartographService;
 
-  @GET('/partogramas')
+  @GET('/api/Partograph/Get/partograph/{userId}')
   Future<ApiResponse<List<PartographResponse>>> get(
     @Header('Authorization') String token,
-    @Query('id') String id,
+    @Path('userId') String id,
   );
 }

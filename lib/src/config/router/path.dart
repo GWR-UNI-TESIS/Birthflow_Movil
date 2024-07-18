@@ -1,38 +1,17 @@
-// Enumeración para definir las rutas de la aplicación
-enum RoutePaths {
-  home,
-  splash,
-  login,
-  register,
-  auth,
-  partograma,
-  createPartograph
+// ignore: avoid_classes_with_only_static_members
+class RoutePaths {
+  static final splash = RoutePath('splash', '/splash');
+  static final home = RoutePath('home', '/home');
+  static final createPartograph = RoutePath('createPartograph', '/createPartograph');
+  static final auth = RoutePath('auth', '/auth');
+  static final login = RoutePath('login', 'login');
+  static final register = RoutePath('register', 'register');
+  static final partograma = RoutePath('partograma', '/partograma');
 }
 
-// Extensión para el enum RoutePaths que permite obtener la ruta como string
-extension RoutePathsExtension on RoutePaths {
-  // Devuelve la ruta como string en base al valor del enum
-  String get path {
-    switch (this) {
-      case RoutePaths.home:
-        // Ruta principal de la aplicación
-        return '/';
-      case RoutePaths.partograma:
-        // Ruta del partograma
-        return '/partograma';
-      case RoutePaths.login:
-        // Ruta de login
-        return 'login';
-      case RoutePaths.register:
-        // Ruta de registro
-        return 'register';
-      case RoutePaths.createPartograph:
-        // Ruta para crear un partograma
-        return 'createPartograph';
-      default:
-        // Ruta por defecto para el resto de los valores del enum
-        // Se construye la ruta con "/nombreDelEnum"
-        return '/$name';
-    }
-  }
+class RoutePath {
+  final String name;
+  final String path;
+
+  RoutePath(this.name, this.path);
 }

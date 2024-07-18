@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PartographsEvent {
-  int? get userId => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? userId) fetchPartographs,
+    required TResult Function(String? userId) fetchPartographs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? userId)? fetchPartographs,
+    TResult? Function(String? userId)? fetchPartographs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? userId)? fetchPartographs,
+    TResult Function(String? userId)? fetchPartographs,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $PartographsEventCopyWith<$Res> {
           PartographsEvent value, $Res Function(PartographsEvent) then) =
       _$PartographsEventCopyWithImpl<$Res, PartographsEvent>;
   @useResult
-  $Res call({int? userId});
+  $Res call({String? userId});
 }
 
 /// @nodoc
@@ -83,7 +83,7 @@ class _$PartographsEventCopyWithImpl<$Res, $Val extends PartographsEvent>
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
     ) as $Val);
   }
 }
@@ -96,7 +96,7 @@ abstract class _$$FetchPartographsImplCopyWith<$Res>
       __$$FetchPartographsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? userId});
+  $Res call({String? userId});
 }
 
 /// @nodoc
@@ -116,7 +116,7 @@ class __$$FetchPartographsImplCopyWithImpl<$Res>
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
     ));
   }
 }
@@ -127,7 +127,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   const _$FetchPartographsImpl({this.userId});
 
   @override
-  final int? userId;
+  final String? userId;
 
   @override
   String toString() {
@@ -155,7 +155,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? userId) fetchPartographs,
+    required TResult Function(String? userId) fetchPartographs,
   }) {
     return fetchPartographs(userId);
   }
@@ -163,7 +163,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? userId)? fetchPartographs,
+    TResult? Function(String? userId)? fetchPartographs,
   }) {
     return fetchPartographs?.call(userId);
   }
@@ -171,7 +171,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? userId)? fetchPartographs,
+    TResult Function(String? userId)? fetchPartographs,
     required TResult orElse(),
   }) {
     if (fetchPartographs != null) {
@@ -210,10 +210,11 @@ class _$FetchPartographsImpl implements FetchPartographs {
 }
 
 abstract class FetchPartographs implements PartographsEvent {
-  const factory FetchPartographs({final int? userId}) = _$FetchPartographsImpl;
+  const factory FetchPartographs({final String? userId}) =
+      _$FetchPartographsImpl;
 
   @override
-  int? get userId;
+  String? get userId;
   @override
   @JsonKey(ignore: true)
   _$$FetchPartographsImplCopyWith<_$FetchPartographsImpl> get copyWith =>

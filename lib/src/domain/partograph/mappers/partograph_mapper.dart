@@ -5,15 +5,17 @@ import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 class PartographMapper {
   static Partograph toEntity(PartographResponse response) {
     return Partograph(
-      partogramaId: response.partogramaId!,
-      creadoPor: response.creadoPor!,
-      nombre: response.nombre!,
-      expediente: response.expediente!,
-      fecha: DateTime.tryParse(response.fecha ?? '')!,
-      observacion: response.observacion!,
-      fechaCreacion: DateTime.tryParse(response.fechaCreacion ?? '')!,
-      fechaModificacion: DateTime.tryParse(response.fechaModificacion ?? '')!,
-      eliminado: response.eliminado!,
+      partographId: response.partographId,
+      name: response.name,
+      recordName: response.recordName,
+      date: DateTime.tryParse(response.date)!,
+      observation: response.observation,
+      createdBy: response.createdBy,
+      createdAt: DateTime.tryParse(response.createdAt)!,
+      deletedAt: DateTime.tryParse(response.deletedAt ?? ''),
+      deletedBy: response.deletedBy,
+      // ignore: avoid_bool_literals_in_conditional_expressions
+      isDelete: response.isDelete,
     );
   }
 

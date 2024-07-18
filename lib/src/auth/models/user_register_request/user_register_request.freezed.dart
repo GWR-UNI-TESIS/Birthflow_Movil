@@ -20,12 +20,18 @@ UserRegisterRequest _$UserRegisterRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserRegisterRequest {
-  int get id => throw _privateConstructorUsedError;
-  String get nombres => throw _privateConstructorUsedError;
-  String get apellidos => throw _privateConstructorUsedError;
-  String get nombreUsuario => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  int? get phoneNumber => throw _privateConstructorUsedError;
+  String? get id =>
+      throw _privateConstructorUsedError; // Identificador único del usuario (usualmente autogenerado por el servidor)
+  String get nombres =>
+      throw _privateConstructorUsedError; // Nombres del usuario
+  String get apellidos =>
+      throw _privateConstructorUsedError; // Apellidos del usuario
+  String get nombreUsuario =>
+      throw _privateConstructorUsedError; // Nombre de usuario para inicio de sesión
+  String get email =>
+      throw _privateConstructorUsedError; // Correo electrónico del usuario
+  int? get phoneNumber =>
+      throw _privateConstructorUsedError; // Número telefónico del usuario (opcional)
   String get passwordHash => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +47,7 @@ abstract class $UserRegisterRequestCopyWith<$Res> {
       _$UserRegisterRequestCopyWithImpl<$Res, UserRegisterRequest>;
   @useResult
   $Res call(
-      {int id,
+      {String? id,
       String nombres,
       String apellidos,
       String nombreUsuario,
@@ -63,7 +69,7 @@ class _$UserRegisterRequestCopyWithImpl<$Res, $Val extends UserRegisterRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? nombres = null,
     Object? apellidos = null,
     Object? nombreUsuario = null,
@@ -72,10 +78,10 @@ class _$UserRegisterRequestCopyWithImpl<$Res, $Val extends UserRegisterRequest>
     Object? passwordHash = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String?,
       nombres: null == nombres
           ? _value.nombres
           : nombres // ignore: cast_nullable_to_non_nullable
@@ -113,7 +119,7 @@ abstract class _$$UserRegisterRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {String? id,
       String nombres,
       String apellidos,
       String nombreUsuario,
@@ -133,7 +139,7 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? nombres = null,
     Object? apellidos = null,
     Object? nombreUsuario = null,
@@ -142,10 +148,10 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
     Object? passwordHash = null,
   }) {
     return _then(_$UserRegisterRequestImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String?,
       nombres: null == nombres
           ? _value.nombres
           : nombres // ignore: cast_nullable_to_non_nullable
@@ -178,7 +184,7 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserRegisterRequestImpl implements _UserRegisterRequest {
   const _$UserRegisterRequestImpl(
-      {required this.id,
+      {this.id,
       required this.nombres,
       required this.apellidos,
       required this.nombreUsuario,
@@ -190,17 +196,23 @@ class _$UserRegisterRequestImpl implements _UserRegisterRequest {
       _$$UserRegisterRequestImplFromJson(json);
 
   @override
-  final int id;
+  final String? id;
+// Identificador único del usuario (usualmente autogenerado por el servidor)
   @override
   final String nombres;
+// Nombres del usuario
   @override
   final String apellidos;
+// Apellidos del usuario
   @override
   final String nombreUsuario;
+// Nombre de usuario para inicio de sesión
   @override
   final String email;
+// Correo electrónico del usuario
   @override
   final int? phoneNumber;
+// Número telefónico del usuario (opcional)
   @override
   final String passwordHash;
 
@@ -249,7 +261,7 @@ class _$UserRegisterRequestImpl implements _UserRegisterRequest {
 
 abstract class _UserRegisterRequest implements UserRegisterRequest {
   const factory _UserRegisterRequest(
-      {required final int id,
+      {final String? id,
       required final String nombres,
       required final String apellidos,
       required final String nombreUsuario,
@@ -261,18 +273,18 @@ abstract class _UserRegisterRequest implements UserRegisterRequest {
       _$UserRegisterRequestImpl.fromJson;
 
   @override
-  int get id;
-  @override
+  String? get id;
+  @override // Identificador único del usuario (usualmente autogenerado por el servidor)
   String get nombres;
-  @override
+  @override // Nombres del usuario
   String get apellidos;
-  @override
+  @override // Apellidos del usuario
   String get nombreUsuario;
-  @override
+  @override // Nombre de usuario para inicio de sesión
   String get email;
-  @override
+  @override // Correo electrónico del usuario
   int? get phoneNumber;
-  @override
+  @override // Número telefónico del usuario (opcional)
   String get passwordHash;
   @override
   @JsonKey(ignore: true)

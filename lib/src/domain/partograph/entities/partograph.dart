@@ -1,23 +1,25 @@
 class Partograph {
-  final String partogramaId;
-  final String creadoPor;
-  final String nombre;
-  final String expediente;
-  final DateTime fecha;
-  final String observacion;
-  final DateTime fechaCreacion;
-  final DateTime fechaModificacion;
-  final bool eliminado;
+  final String? partographId;
+  final String name;
+  final String recordName;
+  final DateTime date;
+  final String observation;
+  final bool isDelete;
+  final DateTime createdAt;
+  final String createdBy;
+  final DateTime? deletedAt;
+  final String? deletedBy;
 
   Partograph({
-    required this.partogramaId,
-    required this.creadoPor,
-    required this.nombre,
-    required this.expediente,
-    required this.fecha,
-    required this.observacion,
-    required this.fechaCreacion,
-    required this.fechaModificacion,
-    required this.eliminado,
+    this.partographId,
+    required this.name,
+    required this.recordName,
+    required this.date,
+    required this.observation,
+    required this.isDelete,
+    required this.createdAt,
+    required this.createdBy,
+    this.deletedAt,
+    this.deletedBy,
   });
 }

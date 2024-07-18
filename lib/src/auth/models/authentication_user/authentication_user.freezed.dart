@@ -20,18 +20,30 @@ UserAuthentication _$UserAuthenticationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserAuthentication {
-  int? get id => throw _privateConstructorUsedError;
-  String get nombres => throw _privateConstructorUsedError;
-  String get apellidos => throw _privateConstructorUsedError;
-  String get nombreUsuario => throw _privateConstructorUsedError;
-  String get passwordHash => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String? get phoneNumber => throw _privateConstructorUsedError;
-  bool get isDelete => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
-  int? get createdBy => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
-  String? get deletedAt => throw _privateConstructorUsedError;
+  String? get id =>
+      throw _privateConstructorUsedError; // Identificador único del usuario (opcional)
+  String get nombres =>
+      throw _privateConstructorUsedError; // Nombres del usuario
+  String get apellidos =>
+      throw _privateConstructorUsedError; // Apellidos del usuario
+  String get nombreUsuario =>
+      throw _privateConstructorUsedError; // Nombre de usuario para inicio de sesión
+  String get passwordHash =>
+      throw _privateConstructorUsedError; // Hash de la contraseña del usuario (por seguridad)
+  String get email =>
+      throw _privateConstructorUsedError; // Correo electrónico del usuario
+  String? get phoneNumber =>
+      throw _privateConstructorUsedError; // Número telefónico del usuario (opcional)
+  bool get isDelete =>
+      throw _privateConstructorUsedError; // Indica si el usuario está eliminado (marcado para borrado)
+  String? get createdAt =>
+      throw _privateConstructorUsedError; // Fecha y hora de creación del usuario (viene del servidor)
+  int? get createdBy =>
+      throw _privateConstructorUsedError; // Identificador del usuario que creó este registro (viene del servidor)
+  String? get updatedAt =>
+      throw _privateConstructorUsedError; // Fecha y hora de última actualización del usuario (viene del servidor)
+  String? get deletedAt =>
+      throw _privateConstructorUsedError; // Fecha y hora de eliminación del usuario (viene del servidor)
   String? get deletedBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +59,7 @@ abstract class $UserAuthenticationCopyWith<$Res> {
       _$UserAuthenticationCopyWithImpl<$Res, UserAuthentication>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String nombres,
       String apellidos,
       String nombreUsuario,
@@ -93,7 +105,7 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       nombres: null == nombres
           ? _value.nombres
           : nombres // ignore: cast_nullable_to_non_nullable
@@ -155,7 +167,7 @@ abstract class _$$UserAuthenticationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String nombres,
       String apellidos,
       String nombreUsuario,
@@ -199,7 +211,7 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       nombres: null == nombres
           ? _value.nombres
           : nombres // ignore: cast_nullable_to_non_nullable
@@ -274,29 +286,41 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
       _$$UserAuthenticationImplFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
+// Identificador único del usuario (opcional)
   @override
   final String nombres;
+// Nombres del usuario
   @override
   final String apellidos;
+// Apellidos del usuario
   @override
   final String nombreUsuario;
+// Nombre de usuario para inicio de sesión
   @override
   final String passwordHash;
+// Hash de la contraseña del usuario (por seguridad)
   @override
   final String email;
+// Correo electrónico del usuario
   @override
   final String? phoneNumber;
+// Número telefónico del usuario (opcional)
   @override
   final bool isDelete;
+// Indica si el usuario está eliminado (marcado para borrado)
   @override
   final String? createdAt;
+// Fecha y hora de creación del usuario (viene del servidor)
   @override
   final int? createdBy;
+// Identificador del usuario que creó este registro (viene del servidor)
   @override
   final String? updatedAt;
+// Fecha y hora de última actualización del usuario (viene del servidor)
   @override
   final String? deletedAt;
+// Fecha y hora de eliminación del usuario (viene del servidor)
   @override
   final String? deletedBy;
 
@@ -370,7 +394,7 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
 
 abstract class _UserAuthentication implements UserAuthentication {
   const factory _UserAuthentication(
-      {required final int? id,
+      {required final String? id,
       required final String nombres,
       required final String apellidos,
       required final String nombreUsuario,
@@ -388,30 +412,30 @@ abstract class _UserAuthentication implements UserAuthentication {
       _$UserAuthenticationImpl.fromJson;
 
   @override
-  int? get id;
-  @override
+  String? get id;
+  @override // Identificador único del usuario (opcional)
   String get nombres;
-  @override
+  @override // Nombres del usuario
   String get apellidos;
-  @override
+  @override // Apellidos del usuario
   String get nombreUsuario;
-  @override
+  @override // Nombre de usuario para inicio de sesión
   String get passwordHash;
-  @override
+  @override // Hash de la contraseña del usuario (por seguridad)
   String get email;
-  @override
+  @override // Correo electrónico del usuario
   String? get phoneNumber;
-  @override
+  @override // Número telefónico del usuario (opcional)
   bool get isDelete;
-  @override
+  @override // Indica si el usuario está eliminado (marcado para borrado)
   String? get createdAt;
-  @override
+  @override // Fecha y hora de creación del usuario (viene del servidor)
   int? get createdBy;
-  @override
+  @override // Identificador del usuario que creó este registro (viene del servidor)
   String? get updatedAt;
-  @override
+  @override // Fecha y hora de última actualización del usuario (viene del servidor)
   String? get deletedAt;
-  @override
+  @override // Fecha y hora de eliminación del usuario (viene del servidor)
   String? get deletedBy;
   @override
   @JsonKey(ignore: true)

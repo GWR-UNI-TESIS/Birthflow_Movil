@@ -8,7 +8,7 @@ class UserAuthentication with _$UserAuthentication {
 
    // Representa la información de un usuario autenticado
   const factory UserAuthentication({
-    required int? id, // Identificador único del usuario (opcional)
+    required String? id, // Identificador único del usuario (opcional)
     required String nombres, // Nombres del usuario
     required String apellidos, // Apellidos del usuario
     required String nombreUsuario, // Nombre de usuario para inicio de sesión

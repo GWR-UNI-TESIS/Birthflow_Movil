@@ -24,7 +24,7 @@ class _PartographService implements PartographService {
     String id,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': id};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -36,7 +36,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/partogramas',
+              '/api/Partograph/Get/partograph/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

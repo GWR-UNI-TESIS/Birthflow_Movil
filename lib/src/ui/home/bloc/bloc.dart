@@ -18,7 +18,7 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
     emit(const PartographsState.loading());
     try {
       final result =
-          await _partogramaGetUseCase.execute(event.userId as String?);
+          await _partogramaGetUseCase.execute(event.userId);
       if (result != null) {
         if (result.isEmpty) {
           emit(const PartographsState.empty());

@@ -9,8 +9,8 @@ part of 'authentication_request.dart';
 _$AuthenticationRequestImpl _$$AuthenticationRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$AuthenticationRequestImpl(
-      email: json['email'] as String?,
-      password: json['password'] as String?,
+      email: json['email'] as String,
+      password: json['password'] as String,
     );
 
 Map<String, dynamic> _$$AuthenticationRequestImplToJson(

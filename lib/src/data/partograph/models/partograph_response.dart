@@ -7,15 +7,16 @@ part 'partograph_response.g.dart';
 @freezed
 class PartographResponse with _$PartographResponse {
   const factory PartographResponse({
-    String? partogramaId,
-    String? creadoPor,
-    String? nombre,
-    String? expediente,
-    String? fecha,
-    String? observacion,
-    String? fechaCreacion,
-    String? fechaModificacion,
-    bool? eliminado,
+    required String partographId,
+    required String name,
+    required String recordName,
+    required String date,
+    required String observation,
+    required bool isDelete,
+    required String createdAt,
+    required String createdBy,
+    String? deletedAt,
+    String? deletedBy,
   }) = _PartographResponse;
 
   factory PartographResponse.fromJson(Map<String, dynamic> json) =>

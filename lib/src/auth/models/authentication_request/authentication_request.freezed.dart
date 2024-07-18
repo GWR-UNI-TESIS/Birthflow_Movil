@@ -21,8 +21,9 @@ AuthenticationRequest _$AuthenticationRequestFromJson(
 
 /// @nodoc
 mixin _$AuthenticationRequest {
-  String? get email => throw _privateConstructorUsedError;
-  String? get password => throw _privateConstructorUsedError;
+  String get email =>
+      throw _privateConstructorUsedError; // Email del usuario (opcional)
+  String get password => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $AuthenticationRequestCopyWith<$Res> {
           $Res Function(AuthenticationRequest) then) =
       _$AuthenticationRequestCopyWithImpl<$Res, AuthenticationRequest>;
   @useResult
-  $Res call({String? email, String? password});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -53,18 +54,18 @@ class _$AuthenticationRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_value.copyWith(
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -78,7 +79,7 @@ abstract class _$$AuthenticationRequestImplCopyWith<$Res>
       __$$AuthenticationRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? email, String? password});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -93,18 +94,18 @@ class __$$AuthenticationRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_$AuthenticationRequestImpl(
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -112,15 +113,17 @@ class __$$AuthenticationRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AuthenticationRequestImpl implements _AuthenticationRequest {
-  const _$AuthenticationRequestImpl({this.email, this.password});
+  const _$AuthenticationRequestImpl(
+      {required this.email, required this.password});
 
   factory _$AuthenticationRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthenticationRequestImplFromJson(json);
 
   @override
-  final String? email;
+  final String email;
+// Email del usuario (opcional)
   @override
-  final String? password;
+  final String password;
 
   @override
   String toString() {
@@ -158,16 +161,16 @@ class _$AuthenticationRequestImpl implements _AuthenticationRequest {
 
 abstract class _AuthenticationRequest implements AuthenticationRequest {
   const factory _AuthenticationRequest(
-      {final String? email,
-      final String? password}) = _$AuthenticationRequestImpl;
+      {required final String email,
+      required final String password}) = _$AuthenticationRequestImpl;
 
   factory _AuthenticationRequest.fromJson(Map<String, dynamic> json) =
       _$AuthenticationRequestImpl.fromJson;
 
   @override
-  String? get email;
-  @override
-  String? get password;
+  String get email;
+  @override // Email del usuario (opcional)
+  String get password;
   @override
   @JsonKey(ignore: true)
   _$$AuthenticationRequestImplCopyWith<_$AuthenticationRequestImpl>
