@@ -1,12 +1,15 @@
-import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/auth/service/authentication_service.dart';
 import 'package:birthflow_movil/src/config/dio/dio.dart';
+import 'package:birthflow_movil/src/data/auth/datasources/authentication_service.dart';
+import 'package:birthflow_movil/src/data/auth/repositories/authentication_repository_imp.dart';
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
 import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repository_imp.dart';
+import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repository.dart';
+import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dart';
+import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import 'package:get_it/get_it.dart';
 
 final GetIt locator = GetIt.instance;
@@ -21,9 +24,24 @@ Future<void> initializeDependencies() async {
   // Registra el AuthenticationService como singleton en GetIt
   locator.registerSingleton<AuthenticationService>(AuthenticationService(dio));
 
+  locator.registerSingleton<AuthenticationRepository>(
+    AuthenticationRepositoryImplementation(locator<AuthenticationService>()),
+  );
+
+  locator.registerSingleton<CreateUserUsecase>(
+    CreateUserUsecaseImplementation(locator<AuthenticationRepository>()),
+  );
+
+  locator.registerSingleton<LoginUsecase>(
+    LoginUsecaseImplementation(locator<AuthenticationRepository>()),
+  );
+
   // Registra el AuthenticationBloc como singleton en GetIt, inyectando AuthenticationService
   locator.registerSingleton<AuthenticationBloc>(
-    AuthenticationBloc(locator<AuthenticationService>()),
+    AuthenticationBloc(
+      locator<CreateUserUsecase>(),
+      locator<LoginUsecase>(),
+    ),
   );
 
   // Registra el PartographService como singleton en GetIt

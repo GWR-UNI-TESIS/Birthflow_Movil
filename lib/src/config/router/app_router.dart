@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/auth/bloc/states/authentication_state.dart';
+
 import 'package:birthflow_movil/src/config/router/path.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:birthflow_movil/src/ui/auth/views/login.dart';
 import 'package:birthflow_movil/src/ui/auth/views/register.dart';
 import 'package:birthflow_movil/src/ui/auth/views/splash.dart';

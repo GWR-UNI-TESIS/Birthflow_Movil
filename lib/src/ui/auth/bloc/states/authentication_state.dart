@@ -1,4 +1,4 @@
-import 'package:birthflow_movil/src/auth/models/authentication_response/authentication_response.dart';
+import 'package:birthflow_movil/src/domain/auth/entities/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'authentication_state.freezed.dart';
@@ -16,7 +16,7 @@ class AuthenticationState with _$AuthenticationState {
 
   // Estado después de una autenticación exitosa (ej. inicio de sesión)
   const factory AuthenticationState.authenticated({
-    required AuthenticationResponse response,
+    required User response,
   }) = Authenticated;
 
   // Estado después de una autenticación fallida

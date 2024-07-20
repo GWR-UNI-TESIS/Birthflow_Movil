@@ -1,6 +1,6 @@
-import 'package:birthflow_movil/src/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/auth/bloc/events/authentication_event.dart';
-import 'package:birthflow_movil/src/auth/bloc/states/authentication_state.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,4 +1,5 @@
-import 'package:birthflow_movil/src/auth/models/authentication_user/authentication_user.dart';
+
+import 'package:birthflow_movil/src/data/auth/models/authentication_user/authentication_user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'authentication_response.freezed.dart';

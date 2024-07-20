@@ -21,7 +21,7 @@ mixin _$AuthenticationState {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function() registrationSuccess,
-    required TResult Function(AuthenticationResponse response) authenticated,
+    required TResult Function(User response) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) =>
@@ -31,7 +31,7 @@ mixin _$AuthenticationState {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function()? registrationSuccess,
-    TResult? Function(AuthenticationResponse response)? authenticated,
+    TResult? Function(User response)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) =>
@@ -41,7 +41,7 @@ mixin _$AuthenticationState {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function()? registrationSuccess,
-    TResult Function(AuthenticationResponse response)? authenticated,
+    TResult Function(User response)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -139,7 +139,7 @@ class _$UninitializedImpl implements Uninitialized {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function() registrationSuccess,
-    required TResult Function(AuthenticationResponse response) authenticated,
+    required TResult Function(User response) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -152,7 +152,7 @@ class _$UninitializedImpl implements Uninitialized {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function()? registrationSuccess,
-    TResult? Function(AuthenticationResponse response)? authenticated,
+    TResult? Function(User response)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -165,7 +165,7 @@ class _$UninitializedImpl implements Uninitialized {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function()? registrationSuccess,
-    TResult Function(AuthenticationResponse response)? authenticated,
+    TResult Function(User response)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -265,7 +265,7 @@ class _$AuthLoadingImpl implements AuthLoading {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function() registrationSuccess,
-    required TResult Function(AuthenticationResponse response) authenticated,
+    required TResult Function(User response) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -278,7 +278,7 @@ class _$AuthLoadingImpl implements AuthLoading {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function()? registrationSuccess,
-    TResult? Function(AuthenticationResponse response)? authenticated,
+    TResult? Function(User response)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -291,7 +291,7 @@ class _$AuthLoadingImpl implements AuthLoading {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function()? registrationSuccess,
-    TResult Function(AuthenticationResponse response)? authenticated,
+    TResult Function(User response)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -392,7 +392,7 @@ class _$RegistrationSuccessImpl implements RegistrationSuccess {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function() registrationSuccess,
-    required TResult Function(AuthenticationResponse response) authenticated,
+    required TResult Function(User response) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -405,7 +405,7 @@ class _$RegistrationSuccessImpl implements RegistrationSuccess {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function()? registrationSuccess,
-    TResult? Function(AuthenticationResponse response)? authenticated,
+    TResult? Function(User response)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -418,7 +418,7 @@ class _$RegistrationSuccessImpl implements RegistrationSuccess {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function()? registrationSuccess,
-    TResult Function(AuthenticationResponse response)? authenticated,
+    TResult Function(User response)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -483,9 +483,7 @@ abstract class _$$AuthenticatedImplCopyWith<$Res> {
           _$AuthenticatedImpl value, $Res Function(_$AuthenticatedImpl) then) =
       __$$AuthenticatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({AuthenticationResponse response});
-
-  $AuthenticationResponseCopyWith<$Res> get response;
+  $Res call({User response});
 }
 
 /// @nodoc
@@ -505,16 +503,8 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
       response: null == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as AuthenticationResponse,
+              as User,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AuthenticationResponseCopyWith<$Res> get response {
-    return $AuthenticationResponseCopyWith<$Res>(_value.response, (value) {
-      return _then(_value.copyWith(response: value));
-    });
   }
 }
 
@@ -524,7 +514,7 @@ class _$AuthenticatedImpl implements Authenticated {
   const _$AuthenticatedImpl({required this.response});
 
   @override
-  final AuthenticationResponse response;
+  final User response;
 
   @override
   String toString() {
@@ -555,7 +545,7 @@ class _$AuthenticatedImpl implements Authenticated {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function() registrationSuccess,
-    required TResult Function(AuthenticationResponse response) authenticated,
+    required TResult Function(User response) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -568,7 +558,7 @@ class _$AuthenticatedImpl implements Authenticated {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function()? registrationSuccess,
-    TResult? Function(AuthenticationResponse response)? authenticated,
+    TResult? Function(User response)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -581,7 +571,7 @@ class _$AuthenticatedImpl implements Authenticated {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function()? registrationSuccess,
-    TResult Function(AuthenticationResponse response)? authenticated,
+    TResult Function(User response)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -637,10 +627,10 @@ class _$AuthenticatedImpl implements Authenticated {
 }
 
 abstract class Authenticated implements AuthenticationState {
-  const factory Authenticated(
-      {required final AuthenticationResponse response}) = _$AuthenticatedImpl;
+  const factory Authenticated({required final User response}) =
+      _$AuthenticatedImpl;
 
-  AuthenticationResponse get response;
+  User get response;
   @JsonKey(ignore: true)
   _$$AuthenticatedImplCopyWith<_$AuthenticatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -714,7 +704,7 @@ class _$UnauthenticatedImpl implements Unauthenticated {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function() registrationSuccess,
-    required TResult Function(AuthenticationResponse response) authenticated,
+    required TResult Function(User response) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -727,7 +717,7 @@ class _$UnauthenticatedImpl implements Unauthenticated {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function()? registrationSuccess,
-    TResult? Function(AuthenticationResponse response)? authenticated,
+    TResult? Function(User response)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -740,7 +730,7 @@ class _$UnauthenticatedImpl implements Unauthenticated {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function()? registrationSuccess,
-    TResult Function(AuthenticationResponse response)? authenticated,
+    TResult Function(User response)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -872,7 +862,7 @@ class _$FailureImpl implements Failure {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function() registrationSuccess,
-    required TResult Function(AuthenticationResponse response) authenticated,
+    required TResult Function(User response) authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -885,7 +875,7 @@ class _$FailureImpl implements Failure {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function()? registrationSuccess,
-    TResult? Function(AuthenticationResponse response)? authenticated,
+    TResult? Function(User response)? authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -898,7 +888,7 @@ class _$FailureImpl implements Failure {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function()? registrationSuccess,
-    TResult Function(AuthenticationResponse response)? authenticated,
+    TResult Function(User response)? authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
