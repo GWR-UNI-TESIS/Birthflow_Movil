@@ -1,4 +1,4 @@
-import 'package:birthflow_movil/src/data/partograph/models/partograph_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 
 // ignore: avoid_classes_with_only_static_members

@@ -2,9 +2,9 @@ import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_event.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/states_events/partographs_state.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/home/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/home/states_events/partographs_event.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/home/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,6 +47,12 @@ class _HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<AuthenticationBloc>().state;
+    final String user = state.maybeWhen(
+      authenticated: (response) => response.userId!,
+      orElse: () => '',
+    );
+
     return DefaultTabController(
       length: 1,
       child: Scaffold(
@@ -115,7 +121,7 @@ class _HomeView extends StatelessWidget {
           children: <Widget>[
             BlocBuilder<PartographsBloc, PartographsState>(
               builder: (context, state) {
-                return state.when(
+                return state.maybeWhen(
                   initial: () =>
                       const Center(child: CircularProgressIndicator()),
                   loading: () =>
@@ -152,6 +158,7 @@ class _HomeView extends StatelessWidget {
                   empty: () => const Center(
                     child: Text('No hay datos'),
                   ),
+                  orElse: () => Container(),
                 );
               },
             ),
@@ -160,7 +167,16 @@ class _HomeView extends StatelessWidget {
         endDrawer: NotificationsDrawer(),
         floatingActionButton: FloatingActionButton(
           tooltip: 'Nuevo',
-          onPressed: () => context.goNamed(RoutePaths.createPartograph.name),
+          onPressed: () async {
+            final String? value =
+                await context.pushNamed(RoutePaths.createPartograph.name);
+
+            if (value != null) {
+              context
+                  .read<PartographsBloc>()
+                  .add(FetchPartographs(userId: user));
+            }
+          },
           child: const Icon(Icons.add),
         ),
       ),

@@ -12,6 +12,7 @@ class PartographResponse with _$PartographResponse {
     required String recordName,
     required String date,
     required String observation,
+     String? workTime,
     required bool isDelete,
     required String createdAt,
     required String createdBy,

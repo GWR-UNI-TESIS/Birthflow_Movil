@@ -7,6 +7,7 @@ import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repo
 import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -57,6 +58,12 @@ Future<void> initializeDependencies() async {
   // Registra el PartographGetUseCase como singleton en GetIt, inyectando PartographRepository
   locator.registerSingleton<PartographGetUseCase>(
     PartographGetUseCase(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+   locator.registerSingleton<PartographCreateUseCase>(
+    PartographCreateUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );

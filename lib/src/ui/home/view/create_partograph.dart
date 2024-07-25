@@ -1,15 +1,54 @@
+import 'package:birthflow_movil/src/config/locator/locator.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/worktime/worktime.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/state_events/create_partograph_event.dart';
+import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/state_events/create_partograph_state.dart';
+import 'package:birthflow_movil/src/ui/home/widget/keep_alive_wrapper.dart';
+import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:birthflow_movil/src/ui/widgets/worktime/worktime_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class CreatePartographScreen extends StatefulWidget {
+class CreatePartographScreen extends StatelessWidget with SnackbarsMixin {
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CreatePartographBloc>(
+          create: (context) => CreatePartographBloc(
+            locator<PartographCreateUseCase>(),
+          ),
+        ),
+      ],
+      child: BlocListener<CreatePartographBloc, CreatePartographState>(
+        listener: (BuildContext context, CreatePartographState state) {
+          if (state is IsSaved) {
+            showSnackbar(context, state.message);
+            Navigator.pop(context, state.partographId);
+          }
+
+          if (state is Error) {
+            showErrorSnackbar(context, state.errorMessage);
+          }
+        },
+        child: _CreatePartographPage(),
+      ),
+    );
+  }
+}
+
+class _CreatePartographPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _CreatePartographState();
 }
 
-class _CreatePartographState extends State<CreatePartographScreen>
-    with TickerProviderStateMixin {
+class _CreatePartographState extends State<_CreatePartographPage>
+    with TickerProviderStateMixin, SnackbarsMixin {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   late final TabController _tabController;
 
   late TextEditingController _nameTextController;
@@ -27,12 +66,56 @@ class _CreatePartographState extends State<CreatePartographScreen>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+    _nameTextController.clear();
+    _recordNumberTextController.clear();
+    _dateTextController.clear();
+  }
+
+  void savePartograph(String user) {
+    final formState = _formKey.currentState;
+    if (formState != null &&
+        formState.validate() &&
+        _workTime.estado != 'unknown state') {
+      context.read<CreatePartographBloc>().add(
+            Save(
+              partogramaId: '',
+              name: _nameTextController.text,
+              recordName: _recordNumberTextController.text,
+              date: DateTime.parse(_dateTextController.text),
+              observation: '',
+              worktime: _workTime.estado,
+              createBy: user,
+            ),
+          );
+    } else {
+        showErrorSnackbar(context, 'Ingresar todos los valores - Tabla de construccion de curvas');
+
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
-    return WillPopScope(
-      onWillPop: () async {
-        final willPopScope = await showWarning(context);
-        return willPopScope ?? false;
+    final state = context.watch<AuthenticationBloc>().state;
+
+    final String user = state.maybeWhen(
+      authenticated: (response) => response.userId!,
+      orElse: () => '',
+    );
+
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
+
+        final bool shouldPop = await _showBackDialog() ?? false;
+        if (context.mounted && shouldPop) {
+          Navigator.pop(context);
+        }
       },
       child: Scaffold(
         appBar: AppBar(
@@ -54,77 +137,113 @@ class _CreatePartographState extends State<CreatePartographScreen>
           children: <Widget>[
             Container(
               padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextField(
-                      controller: _nameTextController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Nombre',
-                        hintText: 'Ingrese el nombre',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextField(
-                      controller: _recordNumberTextController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Expediente',
-                        hintText: 'Ingrese el numero de expediente',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: _dateTextController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Tiempo',
-                      ),
-                      readOnly: true,
-                      onTap: () async {
-                        final DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(
-                            2000,
+              child: KeepAliveWrapper(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 16,
+                        ),
+                        child: TextFormField(
+                          controller: _nameTextController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Nombre',
+                            hintText: 'Ingrese el nombre',
                           ),
-                          lastDate: DateTime(2101),
-                        );
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Porfavor ingrese el nombre';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 16,
+                        ),
+                        child: TextFormField(
+                          controller: _recordNumberTextController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Expediente',
+                            hintText: 'Ingrese el numero de expediente',
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Porfavor ingrese el expediente';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 16,
+                        ),
+                        child: TextFormField(
+                          controller: _dateTextController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Tiempo',
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Porfavor ingrese la fecha';
+                            }
+                            return null;
+                          },
+                          readOnly: true,
+                          onTap: () async {
+                            final DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(
+                                2000,
+                              ),
+                              lastDate: DateTime(2101),
+                            );
 
-                        if (pickedDate != null) {
-                          final String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                            if (pickedDate != null) {
+                              final String formattedDate =
+                                  DateFormat('yyyy-MM-dd').format(pickedDate);
 
-                          setState(() {
-                            _dateTextController.text = formattedDate;
-                          });
-                        }
-                      },
-                    ),
+                              setState(() {
+                                _dateTextController.text = formattedDate;
+                              });
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Column(
                 children: [
                   WorkTimeTableWidget(
                     currentWorkTime: _workTime,
                   ),
-                  FilledButton(
-                    onPressed: () async {},
-                    child: const Text('Guardar'),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 15,
+                      horizontal: 45,
+                    ),
+                    child: FilledButton(
+                      onPressed: () => savePartograph(user),
+                      child: const Text('Guardar'),
+                    ),
                   ),
                 ],
               ),
@@ -135,7 +254,7 @@ class _CreatePartographState extends State<CreatePartographScreen>
     );
   }
 
-  Future<bool?> showWarning(BuildContext context) async => showDialog<bool>(
+  Future<bool?> _showBackDialog() async => showDialog<bool>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text('Desea volver? '),

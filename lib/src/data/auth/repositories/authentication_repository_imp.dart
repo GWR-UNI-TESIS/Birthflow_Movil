@@ -5,15 +5,19 @@ import 'package:birthflow_movil/src/domain/auth/entities/authentication.dart';
 import 'package:birthflow_movil/src/domain/auth/entities/token.dart';
 import 'package:birthflow_movil/src/domain/auth/entities/user.dart';
 import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repository.dart';
+import 'package:birthflow_movil/src/local_storage/token_storage.dart';
 
-class AuthenticationRepositoryImplementation implements AuthenticationRepository {
+class AuthenticationRepositoryImplementation
+    implements AuthenticationRepository {
   final AuthenticationService _authenticactionService;
 
   AuthenticationRepositoryImplementation(this._authenticactionService);
 
   @override
-  Future<Authentication> login(
-      {required String username, required String password,}) async {
+  Future<Authentication> login({
+    required String username,
+    required String password,
+  }) async {
     try {
       final request =
           AuthenticationRequest(email: username, password: password);
@@ -49,8 +53,11 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
 
       if (result.message == 'Generate Token.') {
         final phone = response?.user.phoneNumber;
+
+        TokenStorage().saveTokenSecurely(response!.token);
+
         return Authentication(
-          token: Token(token: response!.token),
+          token: Token(token: response.token),
           user: User(
             userId: response.user.id,
             nombres: response.user.nombres,
@@ -58,7 +65,8 @@ class AuthenticationRepositoryImplementation implements AuthenticationRepository
             nombreUsuario: response.user.nombreUsuario,
             passwordHash: response.user.nombreUsuario,
             email: response.user.email,
-            phoneNumber: phone == null? null: int.tryParse(response.user.phoneNumber!),
+            phoneNumber:
+                phone == null ? null : int.tryParse(response.user.phoneNumber!),
           ),
           message: 'Usuario correcto',
           authenticationCode: AuthenticationCode.success,
