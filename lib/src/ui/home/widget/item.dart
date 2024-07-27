@@ -28,13 +28,10 @@ class _ListItemState extends State<ListItemWidget> {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('01/01/2023'),
+            Text(''),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                if (true) Icon(Icons.push_pin),
-              ],
             ),
           ],
         ),

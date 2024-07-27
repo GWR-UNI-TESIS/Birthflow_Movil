@@ -1,35 +1,26 @@
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
+import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatelessWidget with SnackbarsMixin {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) {
-         // Si el estado es Unauthenticated y hay un mensaje de error, muestra un SnackBar
+        // Si el estado es Unauthenticated y hay un mensaje de error, muestra un SnackBar
         if (state is Unauthenticated) {
           if (state.message != null) {
-            _showErrorSnackbar(context, state.message!);
+            showErrorSnackbar(context, state.message!);
           }
         }
       },
       child: _LoginView(),
-    );
-  }
-
-  void _showErrorSnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(message),
-        backgroundColor: Colors.red,
-        showCloseIcon: true,
-      ),
     );
   }
 }
@@ -41,7 +32,7 @@ class _LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<_LoginView> {
   final _formKey = GlobalKey<FormState>();
-  
+
   // Controladores para los campos de usuario y contraseña
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -51,11 +42,14 @@ class _LoginViewState extends State<_LoginView> {
     final size = MediaQuery.of(context).size;
     final isLoading = context.watch<AuthenticationBloc>().state is AuthLoading;
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
+    return PopScope(
+      canPop:
+          !isLoading, // Deshabilitar la acción de retroceso cuando está cargando
+      child: Scaffold(
+        appBar: AppBar(),
+        body: LoadingOverlay(
+          isLoading: isLoading,
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(40.0),
             child: Center(
               child: Form(
@@ -135,25 +129,7 @@ class _LoginViewState extends State<_LoginView> {
               ),
             ),
           ),
-           // Muestra un indicador de progreso circular mientras se carga
-          if (isLoading)
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              color: const Color.fromRGBO(249, 249, 249, 0.9),
-              child: const Center(
-                child: CircularProgressIndicator(
-                  backgroundColor:
-                      Colors.transparent, // Oculta el fondo del indicador
-
-                  strokeWidth: 5.0, // Ajusta el grosor del indicador
-                  semanticsLabel: 'Cargando...', // Etiqueta para accesibilidad
-                ),
-              ),
-            )
-          else
-            Container(),
-        ],
+        ),
       ),
     );
   }

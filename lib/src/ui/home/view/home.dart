@@ -1,48 +1,17 @@
-import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
-import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/home/bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/home/states_events/partographs_event.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/home/states_events/partographs_state.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 enum _Options { newPartograph, configuration, information }
 
-class AppBarCubit extends Cubit<bool> {
-  AppBarCubit() : super(false);
-
-  void changeValue(bool booleanToChange) {
-    emit(booleanToChange);
-  }
-}
-
 class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final state = context.watch<AuthenticationBloc>().state;
-    final String user = state.maybeWhen(
-      authenticated: (response) => response.userId!,
-      orElse: () => '',
-    );
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<PartographsBloc>(
-          create: (context) => PartographsBloc(
-            locator<PartographGetUseCase>(),
-          )..add(FetchPartographs(userId: user)),
-        ),
-        BlocProvider(create: (context) => AppBarCubit()),
-      ],
-      child: _HomeView(),
-    );
-  }
-}
-
-class _HomeView extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,6 +21,7 @@ class _HomeView extends StatelessWidget {
       authenticated: (response) => response.userId!,
       orElse: () => '',
     );
+    context.read<PartographsBloc>().add(FetchPartographs(userId: user));
 
     return DefaultTabController(
       length: 1,
@@ -68,7 +38,9 @@ class _HomeView extends StatelessWidget {
               icon: const Icon(Icons.notifications),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(RoutePaths.search.name);
+              },
               icon: const Icon(Icons.search),
             ),
             PopupMenuButton<_Options>(
@@ -143,7 +115,7 @@ class _HomeView extends StatelessWidget {
                                   partographId: item.partographId!,
                                   title: item.name,
                                   subtitle:
-                                      '${item.recordName}-${item.date.toIso8601String()}',
+                                      '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}',
                                 );
                               }
                             },

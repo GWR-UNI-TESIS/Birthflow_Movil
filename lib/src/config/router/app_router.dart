@@ -9,6 +9,7 @@ import 'package:birthflow_movil/src/ui/auth/views/splash.dart';
 import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
 import 'package:birthflow_movil/src/ui/home/view/create_partograph.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
+import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -76,6 +77,11 @@ class AppRouter {
             path: RoutePaths.createPartograph.path,
             name: RoutePaths.createPartograph.name,
             screen: CreatePartographScreen(),
+          ),
+          _buildRoute(
+            path: RoutePaths.search.path,
+            name: RoutePaths.search.name,
+            screen: SearchScreen(),
           ),
         ],
       ),

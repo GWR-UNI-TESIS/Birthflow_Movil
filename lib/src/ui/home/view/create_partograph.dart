@@ -2,10 +2,11 @@ import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/worktime/worktime.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/bloc.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/state_events/create_partograph_event.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/state_events/create_partograph_state.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/create_partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/create_partograph/state_events/create_partograph_event.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/create_partograph/state_events/create_partograph_state.dart';
 import 'package:birthflow_movil/src/ui/home/widget/keep_alive_wrapper.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:birthflow_movil/src/ui/widgets/worktime/worktime_widget.dart';
 import 'package:flutter/material.dart';
@@ -91,15 +92,17 @@ class _CreatePartographState extends State<_CreatePartographPage>
             ),
           );
     } else {
-        showErrorSnackbar(context, 'Ingresar todos los valores - Tabla de construccion de curvas');
-
+      showErrorSnackbar(
+        context,
+        'Ingresar todos los valores - Tabla de construccion de curvas',
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AuthenticationBloc>().state;
-
+    final isLoading = context.watch<CreatePartographBloc>().state is Loading;
     final String user = state.maybeWhen(
       authenticated: (response) => response.userId!,
       orElse: () => '',
@@ -132,123 +135,128 @@ class _CreatePartographState extends State<_CreatePartographPage>
             ],
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-              child: KeepAliveWrapper(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 16,
-                        ),
-                        child: TextFormField(
-                          controller: _nameTextController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Nombre',
-                            hintText: 'Ingrese el nombre',
+        body: LoadingOverlay(
+          isLoading: isLoading,
+          child: TabBarView(
+            controller: _tabController,
+            children: <Widget>[
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                child: KeepAliveWrapper(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 16,
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Porfavor ingrese el nombre';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 16,
-                        ),
-                        child: TextFormField(
-                          controller: _recordNumberTextController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Expediente',
-                            hintText: 'Ingrese el numero de expediente',
+                          child: TextFormField(
+                            controller: _nameTextController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Nombre',
+                              hintText: 'Ingrese el nombre',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Porfavor ingrese el nombre';
+                              }
+                              return null;
+                            },
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Porfavor ingrese el expediente';
-                            }
-                            return null;
-                          },
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 16,
-                        ),
-                        child: TextFormField(
-                          controller: _dateTextController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Tiempo',
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 16,
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Porfavor ingrese la fecha';
-                            }
-                            return null;
-                          },
-                          readOnly: true,
-                          onTap: () async {
-                            final DateTime? pickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(
-                                2000,
-                              ),
-                              lastDate: DateTime(2101),
-                            );
+                          child: TextFormField(
+                            controller: _recordNumberTextController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Expediente',
+                              hintText: 'Ingrese el numero de expediente',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Porfavor ingrese el expediente';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 16,
+                          ),
+                          child: TextFormField(
+                            controller: _dateTextController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Tiempo',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Porfavor ingrese la fecha';
+                              }
+                              return null;
+                            },
+                            readOnly: true,
+                            onTap: () async {
+                              final DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(
+                                  2000,
+                                ),
+                                lastDate: DateTime(2101),
+                              );
 
-                            if (pickedDate != null) {
-                              final String formattedDate =
-                                  DateFormat('yyyy-MM-dd').format(pickedDate);
+                              if (pickedDate != null) {
+                                final String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
 
-                              setState(() {
-                                _dateTextController.text = formattedDate;
-                              });
-                            }
-                          },
+                                setState(() {
+                                  _dateTextController.text = formattedDate;
+                                });
+                              }
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Column(
-                children: [
-                  WorkTimeTableWidget(
-                    currentWorkTime: _workTime,
-                  ),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 15,
-                      horizontal: 45,
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Column(
+                  children: [
+                    WorkTimeTableWidget(
+                      currentWorkTime: _workTime,
                     ),
-                    child: FilledButton(
-                      onPressed: () => savePartograph(user),
-                      child: const Text('Guardar'),
+                    Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 15,
+                        horizontal: 45,
+                      ),
+                      child: FilledButton(
+                        onPressed: () => savePartograph(user),
+                        child: const Text('Guardar'),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

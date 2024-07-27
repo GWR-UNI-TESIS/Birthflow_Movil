@@ -1,6 +1,6 @@
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/state_events/create_partograph_event.dart';
-import 'package:birthflow_movil/src/ui/home/bloc/create_partograph/state_events/create_partograph_state.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/create_partograph/state_events/create_partograph_event.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/create_partograph/state_events/create_partograph_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreatePartographBloc

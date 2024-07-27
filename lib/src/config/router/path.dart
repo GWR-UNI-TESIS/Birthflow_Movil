@@ -2,11 +2,13 @@
 class RoutePaths {
   static final splash = RoutePath('splash', '/splash');
   static final home = RoutePath('home', '/home');
-  static final createPartograph = RoutePath('createPartograph', 'createPartograph');
+  static final createPartograph =
+      RoutePath('createPartograph', 'createPartograph');
   static final auth = RoutePath('auth', '/auth');
   static final login = RoutePath('login', 'login');
   static final register = RoutePath('register', 'register');
   static final partograma = RoutePath('partograma', '/partograma');
+  static final search = RoutePath('search', 'search');
 }
 
 class RoutePath {

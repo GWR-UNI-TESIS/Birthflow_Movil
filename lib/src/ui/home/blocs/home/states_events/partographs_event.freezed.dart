@@ -16,42 +16,47 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PartographsEvent {
-  String? get userId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? userId) fetchPartographs,
+    required TResult Function(FilterModel filter, String searchText)
+        applyFiltersAndSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? userId)? fetchPartographs,
+    TResult? Function(FilterModel filter, String searchText)?
+        applyFiltersAndSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? userId)? fetchPartographs,
+    TResult Function(FilterModel filter, String searchText)?
+        applyFiltersAndSearch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FetchPartographs value) fetchPartographs,
+    required TResult Function(ApplyFiltersAndSearch value)
+        applyFiltersAndSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FetchPartographs value)? fetchPartographs,
+    TResult? Function(ApplyFiltersAndSearch value)? applyFiltersAndSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchPartographs value)? fetchPartographs,
+    TResult Function(ApplyFiltersAndSearch value)? applyFiltersAndSearch,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $PartographsEventCopyWith<PartographsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +65,6 @@ abstract class $PartographsEventCopyWith<$Res> {
   factory $PartographsEventCopyWith(
           PartographsEvent value, $Res Function(PartographsEvent) then) =
       _$PartographsEventCopyWithImpl<$Res, PartographsEvent>;
-  @useResult
-  $Res call({String? userId});
 }
 
 /// @nodoc
@@ -73,28 +76,13 @@ class _$PartographsEventCopyWithImpl<$Res, $Val extends PartographsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FetchPartographsImplCopyWith<$Res>
-    implements $PartographsEventCopyWith<$Res> {
+abstract class _$$FetchPartographsImplCopyWith<$Res> {
   factory _$$FetchPartographsImplCopyWith(_$FetchPartographsImpl value,
           $Res Function(_$FetchPartographsImpl) then) =
       __$$FetchPartographsImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String? userId});
 }
@@ -156,6 +144,8 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? userId) fetchPartographs,
+    required TResult Function(FilterModel filter, String searchText)
+        applyFiltersAndSearch,
   }) {
     return fetchPartographs(userId);
   }
@@ -164,6 +154,8 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? userId)? fetchPartographs,
+    TResult? Function(FilterModel filter, String searchText)?
+        applyFiltersAndSearch,
   }) {
     return fetchPartographs?.call(userId);
   }
@@ -172,6 +164,8 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? userId)? fetchPartographs,
+    TResult Function(FilterModel filter, String searchText)?
+        applyFiltersAndSearch,
     required TResult orElse(),
   }) {
     if (fetchPartographs != null) {
@@ -184,6 +178,8 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FetchPartographs value) fetchPartographs,
+    required TResult Function(ApplyFiltersAndSearch value)
+        applyFiltersAndSearch,
   }) {
     return fetchPartographs(this);
   }
@@ -192,6 +188,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FetchPartographs value)? fetchPartographs,
+    TResult? Function(ApplyFiltersAndSearch value)? applyFiltersAndSearch,
   }) {
     return fetchPartographs?.call(this);
   }
@@ -200,6 +197,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchPartographs value)? fetchPartographs,
+    TResult Function(ApplyFiltersAndSearch value)? applyFiltersAndSearch,
     required TResult orElse(),
   }) {
     if (fetchPartographs != null) {
@@ -213,10 +211,160 @@ abstract class FetchPartographs implements PartographsEvent {
   const factory FetchPartographs({final String? userId}) =
       _$FetchPartographsImpl;
 
-  @override
   String? get userId;
-  @override
   @JsonKey(ignore: true)
   _$$FetchPartographsImplCopyWith<_$FetchPartographsImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ApplyFiltersAndSearchImplCopyWith<$Res> {
+  factory _$$ApplyFiltersAndSearchImplCopyWith(
+          _$ApplyFiltersAndSearchImpl value,
+          $Res Function(_$ApplyFiltersAndSearchImpl) then) =
+      __$$ApplyFiltersAndSearchImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FilterModel filter, String searchText});
+}
+
+/// @nodoc
+class __$$ApplyFiltersAndSearchImplCopyWithImpl<$Res>
+    extends _$PartographsEventCopyWithImpl<$Res, _$ApplyFiltersAndSearchImpl>
+    implements _$$ApplyFiltersAndSearchImplCopyWith<$Res> {
+  __$$ApplyFiltersAndSearchImplCopyWithImpl(_$ApplyFiltersAndSearchImpl _value,
+      $Res Function(_$ApplyFiltersAndSearchImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filter = null,
+    Object? searchText = null,
+  }) {
+    return _then(_$ApplyFiltersAndSearchImpl(
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as FilterModel,
+      searchText: null == searchText
+          ? _value.searchText
+          : searchText // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ApplyFiltersAndSearchImpl implements ApplyFiltersAndSearch {
+  const _$ApplyFiltersAndSearchImpl(
+      {required this.filter, required this.searchText});
+
+  @override
+  final FilterModel filter;
+  @override
+  final String searchText;
+
+  @override
+  String toString() {
+    return 'PartographsEvent.applyFiltersAndSearch(filter: $filter, searchText: $searchText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ApplyFiltersAndSearchImpl &&
+            (identical(other.filter, filter) || other.filter == filter) &&
+            (identical(other.searchText, searchText) ||
+                other.searchText == searchText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filter, searchText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ApplyFiltersAndSearchImplCopyWith<_$ApplyFiltersAndSearchImpl>
+      get copyWith => __$$ApplyFiltersAndSearchImplCopyWithImpl<
+          _$ApplyFiltersAndSearchImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? userId) fetchPartographs,
+    required TResult Function(FilterModel filter, String searchText)
+        applyFiltersAndSearch,
+  }) {
+    return applyFiltersAndSearch(filter, searchText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? userId)? fetchPartographs,
+    TResult? Function(FilterModel filter, String searchText)?
+        applyFiltersAndSearch,
+  }) {
+    return applyFiltersAndSearch?.call(filter, searchText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? userId)? fetchPartographs,
+    TResult Function(FilterModel filter, String searchText)?
+        applyFiltersAndSearch,
+    required TResult orElse(),
+  }) {
+    if (applyFiltersAndSearch != null) {
+      return applyFiltersAndSearch(filter, searchText);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FetchPartographs value) fetchPartographs,
+    required TResult Function(ApplyFiltersAndSearch value)
+        applyFiltersAndSearch,
+  }) {
+    return applyFiltersAndSearch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FetchPartographs value)? fetchPartographs,
+    TResult? Function(ApplyFiltersAndSearch value)? applyFiltersAndSearch,
+  }) {
+    return applyFiltersAndSearch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FetchPartographs value)? fetchPartographs,
+    TResult Function(ApplyFiltersAndSearch value)? applyFiltersAndSearch,
+    required TResult orElse(),
+  }) {
+    if (applyFiltersAndSearch != null) {
+      return applyFiltersAndSearch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ApplyFiltersAndSearch implements PartographsEvent {
+  const factory ApplyFiltersAndSearch(
+      {required final FilterModel filter,
+      required final String searchText}) = _$ApplyFiltersAndSearchImpl;
+
+  FilterModel get filter;
+  String get searchText;
+  @JsonKey(ignore: true)
+  _$$ApplyFiltersAndSearchImplCopyWith<_$ApplyFiltersAndSearchImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
