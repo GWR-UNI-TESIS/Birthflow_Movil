@@ -83,6 +83,15 @@ class AppRouter {
             name: RoutePaths.search.name,
             screen: SearchScreen(),
           ),
+          // Ruta del partograma
+          GoRoute(
+            path: RoutePaths.partograma.path,
+            name: RoutePaths.partograma.name,
+            builder: (context, state) {
+              final partographId = state.pathParameters['partographId']!;
+              return PartographScreen(partographId: partographId);
+            },
+          ),
         ],
       ),
       // Ruta de autenticación
@@ -103,12 +112,6 @@ class AppRouter {
             screen: const RegisterScreen(),
           ),
         ],
-      ),
-      // Ruta del partograma
-      _buildRoute(
-        path: RoutePaths.partograma.path,
-        name: RoutePaths.partograma.name,
-        screen: PartographScreen(),
       ),
     ],
     // Escuchador para refrescar la lista de rutas basado en el stream del AuthenticationBloc

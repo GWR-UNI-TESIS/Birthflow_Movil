@@ -9,8 +9,7 @@ Future<void> main() async {
   await initializeDependencies();
 
   runApp(
-    AppDev(   
-    ),
+    AppDev(),
   );
 }
 
@@ -24,4 +23,4 @@ Future<void> loadEnvConfig() async {
   } else {
     await dotenv.load(fileName: '.env.development');
   }
-} 
+}

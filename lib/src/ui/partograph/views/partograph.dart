@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
 class PartographScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return _PartographView();
-  }
-}
+  final String partographId;
 
-class _PartographView extends StatelessWidget {
+  const PartographScreen({super.key, required this.partographId});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Partograph'),
+        title: Text(partographId),
       ),
       body: const Center(
         child: Text('Partograph'),

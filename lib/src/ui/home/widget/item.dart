@@ -1,4 +1,6 @@
+import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ListItemWidget extends StatefulWidget {
   const ListItemWidget({
@@ -36,7 +38,16 @@ class _ListItemState extends State<ListItemWidget> {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        context.go(
+          context.namedLocation(
+            RoutePaths.partograma.name,
+            pathParameters: {
+              'partographId': widget.partographId,
+            },
+          ),
+        );
+      },
       subtitle: Text(widget.subtitle),
       onLongPress: () => showModalBottomSheet<void>(
         context: context,

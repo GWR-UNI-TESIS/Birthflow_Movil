@@ -7,7 +7,7 @@ class RoutePaths {
   static final auth = RoutePath('auth', '/auth');
   static final login = RoutePath('login', 'login');
   static final register = RoutePath('register', 'register');
-  static final partograma = RoutePath('partograma', '/partograma');
+  static final partograma = RoutePath('partograma', 'partograma/:partographId');
   static final search = RoutePath('search', 'search');
 }
 
