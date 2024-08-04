@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
@@ -10,6 +9,8 @@ import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
 import 'package:birthflow_movil/src/ui/home/view/create_partograph.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,7 @@ import 'package:go_router/go_router.dart';
 // ignore: avoid_classes_with_only_static_members
 class AppRouter {
   final AuthenticationBloc authBloc;
-
+  final _rootNavigatorKey = GlobalKey<NavigatorState>();
   AppRouter({required this.authBloc});
 
   // Construye una página con una transición predeterminada
@@ -56,6 +57,9 @@ class AppRouter {
 
   // Inicializa el enrutador GoRouter
   late final GoRouter router = GoRouter(
+    debugLogDiagnostics: true,
+    navigatorKey: _rootNavigatorKey,
+
     // Ubicación inicial de la aplicación (ruta del splash)
     initialLocation: RoutePaths.splash.path,
     // Definición de rutas
@@ -88,9 +92,36 @@ class AppRouter {
             path: RoutePaths.partograma.path,
             name: RoutePaths.partograma.name,
             builder: (context, state) {
-              final partographId = state.pathParameters['partographId']!;
-              return PartographScreen(partographId: partographId);
+              if (state.extra != String) {
+                return const PartographScreen(partographId: '');
+              } else {
+                final partographId = state.extra! as String;
+
+                return PartographScreen(partographId: partographId);
+              }
             },
+            routes: [
+              GoRoute(
+                path: RoutePaths.cervicalDilationList.path,
+                name: RoutePaths.cervicalDilationList.name,
+                builder: (context, state) {
+                  final partographId = state.extra! as String;
+                  return CervicalDilationListScreen(
+                    partographId: partographId,
+                  );
+                },
+              ),
+              GoRoute(
+                path: RoutePaths.cervicalDilation.path,
+                name: RoutePaths.cervicalDilation.name,
+                builder: (context, state) {
+                  final data = state.extra! as CervicalDilationEditData;
+                  return CervicalDilationEditScreen(
+                    cervicalDilationEditData: data,
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),

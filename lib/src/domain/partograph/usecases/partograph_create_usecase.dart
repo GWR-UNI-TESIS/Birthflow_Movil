@@ -30,13 +30,14 @@ class PartographCreateUseCaseImplementation implements PartographCreateUseCase {
     required String worktime,
     required String createBy,
   }) async {
-    return await _partographRepository.create(
-        partogramaId: partogramaId,
-        name: name,
-        recordName: recordName,
-        date: date,
-        observation: observation,
-        worktime: worktime,
-        createBy: createBy,);
+    return await _partographRepository.createPartograph(
+      partogramaId: partogramaId,
+      name: name,
+      recordName: recordName,
+      date: date,
+      observation: observation,
+      worktime: worktime,
+      createBy: createBy,
+    );
   }
 }

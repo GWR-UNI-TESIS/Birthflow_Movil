@@ -148,13 +148,9 @@ class HomeScreen extends StatelessWidget {
                   .read<PartographsBloc>()
                   .add(FetchPartographs(userId: user));
 
-              context.go(
-                context.namedLocation(
-                  RoutePaths.partograma.name,
-                  pathParameters: {
-                    'partographId': value,
-                  },
-                ),
+              context.goNamed(
+                RoutePaths.partograma.name,
+                extra: value,
               );
             }
           },

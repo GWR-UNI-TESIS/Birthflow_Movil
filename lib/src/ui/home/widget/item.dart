@@ -39,13 +39,9 @@ class _ListItemState extends State<ListItemWidget> {
         ),
       ),
       onTap: () {
-        context.go(
-          context.namedLocation(
-            RoutePaths.partograma.name,
-            pathParameters: {
-              'partographId': widget.partographId,
-            },
-          ),
+        context.goNamed(
+          RoutePaths.partograma.name,
+          extra: widget.partographId,
         );
       },
       subtitle: Text(widget.subtitle),

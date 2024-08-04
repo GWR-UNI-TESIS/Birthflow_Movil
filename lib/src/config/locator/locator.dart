@@ -7,6 +7,10 @@ import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repo
 import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
@@ -62,8 +66,32 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-   locator.registerSingleton<PartographCreateUseCase>(
+  locator.registerSingleton<PartographCreateUseCase>(
     PartographCreateUseCaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<CervicalDilationCreateUseCase>(
+    CervicalDilationCreateUseCaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<CervicalDilationDeleteUseCase>(
+    CervicalDilationDeleteUseCaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<CervicalDilationGetUseCase>(
+    CervicalDilationGetUseCaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<CervicalDilationUpdateUseCase>(
+    CervicalDilationUpdateUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );

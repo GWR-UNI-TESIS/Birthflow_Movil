@@ -1,4 +1,6 @@
+import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -19,7 +21,34 @@ class PartographMapper {
     );
   }
 
+  static CervicalDilation toEntityCervicalDilation(
+    CervicalDilationResponse response,
+  ) {
+    return CervicalDilation(
+      id: response.id,
+      partographId: response.partographId,
+      value: response.value,
+      hour: response.hour,
+      remOrRam: response.remOrRam,
+      isDelete: response.isDelete,
+      createAt: response.createAt,
+      updateAt: response.updateAt,
+      deleteAt: response.deleteAt,
+      createdBy: response.createdBy,
+      updateBy: response.updateBy,
+      deleteBy: response.deleteBy,
+    );
+  }
+
   static List<Partograph> toEntityList(List<PartographResponse> responses) {
     return responses.map((response) => toEntity(response)).toList();
+  }
+
+  static List<CervicalDilation> toEntityListCervicalDilation(
+    List<CervicalDilationResponse> responses,
+  ) {
+    return responses
+        .map((response) => toEntityCervicalDilation(response))
+        .toList();
   }
 }
