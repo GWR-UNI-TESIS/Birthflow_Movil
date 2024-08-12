@@ -111,6 +111,7 @@ class AuthenticationRepositoryImplementation
       );
       await _authenticactionService.register(request);
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }

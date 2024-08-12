@@ -35,7 +35,8 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(
                   width: size.width / 1.3,
                   child: FilledButton(
-                    onPressed: () => context.goNamed(RoutePaths.register.name),
+                    onPressed: () =>
+                        context.go(AppPaths.welcome.register.path),
                     child: const Text('Registrarse'),
                   ),
                 ),
@@ -43,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(
                   width: size.width / 1.3,
                   child: TextButton(
-                    onPressed: () => context.goNamed(RoutePaths.login.name),
+                    onPressed: () => context.go(AppPaths.welcome.login.path),
                     child: const Text('Iniciar sesión'),
                   ),
                 ),

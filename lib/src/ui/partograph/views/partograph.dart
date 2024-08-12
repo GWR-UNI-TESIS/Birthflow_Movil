@@ -33,8 +33,11 @@ class _PartographState extends State<PartographScreen> {
           children: [
             FilledButton(
               onPressed: () => context
-                ..goNamed(
-                  RoutePaths.cervicalDilationList.name,
+                ..go(
+                  AppPaths.home.partographPath
+                      .define(widget.partographId)
+                      .cervicalDilationList
+                      .path,
                   extra: widget.partographId,
                 ),
               child: const Text('Dilataciones Cervicales'),

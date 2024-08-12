@@ -38,8 +38,12 @@ class CervicalDilationListScreen extends StatelessWidget {
                           subtitle: (item.remOrRam)
                               ? const Chip(label: Text('Ram O Rem'))
                               : null,
-                          onTap: () => context.goNamed(
-                            RoutePaths.cervicalDilation.name,
+                          onTap: () => context.go(
+                            AppPaths.home.partographPath
+                                .define(partographId)
+                                .cervicalDilationList
+                                .edit
+                                .path,
                             extra: CervicalDilationEditData(
                               cervicalDilation: item,
                               partographId: partographId,
@@ -64,8 +68,12 @@ class CervicalDilationListScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => context.goNamed(
-          RoutePaths.cervicalDilation.name,
+        onPressed: () => context.go(
+          AppPaths.home.partographPath
+              .define(partographId)
+              .cervicalDilationList
+              .create
+              .path,
           extra: CervicalDilationEditData(
             cervicalDilation: null,
             partographId: partographId,

@@ -39,13 +39,11 @@ class AppRouter {
   // Construye una ruta con propiedades específicas
   GoRoute _buildRoute({
     required String path,
-    required String name,
     required Widget screen,
     List<RouteBase>? routeBase,
   }) {
     return GoRoute(
       path: path,
-      name: name,
       pageBuilder: (context, state) => _buildPageWithDefaultTransition<void>(
         context: context,
         state: state,
@@ -61,65 +59,73 @@ class AppRouter {
     navigatorKey: _rootNavigatorKey,
 
     // Ubicación inicial de la aplicación (ruta del splash)
-    initialLocation: RoutePaths.splash.path,
+    initialLocation: AppPaths.splash.goRoute,
     // Definición de rutas
     routes: [
       // Ruta del splash
       _buildRoute(
-        path: RoutePaths.splash.path,
-        name: RoutePaths.splash.name,
+        path: AppPaths.splash.goRoute,
         screen: const SplashScreen(),
       ),
       // Ruta de inicio
       _buildRoute(
-        path: RoutePaths.home.path,
-        name: RoutePaths.home.name,
+        path: AppPaths.home.goRoute,
         screen: HomeScreen(),
         routeBase: <RouteBase>[
           // Rutas hijas de la ruta de inicio (se agregan aquí)
           _buildRoute(
-            path: RoutePaths.createPartograph.path,
-            name: RoutePaths.createPartograph.name,
+            path: AppPaths.home.create.goRoute,
             screen: CreatePartographScreen(),
           ),
           _buildRoute(
-            path: RoutePaths.search.path,
-            name: RoutePaths.search.name,
+            path: AppPaths.home.search.goRoute,
             screen: SearchScreen(),
           ),
           // Ruta del partograma
           GoRoute(
-            path: RoutePaths.partograma.path,
-            name: RoutePaths.partograma.name,
+            path: AppPaths.home.partographPath.goRoute,
             builder: (context, state) {
-              if (state.extra != String) {
-                return const PartographScreen(partographId: '');
-              } else {
-                final partographId = state.extra! as String;
+              final partographId =
+                  state.pathParameters[AppPaths.home.partographPath.id]!;
 
-                return PartographScreen(partographId: partographId);
-              }
+              return PartographScreen(partographId: partographId);
             },
             routes: [
               GoRoute(
-                path: RoutePaths.cervicalDilationList.path,
-                name: RoutePaths.cervicalDilationList.name,
+                path: AppPaths.home.partographPath.cervicalDilationList.goRoute,
                 builder: (context, state) {
-                  final partographId = state.extra! as String;
+                  final partographId =
+                      state.pathParameters[AppPaths.home.partographPath.id]!;
                   return CervicalDilationListScreen(
                     partographId: partographId,
                   );
                 },
-              ),
-              GoRoute(
-                path: RoutePaths.cervicalDilation.path,
-                name: RoutePaths.cervicalDilation.name,
-                builder: (context, state) {
-                  final data = state.extra! as CervicalDilationEditData;
-                  return CervicalDilationEditScreen(
-                    cervicalDilationEditData: data,
-                  );
-                },
+                routes: [
+                  GoRoute(
+                    path: AppPaths.home.partographPath.cervicalDilationList
+                        .create.goRoute,
+                    builder: (context, state) {
+                      final partographId = state
+                          .pathParameters[AppPaths.home.partographPath.id]!;
+                      return CervicalDilationEditScreen(
+                        cervicalDilationEditData: CervicalDilationEditData(
+                          cervicalDilation: null,
+                          partographId: partographId,
+                        ),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: AppPaths
+                        .home.partographPath.cervicalDilationList.edit.goRoute,
+                    builder: (context, state) {
+                      final data = state.extra! as CervicalDilationEditData;
+                      return CervicalDilationEditScreen(
+                        cervicalDilationEditData: data,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -127,19 +133,16 @@ class AppRouter {
       ),
       // Ruta de autenticación
       _buildRoute(
-        path: RoutePaths.auth.path,
-        name: RoutePaths.auth.name,
+        path: AppPaths.welcome.goRoute,
         screen: const WelcomeScreen(),
         routeBase: <RouteBase>[
           // Rutas hijas de la ruta de autenticación (se agregan aquí)
           _buildRoute(
-            path: 'login',
-            name: RoutePaths.login.name,
+            path: AppPaths.welcome.login.goRoute,
             screen: const LoginScreen(),
           ),
           _buildRoute(
-            path: 'register',
-            name: RoutePaths.register.name,
+            path: AppPaths.welcome.register.goRoute,
             screen: const RegisterScreen(),
           ),
         ],
@@ -158,15 +161,15 @@ class AppRouter {
     final initAuth = authBloc.state is Uninitialized;
 
     final unauthenticatedPaths = [
-      RoutePaths.auth.path,
-      '${RoutePaths.auth.path}/login', // Ruta completa para login
-      '${RoutePaths.auth.path}/register',
+      AppPaths.welcome.goRoute,
+      AppPaths.welcome.login.goRoute,
+      AppPaths.welcome.register.goRoute,
     ];
 
     // Rutas que requieren autenticación
     final authenticatedPaths = [
-      RoutePaths.partograma.path,
-      RoutePaths.createPartograph.path,
+      AppPaths.home.create.goRoute,
+      AppPaths.home.partographPath.goRoute,
     ];
 
     final isUnauthenticatedPath = unauthenticatedPaths
@@ -176,22 +179,24 @@ class AppRouter {
         authenticatedPaths.any((path) => state.matchedLocation.contains(path));
 
     //Revisar el inicio
-    final initScreen = state.matchedLocation.contains(RoutePaths.splash.path);
+    final initScreen = state.matchedLocation.contains(
+      AppPaths.splash.goRoute,
+    );
 
     if (initAuth && initScreen) return null;
 
     if (isUnAuthenticated && !isUnauthenticatedPath) {
-      return RoutePaths.auth.path;
+      return AppPaths.welcome.goRoute;
     }
 
     if (isUnAuthenticated && isAuthenticatedPath) {
-      return RoutePaths.auth.path;
+      return AppPaths.welcome.goRoute;
     }
 
     // Redirigir a la página de inicio si el usuario está autenticado y
     // está tratando de acceder a una página de autenticación
     if (isAuthenticated && (isUnauthenticatedPath || initScreen)) {
-      return RoutePaths.home.path;
+      return AppPaths.home.path;
     }
 
     // Permitir el acceso a la ruta solicitada

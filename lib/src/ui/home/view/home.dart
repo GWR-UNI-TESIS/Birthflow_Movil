@@ -39,7 +39,9 @@ class HomeScreen extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                context.pushNamed(RoutePaths.search.name);
+                context.push(
+                  AppPaths.home.search.path,
+                );
               },
               icon: const Icon(Icons.search),
             ),
@@ -141,15 +143,15 @@ class HomeScreen extends StatelessWidget {
           tooltip: 'Nuevo',
           onPressed: () async {
             final String? value =
-                await context.pushNamed(RoutePaths.createPartograph.name);
+                await context.push(AppPaths.home.create.path);
 
             if (value != null) {
               context
                   .read<PartographsBloc>()
                   .add(FetchPartographs(userId: user));
 
-              context.goNamed(
-                RoutePaths.partograma.name,
+              context.go(
+                AppPaths.home.partographPath.define(value).path,
                 extra: value,
               );
             }

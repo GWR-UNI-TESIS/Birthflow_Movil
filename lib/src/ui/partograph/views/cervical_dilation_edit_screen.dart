@@ -13,7 +13,7 @@ class CervicalDilationEditData {
   final String partographId;
 
   CervicalDilationEditData(
-      {required this.cervicalDilation, required this.partographId});
+      {required this.cervicalDilation, required this.partographId,});
 }
 
 class CervicalDilationEditScreen extends StatefulWidget {
@@ -53,7 +53,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
 
     if (widget.cervicalDilationEditData.cervicalDilation != null) {
       _selectedTime = TimeOfDay.fromDateTime(
-          widget.cervicalDilationEditData.cervicalDilation!.hour);
+          widget.cervicalDilationEditData.cervicalDilation!.hour,);
     }
     _remOrRam =
         widget.cervicalDilationEditData.cervicalDilation?.remOrRam ?? false;

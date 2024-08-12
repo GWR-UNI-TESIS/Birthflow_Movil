@@ -170,7 +170,7 @@ class _RegisterView extends StatelessWidget {
                         final username = _usernameController.text;
                         final email = _emailController.text;
                         final password = _passwordController.text;
-                        final phone = _passwordController.text;
+                        final phone = _phoneController.text;
 
                         if (_formKey.currentState!.validate()) {
                           context.read<AuthenticationBloc>().add(
