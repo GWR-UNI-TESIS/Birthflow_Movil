@@ -1,6 +1,8 @@
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -40,6 +42,24 @@ class PartographMapper {
     );
   }
 
+  static MedicalSurveillanceTable toEntityMedicalSurveillance(
+    MedicalSurveillanceTableResponse response,
+  ) {
+    return MedicalSurveillanceTable(
+      id: response.id,
+      partographId: response.partographId,
+      letter: response.letter,
+      maternalPosition: response.maternalPosition,
+      arterialPressure: response.arterialPressure,
+      maternalPulse: response.maternalPulse,
+      fetalHeartRate: response.fetalHeartRate,
+      contractionsDuration: response.contractionsDuration,
+      frequencyContractions: response.frequencyContractions,
+      pain: response.pain,
+      time: response.time,
+    );
+  }
+
   static List<Partograph> toEntityList(List<PartographResponse> responses) {
     return responses.map((response) => toEntity(response)).toList();
   }
@@ -49,6 +69,14 @@ class PartographMapper {
   ) {
     return responses
         .map((response) => toEntityCervicalDilation(response))
+        .toList();
+  }
+
+  static List<MedicalSurveillanceTable> toEntityListMedicalSurveillanceTable(
+    List<MedicalSurveillanceTableResponse> responses,
+  ) {
+    return responses
+        .map((response) => toEntityMedicalSurveillance(response))
         .toList();
   }
 }

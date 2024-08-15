@@ -1,6 +1,8 @@
 import 'package:birthflow_movil/src/core/models/api_reponse/api_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
 
@@ -49,5 +51,30 @@ abstract class PartographService {
   Future<ApiResponse<CervicalDilationResponse>> deleteCervicalDilation(
     @Header('Authorization') String token,
     @Body() CervicalDilationRequest request,
+  );
+
+  // Endpoints de tabla
+  @GET('/api/Partograph/Get/medical-surveillance/{partographId}')
+  Future<ApiResponse<List<MedicalSurveillanceTableResponse>>> getMedicalSurveillanceTable(
+    @Header('Authorization') String token,
+    @Path('partographId') String partographId,
+  );
+
+  @POST('/api/Partograph/Create/medical-surveillance')
+  Future<ApiResponse<MedicalSurveillanceTableResponse>> createMedicalSurveillanceTable(
+    @Header('Authorization') String token,
+    @Body() MedicalSurveillanceTableRequest request,
+  );
+
+  @PUT('/api/Partograph/Update/medical-surveillance')
+  Future<ApiResponse<MedicalSurveillanceTableResponse>> updateMedicalSurveillanceTable(
+    @Header('Authorization') String token,
+    @Body() MedicalSurveillanceTableRequest request,
+  );
+
+  @PUT('/api/Partograph/Delete/medical-surveillance')
+  Future<ApiResponse<MedicalSurveillanceTableResponse>> deleteMedicalSurveillanceTable(
+    @Header('Authorization') String token,
+    @Body() MedicalSurveillanceTableRequest request,
   );
 }

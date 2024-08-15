@@ -1,4 +1,5 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 
 abstract class PartographRepository {
@@ -48,6 +49,44 @@ abstract class PartographRepository {
   });
 
   Future<CervicalDilation?> deleteCervicalDilation({
+    required int id,
+    required String userId,
+  });
+
+  Future<List<MedicalSurveillanceTable>?> getMedicalSurveillance({
+    required String partographId,
+  });
+
+  Future<MedicalSurveillanceTable?> createMedicalSurveillance({
+    required String partographId,
+    required String letter,
+    required String maternalPosition,
+    required String arterialPressure,
+    required String maternalPulse,
+    required String fetalHeartRate,
+    required String contractionsDuration,
+    required String frequencyContractions,
+    required String pain,
+    required DateTime time,
+    required String userId,
+  });
+
+  Future<MedicalSurveillanceTable?> updateMedicalSurveillance({
+    required int id,
+    required String partographId,
+    required String letter,
+    required String maternalPosition,
+    required String arterialPressure,
+    required String maternalPulse,
+    required String fetalHeartRate,
+    required String contractionsDuration,
+    required String frequencyContractions,
+    required String pain,
+    required DateTime time,
+    required String userId,
+  });
+
+  Future<MedicalSurveillanceTable?> deleteMedicalSurveillance({
     required int id,
     required String userId,
   });

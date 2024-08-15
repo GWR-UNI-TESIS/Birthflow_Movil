@@ -1,7 +1,9 @@
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/mappers/partograph_mapper.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
@@ -133,7 +135,7 @@ class PartographRepositoryImplementation implements PartographRepository {
       );
 
       final result =
-          await _partographService.createCervicalDilation(token, request);
+          await _partographService.deleteCervicalDilation(token, request);
 
       if (result.response == null) return null;
 
@@ -185,11 +187,160 @@ class PartographRepositoryImplementation implements PartographRepository {
       );
 
       final result =
-          await _partographService.deleteCervicalDilation(token, request);
+          await _partographService.updateCervicalDilation(token, request);
 
       if (result.response == null) return null;
 
       return PartographMapper.toEntityCervicalDilation(result.response!);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Future<MedicalSurveillanceTable?> createMedicalSurveillance({
+    required String partographId,
+    required String letter,
+    required String maternalPosition,
+    required String arterialPressure,
+    required String maternalPulse,
+    required String fetalHeartRate,
+    required String contractionsDuration,
+    required String frequencyContractions,
+    required String pain,
+    required DateTime time,
+    required String userId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = MedicalSurveillanceTableRequest(
+        partographId: partographId,
+        maternalPosition: maternalPosition,
+        arterialPressure: arterialPressure,
+        maternalPulse: maternalPulse,
+        fetalHeartRate: fetalHeartRate,
+        contractionsDuration: contractionsDuration,
+        frequencyContractions: frequencyContractions,
+        pain: pain,
+        time: time,
+        userId: userId,
+      );
+
+      final result = await _partographService.createMedicalSurveillanceTable(
+        token,
+        request,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityMedicalSurveillance(result.response!);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Future<MedicalSurveillanceTable?> deleteMedicalSurveillance({
+    required int id,
+    required String userId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = MedicalSurveillanceTableRequest(
+        id: id,
+        partographId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        maternalPosition: '',
+        arterialPressure: 'arterialPressure',
+        maternalPulse: 'maternalPulse',
+        fetalHeartRate: 'fetalHeartRate',
+        contractionsDuration: 'contractionsDuration',
+        frequencyContractions: 'frequencyContractions',
+        pain: 'pain',
+        time: DateTime.now(),
+        userId: userId,
+      );
+
+      final result = await _partographService.deleteMedicalSurveillanceTable(
+        token,
+        request,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityMedicalSurveillance(result.response!);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Future<List<MedicalSurveillanceTable>?> getMedicalSurveillance({
+    required String partographId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final result = await _partographService.getMedicalSurveillanceTable(
+        token,
+        partographId,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityListMedicalSurveillanceTable(
+        result.response!,
+      );
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Future<MedicalSurveillanceTable?> updateMedicalSurveillance({
+    required int id,
+    required String partographId,
+    required String letter,
+    required String maternalPosition,
+    required String arterialPressure,
+    required String maternalPulse,
+    required String fetalHeartRate,
+    required String contractionsDuration,
+    required String frequencyContractions,
+    required String pain,
+    required DateTime time,
+    required String userId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = MedicalSurveillanceTableRequest(
+        id: id,
+        partographId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        maternalPosition: '',
+        arterialPressure: 'arterialPressure',
+        maternalPulse: 'maternalPulse',
+        fetalHeartRate: 'fetalHeartRate',
+        contractionsDuration: 'contractionsDuration',
+        frequencyContractions: 'frequencyContractions',
+        pain: 'pain',
+        time: DateTime.now(),
+        userId: userId,
+      );
+
+      final result = await _partographService.updateMedicalSurveillanceTable(
+        token,
+        request,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityMedicalSurveillance(result.response!);
     } catch (error) {
       return null;
     }
