@@ -2,9 +2,11 @@ import 'package:birthflow_movil/src/data/partograph/datasources/partograph_servi
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_entity_request/presentation_position_variety_entity_request.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/domain/partograph/mappers/partograph_mapper.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/local_storage/token_storage.dart';
@@ -321,15 +323,15 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       final request = MedicalSurveillanceTableRequest(
         id: id,
-        partographId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-        maternalPosition: '',
-        arterialPressure: 'arterialPressure',
-        maternalPulse: 'maternalPulse',
-        fetalHeartRate: 'fetalHeartRate',
-        contractionsDuration: 'contractionsDuration',
-        frequencyContractions: 'frequencyContractions',
-        pain: 'pain',
-        time: DateTime.now(),
+        partographId: partographId,
+        maternalPosition: maternalPosition,
+        arterialPressure: arterialPressure,
+        maternalPulse: maternalPulse,
+        fetalHeartRate: fetalHeartRate,
+        contractionsDuration: contractionsDuration,
+        frequencyContractions: frequencyContractions,
+        pain: pain,
+        time: time,
         userId: userId,
       );
 
@@ -341,6 +343,133 @@ class PartographRepositoryImplementation implements PartographRepository {
       if (result.response == null) return null;
 
       return PartographMapper.toEntityMedicalSurveillance(result.response!);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Future<PresentationPositionVariety?> createPresentationPositionVariety({
+    required String partographId,
+    required String hodgePlane,
+    required String position,
+    required DateTime time,
+    required String userId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = PresentationPositionVarietyEntityRequest(
+        partographId: partographId,
+        hodgePlane: hodgePlane,
+        position: position,
+        time: DateTime.now(),
+        userId: userId,
+      );
+
+      final result = await _partographService.createPresentationPositionVariety(
+        token,
+        request,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityPresentationPositionVariety(
+        result.response!,
+      );
+    } catch (error) {
+      return null;
+    }
+  }
+  @override
+  Future<PresentationPositionVariety?> deletePresentationPositionVariety({
+    required int id,
+    required String userId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = PresentationPositionVarietyEntityRequest(
+        id: id,
+        partographId: '',
+        hodgePlane: '',
+        position: '',
+        time: DateTime.now(),
+        userId: userId,
+      );
+
+      final result = await _partographService.deletePresentationPositionVariety(
+        token,
+        request,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityPresentationPositionVariety(
+        result.response!,
+      );
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Future<List<PresentationPositionVariety>?> getPresentationPositionVariety({
+    required String partographId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final result = await _partographService.getPresentationPositionVariety(
+        token,
+        partographId,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityListPresentationPositionVariety(
+        result.response!,
+      );
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Future<PresentationPositionVariety?> updatePresentationPositionVariety({
+    required int id,
+    required String partographId,
+    required String hodgePlane,
+    required String position,
+    required DateTime time,
+    required String userId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = PresentationPositionVarietyEntityRequest(
+        id: id,
+        partographId: partographId,
+        hodgePlane: hodgePlane,
+        position: position,
+        time: DateTime.now(),
+        userId: userId,
+      );
+
+      final result = await _partographService.updatePresentationPositionVariety(
+        token,
+        request,
+      );
+
+      if (result.response == null) return null;
+
+      return PartographMapper.toEntityPresentationPositionVariety(
+        result.response!,
+      );
     } catch (error) {
       return null;
     }

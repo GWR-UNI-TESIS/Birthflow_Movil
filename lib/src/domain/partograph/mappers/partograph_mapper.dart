@@ -1,9 +1,11 @@
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_entity_response/presentation_position_variety_entity_response.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class PartographMapper {
@@ -60,6 +62,18 @@ class PartographMapper {
     );
   }
 
+  static PresentationPositionVariety toEntityPresentationPositionVariety(
+    PresentationPositionVarietyEntityResponse response,
+  ) {
+    return PresentationPositionVariety(
+      id: response.id,
+      partographId: response.partographId,
+      hodgePlane: response.hodgePlane,
+      position: response.position,
+      time: response.time,
+    );
+  }
+
   static List<Partograph> toEntityList(List<PartographResponse> responses) {
     return responses.map((response) => toEntity(response)).toList();
   }
@@ -77,6 +91,14 @@ class PartographMapper {
   ) {
     return responses
         .map((response) => toEntityMedicalSurveillance(response))
+        .toList();
+  }
+
+   static List<PresentationPositionVariety> toEntityListPresentationPositionVariety(
+    List<PresentationPositionVarietyEntityResponse> responses,
+  ) {
+    return responses
+        .map((response) => toEntityPresentationPositionVariety(response))
         .toList();
   }
 }

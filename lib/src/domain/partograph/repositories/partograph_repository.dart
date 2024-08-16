@@ -1,6 +1,7 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 
 abstract class PartographRepository {
   Future<List<Partograph>?> getPartograph({required String userId});
@@ -87,6 +88,32 @@ abstract class PartographRepository {
   });
 
   Future<MedicalSurveillanceTable?> deleteMedicalSurveillance({
+    required int id,
+    required String userId,
+  });
+
+  Future<List<PresentationPositionVariety>?> getPresentationPositionVariety({
+    required String partographId,
+  });
+
+  Future<PresentationPositionVariety?> createPresentationPositionVariety({
+    required String partographId,
+    required String hodgePlane,
+    required String position,
+    required DateTime time,
+    required String userId,
+  });
+
+  Future<PresentationPositionVariety?> updatePresentationPositionVariety({
+    required int id,
+    required String partographId,
+    required String hodgePlane,
+    required String position,
+    required DateTime time,
+    required String userId,
+  });
+
+  Future<PresentationPositionVariety?> deletePresentationPositionVariety({
     required int id,
     required String userId,
   });

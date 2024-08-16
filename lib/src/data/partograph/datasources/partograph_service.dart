@@ -5,6 +5,8 @@ import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_entity_request/presentation_position_variety_entity_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_entity_response/presentation_position_variety_entity_response.dart';
 
 import 'package:dio/dio.dart';
 
@@ -76,5 +78,31 @@ abstract class PartographService {
   Future<ApiResponse<MedicalSurveillanceTableResponse>> deleteMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Body() MedicalSurveillanceTableRequest request,
+  );
+
+
+    // Endpoints de vvp
+  @GET('/api/Partograph/Get/presentation-position-variety/{partographId}')
+  Future<ApiResponse<List<PresentationPositionVarietyEntityResponse>>> getPresentationPositionVariety(
+    @Header('Authorization') String token,
+    @Path('partographId') String partographId,
+  );
+
+  @POST('/api/Partograph/Create/presentation-position-variety')
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>> createPresentationPositionVariety(
+    @Header('Authorization') String token,
+    @Body() PresentationPositionVarietyEntityRequest request,
+  );
+
+  @PUT('/api/Partograph/Update/presentation-position-variety')
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>> updatePresentationPositionVariety(
+    @Header('Authorization') String token,
+    @Body() PresentationPositionVarietyEntityRequest request,
+  );
+
+  @PUT('/api/Partograph/Delete/presentation-position-variety')
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>> deletePresentationPositionVariety(
+    @Header('Authorization') String token,
+    @Body() PresentationPositionVarietyEntityRequest request,
   );
 }
