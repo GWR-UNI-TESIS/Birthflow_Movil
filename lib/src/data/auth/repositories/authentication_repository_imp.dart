@@ -111,7 +111,8 @@ class AuthenticationRepositoryImplementation
       );
       await _authenticactionService.register(request);
     } catch (e) {
-      print(e.toString());
+      // ignore: avoid_print
+      print(e);
       rethrow;
     }
   }

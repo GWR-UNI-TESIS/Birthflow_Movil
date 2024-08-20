@@ -382,6 +382,162 @@ class _PartographService implements PartographService {
     return value;
   }
 
+  @override
+  Future<ApiResponse<List<PresentationPositionVarietyEntityResponse>>>
+      getPresentationPositionVariety(
+    String token,
+    String partographId,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ApiResponse<List<PresentationPositionVarietyEntityResponse>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/Partograph/Get/presentation-position-variety/${partographId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value =
+        ApiResponse<List<PresentationPositionVarietyEntityResponse>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<PresentationPositionVarietyEntityResponse>((i) =>
+                  PresentationPositionVarietyEntityResponse.fromJson(
+                      i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>>
+      createPresentationPositionVariety(
+    String token,
+    PresentationPositionVarietyEntityRequest request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
+            Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/api/Partograph/Create/presentation-position-variety',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value =
+        ApiResponse<PresentationPositionVarietyEntityResponse>.fromJson(
+      _result.data!,
+      (json) => PresentationPositionVarietyEntityResponse.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>>
+      updatePresentationPositionVariety(
+    String token,
+    PresentationPositionVarietyEntityRequest request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
+            Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/api/Partograph/Update/presentation-position-variety',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value =
+        ApiResponse<PresentationPositionVarietyEntityResponse>.fromJson(
+      _result.data!,
+      (json) => PresentationPositionVarietyEntityResponse.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>>
+      deletePresentationPositionVariety(
+    String token,
+    PresentationPositionVarietyEntityRequest request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
+            Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/api/Partograph/Delete/presentation-position-variety',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value =
+        ApiResponse<PresentationPositionVarietyEntityResponse>.fromJson(
+      _result.data!,
+      (json) => PresentationPositionVarietyEntityResponse.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
