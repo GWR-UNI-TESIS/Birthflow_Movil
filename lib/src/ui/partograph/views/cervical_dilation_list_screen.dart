@@ -53,7 +53,7 @@ class CervicalDilationListScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            childCount: cervicalDilation!.length,
+                            childCount: cervicalDilation.length,
                           ),
                         ),
                       ],
