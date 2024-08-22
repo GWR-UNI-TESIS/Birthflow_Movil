@@ -28,23 +28,11 @@ mixin _$UserAuthentication {
       throw _privateConstructorUsedError; // Apellidos del usuario
   String get nombreUsuario =>
       throw _privateConstructorUsedError; // Nombre de usuario para inicio de sesión
-  String get passwordHash =>
-      throw _privateConstructorUsedError; // Hash de la contraseña del usuario (por seguridad)
   String get email =>
       throw _privateConstructorUsedError; // Correo electrónico del usuario
-  String? get phoneNumber =>
+  int? get phoneNumber =>
       throw _privateConstructorUsedError; // Número telefónico del usuario (opcional)
-  bool get isDelete =>
-      throw _privateConstructorUsedError; // Indica si el usuario está eliminado (marcado para borrado)
-  String? get createdAt =>
-      throw _privateConstructorUsedError; // Fecha y hora de creación del usuario (viene del servidor)
-  int? get createdBy =>
-      throw _privateConstructorUsedError; // Identificador del usuario que creó este registro (viene del servidor)
-  String? get updatedAt =>
-      throw _privateConstructorUsedError; // Fecha y hora de última actualización del usuario (viene del servidor)
-  String? get deletedAt =>
-      throw _privateConstructorUsedError; // Fecha y hora de eliminación del usuario (viene del servidor)
-  String? get deletedBy => throw _privateConstructorUsedError;
+  String? get passwordHash => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -63,15 +51,9 @@ abstract class $UserAuthenticationCopyWith<$Res> {
       String nombres,
       String apellidos,
       String nombreUsuario,
-      String passwordHash,
       String email,
-      String? phoneNumber,
-      bool isDelete,
-      String? createdAt,
-      int? createdBy,
-      String? updatedAt,
-      String? deletedAt,
-      String? deletedBy});
+      int? phoneNumber,
+      String? passwordHash});
 }
 
 /// @nodoc
@@ -91,15 +73,9 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
     Object? nombres = null,
     Object? apellidos = null,
     Object? nombreUsuario = null,
-    Object? passwordHash = null,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? isDelete = null,
-    Object? createdAt = freezed,
-    Object? createdBy = freezed,
-    Object? updatedAt = freezed,
-    Object? deletedAt = freezed,
-    Object? deletedBy = freezed,
+    Object? passwordHash = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -118,10 +94,6 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
           ? _value.nombreUsuario
           : nombreUsuario // ignore: cast_nullable_to_non_nullable
               as String,
-      passwordHash: null == passwordHash
-          ? _value.passwordHash
-          : passwordHash // ignore: cast_nullable_to_non_nullable
-              as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -129,30 +101,10 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deletedAt: freezed == deletedAt
-          ? _value.deletedAt
-          : deletedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deletedBy: freezed == deletedBy
-          ? _value.deletedBy
-          : deletedBy // ignore: cast_nullable_to_non_nullable
+      passwordHash: freezed == passwordHash
+          ? _value.passwordHash
+          : passwordHash // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -171,15 +123,9 @@ abstract class _$$UserAuthenticationImplCopyWith<$Res>
       String nombres,
       String apellidos,
       String nombreUsuario,
-      String passwordHash,
       String email,
-      String? phoneNumber,
-      bool isDelete,
-      String? createdAt,
-      int? createdBy,
-      String? updatedAt,
-      String? deletedAt,
-      String? deletedBy});
+      int? phoneNumber,
+      String? passwordHash});
 }
 
 /// @nodoc
@@ -197,15 +143,9 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
     Object? nombres = null,
     Object? apellidos = null,
     Object? nombreUsuario = null,
-    Object? passwordHash = null,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? isDelete = null,
-    Object? createdAt = freezed,
-    Object? createdBy = freezed,
-    Object? updatedAt = freezed,
-    Object? deletedAt = freezed,
-    Object? deletedBy = freezed,
+    Object? passwordHash = freezed,
   }) {
     return _then(_$UserAuthenticationImpl(
       id: freezed == id
@@ -224,10 +164,6 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
           ? _value.nombreUsuario
           : nombreUsuario // ignore: cast_nullable_to_non_nullable
               as String,
-      passwordHash: null == passwordHash
-          ? _value.passwordHash
-          : passwordHash // ignore: cast_nullable_to_non_nullable
-              as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -235,30 +171,10 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deletedAt: freezed == deletedAt
-          ? _value.deletedAt
-          : deletedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deletedBy: freezed == deletedBy
-          ? _value.deletedBy
-          : deletedBy // ignore: cast_nullable_to_non_nullable
+      passwordHash: freezed == passwordHash
+          ? _value.passwordHash
+          : passwordHash // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -272,15 +188,9 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
       required this.nombres,
       required this.apellidos,
       required this.nombreUsuario,
-      required this.passwordHash,
       required this.email,
       this.phoneNumber,
-      required this.isDelete,
-      this.createdAt,
-      this.createdBy,
-      this.updatedAt,
-      this.deletedAt,
-      this.deletedBy});
+      this.passwordHash});
 
   factory _$UserAuthenticationImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserAuthenticationImplFromJson(json);
@@ -298,35 +208,17 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
   final String nombreUsuario;
 // Nombre de usuario para inicio de sesión
   @override
-  final String passwordHash;
-// Hash de la contraseña del usuario (por seguridad)
-  @override
   final String email;
 // Correo electrónico del usuario
   @override
-  final String? phoneNumber;
+  final int? phoneNumber;
 // Número telefónico del usuario (opcional)
   @override
-  final bool isDelete;
-// Indica si el usuario está eliminado (marcado para borrado)
-  @override
-  final String? createdAt;
-// Fecha y hora de creación del usuario (viene del servidor)
-  @override
-  final int? createdBy;
-// Identificador del usuario que creó este registro (viene del servidor)
-  @override
-  final String? updatedAt;
-// Fecha y hora de última actualización del usuario (viene del servidor)
-  @override
-  final String? deletedAt;
-// Fecha y hora de eliminación del usuario (viene del servidor)
-  @override
-  final String? deletedBy;
+  final String? passwordHash;
 
   @override
   String toString() {
-    return 'UserAuthentication(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, passwordHash: $passwordHash, email: $email, phoneNumber: $phoneNumber, isDelete: $isDelete, createdAt: $createdAt, createdBy: $createdBy, updatedAt: $updatedAt, deletedAt: $deletedAt, deletedBy: $deletedBy)';
+    return 'UserAuthentication(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
   }
 
   @override
@@ -340,42 +232,17 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
                 other.apellidos == apellidos) &&
             (identical(other.nombreUsuario, nombreUsuario) ||
                 other.nombreUsuario == nombreUsuario) &&
-            (identical(other.passwordHash, passwordHash) ||
-                other.passwordHash == passwordHash) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
-            (identical(other.isDelete, isDelete) ||
-                other.isDelete == isDelete) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.deletedAt, deletedAt) ||
-                other.deletedAt == deletedAt) &&
-            (identical(other.deletedBy, deletedBy) ||
-                other.deletedBy == deletedBy));
+            (identical(other.passwordHash, passwordHash) ||
+                other.passwordHash == passwordHash));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      nombres,
-      apellidos,
-      nombreUsuario,
-      passwordHash,
-      email,
-      phoneNumber,
-      isDelete,
-      createdAt,
-      createdBy,
-      updatedAt,
-      deletedAt,
-      deletedBy);
+  int get hashCode => Object.hash(runtimeType, id, nombres, apellidos,
+      nombreUsuario, email, phoneNumber, passwordHash);
 
   @JsonKey(ignore: true)
   @override
@@ -398,15 +265,9 @@ abstract class _UserAuthentication implements UserAuthentication {
       required final String nombres,
       required final String apellidos,
       required final String nombreUsuario,
-      required final String passwordHash,
       required final String email,
-      final String? phoneNumber,
-      required final bool isDelete,
-      final String? createdAt,
-      final int? createdBy,
-      final String? updatedAt,
-      final String? deletedAt,
-      final String? deletedBy}) = _$UserAuthenticationImpl;
+      final int? phoneNumber,
+      final String? passwordHash}) = _$UserAuthenticationImpl;
 
   factory _UserAuthentication.fromJson(Map<String, dynamic> json) =
       _$UserAuthenticationImpl.fromJson;
@@ -420,23 +281,11 @@ abstract class _UserAuthentication implements UserAuthentication {
   @override // Apellidos del usuario
   String get nombreUsuario;
   @override // Nombre de usuario para inicio de sesión
-  String get passwordHash;
-  @override // Hash de la contraseña del usuario (por seguridad)
   String get email;
   @override // Correo electrónico del usuario
-  String? get phoneNumber;
+  int? get phoneNumber;
   @override // Número telefónico del usuario (opcional)
-  bool get isDelete;
-  @override // Indica si el usuario está eliminado (marcado para borrado)
-  String? get createdAt;
-  @override // Fecha y hora de creación del usuario (viene del servidor)
-  int? get createdBy;
-  @override // Identificador del usuario que creó este registro (viene del servidor)
-  String? get updatedAt;
-  @override // Fecha y hora de última actualización del usuario (viene del servidor)
-  String? get deletedAt;
-  @override // Fecha y hora de eliminación del usuario (viene del servidor)
-  String? get deletedBy;
+  String? get passwordHash;
   @override
   @JsonKey(ignore: true)
   _$$UserAuthenticationImplCopyWith<_$UserAuthenticationImpl> get copyWith =>

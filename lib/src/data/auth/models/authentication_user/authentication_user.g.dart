@@ -13,15 +13,9 @@ _$UserAuthenticationImpl _$$UserAuthenticationImplFromJson(
       nombres: json['nombres'] as String,
       apellidos: json['apellidos'] as String,
       nombreUsuario: json['nombreUsuario'] as String,
-      passwordHash: json['passwordHash'] as String,
       email: json['email'] as String,
-      phoneNumber: json['phoneNumber'] as String?,
-      isDelete: json['isDelete'] as bool,
-      createdAt: json['createdAt'] as String?,
-      createdBy: (json['createdBy'] as num?)?.toInt(),
-      updatedAt: json['updatedAt'] as String?,
-      deletedAt: json['deletedAt'] as String?,
-      deletedBy: json['deletedBy'] as String?,
+      phoneNumber: (json['phoneNumber'] as num?)?.toInt(),
+      passwordHash: json['passwordHash'] as String?,
     );
 
 Map<String, dynamic> _$$UserAuthenticationImplToJson(
@@ -31,13 +25,7 @@ Map<String, dynamic> _$$UserAuthenticationImplToJson(
       'nombres': instance.nombres,
       'apellidos': instance.apellidos,
       'nombreUsuario': instance.nombreUsuario,
-      'passwordHash': instance.passwordHash,
       'email': instance.email,
       'phoneNumber': instance.phoneNumber,
-      'isDelete': instance.isDelete,
-      'createdAt': instance.createdAt,
-      'createdBy': instance.createdBy,
-      'updatedAt': instance.updatedAt,
-      'deletedAt': instance.deletedAt,
-      'deletedBy': instance.deletedBy,
+      'passwordHash': instance.passwordHash,
     };

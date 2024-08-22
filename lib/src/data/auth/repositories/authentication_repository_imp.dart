@@ -65,8 +65,7 @@ class AuthenticationRepositoryImplementation
             nombreUsuario: response.user.nombreUsuario,
             passwordHash: response.user.nombreUsuario,
             email: response.user.email,
-            phoneNumber:
-                phone == null ? null : int.tryParse(response.user.phoneNumber!),
+            phoneNumber: phone,
           ),
           message: 'Usuario correcto',
           authenticationCode: AuthenticationCode.success,
