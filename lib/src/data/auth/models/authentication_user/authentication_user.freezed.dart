@@ -22,11 +22,10 @@ UserAuthentication _$UserAuthenticationFromJson(Map<String, dynamic> json) {
 mixin _$UserAuthentication {
   String? get id =>
       throw _privateConstructorUsedError; // Identificador único del usuario (opcional)
-  String get nombres =>
-      throw _privateConstructorUsedError; // Nombres del usuario
-  String get apellidos =>
+  String get name => throw _privateConstructorUsedError; // Nombres del usuario
+  String get secondName =>
       throw _privateConstructorUsedError; // Apellidos del usuario
-  String get nombreUsuario =>
+  String get userName =>
       throw _privateConstructorUsedError; // Nombre de usuario para inicio de sesión
   String get email =>
       throw _privateConstructorUsedError; // Correo electrónico del usuario
@@ -48,9 +47,9 @@ abstract class $UserAuthenticationCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      String nombres,
-      String apellidos,
-      String nombreUsuario,
+      String name,
+      String secondName,
+      String userName,
       String email,
       int? phoneNumber,
       String? passwordHash});
@@ -70,9 +69,9 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
   @override
   $Res call({
     Object? id = freezed,
-    Object? nombres = null,
-    Object? apellidos = null,
-    Object? nombreUsuario = null,
+    Object? name = null,
+    Object? secondName = null,
+    Object? userName = null,
     Object? email = null,
     Object? phoneNumber = freezed,
     Object? passwordHash = freezed,
@@ -82,17 +81,17 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      nombres: null == nombres
-          ? _value.nombres
-          : nombres // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      apellidos: null == apellidos
-          ? _value.apellidos
-          : apellidos // ignore: cast_nullable_to_non_nullable
+      secondName: null == secondName
+          ? _value.secondName
+          : secondName // ignore: cast_nullable_to_non_nullable
               as String,
-      nombreUsuario: null == nombreUsuario
-          ? _value.nombreUsuario
-          : nombreUsuario // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -120,9 +119,9 @@ abstract class _$$UserAuthenticationImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
-      String nombres,
-      String apellidos,
-      String nombreUsuario,
+      String name,
+      String secondName,
+      String userName,
       String email,
       int? phoneNumber,
       String? passwordHash});
@@ -140,9 +139,9 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? nombres = null,
-    Object? apellidos = null,
-    Object? nombreUsuario = null,
+    Object? name = null,
+    Object? secondName = null,
+    Object? userName = null,
     Object? email = null,
     Object? phoneNumber = freezed,
     Object? passwordHash = freezed,
@@ -152,17 +151,17 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      nombres: null == nombres
-          ? _value.nombres
-          : nombres // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      apellidos: null == apellidos
-          ? _value.apellidos
-          : apellidos // ignore: cast_nullable_to_non_nullable
+      secondName: null == secondName
+          ? _value.secondName
+          : secondName // ignore: cast_nullable_to_non_nullable
               as String,
-      nombreUsuario: null == nombreUsuario
-          ? _value.nombreUsuario
-          : nombreUsuario // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -185,9 +184,9 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
 class _$UserAuthenticationImpl implements _UserAuthentication {
   const _$UserAuthenticationImpl(
       {required this.id,
-      required this.nombres,
-      required this.apellidos,
-      required this.nombreUsuario,
+      required this.name,
+      required this.secondName,
+      required this.userName,
       required this.email,
       this.phoneNumber,
       this.passwordHash});
@@ -199,13 +198,13 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
   final String? id;
 // Identificador único del usuario (opcional)
   @override
-  final String nombres;
+  final String name;
 // Nombres del usuario
   @override
-  final String apellidos;
+  final String secondName;
 // Apellidos del usuario
   @override
-  final String nombreUsuario;
+  final String userName;
 // Nombre de usuario para inicio de sesión
   @override
   final String email;
@@ -218,7 +217,7 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
 
   @override
   String toString() {
-    return 'UserAuthentication(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
+    return 'UserAuthentication(id: $id, name: $name, secondName: $secondName, userName: $userName, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
   }
 
   @override
@@ -227,11 +226,11 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
         (other.runtimeType == runtimeType &&
             other is _$UserAuthenticationImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.nombres, nombres) || other.nombres == nombres) &&
-            (identical(other.apellidos, apellidos) ||
-                other.apellidos == apellidos) &&
-            (identical(other.nombreUsuario, nombreUsuario) ||
-                other.nombreUsuario == nombreUsuario) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.secondName, secondName) ||
+                other.secondName == secondName) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
@@ -241,8 +240,8 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nombres, apellidos,
-      nombreUsuario, email, phoneNumber, passwordHash);
+  int get hashCode => Object.hash(runtimeType, id, name, secondName, userName,
+      email, phoneNumber, passwordHash);
 
   @JsonKey(ignore: true)
   @override
@@ -262,9 +261,9 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
 abstract class _UserAuthentication implements UserAuthentication {
   const factory _UserAuthentication(
       {required final String? id,
-      required final String nombres,
-      required final String apellidos,
-      required final String nombreUsuario,
+      required final String name,
+      required final String secondName,
+      required final String userName,
       required final String email,
       final int? phoneNumber,
       final String? passwordHash}) = _$UserAuthenticationImpl;
@@ -275,11 +274,11 @@ abstract class _UserAuthentication implements UserAuthentication {
   @override
   String? get id;
   @override // Identificador único del usuario (opcional)
-  String get nombres;
+  String get name;
   @override // Nombres del usuario
-  String get apellidos;
+  String get secondName;
   @override // Apellidos del usuario
-  String get nombreUsuario;
+  String get userName;
   @override // Nombre de usuario para inicio de sesión
   String get email;
   @override // Correo electrónico del usuario

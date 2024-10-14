@@ -33,7 +33,7 @@ class _AuthenticationService implements AuthenticationService {
     )
             .compose(
               _dio.options,
-              '/api/Auth/Login',
+              '/api/auth/login',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -50,7 +50,7 @@ class _AuthenticationService implements AuthenticationService {
   }
 
   @override
-  Future<ApiResponse<AuthenticationResponse>> validateToken(
+  Future<ApiResponse<AuthenticationResponse>> refreshToken(
       TokenRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -64,7 +64,7 @@ class _AuthenticationService implements AuthenticationService {
     )
             .compose(
               _dio.options,
-              '/users/validate-token',
+              '/api/auth/refresh',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -95,7 +95,7 @@ class _AuthenticationService implements AuthenticationService {
     )
             .compose(
               _dio.options,
-              '/api/Auth/Create/user',
+              '/api/auth/create/user',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -126,7 +126,7 @@ class _AuthenticationService implements AuthenticationService {
     )
             .compose(
               _dio.options,
-              '/users/logout',
+              '/api/auth/logout',
               queryParameters: queryParameters,
               data: _data,
             )

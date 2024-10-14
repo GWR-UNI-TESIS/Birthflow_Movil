@@ -1,4 +1,3 @@
-
 import 'package:birthflow_movil/src/data/auth/models/authentication_user/authentication_user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +8,8 @@ part 'authentication_response.g.dart';
 class AuthenticationResponse with _$AuthenticationResponse {
   // Representa la respuesta de una solicitud de autenticación exitosa
   const factory AuthenticationResponse({
-    required String token, // Token de autenticación
+    required String accessToken, // Token de autenticación
+    required String refreshToken,
     required UserAuthentication
         user, // Objeto con la información del usuario autenticado
   }) = _AuthenticationResponse;

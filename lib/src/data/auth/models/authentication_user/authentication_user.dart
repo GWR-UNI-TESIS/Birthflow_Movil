@@ -5,17 +5,15 @@ part 'authentication_user.g.dart';
 
 @freezed
 class UserAuthentication with _$UserAuthentication {
-
-   // Representa la información de un usuario autenticado
+  // Representa la información de un usuario autenticado
   const factory UserAuthentication({
     required String? id, // Identificador único del usuario (opcional)
-    required String nombres, // Nombres del usuario
-    required String apellidos, // Apellidos del usuario
-    required String nombreUsuario, // Nombre de usuario para inicio de sesión
+    required String name, // Nombres del usuario
+    required String secondName, // Apellidos del usuario
+    required String userName, // Nombre de usuario para inicio de sesión
     required String email, // Correo electrónico del usuario
     int? phoneNumber, // Número telefónico del usuario (opcional)
     String? passwordHash, // Hash de la contraseña del usuario (por seguridad)
-
   }) = _UserAuthentication;
 
   // Crea una instancia de UserAuthentication a partir de un JSON
