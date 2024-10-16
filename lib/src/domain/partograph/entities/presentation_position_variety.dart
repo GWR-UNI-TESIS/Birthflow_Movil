@@ -35,14 +35,14 @@ extension HodgePlanePositionExtensionString on HodgePlanePosition {
 }
 
 enum Position {
-  OIA('OIIA'),
-  OIT('OIIT'),
-  OIP('OIIP'),
-  ODA('OIDA'),
-  ODT('OIDT'),
-  ODP('OIDP'),
-  OP('OP'),
-  OS('OS');
+  oia('OIIA'),
+  oit('OIIT'),
+  oip('OIIP'),
+  oda('OIDA'),
+  odt('OIDT'),
+  odp('OIDP'),
+  op('OP'),
+  os('OS');
 
   const Position(this.value);
 

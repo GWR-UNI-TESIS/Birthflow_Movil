@@ -1,6 +1,8 @@
 import 'package:birthflow_movil/src/domain/auth/entities/authentication.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
+import 'package:birthflow_movil/src/domain/auth/usecases/logout_usercase.dart';
+import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:dio/dio.dart';
@@ -10,43 +12,49 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final CreateUserUsecase _createUserUsecase;
   final LoginUsecase _loginUsecase;
+  final RefreshUsecase _refreshUsecase;
+  final LogoutUsecase _logoutUsecase;
 
-  AuthenticationBloc(this._createUserUsecase, this._loginUsecase)
-      : super(const Uninitialized()) {
+  AuthenticationBloc(
+    this._createUserUsecase,
+    this._loginUsecase,
+    this._refreshUsecase,
+    this._logoutUsecase,
+  ) : super(const Uninitialized()) {
     on<LoggedIn>(_onLoggedIn);
     on<Register>(_onRegister);
+    on<Logout>(_onLogout);
+    on<RefreshToken>(_onRefresh);
+  }
 
-    on<LogoutRequested>((event, emit) async {
-      emit(const AuthLoading());
-      try {
-        // await _authenticationService.logout(TokenRequest(token: event.token));
-        // await _tokenStorage.removeTokenSecurely();
-        emit(const Unauthenticated());
-      } catch (e) {
-        emit(Failure(error: e.toString()));
-      }
-    });
+  Future<void> _onLogout(
+    Logout event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    emit(const AuthLoading());
+    try {
+      await _logoutUsecase.execute();
+      emit(const Unauthenticated());
+    } catch (e) {
+      emit(Failure(error: e.toString()));
+    }
+  }
 
-    on<AuthenticationStatusChecked>((event, emit) async {
-      emit(const AuthLoading());
-      try {
-        //final response =
-        // await _authenticationService.validateToken(tokenRequest);
+  Future<void> _onRefresh(
+    RefreshToken event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    emit(const AuthLoading());
+    try {
+      final result = await _refreshUsecase.execute();
+      if (result.authenticationCode == AuthenticationCode.success) {
+        emit(Authenticated(response: result.user!));
+      } else {
         emit(const Unauthenticated());
-        /* if (response.response == null) {
-          await _tokenStorage.removeTokenSecurely();
-          emit(const Unauthenticated());
-        } else {
-          if (response.response?.token != null) {
-            //emit(Authenticated(response: response.response!));
-          } else {
-            emit(const Unauthenticated());
-          }
-        }*/
-      } catch (e) {
-        emit(Failure(error: e.toString()));
       }
-    });
+    } catch (e) {
+      emit(Failure(error: e.toString()));
+    }
   }
 
   Future<void> _onLoggedIn(

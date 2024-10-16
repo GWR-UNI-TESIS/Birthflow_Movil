@@ -11,8 +11,7 @@ class AuthenticationEvent with _$AuthenticationEvent {
   }) = LoggedIn;
 
   // Evento disparado cuando el usuario solicita cerrar sesión
-  const factory AuthenticationEvent.logoutRequested({required String token}) =
-      LogoutRequested;
+  const factory AuthenticationEvent.logout() = Logout;
   // Evento disparado cuando el usuario se registra
   const factory AuthenticationEvent.register({
     required int id,
@@ -25,6 +24,5 @@ class AuthenticationEvent with _$AuthenticationEvent {
   }) = Register;
 
   // Evento disparado para verificar el estado de autenticación del usuario
-  const factory AuthenticationEvent.authenticationStatusChecked() =
-      AuthenticationStatusChecked;
+  const factory AuthenticationEvent.refreshToken() = RefreshToken;
 }

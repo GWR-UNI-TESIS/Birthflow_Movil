@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (mounted) {
         // Dispara el evento AuthenticationStatusChecked del AuthenticationBloc
         BlocProvider.of<AuthenticationBloc>(context).add(
-          const AuthenticationStatusChecked(),
+          const RefreshToken(),
         );
       }
     });

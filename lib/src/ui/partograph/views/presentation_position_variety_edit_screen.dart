@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class PresentationPositionVarietyEditScreen extends StatefulWidget {
-
-   final PresentationPositionVariety? model;
+  final PresentationPositionVariety? model;
 
   // Constructor que acepta el modelo opcional
   const PresentationPositionVarietyEditScreen({this.model});
-  
+
   @override
   State<StatefulWidget> createState() => PresentationPositionVarietyEditState();
 }
@@ -22,20 +21,21 @@ class PresentationPositionVarietyEditState
 
   final today = DateTime.now();
 
-@override
+  @override
   void initState() {
     super.initState();
 
-    if (widget.model != null) {      
+    if (widget.model != null) {
       // Si el modelo está presente, inicializa los valores
       final model = widget.model!;
       timeInput.text = DateFormat('HH:mm:ss').format(model.time);
-      _position =  Position.fromString(model.hodgePlane);
+      _position = Position.fromString(model.hodgePlane);
       _hodgePlanePosition = HodgePlanePosition.fromString(model.hodgePlane);
     } else {
       // Valores por defecto si no hay modelo
       _position = Position.values.first; // Ajusta según sea necesario
-      _hodgePlanePosition = HodgePlanePosition.values.first; // Ajusta según sea necesario
+      _hodgePlanePosition =
+          HodgePlanePosition.values.first; // Ajusta según sea necesario
     }
   }
 
@@ -67,8 +67,7 @@ class PresentationPositionVarietyEditState
                   DropdownButtonWidget<Position>(
                     labelText: 'Plano',
                     enumValues: Position.values,
-                    onValueChanged: (Position plane) {
-                    },
+                    onValueChanged: (Position plane) {},
                   ),
                   TextField(
                     controller:
@@ -101,7 +100,6 @@ class PresentationPositionVarietyEditState
 
                         setState(() {
                           timeInput.text = formattedTime;
-                          
                         });
                       }
                     },

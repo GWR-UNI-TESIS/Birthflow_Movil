@@ -29,7 +29,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String createBy,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = PartographRequest(
@@ -62,7 +62,7 @@ class PartographRepositoryImplementation implements PartographRepository {
   @override
   Future<List<Partograph>?> getPartograph({required String userId}) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
       final result = await _partographService.get(token, userId);
 
@@ -95,7 +95,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = CervicalDilationRequest(
@@ -124,7 +124,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = CervicalDilationRequest(
@@ -152,7 +152,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String partographId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final result =
@@ -176,7 +176,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = CervicalDilationRequest(
@@ -214,7 +214,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = MedicalSurveillanceTableRequest(
@@ -249,7 +249,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = MedicalSurveillanceTableRequest(
@@ -284,7 +284,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String partographId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final result = await _partographService.getMedicalSurveillanceTable(
@@ -318,7 +318,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = MedicalSurveillanceTableRequest(
@@ -357,7 +357,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = PresentationPositionVarietyEntityRequest(
@@ -388,7 +388,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = PresentationPositionVarietyEntityRequest(
@@ -420,7 +420,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String partographId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final result = await _partographService.getPresentationPositionVariety(
@@ -448,7 +448,7 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String userId,
   }) async {
     try {
-      final tokenGuardado = await _tokenStorage.getTokenSecurely();
+      final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = PresentationPositionVarietyEntityRequest(

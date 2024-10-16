@@ -1,8 +1,8 @@
 import 'package:birthflow_movil/src/data/auth/datasources/authentication_service.dart';
 import 'package:birthflow_movil/src/data/auth/models/authentication_request/authentication_request.dart';
+import 'package:birthflow_movil/src/data/auth/models/token_request/token_request.dart';
 import 'package:birthflow_movil/src/data/auth/models/user_register_request/user_register_request.dart';
 import 'package:birthflow_movil/src/domain/auth/entities/authentication.dart';
-import 'package:birthflow_movil/src/domain/auth/entities/token.dart';
 import 'package:birthflow_movil/src/domain/auth/entities/user.dart';
 import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repository.dart';
 import 'package:birthflow_movil/src/local_storage/token_storage.dart';
@@ -26,7 +26,6 @@ class AuthenticationRepositoryImplementation
 
       if (result.message == 'User not found.') {
         return Authentication(
-          token: null,
           user: null,
           message: 'Usuario no encontrado',
           authenticationCode: AuthenticationCode.error,
@@ -35,7 +34,6 @@ class AuthenticationRepositoryImplementation
 
       if (result.message == 'User not valid.') {
         return Authentication(
-          token: null,
           user: null,
           message: 'Usuario no valido',
           authenticationCode: AuthenticationCode.error,
@@ -44,26 +42,24 @@ class AuthenticationRepositoryImplementation
 
       if (result.message == 'Invalid Credential.') {
         return Authentication(
-          token: null,
           user: null,
           message: 'Credenciales invalidas',
           authenticationCode: AuthenticationCode.error,
         );
       }
 
-      if (result.message == 'Generate Token.') {
+      if (result.statusCode == 200) {
         final phone = response?.user.phoneNumber;
 
-        TokenStorage().saveTokenSecurely(response!.token);
+        await TokenStorage()
+            .saveTokens(response!.accessToken, response.refreshToken);
 
         return Authentication(
-          token: Token(token: response.token),
           user: User(
             userId: response.user.id,
-            nombres: response.user.nombres,
-            apellidos: response.user.apellidos,
-            nombreUsuario: response.user.nombreUsuario,
-            passwordHash: response.user.nombreUsuario,
+            nombres: response.user.name,
+            apellidos: response.user.secondName,
+            nombreUsuario: response.user.userName,
             email: response.user.email,
             phoneNumber: phone,
           ),
@@ -72,7 +68,6 @@ class AuthenticationRepositoryImplementation
         );
       } else {
         return Authentication(
-          token: null,
           user: null,
           message: 'Error no documentado',
           authenticationCode: AuthenticationCode.error,
@@ -80,7 +75,6 @@ class AuthenticationRepositoryImplementation
       }
     } catch (e) {
       return Authentication(
-        token: null,
         user: null,
         message: e.toString(),
         authenticationCode: AuthenticationCode.error,
@@ -109,6 +103,70 @@ class AuthenticationRepositoryImplementation
         phoneNumber: phoneNumber,
       );
       await _authenticactionService.register(request);
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Authentication> refresh() async {
+    try {
+      final tokens = await TokenStorage().getTokens();
+
+      final request = TokenRequest(
+          accessToken: tokens!.accessToken, refreshToken: tokens.accessToken);
+
+      final result = await _authenticactionService.refreshToken(request);
+      final response = result.response;
+      if (result.statusCode == 200) {
+        await TokenStorage().removeTokens();
+
+        await TokenStorage().saveTokens(
+          response!.accessToken,
+          response.refreshToken,
+        );
+        return Authentication(
+          user: User(
+            userId: response.user.id,
+            nombres: response.user.name,
+            apellidos: response.user.secondName,
+            nombreUsuario: response.user.userName,
+            email: response.user.email,
+            phoneNumber: response.user.phoneNumber,
+          ),
+          message: 'Usuario correcto',
+          authenticationCode: AuthenticationCode.success,
+        );
+      }
+      return Authentication(
+        user: null,
+        message: 'ERROR',
+        authenticationCode: AuthenticationCode.error,
+      );
+    } catch (e) {
+      return Authentication(
+        user: null,
+        message: e.toString(),
+        authenticationCode: AuthenticationCode.error,
+      );
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    try {
+      final tokens = await TokenStorage().getTokens();
+
+      final request = TokenRequest(
+        accessToken: tokens!.accessToken,
+        refreshToken: tokens.accessToken,
+      );
+
+      await _authenticactionService.logout(request);
+
+      await TokenStorage().removeTokens();
     } catch (e) {
       // ignore: avoid_print
       print(e);

@@ -6,6 +6,8 @@ import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repo
 import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repository.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
+import 'package:birthflow_movil/src/domain/auth/usecases/logout_usercase.dart';
+import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
@@ -14,6 +16,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
@@ -41,11 +44,23 @@ Future<void> initializeDependencies() async {
     LoginUsecaseImplementation(locator<AuthenticationRepository>()),
   );
 
+  locator.registerSingleton<RefreshUsecase>(
+    RefreshUsecaseImplementation(locator<AuthenticationRepository>()),
+  );
+
+
+locator.registerSingleton<LogoutUsecase>(
+    LogoutUsecaseImplementation(locator<AuthenticationRepository>()),
+  );
+
+
   // Registra el AuthenticationBloc como singleton en GetIt, inyectando AuthenticationService
   locator.registerSingleton<AuthenticationBloc>(
     AuthenticationBloc(
       locator<CreateUserUsecase>(),
       locator<LoginUsecase>(),
+      locator<RefreshUsecase>(),
+      locator<LogoutUsecase>(),
     ),
   );
 

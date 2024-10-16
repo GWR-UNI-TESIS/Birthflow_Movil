@@ -14,4 +14,8 @@ abstract class AuthenticationRepository {
     required String username,
     required String password,
   });
+
+  Future<Authentication> refresh();
+
+  Future<void> logout();
 }

@@ -19,7 +19,7 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
-    required TResult Function(String token) logoutRequested,
+    required TResult Function() logout,
     required TResult Function(
             int id,
             String nombres,
@@ -29,13 +29,13 @@ mixin _$AuthenticationEvent {
             String? phoneNumber,
             String passwordHash)
         register,
-    required TResult Function() authenticationStatusChecked,
+    required TResult Function() refreshToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
-    TResult? Function(String token)? logoutRequested,
+    TResult? Function()? logout,
     TResult? Function(
             int id,
             String nombres,
@@ -45,13 +45,13 @@ mixin _$AuthenticationEvent {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult? Function()? authenticationStatusChecked,
+    TResult? Function()? refreshToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
-    TResult Function(String token)? logoutRequested,
+    TResult Function()? logout,
     TResult Function(
             int id,
             String nombres,
@@ -61,35 +61,32 @@ mixin _$AuthenticationEvent {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult Function()? authenticationStatusChecked,
+    TResult Function()? refreshToken,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
-    required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Logout value) logout,
     required TResult Function(Register value) register,
-    required TResult Function(AuthenticationStatusChecked value)
-        authenticationStatusChecked,
+    required TResult Function(RefreshToken value) refreshToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
-    TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Logout value)? logout,
     TResult? Function(Register value)? register,
-    TResult? Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult? Function(RefreshToken value)? refreshToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
-    TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Logout value)? logout,
     TResult Function(Register value)? register,
-    TResult Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult Function(RefreshToken value)? refreshToken,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -188,7 +185,7 @@ class _$LoggedInImpl implements LoggedIn {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
-    required TResult Function(String token) logoutRequested,
+    required TResult Function() logout,
     required TResult Function(
             int id,
             String nombres,
@@ -198,7 +195,7 @@ class _$LoggedInImpl implements LoggedIn {
             String? phoneNumber,
             String passwordHash)
         register,
-    required TResult Function() authenticationStatusChecked,
+    required TResult Function() refreshToken,
   }) {
     return loggedIn(username, password);
   }
@@ -207,7 +204,7 @@ class _$LoggedInImpl implements LoggedIn {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
-    TResult? Function(String token)? logoutRequested,
+    TResult? Function()? logout,
     TResult? Function(
             int id,
             String nombres,
@@ -217,7 +214,7 @@ class _$LoggedInImpl implements LoggedIn {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult? Function()? authenticationStatusChecked,
+    TResult? Function()? refreshToken,
   }) {
     return loggedIn?.call(username, password);
   }
@@ -226,7 +223,7 @@ class _$LoggedInImpl implements LoggedIn {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
-    TResult Function(String token)? logoutRequested,
+    TResult Function()? logout,
     TResult Function(
             int id,
             String nombres,
@@ -236,7 +233,7 @@ class _$LoggedInImpl implements LoggedIn {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult Function()? authenticationStatusChecked,
+    TResult Function()? refreshToken,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
@@ -249,10 +246,9 @@ class _$LoggedInImpl implements LoggedIn {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
-    required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Logout value) logout,
     required TResult Function(Register value) register,
-    required TResult Function(AuthenticationStatusChecked value)
-        authenticationStatusChecked,
+    required TResult Function(RefreshToken value) refreshToken,
   }) {
     return loggedIn(this);
   }
@@ -261,10 +257,9 @@ class _$LoggedInImpl implements LoggedIn {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
-    TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Logout value)? logout,
     TResult? Function(Register value)? register,
-    TResult? Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult? Function(RefreshToken value)? refreshToken,
   }) {
     return loggedIn?.call(this);
   }
@@ -273,10 +268,9 @@ class _$LoggedInImpl implements LoggedIn {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
-    TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Logout value)? logout,
     TResult Function(Register value)? register,
-    TResult Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult Function(RefreshToken value)? refreshToken,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
@@ -299,72 +293,45 @@ abstract class LoggedIn implements AuthenticationEvent {
 }
 
 /// @nodoc
-abstract class _$$LogoutRequestedImplCopyWith<$Res> {
-  factory _$$LogoutRequestedImplCopyWith(_$LogoutRequestedImpl value,
-          $Res Function(_$LogoutRequestedImpl) then) =
-      __$$LogoutRequestedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String token});
+abstract class _$$LogoutImplCopyWith<$Res> {
+  factory _$$LogoutImplCopyWith(
+          _$LogoutImpl value, $Res Function(_$LogoutImpl) then) =
+      __$$LogoutImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LogoutRequestedImplCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$LogoutRequestedImpl>
-    implements _$$LogoutRequestedImplCopyWith<$Res> {
-  __$$LogoutRequestedImplCopyWithImpl(
-      _$LogoutRequestedImpl _value, $Res Function(_$LogoutRequestedImpl) _then)
+class __$$LogoutImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$LogoutImpl>
+    implements _$$LogoutImplCopyWith<$Res> {
+  __$$LogoutImplCopyWithImpl(
+      _$LogoutImpl _value, $Res Function(_$LogoutImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-  }) {
-    return _then(_$LogoutRequestedImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$LogoutRequestedImpl implements LogoutRequested {
-  const _$LogoutRequestedImpl({required this.token});
-
-  @override
-  final String token;
+class _$LogoutImpl implements Logout {
+  const _$LogoutImpl();
 
   @override
   String toString() {
-    return 'AuthenticationEvent.logoutRequested(token: $token)';
+    return 'AuthenticationEvent.logout()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LogoutRequestedImpl &&
-            (identical(other.token, token) || other.token == token));
+        (other.runtimeType == runtimeType && other is _$LogoutImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LogoutRequestedImplCopyWith<_$LogoutRequestedImpl> get copyWith =>
-      __$$LogoutRequestedImplCopyWithImpl<_$LogoutRequestedImpl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
-    required TResult Function(String token) logoutRequested,
+    required TResult Function() logout,
     required TResult Function(
             int id,
             String nombres,
@@ -374,16 +341,16 @@ class _$LogoutRequestedImpl implements LogoutRequested {
             String? phoneNumber,
             String passwordHash)
         register,
-    required TResult Function() authenticationStatusChecked,
+    required TResult Function() refreshToken,
   }) {
-    return logoutRequested(token);
+    return logout();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
-    TResult? Function(String token)? logoutRequested,
+    TResult? Function()? logout,
     TResult? Function(
             int id,
             String nombres,
@@ -393,16 +360,16 @@ class _$LogoutRequestedImpl implements LogoutRequested {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult? Function()? authenticationStatusChecked,
+    TResult? Function()? refreshToken,
   }) {
-    return logoutRequested?.call(token);
+    return logout?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
-    TResult Function(String token)? logoutRequested,
+    TResult Function()? logout,
     TResult Function(
             int id,
             String nombres,
@@ -412,11 +379,11 @@ class _$LogoutRequestedImpl implements LogoutRequested {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult Function()? authenticationStatusChecked,
+    TResult Function()? refreshToken,
     required TResult orElse(),
   }) {
-    if (logoutRequested != null) {
-      return logoutRequested(token);
+    if (logout != null) {
+      return logout();
     }
     return orElse();
   }
@@ -425,51 +392,42 @@ class _$LogoutRequestedImpl implements LogoutRequested {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
-    required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Logout value) logout,
     required TResult Function(Register value) register,
-    required TResult Function(AuthenticationStatusChecked value)
-        authenticationStatusChecked,
+    required TResult Function(RefreshToken value) refreshToken,
   }) {
-    return logoutRequested(this);
+    return logout(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
-    TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Logout value)? logout,
     TResult? Function(Register value)? register,
-    TResult? Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult? Function(RefreshToken value)? refreshToken,
   }) {
-    return logoutRequested?.call(this);
+    return logout?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
-    TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Logout value)? logout,
     TResult Function(Register value)? register,
-    TResult Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult Function(RefreshToken value)? refreshToken,
     required TResult orElse(),
   }) {
-    if (logoutRequested != null) {
-      return logoutRequested(this);
+    if (logout != null) {
+      return logout(this);
     }
     return orElse();
   }
 }
 
-abstract class LogoutRequested implements AuthenticationEvent {
-  const factory LogoutRequested({required final String token}) =
-      _$LogoutRequestedImpl;
-
-  String get token;
-  @JsonKey(ignore: true)
-  _$$LogoutRequestedImplCopyWith<_$LogoutRequestedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class Logout implements AuthenticationEvent {
+  const factory Logout() = _$LogoutImpl;
 }
 
 /// @nodoc
@@ -604,7 +562,7 @@ class _$RegisterImpl implements Register {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
-    required TResult Function(String token) logoutRequested,
+    required TResult Function() logout,
     required TResult Function(
             int id,
             String nombres,
@@ -614,7 +572,7 @@ class _$RegisterImpl implements Register {
             String? phoneNumber,
             String passwordHash)
         register,
-    required TResult Function() authenticationStatusChecked,
+    required TResult Function() refreshToken,
   }) {
     return register(id, nombres, apellidos, nombreUsuario, email, phoneNumber,
         passwordHash);
@@ -624,7 +582,7 @@ class _$RegisterImpl implements Register {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
-    TResult? Function(String token)? logoutRequested,
+    TResult? Function()? logout,
     TResult? Function(
             int id,
             String nombres,
@@ -634,7 +592,7 @@ class _$RegisterImpl implements Register {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult? Function()? authenticationStatusChecked,
+    TResult? Function()? refreshToken,
   }) {
     return register?.call(id, nombres, apellidos, nombreUsuario, email,
         phoneNumber, passwordHash);
@@ -644,7 +602,7 @@ class _$RegisterImpl implements Register {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
-    TResult Function(String token)? logoutRequested,
+    TResult Function()? logout,
     TResult Function(
             int id,
             String nombres,
@@ -654,7 +612,7 @@ class _$RegisterImpl implements Register {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult Function()? authenticationStatusChecked,
+    TResult Function()? refreshToken,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -668,10 +626,9 @@ class _$RegisterImpl implements Register {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
-    required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Logout value) logout,
     required TResult Function(Register value) register,
-    required TResult Function(AuthenticationStatusChecked value)
-        authenticationStatusChecked,
+    required TResult Function(RefreshToken value) refreshToken,
   }) {
     return register(this);
   }
@@ -680,10 +637,9 @@ class _$RegisterImpl implements Register {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
-    TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Logout value)? logout,
     TResult? Function(Register value)? register,
-    TResult? Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult? Function(RefreshToken value)? refreshToken,
   }) {
     return register?.call(this);
   }
@@ -692,10 +648,9 @@ class _$RegisterImpl implements Register {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
-    TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Logout value)? logout,
     TResult Function(Register value)? register,
-    TResult Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult Function(RefreshToken value)? refreshToken,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -728,39 +683,35 @@ abstract class Register implements AuthenticationEvent {
 }
 
 /// @nodoc
-abstract class _$$AuthenticationStatusCheckedImplCopyWith<$Res> {
-  factory _$$AuthenticationStatusCheckedImplCopyWith(
-          _$AuthenticationStatusCheckedImpl value,
-          $Res Function(_$AuthenticationStatusCheckedImpl) then) =
-      __$$AuthenticationStatusCheckedImplCopyWithImpl<$Res>;
+abstract class _$$RefreshTokenImplCopyWith<$Res> {
+  factory _$$RefreshTokenImplCopyWith(
+          _$RefreshTokenImpl value, $Res Function(_$RefreshTokenImpl) then) =
+      __$$RefreshTokenImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthenticationStatusCheckedImplCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res,
-        _$AuthenticationStatusCheckedImpl>
-    implements _$$AuthenticationStatusCheckedImplCopyWith<$Res> {
-  __$$AuthenticationStatusCheckedImplCopyWithImpl(
-      _$AuthenticationStatusCheckedImpl _value,
-      $Res Function(_$AuthenticationStatusCheckedImpl) _then)
+class __$$RefreshTokenImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$RefreshTokenImpl>
+    implements _$$RefreshTokenImplCopyWith<$Res> {
+  __$$RefreshTokenImplCopyWithImpl(
+      _$RefreshTokenImpl _value, $Res Function(_$RefreshTokenImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
-  const _$AuthenticationStatusCheckedImpl();
+class _$RefreshTokenImpl implements RefreshToken {
+  const _$RefreshTokenImpl();
 
   @override
   String toString() {
-    return 'AuthenticationEvent.authenticationStatusChecked()';
+    return 'AuthenticationEvent.refreshToken()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthenticationStatusCheckedImpl);
+        (other.runtimeType == runtimeType && other is _$RefreshTokenImpl);
   }
 
   @override
@@ -770,7 +721,7 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
-    required TResult Function(String token) logoutRequested,
+    required TResult Function() logout,
     required TResult Function(
             int id,
             String nombres,
@@ -780,16 +731,16 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
             String? phoneNumber,
             String passwordHash)
         register,
-    required TResult Function() authenticationStatusChecked,
+    required TResult Function() refreshToken,
   }) {
-    return authenticationStatusChecked();
+    return refreshToken();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
-    TResult? Function(String token)? logoutRequested,
+    TResult? Function()? logout,
     TResult? Function(
             int id,
             String nombres,
@@ -799,16 +750,16 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult? Function()? authenticationStatusChecked,
+    TResult? Function()? refreshToken,
   }) {
-    return authenticationStatusChecked?.call();
+    return refreshToken?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
-    TResult Function(String token)? logoutRequested,
+    TResult Function()? logout,
     TResult Function(
             int id,
             String nombres,
@@ -818,11 +769,11 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
             String? phoneNumber,
             String passwordHash)?
         register,
-    TResult Function()? authenticationStatusChecked,
+    TResult Function()? refreshToken,
     required TResult orElse(),
   }) {
-    if (authenticationStatusChecked != null) {
-      return authenticationStatusChecked();
+    if (refreshToken != null) {
+      return refreshToken();
     }
     return orElse();
   }
@@ -831,44 +782,40 @@ class _$AuthenticationStatusCheckedImpl implements AuthenticationStatusChecked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoggedIn value) loggedIn,
-    required TResult Function(LogoutRequested value) logoutRequested,
+    required TResult Function(Logout value) logout,
     required TResult Function(Register value) register,
-    required TResult Function(AuthenticationStatusChecked value)
-        authenticationStatusChecked,
+    required TResult Function(RefreshToken value) refreshToken,
   }) {
-    return authenticationStatusChecked(this);
+    return refreshToken(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoggedIn value)? loggedIn,
-    TResult? Function(LogoutRequested value)? logoutRequested,
+    TResult? Function(Logout value)? logout,
     TResult? Function(Register value)? register,
-    TResult? Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult? Function(RefreshToken value)? refreshToken,
   }) {
-    return authenticationStatusChecked?.call(this);
+    return refreshToken?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoggedIn value)? loggedIn,
-    TResult Function(LogoutRequested value)? logoutRequested,
+    TResult Function(Logout value)? logout,
     TResult Function(Register value)? register,
-    TResult Function(AuthenticationStatusChecked value)?
-        authenticationStatusChecked,
+    TResult Function(RefreshToken value)? refreshToken,
     required TResult orElse(),
   }) {
-    if (authenticationStatusChecked != null) {
-      return authenticationStatusChecked(this);
+    if (refreshToken != null) {
+      return refreshToken(this);
     }
     return orElse();
   }
 }
 
-abstract class AuthenticationStatusChecked implements AuthenticationEvent {
-  const factory AuthenticationStatusChecked() =
-      _$AuthenticationStatusCheckedImpl;
+abstract class RefreshToken implements AuthenticationEvent {
+  const factory RefreshToken() = _$RefreshTokenImpl;
 }
