@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/config/device_fingerprint/index.dart';
 import 'package:birthflow_movil/src/config/dio/dio.dart';
 import 'package:birthflow_movil/src/data/auth/datasources/authentication_service.dart';
 import 'package:birthflow_movil/src/data/auth/repositories/authentication_repository_imp.dart';
@@ -16,7 +17,6 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
@@ -25,9 +25,9 @@ final GetIt locator = GetIt.instance;
 Future<void> initializeDependencies() async {
   // Obtiene la URL de la API desde el archivo .env (asumiendo que existe un paquete dotenv)
   final String? apiUrl = dotenv.env['API_URL'];
-
+  final device =  await getDeviceFingerprint();
   // Crea un cliente Dio para realizar llamadas HTTP a la API
-  final dio = buildDioClient(apiUrl!);
+  final dio = buildDioClient(apiUrl!, device);
 
   // Registra el AuthenticationService como singleton en GetIt
   locator.registerSingleton<AuthenticationService>(AuthenticationService(dio));

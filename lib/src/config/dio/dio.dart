@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-Dio buildDioClient(String base) {
+Dio buildDioClient(String base, String deviceInfo) {
   final dio = Dio(
     BaseOptions(
       baseUrl: base,
@@ -10,6 +10,7 @@ Dio buildDioClient(String base) {
           const Duration(seconds: 30), // Tiempo de espera de recepción
       headers: {
         'Content-Type': 'application/json', 
+        'Device-Info': deviceInfo,
         // Establece el Content-Type
         // Puedes agregar otros headers necesarios aquí
       },
