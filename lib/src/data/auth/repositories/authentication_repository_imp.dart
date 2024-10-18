@@ -47,20 +47,20 @@ class AuthenticationRepositoryImplementation
       }
 
       if (result.statusCode == 200) {
-        final phone = response?.user.phoneNumber;
-
+        final phone = response?.user!.phoneNumber;
+        await TokenStorage().removeTokens();
         await TokenStorage().saveTokens(
           response!.accessToken,
           response.refreshToken,
         );
-        _logger.i('Login successful for user: ${response.user.email}');
+        _logger.i('Login successful for user: ${response.user!.email}');
         return Authentication(
           user: User(
-            userId: response.user.id,
-            nombres: response.user.name,
-            apellidos: response.user.secondName,
-            nombreUsuario: response.user.userName,
-            email: response.user.email,
+            userId: response.user!.id,
+            nombres: response.user!.name,
+            apellidos: response.user!.secondName,
+            nombreUsuario: response.user!.userName,
+            email: response.user!.email,
             phoneNumber: phone,
           ),
           message: 'Login exitoso',
@@ -115,43 +115,72 @@ class AuthenticationRepositoryImplementation
   @override
   Future<Authentication> refresh() async {
     try {
+      // Obtener los tokens almacenados
       final tokens = await TokenStorage().getTokens();
 
+      // Preparar la solicitud de renovación con los tokens actuales
       final request = TokenRequest(
-          accessToken: tokens!.accessToken, refreshToken: tokens.accessToken);
+        accessToken: tokens!.accessToken,
+        refreshToken: tokens
+            .refreshToken, // Debe ser el refresh token, no el access token
+      );
 
+      // Realizar la solicitud de renovación de tokens
       final result = await _authenticactionService.refreshToken(request);
+
+      // Manejar el resultado según el statusCode
       final response = result.response;
 
       if (result.statusCode == 200) {
-        await TokenStorage().removeTokens();
+        // Si la respuesta es exitosa (200), actualiza los tokens
+        await TokenStorage().removeTokens(); // Elimina los tokens actuales
         await TokenStorage().saveTokens(
           response!.accessToken,
           response.refreshToken,
         );
         _logger.i('Token refreshed successfully.');
 
+        // Devuelve una respuesta exitosa
         return Authentication(
           user: User(
-            userId: response.user.id,
-            nombres: response.user.name,
-            apellidos: response.user.secondName,
-            nombreUsuario: response.user.userName,
-            email: response.user.email,
-            phoneNumber: response.user.phoneNumber,
+            userId: response.user!.id,
+            nombres: response.user!.name,
+            apellidos: response.user!.secondName,
+            nombreUsuario: response.user!.userName,
+            email: response.user!.email,
+            phoneNumber: response.user!.phoneNumber,
           ),
           message: 'Tokens actualizados correctamente',
           authenticationCode: AuthenticationCode.success,
         );
+      } else if (result.statusCode == 401) {
+        // Si es no autorizado (401), manejar como fallo de autenticación
+        await TokenStorage().removeTokens(); 
+        _logger.e('Token refresh failed: Unauthorized.');
+        return Authentication(
+          user: null,
+          message: 'No autorizado para renovar el token.',
+          authenticationCode: AuthenticationCode.unauthorized,
+        );
+      } else if (result.statusCode == 400) {
+        // Si es un error de solicitud (400), manejar error específico
+        _logger.e('Token refresh failed: Bad Request.');
+        return Authentication(
+          user: null,
+          message: 'Solicitud inválida para renovar el token.',
+          authenticationCode: AuthenticationCode.error,
+        );
+      } else {
+        // Para otros códigos de estado, manejar como error general
+        _logger.e('Token refresh failed: Unknown error.');
+        return Authentication(
+          user: null,
+          message: 'Error desconocido al renovar el token.',
+          authenticationCode: AuthenticationCode.error,
+        );
       }
-
-      _logger.e('Token refresh failed: Invalid response.');
-      return Authentication(
-        user: null,
-        message: 'No se pudo actualizar el token',
-        authenticationCode: AuthenticationCode.error,
-      );
     } catch (e, stackTrace) {
+      // Manejo de errores inesperados durante el proceso de renovación
       _logger.e('Token refresh exception', error: e, stackTrace: stackTrace);
       return Authentication(
         user: null,

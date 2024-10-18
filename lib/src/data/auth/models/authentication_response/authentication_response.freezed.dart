@@ -24,7 +24,7 @@ mixin _$AuthenticationResponse {
   String get accessToken =>
       throw _privateConstructorUsedError; // Token de autenticación
   String get refreshToken => throw _privateConstructorUsedError;
-  UserAuthentication get user => throw _privateConstructorUsedError;
+  UserAuthentication? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,9 +38,10 @@ abstract class $AuthenticationResponseCopyWith<$Res> {
           $Res Function(AuthenticationResponse) then) =
       _$AuthenticationResponseCopyWithImpl<$Res, AuthenticationResponse>;
   @useResult
-  $Res call({String accessToken, String refreshToken, UserAuthentication user});
+  $Res call(
+      {String accessToken, String refreshToken, UserAuthentication? user});
 
-  $UserAuthenticationCopyWith<$Res> get user;
+  $UserAuthenticationCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -59,7 +60,7 @@ class _$AuthenticationResponseCopyWithImpl<$Res,
   $Res call({
     Object? accessToken = null,
     Object? refreshToken = null,
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       accessToken: null == accessToken
@@ -70,17 +71,21 @@ class _$AuthenticationResponseCopyWithImpl<$Res,
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserAuthentication,
+              as UserAuthentication?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserAuthenticationCopyWith<$Res> get user {
-    return $UserAuthenticationCopyWith<$Res>(_value.user, (value) {
+  $UserAuthenticationCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserAuthenticationCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -95,10 +100,11 @@ abstract class _$$AuthenticationResponseImplCopyWith<$Res>
       __$$AuthenticationResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accessToken, String refreshToken, UserAuthentication user});
+  $Res call(
+      {String accessToken, String refreshToken, UserAuthentication? user});
 
   @override
-  $UserAuthenticationCopyWith<$Res> get user;
+  $UserAuthenticationCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -116,7 +122,7 @@ class __$$AuthenticationResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? accessToken = null,
     Object? refreshToken = null,
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_$AuthenticationResponseImpl(
       accessToken: null == accessToken
@@ -127,10 +133,10 @@ class __$$AuthenticationResponseImplCopyWithImpl<$Res>
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserAuthentication,
+              as UserAuthentication?,
     ));
   }
 }
@@ -139,9 +145,7 @@ class __$$AuthenticationResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AuthenticationResponseImpl implements _AuthenticationResponse {
   const _$AuthenticationResponseImpl(
-      {required this.accessToken,
-      required this.refreshToken,
-      required this.user});
+      {required this.accessToken, required this.refreshToken, this.user});
 
   factory _$AuthenticationResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthenticationResponseImplFromJson(json);
@@ -152,7 +156,7 @@ class _$AuthenticationResponseImpl implements _AuthenticationResponse {
   @override
   final String refreshToken;
   @override
-  final UserAuthentication user;
+  final UserAuthentication? user;
 
   @override
   String toString() {
@@ -194,7 +198,7 @@ abstract class _AuthenticationResponse implements AuthenticationResponse {
   const factory _AuthenticationResponse(
       {required final String accessToken,
       required final String refreshToken,
-      required final UserAuthentication user}) = _$AuthenticationResponseImpl;
+      final UserAuthentication? user}) = _$AuthenticationResponseImpl;
 
   factory _AuthenticationResponse.fromJson(Map<String, dynamic> json) =
       _$AuthenticationResponseImpl.fromJson;
@@ -204,7 +208,7 @@ abstract class _AuthenticationResponse implements AuthenticationResponse {
   @override // Token de autenticación
   String get refreshToken;
   @override
-  UserAuthentication get user;
+  UserAuthentication? get user;
   @override
   @JsonKey(ignore: true)
   _$$AuthenticationResponseImplCopyWith<_$AuthenticationResponseImpl>

@@ -8,8 +8,12 @@ Dio buildDioClient(String base, String deviceInfo) {
           const Duration(seconds: 30), // Tiempo de espera de conexión
       receiveTimeout:
           const Duration(seconds: 30), // Tiempo de espera de recepción
+      validateStatus: (status) {
+        // Aceptar todos los códigos de estado menores a 500
+        return status != null && status < 500;
+      },
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
         'Device-Info': deviceInfo,
         // Establece el Content-Type
         // Puedes agregar otros headers necesarios aquí

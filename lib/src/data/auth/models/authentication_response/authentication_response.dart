@@ -10,7 +10,7 @@ class AuthenticationResponse with _$AuthenticationResponse {
   const factory AuthenticationResponse({
     required String accessToken, // Token de autenticación
     required String refreshToken,
-    required UserAuthentication
+    UserAuthentication?
         user, // Objeto con la información del usuario autenticado
   }) = _AuthenticationResponse;
 

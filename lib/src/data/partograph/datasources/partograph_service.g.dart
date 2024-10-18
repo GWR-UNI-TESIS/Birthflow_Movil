@@ -36,7 +36,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Get/partograph/${id}',
+              '/api/partograph/partographs/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -75,7 +75,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Create/partograph',
+              '/api/partograph/create/partograph',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -109,7 +109,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Get/cervical-dilation/${partographId}',
+              '/api/partograph/cervical-dilation/partograph/${partographId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -148,7 +148,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Create/cervical-dilation',
+              '/api/partograph/create/cervical-dilation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -182,7 +182,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Update/cervical-dilation',
+              '/api/partograph/update/cervical-dilation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -216,7 +216,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Delete/cervical-dilation',
+              '/api/partograph/delete/cervical-dilation',
               queryParameters: queryParameters,
               data: _data,
             )

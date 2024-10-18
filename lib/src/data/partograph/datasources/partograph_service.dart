@@ -18,38 +18,38 @@ part 'partograph_service.g.dart';
 abstract class PartographService {
   factory PartographService(Dio dio, {String baseUrl}) = _PartographService;
 
-  @GET('/api/Partograph/Get/partograph/{userId}')
+  @GET('/api/partograph/partographs/{userId}')
   Future<ApiResponse<List<PartographResponse>>> get(
     @Header('Authorization') String token,
     @Path('userId') String id,
   );
 
-  @POST('/api/Partograph/Create/partograph')
+  @POST('/api/partograph/create/partograph')
   Future<ApiResponse<PartographResponse>> create(
     @Header('Authorization') String token,
     @Body() PartographRequest request,
   );
 
   // Endpoints de dilataciones cervicales
-  @GET('/api/Partograph/Get/cervical-dilation/{partographId}')
+  @GET('/api/partograph/cervical-dilation/partograph/{partographId}')
   Future<ApiResponse<List<CervicalDilationResponse>>> getCervicalDilation(
     @Header('Authorization') String token,
     @Path('partographId') String partographId,
   );
 
-  @POST('/api/Partograph/Create/cervical-dilation')
+  @POST('/api/partograph/create/cervical-dilation')
   Future<ApiResponse<CervicalDilationResponse>> createCervicalDilation(
     @Header('Authorization') String token,
     @Body() CervicalDilationRequest request,
   );
 
-  @PUT('/api/Partograph/Update/cervical-dilation')
+  @PUT('/api/partograph/update/cervical-dilation')
   Future<ApiResponse<CervicalDilationResponse>> updateCervicalDilation(
     @Header('Authorization') String token,
     @Body() CervicalDilationRequest request,
   );
 
-  @PUT('/api/Partograph/Delete/cervical-dilation')
+  @PUT('/api/partograph/delete/cervical-dilation')
   Future<ApiResponse<CervicalDilationResponse>> deleteCervicalDilation(
     @Header('Authorization') String token,
     @Body() CervicalDilationRequest request,

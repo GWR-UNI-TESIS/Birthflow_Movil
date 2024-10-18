@@ -11,7 +11,9 @@ _$AuthenticationResponseImpl _$$AuthenticationResponseImplFromJson(
     _$AuthenticationResponseImpl(
       accessToken: json['accessToken'] as String,
       refreshToken: json['refreshToken'] as String,
-      user: UserAuthentication.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : UserAuthentication.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$AuthenticationResponseImplToJson(
@@ -19,5 +21,5 @@ Map<String, dynamic> _$$AuthenticationResponseImplToJson(
     <String, dynamic>{
       'accessToken': instance.accessToken,
       'refreshToken': instance.refreshToken,
-      'user': instance.user.toJson(),
+      'user': instance.user?.toJson(),
     };

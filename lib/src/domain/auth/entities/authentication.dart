@@ -13,4 +13,4 @@ class Authentication {
   });
 }
 
-enum AuthenticationCode { success, error, init }
+enum AuthenticationCode { success, unauthorized, error, init }
