@@ -3,10 +3,11 @@ import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_req
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_list_response/partograph_list_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
-import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_entity_request/presentation_position_variety_entity_request.dart';
-import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_entity_response/presentation_position_variety_entity_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_request/presentation_position_variety_entity_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
 
 import 'package:dio/dio.dart';
 
@@ -19,7 +20,7 @@ abstract class PartographService {
   factory PartographService(Dio dio, {String baseUrl}) = _PartographService;
 
   @GET('/api/partograph/partographs/{userId}')
-  Future<ApiResponse<List<PartographResponse>>> get(
+  Future<ApiResponse<List<PartographListResponse>>> get(
     @Header('Authorization') String token,
     @Path('userId') String id,
   );

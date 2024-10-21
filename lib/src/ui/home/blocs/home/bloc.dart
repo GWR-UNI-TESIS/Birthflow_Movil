@@ -1,16 +1,16 @@
-import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
-import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/models/filters.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
-  final PartographGetUseCase _partographGetUseCase;
-  List<Partograph> _allPartographs = [];
+  final PartographListGetUseCase _partographsGetUseCase;
+  List<PartographList> _allPartographs = [];
 
 
-  PartographsBloc(this._partographGetUseCase)
+  PartographsBloc(this._partographsGetUseCase)
       : super(const PartographsState.initial()) {
     on<FetchPartographs>(_onPostFetched);
     on<ApplyFiltersAndSearch>(_onApplyFiltersAndSearch);
@@ -22,7 +22,7 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
   ) async {
     emit(const PartographsState.loading());
     try {
-      final result = await _partographGetUseCase.execute(event.userId);
+      final result = await _partographsGetUseCase.execute(userId: event.userId!);
       if (result != null) {
         _allPartographs = result;
         if (result.isEmpty) {
@@ -40,7 +40,7 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
     ApplyFiltersAndSearch event,
     Emitter<PartographsState> emit,
   ) {
-    List<Partograph> filteredPartographs = _allPartographs;
+    List<PartographList> filteredPartographs = _allPartographs;
 
     if (event.filter.filter != Filters.all) {
       // Aplicar filtro basado en el tipo de filtro

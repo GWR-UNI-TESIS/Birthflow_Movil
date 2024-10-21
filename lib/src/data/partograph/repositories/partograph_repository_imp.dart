@@ -1,19 +1,27 @@
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_list_response/partograph_list_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
-import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_entity_request/presentation_position_variety_entity_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_request/presentation_position_variety_entity_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
-import 'package:birthflow_movil/src/domain/partograph/mappers/partograph_mapper.dart';
+import 'package:birthflow_movil/src/domain/partograph/mappers/mapper.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/local_storage/token_storage.dart';
 
 class PartographRepositoryImplementation implements PartographRepository {
   final PartographService _partographService;
   final TokenStorage _tokenStorage = TokenStorage();
+  final Mappr _mapper = Mappr();
+
   PartographRepositoryImplementation({
     required PartographService partogramaService,
   }) : _partographService = partogramaService;
@@ -40,14 +48,13 @@ class PartographRepositoryImplementation implements PartographRepository {
         date: date.toIso8601String(),
         observation: observation,
         workTime: worktime,
-        createdBy: createBy,
       );
 
       final result = await _partographService.create(token, request);
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntity(result.response!);
+      return _mapper.convert<PartographResponse, Partograph>(result.response);
     } catch (error) {
       return null;
     }
@@ -60,7 +67,7 @@ class PartographRepositoryImplementation implements PartographRepository {
   }
 
   @override
-  Future<List<Partograph>?> getPartograph({required String userId}) async {
+  Future<List<PartographList>?> getPartographs({required String userId}) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
@@ -68,7 +75,9 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return [];
 
-      return PartographMapper.toEntityList(result.response!);
+      return _mapper.convertList<PartographListResponse, PartographList>(
+        result.response!,
+      );
     } catch (error) {
       return [];
     }
@@ -112,7 +121,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityCervicalDilation(result.response!);
+      return _mapper
+          .convert<CervicalDilationResponse, CervicalDilation>(result.response);
     } catch (error) {
       return null;
     }
@@ -141,7 +151,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityCervicalDilation(result.response!);
+      return _mapper
+          .convert<CervicalDilationResponse, CervicalDilation>(result.response);
     } catch (error) {
       return null;
     }
@@ -160,7 +171,9 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityListCervicalDilation(result.response!);
+      return _mapper.convertList<CervicalDilationResponse, CervicalDilation>(
+        result.response!,
+      );
     } catch (error) {
       return null;
     }
@@ -193,7 +206,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityCervicalDilation(result.response!);
+      return _mapper
+          .convert<CervicalDilationResponse, CervicalDilation>(result.response);
     } catch (error) {
       return null;
     }
@@ -237,7 +251,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityMedicalSurveillance(result.response!);
+      return _mapper.convert<MedicalSurveillanceTableResponse,
+          MedicalSurveillanceTable>(result.response);
     } catch (error) {
       return null;
     }
@@ -273,7 +288,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityMedicalSurveillance(result.response!);
+      return _mapper.convert<MedicalSurveillanceTableResponse,
+          MedicalSurveillanceTable>(result.response);
     } catch (error) {
       return null;
     }
@@ -294,7 +310,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityListMedicalSurveillanceTable(
+      return _mapper.convertList<MedicalSurveillanceTableResponse,
+          MedicalSurveillanceTable>(
         result.response!,
       );
     } catch (error) {
@@ -342,7 +359,10 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityMedicalSurveillance(result.response!);
+      return _mapper
+          .convert<MedicalSurveillanceTableResponse, MedicalSurveillanceTable>(
+        result.response,
+      );
     } catch (error) {
       return null;
     }
@@ -375,13 +395,13 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityPresentationPositionVariety(
-        result.response!,
-      );
+      return _mapper.convert<PresentationPositionVarietyEntityResponse,
+          PresentationPositionVariety>(result.response);
     } catch (error) {
       return null;
     }
   }
+
   @override
   Future<PresentationPositionVariety?> deletePresentationPositionVariety({
     required int id,
@@ -407,9 +427,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityPresentationPositionVariety(
-        result.response!,
-      );
+      return _mapper.convert<PresentationPositionVarietyEntityResponse,
+          PresentationPositionVariety>(result.response);
     } catch (error) {
       return null;
     }
@@ -430,7 +449,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityListPresentationPositionVariety(
+      return _mapper.convertList<PresentationPositionVarietyEntityResponse,
+          PresentationPositionVariety>(
         result.response!,
       );
     } catch (error) {
@@ -467,9 +487,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return PartographMapper.toEntityPresentationPositionVariety(
-        result.response!,
-      );
+      return _mapper.convert<PresentationPositionVarietyEntityResponse,
+          PresentationPositionVariety>(result.response);
     } catch (error) {
       return null;
     }

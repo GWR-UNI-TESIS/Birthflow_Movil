@@ -12,14 +12,41 @@ _$PartographResponseImpl _$$PartographResponseImplFromJson(
       partographId: json['partographId'] as String,
       name: json['name'] as String,
       recordName: json['recordName'] as String,
-      date: json['date'] as String,
+      date: DateTime.parse(json['date'] as String),
       observation: json['observation'] as String,
-      workTime: json['workTime'] as String?,
-      isDelete: json['isDelete'] as bool,
-      createdAt: json['createdAt'] as String,
-      createdBy: json['createdBy'] as String,
-      deletedAt: json['deletedAt'] as String?,
-      deletedBy: json['deletedBy'] as String?,
+      workTime: json['workTime'] as String,
+      cervicalDilationResponse:
+          (json['cervicalDilationResponse'] as List<dynamic>?)
+              ?.map((e) =>
+                  CervicalDilationResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      medicalSurveillanceTableResponse:
+          (json['medicalSurveillanceTableResponse'] as List<dynamic>?)
+              ?.map((e) => MedicalSurveillanceTableResponse.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+      presentationPositionVarietyEntityResponse:
+          (json['presentationPositionVarietyEntityResponse'] as List<dynamic>?)
+              ?.map((e) => PresentationPositionVarietyEntityResponse.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+      fetalHeartRateResponse: (json['fetalHeartRateResponse'] as List<dynamic>?)
+          ?.map(
+              (e) => FetalHeartRateResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      contractionFrequenceResponse: (json['contractionFrequenceResponse']
+              as List<dynamic>?)
+          ?.map((e) =>
+              ContractionFrequencyResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      partographStateResponse: json['partographStateResponse'] == null
+          ? null
+          : PartographStateResponse.fromJson(
+              json['partographStateResponse'] as Map<String, dynamic>),
+      alertCurvesResponse: json['alertCurvesResponse'] == null
+          ? null
+          : AlertCurvesResponse.fromJson(
+              json['alertCurvesResponse'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PartographResponseImplToJson(
@@ -28,12 +55,24 @@ Map<String, dynamic> _$$PartographResponseImplToJson(
       'partographId': instance.partographId,
       'name': instance.name,
       'recordName': instance.recordName,
-      'date': instance.date,
+      'date': instance.date.toIso8601String(),
       'observation': instance.observation,
       'workTime': instance.workTime,
-      'isDelete': instance.isDelete,
-      'createdAt': instance.createdAt,
-      'createdBy': instance.createdBy,
-      'deletedAt': instance.deletedAt,
-      'deletedBy': instance.deletedBy,
+      'cervicalDilationResponse':
+          instance.cervicalDilationResponse?.map((e) => e.toJson()).toList(),
+      'medicalSurveillanceTableResponse': instance
+          .medicalSurveillanceTableResponse
+          ?.map((e) => e.toJson())
+          .toList(),
+      'presentationPositionVarietyEntityResponse': instance
+          .presentationPositionVarietyEntityResponse
+          ?.map((e) => e.toJson())
+          .toList(),
+      'fetalHeartRateResponse':
+          instance.fetalHeartRateResponse?.map((e) => e.toJson()).toList(),
+      'contractionFrequenceResponse': instance.contractionFrequenceResponse
+          ?.map((e) => e.toJson())
+          .toList(),
+      'partographStateResponse': instance.partographStateResponse?.toJson(),
+      'alertCurvesResponse': instance.alertCurvesResponse?.toJson(),
     };

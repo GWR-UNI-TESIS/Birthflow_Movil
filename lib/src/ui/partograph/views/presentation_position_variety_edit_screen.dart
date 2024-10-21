@@ -42,7 +42,7 @@ class PresentationPositionVarietyEditState
   @override
   Widget build(BuildContext context) {
     timeInput.text = DateFormat('HH:mm:ss').format(today);
-    HodgePlanePosition _hodgePlanePosition;
+    HodgePlanePosition hodgePlanePosition;
 
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +61,7 @@ class PresentationPositionVarietyEditState
                     labelText: 'Posicion',
                     enumValues: HodgePlanePosition.values,
                     onValueChanged: (HodgePlanePosition position) {
-                      _hodgePlanePosition = position;
+                      hodgePlanePosition = position;
                     },
                   ),
                   DropdownButtonWidget<Position>(

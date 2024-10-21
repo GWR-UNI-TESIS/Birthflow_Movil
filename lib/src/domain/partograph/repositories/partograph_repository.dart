@@ -1,10 +1,11 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 
 abstract class PartographRepository {
-  Future<List<Partograph>?> getPartograph({required String userId});
+  Future<List<PartographList>?> getPartographs({required String userId});
 
   Future<Partograph?> createPartograph({
     required String partogramaId,

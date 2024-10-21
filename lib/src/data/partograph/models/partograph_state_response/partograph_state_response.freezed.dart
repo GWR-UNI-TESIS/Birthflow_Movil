@@ -1,0 +1,266 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'partograph_state_response.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+PartographStateResponse _$PartographStateResponseFromJson(
+    Map<String, dynamic> json) {
+  return _PartographStateResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PartographStateResponse {
+  String? get id => throw _privateConstructorUsedError;
+  String get partographId => throw _privateConstructorUsedError;
+  bool get isAchived => throw _privateConstructorUsedError;
+  bool get set => throw _privateConstructorUsedError;
+  bool get silenced => throw _privateConstructorUsedError;
+  bool get favorite => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PartographStateResponseCopyWith<PartographStateResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PartographStateResponseCopyWith<$Res> {
+  factory $PartographStateResponseCopyWith(PartographStateResponse value,
+          $Res Function(PartographStateResponse) then) =
+      _$PartographStateResponseCopyWithImpl<$Res, PartographStateResponse>;
+  @useResult
+  $Res call(
+      {String? id,
+      String partographId,
+      bool isAchived,
+      bool set,
+      bool silenced,
+      bool favorite});
+}
+
+/// @nodoc
+class _$PartographStateResponseCopyWithImpl<$Res,
+        $Val extends PartographStateResponse>
+    implements $PartographStateResponseCopyWith<$Res> {
+  _$PartographStateResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? partographId = null,
+    Object? isAchived = null,
+    Object? set = null,
+    Object? silenced = null,
+    Object? favorite = null,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAchived: null == isAchived
+          ? _value.isAchived
+          : isAchived // ignore: cast_nullable_to_non_nullable
+              as bool,
+      set: null == set
+          ? _value.set
+          : set // ignore: cast_nullable_to_non_nullable
+              as bool,
+      silenced: null == silenced
+          ? _value.silenced
+          : silenced // ignore: cast_nullable_to_non_nullable
+              as bool,
+      favorite: null == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PartographStateResponseImplCopyWith<$Res>
+    implements $PartographStateResponseCopyWith<$Res> {
+  factory _$$PartographStateResponseImplCopyWith(
+          _$PartographStateResponseImpl value,
+          $Res Function(_$PartographStateResponseImpl) then) =
+      __$$PartographStateResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? id,
+      String partographId,
+      bool isAchived,
+      bool set,
+      bool silenced,
+      bool favorite});
+}
+
+/// @nodoc
+class __$$PartographStateResponseImplCopyWithImpl<$Res>
+    extends _$PartographStateResponseCopyWithImpl<$Res,
+        _$PartographStateResponseImpl>
+    implements _$$PartographStateResponseImplCopyWith<$Res> {
+  __$$PartographStateResponseImplCopyWithImpl(
+      _$PartographStateResponseImpl _value,
+      $Res Function(_$PartographStateResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? partographId = null,
+    Object? isAchived = null,
+    Object? set = null,
+    Object? silenced = null,
+    Object? favorite = null,
+  }) {
+    return _then(_$PartographStateResponseImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAchived: null == isAchived
+          ? _value.isAchived
+          : isAchived // ignore: cast_nullable_to_non_nullable
+              as bool,
+      set: null == set
+          ? _value.set
+          : set // ignore: cast_nullable_to_non_nullable
+              as bool,
+      silenced: null == silenced
+          ? _value.silenced
+          : silenced // ignore: cast_nullable_to_non_nullable
+              as bool,
+      favorite: null == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PartographStateResponseImpl implements _PartographStateResponse {
+  const _$PartographStateResponseImpl(
+      {this.id,
+      required this.partographId,
+      required this.isAchived,
+      required this.set,
+      required this.silenced,
+      required this.favorite});
+
+  factory _$PartographStateResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PartographStateResponseImplFromJson(json);
+
+  @override
+  final String? id;
+  @override
+  final String partographId;
+  @override
+  final bool isAchived;
+  @override
+  final bool set;
+  @override
+  final bool silenced;
+  @override
+  final bool favorite;
+
+  @override
+  String toString() {
+    return 'PartographStateResponse(id: $id, partographId: $partographId, isAchived: $isAchived, set: $set, silenced: $silenced, favorite: $favorite)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PartographStateResponseImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
+            (identical(other.isAchived, isAchived) ||
+                other.isAchived == isAchived) &&
+            (identical(other.set, set) || other.set == set) &&
+            (identical(other.silenced, silenced) ||
+                other.silenced == silenced) &&
+            (identical(other.favorite, favorite) ||
+                other.favorite == favorite));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, partographId, isAchived, set, silenced, favorite);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PartographStateResponseImplCopyWith<_$PartographStateResponseImpl>
+      get copyWith => __$$PartographStateResponseImplCopyWithImpl<
+          _$PartographStateResponseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PartographStateResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PartographStateResponse implements PartographStateResponse {
+  const factory _PartographStateResponse(
+      {final String? id,
+      required final String partographId,
+      required final bool isAchived,
+      required final bool set,
+      required final bool silenced,
+      required final bool favorite}) = _$PartographStateResponseImpl;
+
+  factory _PartographStateResponse.fromJson(Map<String, dynamic> json) =
+      _$PartographStateResponseImpl.fromJson;
+
+  @override
+  String? get id;
+  @override
+  String get partographId;
+  @override
+  bool get isAchived;
+  @override
+  bool get set;
+  @override
+  bool get silenced;
+  @override
+  bool get favorite;
+  @override
+  @JsonKey(ignore: true)
+  _$$PartographStateResponseImplCopyWith<_$PartographStateResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

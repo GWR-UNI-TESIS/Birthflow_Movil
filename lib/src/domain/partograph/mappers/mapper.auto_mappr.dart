@@ -1,0 +1,611 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// AutoMapprGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint, unnecessary_cast, unused_local_variable
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
+
+import '../../../data/partograph/models/alert_curve_response/alert_curve_response.dart'
+    as _i18;
+import '../../../data/partograph/models/alert_curve_response/alert_curves_response.dart'
+    as _i16;
+import '../../../data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart'
+    as _i4;
+import '../../../data/partograph/models/contraction_frequency_response/contraction_frequency_response.dart'
+    as _i12;
+import '../../../data/partograph/models/fetal_heart_rate_response/fetal_heart_rate_response.dart'
+    as _i10;
+import '../../../data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart'
+    as _i6;
+import '../../../data/partograph/models/partograph_response/partograph_response.dart'
+    as _i2;
+import '../../../data/partograph/models/partograph_state_response/partograph_state_response.dart'
+    as _i14;
+import '../../../data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart'
+    as _i8;
+import '../entities/alert_curves.dart' as _i17;
+import '../entities/cervical_dilation.dart' as _i5;
+import '../entities/contraction_frequency.dart' as _i13;
+import '../entities/fetal_heart_rate.dart' as _i11;
+import '../entities/medical_surveillance_table.dart' as _i7;
+import '../entities/partograph.dart' as _i3;
+import '../entities/partograph_state.dart' as _i15;
+import '../entities/presentation_position_variety.dart' as _i9;
+
+/// {@template package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+/// Available mappings:
+/// - `PartographResponse` → `Partograph`.
+/// - `CervicalDilationResponse` → `CervicalDilation`.
+/// - `MedicalSurveillanceTableResponse` → `MedicalSurveillanceTable`.
+/// - `PresentationPositionVarietyEntityResponse` → `PresentationPositionVariety`.
+/// - `FetalHeartRateResponse` → `FetalHeartRate`.
+/// - `ContractionFrequencyResponse` → `ContractionFrequency`.
+/// - `PartographStateResponse` → `PartographState`.
+/// - `AlertCurvesResponse` → `AlertCurves`.
+/// - `AlertCurveResponse` → `AlertCurve`.
+/// {@endtemplate}
+class $Mappr implements _i1.AutoMapprInterface {
+  const $Mappr();
+
+  Type _typeOf<T>() => T;
+
+  List<_i1.AutoMapprInterface> get _delegates => const [];
+
+  /// {@macro AutoMapprInterface:canConvert}
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  bool canConvert<SOURCE, TARGET>({bool recursive = true}) {
+    final sourceTypeOf = _typeOf<SOURCE>();
+    final targetTypeOf = _typeOf<TARGET>();
+    if ((sourceTypeOf == _typeOf<_i2.PartographResponse>() ||
+            sourceTypeOf == _typeOf<_i2.PartographResponse?>()) &&
+        (targetTypeOf == _typeOf<_i3.Partograph>() ||
+            targetTypeOf == _typeOf<_i3.Partograph?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i4.CervicalDilationResponse>() ||
+            sourceTypeOf == _typeOf<_i4.CervicalDilationResponse?>()) &&
+        (targetTypeOf == _typeOf<_i5.CervicalDilation>() ||
+            targetTypeOf == _typeOf<_i5.CervicalDilation?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i6.MedicalSurveillanceTableResponse>() ||
+            sourceTypeOf == _typeOf<_i6.MedicalSurveillanceTableResponse?>()) &&
+        (targetTypeOf == _typeOf<_i7.MedicalSurveillanceTable>() ||
+            targetTypeOf == _typeOf<_i7.MedicalSurveillanceTable?>())) {
+      return true;
+    }
+    if ((sourceTypeOf ==
+                _typeOf<_i8.PresentationPositionVarietyEntityResponse>() ||
+            sourceTypeOf ==
+                _typeOf<_i8.PresentationPositionVarietyEntityResponse?>()) &&
+        (targetTypeOf == _typeOf<_i9.PresentationPositionVariety>() ||
+            targetTypeOf == _typeOf<_i9.PresentationPositionVariety?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i10.FetalHeartRateResponse>() ||
+            sourceTypeOf == _typeOf<_i10.FetalHeartRateResponse?>()) &&
+        (targetTypeOf == _typeOf<_i11.FetalHeartRate>() ||
+            targetTypeOf == _typeOf<_i11.FetalHeartRate?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i12.ContractionFrequencyResponse>() ||
+            sourceTypeOf == _typeOf<_i12.ContractionFrequencyResponse?>()) &&
+        (targetTypeOf == _typeOf<_i13.ContractionFrequency>() ||
+            targetTypeOf == _typeOf<_i13.ContractionFrequency?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i14.PartographStateResponse>() ||
+            sourceTypeOf == _typeOf<_i14.PartographStateResponse?>()) &&
+        (targetTypeOf == _typeOf<_i15.PartographState>() ||
+            targetTypeOf == _typeOf<_i15.PartographState?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i16.AlertCurvesResponse>() ||
+            sourceTypeOf == _typeOf<_i16.AlertCurvesResponse?>()) &&
+        (targetTypeOf == _typeOf<_i17.AlertCurves>() ||
+            targetTypeOf == _typeOf<_i17.AlertCurves?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i18.AlertCurveResponse>() ||
+            sourceTypeOf == _typeOf<_i18.AlertCurveResponse?>()) &&
+        (targetTypeOf == _typeOf<_i17.AlertCurve>() ||
+            targetTypeOf == _typeOf<_i17.AlertCurve?>())) {
+      return true;
+    }
+    if (recursive) {
+      for (final mappr in _delegates) {
+        if (mappr.canConvert<SOURCE, TARGET>()) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /// {@macro AutoMapprInterface:convert}
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  TARGET convert<SOURCE, TARGET>(SOURCE? model) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return _convert(model)!;
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.convert(model)!;
+      }
+    }
+
+    throw Exception('No ${_typeOf<SOURCE>()} -> ${_typeOf<TARGET>()} mapping.');
+  }
+
+  /// {@macro AutoMapprInterface:tryConvert}
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  TARGET? tryConvert<SOURCE, TARGET>(
+    SOURCE? model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return _safeConvert(
+        model,
+        onMappingError: onMappingError,
+      );
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.tryConvert(
+          model,
+          onMappingError: onMappingError,
+        );
+      }
+    }
+
+    return null;
+  }
+
+  /// {@macro AutoMapprInterface:convertIterable}
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  Iterable<TARGET> convertIterable<SOURCE, TARGET>(Iterable<SOURCE?> model) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return model.map<TARGET>((item) => _convert(item)!);
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.convertIterable(model);
+      }
+    }
+
+    throw Exception('No ${_typeOf<SOURCE>()} -> ${_typeOf<TARGET>()} mapping.');
+  }
+
+  /// For iterable items, converts from SOURCE to TARGET if such mapping is configured, into Iterable.
+  ///
+  /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
+  ///
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  Iterable<TARGET?> tryConvertIterable<SOURCE, TARGET>(
+    Iterable<SOURCE?> model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return model.map<TARGET?>(
+          (item) => _safeConvert(item, onMappingError: onMappingError));
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.tryConvertIterable(
+          model,
+          onMappingError: onMappingError,
+        );
+      }
+    }
+
+    throw Exception('No ${_typeOf<SOURCE>()} -> ${_typeOf<TARGET>()} mapping.');
+  }
+
+  /// {@macro AutoMapprInterface:convertList}
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  List<TARGET> convertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return convertIterable<SOURCE, TARGET>(model).toList();
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.convertList(model);
+      }
+    }
+
+    throw Exception('No ${_typeOf<SOURCE>()} -> ${_typeOf<TARGET>()} mapping.');
+  }
+
+  /// For iterable items, converts from SOURCE to TARGET if such mapping is configured, into List.
+  ///
+  /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
+  ///
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  List<TARGET?> tryConvertList<SOURCE, TARGET>(
+    Iterable<SOURCE?> model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return tryConvertIterable<SOURCE, TARGET>(
+        model,
+        onMappingError: onMappingError,
+      ).toList();
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.tryConvertList(
+          model,
+          onMappingError: onMappingError,
+        );
+      }
+    }
+
+    throw Exception('No ${_typeOf<SOURCE>()} -> ${_typeOf<TARGET>()} mapping.');
+  }
+
+  /// {@macro AutoMapprInterface:convertSet}
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  Set<TARGET> convertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return convertIterable<SOURCE, TARGET>(model).toSet();
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.convertSet(model);
+      }
+    }
+
+    throw Exception('No ${_typeOf<SOURCE>()} -> ${_typeOf<TARGET>()} mapping.');
+  }
+
+  /// For iterable items, converts from SOURCE to TARGET if such mapping is configured, into Set.
+  ///
+  /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
+  ///
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  Set<TARGET?> tryConvertSet<SOURCE, TARGET>(
+    Iterable<SOURCE?> model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
+    if (canConvert<SOURCE, TARGET>(recursive: false)) {
+      return tryConvertIterable<SOURCE, TARGET>(
+        model,
+        onMappingError: onMappingError,
+      ).toSet();
+    }
+    for (final mappr in _delegates) {
+      if (mappr.canConvert<SOURCE, TARGET>()) {
+        return mappr.tryConvertSet(
+          model,
+          onMappingError: onMappingError,
+        );
+      }
+    }
+
+    throw Exception('No ${_typeOf<SOURCE>()} -> ${_typeOf<TARGET>()} mapping.');
+  }
+
+  TARGET? _convert<SOURCE, TARGET>(
+    SOURCE? model, {
+    bool canReturnNull = false,
+  }) {
+    final sourceTypeOf = _typeOf<SOURCE>();
+    final targetTypeOf = _typeOf<TARGET>();
+    if ((sourceTypeOf == _typeOf<_i2.PartographResponse>() ||
+            sourceTypeOf == _typeOf<_i2.PartographResponse?>()) &&
+        (targetTypeOf == _typeOf<_i3.Partograph>() ||
+            targetTypeOf == _typeOf<_i3.Partograph?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i2$PartographResponse_To__i3$Partograph(
+          (model as _i2.PartographResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i4.CervicalDilationResponse>() ||
+            sourceTypeOf == _typeOf<_i4.CervicalDilationResponse?>()) &&
+        (targetTypeOf == _typeOf<_i5.CervicalDilation>() ||
+            targetTypeOf == _typeOf<_i5.CervicalDilation?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i4$CervicalDilationResponse_To__i5$CervicalDilation(
+          (model as _i4.CervicalDilationResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i6.MedicalSurveillanceTableResponse>() ||
+            sourceTypeOf == _typeOf<_i6.MedicalSurveillanceTableResponse?>()) &&
+        (targetTypeOf == _typeOf<_i7.MedicalSurveillanceTable>() ||
+            targetTypeOf == _typeOf<_i7.MedicalSurveillanceTable?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i6$MedicalSurveillanceTableResponse_To__i7$MedicalSurveillanceTable(
+          (model as _i6.MedicalSurveillanceTableResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf ==
+                _typeOf<_i8.PresentationPositionVarietyEntityResponse>() ||
+            sourceTypeOf ==
+                _typeOf<_i8.PresentationPositionVarietyEntityResponse?>()) &&
+        (targetTypeOf == _typeOf<_i9.PresentationPositionVariety>() ||
+            targetTypeOf == _typeOf<_i9.PresentationPositionVariety?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i8$PresentationPositionVarietyEntityResponse_To__i9$PresentationPositionVariety(
+          (model as _i8.PresentationPositionVarietyEntityResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i10.FetalHeartRateResponse>() ||
+            sourceTypeOf == _typeOf<_i10.FetalHeartRateResponse?>()) &&
+        (targetTypeOf == _typeOf<_i11.FetalHeartRate>() ||
+            targetTypeOf == _typeOf<_i11.FetalHeartRate?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i10$FetalHeartRateResponse_To__i11$FetalHeartRate(
+          (model as _i10.FetalHeartRateResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i12.ContractionFrequencyResponse>() ||
+            sourceTypeOf == _typeOf<_i12.ContractionFrequencyResponse?>()) &&
+        (targetTypeOf == _typeOf<_i13.ContractionFrequency>() ||
+            targetTypeOf == _typeOf<_i13.ContractionFrequency?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i12$ContractionFrequencyResponse_To__i13$ContractionFrequency(
+          (model as _i12.ContractionFrequencyResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i14.PartographStateResponse>() ||
+            sourceTypeOf == _typeOf<_i14.PartographStateResponse?>()) &&
+        (targetTypeOf == _typeOf<_i15.PartographState>() ||
+            targetTypeOf == _typeOf<_i15.PartographState?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i14$PartographStateResponse_To__i15$PartographState(
+          (model as _i14.PartographStateResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i16.AlertCurvesResponse>() ||
+            sourceTypeOf == _typeOf<_i16.AlertCurvesResponse?>()) &&
+        (targetTypeOf == _typeOf<_i17.AlertCurves>() ||
+            targetTypeOf == _typeOf<_i17.AlertCurves?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i16$AlertCurvesResponse_To__i17$AlertCurves(
+          (model as _i16.AlertCurvesResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i18.AlertCurveResponse>() ||
+            sourceTypeOf == _typeOf<_i18.AlertCurveResponse?>()) &&
+        (targetTypeOf == _typeOf<_i17.AlertCurve>() ||
+            targetTypeOf == _typeOf<_i17.AlertCurve?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i18$AlertCurveResponse_To__i17$AlertCurve(
+          (model as _i18.AlertCurveResponse?)) as TARGET);
+    }
+    throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
+  }
+
+  TARGET? _safeConvert<SOURCE, TARGET>(
+    SOURCE? model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
+    if (!useSafeMapping<SOURCE, TARGET>()) {
+      return _convert(
+        model,
+        canReturnNull: true,
+      );
+    }
+    try {
+      return _convert(
+        model,
+        canReturnNull: true,
+      );
+    } catch (e, s) {
+      onMappingError?.call(e, s, model);
+      return null;
+    }
+  }
+
+  /// {@macro AutoMapprInterface:useSafeMapping}
+  /// {@macro package:birthflow_movil/src/domain/partograph/mappers/mapper.dart}
+  @override
+  bool useSafeMapping<SOURCE, TARGET>() {
+    return false;
+  }
+
+  _i3.Partograph _map__i2$PartographResponse_To__i3$Partograph(
+      _i2.PartographResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping PartographResponse → Partograph failed because PartographResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<PartographResponse, Partograph> to handle null values during mapping.');
+    }
+    return _i3.Partograph(
+      partographId: model.partographId,
+      name: model.name,
+      recordName: model.recordName,
+      date: model.date,
+      observation: model.observation,
+      workTime: model.workTime,
+    );
+  }
+
+  _i5.CervicalDilation
+      _map__i4$CervicalDilationResponse_To__i5$CervicalDilation(
+          _i4.CervicalDilationResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping CervicalDilationResponse → CervicalDilation failed because CervicalDilationResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<CervicalDilationResponse, CervicalDilation> to handle null values during mapping.');
+    }
+    return _i5.CervicalDilation(
+      id: model.id,
+      partographId: model.partographId,
+      value: model.value,
+      hour: model.hour,
+      remOrRam: model.remOrRam,
+      isDelete: model.isDelete,
+      createAt: model.createAt,
+      updateAt: model.updateAt,
+      deleteAt: model.deleteAt,
+      createdBy: model.createdBy,
+      updateBy: model.updateBy,
+      deleteBy: model.deleteBy,
+    );
+  }
+
+  _i7.MedicalSurveillanceTable
+      _map__i6$MedicalSurveillanceTableResponse_To__i7$MedicalSurveillanceTable(
+          _i6.MedicalSurveillanceTableResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping MedicalSurveillanceTableResponse → MedicalSurveillanceTable failed because MedicalSurveillanceTableResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<MedicalSurveillanceTableResponse, MedicalSurveillanceTable> to handle null values during mapping.');
+    }
+    return _i7.MedicalSurveillanceTable(
+      id: model.id,
+      partographId: model.partographId,
+      letter: model.letter,
+      maternalPosition: model.maternalPosition,
+      arterialPressure: model.arterialPressure,
+      maternalPulse: model.maternalPulse,
+      fetalHeartRate: model.fetalHeartRate,
+      contractionsDuration: model.contractionsDuration,
+      frequencyContractions: model.frequencyContractions,
+      pain: model.pain,
+      time: model.time,
+    );
+  }
+
+  _i9.PresentationPositionVariety
+      _map__i8$PresentationPositionVarietyEntityResponse_To__i9$PresentationPositionVariety(
+          _i8.PresentationPositionVarietyEntityResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping PresentationPositionVarietyEntityResponse → PresentationPositionVariety failed because PresentationPositionVarietyEntityResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<PresentationPositionVarietyEntityResponse, PresentationPositionVariety> to handle null values during mapping.');
+    }
+    return _i9.PresentationPositionVariety(
+      id: model.id,
+      partographId: model.partographId,
+      hodgePlane: model.hodgePlane,
+      position: model.position,
+      time: model.time,
+    );
+  }
+
+  _i11.FetalHeartRate _map__i10$FetalHeartRateResponse_To__i11$FetalHeartRate(
+      _i10.FetalHeartRateResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping FetalHeartRateResponse → FetalHeartRate failed because FetalHeartRateResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<FetalHeartRateResponse, FetalHeartRate> to handle null values during mapping.');
+    }
+    return _i11.FetalHeartRate(
+      id: model.id,
+      partographId: model.partographId,
+      value: model.value,
+      time: model.time,
+      createAt: model.createAt,
+      updateAt: model.updateAt,
+      deleteAt: model.deleteAt,
+      createdBy: model.createdBy,
+      updateBy: model.updateBy,
+      deleteBy: model.deleteBy,
+    );
+  }
+
+  _i13.ContractionFrequency
+      _map__i12$ContractionFrequencyResponse_To__i13$ContractionFrequency(
+          _i12.ContractionFrequencyResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping ContractionFrequencyResponse → ContractionFrequency failed because ContractionFrequencyResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<ContractionFrequencyResponse, ContractionFrequency> to handle null values during mapping.');
+    }
+    return _i13.ContractionFrequency(
+      id: model.id,
+      partographId: model.partographId,
+      value: model.value,
+      time: model.time,
+      createAt: model.createAt,
+      updateAt: model.updateAt,
+      deleteAt: model.deleteAt,
+      createdBy: model.createdBy,
+      updateBy: model.updateBy,
+      deleteBy: model.deleteBy,
+    );
+  }
+
+  _i15.PartographState
+      _map__i14$PartographStateResponse_To__i15$PartographState(
+          _i14.PartographStateResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping PartographStateResponse → PartographState failed because PartographStateResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<PartographStateResponse, PartographState> to handle null values during mapping.');
+    }
+    return _i15.PartographState(
+      id: model.id,
+      partographId: model.partographId,
+      isAchived: model.isAchived,
+      set: model.set,
+      silenced: model.silenced,
+      favorite: model.favorite,
+    );
+  }
+
+  _i17.AlertCurves _map__i16$AlertCurvesResponse_To__i17$AlertCurves(
+      _i16.AlertCurvesResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping AlertCurvesResponse → AlertCurves failed because AlertCurvesResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<AlertCurvesResponse, AlertCurves> to handle null values during mapping.');
+    }
+    return _i17.AlertCurves(
+      alertCurve: null,
+      newAlertCurve: null,
+    );
+  }
+
+  _i17.AlertCurve _map__i18$AlertCurveResponse_To__i17$AlertCurve(
+      _i18.AlertCurveResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping AlertCurveResponse → AlertCurve failed because AlertCurveResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<AlertCurveResponse, AlertCurve> to handle null values during mapping.');
+    }
+    return _i17.AlertCurve(
+      cervicalDilation: model.cervicalDilation,
+      time: model.time,
+    );
+  }
+}

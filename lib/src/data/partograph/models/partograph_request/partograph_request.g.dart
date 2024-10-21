@@ -15,7 +15,6 @@ _$PartographRequestImpl _$$PartographRequestImplFromJson(
       date: json['date'] as String,
       observation: json['observation'] as String,
       workTime: json['workTime'] as String,
-      createdBy: json['createdBy'] as String,
     );
 
 Map<String, dynamic> _$$PartographRequestImplToJson(
@@ -27,5 +26,4 @@ Map<String, dynamic> _$$PartographRequestImplToJson(
       'date': instance.date,
       'observation': instance.observation,
       'workTime': instance.workTime,
-      'createdBy': instance.createdBy,
     };

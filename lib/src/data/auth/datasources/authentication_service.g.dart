@@ -6,17 +6,20 @@ part of 'authentication_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _AuthenticationService implements AuthenticationService {
   _AuthenticationService(
     this._dio, {
     this.baseUrl,
+    this.errorLogger,
   });
 
   final Dio _dio;
 
   String? baseUrl;
+
+  final ParseErrorLogger? errorLogger;
 
   @override
   Future<ApiResponse<AuthenticationResponse>> authenticate(
@@ -25,7 +28,7 @@ class _AuthenticationService implements AuthenticationService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<ApiResponse<AuthenticationResponse>>(Options(
       method: 'POST',
       headers: _headers,
@@ -41,12 +44,19 @@ class _AuthenticationService implements AuthenticationService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = ApiResponse<AuthenticationResponse>.fromJson(
-      _result.data!,
-      (json) => AuthenticationResponse.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<AuthenticationResponse> _value;
+    try {
+      _value = ApiResponse<AuthenticationResponse>.fromJson(
+        _result.data!,
+        (json) => AuthenticationResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -56,7 +66,7 @@ class _AuthenticationService implements AuthenticationService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<ApiResponse<AuthenticationResponse>>(Options(
       method: 'POST',
       headers: _headers,
@@ -72,12 +82,19 @@ class _AuthenticationService implements AuthenticationService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = ApiResponse<AuthenticationResponse>.fromJson(
-      _result.data!,
-      (json) => AuthenticationResponse.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<AuthenticationResponse> _value;
+    try {
+      _value = ApiResponse<AuthenticationResponse>.fromJson(
+        _result.data!,
+        (json) => AuthenticationResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -87,28 +104,34 @@ class _AuthenticationService implements AuthenticationService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<UserAuthentication>>(Options(
+    final _options = _setStreamType<ApiResponse<UserAuthentication>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/api/auth/create/user',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ApiResponse<UserAuthentication>.fromJson(
-      _result.data!,
-      (json) => UserAuthentication.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
+        .compose(
+          _dio.options,
+          '/api/auth/create/user',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<UserAuthentication> _value;
+    try {
+      _value = ApiResponse<UserAuthentication>.fromJson(
+        _result.data!,
+        (json) => UserAuthentication.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -118,7 +141,7 @@ class _AuthenticationService implements AuthenticationService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<ApiResponse<AuthenticationResponse>>(Options(
       method: 'POST',
       headers: _headers,
@@ -134,12 +157,19 @@ class _AuthenticationService implements AuthenticationService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = ApiResponse<AuthenticationResponse>.fromJson(
-      _result.data!,
-      (json) => AuthenticationResponse.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<AuthenticationResponse> _value;
+    try {
+      _value = ApiResponse<AuthenticationResponse>.fromJson(
+        _result.data!,
+        (json) => AuthenticationResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

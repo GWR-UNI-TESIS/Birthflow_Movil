@@ -15,6 +15,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -77,6 +78,12 @@ locator.registerSingleton<LogoutUsecase>(
   // Registra el PartographGetUseCase como singleton en GetIt, inyectando PartographRepository
   locator.registerSingleton<PartographGetUseCase>(
     PartographGetUseCase(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<PartographListGetUseCase>(
+    PartographListGetUsecaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );

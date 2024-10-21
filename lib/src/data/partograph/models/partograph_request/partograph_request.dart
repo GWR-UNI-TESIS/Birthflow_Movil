@@ -12,7 +12,6 @@ class PartographRequest with _$PartographRequest {
     required String date,
     required String observation,
     required String workTime,
-    required String createdBy,
   }) = _PartographRequest;
 
   factory PartographRequest.fromJson(Map<String, dynamic> json) =>

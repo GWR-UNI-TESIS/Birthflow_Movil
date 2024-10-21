@@ -26,7 +26,6 @@ mixin _$PartographRequest {
   String get date => throw _privateConstructorUsedError;
   String get observation => throw _privateConstructorUsedError;
   String get workTime => throw _privateConstructorUsedError;
-  String get createdBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,8 +45,7 @@ abstract class $PartographRequestCopyWith<$Res> {
       String recordName,
       String date,
       String observation,
-      String workTime,
-      String createdBy});
+      String workTime});
 }
 
 /// @nodoc
@@ -69,7 +67,6 @@ class _$PartographRequestCopyWithImpl<$Res, $Val extends PartographRequest>
     Object? date = null,
     Object? observation = null,
     Object? workTime = null,
-    Object? createdBy = null,
   }) {
     return _then(_value.copyWith(
       partographId: freezed == partographId
@@ -96,10 +93,6 @@ class _$PartographRequestCopyWithImpl<$Res, $Val extends PartographRequest>
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -118,8 +111,7 @@ abstract class _$$PartographRequestImplCopyWith<$Res>
       String recordName,
       String date,
       String observation,
-      String workTime,
-      String createdBy});
+      String workTime});
 }
 
 /// @nodoc
@@ -139,7 +131,6 @@ class __$$PartographRequestImplCopyWithImpl<$Res>
     Object? date = null,
     Object? observation = null,
     Object? workTime = null,
-    Object? createdBy = null,
   }) {
     return _then(_$PartographRequestImpl(
       partographId: freezed == partographId
@@ -166,10 +157,6 @@ class __$$PartographRequestImplCopyWithImpl<$Res>
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -183,8 +170,7 @@ class _$PartographRequestImpl implements _PartographRequest {
       required this.recordName,
       required this.date,
       required this.observation,
-      required this.workTime,
-      required this.createdBy});
+      required this.workTime});
 
   factory _$PartographRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartographRequestImplFromJson(json);
@@ -201,12 +187,10 @@ class _$PartographRequestImpl implements _PartographRequest {
   final String observation;
   @override
   final String workTime;
-  @override
-  final String createdBy;
 
   @override
   String toString() {
-    return 'PartographRequest(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime, createdBy: $createdBy)';
+    return 'PartographRequest(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime)';
   }
 
   @override
@@ -223,15 +207,13 @@ class _$PartographRequestImpl implements _PartographRequest {
             (identical(other.observation, observation) ||
                 other.observation == observation) &&
             (identical(other.workTime, workTime) ||
-                other.workTime == workTime) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy));
+                other.workTime == workTime));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, partographId, name, recordName,
-      date, observation, workTime, createdBy);
+  int get hashCode => Object.hash(
+      runtimeType, partographId, name, recordName, date, observation, workTime);
 
   @JsonKey(ignore: true)
   @override
@@ -255,8 +237,7 @@ abstract class _PartographRequest implements PartographRequest {
       required final String recordName,
       required final String date,
       required final String observation,
-      required final String workTime,
-      required final String createdBy}) = _$PartographRequestImpl;
+      required final String workTime}) = _$PartographRequestImpl;
 
   factory _PartographRequest.fromJson(Map<String, dynamic> json) =
       _$PartographRequestImpl.fromJson;
@@ -273,8 +254,6 @@ abstract class _PartographRequest implements PartographRequest {
   String get observation;
   @override
   String get workTime;
-  @override
-  String get createdBy;
   @override
   @JsonKey(ignore: true)
   _$$PartographRequestImplCopyWith<_$PartographRequestImpl> get copyWith =>

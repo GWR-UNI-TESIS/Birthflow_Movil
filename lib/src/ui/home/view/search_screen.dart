@@ -79,7 +79,7 @@ class _SearchViewState extends State<SearchScreen> {
                             partographId: item.partographId!,
                             title: item.name,
                             subtitle:
-                                '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}',
+                                '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}', lastUpdate: '', set: false, silenced: false,
                           );
                       
                       },

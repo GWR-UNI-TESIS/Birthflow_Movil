@@ -113,11 +113,16 @@ class HomeScreen extends StatelessWidget {
                                 );
                               } else {
                                 final item = data[index - 1];
+                                final lastModification = (item.updateAt == null)? item.createdAt : item.updateAt;
                                 return ListItemWidget(
                                   partographId: item.partographId!,
                                   title: item.name,
                                   subtitle:
                                       '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}',
+                                  lastUpdate: DateFormat('yyyy-MM-dd')
+                                      .format(lastModification!),
+                                  set: item.set,
+                                  silenced: item.silenced,
                                 );
                               }
                             },
@@ -142,8 +147,7 @@ class HomeScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           tooltip: 'Nuevo',
           onPressed: () async {
-            final String? value =
-                await context.push(AppPaths.home.create.path);
+            final String? value = await context.push(AppPaths.home.create.path);
 
             if (value != null) {
               context

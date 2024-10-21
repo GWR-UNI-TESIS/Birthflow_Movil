@@ -6,7 +6,7 @@ import 'package:birthflow_movil/src/data/auth/models/authentication_user/authent
 import 'package:birthflow_movil/src/data/auth/models/token_request/token_request.dart';
 import 'package:birthflow_movil/src/data/auth/models/user_register_request/user_register_request.dart';
 import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
 part 'authentication_service.g.dart';
 

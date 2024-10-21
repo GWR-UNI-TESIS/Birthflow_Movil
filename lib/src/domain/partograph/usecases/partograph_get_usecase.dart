@@ -10,6 +10,8 @@ class PartographGetUseCase implements UseCase<List<Partograph>, String> {
 
   @override
   Future<List<Partograph>?> execute([String? id]) async {
-    return await _partographRepository.getPartograph(userId: id!);
+    return null;
+  
+    //return await _partographRepository.getPartograph(userId: id!);
   }
 }

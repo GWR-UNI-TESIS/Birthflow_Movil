@@ -4,22 +4,13 @@ class Partograph {
   final String recordName;
   final DateTime date;
   final String observation;
-  final bool isDelete;
-  final DateTime createdAt;
-  final String createdBy;
-  final DateTime? deletedAt;
-  final String? deletedBy;
-
+  final String workTime;
   Partograph({
     this.partographId,
     required this.name,
     required this.recordName,
     required this.date,
     required this.observation,
-    required this.isDelete,
-    required this.createdAt,
-    required this.createdBy,
-    this.deletedAt,
-    this.deletedBy,
+    required this.workTime,
   });
 }

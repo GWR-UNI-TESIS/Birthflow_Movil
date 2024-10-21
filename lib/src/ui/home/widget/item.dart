@@ -8,12 +8,17 @@ class ListItemWidget extends StatefulWidget {
     required this.partographId,
     required this.title,
     required this.subtitle,
+    required this.lastUpdate,
+    required this.set,
+    required this.silenced,
   });
 
   final String partographId;
   final String title;
   final String subtitle;
-
+  final String lastUpdate;
+  final bool set;
+  final bool silenced;
   @override
   State<ListItemWidget> createState() => _ListItemState();
 }
@@ -24,16 +29,20 @@ class _ListItemState extends State<ListItemWidget> {
     return ListTile(
       titleAlignment: ListTileTitleAlignment.center,
       title: Text(widget.title),
-      trailing: const SizedBox(
+      trailing: SizedBox(
         width: 100,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(''),
+            Text(widget.lastUpdate),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                if (widget.set) const Icon(Icons.push_pin),
+                if (widget.silenced) const Icon(Icons.notifications_off),
+              ],
             ),
           ],
         ),
@@ -54,6 +63,7 @@ class _ListItemState extends State<ListItemWidget> {
             child: Center(
               child: Column(
                 children: <Widget>[
+                  const Text('Estado'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -61,6 +71,22 @@ class _ListItemState extends State<ListItemWidget> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
+                        icon: const Icon(Icons.favorite),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: (widget.silenced)
+                            ? const Icon(Icons.notifications_off)
+                            : const Icon(Icons.notifications),
+                      ),
+                      IconButton(
+                        isSelected: widget.set,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        selectedIcon: const Icon(Icons.push_pin),
                         icon: const Icon(Icons.push_pin),
                       ),
                       IconButton(
