@@ -26,22 +26,19 @@ mixin _$PartographResponse {
   DateTime get date => throw _privateConstructorUsedError;
   String get observation => throw _privateConstructorUsedError;
   String get workTime => throw _privateConstructorUsedError;
-  List<CervicalDilationResponse>? get cervicalDilationResponse =>
+  List<CervicalDilationResponse>? get cervicalDilations =>
       throw _privateConstructorUsedError;
-  List<MedicalSurveillanceTableResponse>?
-      get medicalSurveillanceTableResponse =>
-          throw _privateConstructorUsedError;
+  List<MedicalSurveillanceTableResponse>? get medicalSurveillanceTable =>
+      throw _privateConstructorUsedError;
   List<PresentationPositionVarietyEntityResponse>?
-      get presentationPositionVarietyEntityResponse =>
-          throw _privateConstructorUsedError;
-  List<FetalHeartRateResponse>? get fetalHeartRateResponse =>
+      get presentationPositionVarieties => throw _privateConstructorUsedError;
+  List<FetalHeartRateResponse>? get fetalHeartRates =>
       throw _privateConstructorUsedError;
-  List<ContractionFrequencyResponse>? get contractionFrequenceResponse =>
+  List<ContractionFrequencyResponse>? get contractionFrequencies =>
       throw _privateConstructorUsedError;
-  PartographStateResponse? get partographStateResponse =>
+  PartographStateResponse? get partographState =>
       throw _privateConstructorUsedError;
-  AlertCurvesResponse? get alertCurvesResponse =>
-      throw _privateConstructorUsedError;
+  AlertCurvesResponse? get curves => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,17 +59,17 @@ abstract class $PartographResponseCopyWith<$Res> {
       DateTime date,
       String observation,
       String workTime,
-      List<CervicalDilationResponse>? cervicalDilationResponse,
-      List<MedicalSurveillanceTableResponse>? medicalSurveillanceTableResponse,
+      List<CervicalDilationResponse>? cervicalDilations,
+      List<MedicalSurveillanceTableResponse>? medicalSurveillanceTable,
       List<PresentationPositionVarietyEntityResponse>?
-          presentationPositionVarietyEntityResponse,
-      List<FetalHeartRateResponse>? fetalHeartRateResponse,
-      List<ContractionFrequencyResponse>? contractionFrequenceResponse,
-      PartographStateResponse? partographStateResponse,
-      AlertCurvesResponse? alertCurvesResponse});
+          presentationPositionVarieties,
+      List<FetalHeartRateResponse>? fetalHeartRates,
+      List<ContractionFrequencyResponse>? contractionFrequencies,
+      PartographStateResponse? partographState,
+      AlertCurvesResponse? curves});
 
-  $PartographStateResponseCopyWith<$Res>? get partographStateResponse;
-  $AlertCurvesResponseCopyWith<$Res>? get alertCurvesResponse;
+  $PartographStateResponseCopyWith<$Res>? get partographState;
+  $AlertCurvesResponseCopyWith<$Res>? get curves;
 }
 
 /// @nodoc
@@ -94,13 +91,13 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
     Object? date = null,
     Object? observation = null,
     Object? workTime = null,
-    Object? cervicalDilationResponse = freezed,
-    Object? medicalSurveillanceTableResponse = freezed,
-    Object? presentationPositionVarietyEntityResponse = freezed,
-    Object? fetalHeartRateResponse = freezed,
-    Object? contractionFrequenceResponse = freezed,
-    Object? partographStateResponse = freezed,
-    Object? alertCurvesResponse = freezed,
+    Object? cervicalDilations = freezed,
+    Object? medicalSurveillanceTable = freezed,
+    Object? presentationPositionVarieties = freezed,
+    Object? fetalHeartRates = freezed,
+    Object? contractionFrequencies = freezed,
+    Object? partographState = freezed,
+    Object? curves = freezed,
   }) {
     return _then(_value.copyWith(
       partographId: null == partographId
@@ -127,62 +124,59 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
               as String,
-      cervicalDilationResponse: freezed == cervicalDilationResponse
-          ? _value.cervicalDilationResponse
-          : cervicalDilationResponse // ignore: cast_nullable_to_non_nullable
+      cervicalDilations: freezed == cervicalDilations
+          ? _value.cervicalDilations
+          : cervicalDilations // ignore: cast_nullable_to_non_nullable
               as List<CervicalDilationResponse>?,
-      medicalSurveillanceTableResponse: freezed ==
-              medicalSurveillanceTableResponse
-          ? _value.medicalSurveillanceTableResponse
-          : medicalSurveillanceTableResponse // ignore: cast_nullable_to_non_nullable
+      medicalSurveillanceTable: freezed == medicalSurveillanceTable
+          ? _value.medicalSurveillanceTable
+          : medicalSurveillanceTable // ignore: cast_nullable_to_non_nullable
               as List<MedicalSurveillanceTableResponse>?,
-      presentationPositionVarietyEntityResponse: freezed ==
-              presentationPositionVarietyEntityResponse
-          ? _value.presentationPositionVarietyEntityResponse
-          : presentationPositionVarietyEntityResponse // ignore: cast_nullable_to_non_nullable
+      presentationPositionVarieties: freezed == presentationPositionVarieties
+          ? _value.presentationPositionVarieties
+          : presentationPositionVarieties // ignore: cast_nullable_to_non_nullable
               as List<PresentationPositionVarietyEntityResponse>?,
-      fetalHeartRateResponse: freezed == fetalHeartRateResponse
-          ? _value.fetalHeartRateResponse
-          : fetalHeartRateResponse // ignore: cast_nullable_to_non_nullable
+      fetalHeartRates: freezed == fetalHeartRates
+          ? _value.fetalHeartRates
+          : fetalHeartRates // ignore: cast_nullable_to_non_nullable
               as List<FetalHeartRateResponse>?,
-      contractionFrequenceResponse: freezed == contractionFrequenceResponse
-          ? _value.contractionFrequenceResponse
-          : contractionFrequenceResponse // ignore: cast_nullable_to_non_nullable
+      contractionFrequencies: freezed == contractionFrequencies
+          ? _value.contractionFrequencies
+          : contractionFrequencies // ignore: cast_nullable_to_non_nullable
               as List<ContractionFrequencyResponse>?,
-      partographStateResponse: freezed == partographStateResponse
-          ? _value.partographStateResponse
-          : partographStateResponse // ignore: cast_nullable_to_non_nullable
+      partographState: freezed == partographState
+          ? _value.partographState
+          : partographState // ignore: cast_nullable_to_non_nullable
               as PartographStateResponse?,
-      alertCurvesResponse: freezed == alertCurvesResponse
-          ? _value.alertCurvesResponse
-          : alertCurvesResponse // ignore: cast_nullable_to_non_nullable
+      curves: freezed == curves
+          ? _value.curves
+          : curves // ignore: cast_nullable_to_non_nullable
               as AlertCurvesResponse?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $PartographStateResponseCopyWith<$Res>? get partographStateResponse {
-    if (_value.partographStateResponse == null) {
+  $PartographStateResponseCopyWith<$Res>? get partographState {
+    if (_value.partographState == null) {
       return null;
     }
 
-    return $PartographStateResponseCopyWith<$Res>(
-        _value.partographStateResponse!, (value) {
-      return _then(_value.copyWith(partographStateResponse: value) as $Val);
+    return $PartographStateResponseCopyWith<$Res>(_value.partographState!,
+        (value) {
+      return _then(_value.copyWith(partographState: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AlertCurvesResponseCopyWith<$Res>? get alertCurvesResponse {
-    if (_value.alertCurvesResponse == null) {
+  $AlertCurvesResponseCopyWith<$Res>? get curves {
+    if (_value.curves == null) {
       return null;
     }
 
-    return $AlertCurvesResponseCopyWith<$Res>(_value.alertCurvesResponse!,
-        (value) {
-      return _then(_value.copyWith(alertCurvesResponse: value) as $Val);
+    return $AlertCurvesResponseCopyWith<$Res>(_value.curves!, (value) {
+      return _then(_value.copyWith(curves: value) as $Val);
     });
   }
 }
@@ -202,19 +196,19 @@ abstract class _$$PartographResponseImplCopyWith<$Res>
       DateTime date,
       String observation,
       String workTime,
-      List<CervicalDilationResponse>? cervicalDilationResponse,
-      List<MedicalSurveillanceTableResponse>? medicalSurveillanceTableResponse,
+      List<CervicalDilationResponse>? cervicalDilations,
+      List<MedicalSurveillanceTableResponse>? medicalSurveillanceTable,
       List<PresentationPositionVarietyEntityResponse>?
-          presentationPositionVarietyEntityResponse,
-      List<FetalHeartRateResponse>? fetalHeartRateResponse,
-      List<ContractionFrequencyResponse>? contractionFrequenceResponse,
-      PartographStateResponse? partographStateResponse,
-      AlertCurvesResponse? alertCurvesResponse});
+          presentationPositionVarieties,
+      List<FetalHeartRateResponse>? fetalHeartRates,
+      List<ContractionFrequencyResponse>? contractionFrequencies,
+      PartographStateResponse? partographState,
+      AlertCurvesResponse? curves});
 
   @override
-  $PartographStateResponseCopyWith<$Res>? get partographStateResponse;
+  $PartographStateResponseCopyWith<$Res>? get partographState;
   @override
-  $AlertCurvesResponseCopyWith<$Res>? get alertCurvesResponse;
+  $AlertCurvesResponseCopyWith<$Res>? get curves;
 }
 
 /// @nodoc
@@ -234,13 +228,13 @@ class __$$PartographResponseImplCopyWithImpl<$Res>
     Object? date = null,
     Object? observation = null,
     Object? workTime = null,
-    Object? cervicalDilationResponse = freezed,
-    Object? medicalSurveillanceTableResponse = freezed,
-    Object? presentationPositionVarietyEntityResponse = freezed,
-    Object? fetalHeartRateResponse = freezed,
-    Object? contractionFrequenceResponse = freezed,
-    Object? partographStateResponse = freezed,
-    Object? alertCurvesResponse = freezed,
+    Object? cervicalDilations = freezed,
+    Object? medicalSurveillanceTable = freezed,
+    Object? presentationPositionVarieties = freezed,
+    Object? fetalHeartRates = freezed,
+    Object? contractionFrequencies = freezed,
+    Object? partographState = freezed,
+    Object? curves = freezed,
   }) {
     return _then(_$PartographResponseImpl(
       partographId: null == partographId
@@ -267,35 +261,33 @@ class __$$PartographResponseImplCopyWithImpl<$Res>
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
               as String,
-      cervicalDilationResponse: freezed == cervicalDilationResponse
-          ? _value._cervicalDilationResponse
-          : cervicalDilationResponse // ignore: cast_nullable_to_non_nullable
+      cervicalDilations: freezed == cervicalDilations
+          ? _value._cervicalDilations
+          : cervicalDilations // ignore: cast_nullable_to_non_nullable
               as List<CervicalDilationResponse>?,
-      medicalSurveillanceTableResponse: freezed ==
-              medicalSurveillanceTableResponse
-          ? _value._medicalSurveillanceTableResponse
-          : medicalSurveillanceTableResponse // ignore: cast_nullable_to_non_nullable
+      medicalSurveillanceTable: freezed == medicalSurveillanceTable
+          ? _value._medicalSurveillanceTable
+          : medicalSurveillanceTable // ignore: cast_nullable_to_non_nullable
               as List<MedicalSurveillanceTableResponse>?,
-      presentationPositionVarietyEntityResponse: freezed ==
-              presentationPositionVarietyEntityResponse
-          ? _value._presentationPositionVarietyEntityResponse
-          : presentationPositionVarietyEntityResponse // ignore: cast_nullable_to_non_nullable
+      presentationPositionVarieties: freezed == presentationPositionVarieties
+          ? _value._presentationPositionVarieties
+          : presentationPositionVarieties // ignore: cast_nullable_to_non_nullable
               as List<PresentationPositionVarietyEntityResponse>?,
-      fetalHeartRateResponse: freezed == fetalHeartRateResponse
-          ? _value._fetalHeartRateResponse
-          : fetalHeartRateResponse // ignore: cast_nullable_to_non_nullable
+      fetalHeartRates: freezed == fetalHeartRates
+          ? _value._fetalHeartRates
+          : fetalHeartRates // ignore: cast_nullable_to_non_nullable
               as List<FetalHeartRateResponse>?,
-      contractionFrequenceResponse: freezed == contractionFrequenceResponse
-          ? _value._contractionFrequenceResponse
-          : contractionFrequenceResponse // ignore: cast_nullable_to_non_nullable
+      contractionFrequencies: freezed == contractionFrequencies
+          ? _value._contractionFrequencies
+          : contractionFrequencies // ignore: cast_nullable_to_non_nullable
               as List<ContractionFrequencyResponse>?,
-      partographStateResponse: freezed == partographStateResponse
-          ? _value.partographStateResponse
-          : partographStateResponse // ignore: cast_nullable_to_non_nullable
+      partographState: freezed == partographState
+          ? _value.partographState
+          : partographState // ignore: cast_nullable_to_non_nullable
               as PartographStateResponse?,
-      alertCurvesResponse: freezed == alertCurvesResponse
-          ? _value.alertCurvesResponse
-          : alertCurvesResponse // ignore: cast_nullable_to_non_nullable
+      curves: freezed == curves
+          ? _value.curves
+          : curves // ignore: cast_nullable_to_non_nullable
               as AlertCurvesResponse?,
     ));
   }
@@ -311,21 +303,19 @@ class _$PartographResponseImpl implements _PartographResponse {
       required this.date,
       required this.observation,
       required this.workTime,
-      final List<CervicalDilationResponse>? cervicalDilationResponse,
-      final List<MedicalSurveillanceTableResponse>?
-          medicalSurveillanceTableResponse,
+      final List<CervicalDilationResponse>? cervicalDilations,
+      final List<MedicalSurveillanceTableResponse>? medicalSurveillanceTable,
       final List<PresentationPositionVarietyEntityResponse>?
-          presentationPositionVarietyEntityResponse,
-      final List<FetalHeartRateResponse>? fetalHeartRateResponse,
-      final List<ContractionFrequencyResponse>? contractionFrequenceResponse,
-      this.partographStateResponse,
-      this.alertCurvesResponse})
-      : _cervicalDilationResponse = cervicalDilationResponse,
-        _medicalSurveillanceTableResponse = medicalSurveillanceTableResponse,
-        _presentationPositionVarietyEntityResponse =
-            presentationPositionVarietyEntityResponse,
-        _fetalHeartRateResponse = fetalHeartRateResponse,
-        _contractionFrequenceResponse = contractionFrequenceResponse;
+          presentationPositionVarieties,
+      final List<FetalHeartRateResponse>? fetalHeartRates,
+      final List<ContractionFrequencyResponse>? contractionFrequencies,
+      this.partographState,
+      this.curves})
+      : _cervicalDilations = cervicalDilations,
+        _medicalSurveillanceTable = medicalSurveillanceTable,
+        _presentationPositionVarieties = presentationPositionVarieties,
+        _fetalHeartRates = fetalHeartRates,
+        _contractionFrequencies = contractionFrequencies;
 
   factory _$PartographResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartographResponseImplFromJson(json);
@@ -342,72 +332,70 @@ class _$PartographResponseImpl implements _PartographResponse {
   final String observation;
   @override
   final String workTime;
-  final List<CervicalDilationResponse>? _cervicalDilationResponse;
+  final List<CervicalDilationResponse>? _cervicalDilations;
   @override
-  List<CervicalDilationResponse>? get cervicalDilationResponse {
-    final value = _cervicalDilationResponse;
+  List<CervicalDilationResponse>? get cervicalDilations {
+    final value = _cervicalDilations;
     if (value == null) return null;
-    if (_cervicalDilationResponse is EqualUnmodifiableListView)
-      return _cervicalDilationResponse;
+    if (_cervicalDilations is EqualUnmodifiableListView)
+      return _cervicalDilations;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<MedicalSurveillanceTableResponse>?
-      _medicalSurveillanceTableResponse;
+  final List<MedicalSurveillanceTableResponse>? _medicalSurveillanceTable;
   @override
-  List<MedicalSurveillanceTableResponse>? get medicalSurveillanceTableResponse {
-    final value = _medicalSurveillanceTableResponse;
+  List<MedicalSurveillanceTableResponse>? get medicalSurveillanceTable {
+    final value = _medicalSurveillanceTable;
     if (value == null) return null;
-    if (_medicalSurveillanceTableResponse is EqualUnmodifiableListView)
-      return _medicalSurveillanceTableResponse;
+    if (_medicalSurveillanceTable is EqualUnmodifiableListView)
+      return _medicalSurveillanceTable;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   final List<PresentationPositionVarietyEntityResponse>?
-      _presentationPositionVarietyEntityResponse;
+      _presentationPositionVarieties;
   @override
   List<PresentationPositionVarietyEntityResponse>?
-      get presentationPositionVarietyEntityResponse {
-    final value = _presentationPositionVarietyEntityResponse;
+      get presentationPositionVarieties {
+    final value = _presentationPositionVarieties;
     if (value == null) return null;
-    if (_presentationPositionVarietyEntityResponse is EqualUnmodifiableListView)
-      return _presentationPositionVarietyEntityResponse;
+    if (_presentationPositionVarieties is EqualUnmodifiableListView)
+      return _presentationPositionVarieties;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<FetalHeartRateResponse>? _fetalHeartRateResponse;
+  final List<FetalHeartRateResponse>? _fetalHeartRates;
   @override
-  List<FetalHeartRateResponse>? get fetalHeartRateResponse {
-    final value = _fetalHeartRateResponse;
+  List<FetalHeartRateResponse>? get fetalHeartRates {
+    final value = _fetalHeartRates;
     if (value == null) return null;
-    if (_fetalHeartRateResponse is EqualUnmodifiableListView)
-      return _fetalHeartRateResponse;
+    if (_fetalHeartRates is EqualUnmodifiableListView) return _fetalHeartRates;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<ContractionFrequencyResponse>? _contractionFrequenceResponse;
+  final List<ContractionFrequencyResponse>? _contractionFrequencies;
   @override
-  List<ContractionFrequencyResponse>? get contractionFrequenceResponse {
-    final value = _contractionFrequenceResponse;
+  List<ContractionFrequencyResponse>? get contractionFrequencies {
+    final value = _contractionFrequencies;
     if (value == null) return null;
-    if (_contractionFrequenceResponse is EqualUnmodifiableListView)
-      return _contractionFrequenceResponse;
+    if (_contractionFrequencies is EqualUnmodifiableListView)
+      return _contractionFrequencies;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
-  final PartographStateResponse? partographStateResponse;
+  final PartographStateResponse? partographState;
   @override
-  final AlertCurvesResponse? alertCurvesResponse;
+  final AlertCurvesResponse? curves;
 
   @override
   String toString() {
-    return 'PartographResponse(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime, cervicalDilationResponse: $cervicalDilationResponse, medicalSurveillanceTableResponse: $medicalSurveillanceTableResponse, presentationPositionVarietyEntityResponse: $presentationPositionVarietyEntityResponse, fetalHeartRateResponse: $fetalHeartRateResponse, contractionFrequenceResponse: $contractionFrequenceResponse, partographStateResponse: $partographStateResponse, alertCurvesResponse: $alertCurvesResponse)';
+    return 'PartographResponse(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime, cervicalDilations: $cervicalDilations, medicalSurveillanceTable: $medicalSurveillanceTable, presentationPositionVarieties: $presentationPositionVarieties, fetalHeartRates: $fetalHeartRates, contractionFrequencies: $contractionFrequencies, partographState: $partographState, curves: $curves)';
   }
 
   @override
@@ -425,24 +413,20 @@ class _$PartographResponseImpl implements _PartographResponse {
                 other.observation == observation) &&
             (identical(other.workTime, workTime) ||
                 other.workTime == workTime) &&
+            const DeepCollectionEquality()
+                .equals(other._cervicalDilations, _cervicalDilations) &&
             const DeepCollectionEquality().equals(
-                other._cervicalDilationResponse, _cervicalDilationResponse) &&
+                other._medicalSurveillanceTable, _medicalSurveillanceTable) &&
             const DeepCollectionEquality().equals(
-                other._medicalSurveillanceTableResponse,
-                _medicalSurveillanceTableResponse) &&
+                other._presentationPositionVarieties,
+                _presentationPositionVarieties) &&
+            const DeepCollectionEquality()
+                .equals(other._fetalHeartRates, _fetalHeartRates) &&
             const DeepCollectionEquality().equals(
-                other._presentationPositionVarietyEntityResponse,
-                _presentationPositionVarietyEntityResponse) &&
-            const DeepCollectionEquality().equals(
-                other._fetalHeartRateResponse, _fetalHeartRateResponse) &&
-            const DeepCollectionEquality().equals(
-                other._contractionFrequenceResponse,
-                _contractionFrequenceResponse) &&
-            (identical(
-                    other.partographStateResponse, partographStateResponse) ||
-                other.partographStateResponse == partographStateResponse) &&
-            (identical(other.alertCurvesResponse, alertCurvesResponse) ||
-                other.alertCurvesResponse == alertCurvesResponse));
+                other._contractionFrequencies, _contractionFrequencies) &&
+            (identical(other.partographState, partographState) ||
+                other.partographState == partographState) &&
+            (identical(other.curves, curves) || other.curves == curves));
   }
 
   @JsonKey(ignore: true)
@@ -455,14 +439,13 @@ class _$PartographResponseImpl implements _PartographResponse {
       date,
       observation,
       workTime,
-      const DeepCollectionEquality().hash(_cervicalDilationResponse),
-      const DeepCollectionEquality().hash(_medicalSurveillanceTableResponse),
-      const DeepCollectionEquality()
-          .hash(_presentationPositionVarietyEntityResponse),
-      const DeepCollectionEquality().hash(_fetalHeartRateResponse),
-      const DeepCollectionEquality().hash(_contractionFrequenceResponse),
-      partographStateResponse,
-      alertCurvesResponse);
+      const DeepCollectionEquality().hash(_cervicalDilations),
+      const DeepCollectionEquality().hash(_medicalSurveillanceTable),
+      const DeepCollectionEquality().hash(_presentationPositionVarieties),
+      const DeepCollectionEquality().hash(_fetalHeartRates),
+      const DeepCollectionEquality().hash(_contractionFrequencies),
+      partographState,
+      curves);
 
   @JsonKey(ignore: true)
   @override
@@ -487,16 +470,14 @@ abstract class _PartographResponse implements PartographResponse {
       required final DateTime date,
       required final String observation,
       required final String workTime,
-      final List<CervicalDilationResponse>? cervicalDilationResponse,
-      final List<MedicalSurveillanceTableResponse>?
-          medicalSurveillanceTableResponse,
+      final List<CervicalDilationResponse>? cervicalDilations,
+      final List<MedicalSurveillanceTableResponse>? medicalSurveillanceTable,
       final List<PresentationPositionVarietyEntityResponse>?
-          presentationPositionVarietyEntityResponse,
-      final List<FetalHeartRateResponse>? fetalHeartRateResponse,
-      final List<ContractionFrequencyResponse>? contractionFrequenceResponse,
-      final PartographStateResponse? partographStateResponse,
-      final AlertCurvesResponse?
-          alertCurvesResponse}) = _$PartographResponseImpl;
+          presentationPositionVarieties,
+      final List<FetalHeartRateResponse>? fetalHeartRates,
+      final List<ContractionFrequencyResponse>? contractionFrequencies,
+      final PartographStateResponse? partographState,
+      final AlertCurvesResponse? curves}) = _$PartographResponseImpl;
 
   factory _PartographResponse.fromJson(Map<String, dynamic> json) =
       _$PartographResponseImpl.fromJson;
@@ -514,20 +495,20 @@ abstract class _PartographResponse implements PartographResponse {
   @override
   String get workTime;
   @override
-  List<CervicalDilationResponse>? get cervicalDilationResponse;
+  List<CervicalDilationResponse>? get cervicalDilations;
   @override
-  List<MedicalSurveillanceTableResponse>? get medicalSurveillanceTableResponse;
+  List<MedicalSurveillanceTableResponse>? get medicalSurveillanceTable;
   @override
   List<PresentationPositionVarietyEntityResponse>?
-      get presentationPositionVarietyEntityResponse;
+      get presentationPositionVarieties;
   @override
-  List<FetalHeartRateResponse>? get fetalHeartRateResponse;
+  List<FetalHeartRateResponse>? get fetalHeartRates;
   @override
-  List<ContractionFrequencyResponse>? get contractionFrequenceResponse;
+  List<ContractionFrequencyResponse>? get contractionFrequencies;
   @override
-  PartographStateResponse? get partographStateResponse;
+  PartographStateResponse? get partographState;
   @override
-  AlertCurvesResponse? get alertCurvesResponse;
+  AlertCurvesResponse? get curves;
   @override
   @JsonKey(ignore: true)
   _$$PartographResponseImplCopyWith<_$PartographResponseImpl> get copyWith =>

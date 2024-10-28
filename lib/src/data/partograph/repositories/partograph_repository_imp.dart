@@ -16,10 +16,12 @@ import 'package:birthflow_movil/src/domain/partograph/entities/presentation_posi
 import 'package:birthflow_movil/src/domain/partograph/mappers/mapper.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/local_storage/token_storage.dart';
+import 'package:logger/logger.dart';
 
 class PartographRepositoryImplementation implements PartographRepository {
   final PartographService _partographService;
   final TokenStorage _tokenStorage = TokenStorage();
+  final Logger _logger = Logger();
   final Mappr _mapper = Mappr();
 
   PartographRepositoryImplementation({
@@ -80,6 +82,25 @@ class PartographRepositoryImplementation implements PartographRepository {
       );
     } catch (error) {
       return [];
+    }
+  }
+
+  @override
+  Future<Partograph> getPartograph({required String partographId}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+      final result =
+          await _partographService.getPartograph(token, partographId);
+
+      return _mapper.convert<PartographResponse, Partograph>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      // Manejo de errores inesperados durante el proceso de renovación
+      _logger.e('Token refresh exception', error: e, stackTrace: stackTrace);
+
+      rethrow;
     }
   }
 

@@ -7,6 +7,8 @@ import 'package:birthflow_movil/src/domain/partograph/entities/presentation_posi
 abstract class PartographRepository {
   Future<List<PartographList>?> getPartographs({required String userId});
 
+   Future<Partograph> getPartograph({required String partographId});
+
   Future<Partograph?> createPartograph({
     required String partogramaId,
     required String name,

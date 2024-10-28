@@ -11,13 +11,6 @@ class CervicalDilationResponse with _$CervicalDilationResponse {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required bool isDelete,
-    required DateTime createAt,
-    DateTime? updateAt,
-    DateTime? deleteAt,
-    required String createdBy,
-    String? updateBy,
-    String? deleteBy,
   }) = _CervicalDilationResponse;
 
   factory CervicalDilationResponse.fromJson(Map<String, dynamic> json) =>

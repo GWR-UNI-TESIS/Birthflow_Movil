@@ -10,13 +10,6 @@ class FetalHeartRateResponse with _$FetalHeartRateResponse {
     required String partographId,
     required String value,
     required DateTime time,
-    required bool isDelete,
-    required DateTime createAt,
-    DateTime? updateAt,
-    DateTime? deleteAt,
-    String? createdBy,
-    String? updateBy,
-    String? deleteBy,
   }) = _FetalHeartRateResponse;
 
   factory FetalHeartRateResponse.fromJson(Map<String, dynamic> json) =>

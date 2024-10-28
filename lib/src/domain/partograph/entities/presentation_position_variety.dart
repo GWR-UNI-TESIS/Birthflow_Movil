@@ -33,7 +33,6 @@ extension HodgePlanePositionExtensionString on HodgePlanePosition {
     }
   }
 }
-
 enum Position {
   oia('OIIA'),
   oit('OIIT'),
@@ -57,14 +56,14 @@ enum Position {
 }
 
 class PresentationPositionVariety {
-  final int id;
+  final int? id;
   final String partographId;
-  final String hodgePlane;
-  final String position;
+  final int hodgePlane;
+  final int position;
   final DateTime time;
 
   PresentationPositionVariety({
-    required this.id,
+    this.id,
     required this.partographId,
     required this.hodgePlane,
     required this.position,

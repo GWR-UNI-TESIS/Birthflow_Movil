@@ -14,17 +14,6 @@ _$CervicalDilationResponseImpl _$$CervicalDilationResponseImplFromJson(
       value: (json['value'] as num).toDouble(),
       hour: DateTime.parse(json['hour'] as String),
       remOrRam: json['remOrRam'] as bool,
-      isDelete: json['isDelete'] as bool,
-      createAt: DateTime.parse(json['createAt'] as String),
-      updateAt: json['updateAt'] == null
-          ? null
-          : DateTime.parse(json['updateAt'] as String),
-      deleteAt: json['deleteAt'] == null
-          ? null
-          : DateTime.parse(json['deleteAt'] as String),
-      createdBy: json['createdBy'] as String,
-      updateBy: json['updateBy'] as String?,
-      deleteBy: json['deleteBy'] as String?,
     );
 
 Map<String, dynamic> _$$CervicalDilationResponseImplToJson(
@@ -35,11 +24,4 @@ Map<String, dynamic> _$$CervicalDilationResponseImplToJson(
       'value': instance.value,
       'hour': instance.hour.toIso8601String(),
       'remOrRam': instance.remOrRam,
-      'isDelete': instance.isDelete,
-      'createAt': instance.createAt.toIso8601String(),
-      'updateAt': instance.updateAt?.toIso8601String(),
-      'deleteAt': instance.deleteAt?.toIso8601String(),
-      'createdBy': instance.createdBy,
-      'updateBy': instance.updateBy,
-      'deleteBy': instance.deleteBy,
     };

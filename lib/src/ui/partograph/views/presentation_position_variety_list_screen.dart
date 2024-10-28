@@ -17,6 +17,7 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dilataciones Cervicales'),
       ),
+      /*
       body: BlocBuilder<PartographBloc, PartographState>(
         builder: (context, state) {
           return state.maybeWhen(
@@ -56,6 +57,7 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
           );
         },
       ),
+      */
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => {},

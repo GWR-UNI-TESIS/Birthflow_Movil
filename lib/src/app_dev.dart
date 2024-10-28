@@ -5,6 +5,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
@@ -24,12 +25,15 @@ class AppDev extends StatelessWidget {
             locator<PartographListGetUseCase>(),
           ),
         ),
-        BlocProvider( create: (BuildContext context) => PartographBloc(
-        locator<CervicalDilationCreateUseCase>(),
-        locator<CervicalDilationGetUseCase>(),
-        locator<CervicalDilationUpdateUseCase>(),
-        locator<CervicalDilationDeleteUseCase>(),
-      ),),
+        BlocProvider(
+          create: (BuildContext context) => PartographBloc(
+            locator<PartographGetUsecase>(),
+            locator<CervicalDilationCreateUseCase>(),
+            locator<CervicalDilationGetUseCase>(),
+            locator<CervicalDilationUpdateUseCase>(),
+            locator<CervicalDilationDeleteUseCase>(),
+          ),
+        ),
       ],
       child: MaterialApp(
         home: AppEntry(),

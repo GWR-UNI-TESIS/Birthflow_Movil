@@ -19,14 +19,14 @@ class PartographResponse with _$PartographResponse {
     required DateTime date,
     required String observation,
     required String workTime,
-    List<CervicalDilationResponse>? cervicalDilationResponse,
-    List<MedicalSurveillanceTableResponse>? medicalSurveillanceTableResponse,
+    List<CervicalDilationResponse>? cervicalDilations,
+    List<MedicalSurveillanceTableResponse>? medicalSurveillanceTable,
     List<PresentationPositionVarietyEntityResponse>?
-        presentationPositionVarietyEntityResponse,
-    List<FetalHeartRateResponse>? fetalHeartRateResponse,
-    List<ContractionFrequencyResponse>? contractionFrequenceResponse,
-    PartographStateResponse? partographStateResponse,
-    AlertCurvesResponse? alertCurvesResponse,
+        presentationPositionVarieties,
+    List<FetalHeartRateResponse>? fetalHeartRates,
+    List<ContractionFrequencyResponse>? contractionFrequencies,
+    PartographStateResponse? partographState,
+    AlertCurvesResponse? curves,
   }) = _PartographResponse;
 
   factory PartographResponse.fromJson(Map<String, dynamic> json) =>

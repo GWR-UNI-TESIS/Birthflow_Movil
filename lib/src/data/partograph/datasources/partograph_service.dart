@@ -25,6 +25,12 @@ abstract class PartographService {
     @Path('userId') String id,
   );
 
+  @GET('/api/partograph/partograph/{partographId}')
+  Future<ApiResponse<PartographResponse>> getPartograph(
+    @Header('Authorization') String token,
+    @Path('partographId') String partographId,
+  );
+
   @POST('/api/partograph/create/partograph')
   Future<ApiResponse<PartographResponse>> create(
     @Header('Authorization') String token,

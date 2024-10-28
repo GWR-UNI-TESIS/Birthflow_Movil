@@ -29,8 +29,8 @@ class PresentationPositionVarietyEditState
       // Si el modelo está presente, inicializa los valores
       final model = widget.model!;
       timeInput.text = DateFormat('HH:mm:ss').format(model.time);
-      _position = Position.fromString(model.hodgePlane);
-      _hodgePlanePosition = HodgePlanePosition.fromString(model.hodgePlane);
+      //_position = Position.fromString(model.hodgePlane);
+      //_hodgePlanePosition = HodgePlanePosition.fromString(model.hodgePlane);
     } else {
       // Valores por defecto si no hay modelo
       _position = Position.values.first; // Ajusta según sea necesario

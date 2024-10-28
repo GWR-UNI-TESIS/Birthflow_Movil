@@ -25,13 +25,6 @@ mixin _$FetalHeartRateResponse {
   String get partographId => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
-  bool get isDelete => throw _privateConstructorUsedError;
-  DateTime get createAt => throw _privateConstructorUsedError;
-  DateTime? get updateAt => throw _privateConstructorUsedError;
-  DateTime? get deleteAt => throw _privateConstructorUsedError;
-  String? get createdBy => throw _privateConstructorUsedError;
-  String? get updateBy => throw _privateConstructorUsedError;
-  String? get deleteBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,18 +38,7 @@ abstract class $FetalHeartRateResponseCopyWith<$Res> {
           $Res Function(FetalHeartRateResponse) then) =
       _$FetalHeartRateResponseCopyWithImpl<$Res, FetalHeartRateResponse>;
   @useResult
-  $Res call(
-      {int id,
-      String partographId,
-      String value,
-      DateTime time,
-      bool isDelete,
-      DateTime createAt,
-      DateTime? updateAt,
-      DateTime? deleteAt,
-      String? createdBy,
-      String? updateBy,
-      String? deleteBy});
+  $Res call({int id, String partographId, String value, DateTime time});
 }
 
 /// @nodoc
@@ -77,13 +59,6 @@ class _$FetalHeartRateResponseCopyWithImpl<$Res,
     Object? partographId = null,
     Object? value = null,
     Object? time = null,
-    Object? isDelete = null,
-    Object? createAt = null,
-    Object? updateAt = freezed,
-    Object? deleteAt = freezed,
-    Object? createdBy = freezed,
-    Object? updateBy = freezed,
-    Object? deleteBy = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -102,34 +77,6 @@ class _$FetalHeartRateResponseCopyWithImpl<$Res,
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deleteAt: freezed == deleteAt
-          ? _value.deleteAt
-          : deleteAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deleteBy: freezed == deleteBy
-          ? _value.deleteBy
-          : deleteBy // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -143,18 +90,7 @@ abstract class _$$FetalHeartRateResponseImplCopyWith<$Res>
       __$$FetalHeartRateResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String partographId,
-      String value,
-      DateTime time,
-      bool isDelete,
-      DateTime createAt,
-      DateTime? updateAt,
-      DateTime? deleteAt,
-      String? createdBy,
-      String? updateBy,
-      String? deleteBy});
+  $Res call({int id, String partographId, String value, DateTime time});
 }
 
 /// @nodoc
@@ -174,13 +110,6 @@ class __$$FetalHeartRateResponseImplCopyWithImpl<$Res>
     Object? partographId = null,
     Object? value = null,
     Object? time = null,
-    Object? isDelete = null,
-    Object? createAt = null,
-    Object? updateAt = freezed,
-    Object? deleteAt = freezed,
-    Object? createdBy = freezed,
-    Object? updateBy = freezed,
-    Object? deleteBy = freezed,
   }) {
     return _then(_$FetalHeartRateResponseImpl(
       id: null == id
@@ -199,34 +128,6 @@ class __$$FetalHeartRateResponseImplCopyWithImpl<$Res>
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deleteAt: freezed == deleteAt
-          ? _value.deleteAt
-          : deleteAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deleteBy: freezed == deleteBy
-          ? _value.deleteBy
-          : deleteBy // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -238,14 +139,7 @@ class _$FetalHeartRateResponseImpl implements _FetalHeartRateResponse {
       {required this.id,
       required this.partographId,
       required this.value,
-      required this.time,
-      required this.isDelete,
-      required this.createAt,
-      this.updateAt,
-      this.deleteAt,
-      this.createdBy,
-      this.updateBy,
-      this.deleteBy});
+      required this.time});
 
   factory _$FetalHeartRateResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$FetalHeartRateResponseImplFromJson(json);
@@ -258,24 +152,10 @@ class _$FetalHeartRateResponseImpl implements _FetalHeartRateResponse {
   final String value;
   @override
   final DateTime time;
-  @override
-  final bool isDelete;
-  @override
-  final DateTime createAt;
-  @override
-  final DateTime? updateAt;
-  @override
-  final DateTime? deleteAt;
-  @override
-  final String? createdBy;
-  @override
-  final String? updateBy;
-  @override
-  final String? deleteBy;
 
   @override
   String toString() {
-    return 'FetalHeartRateResponse(id: $id, partographId: $partographId, value: $value, time: $time, isDelete: $isDelete, createAt: $createAt, updateAt: $updateAt, deleteAt: $deleteAt, createdBy: $createdBy, updateBy: $updateBy, deleteBy: $deleteBy)';
+    return 'FetalHeartRateResponse(id: $id, partographId: $partographId, value: $value, time: $time)';
   }
 
   @override
@@ -287,27 +167,12 @@ class _$FetalHeartRateResponseImpl implements _FetalHeartRateResponse {
             (identical(other.partographId, partographId) ||
                 other.partographId == partographId) &&
             (identical(other.value, value) || other.value == value) &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.isDelete, isDelete) ||
-                other.isDelete == isDelete) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt) &&
-            (identical(other.updateAt, updateAt) ||
-                other.updateAt == updateAt) &&
-            (identical(other.deleteAt, deleteAt) ||
-                other.deleteAt == deleteAt) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
-            (identical(other.updateBy, updateBy) ||
-                other.updateBy == updateBy) &&
-            (identical(other.deleteBy, deleteBy) ||
-                other.deleteBy == deleteBy));
+            (identical(other.time, time) || other.time == time));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, partographId, value, time,
-      isDelete, createAt, updateAt, deleteAt, createdBy, updateBy, deleteBy);
+  int get hashCode => Object.hash(runtimeType, id, partographId, value, time);
 
   @JsonKey(ignore: true)
   @override
@@ -329,14 +194,7 @@ abstract class _FetalHeartRateResponse implements FetalHeartRateResponse {
       {required final int id,
       required final String partographId,
       required final String value,
-      required final DateTime time,
-      required final bool isDelete,
-      required final DateTime createAt,
-      final DateTime? updateAt,
-      final DateTime? deleteAt,
-      final String? createdBy,
-      final String? updateBy,
-      final String? deleteBy}) = _$FetalHeartRateResponseImpl;
+      required final DateTime time}) = _$FetalHeartRateResponseImpl;
 
   factory _FetalHeartRateResponse.fromJson(Map<String, dynamic> json) =
       _$FetalHeartRateResponseImpl.fromJson;
@@ -349,20 +207,6 @@ abstract class _FetalHeartRateResponse implements FetalHeartRateResponse {
   String get value;
   @override
   DateTime get time;
-  @override
-  bool get isDelete;
-  @override
-  DateTime get createAt;
-  @override
-  DateTime? get updateAt;
-  @override
-  DateTime? get deleteAt;
-  @override
-  String? get createdBy;
-  @override
-  String? get updateBy;
-  @override
-  String? get deleteBy;
   @override
   @JsonKey(ignore: true)
   _$$FetalHeartRateResponseImplCopyWith<_$FetalHeartRateResponseImpl>

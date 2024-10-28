@@ -15,38 +15,36 @@ _$PartographResponseImpl _$$PartographResponseImplFromJson(
       date: DateTime.parse(json['date'] as String),
       observation: json['observation'] as String,
       workTime: json['workTime'] as String,
-      cervicalDilationResponse:
-          (json['cervicalDilationResponse'] as List<dynamic>?)
-              ?.map((e) =>
-                  CervicalDilationResponse.fromJson(e as Map<String, dynamic>))
-              .toList(),
-      medicalSurveillanceTableResponse:
-          (json['medicalSurveillanceTableResponse'] as List<dynamic>?)
+      cervicalDilations: (json['cervicalDilations'] as List<dynamic>?)
+          ?.map((e) =>
+              CervicalDilationResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      medicalSurveillanceTable:
+          (json['medicalSurveillanceTable'] as List<dynamic>?)
               ?.map((e) => MedicalSurveillanceTableResponse.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-      presentationPositionVarietyEntityResponse:
-          (json['presentationPositionVarietyEntityResponse'] as List<dynamic>?)
+      presentationPositionVarieties:
+          (json['presentationPositionVarieties'] as List<dynamic>?)
               ?.map((e) => PresentationPositionVarietyEntityResponse.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-      fetalHeartRateResponse: (json['fetalHeartRateResponse'] as List<dynamic>?)
+      fetalHeartRates: (json['fetalHeartRates'] as List<dynamic>?)
           ?.map(
               (e) => FetalHeartRateResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      contractionFrequenceResponse: (json['contractionFrequenceResponse']
-              as List<dynamic>?)
+      contractionFrequencies: (json['contractionFrequencies'] as List<dynamic>?)
           ?.map((e) =>
               ContractionFrequencyResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      partographStateResponse: json['partographStateResponse'] == null
+      partographState: json['partographState'] == null
           ? null
           : PartographStateResponse.fromJson(
-              json['partographStateResponse'] as Map<String, dynamic>),
-      alertCurvesResponse: json['alertCurvesResponse'] == null
+              json['partographState'] as Map<String, dynamic>),
+      curves: json['curves'] == null
           ? null
           : AlertCurvesResponse.fromJson(
-              json['alertCurvesResponse'] as Map<String, dynamic>),
+              json['curves'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PartographResponseImplToJson(
@@ -58,21 +56,17 @@ Map<String, dynamic> _$$PartographResponseImplToJson(
       'date': instance.date.toIso8601String(),
       'observation': instance.observation,
       'workTime': instance.workTime,
-      'cervicalDilationResponse':
-          instance.cervicalDilationResponse?.map((e) => e.toJson()).toList(),
-      'medicalSurveillanceTableResponse': instance
-          .medicalSurveillanceTableResponse
+      'cervicalDilations':
+          instance.cervicalDilations?.map((e) => e.toJson()).toList(),
+      'medicalSurveillanceTable':
+          instance.medicalSurveillanceTable?.map((e) => e.toJson()).toList(),
+      'presentationPositionVarieties': instance.presentationPositionVarieties
           ?.map((e) => e.toJson())
           .toList(),
-      'presentationPositionVarietyEntityResponse': instance
-          .presentationPositionVarietyEntityResponse
-          ?.map((e) => e.toJson())
-          .toList(),
-      'fetalHeartRateResponse':
-          instance.fetalHeartRateResponse?.map((e) => e.toJson()).toList(),
-      'contractionFrequenceResponse': instance.contractionFrequenceResponse
-          ?.map((e) => e.toJson())
-          .toList(),
-      'partographStateResponse': instance.partographStateResponse?.toJson(),
-      'alertCurvesResponse': instance.alertCurvesResponse?.toJson(),
+      'fetalHeartRates':
+          instance.fetalHeartRates?.map((e) => e.toJson()).toList(),
+      'contractionFrequencies':
+          instance.contractionFrequencies?.map((e) => e.toJson()).toList(),
+      'partographState': instance.partographState?.toJson(),
+      'curves': instance.curves?.toJson(),
     };

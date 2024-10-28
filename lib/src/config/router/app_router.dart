@@ -11,7 +11,7 @@ import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_list_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/partograph.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

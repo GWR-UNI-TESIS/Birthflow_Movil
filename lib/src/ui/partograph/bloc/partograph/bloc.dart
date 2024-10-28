@@ -3,19 +3,20 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PartographBloc extends Bloc<PartographEvent, PartographState> {
+  final PartographGetUsecase _partographGetUsecase;
   final CervicalDilationCreateUseCase _cervicalDilationCreateUseCase;
   final CervicalDilationGetUseCase _cervicalDilationGetUseCase;
   final CervicalDilationUpdateUseCase _cervicalDilationUpdateUseCase;
   final CervicalDilationDeleteUseCase _cervicalDilationDeleteUseCase;
 
-  List<CervicalDilation> _cachedCervicalDilation = [];
-
   PartographBloc(
+    this._partographGetUsecase,
     this._cervicalDilationCreateUseCase,
     this._cervicalDilationGetUseCase,
     this._cervicalDilationUpdateUseCase,
@@ -33,24 +34,16 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       emit(const Loading());
-      final result = await _cervicalDilationGetUseCase.execute(
+      final result = await _partographGetUsecase.execute(
         partographId: event.partographId,
       );
 
-      if (result == null) {
-        emit(
-          const Empty(),
-        );
-      } else {
-        _cachedCervicalDilation = result;
-
-        emit(
-          Loaded(
-            cervicalDilation: result,
-            message: 'Elementos cargados correctamente',
-          ),
-        );
-      }
+      emit(
+        Loaded(
+          partograph: result,
+          message: 'Elementos cargados correctamente',
+        ),
+      );
     } catch (e) {
       emit(Error(e.toString()));
     }
@@ -68,19 +61,6 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         remOrRam: event.remOrRam,
         userId: event.userId,
       );
-      if (result == null) {
-        emit(const Error('Ocurrio un error'));
-      } else {
-        //final currentState = state as Loaded;
-        _cachedCervicalDilation.add(result);
-
-        emit(
-          Loaded(
-            cervicalDilation: _cachedCervicalDilation,
-            message: 'Guardado correctamente',
-          ),
-        );
-      }
     } catch (ex) {
       emit(Error(ex.toString()));
     }
@@ -103,18 +83,6 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         emit(const Error('Ocurrio un error'));
       } else {
         //final currentState = state as Loaded;
-
-        final index = _cachedCervicalDilation
-            .indexWhere((dilation) => dilation.id == event.id);
-        if (index != -1) {
-          _cachedCervicalDilation[index] = result;
-          emit(
-            Loaded(
-              cervicalDilation: _cachedCervicalDilation,
-              message: 'Actualizado correctamente',
-            ),
-          );
-        }
       }
     } catch (ex) {
       emit(Error(ex.toString()));
@@ -131,19 +99,6 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         userId: event.userId,
       );
       // ignore: unrelated_type_equality_checks
-      if (result == false) {
-        emit(const Error('Ocurrió un error al eliminar'));
-      } else {
-        _cachedCervicalDilation.removeWhere(
-          (dilation) => dilation.id == event.id,
-        );
-        emit(
-          Loaded(
-            cervicalDilation: _cachedCervicalDilation,
-            message: 'Eliminado correctamente',
-          ),
-        );
-      }
     } catch (ex) {
       emit(Error(ex.toString()));
     }

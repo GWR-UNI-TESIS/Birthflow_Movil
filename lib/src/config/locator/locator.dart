@@ -26,7 +26,7 @@ final GetIt locator = GetIt.instance;
 Future<void> initializeDependencies() async {
   // Obtiene la URL de la API desde el archivo .env (asumiendo que existe un paquete dotenv)
   final String? apiUrl = dotenv.env['API_URL'];
-  final device =  await getDeviceFingerprint();
+  final device = await getDeviceFingerprint();
   // Crea un cliente Dio para realizar llamadas HTTP a la API
   final dio = buildDioClient(apiUrl!, device);
 
@@ -49,11 +49,9 @@ Future<void> initializeDependencies() async {
     RefreshUsecaseImplementation(locator<AuthenticationRepository>()),
   );
 
-
-locator.registerSingleton<LogoutUsecase>(
+  locator.registerSingleton<LogoutUsecase>(
     LogoutUsecaseImplementation(locator<AuthenticationRepository>()),
   );
-
 
   // Registra el AuthenticationBloc como singleton en GetIt, inyectando AuthenticationService
   locator.registerSingleton<AuthenticationBloc>(
@@ -76,8 +74,8 @@ locator.registerSingleton<LogoutUsecase>(
   );
 
   // Registra el PartographGetUseCase como singleton en GetIt, inyectando PartographRepository
-  locator.registerSingleton<PartographGetUseCase>(
-    PartographGetUseCase(
+  locator.registerSingleton<PartographGetUsecase>(
+    PartographGetUsecaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );

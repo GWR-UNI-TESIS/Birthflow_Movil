@@ -17,13 +17,7 @@ class MedicalSurveillanceTableResponse with _$MedicalSurveillanceTableResponse {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required bool isDelete,
-    required DateTime createAt,
-    DateTime? updateAt,
-    DateTime? deleteAt,
-    required String createdBy,
-    String? updateBy,
-    String? deleteBy,
+
   }) = _MedicalSurveillanceTableResponse;
 
   factory MedicalSurveillanceTableResponse.fromJson(

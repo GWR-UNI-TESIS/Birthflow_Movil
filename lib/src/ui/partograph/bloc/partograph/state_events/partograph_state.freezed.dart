@@ -21,11 +21,7 @@ mixin _$PartographState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)
-        loaded,
+    required TResult Function(Partograph partograph, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,11 +30,7 @@ mixin _$PartographState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult? Function(Partograph partograph, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,11 +39,7 @@ mixin _$PartographState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult Function(Partograph partograph, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) =>
@@ -145,11 +133,7 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)
-        loaded,
+    required TResult Function(Partograph partograph, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return initial();
@@ -161,11 +145,7 @@ class _$InitialImpl implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult? Function(Partograph partograph, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return initial?.call();
@@ -177,11 +157,7 @@ class _$InitialImpl implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult Function(Partograph partograph, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -277,11 +253,7 @@ class _$LoadingImpl implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)
-        loaded,
+    required TResult Function(Partograph partograph, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return loading();
@@ -293,11 +265,7 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult? Function(Partograph partograph, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return loading?.call();
@@ -309,11 +277,7 @@ class _$LoadingImpl implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult Function(Partograph partograph, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -409,11 +373,7 @@ class _$EmptyImpl implements Empty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)
-        loaded,
+    required TResult Function(Partograph partograph, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return empty();
@@ -425,11 +385,7 @@ class _$EmptyImpl implements Empty {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult? Function(Partograph partograph, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return empty?.call();
@@ -441,11 +397,7 @@ class _$EmptyImpl implements Empty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult Function(Partograph partograph, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -506,10 +458,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {List<CervicalDilation>? cervicalDilation,
-      List<PresentationPositionVariety>? presentationPositionVariety,
-      String message});
+  $Res call({Partograph partograph, String message});
 }
 
 /// @nodoc
@@ -523,19 +472,14 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cervicalDilation = freezed,
-    Object? presentationPositionVariety = freezed,
+    Object? partograph = null,
     Object? message = null,
   }) {
     return _then(_$LoadedImpl(
-      cervicalDilation: freezed == cervicalDilation
-          ? _value._cervicalDilation
-          : cervicalDilation // ignore: cast_nullable_to_non_nullable
-              as List<CervicalDilation>?,
-      presentationPositionVariety: freezed == presentationPositionVariety
-          ? _value._presentationPositionVariety
-          : presentationPositionVariety // ignore: cast_nullable_to_non_nullable
-              as List<PresentationPositionVariety>?,
+      partograph: null == partograph
+          ? _value.partograph
+          : partograph // ignore: cast_nullable_to_non_nullable
+              as Partograph,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -547,41 +491,16 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements Loaded {
-  const _$LoadedImpl(
-      {final List<CervicalDilation>? cervicalDilation,
-      final List<PresentationPositionVariety>? presentationPositionVariety,
-      required this.message})
-      : _cervicalDilation = cervicalDilation,
-        _presentationPositionVariety = presentationPositionVariety;
+  const _$LoadedImpl({required this.partograph, required this.message});
 
-  final List<CervicalDilation>? _cervicalDilation;
   @override
-  List<CervicalDilation>? get cervicalDilation {
-    final value = _cervicalDilation;
-    if (value == null) return null;
-    if (_cervicalDilation is EqualUnmodifiableListView)
-      return _cervicalDilation;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<PresentationPositionVariety>? _presentationPositionVariety;
-  @override
-  List<PresentationPositionVariety>? get presentationPositionVariety {
-    final value = _presentationPositionVariety;
-    if (value == null) return null;
-    if (_presentationPositionVariety is EqualUnmodifiableListView)
-      return _presentationPositionVariety;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final Partograph partograph;
   @override
   final String message;
 
   @override
   String toString() {
-    return 'PartographState.loaded(cervicalDilation: $cervicalDilation, presentationPositionVariety: $presentationPositionVariety, message: $message)';
+    return 'PartographState.loaded(partograph: $partograph, message: $message)';
   }
 
   @override
@@ -589,20 +508,13 @@ class _$LoadedImpl implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality()
-                .equals(other._cervicalDilation, _cervicalDilation) &&
-            const DeepCollectionEquality().equals(
-                other._presentationPositionVariety,
-                _presentationPositionVariety) &&
+            (identical(other.partograph, partograph) ||
+                other.partograph == partograph) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_cervicalDilation),
-      const DeepCollectionEquality().hash(_presentationPositionVariety),
-      message);
+  int get hashCode => Object.hash(runtimeType, partograph, message);
 
   @JsonKey(ignore: true)
   @override
@@ -616,14 +528,10 @@ class _$LoadedImpl implements Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)
-        loaded,
+    required TResult Function(Partograph partograph, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
-    return loaded(cervicalDilation, presentationPositionVariety, message);
+    return loaded(partograph, message);
   }
 
   @override
@@ -632,14 +540,10 @@ class _$LoadedImpl implements Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult? Function(Partograph partograph, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
-    return loaded?.call(cervicalDilation, presentationPositionVariety, message);
+    return loaded?.call(partograph, message);
   }
 
   @override
@@ -648,16 +552,12 @@ class _$LoadedImpl implements Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult Function(Partograph partograph, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(cervicalDilation, presentationPositionVariety, message);
+      return loaded(partograph, message);
     }
     return orElse();
   }
@@ -705,12 +605,10 @@ class _$LoadedImpl implements Loaded {
 
 abstract class Loaded implements PartographState {
   const factory Loaded(
-      {final List<CervicalDilation>? cervicalDilation,
-      final List<PresentationPositionVariety>? presentationPositionVariety,
+      {required final Partograph partograph,
       required final String message}) = _$LoadedImpl;
 
-  List<CervicalDilation>? get cervicalDilation;
-  List<PresentationPositionVariety>? get presentationPositionVariety;
+  Partograph get partograph;
   String get message;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -785,11 +683,7 @@ class _$ErrorImpl implements Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)
-        loaded,
+    required TResult Function(Partograph partograph, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return error(errorMessage);
@@ -801,11 +695,7 @@ class _$ErrorImpl implements Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult? Function(Partograph partograph, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return error?.call(errorMessage);
@@ -817,11 +707,7 @@ class _$ErrorImpl implements Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            List<CervicalDilation>? cervicalDilation,
-            List<PresentationPositionVariety>? presentationPositionVariety,
-            String message)?
-        loaded,
+    TResult Function(Partograph partograph, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
