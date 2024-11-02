@@ -1,7 +1,7 @@
 class ContractionFrequency {
   final int? id;
   final String partographId;
-  final int value;
+  final String value;
   final DateTime time;
   final DateTime createAt;
   final DateTime? updateAt;

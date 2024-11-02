@@ -24,7 +24,7 @@ import 'package:birthflow_movil/src/domain/partograph/mappers/mapper.auto_mappr.
 // Configuración del mapper
 @AutoMappr([
   MapType<PartographResponse, Partograph>(),
-   MapType<PartographListResponse, PartographList>(),
+  MapType<PartographListResponse, PartographList>(),
   MapType<CervicalDilationResponse, CervicalDilation>(),
   MapType<MedicalSurveillanceTableResponse, MedicalSurveillanceTable>(),
   MapType<PresentationPositionVarietyEntityResponse, PresentationPositionVariety>(),

@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/app_dev.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
+import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -8,8 +9,12 @@ Future<void> main() async {
   await loadEnvConfig();
   await initializeDependencies();
 
+  final catalog =
+      await locator<CatalogRepository>().getCatalog(); // Carga el catálogo
   runApp(
-    AppDev(),
+    AppDev(
+      catalog: catalog,
+    ),
   );
 }
 

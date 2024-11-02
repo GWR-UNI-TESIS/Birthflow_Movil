@@ -2,6 +2,8 @@ import 'package:birthflow_movil/src/config/device_fingerprint/index.dart';
 import 'package:birthflow_movil/src/config/dio/dio.dart';
 import 'package:birthflow_movil/src/data/auth/datasources/authentication_service.dart';
 import 'package:birthflow_movil/src/data/auth/repositories/authentication_repository_imp.dart';
+import 'package:birthflow_movil/src/data/catalog/datasources/catalog_service.dart';
+import 'package:birthflow_movil/src/data/catalog/repositories/catalog_repository_imp.dart';
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
 import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repository_imp.dart';
 import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repository.dart';
@@ -9,6 +11,7 @@ import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dar
 import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/logout_usercase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
+import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
@@ -30,6 +33,12 @@ Future<void> initializeDependencies() async {
   // Crea un cliente Dio para realizar llamadas HTTP a la API
   final dio = buildDioClient(apiUrl!, device);
 
+  locator.registerSingleton<CatalogService>(CatalogService(dio));
+
+  locator.registerSingleton<CatalogRepository>(
+    CatalogRepositoryImplementation(locator<CatalogService>()),
+  );
+  
   // Registra el AuthenticationService como singleton en GetIt
   locator.registerSingleton<AuthenticationService>(AuthenticationService(dio));
 

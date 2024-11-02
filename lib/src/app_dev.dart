@@ -1,5 +1,7 @@
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/app_router.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
+import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
@@ -9,14 +11,21 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_us
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppDev extends StatelessWidget {
+  final Catalog catalog;
+
+  const AppDev({required this.catalog, super.key});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (_) => CatalogCubit(catalog),
+        ),
         BlocProvider<AuthenticationBloc>(
           create: (_) => locator<AuthenticationBloc>(),
         ),

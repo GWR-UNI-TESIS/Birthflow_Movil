@@ -16,7 +16,7 @@ class PresentationPositionVarietyEditScreen extends StatefulWidget {
 class PresentationPositionVarietyEditState
     extends State<PresentationPositionVarietyEditScreen> {
   final TextEditingController timeInput = TextEditingController();
-  late Position _position;
+  //late Position _position;
   late HodgePlanePosition _hodgePlanePosition;
 
   final today = DateTime.now();
@@ -33,7 +33,7 @@ class PresentationPositionVarietyEditState
       //_hodgePlanePosition = HodgePlanePosition.fromString(model.hodgePlane);
     } else {
       // Valores por defecto si no hay modelo
-      _position = Position.values.first; // Ajusta según sea necesario
+      //_position = Position.values.first; // Ajusta según sea necesario
       _hodgePlanePosition =
           HodgePlanePosition.values.first; // Ajusta según sea necesario
     }
@@ -64,11 +64,11 @@ class PresentationPositionVarietyEditState
                       hodgePlanePosition = position;
                     },
                   ),
-                  DropdownButtonWidget<Position>(
+                  /*DropdownButtonWidget<Position>(
                     labelText: 'Plano',
                     enumValues: Position.values,
                     onValueChanged: (Position plane) {},
-                  ),
+                  ),*/
                   TextField(
                     controller:
                         timeInput, //editing controller of this TextField

@@ -8,7 +8,7 @@ class ContractionFrequencyResponse with _$ContractionFrequencyResponse {
   const factory ContractionFrequencyResponse({
     required int id,
     required String partographId,
-    required int value,
+    required String value,
     required DateTime time,
     required bool isDelete,
     required DateTime createAt,

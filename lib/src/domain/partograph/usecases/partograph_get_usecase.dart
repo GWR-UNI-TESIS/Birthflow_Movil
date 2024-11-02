@@ -1,4 +1,3 @@
-import 'package:birthflow_movil/src/core/lib/usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 

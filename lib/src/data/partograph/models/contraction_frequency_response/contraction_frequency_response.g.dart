@@ -11,7 +11,7 @@ _$ContractionFrequencyResponseImpl _$$ContractionFrequencyResponseImplFromJson(
     _$ContractionFrequencyResponseImpl(
       id: (json['id'] as num).toInt(),
       partographId: json['partographId'] as String,
-      value: (json['value'] as num).toInt(),
+      value: json['value'] as String,
       time: DateTime.parse(json['time'] as String),
       isDelete: json['isDelete'] as bool,
       createAt: DateTime.parse(json['createAt'] as String),

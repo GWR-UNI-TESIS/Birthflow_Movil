@@ -23,7 +23,7 @@ ContractionFrequencyResponse _$ContractionFrequencyResponseFromJson(
 mixin _$ContractionFrequencyResponse {
   int get id => throw _privateConstructorUsedError;
   String get partographId => throw _privateConstructorUsedError;
-  int get value => throw _privateConstructorUsedError;
+  String get value => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
   bool get isDelete => throw _privateConstructorUsedError;
   DateTime get createAt => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $ContractionFrequencyResponseCopyWith<$Res> {
   $Res call(
       {int id,
       String partographId,
-      int value,
+      String value,
       DateTime time,
       bool isDelete,
       DateTime createAt,
@@ -99,7 +99,7 @@ class _$ContractionFrequencyResponseCopyWithImpl<$Res,
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -148,7 +148,7 @@ abstract class _$$ContractionFrequencyResponseImplCopyWith<$Res>
   $Res call(
       {int id,
       String partographId,
-      int value,
+      String value,
       DateTime time,
       bool isDelete,
       DateTime createAt,
@@ -196,7 +196,7 @@ class __$$ContractionFrequencyResponseImplCopyWithImpl<$Res>
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -259,7 +259,7 @@ class _$ContractionFrequencyResponseImpl
   @override
   final String partographId;
   @override
-  final int value;
+  final String value;
   @override
   final DateTime time;
   @override
@@ -334,7 +334,7 @@ abstract class _ContractionFrequencyResponse
   const factory _ContractionFrequencyResponse(
       {required final int id,
       required final String partographId,
-      required final int value,
+      required final String value,
       required final DateTime time,
       required final bool isDelete,
       required final DateTime createAt,
@@ -352,7 +352,7 @@ abstract class _ContractionFrequencyResponse
   @override
   String get partographId;
   @override
-  int get value;
+  String get value;
   @override
   DateTime get time;
   @override

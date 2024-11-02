@@ -52,6 +52,7 @@ extension HodgePlanePositionExtensionString on HodgePlanePosition {
     }
   }
 }
+/*
 enum Position {
   oia('OIIA'),
   oit('OIIT'),
@@ -72,7 +73,7 @@ enum Position {
       orElse: () => throw ArgumentError('Invalid Position value: $value'),
     );
   }
-}
+}*/
 
 class PresentationPositionVariety {
   final int? id;
