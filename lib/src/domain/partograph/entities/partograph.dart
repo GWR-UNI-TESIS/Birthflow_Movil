@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
@@ -16,6 +17,7 @@ class Partograph {
   final List<PresentationPositionVariety>? presentationPositionVarieties;
   final List<FetalHeartRate>? fetalHeartRates;
   final List<ContractionFrequency>? contractionFrequencies;
+  final AlertCurves? alertCurves;
   
   Partograph({
     this.partographId,
@@ -29,5 +31,6 @@ class Partograph {
     this.presentationPositionVarieties,
     this.fetalHeartRates,
     this.contractionFrequencies,
+    this.alertCurves,
   });
 }

@@ -20,9 +20,9 @@ AlertCurvesResponse _$AlertCurvesResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AlertCurvesResponse {
-  List<AlertCurvesResponse>? get alertCurve =>
+  List<AlertCurveResponse>? get alertCurve =>
       throw _privateConstructorUsedError;
-  List<AlertCurvesResponse>? get newAlertCurve =>
+  List<AlertCurveResponse>? get newAlertCurve =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,8 +38,8 @@ abstract class $AlertCurvesResponseCopyWith<$Res> {
       _$AlertCurvesResponseCopyWithImpl<$Res, AlertCurvesResponse>;
   @useResult
   $Res call(
-      {List<AlertCurvesResponse>? alertCurve,
-      List<AlertCurvesResponse>? newAlertCurve});
+      {List<AlertCurveResponse>? alertCurve,
+      List<AlertCurveResponse>? newAlertCurve});
 }
 
 /// @nodoc
@@ -62,11 +62,11 @@ class _$AlertCurvesResponseCopyWithImpl<$Res, $Val extends AlertCurvesResponse>
       alertCurve: freezed == alertCurve
           ? _value.alertCurve
           : alertCurve // ignore: cast_nullable_to_non_nullable
-              as List<AlertCurvesResponse>?,
+              as List<AlertCurveResponse>?,
       newAlertCurve: freezed == newAlertCurve
           ? _value.newAlertCurve
           : newAlertCurve // ignore: cast_nullable_to_non_nullable
-              as List<AlertCurvesResponse>?,
+              as List<AlertCurveResponse>?,
     ) as $Val);
   }
 }
@@ -80,8 +80,8 @@ abstract class _$$AlertCurvesResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<AlertCurvesResponse>? alertCurve,
-      List<AlertCurvesResponse>? newAlertCurve});
+      {List<AlertCurveResponse>? alertCurve,
+      List<AlertCurveResponse>? newAlertCurve});
 }
 
 /// @nodoc
@@ -102,11 +102,11 @@ class __$$AlertCurvesResponseImplCopyWithImpl<$Res>
       alertCurve: freezed == alertCurve
           ? _value._alertCurve
           : alertCurve // ignore: cast_nullable_to_non_nullable
-              as List<AlertCurvesResponse>?,
+              as List<AlertCurveResponse>?,
       newAlertCurve: freezed == newAlertCurve
           ? _value._newAlertCurve
           : newAlertCurve // ignore: cast_nullable_to_non_nullable
-              as List<AlertCurvesResponse>?,
+              as List<AlertCurveResponse>?,
     ));
   }
 }
@@ -115,17 +115,17 @@ class __$$AlertCurvesResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AlertCurvesResponseImpl implements _AlertCurvesResponse {
   const _$AlertCurvesResponseImpl(
-      {final List<AlertCurvesResponse>? alertCurve,
-      final List<AlertCurvesResponse>? newAlertCurve})
+      {final List<AlertCurveResponse>? alertCurve,
+      final List<AlertCurveResponse>? newAlertCurve})
       : _alertCurve = alertCurve,
         _newAlertCurve = newAlertCurve;
 
   factory _$AlertCurvesResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$AlertCurvesResponseImplFromJson(json);
 
-  final List<AlertCurvesResponse>? _alertCurve;
+  final List<AlertCurveResponse>? _alertCurve;
   @override
-  List<AlertCurvesResponse>? get alertCurve {
+  List<AlertCurveResponse>? get alertCurve {
     final value = _alertCurve;
     if (value == null) return null;
     if (_alertCurve is EqualUnmodifiableListView) return _alertCurve;
@@ -133,9 +133,9 @@ class _$AlertCurvesResponseImpl implements _AlertCurvesResponse {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<AlertCurvesResponse>? _newAlertCurve;
+  final List<AlertCurveResponse>? _newAlertCurve;
   @override
-  List<AlertCurvesResponse>? get newAlertCurve {
+  List<AlertCurveResponse>? get newAlertCurve {
     final value = _newAlertCurve;
     if (value == null) return null;
     if (_newAlertCurve is EqualUnmodifiableListView) return _newAlertCurve;
@@ -183,17 +183,17 @@ class _$AlertCurvesResponseImpl implements _AlertCurvesResponse {
 
 abstract class _AlertCurvesResponse implements AlertCurvesResponse {
   const factory _AlertCurvesResponse(
-          {final List<AlertCurvesResponse>? alertCurve,
-          final List<AlertCurvesResponse>? newAlertCurve}) =
+          {final List<AlertCurveResponse>? alertCurve,
+          final List<AlertCurveResponse>? newAlertCurve}) =
       _$AlertCurvesResponseImpl;
 
   factory _AlertCurvesResponse.fromJson(Map<String, dynamic> json) =
       _$AlertCurvesResponseImpl.fromJson;
 
   @override
-  List<AlertCurvesResponse>? get alertCurve;
+  List<AlertCurveResponse>? get alertCurve;
   @override
-  List<AlertCurvesResponse>? get newAlertCurve;
+  List<AlertCurveResponse>? get newAlertCurve;
   @override
   @JsonKey(ignore: true)
   _$$AlertCurvesResponseImplCopyWith<_$AlertCurvesResponseImpl> get copyWith =>

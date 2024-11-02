@@ -648,8 +648,14 @@ class $Mappr implements _i1.AutoMapprInterface {
           r'Consider setting the whenSourceIsNull parameter on the MapType<AlertCurvesResponse, AlertCurves> to handle null values during mapping.');
     }
     return _i19.AlertCurves(
-      alertCurve: null,
-      newAlertCurve: null,
+      alertCurve: model.alertCurve
+          ?.map<_i19.AlertCurve>(
+              (value) => _map__i20$AlertCurveResponse_To__i19$AlertCurve(value))
+          .toList(),
+      newAlertCurve: model.newAlertCurve
+          ?.map<_i19.AlertCurve>(
+              (value) => _map__i20$AlertCurveResponse_To__i19$AlertCurve(value))
+          .toList(),
     );
   }
 

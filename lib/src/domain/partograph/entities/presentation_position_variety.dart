@@ -17,6 +17,25 @@ enum HodgePlanePosition {
   }
 }
 
+const Map<int, double> positionCatalog = {
+  1: 9.5,
+  2: 6.5,
+  3: 3.5,
+  4: 1.0,
+};
+
+const hodgePlanePositionCatalog = {
+  1: 'OP',
+  2: 'OIIA',
+  3: 'OIIT',
+  4:'OIIP',
+  5: 'OS',
+  6:'OIDA',
+  7:'OIDT',
+  8:'OIDP',
+};
+
+
 extension HodgePlanePositionExtensionString on HodgePlanePosition {
   String get valueAsString {
     switch (this) {

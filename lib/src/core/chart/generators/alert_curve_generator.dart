@@ -15,7 +15,7 @@ class AlertCurveGenerator implements IGenerator {
     final result = _generate(workTime, cervicalList);
     _curveData = result;
 
-    _chartPoint = ChartMapper.transformToChartPoint(data: result);
+   // _chartPoint = ChartMapper.transformToChartPoint(data: result);
   }
 
   List<ChartPoint>? _chartPoint;

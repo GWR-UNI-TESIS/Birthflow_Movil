@@ -10,10 +10,10 @@ _$AlertCurvesResponseImpl _$$AlertCurvesResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$AlertCurvesResponseImpl(
       alertCurve: (json['alertCurve'] as List<dynamic>?)
-          ?.map((e) => AlertCurvesResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => AlertCurveResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       newAlertCurve: (json['newAlertCurve'] as List<dynamic>?)
-          ?.map((e) => AlertCurvesResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => AlertCurveResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

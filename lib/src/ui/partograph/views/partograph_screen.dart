@@ -1,11 +1,9 @@
-import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class PartographScreen extends StatefulWidget {
@@ -30,321 +28,14 @@ class _PartographState extends State<PartographScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(135.0),
-        child: BlocBuilder<PartographBloc, PartographState>(
-          builder: (context, state) {
-            final state = context.watch<PartographBloc>().state;
-            if (state is Loaded) {
-              return AppBar(
-                elevation: 1,
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.notifications),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.calendar_month),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.more_vert),
-                    onPressed: () {},
-                  ),
-                ],
-                flexibleSpace: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 40.0,
-                    left: 16.0,
-                    right: 10.0,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              state.partograph.name,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            Text(
-                              '${state.partograph.recordName} - ${DateFormat('dd/mm/yyyy').format(state.partograph.date)}',
-                            ),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('Modificar'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }
-            return AppBar(
-              elevation: 1,
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.notifications),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: const Icon(Icons.calendar_month),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  onPressed: () {},
-                ),
-              ],
-            );
-          },
-        ),
+        child: _buildAppBar(context),
       ),
       body: SingleChildScrollView(
         child: BlocBuilder<PartographBloc, PartographState>(
           builder: (context, state) {
             final state = context.watch<PartographBloc>().state;
             if (state is Loaded) {
-              return Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Dilataciones cervicales',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: 10),
-                            if (state.partograph.cervicalDilations == null ||
-                                state.partograph.cervicalDilations!.isEmpty)
-                              Container(
-                                margin: const EdgeInsets.all(10),
-                                child: Center(
-                                  child: Text(
-                                    'No existen datos',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  ),
-                                ),
-                              )
-                            else
-                              Container(
-                                margin: const EdgeInsets.all(16),
-                                child: DataTable(
-                                  columnSpacing: 10.0,
-                                  columns: const [
-                                    DataColumn(
-                                      label: Text('Dilatacion'),
-                                    ),
-                                    DataColumn(label: Text('Hora')),
-                                    DataColumn(label: Text('RAM o REM')),
-                                  ],
-                                  rows: state.partograph.cervicalDilations!
-                                      .map((dilatation) {
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0,
-                                            ),
-                                            child: Text(
-                                              dilatation.value.toString(),
-                                            ),
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0,
-                                            ),
-                                            child: Text(
-                                              DateFormat.yMd()
-                                                  .format(dilatation.hour),
-                                            ),
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Checkbox(
-                                            value: dilatation.remOrRam,
-                                            onChanged: (value) {},
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'Mostrar',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Tabla de Vigilancia',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: 10),
-                            if (state.partograph.medicalSurveillanceTable ==
-                                    null ||
-                                state.partograph.medicalSurveillanceTable!
-                                    .isEmpty)
-                              Container(
-                                margin: const EdgeInsets.all(10),
-                                child: Center(
-                                  child: Text(
-                                    'No existen datos',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  ),
-                                ),
-                              )
-                            else
-                              Container(
-                                margin: const EdgeInsets.all(16),
-                                child: MedicalSurveillanceWidget(
-                                  list:
-                                      state.partograph.medicalSurveillanceTable,
-                                ),
-                              ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'Mostrar',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Altura de la presentacion',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: 10),
-                            if (state.partograph
-                                        .presentationPositionVarieties ==
-                                    null ||
-                                state.partograph.presentationPositionVarieties!
-                                    .isEmpty)
-                              Container(
-                                margin: const EdgeInsets.all(10),
-                                child: Center(
-                                  child: Text(
-                                    'No existen datos',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  ),
-                                ),
-                              )
-                            else
-                              Container(
-                                margin: const EdgeInsets.all(16),
-                                child: DataTable(
-                                  columnSpacing: 5.0,
-                                  columns: const [
-                                    DataColumn(
-                                      label: Text('Plano Hodge'),
-                                    ),
-                                    DataColumn(label: Text('Posicion')),
-                                    DataColumn(label: Text('Hora')),
-                                  ],
-                                  rows: state
-                                      .partograph.presentationPositionVarieties!
-                                      .map((presentationPositionVariety) {
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0,
-                                            ),
-                                            child: Text(
-                                              presentationPositionVariety
-                                                  .hodgePlane
-                                                  .toString(),
-                                            ),
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0,
-                                            ),
-                                            child: Text(
-                                              presentationPositionVariety
-                                                  .position
-                                                  .toString(),
-                                            ),
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0,
-                                            ),
-                                            child: Text(
-                                              DateFormat.yMd().format(
-                                                presentationPositionVariety
-                                                    .time,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'Mostrar',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return _buildContent(context, state);
             }
             return const LinearProgressIndicator();
           },
@@ -367,6 +58,174 @@ class _PartographState extends State<PartographScreen> {
         ),
       ),
       */
+      ),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      elevation: 1,
+      actions: _buildAppBarActions(),
+      flexibleSpace: Padding(
+        padding: const EdgeInsets.only(top: 40.0, left: 16.0, right: 10.0),
+        child: BlocBuilder<PartographBloc, PartographState>(
+          builder: (context, state) {
+            if (state is Loaded) {
+              return _buildAppBarContent(context, state);
+            }
+            return Container(); // Placeholder if not loaded
+          },
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildAppBarActions() {
+    return [
+      IconButton(icon: const Icon(Icons.description), onPressed: () {}),
+      IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
+      IconButton(icon: const Icon(Icons.calendar_month), onPressed: () {}),
+      IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
+    ];
+  }
+
+  Widget _buildAppBarContent(BuildContext context, Loaded state) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              state.partograph.name,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            Text(
+              '${state.partograph.recordName} - ${DateFormat('dd/MM/yyyy').format(state.partograph.date)}',
+            ),
+          ],
+        ),
+        TextButton(onPressed: () {}, child: const Text('Modificar')),
+      ],
+    );
+  }
+
+  Widget _buildContent(BuildContext context, Loaded state) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          _buildGenericCard(
+            title: 'Dilataciones cervicales',
+            content: _cervicalDilationsContent(state),
+          ),
+          _buildGenericCard(
+            title: 'Tabla de Vigilancia',
+            content: _medicalSurveillanceContent(state),
+          ),
+          _buildGenericCard(
+            title: 'Altura de la presentación',
+            content: _presentationHeightContent(state),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGenericCard({required String title, required Widget content}) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 10),
+            content,
+            Align(
+              alignment: Alignment.bottomRight,
+              child: TextButton(onPressed: () {}, child: const Text('Mostrar')),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _noDataMessage() {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      child: Center(
+        child: Text(
+          'No existen datos',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ),
+    );
+  }
+
+  Widget _cervicalDilationsContent(Loaded state) {
+    if (state.partograph.cervicalDilations == null ||
+        state.partograph.cervicalDilations!.isEmpty) {
+      return _noDataMessage();
+    }
+    return Container(
+      margin: const EdgeInsets.all(16),
+      child: DataTable(
+        columnSpacing: 10.0,
+        columns: const [
+          DataColumn(label: Text('Dilatación')),
+          DataColumn(label: Text('Hora')),
+          DataColumn(label: Text('RAM o REM')),
+        ],
+        rows: state.partograph.cervicalDilations!.map((dilatation) {
+          return DataRow(
+            cells: [
+              DataCell(Text(dilatation.value.toString())),
+              DataCell(Text(DateFormat.yMd().format(dilatation.hour))),
+              DataCell(
+                Checkbox(value: dilatation.remOrRam, onChanged: (value) {}),
+              ),
+            ],
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _medicalSurveillanceContent(Loaded state) {
+    if (state.partograph.medicalSurveillanceTable == null ||
+        state.partograph.medicalSurveillanceTable!.isEmpty) {
+      return _noDataMessage();
+    }
+    return MedicalSurveillanceWidget(
+      list: state.partograph.medicalSurveillanceTable,
+    );
+  }
+
+  Widget _presentationHeightContent(Loaded state) {
+    if (state.partograph.presentationPositionVarieties == null ||
+        state.partograph.presentationPositionVarieties!.isEmpty) {
+      return _noDataMessage();
+    }
+    return Container(
+      margin: const EdgeInsets.all(16),
+      child: DataTable(
+        columnSpacing: 5.0,
+        columns: const [
+          DataColumn(label: Text('Plano Hodge')),
+          DataColumn(label: Text('Posición')),
+          DataColumn(label: Text('Hora')),
+        ],
+        rows: state.partograph.presentationPositionVarieties!.map((position) {
+          return DataRow(
+            cells: [
+              DataCell(Text(position.hodgePlane.toString())),
+              DataCell(Text(position.position.toString())),
+              DataCell(Text(DateFormat.yMd().format(position.time))),
+            ],
+          );
+        }).toList(),
       ),
     );
   }

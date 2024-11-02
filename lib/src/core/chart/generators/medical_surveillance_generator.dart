@@ -49,6 +49,7 @@ class MedicalSurveillanceGenerator implements IGenerator {
         fillColor: charts.MaterialPalette.transparent,
         shape: 'rect',
       );
+
       final frequencyContractionsPoint = ChartPoint(
         x: timeResult,
         y: frequencyContractions!,

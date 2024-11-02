@@ -1,6 +1,7 @@
 
 import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 import 'package:birthflow_movil/src/core/chart/models/curve_data.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -26,7 +27,7 @@ class ChartMapper {
   }
 
   static List<ChartPoint> transformToChartPoint({
-    required List<CurveData> data,
+    required List<AlertCurve> data,
   }) {
     if (data.isEmpty) {
       return [];

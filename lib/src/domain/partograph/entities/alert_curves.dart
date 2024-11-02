@@ -9,8 +9,8 @@ class AlertCurve {
 }
 
 class AlertCurves {
-  final AlertCurve? alertCurve;
-  final AlertCurve? newAlertCurve;
+  final List<AlertCurve>? alertCurve;
+  final List<AlertCurve>? newAlertCurve;
 
   AlertCurves({
     this.alertCurve,

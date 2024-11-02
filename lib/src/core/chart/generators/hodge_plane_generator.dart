@@ -30,17 +30,17 @@ class HodgePlaneGenerator implements IGenerator {
 
       final timeResult = timeDecimalValue - firstPoint;
 
-      /*final double y =  HodgePlanePosition.fromString(hodgePlaneList[index].hodgePlane).value;
+      final double y =  positionCatalog[hodgePlaneList[index].position]!;
       final currentPoint = ChartPoint(
         x: timeResult,
         y: y,
         radius: 10,
         strokeWidth: 2,
         fillColor: charts.Color.transparent,
-        shape: hodgePlaneList[index].position,
-      );*/
+        shape: hodgePlanePositionCatalog[hodgePlaneList[index].hodgePlane],
+      );
 
-      //points.add(currentPoint);
+      points.add(currentPoint);
     }
     _chartPoint = points;
   }
