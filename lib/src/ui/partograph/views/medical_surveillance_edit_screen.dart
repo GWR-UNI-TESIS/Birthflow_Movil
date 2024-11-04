@@ -6,8 +6,19 @@ import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dar
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+class MedicalSurveillanceEditData {
+  final MedicalSurveillanceTable? medicalSurveillanceTable;
+  final String partographId;
+
+  MedicalSurveillanceEditData({
+    required this.medicalSurveillanceTable,
+    required this.partographId,
+  });
+}
+
+
 class MedicalSurveillanceEditScreen extends StatefulWidget {
-  final MedicalSurveillanceTable? model;
+  final MedicalSurveillanceEditData? model;
 
   const MedicalSurveillanceEditScreen({super.key, this.model});
 
@@ -33,28 +44,28 @@ class MedicalSurveillanceEditState
   void initState() {
     super.initState();
 
-    if (widget.model != null) {
+    if (widget.model?.medicalSurveillanceTable != null) {
       // Si el modelo está presente, inicializa los valores
       final model = widget.model!;
-      timeController.text = DateFormat('HH:mm:ss').format(model.time);
-      frequencyContractions = model.frequencyContractions;
-      painLocation = model.pain; // Ajusta según corresponda
-      painIntensity = model.pain; // Ajusta según corresponda
+      timeController.text = DateFormat('HH:mm:ss').format(model.medicalSurveillanceTable!.time);
+      frequencyContractions = model.medicalSurveillanceTable!.frequencyContractions;
+      painLocation = model.medicalSurveillanceTable!.pain; // Ajusta según corresponda
+      painIntensity = model.medicalSurveillanceTable!.pain; // Ajusta según corresponda
 
       arterialPressureWidget = ArterialPressureWidget(
-        label: model.arterialPressure,
+        label: model.medicalSurveillanceTable!.arterialPressure,
       );
       maternalPulseWidget = FormElementWidget(
         label: 'Pulso Materno',
-        initValue: model.maternalPulse,
+        initValue: model.medicalSurveillanceTable!.maternalPulse,
       );
       fetalHeartRateWidget = FormElementWidget(
         label: 'Frecuencia cardiaca fetal',
-        initValue: model.fetalHeartRate,
+        initValue: model.medicalSurveillanceTable!.fetalHeartRate,
       );
       contractionsDurationWidget = FormElementWidget(
         label: 'Duracion Contracciones',
-        initValue: model.contractionsDuration,
+        initValue: model.medicalSurveillanceTable!.contractionsDuration,
       );
     } else {
       // Inicializa los widgets con valores por defecto si no hay modelo

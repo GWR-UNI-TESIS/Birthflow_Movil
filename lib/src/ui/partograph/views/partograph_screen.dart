@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/hodge_plane.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/position.dart';
@@ -8,7 +9,9 @@ import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_wi
 import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+
 class PartographScreen extends StatefulWidget {
   final String partographId;
 
@@ -44,24 +47,6 @@ class _PartographState extends State<PartographScreen> {
             return const LinearProgressIndicator();
           },
         ),
-        /*Center(
-        child: Column(
-          children: [
-            FilledButton(
-              onPressed: () => context
-                ..go(
-                  AppPaths.home.partographPath
-                      .define(widget.partographId)
-                      .cervicalDilationList
-                      .path,
-                  extra: widget.partographId,
-                ),
-              child: const Text('Dilataciones Cervicales'),
-            ),
-          ],
-        ),
-      ),
-      */
       ),
     );
   }
@@ -95,59 +80,90 @@ class _PartographState extends State<PartographScreen> {
 
   Widget _buildAppBarContent(BuildContext context, Loaded state) {
     return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                state.partograph.name,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              Text(
-                '${state.partograph.recordName} - ${DateFormat('dd/MM/yyyy').format(state.partograph.date)}',
-              ),
-            ],
-          ),
-          TextButton(onPressed: () {}, child: const Text('Modificar')),
-        ],
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              state.partograph.name,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            Text(
+              '${state.partograph.recordName} - ${DateFormat('dd/MM/yyyy').format(state.partograph.date)}',
+            ),
+          ],
+        ),
+        TextButton(onPressed: () {}, child: const Text('Modificar')),
+      ],
     );
   }
 
   Widget _buildContent(BuildContext context, Loaded state, Catalog catalog) {
-
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          FilledButton(onPressed: () {}, child: const Text('Mostrar grafica')),
+          FilledButton(
+            onPressed: () => context
+              ..go(
+                AppPaths.home.partographPath
+                    .define(widget.partographId)
+                    .chart
+                    .path,
+              ),
+            child: const Text('Mostrar grafica'),
+          ),
           _buildGenericCard(
             title: 'Dilataciones cervicales',
             content: _cervicalDilationsContent(state),
+            onPressed: () => context
+              ..go(
+                AppPaths.home.partographPath
+                    .define(widget.partographId)
+                    .cervicalDilationList
+                    .path,
+                extra: widget.partographId,
+              ),
           ),
           _buildGenericCard(
             title: 'Tabla de Vigilancia',
             content: _medicalSurveillanceContent(state),
+            onPressed: () => context
+              ..go(
+                AppPaths.home.partographPath
+                    .define(widget.partographId)
+                    .medicalSurveillanceListPath
+                    .path,
+                extra: widget.partographId,
+              ),
           ),
           _buildGenericCard(
             title: 'Altura de la presentación',
             content: _presentationHeightContent(state, catalog),
+            onPressed: () {},
           ),
           _buildGenericCard(
             title: 'Frecuencia Cardiaca Fetal',
             content: _fetalHeartRatesContent(state),
+            onPressed: () {},
           ),
           _buildGenericCard(
             title: 'Frecuencia de contraciones',
             content: _contractionFrequenciesContent(state),
+            onPressed: () {},
           ),
         ],
       ),
     );
   }
 
-  Widget _buildGenericCard({required String title, required Widget content}) {
+  Widget _buildGenericCard({
+    required String title,
+    required Widget content,
+    required VoidCallback onPressed,
+  }) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(15),
@@ -159,7 +175,10 @@ class _PartographState extends State<PartographScreen> {
             content,
             Align(
               alignment: Alignment.bottomRight,
-              child: TextButton(onPressed: () {}, child: const Text('Mostrar')),
+              child: TextButton(
+                onPressed: onPressed,
+                child: const Text('Mostrar'),
+              ),
             ),
           ],
         ),

@@ -12,8 +12,10 @@ class CervicalDilationEditData {
   final CervicalDilation? cervicalDilation;
   final String partographId;
 
-  CervicalDilationEditData(
-      {required this.cervicalDilation, required this.partographId,});
+  CervicalDilationEditData({
+    required this.cervicalDilation,
+    required this.partographId,
+  });
 }
 
 class CervicalDilationEditScreen extends StatefulWidget {
@@ -32,109 +34,97 @@ class CervicalDilationEditScreen extends StatefulWidget {
 class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
     with SnackbarsMixin {
   final _formKey = GlobalKey<FormState>();
-  late TextEditingController _valueController;
-  late TextEditingController _dateTimecontroller;
+  late final TextEditingController _valueController;
+  late final TextEditingController _dateTimeController;
   TimeOfDay? _selectedTime;
   bool _remOrRam = false;
 
   @override
   void initState() {
     super.initState();
+    final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
+
     _valueController = TextEditingController(
-      text:
-          widget.cervicalDilationEditData.cervicalDilation?.value.toString() ??
-              '',
+      text: cervicalDilation?.value.toString() ?? '',
     );
-
-    _dateTimecontroller = TextEditingController(
-      text: widget.cervicalDilationEditData.cervicalDilation?.hour.toString() ??
-          '',
+    _dateTimeController = TextEditingController(
+      text: cervicalDilation != null
+          ? DateFormat('HH:mm:ss').format(cervicalDilation.hour)
+          : '',
     );
-
-    if (widget.cervicalDilationEditData.cervicalDilation != null) {
-      _selectedTime = TimeOfDay.fromDateTime(
-          widget.cervicalDilationEditData.cervicalDilation!.hour,);
-    }
-    _remOrRam =
-        widget.cervicalDilationEditData.cervicalDilation?.remOrRam ?? false;
+    _selectedTime = cervicalDilation != null
+        ? TimeOfDay.fromDateTime(cervicalDilation.hour)
+        : null;
+    _remOrRam = cervicalDilation?.remOrRam ?? false;
   }
 
   @override
   void dispose() {
     _valueController.dispose();
+    _dateTimeController.dispose();
     super.dispose();
   }
 
   void _saveCervicalDilation(String user) {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
-      final now = DateTime.now();
       final selectedDateTime = DateTime(
-        now.year,
-        now.month,
-        now.day,
-        _selectedTime?.hour ?? now.hour,
-        _selectedTime?.minute ?? now.minute,
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+        _selectedTime?.hour ?? DateTime.now().hour,
+        _selectedTime?.minute ?? DateTime.now().minute,
       );
 
-      if (widget.cervicalDilationEditData.cervicalDilation == null) {
-        bloc.add(
-          SaveCervicalDilation(
-            partographId: widget.cervicalDilationEditData.partographId,
-            value: double.parse(_valueController.text),
-            hour: selectedDateTime,
-            remOrRam: _remOrRam,
-            userId: user,
-          ),
-        );
-      } else {
-        bloc.add(
-          UpdateCervicalDilation(
-            id: widget.cervicalDilationEditData.cervicalDilation!.id,
-            partographId: widget.cervicalDilationEditData.partographId,
-            value: double.parse(_valueController.text),
-            hour: selectedDateTime,
-            remOrRam: _remOrRam,
-            userId: user,
-          ),
-        );
-      }
+      final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
+      final event = cervicalDilation == null
+          ? SaveCervicalDilation(
+              partographId: widget.cervicalDilationEditData.partographId,
+              value: double.parse(_valueController.text),
+              hour: selectedDateTime,
+              remOrRam: _remOrRam,
+            )
+          : UpdateCervicalDilation(
+              id: cervicalDilation.id,
+              partographId: widget.cervicalDilationEditData.partographId,
+              value: double.parse(_valueController.text),
+              hour: selectedDateTime,
+              remOrRam: _remOrRam,
+            );
+
+      bloc.add(event);
     }
   }
 
   Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
+    final picked = await showTimePicker(
       context: context,
       initialTime: _selectedTime ?? TimeOfDay.now(),
     );
     if (picked != null && picked != _selectedTime) {
-      final parsedTime = DateFormat.jm()
-          // ignore: use_build_context_synchronously
-          .parse(picked.format(context));
-      //converting to DateTime so that we can further format on different pattern.
-
-      final formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
       setState(() {
         _selectedTime = picked;
-        _dateTimecontroller.text = formattedTime;
+        _dateTimeController.text = DateFormat('HH:mm:ss').format(
+          DateFormat.jm().parse(picked.format(context)),
+        );
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<AuthenticationBloc>().state;
-    final String user = state.maybeWhen(
-      authenticated: (response) => response.userId!,
-      orElse: () => '',
+    final user = context.select<AuthenticationBloc, String>(
+      (bloc) => bloc.state.maybeWhen(
+        authenticated: (response) => response.userId!,
+        orElse: () => '',
+      ),
     );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.cervicalDilationEditData.cervicalDilation == null
-              ? 'Crear Dilatación Cervical'
-              : 'Editar Dilatación Cervical',
-        ),
+        title: Text(widget.cervicalDilationEditData.cervicalDilation == null
+            ? 'Crear Dilatación Cervical'
+            : 'Editar Dilatación Cervical'),
       ),
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
@@ -151,55 +141,10 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
             key: _formKey,
             child: Column(
               children: [
-                TextFormField(
-                  controller: _valueController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Valor de Dilatación',
-                  ),
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor ingrese un valor';
-                    }
-                    if (double.tryParse(value) == null) {
-                      return 'Por favor ingrese un valor válido';
-                    }
-                    return null;
-                  },
-                ),
+                _buildValueField(),
                 const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () => _selectTime(context),
-                  child: AbsorbPointer(
-                    child: TextFormField(
-                      controller: _dateTimecontroller,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.calendar_today),
-                        border: const OutlineInputBorder(),
-                        labelText: 'Hora',
-                        hintText: _selectedTime != null
-                            ? _selectedTime!.format(context)
-                            : 'Seleccione una hora',
-                      ),
-                      validator: (value) {
-                        if (_selectedTime == null) {
-                          return 'Por favor seleccione una hora';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ),
-                SwitchListTile(
-                  title: const Text('Ram O Rem'),
-                  value: _remOrRam,
-                  onChanged: (value) {
-                    setState(() {
-                      _remOrRam = value;
-                    });
-                  },
-                ),
+                _buildTimeField(context),
+                _buildSwitch(),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => _saveCervicalDilation(user),
@@ -210,6 +155,63 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildValueField() {
+    return TextFormField(
+      controller: _valueController,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: 'Valor de Dilatación',
+      ),
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Por favor ingrese un valor';
+        }
+        if (double.tryParse(value) == null) {
+          return 'Por favor ingrese un valor válido';
+        }
+        return null;
+      },
+    );
+  }
+
+  Widget _buildTimeField(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _selectTime(context),
+      child: AbsorbPointer(
+        child: TextFormField(
+          controller: _dateTimeController,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.calendar_today),
+            border: const OutlineInputBorder(),
+            labelText: 'Hora',
+            hintText: _selectedTime != null
+                ? _selectedTime!.format(context)
+                : 'Seleccione una hora',
+          ),
+          validator: (value) {
+            if (_selectedTime == null) {
+              return 'Por favor seleccione una hora';
+            }
+            return null;
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSwitch() {
+    return SwitchListTile(
+      title: const Text('Ram O Rem'),
+      value: _remOrRam,
+      onChanged: (value) {
+        setState(() {
+          _remOrRam = value;
+        });
+      },
     );
   }
 }

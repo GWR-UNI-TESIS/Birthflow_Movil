@@ -53,11 +53,25 @@ class PartographPath extends Param<PartographPath> {
       : super.only('partographId', parent: homePath);
 
   CervicalDilationPath get cervicalDilationList => CervicalDilationPath(this);
+  MedicalSurveillancePath get medicalSurveillanceListPath => MedicalSurveillancePath(this);
+  ChartPath get chart => ChartPath(this);
 }
 
 class CervicalDilationPath extends Path<CervicalDilationPath> {
   CervicalDilationPath(PartographPath partographPath)
       : super('cervical-dilation-list', parent: partographPath);
+  Path get create => Path('create', parent: this);
+  Path get edit => Path('edit', parent: this);
+}
+
+class ChartPath extends Path<ChartPath> {
+  ChartPath(PartographPath partographPath)
+      : super('chart', parent: partographPath);
+}
+
+class MedicalSurveillancePath extends Path<MedicalSurveillancePath> {
+  MedicalSurveillancePath(PartographPath partographPath)
+      : super('medical-surveillance-table', parent: partographPath);
   Path get create => Path('create', parent: this);
   Path get edit => Path('edit', parent: this);
 }

@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/core/chart/generators/real_curve_generator.d
 import 'package:birthflow_movil/src/core/chart/libs/helper.dart';
 import 'package:birthflow_movil/src/core/chart/libs/mapper.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_data.dart';
+import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/events/chart_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/states/chart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,8 +27,8 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
       if (cervicalDilations == null || cervicalDilations.isEmpty) {
         emit(const Error('Es necesario agregar una dilatacion cervical'));
       } else {
-        final alertcurve = partograph.alertCurves!.alertCurve;
-        final newAlertCurve = partograph.alertCurves!.newAlertCurve;
+        final alertcurve = partograph.curves!.alertCurve;
+        final newAlertCurve = partograph.curves!.newAlertCurve;
 
         final firstPoint =
             Helper.transformToDecimal(cervicalDilations.first.hour);
@@ -35,13 +36,18 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
         final realCurvePoints =
             RealCurveGenerator(cervicalList: cervicalDilations).chartPoint;
 
-        final otherPointsPoints = MedicalSurveillanceGenerator(
-          medicalSurveillanceList: medicalsurveillanceData!,
-          firstPoint: firstPoint,
-        ).chartPoint;
+        List<ChartPoint>? otherPointsPoints = [];
 
-        if (presentationPositionVarietyData != null ||
-            presentationPositionVarietyData!.isNotEmpty) {
+        if (medicalsurveillanceData != null &&
+            medicalsurveillanceData.isNotEmpty) {
+          otherPointsPoints = MedicalSurveillanceGenerator(
+            medicalSurveillanceList: medicalsurveillanceData,
+            firstPoint: firstPoint,
+          ).chartPoint;
+        }
+
+        if (presentationPositionVarietyData != null &&
+            presentationPositionVarietyData.isNotEmpty) {
           final hodgePlanePoints = HodgePlaneGenerator(
             hodgePlaneList: presentationPositionVarietyData,
             firstPoint: firstPoint,
@@ -50,10 +56,10 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
           otherPointsPoints!.addAll(hodgePlanePoints!);
         }
 
-        final alertCurvePoints =
+        final alertCurvePoints = 
             ChartMapper.transformToChartPoint(data: alertcurve!);
-        final newAlertCurvePoints =
-            ChartMapper.transformToChartPoint(data: newAlertCurve!);
+        final newAlertCurvePoints = (newAlertCurve != null)? 
+            ChartMapper.transformToChartPoint(data: newAlertCurve) : List<ChartPoint>.empty();
 
         emit(
           Loaded(

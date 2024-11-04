@@ -14,7 +14,6 @@ _$CervicalDilationRequestImpl _$$CervicalDilationRequestImplFromJson(
       value: (json['value'] as num).toDouble(),
       hour: DateTime.parse(json['hour'] as String),
       remOrRam: json['remOrRam'] as bool,
-      userId: json['userId'] as String,
     );
 
 Map<String, dynamic> _$$CervicalDilationRequestImplToJson(
@@ -25,5 +24,4 @@ Map<String, dynamic> _$$CervicalDilationRequestImplToJson(
       'value': instance.value,
       'hour': instance.hour.toIso8601String(),
       'remOrRam': instance.remOrRam,
-      'userId': instance.userId,
     };

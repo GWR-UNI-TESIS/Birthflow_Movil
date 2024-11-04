@@ -14,7 +14,6 @@ abstract class MedicalSurveillanceUpdateUsecase {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
   });
 }
 
@@ -38,7 +37,6 @@ class MedicalSurveillanceUpdateUsecaseImplementation
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
   }) async {
     return _partographRepository.updateMedicalSurveillance(
       id: id,
@@ -52,7 +50,6 @@ class MedicalSurveillanceUpdateUsecaseImplementation
       frequencyContractions: frequencyContractions,
       pain: pain,
       time: time,
-      userId: userId,
     );
   }
 }

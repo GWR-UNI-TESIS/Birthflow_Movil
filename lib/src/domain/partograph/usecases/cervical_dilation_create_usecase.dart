@@ -7,7 +7,6 @@ abstract class CervicalDilationCreateUseCase {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   });
 }
 
@@ -25,14 +24,12 @@ class CervicalDilationCreateUseCaseImplementation
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   }) async {
     return await _partographRepository.createCervicalDilation(
       partographId: partographId,
       value: value,
       hour: hour,
       remOrRam: remOrRam,
-      userId: userId,
     );
   }
 }

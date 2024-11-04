@@ -491,6 +491,8 @@ class $Mappr implements _i1.AutoMapprInterface {
               _map__i14$ContractionFrequencyResponse_To__i15$ContractionFrequency(
                   value))
           .toList(),
+      curves: _map__i18$AlertCurvesResponse_To__i19$AlertCurves_Nullable(
+          model.curves),
     );
   }
 
@@ -670,6 +672,24 @@ class $Mappr implements _i1.AutoMapprInterface {
     return _i19.AlertCurve(
       cervicalDilation: model.cervicalDilation,
       time: model.time,
+    );
+  }
+
+  _i19.AlertCurves? _map__i18$AlertCurvesResponse_To__i19$AlertCurves_Nullable(
+      _i18.AlertCurvesResponse? input) {
+    final model = input;
+    if (model == null) {
+      return null;
+    }
+    return _i19.AlertCurves(
+      alertCurve: model.alertCurve
+          ?.map<_i19.AlertCurve>(
+              (value) => _map__i20$AlertCurveResponse_To__i19$AlertCurve(value))
+          .toList(),
+      newAlertCurve: model.newAlertCurve
+          ?.map<_i19.AlertCurve>(
+              (value) => _map__i20$AlertCurveResponse_To__i19$AlertCurve(value))
+          .toList(),
     );
   }
 }

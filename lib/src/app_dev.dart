@@ -1,11 +1,12 @@
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/app_router.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
-import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
-import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
@@ -38,9 +39,11 @@ class AppDev extends StatelessWidget {
           create: (BuildContext context) => PartographBloc(
             locator<PartographGetUsecase>(),
             locator<CervicalDilationCreateUseCase>(),
-            locator<CervicalDilationGetUseCase>(),
             locator<CervicalDilationUpdateUseCase>(),
             locator<CervicalDilationDeleteUseCase>(),
+            locator<AlertCurvesGetUseCase>(),
+            locator<MedicalSurveillanceCreateUsecase>(),
+            locator<MedicalSurveillanceUpdateUsecase>(),
           ),
         ),
       ],

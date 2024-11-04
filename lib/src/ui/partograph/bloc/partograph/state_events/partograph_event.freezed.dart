@@ -19,37 +19,112 @@ mixin _$PartographEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String partographId) onFetchData,
-    required TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
     required TResult Function(int id, String partographId, double value,
-            DateTime hour, bool remOrRam, String userId)
+            DateTime hour, bool remOrRam)
         updateCervicalDilation,
-    required TResult Function(int id, String userId) deleteCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String partographId)? onFetchData,
-    TResult? Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult? Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult? Function(int id, String userId)? deleteCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String partographId)? onFetchData,
-    TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult Function(int id, String userId)? deleteCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,6 +136,10 @@ mixin _$PartographEvent {
         updateCervicalDilation,
     required TResult Function(DeleteCervicalDilation value)
         deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +148,10 @@ mixin _$PartographEvent {
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +160,10 @@ mixin _$PartographEvent {
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -166,13 +253,38 @@ class _$onFetchDataImpl implements onFetchData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String partographId) onFetchData,
-    required TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
     required TResult Function(int id, String partographId, double value,
-            DateTime hour, bool remOrRam, String userId)
+            DateTime hour, bool remOrRam)
         updateCervicalDilation,
-    required TResult Function(int id, String userId) deleteCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
   }) {
     return onFetchData(partographId);
   }
@@ -181,13 +293,38 @@ class _$onFetchDataImpl implements onFetchData {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String partographId)? onFetchData,
-    TResult? Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult? Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult? Function(int id, String userId)? deleteCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
   }) {
     return onFetchData?.call(partographId);
   }
@@ -196,13 +333,38 @@ class _$onFetchDataImpl implements onFetchData {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String partographId)? onFetchData,
-    TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult Function(int id, String userId)? deleteCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (onFetchData != null) {
@@ -220,6 +382,10 @@ class _$onFetchDataImpl implements onFetchData {
         updateCervicalDilation,
     required TResult Function(DeleteCervicalDilation value)
         deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
   }) {
     return onFetchData(this);
   }
@@ -231,6 +397,10 @@ class _$onFetchDataImpl implements onFetchData {
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
   }) {
     return onFetchData?.call(this);
   }
@@ -242,6 +412,10 @@ class _$onFetchDataImpl implements onFetchData {
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (onFetchData != null) {
@@ -267,12 +441,7 @@ abstract class _$$SaveCervicalDilationImplCopyWith<$Res> {
           $Res Function(_$SaveCervicalDilationImpl) then) =
       __$$SaveCervicalDilationImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {String partographId,
-      double value,
-      DateTime hour,
-      bool remOrRam,
-      String userId});
+  $Res call({String partographId, double value, DateTime hour, bool remOrRam});
 }
 
 /// @nodoc
@@ -290,7 +459,6 @@ class __$$SaveCervicalDilationImplCopyWithImpl<$Res>
     Object? value = null,
     Object? hour = null,
     Object? remOrRam = null,
-    Object? userId = null,
   }) {
     return _then(_$SaveCervicalDilationImpl(
       partographId: null == partographId
@@ -309,10 +477,6 @@ class __$$SaveCervicalDilationImplCopyWithImpl<$Res>
           ? _value.remOrRam
           : remOrRam // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -324,8 +488,7 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
       {required this.partographId,
       required this.value,
       required this.hour,
-      required this.remOrRam,
-      required this.userId});
+      required this.remOrRam});
 
   @override
   final String partographId;
@@ -335,12 +498,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
   final DateTime hour;
   @override
   final bool remOrRam;
-  @override
-  final String userId;
 
   @override
   String toString() {
-    return 'PartographEvent.saveCervicalDilation(partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam, userId: $userId)';
+    return 'PartographEvent.saveCervicalDilation(partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam)';
   }
 
   @override
@@ -353,13 +514,12 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             (identical(other.value, value) || other.value == value) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.remOrRam, remOrRam) ||
-                other.remOrRam == remOrRam) &&
-            (identical(other.userId, userId) || other.userId == userId));
+                other.remOrRam == remOrRam));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, partographId, value, hour, remOrRam, userId);
+      Object.hash(runtimeType, partographId, value, hour, remOrRam);
 
   @JsonKey(ignore: true)
   @override
@@ -373,48 +533,122 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String partographId) onFetchData,
-    required TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
     required TResult Function(int id, String partographId, double value,
-            DateTime hour, bool remOrRam, String userId)
+            DateTime hour, bool remOrRam)
         updateCervicalDilation,
-    required TResult Function(int id, String userId) deleteCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
   }) {
-    return saveCervicalDilation(partographId, value, hour, remOrRam, userId);
+    return saveCervicalDilation(partographId, value, hour, remOrRam);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String partographId)? onFetchData,
-    TResult? Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult? Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult? Function(int id, String userId)? deleteCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
   }) {
-    return saveCervicalDilation?.call(
-        partographId, value, hour, remOrRam, userId);
+    return saveCervicalDilation?.call(partographId, value, hour, remOrRam);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String partographId)? onFetchData,
-    TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult Function(int id, String userId)? deleteCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (saveCervicalDilation != null) {
-      return saveCervicalDilation(partographId, value, hour, remOrRam, userId);
+      return saveCervicalDilation(partographId, value, hour, remOrRam);
     }
     return orElse();
   }
@@ -428,6 +662,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
         updateCervicalDilation,
     required TResult Function(DeleteCervicalDilation value)
         deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
   }) {
     return saveCervicalDilation(this);
   }
@@ -439,6 +677,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
   }) {
     return saveCervicalDilation?.call(this);
   }
@@ -450,6 +692,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (saveCervicalDilation != null) {
@@ -464,14 +710,12 @@ abstract class SaveCervicalDilation implements PartographEvent {
       {required final String partographId,
       required final double value,
       required final DateTime hour,
-      required final bool remOrRam,
-      required final String userId}) = _$SaveCervicalDilationImpl;
+      required final bool remOrRam}) = _$SaveCervicalDilationImpl;
 
   String get partographId;
   double get value;
   DateTime get hour;
   bool get remOrRam;
-  String get userId;
   @JsonKey(ignore: true)
   _$$SaveCervicalDilationImplCopyWith<_$SaveCervicalDilationImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -489,8 +733,7 @@ abstract class _$$UpdateCervicalDilationImplCopyWith<$Res> {
       String partographId,
       double value,
       DateTime hour,
-      bool remOrRam,
-      String userId});
+      bool remOrRam});
 }
 
 /// @nodoc
@@ -510,7 +753,6 @@ class __$$UpdateCervicalDilationImplCopyWithImpl<$Res>
     Object? value = null,
     Object? hour = null,
     Object? remOrRam = null,
-    Object? userId = null,
   }) {
     return _then(_$UpdateCervicalDilationImpl(
       id: null == id
@@ -533,10 +775,6 @@ class __$$UpdateCervicalDilationImplCopyWithImpl<$Res>
           ? _value.remOrRam
           : remOrRam // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -549,8 +787,7 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
       required this.partographId,
       required this.value,
       required this.hour,
-      required this.remOrRam,
-      required this.userId});
+      required this.remOrRam});
 
   @override
   final int id;
@@ -562,12 +799,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
   final DateTime hour;
   @override
   final bool remOrRam;
-  @override
-  final String userId;
 
   @override
   String toString() {
-    return 'PartographEvent.updateCervicalDilation(id: $id, partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam, userId: $userId)';
+    return 'PartographEvent.updateCervicalDilation(id: $id, partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam)';
   }
 
   @override
@@ -581,13 +816,12 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             (identical(other.value, value) || other.value == value) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.remOrRam, remOrRam) ||
-                other.remOrRam == remOrRam) &&
-            (identical(other.userId, userId) || other.userId == userId));
+                other.remOrRam == remOrRam));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, partographId, value, hour, remOrRam, userId);
+      Object.hash(runtimeType, id, partographId, value, hour, remOrRam);
 
   @JsonKey(ignore: true)
   @override
@@ -600,50 +834,123 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String partographId) onFetchData,
-    required TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
     required TResult Function(int id, String partographId, double value,
-            DateTime hour, bool remOrRam, String userId)
+            DateTime hour, bool remOrRam)
         updateCervicalDilation,
-    required TResult Function(int id, String userId) deleteCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
   }) {
-    return updateCervicalDilation(
-        id, partographId, value, hour, remOrRam, userId);
+    return updateCervicalDilation(id, partographId, value, hour, remOrRam);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String partographId)? onFetchData,
-    TResult? Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult? Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult? Function(int id, String userId)? deleteCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
   }) {
     return updateCervicalDilation?.call(
-        id, partographId, value, hour, remOrRam, userId);
+        id, partographId, value, hour, remOrRam);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String partographId)? onFetchData,
-    TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult Function(int id, String userId)? deleteCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (updateCervicalDilation != null) {
-      return updateCervicalDilation(
-          id, partographId, value, hour, remOrRam, userId);
+      return updateCervicalDilation(id, partographId, value, hour, remOrRam);
     }
     return orElse();
   }
@@ -657,6 +964,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
         updateCervicalDilation,
     required TResult Function(DeleteCervicalDilation value)
         deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
   }) {
     return updateCervicalDilation(this);
   }
@@ -668,6 +979,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
   }) {
     return updateCervicalDilation?.call(this);
   }
@@ -679,6 +994,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (updateCervicalDilation != null) {
@@ -694,15 +1013,13 @@ abstract class UpdateCervicalDilation implements PartographEvent {
       required final String partographId,
       required final double value,
       required final DateTime hour,
-      required final bool remOrRam,
-      required final String userId}) = _$UpdateCervicalDilationImpl;
+      required final bool remOrRam}) = _$UpdateCervicalDilationImpl;
 
   int get id;
   String get partographId;
   double get value;
   DateTime get hour;
   bool get remOrRam;
-  String get userId;
   @JsonKey(ignore: true)
   _$$UpdateCervicalDilationImplCopyWith<_$UpdateCervicalDilationImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -715,7 +1032,7 @@ abstract class _$$DeleteCervicalDilationImplCopyWith<$Res> {
           $Res Function(_$DeleteCervicalDilationImpl) then) =
       __$$DeleteCervicalDilationImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int id, String userId});
+  $Res call({int id});
 }
 
 /// @nodoc
@@ -731,17 +1048,12 @@ class __$$DeleteCervicalDilationImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = null,
   }) {
     return _then(_$DeleteCervicalDilationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -749,16 +1061,14 @@ class __$$DeleteCervicalDilationImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
-  const _$DeleteCervicalDilationImpl({required this.id, required this.userId});
+  const _$DeleteCervicalDilationImpl({required this.id});
 
   @override
   final int id;
-  @override
-  final String userId;
 
   @override
   String toString() {
-    return 'PartographEvent.deleteCervicalDilation(id: $id, userId: $userId)';
+    return 'PartographEvent.deleteCervicalDilation(id: $id)';
   }
 
   @override
@@ -766,12 +1076,11 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteCervicalDilationImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId);
+  int get hashCode => Object.hash(runtimeType, id);
 
   @JsonKey(ignore: true)
   @override
@@ -784,47 +1093,122 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String partographId) onFetchData,
-    required TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
     required TResult Function(int id, String partographId, double value,
-            DateTime hour, bool remOrRam, String userId)
+            DateTime hour, bool remOrRam)
         updateCervicalDilation,
-    required TResult Function(int id, String userId) deleteCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
   }) {
-    return deleteCervicalDilation(id, userId);
+    return deleteCervicalDilation(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String partographId)? onFetchData,
-    TResult? Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult? Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult? Function(int id, String userId)? deleteCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
   }) {
-    return deleteCervicalDilation?.call(id, userId);
+    return deleteCervicalDilation?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String partographId)? onFetchData,
-    TResult Function(String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
     TResult Function(int id, String partographId, double value, DateTime hour,
-            bool remOrRam, String userId)?
+            bool remOrRam)?
         updateCervicalDilation,
-    TResult Function(int id, String userId)? deleteCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (deleteCervicalDilation != null) {
-      return deleteCervicalDilation(id, userId);
+      return deleteCervicalDilation(id);
     }
     return orElse();
   }
@@ -838,6 +1222,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
         updateCervicalDilation,
     required TResult Function(DeleteCervicalDilation value)
         deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
   }) {
     return deleteCervicalDilation(this);
   }
@@ -849,6 +1237,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
   }) {
     return deleteCervicalDilation?.call(this);
   }
@@ -860,6 +1252,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
     required TResult orElse(),
   }) {
     if (deleteCervicalDilation != null) {
@@ -870,13 +1266,843 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
 }
 
 abstract class DeleteCervicalDilation implements PartographEvent {
-  const factory DeleteCervicalDilation(
-      {required final int id,
-      required final String userId}) = _$DeleteCervicalDilationImpl;
+  const factory DeleteCervicalDilation({required final int id}) =
+      _$DeleteCervicalDilationImpl;
 
   int get id;
-  String get userId;
   @JsonKey(ignore: true)
   _$$DeleteCervicalDilationImplCopyWith<_$DeleteCervicalDilationImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreateMedicalSurveillanceImplCopyWith<$Res> {
+  factory _$$CreateMedicalSurveillanceImplCopyWith(
+          _$CreateMedicalSurveillanceImpl value,
+          $Res Function(_$CreateMedicalSurveillanceImpl) then) =
+      __$$CreateMedicalSurveillanceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String partographId,
+      String letter,
+      String maternalPosition,
+      String arterialPressure,
+      String maternalPulse,
+      String fetalHeartRate,
+      String contractionsDuration,
+      String frequencyContractions,
+      String pain,
+      DateTime time});
+}
+
+/// @nodoc
+class __$$CreateMedicalSurveillanceImplCopyWithImpl<$Res>
+    extends _$PartographEventCopyWithImpl<$Res, _$CreateMedicalSurveillanceImpl>
+    implements _$$CreateMedicalSurveillanceImplCopyWith<$Res> {
+  __$$CreateMedicalSurveillanceImplCopyWithImpl(
+      _$CreateMedicalSurveillanceImpl _value,
+      $Res Function(_$CreateMedicalSurveillanceImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? partographId = null,
+    Object? letter = null,
+    Object? maternalPosition = null,
+    Object? arterialPressure = null,
+    Object? maternalPulse = null,
+    Object? fetalHeartRate = null,
+    Object? contractionsDuration = null,
+    Object? frequencyContractions = null,
+    Object? pain = null,
+    Object? time = null,
+  }) {
+    return _then(_$CreateMedicalSurveillanceImpl(
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      letter: null == letter
+          ? _value.letter
+          : letter // ignore: cast_nullable_to_non_nullable
+              as String,
+      maternalPosition: null == maternalPosition
+          ? _value.maternalPosition
+          : maternalPosition // ignore: cast_nullable_to_non_nullable
+              as String,
+      arterialPressure: null == arterialPressure
+          ? _value.arterialPressure
+          : arterialPressure // ignore: cast_nullable_to_non_nullable
+              as String,
+      maternalPulse: null == maternalPulse
+          ? _value.maternalPulse
+          : maternalPulse // ignore: cast_nullable_to_non_nullable
+              as String,
+      fetalHeartRate: null == fetalHeartRate
+          ? _value.fetalHeartRate
+          : fetalHeartRate // ignore: cast_nullable_to_non_nullable
+              as String,
+      contractionsDuration: null == contractionsDuration
+          ? _value.contractionsDuration
+          : contractionsDuration // ignore: cast_nullable_to_non_nullable
+              as String,
+      frequencyContractions: null == frequencyContractions
+          ? _value.frequencyContractions
+          : frequencyContractions // ignore: cast_nullable_to_non_nullable
+              as String,
+      pain: null == pain
+          ? _value.pain
+          : pain // ignore: cast_nullable_to_non_nullable
+              as String,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
+  const _$CreateMedicalSurveillanceImpl(
+      {required this.partographId,
+      required this.letter,
+      required this.maternalPosition,
+      required this.arterialPressure,
+      required this.maternalPulse,
+      required this.fetalHeartRate,
+      required this.contractionsDuration,
+      required this.frequencyContractions,
+      required this.pain,
+      required this.time});
+
+  @override
+  final String partographId;
+  @override
+  final String letter;
+  @override
+  final String maternalPosition;
+  @override
+  final String arterialPressure;
+  @override
+  final String maternalPulse;
+  @override
+  final String fetalHeartRate;
+  @override
+  final String contractionsDuration;
+  @override
+  final String frequencyContractions;
+  @override
+  final String pain;
+  @override
+  final DateTime time;
+
+  @override
+  String toString() {
+    return 'PartographEvent.createMedicalSurveillance(partographId: $partographId, letter: $letter, maternalPosition: $maternalPosition, arterialPressure: $arterialPressure, maternalPulse: $maternalPulse, fetalHeartRate: $fetalHeartRate, contractionsDuration: $contractionsDuration, frequencyContractions: $frequencyContractions, pain: $pain, time: $time)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateMedicalSurveillanceImpl &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
+            (identical(other.letter, letter) || other.letter == letter) &&
+            (identical(other.maternalPosition, maternalPosition) ||
+                other.maternalPosition == maternalPosition) &&
+            (identical(other.arterialPressure, arterialPressure) ||
+                other.arterialPressure == arterialPressure) &&
+            (identical(other.maternalPulse, maternalPulse) ||
+                other.maternalPulse == maternalPulse) &&
+            (identical(other.fetalHeartRate, fetalHeartRate) ||
+                other.fetalHeartRate == fetalHeartRate) &&
+            (identical(other.contractionsDuration, contractionsDuration) ||
+                other.contractionsDuration == contractionsDuration) &&
+            (identical(other.frequencyContractions, frequencyContractions) ||
+                other.frequencyContractions == frequencyContractions) &&
+            (identical(other.pain, pain) || other.pain == pain) &&
+            (identical(other.time, time) || other.time == time));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      partographId,
+      letter,
+      maternalPosition,
+      arterialPressure,
+      maternalPulse,
+      fetalHeartRate,
+      contractionsDuration,
+      frequencyContractions,
+      pain,
+      time);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateMedicalSurveillanceImplCopyWith<_$CreateMedicalSurveillanceImpl>
+      get copyWith => __$$CreateMedicalSurveillanceImplCopyWithImpl<
+          _$CreateMedicalSurveillanceImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String partographId) onFetchData,
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
+        saveCervicalDilation,
+    required TResult Function(int id, String partographId, double value,
+            DateTime hour, bool remOrRam)
+        updateCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
+  }) {
+    return createMedicalSurveillance(
+        partographId,
+        letter,
+        maternalPosition,
+        arterialPressure,
+        maternalPulse,
+        fetalHeartRate,
+        contractionsDuration,
+        frequencyContractions,
+        pain,
+        time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String partographId)? onFetchData,
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult? Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+  }) {
+    return createMedicalSurveillance?.call(
+        partographId,
+        letter,
+        maternalPosition,
+        arterialPressure,
+        maternalPulse,
+        fetalHeartRate,
+        contractionsDuration,
+        frequencyContractions,
+        pain,
+        time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String partographId)? onFetchData,
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    required TResult orElse(),
+  }) {
+    if (createMedicalSurveillance != null) {
+      return createMedicalSurveillance(
+          partographId,
+          letter,
+          maternalPosition,
+          arterialPressure,
+          maternalPulse,
+          fetalHeartRate,
+          contractionsDuration,
+          frequencyContractions,
+          pain,
+          time);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(onFetchData value) onFetchData,
+    required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
+    required TResult Function(UpdateCervicalDilation value)
+        updateCervicalDilation,
+    required TResult Function(DeleteCervicalDilation value)
+        deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
+  }) {
+    return createMedicalSurveillance(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(onFetchData value)? onFetchData,
+    TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+  }) {
+    return createMedicalSurveillance?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(onFetchData value)? onFetchData,
+    TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    required TResult orElse(),
+  }) {
+    if (createMedicalSurveillance != null) {
+      return createMedicalSurveillance(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreateMedicalSurveillance implements PartographEvent {
+  const factory CreateMedicalSurveillance(
+      {required final String partographId,
+      required final String letter,
+      required final String maternalPosition,
+      required final String arterialPressure,
+      required final String maternalPulse,
+      required final String fetalHeartRate,
+      required final String contractionsDuration,
+      required final String frequencyContractions,
+      required final String pain,
+      required final DateTime time}) = _$CreateMedicalSurveillanceImpl;
+
+  String get partographId;
+  String get letter;
+  String get maternalPosition;
+  String get arterialPressure;
+  String get maternalPulse;
+  String get fetalHeartRate;
+  String get contractionsDuration;
+  String get frequencyContractions;
+  String get pain;
+  DateTime get time;
+  @JsonKey(ignore: true)
+  _$$CreateMedicalSurveillanceImplCopyWith<_$CreateMedicalSurveillanceImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateMedicalSurveillanceImplCopyWith<$Res> {
+  factory _$$UpdateMedicalSurveillanceImplCopyWith(
+          _$UpdateMedicalSurveillanceImpl value,
+          $Res Function(_$UpdateMedicalSurveillanceImpl) then) =
+      __$$UpdateMedicalSurveillanceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {int id,
+      String partographId,
+      String letter,
+      String maternalPosition,
+      String arterialPressure,
+      String maternalPulse,
+      String fetalHeartRate,
+      String contractionsDuration,
+      String frequencyContractions,
+      String pain,
+      DateTime time});
+}
+
+/// @nodoc
+class __$$UpdateMedicalSurveillanceImplCopyWithImpl<$Res>
+    extends _$PartographEventCopyWithImpl<$Res, _$UpdateMedicalSurveillanceImpl>
+    implements _$$UpdateMedicalSurveillanceImplCopyWith<$Res> {
+  __$$UpdateMedicalSurveillanceImplCopyWithImpl(
+      _$UpdateMedicalSurveillanceImpl _value,
+      $Res Function(_$UpdateMedicalSurveillanceImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? partographId = null,
+    Object? letter = null,
+    Object? maternalPosition = null,
+    Object? arterialPressure = null,
+    Object? maternalPulse = null,
+    Object? fetalHeartRate = null,
+    Object? contractionsDuration = null,
+    Object? frequencyContractions = null,
+    Object? pain = null,
+    Object? time = null,
+  }) {
+    return _then(_$UpdateMedicalSurveillanceImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      letter: null == letter
+          ? _value.letter
+          : letter // ignore: cast_nullable_to_non_nullable
+              as String,
+      maternalPosition: null == maternalPosition
+          ? _value.maternalPosition
+          : maternalPosition // ignore: cast_nullable_to_non_nullable
+              as String,
+      arterialPressure: null == arterialPressure
+          ? _value.arterialPressure
+          : arterialPressure // ignore: cast_nullable_to_non_nullable
+              as String,
+      maternalPulse: null == maternalPulse
+          ? _value.maternalPulse
+          : maternalPulse // ignore: cast_nullable_to_non_nullable
+              as String,
+      fetalHeartRate: null == fetalHeartRate
+          ? _value.fetalHeartRate
+          : fetalHeartRate // ignore: cast_nullable_to_non_nullable
+              as String,
+      contractionsDuration: null == contractionsDuration
+          ? _value.contractionsDuration
+          : contractionsDuration // ignore: cast_nullable_to_non_nullable
+              as String,
+      frequencyContractions: null == frequencyContractions
+          ? _value.frequencyContractions
+          : frequencyContractions // ignore: cast_nullable_to_non_nullable
+              as String,
+      pain: null == pain
+          ? _value.pain
+          : pain // ignore: cast_nullable_to_non_nullable
+              as String,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
+  const _$UpdateMedicalSurveillanceImpl(
+      {required this.id,
+      required this.partographId,
+      required this.letter,
+      required this.maternalPosition,
+      required this.arterialPressure,
+      required this.maternalPulse,
+      required this.fetalHeartRate,
+      required this.contractionsDuration,
+      required this.frequencyContractions,
+      required this.pain,
+      required this.time});
+
+  @override
+  final int id;
+  @override
+  final String partographId;
+  @override
+  final String letter;
+  @override
+  final String maternalPosition;
+  @override
+  final String arterialPressure;
+  @override
+  final String maternalPulse;
+  @override
+  final String fetalHeartRate;
+  @override
+  final String contractionsDuration;
+  @override
+  final String frequencyContractions;
+  @override
+  final String pain;
+  @override
+  final DateTime time;
+
+  @override
+  String toString() {
+    return 'PartographEvent.updateMedicalSurveillance(id: $id, partographId: $partographId, letter: $letter, maternalPosition: $maternalPosition, arterialPressure: $arterialPressure, maternalPulse: $maternalPulse, fetalHeartRate: $fetalHeartRate, contractionsDuration: $contractionsDuration, frequencyContractions: $frequencyContractions, pain: $pain, time: $time)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateMedicalSurveillanceImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
+            (identical(other.letter, letter) || other.letter == letter) &&
+            (identical(other.maternalPosition, maternalPosition) ||
+                other.maternalPosition == maternalPosition) &&
+            (identical(other.arterialPressure, arterialPressure) ||
+                other.arterialPressure == arterialPressure) &&
+            (identical(other.maternalPulse, maternalPulse) ||
+                other.maternalPulse == maternalPulse) &&
+            (identical(other.fetalHeartRate, fetalHeartRate) ||
+                other.fetalHeartRate == fetalHeartRate) &&
+            (identical(other.contractionsDuration, contractionsDuration) ||
+                other.contractionsDuration == contractionsDuration) &&
+            (identical(other.frequencyContractions, frequencyContractions) ||
+                other.frequencyContractions == frequencyContractions) &&
+            (identical(other.pain, pain) || other.pain == pain) &&
+            (identical(other.time, time) || other.time == time));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      partographId,
+      letter,
+      maternalPosition,
+      arterialPressure,
+      maternalPulse,
+      fetalHeartRate,
+      contractionsDuration,
+      frequencyContractions,
+      pain,
+      time);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateMedicalSurveillanceImplCopyWith<_$UpdateMedicalSurveillanceImpl>
+      get copyWith => __$$UpdateMedicalSurveillanceImplCopyWithImpl<
+          _$UpdateMedicalSurveillanceImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String partographId) onFetchData,
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
+        saveCervicalDilation,
+    required TResult Function(int id, String partographId, double value,
+            DateTime hour, bool remOrRam)
+        updateCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
+  }) {
+    return updateMedicalSurveillance(
+        id,
+        partographId,
+        letter,
+        maternalPosition,
+        arterialPressure,
+        maternalPulse,
+        fetalHeartRate,
+        contractionsDuration,
+        frequencyContractions,
+        pain,
+        time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String partographId)? onFetchData,
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult? Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+  }) {
+    return updateMedicalSurveillance?.call(
+        id,
+        partographId,
+        letter,
+        maternalPosition,
+        arterialPressure,
+        maternalPulse,
+        fetalHeartRate,
+        contractionsDuration,
+        frequencyContractions,
+        pain,
+        time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String partographId)? onFetchData,
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    required TResult orElse(),
+  }) {
+    if (updateMedicalSurveillance != null) {
+      return updateMedicalSurveillance(
+          id,
+          partographId,
+          letter,
+          maternalPosition,
+          arterialPressure,
+          maternalPulse,
+          fetalHeartRate,
+          contractionsDuration,
+          frequencyContractions,
+          pain,
+          time);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(onFetchData value) onFetchData,
+    required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
+    required TResult Function(UpdateCervicalDilation value)
+        updateCervicalDilation,
+    required TResult Function(DeleteCervicalDilation value)
+        deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
+  }) {
+    return updateMedicalSurveillance(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(onFetchData value)? onFetchData,
+    TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+  }) {
+    return updateMedicalSurveillance?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(onFetchData value)? onFetchData,
+    TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    required TResult orElse(),
+  }) {
+    if (updateMedicalSurveillance != null) {
+      return updateMedicalSurveillance(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateMedicalSurveillance implements PartographEvent {
+  const factory UpdateMedicalSurveillance(
+      {required final int id,
+      required final String partographId,
+      required final String letter,
+      required final String maternalPosition,
+      required final String arterialPressure,
+      required final String maternalPulse,
+      required final String fetalHeartRate,
+      required final String contractionsDuration,
+      required final String frequencyContractions,
+      required final String pain,
+      required final DateTime time}) = _$UpdateMedicalSurveillanceImpl;
+
+  int get id;
+  String get partographId;
+  String get letter;
+  String get maternalPosition;
+  String get arterialPressure;
+  String get maternalPulse;
+  String get fetalHeartRate;
+  String get contractionsDuration;
+  String get frequencyContractions;
+  String get pain;
+  DateTime get time;
+  @JsonKey(ignore: true)
+  _$$UpdateMedicalSurveillanceImplCopyWith<_$UpdateMedicalSurveillanceImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

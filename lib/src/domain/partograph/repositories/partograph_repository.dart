@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
@@ -40,7 +41,6 @@ abstract class PartographRepository {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   });
 
   Future<CervicalDilation?> updateCervicalDilation({
@@ -48,13 +48,11 @@ abstract class PartographRepository {
     required String partographId,
     required double value,
     required DateTime hour,
-    required bool remOrRam,
-    required String userId,
+    required bool remOrRam
   });
 
   Future<CervicalDilation?> deleteCervicalDilation({
     required int id,
-    required String userId,
   });
 
   Future<List<MedicalSurveillanceTable>?> getMedicalSurveillance({
@@ -72,7 +70,6 @@ abstract class PartographRepository {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
   });
 
   Future<MedicalSurveillanceTable?> updateMedicalSurveillance({
@@ -87,12 +84,11 @@ abstract class PartographRepository {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
+
   });
 
   Future<MedicalSurveillanceTable?> deleteMedicalSurveillance({
     required int id,
-    required String userId,
   });
 
   Future<List<PresentationPositionVariety>?> getPresentationPositionVariety({
@@ -119,5 +115,9 @@ abstract class PartographRepository {
   Future<PresentationPositionVariety?> deletePresentationPositionVariety({
     required int id,
     required String userId,
+  });
+  
+  Future<AlertCurves?> getCurves({
+    required String partographId,
   });
 }

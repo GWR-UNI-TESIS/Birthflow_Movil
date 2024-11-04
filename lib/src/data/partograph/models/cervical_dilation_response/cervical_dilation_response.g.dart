@@ -14,6 +14,10 @@ _$CervicalDilationResponseImpl _$$CervicalDilationResponseImplFromJson(
       value: (json['value'] as num).toDouble(),
       hour: DateTime.parse(json['hour'] as String),
       remOrRam: json['remOrRam'] as bool,
+      curves: json['curves'] == null
+          ? null
+          : AlertCurvesResponse.fromJson(
+              json['curves'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CervicalDilationResponseImplToJson(
@@ -24,4 +28,5 @@ Map<String, dynamic> _$$CervicalDilationResponseImplToJson(
       'value': instance.value,
       'hour': instance.hour.toIso8601String(),
       'remOrRam': instance.remOrRam,
+      'curves': instance.curves?.toJson(),
     };

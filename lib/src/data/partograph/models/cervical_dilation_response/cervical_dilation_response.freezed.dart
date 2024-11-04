@@ -26,6 +26,7 @@ mixin _$CervicalDilationResponse {
   double get value => throw _privateConstructorUsedError;
   DateTime get hour => throw _privateConstructorUsedError;
   bool get remOrRam => throw _privateConstructorUsedError;
+  AlertCurvesResponse? get curves => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,10 @@ abstract class $CervicalDilationResponseCopyWith<$Res> {
       String partographId,
       double value,
       DateTime hour,
-      bool remOrRam});
+      bool remOrRam,
+      AlertCurvesResponse? curves});
+
+  $AlertCurvesResponseCopyWith<$Res>? get curves;
 }
 
 /// @nodoc
@@ -66,6 +70,7 @@ class _$CervicalDilationResponseCopyWithImpl<$Res,
     Object? value = null,
     Object? hour = null,
     Object? remOrRam = null,
+    Object? curves = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,7 +93,23 @@ class _$CervicalDilationResponseCopyWithImpl<$Res,
           ? _value.remOrRam
           : remOrRam // ignore: cast_nullable_to_non_nullable
               as bool,
+      curves: freezed == curves
+          ? _value.curves
+          : curves // ignore: cast_nullable_to_non_nullable
+              as AlertCurvesResponse?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AlertCurvesResponseCopyWith<$Res>? get curves {
+    if (_value.curves == null) {
+      return null;
+    }
+
+    return $AlertCurvesResponseCopyWith<$Res>(_value.curves!, (value) {
+      return _then(_value.copyWith(curves: value) as $Val);
+    });
   }
 }
 
@@ -106,7 +127,11 @@ abstract class _$$CervicalDilationResponseImplCopyWith<$Res>
       String partographId,
       double value,
       DateTime hour,
-      bool remOrRam});
+      bool remOrRam,
+      AlertCurvesResponse? curves});
+
+  @override
+  $AlertCurvesResponseCopyWith<$Res>? get curves;
 }
 
 /// @nodoc
@@ -127,6 +152,7 @@ class __$$CervicalDilationResponseImplCopyWithImpl<$Res>
     Object? value = null,
     Object? hour = null,
     Object? remOrRam = null,
+    Object? curves = freezed,
   }) {
     return _then(_$CervicalDilationResponseImpl(
       id: null == id
@@ -149,6 +175,10 @@ class __$$CervicalDilationResponseImplCopyWithImpl<$Res>
           ? _value.remOrRam
           : remOrRam // ignore: cast_nullable_to_non_nullable
               as bool,
+      curves: freezed == curves
+          ? _value.curves
+          : curves // ignore: cast_nullable_to_non_nullable
+              as AlertCurvesResponse?,
     ));
   }
 }
@@ -161,7 +191,8 @@ class _$CervicalDilationResponseImpl implements _CervicalDilationResponse {
       required this.partographId,
       required this.value,
       required this.hour,
-      required this.remOrRam});
+      required this.remOrRam,
+      this.curves});
 
   factory _$CervicalDilationResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$CervicalDilationResponseImplFromJson(json);
@@ -176,10 +207,12 @@ class _$CervicalDilationResponseImpl implements _CervicalDilationResponse {
   final DateTime hour;
   @override
   final bool remOrRam;
+  @override
+  final AlertCurvesResponse? curves;
 
   @override
   String toString() {
-    return 'CervicalDilationResponse(id: $id, partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam)';
+    return 'CervicalDilationResponse(id: $id, partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam, curves: $curves)';
   }
 
   @override
@@ -193,13 +226,14 @@ class _$CervicalDilationResponseImpl implements _CervicalDilationResponse {
             (identical(other.value, value) || other.value == value) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.remOrRam, remOrRam) ||
-                other.remOrRam == remOrRam));
+                other.remOrRam == remOrRam) &&
+            (identical(other.curves, curves) || other.curves == curves));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, partographId, value, hour, remOrRam);
+      Object.hash(runtimeType, id, partographId, value, hour, remOrRam, curves);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +256,8 @@ abstract class _CervicalDilationResponse implements CervicalDilationResponse {
       required final String partographId,
       required final double value,
       required final DateTime hour,
-      required final bool remOrRam}) = _$CervicalDilationResponseImpl;
+      required final bool remOrRam,
+      final AlertCurvesResponse? curves}) = _$CervicalDilationResponseImpl;
 
   factory _CervicalDilationResponse.fromJson(Map<String, dynamic> json) =
       _$CervicalDilationResponseImpl.fromJson;
@@ -237,6 +272,8 @@ abstract class _CervicalDilationResponse implements CervicalDilationResponse {
   DateTime get hour;
   @override
   bool get remOrRam;
+  @override
+  AlertCurvesResponse? get curves;
   @override
   @JsonKey(ignore: true)
   _$$CervicalDilationResponseImplCopyWith<_$CervicalDilationResponseImpl>

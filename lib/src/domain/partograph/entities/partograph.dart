@@ -17,8 +17,8 @@ class Partograph {
   final List<PresentationPositionVariety>? presentationPositionVarieties;
   final List<FetalHeartRate>? fetalHeartRates;
   final List<ContractionFrequency>? contractionFrequencies;
-  final AlertCurves? alertCurves;
-  
+  final AlertCurves? curves;
+
   Partograph({
     this.partographId,
     required this.name,
@@ -31,6 +31,39 @@ class Partograph {
     this.presentationPositionVarieties,
     this.fetalHeartRates,
     this.contractionFrequencies,
-    this.alertCurves,
+    this.curves,
   });
+
+  Partograph copyWith({
+    String? partographId,
+    String? name,
+    String? recordName,
+    DateTime? date,
+    String? observation,
+    String? workTime,
+    List<CervicalDilation>? cervicalDilations,
+    List<MedicalSurveillanceTable>? medicalSurveillanceTable,
+    List<PresentationPositionVariety>? presentationPositionVarieties,
+    List<FetalHeartRate>? fetalHeartRates,
+    List<ContractionFrequency>? contractionFrequencies,
+    AlertCurves? curves,
+  }) {
+    return Partograph(
+      partographId: partographId ?? this.partographId,
+      name: name ?? this.name,
+      recordName: recordName ?? this.recordName,
+      date: date ?? this.date,
+      observation: observation ?? this.observation,
+      workTime: workTime ?? this.workTime,
+      cervicalDilations: cervicalDilations ?? this.cervicalDilations,
+      medicalSurveillanceTable:
+          medicalSurveillanceTable ?? this.medicalSurveillanceTable,
+      presentationPositionVarieties:
+          presentationPositionVarieties ?? this.presentationPositionVarieties,
+      fetalHeartRates: fetalHeartRates ?? this.fetalHeartRates,
+      contractionFrequencies:
+          contractionFrequencies ?? this.contractionFrequencies,
+      curves: curves ?? this.curves,
+    );
+  }
 }

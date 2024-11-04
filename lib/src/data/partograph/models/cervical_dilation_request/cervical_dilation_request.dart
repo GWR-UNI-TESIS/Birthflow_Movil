@@ -11,7 +11,6 @@ class CervicalDilationRequest with _$CervicalDilationRequest {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   }) = _CervicalDilationRequest;
 
   factory CervicalDilationRequest.fromJson(Map<String, dynamic> json) =>

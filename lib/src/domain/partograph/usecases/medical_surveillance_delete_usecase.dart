@@ -4,7 +4,6 @@ import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_re
 abstract class MedicalSurveillanceDeleteUsecase {
   Future<MedicalSurveillanceTable?> execute({
     required int id,
-    required String userId,
   });
 }
 
@@ -18,11 +17,9 @@ class MedicalSurveillanceDeleteUsecaseImplementation
   @override
   Future<MedicalSurveillanceTable?> execute({
     required int id,
-    required String userId,
   }) async {
     return _partographRepository.deleteMedicalSurveillance(
       id: id,
-      userId: userId,
     );
   }
 }

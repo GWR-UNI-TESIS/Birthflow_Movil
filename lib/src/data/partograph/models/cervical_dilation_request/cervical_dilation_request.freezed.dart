@@ -26,7 +26,6 @@ mixin _$CervicalDilationRequest {
   double get value => throw _privateConstructorUsedError;
   DateTime get hour => throw _privateConstructorUsedError;
   bool get remOrRam => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,8 +44,7 @@ abstract class $CervicalDilationRequestCopyWith<$Res> {
       String partographId,
       double value,
       DateTime hour,
-      bool remOrRam,
-      String userId});
+      bool remOrRam});
 }
 
 /// @nodoc
@@ -68,7 +66,6 @@ class _$CervicalDilationRequestCopyWithImpl<$Res,
     Object? value = null,
     Object? hour = null,
     Object? remOrRam = null,
-    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -91,10 +88,6 @@ class _$CervicalDilationRequestCopyWithImpl<$Res,
           ? _value.remOrRam
           : remOrRam // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -113,8 +106,7 @@ abstract class _$$CervicalDilationRequestImplCopyWith<$Res>
       String partographId,
       double value,
       DateTime hour,
-      bool remOrRam,
-      String userId});
+      bool remOrRam});
 }
 
 /// @nodoc
@@ -135,7 +127,6 @@ class __$$CervicalDilationRequestImplCopyWithImpl<$Res>
     Object? value = null,
     Object? hour = null,
     Object? remOrRam = null,
-    Object? userId = null,
   }) {
     return _then(_$CervicalDilationRequestImpl(
       id: freezed == id
@@ -158,10 +149,6 @@ class __$$CervicalDilationRequestImplCopyWithImpl<$Res>
           ? _value.remOrRam
           : remOrRam // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -174,8 +161,7 @@ class _$CervicalDilationRequestImpl implements _CervicalDilationRequest {
       required this.partographId,
       required this.value,
       required this.hour,
-      required this.remOrRam,
-      required this.userId});
+      required this.remOrRam});
 
   factory _$CervicalDilationRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$CervicalDilationRequestImplFromJson(json);
@@ -190,12 +176,10 @@ class _$CervicalDilationRequestImpl implements _CervicalDilationRequest {
   final DateTime hour;
   @override
   final bool remOrRam;
-  @override
-  final String userId;
 
   @override
   String toString() {
-    return 'CervicalDilationRequest(id: $id, partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam, userId: $userId)';
+    return 'CervicalDilationRequest(id: $id, partographId: $partographId, value: $value, hour: $hour, remOrRam: $remOrRam)';
   }
 
   @override
@@ -209,14 +193,13 @@ class _$CervicalDilationRequestImpl implements _CervicalDilationRequest {
             (identical(other.value, value) || other.value == value) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.remOrRam, remOrRam) ||
-                other.remOrRam == remOrRam) &&
-            (identical(other.userId, userId) || other.userId == userId));
+                other.remOrRam == remOrRam));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, partographId, value, hour, remOrRam, userId);
+      Object.hash(runtimeType, id, partographId, value, hour, remOrRam);
 
   @JsonKey(ignore: true)
   @override
@@ -239,8 +222,7 @@ abstract class _CervicalDilationRequest implements CervicalDilationRequest {
       required final String partographId,
       required final double value,
       required final DateTime hour,
-      required final bool remOrRam,
-      required final String userId}) = _$CervicalDilationRequestImpl;
+      required final bool remOrRam}) = _$CervicalDilationRequestImpl;
 
   factory _CervicalDilationRequest.fromJson(Map<String, dynamic> json) =
       _$CervicalDilationRequestImpl.fromJson;
@@ -255,8 +237,6 @@ abstract class _CervicalDilationRequest implements CervicalDilationRequest {
   DateTime get hour;
   @override
   bool get remOrRam;
-  @override
-  String get userId;
   @override
   @JsonKey(ignore: true)
   _$$CervicalDilationRequestImplCopyWith<_$CervicalDilationRequestImpl>

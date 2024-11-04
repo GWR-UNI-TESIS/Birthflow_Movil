@@ -1,4 +1,5 @@
 import 'package:birthflow_movil/src/config/router/path.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_edit_screen.dart';
@@ -17,72 +18,59 @@ class CervicalDilationListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1,
         title: const Text('Dilataciones Cervicales'),
       ),
-      /*/
       body: BlocBuilder<PartographBloc, PartographState>(
         builder: (context, state) {
           return state.maybeWhen(
-            initial: () => const Center(child: CircularProgressIndicator()),
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (cervicalDilation, data, message) {
-              return (cervicalDilation == null || cervicalDilation.isEmpty)
-                  ? const Center(child: Text('No hay datos'))
-                  : CustomScrollView(
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              final item = cervicalDilation[index];
-                              return ListTile(
-                                title: Text(
-                                  '${item.value} - ${item.hour} -',
-                                ),
-                                subtitle: (item.remOrRam)
-                                    ? const Chip(label: Text('Ram O Rem'))
-                                    : null,
-                                onTap: () => context.go(
-                                  AppPaths.home.partographPath
-                                      .define(partographId)
-                                      .cervicalDilationList
-                                      .edit
-                                      .path,
-                                  extra: CervicalDilationEditData(
-                                    cervicalDilation: item,
-                                    partographId: partographId,
-                                  ),
-                                ),
-                              );
-                            },
-                            childCount: cervicalDilation.length,
-                          ),
-                        ),
-                      ],
-                    );
-            },
-            error: (errorMessage) =>
-                Center(child: Text('Error: $errorMessage')),
-            empty: () => const Center(
-              child: Text('No hay datos'),
-            ),
-            orElse: () => Container(),
+            loaded: (partograph, _) => partograph.cervicalDilations?.isEmpty ?? true
+                ? const Center(child: Text('No hay datos'))
+                : _buildCervicalDilationList(partograph.cervicalDilations!),
+            error: (errorMessage) => Center(child: Text('Error: $errorMessage')),
+            orElse: () => const Center(child: CircularProgressIndicator()),
           );
         },
       ),
-      */
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => context.go(
-          AppPaths.home.partographPath
-              .define(partographId)
-              .cervicalDilationList
-              .create
-              .path,
-          extra: CervicalDilationEditData(
-            cervicalDilation: null,
-            partographId: partographId,
+        onPressed: () => _navigateToEdit(context, null),
+      ),
+    );
+  }
+
+   Widget _buildCervicalDilationList(List<CervicalDilation> cervicalDilations) {
+    return CustomScrollView(
+      slivers: [
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final item = cervicalDilations[index];
+              return _buildCervicalDilationTile(context, item);
+            },
+            childCount: cervicalDilations.length,
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _buildCervicalDilationTile(BuildContext context, CervicalDilation item) {
+    return ListTile(
+      title: Text('${item.value} - ${item.hour}'),
+      subtitle: item.remOrRam ? const Chip(label: Text('Ram O Rem')) : null,
+      onTap: () => _navigateToEdit(context, item),
+      
+    );
+  }
+
+  void _navigateToEdit(BuildContext context, CervicalDilation? item) {
+    context.go(
+      AppPaths.home.partographPath.define(partographId).cervicalDilationList.edit.path,
+      extra: CervicalDilationEditData(
+        cervicalDilation: item,
+        partographId: partographId,
       ),
     );
   }

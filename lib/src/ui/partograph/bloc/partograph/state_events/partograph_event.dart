@@ -12,7 +12,6 @@ class PartographEvent with _$PartographEvent {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   }) = SaveCervicalDilation;
 
   const factory PartographEvent.updateCervicalDilation({
@@ -21,11 +20,37 @@ class PartographEvent with _$PartographEvent {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   }) = UpdateCervicalDilation;
 
   const factory PartographEvent.deleteCervicalDilation({
     required int id,
-    required String userId,
   }) = DeleteCervicalDilation;
+
+  const factory PartographEvent.createMedicalSurveillance({
+    required String partographId,
+    required String letter,
+    required String maternalPosition,
+    required String arterialPressure,
+    required String maternalPulse,
+    required String fetalHeartRate,
+    required String contractionsDuration,
+    required String frequencyContractions,
+    required String pain,
+    required DateTime time,
+  }) = CreateMedicalSurveillance;
+
+  // Nuevo evento para actualizar un registro en MedicalSurveillanceTable
+  const factory PartographEvent.updateMedicalSurveillance({
+    required int id,
+    required String partographId,
+    required String letter,
+    required String maternalPosition,
+    required String arterialPressure,
+    required String maternalPulse,
+    required String fetalHeartRate,
+    required String contractionsDuration,
+    required String frequencyContractions,
+    required String pain,
+    required DateTime time,
+  }) = UpdateMedicalSurveillance;
 }

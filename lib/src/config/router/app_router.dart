@@ -11,6 +11,9 @@ import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/chart_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -122,6 +125,49 @@ class AppRouter {
                       final data = state.extra! as CervicalDilationEditData;
                       return CervicalDilationEditScreen(
                         cervicalDilationEditData: data,
+                      );
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppPaths.home.partographPath.chart.goRoute,
+                builder: (context, state) {
+                  return ChartScreen();
+                },
+              ),
+              GoRoute(
+                path: AppPaths
+                    .home.partographPath.medicalSurveillanceListPath.goRoute,
+                builder: (context, state) {
+                  final partographId =
+                      state.pathParameters[AppPaths.home.partographPath.id]!;
+                  return MedicalSurveillanceListScreen(
+                    partographId: partographId,
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: AppPaths.home.partographPath
+                        .medicalSurveillanceListPath.create.goRoute,
+                    builder: (context, state) {
+                      final partographId = state
+                          .pathParameters[AppPaths.home.partographPath.id]!;
+                      return MedicalSurveillanceEditScreen(
+                        model: MedicalSurveillanceEditData(
+                          medicalSurveillanceTable: null,
+                          partographId: partographId,
+                        ),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: AppPaths
+                        .home.partographPath.cervicalDilationList.edit.goRoute,
+                    builder: (context, state) {
+                      final data = state.extra! as MedicalSurveillanceEditData;
+                      return MedicalSurveillanceEditScreen(
+                        model: data,
                       );
                     },
                   ),

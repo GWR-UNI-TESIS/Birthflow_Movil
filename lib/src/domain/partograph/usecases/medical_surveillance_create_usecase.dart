@@ -13,7 +13,6 @@ abstract class MedicalSurveillanceCreateUsecase {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
   });
 }
 
@@ -36,7 +35,6 @@ class MedicalSurveillanceCreateUsecaseImplementation
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
   }) async {
     return _partographRepository.createMedicalSurveillance(
       partographId: partographId,
@@ -49,7 +47,6 @@ class MedicalSurveillanceCreateUsecaseImplementation
       frequencyContractions: frequencyContractions,
       pain: pain,
       time: time,
-      userId: userId,
     );
   }
 }

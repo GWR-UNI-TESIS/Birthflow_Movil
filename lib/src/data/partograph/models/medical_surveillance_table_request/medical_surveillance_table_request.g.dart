@@ -19,7 +19,6 @@ _$MedicalSurveillanceTableRequestImpl
           frequencyContractions: json['frequencyContractions'] as String,
           pain: json['pain'] as String,
           time: DateTime.parse(json['time'] as String),
-          userId: json['userId'] as String?,
         );
 
 Map<String, dynamic> _$$MedicalSurveillanceTableRequestImplToJson(
@@ -35,5 +34,4 @@ Map<String, dynamic> _$$MedicalSurveillanceTableRequestImplToJson(
       'frequencyContractions': instance.frequencyContractions,
       'pain': instance.pain,
       'time': instance.time.toIso8601String(),
-      'userId': instance.userId,
     };

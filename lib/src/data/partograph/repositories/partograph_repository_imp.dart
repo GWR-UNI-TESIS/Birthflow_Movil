@@ -1,4 +1,5 @@
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
+import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
@@ -8,6 +9,7 @@ import 'package:birthflow_movil/src/data/partograph/models/partograph_request/pa
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_request/presentation_position_variety_entity_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
@@ -122,7 +124,6 @@ class PartographRepositoryImplementation implements PartographRepository {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -134,7 +135,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         value: value,
         hour: hour,
         remOrRam: remOrRam,
-        userId: userId,
       );
 
       final result =
@@ -152,7 +152,6 @@ class PartographRepositoryImplementation implements PartographRepository {
   @override
   Future<CervicalDilation?> deleteCervicalDilation({
     required int id,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -164,7 +163,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         value: 6.0,
         hour: DateTime.now(),
         remOrRam: false,
-        userId: userId,
       );
 
       final result =
@@ -207,7 +205,6 @@ class PartographRepositoryImplementation implements PartographRepository {
     required double value,
     required DateTime hour,
     required bool remOrRam,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -219,7 +216,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         value: value,
         hour: hour,
         remOrRam: remOrRam,
-        userId: userId,
       );
 
       final result =
@@ -246,7 +242,6 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -262,7 +257,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         frequencyContractions: frequencyContractions,
         pain: pain,
         time: time,
-        userId: userId,
       );
 
       final result = await _partographService.createMedicalSurveillanceTable(
@@ -282,7 +276,6 @@ class PartographRepositoryImplementation implements PartographRepository {
   @override
   Future<MedicalSurveillanceTable?> deleteMedicalSurveillance({
     required int id,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -299,7 +292,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         frequencyContractions: 'frequencyContractions',
         pain: 'pain',
         time: DateTime.now(),
-        userId: userId,
       );
 
       final result = await _partographService.deleteMedicalSurveillanceTable(
@@ -353,7 +345,6 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -370,7 +361,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         frequencyContractions: frequencyContractions,
         pain: pain,
         time: time,
-        userId: userId,
       );
 
       final result = await _partographService.updateMedicalSurveillanceTable(
@@ -512,6 +502,24 @@ class PartographRepositoryImplementation implements PartographRepository {
           PresentationPositionVariety>(result.response);
     } catch (error) {
       return null;
+    }
+  }
+
+  @override
+  Future<AlertCurves?> getCurves({required String partographId}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+      final result = await _partographService.getCurves(token, partographId);
+
+      return _mapper.convert<AlertCurvesResponse, AlertCurves>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      // Manejo de errores inesperados durante el proceso de renovación
+      _logger.e('Token refresh exception', error: e, stackTrace: stackTrace);
+
+      rethrow;
     }
   }
 }

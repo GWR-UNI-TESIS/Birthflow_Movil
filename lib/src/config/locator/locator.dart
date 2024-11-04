@@ -13,10 +13,13 @@ import 'package:birthflow_movil/src/domain/auth/usecases/logout_usercase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
@@ -38,7 +41,7 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<CatalogRepository>(
     CatalogRepositoryImplementation(locator<CatalogService>()),
   );
-  
+
   // Registra el AuthenticationService como singleton en GetIt
   locator.registerSingleton<AuthenticationService>(AuthenticationService(dio));
 
@@ -121,6 +124,24 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<CervicalDilationUpdateUseCase>(
     CervicalDilationUpdateUseCaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<AlertCurvesGetUseCase>(
+    AlertCurvesGetUseCaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<MedicalSurveillanceCreateUsecase>(
+    MedicalSurveillanceCreateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<MedicalSurveillanceUpdateUsecase>(
+    MedicalSurveillanceUpdateUsecaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );

@@ -16,7 +16,6 @@ class MedicalSurveillanceTableRequest with _$MedicalSurveillanceTableRequest {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-    String? userId,
   }) = _MedicalSurveillanceTableRequest;
 
   factory MedicalSurveillanceTableRequest.fromJson(Map<String, dynamic> json) =>

@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cervical_dilation_response.freezed.dart';
@@ -11,6 +12,7 @@ class CervicalDilationResponse with _$CervicalDilationResponse {
     required double value,
     required DateTime hour,
     required bool remOrRam,
+    AlertCurvesResponse? curves,
   }) = _CervicalDilationResponse;
 
   factory CervicalDilationResponse.fromJson(Map<String, dynamic> json) =>

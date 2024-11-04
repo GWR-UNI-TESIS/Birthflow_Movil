@@ -1,4 +1,5 @@
 import 'package:birthflow_movil/src/core/models/api_reponse/api_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
@@ -111,5 +112,11 @@ abstract class PartographService {
   Future<ApiResponse<PresentationPositionVarietyEntityResponse>> deletePresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,
+  );
+
+  @GET('/api/partograph/curve/{partographId}')
+  Future<ApiResponse<AlertCurvesResponse>> getCurves(
+    @Header('Authorization') String token,
+    @Path('partographId') String partographId,
   );
 }

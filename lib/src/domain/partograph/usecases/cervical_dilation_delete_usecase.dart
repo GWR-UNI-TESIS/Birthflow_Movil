@@ -4,7 +4,6 @@ import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_re
 abstract class CervicalDilationDeleteUseCase {
   Future<CervicalDilation?> execute({
     required int id,
-    required String userId,
   });
 }
 
@@ -19,11 +18,9 @@ class CervicalDilationDeleteUseCaseImplementation
   @override
   Future<CervicalDilation?> execute({
     required int id,
-    required String userId,
   }) async {
     return await _partographRepository.deleteCervicalDilation(
       id: id,
-      userId: userId,
     );
   }
 }

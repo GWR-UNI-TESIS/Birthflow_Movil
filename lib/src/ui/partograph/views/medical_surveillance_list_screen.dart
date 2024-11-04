@@ -1,164 +1,143 @@
+import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_edit_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-class CervicalDilationListScreen extends StatelessWidget {
-  final List<MedicalSurveillanceTable> list;
+class MedicalSurveillanceListScreen extends StatelessWidget {
+  final String partographId;
 
-  const CervicalDilationListScreen({super.key, required this.list});
+  const MedicalSurveillanceListScreen({super.key, required this.partographId});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tabla'),
       ),
-      body: Container(
-        alignment: Alignment.topLeft,
-        padding: const EdgeInsets.only(top: 10),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Table(
-                border: TableBorder.all(
-                  color: Colors.black54,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                defaultColumnWidth: const IntrinsicColumnWidth(),
-                columnWidths: const {0: FixedColumnWidth(130)},
-                children: [
-                  TableRow(
-                    children: [
-                      TableCell(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 2,
-                          ),
-                          child: Text(
-                            ' ',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        TableCell(
-                          verticalAlignment: TableCellVerticalAlignment.middle,
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 1,
-                              horizontal: 10,
-                            ),
-                            child: Text(
-                              String.fromCharCode(97 + i),
-                              style: Theme.of(context).textTheme.labelSmall,
-                            ),
-                          ),
-                        ),  
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Tiempo',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value: i >= list.length
-                              ? ' '
-                              : '${list[i].time.hour} : ${list[i].time.minute}',
-                        ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Posicion Materna',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value:
-                              i >= list.length ? ' ' : list[i].maternalPosition,
-                        ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Presion Arterial',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value:
-                              i >= list.length ? ' ' : list[i].arterialPressure,
-                        ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Pulso Materno',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value: i >= list.length ? ' ' : list[i].maternalPulse,
-                        ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Frec. Cardiaca Fetal',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value:
-                              i >= list.length ? ' ' : list[i].fetalHeartRate,
-                        ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Duracion Contracciones',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value: i >= list.length
-                              ? ' '
-                              : list[i].contractionsDuration,
-                        ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Frec. Contracciones',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value: i >= list.length
-                              ? ' '
-                              : list[i].frequencyContractions,
-                        ),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      const HeaderItem(
-                        value: 'Dolor',
-                      ),
-                      for (int i = 0; i <= 15; i++)
-                        Item(
-                          value: i >= list.length ? ' ' : list[i].pain,
-                        ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
+      body: BlocBuilder<PartographBloc, PartographState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            loaded: (partograph, _) =>
+                partograph.medicalSurveillanceTable?.isEmpty ?? true
+                    ? const Center(child: Text('No hay datos'))
+                    : _buildTable(partograph.medicalSurveillanceTable!),
+            error: (errorMessage) =>
+                Center(child: Text('Error: $errorMessage')),
+            orElse: () => const Center(child: CircularProgressIndicator()),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _navigateToEdit(context, null),
+        child: const Text('Agregar'),
+      ),
+    );
+  }
+
+  Widget _buildTable(List<MedicalSurveillanceTable> list) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Table(
+        border: TableBorder.all(
+          color: Colors.black54,
+          borderRadius: BorderRadius.circular(5),
         ),
+        defaultColumnWidth: const IntrinsicColumnWidth(),
+        columnWidths: const {0: FixedColumnWidth(130)},
+        children: [
+          _buildHeaderRow(),
+          _buildDataRow(
+            'Tiempo',
+            list,
+            (item) => '${item.time.hour}:${item.time.minute}',
+          ),
+          _buildDataRow(
+            'Posición Materna',
+            list,
+            (item) => item.maternalPosition,
+          ),
+          _buildDataRow(
+            'Presión Arterial',
+            list,
+            (item) => item.arterialPressure,
+          ),
+          _buildDataRow('Pulso Materno', list, (item) => item.maternalPulse),
+          _buildDataRow(
+            'Frec. Cardiaca Fetal',
+            list,
+            (item) => item.fetalHeartRate,
+          ),
+          _buildDataRow(
+            'Duración Contracciones',
+            list,
+            (item) => item.contractionsDuration,
+          ),
+          _buildDataRow(
+            'Frec. Contracciones',
+            list,
+            (item) => item.frequencyContractions,
+          ),
+          _buildDataRow('Dolor', list, (item) => item.pain),
+        ],
+      ),
+    );
+  }
+
+  TableRow _buildHeaderRow() {
+    return TableRow(
+      children: [
+        const TableCell(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 2),
+            child: Text(''),
+          ),
+        ),
+        for (int i = 0; i <= 15; i++)
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+              child: Text(
+                String.fromCharCode(97 + i),
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  TableRow _buildDataRow(
+    String title,
+    List<MedicalSurveillanceTable> list,
+    String Function(MedicalSurveillanceTable) getValue,
+  ) {
+    return TableRow(
+      children: [
+        HeaderItem(value: title),
+        for (int i = 0; i <= 15; i++)
+          Item(value: i >= list.length ? ' ' : getValue(list[i])),
+      ],
+    );
+  }
+
+  void _navigateToEdit(BuildContext context, MedicalSurveillanceTable? item) {
+    context.go(
+      AppPaths.home.partographPath
+          .define(partographId)
+          .medicalSurveillanceListPath
+          .edit
+          .path,
+      extra: MedicalSurveillanceEditData(
+        medicalSurveillanceTable: item,
+        partographId: partographId,
       ),
     );
   }
@@ -177,7 +156,7 @@ class Item extends StatelessWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 2),
         child: Text(
-          value!,
+          value ?? '',
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ),
