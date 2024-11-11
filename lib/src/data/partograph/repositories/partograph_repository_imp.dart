@@ -59,7 +59,8 @@ class PartographRepositoryImplementation implements PartographRepository {
       if (result.response == null) return null;
 
       return _mapper.convert<PartographResponse, Partograph>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -82,7 +83,8 @@ class PartographRepositoryImplementation implements PartographRepository {
       return _mapper.convertList<PartographListResponse, PartographList>(
         result.response!,
       );
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return [];
     }
   }
@@ -100,7 +102,7 @@ class PartographRepositoryImplementation implements PartographRepository {
       );
     } catch (e, stackTrace) {
       // Manejo de errores inesperados durante el proceso de renovación
-      _logger.e('Token refresh exception', error: e, stackTrace: stackTrace);
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
 
       rethrow;
     }
@@ -144,7 +146,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper
           .convert<CervicalDilationResponse, CervicalDilation>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -172,7 +175,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper
           .convert<CervicalDilationResponse, CervicalDilation>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -193,7 +197,8 @@ class PartographRepositoryImplementation implements PartographRepository {
       return _mapper.convertList<CervicalDilationResponse, CervicalDilation>(
         result.response!,
       );
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -225,7 +230,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper
           .convert<CervicalDilationResponse, CervicalDilation>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -248,6 +254,7 @@ class PartographRepositoryImplementation implements PartographRepository {
       final token = 'Bearer $tokenGuardado';
 
       final request = MedicalSurveillanceTableRequest(
+        id: 0,
         partographId: partographId,
         maternalPosition: maternalPosition,
         arterialPressure: arterialPressure,
@@ -256,6 +263,7 @@ class PartographRepositoryImplementation implements PartographRepository {
         contractionsDuration: contractionsDuration,
         frequencyContractions: frequencyContractions,
         pain: pain,
+        letter: 'a',
         time: time,
       );
 
@@ -268,7 +276,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper.convert<MedicalSurveillanceTableResponse,
           MedicalSurveillanceTable>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -291,6 +300,7 @@ class PartographRepositoryImplementation implements PartographRepository {
         contractionsDuration: 'contractionsDuration',
         frequencyContractions: 'frequencyContractions',
         pain: 'pain',
+        letter: 'letter',
         time: DateTime.now(),
       );
 
@@ -303,7 +313,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper.convert<MedicalSurveillanceTableResponse,
           MedicalSurveillanceTable>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -327,7 +338,8 @@ class PartographRepositoryImplementation implements PartographRepository {
           MedicalSurveillanceTable>(
         result.response!,
       );
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -360,6 +372,7 @@ class PartographRepositoryImplementation implements PartographRepository {
         contractionsDuration: contractionsDuration,
         frequencyContractions: frequencyContractions,
         pain: pain,
+        letter: letter,
         time: time,
       );
 
@@ -374,7 +387,8 @@ class PartographRepositoryImplementation implements PartographRepository {
           .convert<MedicalSurveillanceTableResponse, MedicalSurveillanceTable>(
         result.response,
       );
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -408,7 +422,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper.convert<PresentationPositionVarietyEntityResponse,
           PresentationPositionVariety>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -440,7 +455,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper.convert<PresentationPositionVarietyEntityResponse,
           PresentationPositionVariety>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -464,7 +480,8 @@ class PartographRepositoryImplementation implements PartographRepository {
           PresentationPositionVariety>(
         result.response!,
       );
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -500,7 +517,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       return _mapper.convert<PresentationPositionVarietyEntityResponse,
           PresentationPositionVariety>(result.response);
-    } catch (error) {
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -516,9 +534,7 @@ class PartographRepositoryImplementation implements PartographRepository {
         result.response,
       );
     } catch (e, stackTrace) {
-      // Manejo de errores inesperados durante el proceso de renovación
-      _logger.e('Token refresh exception', error: e, stackTrace: stackTrace);
-
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       rethrow;
     }
   }

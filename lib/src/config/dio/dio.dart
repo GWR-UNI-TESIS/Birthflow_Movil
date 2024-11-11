@@ -5,9 +5,9 @@ Dio buildDioClient(String base, String deviceInfo) {
     BaseOptions(
       baseUrl: base,
       connectTimeout:
-          const Duration(seconds: 30), // Tiempo de espera de conexión
+          const Duration(seconds: 100), // Tiempo de espera de conexión
       receiveTimeout:
-          const Duration(seconds: 30), // Tiempo de espera de recepción
+          const Duration(seconds: 100), // Tiempo de espera de recepción
       validateStatus: (status) {
         // Aceptar todos los códigos de estado menores a 500
         return status != null && status < 500;

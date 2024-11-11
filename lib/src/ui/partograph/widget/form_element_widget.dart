@@ -1,53 +1,71 @@
 import 'package:flutter/material.dart';
 
-enum _Optionstype {
+enum OptionType {
   minute("'"),
-  seconds("''");
+  second("''");
 
   final String value;
-  const _Optionstype(this.value);
+  const OptionType(this.value);
 }
 
-// ignore: must_be_immutable
 class FormElementWidget extends StatefulWidget {
   final String label;
   final double? width;
-  final String? initValue;
-  
+  final String? initialValue;
+  final ValueChanged<String>? onChanged;
+
   const FormElementWidget({
     super.key,
     required this.label,
     this.width,
-    this.initValue,
+    this.initialValue,
+    this.onChanged,
   });
 
   @override
-  // ignore: library_private_types_in_public_api
-  _FormElementState createState() => _FormElementState();
-
-  String get value => _FormElementState()._value ?? '';
+  State<FormElementWidget> createState() => _FormElementWidgetState();
 }
 
-class _FormElementState extends State<FormElementWidget> {
-  _Optionstype selectedValue = _Optionstype.minute;
-  String _stringValue = '';
-  String? _value;
+class _FormElementWidgetState extends State<FormElementWidget> {
+  final TextEditingController _textController = TextEditingController();
+  late ValueNotifier<OptionType> selectedOption;
+  late ValueNotifier<String> _compositeValue;
 
   @override
   void initState() {
     super.initState();
-    if (widget.initValue != null) {
-      final parts = widget.initValue!.split('x');
-      if (parts.length == 2) {
-        _stringValue = parts[0];
-        final option = _Optionstype.values.firstWhere(
-          (e) => e.value == parts[1],
-          orElse: () => _Optionstype.minute, // Default en caso de error
-        );
-        selectedValue = option;
-      }
-    }
-    _value = widget.initValue;
+
+    // Configura los valores iniciales
+    final initialParts = widget.initialValue?.split('x') ?? [''];
+    final initialStringValue = initialParts[0];
+    final initialOption = initialParts.length == 2
+        ? OptionType.values.firstWhere(
+            (e) => e.value == initialParts[1],
+            orElse: () => OptionType.minute,
+          )
+        : OptionType.minute;
+
+    _textController.text = initialStringValue;
+    selectedOption = ValueNotifier<OptionType>(initialOption);
+    _compositeValue =
+        ValueNotifier<String>('${initialStringValue}x${initialOption.value}');
+
+    _textController.addListener(_updateCompositeValue);
+    selectedOption.addListener(_updateCompositeValue);
+  }
+
+  void _updateCompositeValue() {
+    final newValue = '${_textController.text}x${selectedOption.value.value}';
+    _compositeValue.value = newValue;
+    widget.onChanged?.call(newValue);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    selectedOption.dispose();
+    _compositeValue.dispose();
+    super.dispose();
   }
 
   @override
@@ -55,9 +73,9 @@ class _FormElementState extends State<FormElementWidget> {
     return SizedBox(
       width: widget.width,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            alignment: AlignmentDirectional.centerStart,
+          Padding(
             padding: const EdgeInsets.only(bottom: 5, left: 2),
             child: Text(
               widget.label,
@@ -65,58 +83,12 @@ class _FormElementState extends State<FormElementWidget> {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Espacio entre la 'x' y el TextField
-              Expanded(
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Porfavor ingresar un dato';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    _stringValue = value;
-                    _updateValue();
-                  },
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
+              Expanded(child: _buildTextInputField()),
+              const SizedBox(width: 10),
               const Text('X'),
-              const SizedBox(
-                width: 10,
-              ),
-              // Espacio entre el TextField y el DropdownButton
-              Expanded(
-                flex: 2,
-                child: DropdownButtonFormField<_Optionstype>(
-                  value: selectedValue,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  onChanged: (newValue) {
-                    setState(() {
-                      selectedValue = newValue!;
-                      _updateValue();
-                    });
-                  },
-                  items: _Optionstype.values.map((value) {
-                    return DropdownMenuItem<_Optionstype>(
-                      value: value,
-                      child: Text(
-                        value == _Optionstype.minute ? 'minuto' : 'segundo',
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
+              const SizedBox(width: 10),
+              Expanded(flex: 2, child: _buildDropdownButton()),
             ],
           ),
         ],
@@ -124,7 +96,44 @@ class _FormElementState extends State<FormElementWidget> {
     );
   }
 
-  void _updateValue() {
-    _value = '${_stringValue}x${selectedValue.value}';
+  Widget _buildTextInputField() {
+    return TextFormField(
+      controller: _textController,
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Por favor, ingrese un dato';
+        }
+        return null;
+      },
+    );
+  }
+
+  Widget _buildDropdownButton() {
+    return ValueListenableBuilder<OptionType>(
+      valueListenable: selectedOption,
+      builder: (context, value, _) {
+        return DropdownButtonFormField<OptionType>(
+          value: value,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+          ),
+          onChanged: (newValue) {
+            if (newValue != null) {
+              selectedOption.value = newValue;
+            }
+          },
+          items: OptionType.values.map((option) {
+            return DropdownMenuItem<OptionType>(
+              value: option,
+              child: Text(option == OptionType.minute ? 'minuto' : 'segundo'),
+            );
+          }).toList(),
+        );
+      },
+    );
   }
 }

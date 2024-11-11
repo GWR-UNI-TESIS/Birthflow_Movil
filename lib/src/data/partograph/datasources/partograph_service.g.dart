@@ -340,7 +340,7 @@ class _PartographService implements PartographService {
     )
                 .compose(
                   _dio.options,
-                  '/api/Partograph/Get/medical-surveillance/${partographId}',
+                  '/api/partograph/medical-surveillance-table/partograph/{parthographId}',
                   queryParameters: queryParameters,
                   data: _data,
                 )
@@ -388,7 +388,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Create/medical-surveillance',
+              '/api/partograph/create/medical-surveillance-table',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -425,13 +425,13 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(Options(
-      method: 'PUT',
+      method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Update/medical-surveillance',
+              '/api/partograph/update/medical-surveillance-table',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -474,7 +474,7 @@ class _PartographService implements PartographService {
     )
             .compose(
               _dio.options,
-              '/api/Partograph/Delete/medical-surveillance',
+              '/api/partograph/delete/medical-surveillance-table',
               queryParameters: queryParameters,
               data: _data,
             )

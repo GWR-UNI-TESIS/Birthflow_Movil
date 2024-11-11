@@ -26,6 +26,7 @@ class MedicalSurveillanceGenerator implements IGenerator {
     List<ChartPoint>? frequencyContractionsList;
 
     fetalHeartRateList = [];
+    frequencyContractionsList = [];
     for (var index = 0; index < medicalSurveillanceList.length; index++) {
       final fetalHeartRateValue =
           medicalSurveillanceList[index].fetalHeartRate.split('x');
@@ -60,10 +61,10 @@ class MedicalSurveillanceGenerator implements IGenerator {
       );
 
       fetalHeartRateList.add(fetalHeartRateChartPoint);
-      frequencyContractionsList!.add(frequencyContractionsPoint);
+      frequencyContractionsList.add(frequencyContractionsPoint);
     }
 
     _chartPoint = fetalHeartRateList;
-    _chartPoint!.addAll(frequencyContractionsList!);
+    _chartPoint!.addAll(frequencyContractionsList);
   }
 }

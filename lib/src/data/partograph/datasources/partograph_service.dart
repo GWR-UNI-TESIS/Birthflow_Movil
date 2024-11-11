@@ -64,25 +64,25 @@ abstract class PartographService {
   );
 
   // Endpoints de tabla
-  @GET('/api/Partograph/Get/medical-surveillance/{partographId}')
+  @GET('/api/partograph/medical-surveillance-table/partograph/{parthographId}')
   Future<ApiResponse<List<MedicalSurveillanceTableResponse>>> getMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Path('partographId') String partographId,
   );
 
-  @POST('/api/Partograph/Create/medical-surveillance')
+  @POST('/api/partograph/create/medical-surveillance-table')
   Future<ApiResponse<MedicalSurveillanceTableResponse>> createMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Body() MedicalSurveillanceTableRequest request,
   );
 
-  @PUT('/api/Partograph/Update/medical-surveillance')
+  @PATCH('/api/partograph/update/medical-surveillance-table')
   Future<ApiResponse<MedicalSurveillanceTableResponse>> updateMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Body() MedicalSurveillanceTableRequest request,
   );
 
-  @PUT('/api/Partograph/Delete/medical-surveillance')
+  @PUT('/api/partograph/delete/medical-surveillance-table')
   Future<ApiResponse<MedicalSurveillanceTableResponse>> deleteMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Body() MedicalSurveillanceTableRequest request,

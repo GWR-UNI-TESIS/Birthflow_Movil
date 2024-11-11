@@ -1,9 +1,13 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/worktime/enums.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/arterial_pressure_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/dropdown_button_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
+import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class MedicalSurveillanceEditData {
@@ -16,71 +20,91 @@ class MedicalSurveillanceEditData {
   });
 }
 
-
 class MedicalSurveillanceEditScreen extends StatefulWidget {
   final MedicalSurveillanceEditData? model;
 
   const MedicalSurveillanceEditScreen({super.key, this.model});
 
   @override
-  State<StatefulWidget> createState() => MedicalSurveillanceEditState();
+  State<MedicalSurveillanceEditScreen> createState() => _MedicalSurveillanceEditScreenState();
 }
 
-class MedicalSurveillanceEditState
-    extends State<MedicalSurveillanceEditScreen> {
-  final TextEditingController timeController = TextEditingController();
+class _MedicalSurveillanceEditScreenState extends State<MedicalSurveillanceEditScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _timeController = TextEditingController();
 
-  late final ArterialPressureWidget arterialPressureWidget;
-  late final FormElementWidget maternalPulseWidget;
-  late final FormElementWidget fetalHeartRateWidget;
-  late final FormElementWidget contractionsDurationWidget;
+  // Controladores de valores
+  late final ValueNotifier<String> _arterialPressureValue;
+  late final ValueNotifier<String> _maternalPulseValue;
+  late final ValueNotifier<String> _fetalHeartRateValue;
+  late final ValueNotifier<String> _contractionsDurationValue;
 
-  late DateTime _dateTime;
-  late String frequencyContractions;
-  late String painLocation;
-  late String painIntensity;
+  String _maternalPositionValue = '';
+  String _frequencyContractions = '';
+  String _painLocation = '';
+  String _painIntensity = '';
+  DateTime _dateTime = DateTime.now();
 
   @override
   void initState() {
     super.initState();
+    _initializeWidgets();
+  }
 
-    if (widget.model?.medicalSurveillanceTable != null) {
-      // Si el modelo está presente, inicializa los valores
-      final model = widget.model!;
-      timeController.text = DateFormat('HH:mm:ss').format(model.medicalSurveillanceTable!.time);
-      frequencyContractions = model.medicalSurveillanceTable!.frequencyContractions;
-      painLocation = model.medicalSurveillanceTable!.pain; // Ajusta según corresponda
-      painIntensity = model.medicalSurveillanceTable!.pain; // Ajusta según corresponda
+  void _initializeWidgets() {
+    final model = widget.model?.medicalSurveillanceTable;
+    _timeController.text = model != null
+        ? DateFormat('HH:mm:ss').format(model.time)
+        : '';
 
-      arterialPressureWidget = ArterialPressureWidget(
-        label: model.medicalSurveillanceTable!.arterialPressure,
-      );
-      maternalPulseWidget = FormElementWidget(
-        label: 'Pulso Materno',
-        initValue: model.medicalSurveillanceTable!.maternalPulse,
-      );
-      fetalHeartRateWidget = FormElementWidget(
-        label: 'Frecuencia cardiaca fetal',
-        initValue: model.medicalSurveillanceTable!.fetalHeartRate,
-      );
-      contractionsDurationWidget = FormElementWidget(
-        label: 'Duracion Contracciones',
-        initValue: model.medicalSurveillanceTable!.contractionsDuration,
-      );
-    } else {
-      // Inicializa los widgets con valores por defecto si no hay modelo
-      arterialPressureWidget =
-          const ArterialPressureWidget(label: 'TensionArterial');
-      maternalPulseWidget = const FormElementWidget(
-        label: 'Pulso Materno',
-        initValue: '',
-      );
-      fetalHeartRateWidget = const FormElementWidget(
-        label: 'Frecuencia cardiaca fetal',
-      );
-      contractionsDurationWidget = const FormElementWidget(
-        label: 'Duracion Contracciones',
-      );
+    _arterialPressureValue = ValueNotifier(model?.arterialPressure ?? '');
+    _maternalPulseValue = ValueNotifier(model?.maternalPulse ?? '');
+    _fetalHeartRateValue = ValueNotifier(model?.fetalHeartRate ?? '');
+    _contractionsDurationValue = ValueNotifier(model?.contractionsDuration ?? '');
+  }
+
+  @override
+  void dispose() {
+    _timeController.dispose();
+    _arterialPressureValue.dispose();
+    _maternalPulseValue.dispose();
+    _fetalHeartRateValue.dispose();
+    _contractionsDurationValue.dispose();
+    super.dispose();
+  }
+
+  void _handleSave() {
+    if (_formKey.currentState?.validate() ?? false) {
+      final bloc = context.read<PartographBloc>();
+
+      final event = widget.model?.medicalSurveillanceTable == null
+          ? CreateMedicalSurveillance(
+              partographId: widget.model!.partographId,
+              letter: '',
+              maternalPosition: _maternalPositionValue,
+              arterialPressure: _arterialPressureValue.value,
+              maternalPulse: _maternalPulseValue.value,
+              fetalHeartRate: _fetalHeartRateValue.value,
+              contractionsDuration: _contractionsDurationValue.value,
+              frequencyContractions: _frequencyContractions,
+              pain: _painLocation,
+              time: _dateTime,
+            )
+          : UpdateMedicalSurveillance(
+              id: widget.model!.medicalSurveillanceTable!.id,
+              partographId: widget.model!.partographId,
+              letter: '',
+              maternalPosition: _maternalPositionValue,
+              arterialPressure: _arterialPressureValue.value,
+              maternalPulse: _maternalPulseValue.value,
+              fetalHeartRate: _fetalHeartRateValue.value,
+              contractionsDuration: _contractionsDurationValue.value,
+              frequencyContractions: _frequencyContractions,
+              pain: _painLocation,
+              time: _dateTime,
+            );
+
+      bloc.add(event);
     }
   }
 
@@ -88,97 +112,120 @@ class MedicalSurveillanceEditState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Form(
+          key: _formKey,
           child: SingleChildScrollView(
             child: Column(
               children: [
-                TextFormField(
-                  controller:
-                      timeController, //editing controller of this TextField
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Tiempo',
-                  ),
-                  readOnly:
-                      true, //set it true, so that user will not able to edit text
-                  onTap: () async {
-                    final TimeOfDay? pickedTime = await showTimePicker(
-                      initialTime: TimeOfDay.now(),
-                      context: context,
-                    );
-
-                    if (pickedTime != null) {
-                      // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
-                      final DateTime now = DateTime.now();
-
-                      _dateTime = DateTime(
-                        now.year,
-                        now.month,
-                        now.day,
-                        pickedTime.hour,
-                        pickedTime.minute,
-                      );
-
-                      final DateTime parsedTime = DateFormat.jm()
-                          // ignore: use_build_context_synchronously
-                          .parse(pickedTime.format(context));
-
-                      final String formattedTime =
-                          DateFormat('HH:mm:ss').format(parsedTime);
-
-                      setState(() {
-                        timeController.text =
-                            formattedTime; //set the value of text field.
-                      });
-                    }
-                  },
+                _buildTimePicker(),
+                _buildDropdownButton(
+                  labelText: 'Posición Materna',
+                  items: const ['Lat. Derecho', 'Lat. Izquierdo', 'Dorsal', 'Semisentada', 'Sentada', 'Parada o Caminando'],
+                  onChanged: (value) => setState(() => _maternalPositionValue = value),
                 ),
-                arterialPressureWidget,
-                maternalPulseWidget,
-                fetalHeartRateWidget,
-                contractionsDurationWidget,
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Frec. Contracciones',
-                  ),
+                ArterialPressureWidget(
+                  label: 'Tensión Arterial',
+                  initialValue: _arterialPressureValue.value,
+                  onChanged: (value) => _arterialPressureValue.value = value,
+                ),
+                FormElementWidget(
+                  label: 'Pulso Materno',
+                  initialValue: _maternalPulseValue.value,
+                  onChanged: (value) => _maternalPulseValue.value = value,
+                ),
+                FormElementWidget(
+                  label: 'Frecuencia cardiaca fetal',
+                  initialValue: _fetalHeartRateValue.value,
+                  onChanged: (value) => _fetalHeartRateValue.value = value,
+                ),
+                FormElementWidget(
+                  label: 'Duración Contracciones',
+                  initialValue: _contractionsDurationValue.value,
+                  onChanged: (value) => _contractionsDurationValue.value = value,
+                ),
+                _buildTextField(
+                  label: 'Frec. Contracciones',
                   maxLength: 3,
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Frequency Contraction';
-                    }
-                    return null;
-                  },
-                  onChanged: (String? value) {
-                    frequencyContractions = value!;
-                  },
+                  onChanged: (value) => _frequencyContractions = value,
                 ),
-                DropdownButtonWidget(
-                  labelText: 'Dolor Localizacion',
-                  enumValues: PainLocation.values,
-                  onValueChanged: (PainLocation value) {
-                    painLocation = value.value;
-                  },
-                ),
-                DropdownButtonWidget(
-                  labelText: 'Dolor Intensidad',
-                  enumValues: PainIntensity.values,
-                  onValueChanged: (PainIntensity value) {
-                    painIntensity = value.value;
-                  },
-                ),
-                FilledButton(
-                  onPressed: () {},
-                  child: Text(widget.model != null ? 'Actualizar' : 'Guardar'),
+                _buildPainDropdown('Dolor Localización', PainLocation.values, (value) => _painLocation = value.value),
+                _buildPainDropdown('Dolor Intensidad', PainIntensity.values, (value) => _painIntensity = value.value),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _handleSave,
+                  child: Text(widget.model!.medicalSurveillanceTable == null ? 'Guardar' : 'Actualizar'),
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTimePicker() {
+    return TextFormField(
+      controller: _timeController,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: 'Tiempo',
+      ),
+      readOnly: true,
+      onTap: () async {
+        final pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+        if (pickedTime != null) {
+          _dateTime = DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+            pickedTime.hour,
+            pickedTime.minute,
+          );
+          setState(() {
+            _timeController.text = DateFormat('HH:mm:ss').format(_dateTime);
+          });
+        }
+      },
+    );
+  }
+
+  Widget _buildDropdownButton({
+    required String labelText,
+    required List<String> items,
+    required ValueChanged<String> onChanged,
+  }) {
+    return CustomDropdownButton(
+      list: items,
+      labelText: labelText,
+      onValueChanged: onChanged,
+    );
+  }
+
+  Widget _buildTextField({
+    required String label,
+    required int maxLength,
+    required ValueChanged<String> onChanged,
+  }) {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: label,
+      ),
+      maxLength: maxLength,
+      validator: (value) => value == null || value.isEmpty ? 'Por favor, ingrese un dato' : null,
+      onChanged: onChanged,
+    );
+  }
+
+  Widget _buildPainDropdown<T extends Enum>(
+      String labelText, List<T> enumValues, ValueChanged<T> onChanged) {
+    return DropdownButtonWidget(
+      labelText: labelText,
+      enumValues: enumValues,
+      onValueChanged: onChanged,
     );
   }
 }

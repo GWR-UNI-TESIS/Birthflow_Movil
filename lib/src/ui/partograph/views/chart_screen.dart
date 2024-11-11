@@ -154,7 +154,8 @@ class _ChartState extends State<_ChartScreen> {
     );
   }
 
-  Future<DateTime?> _showCreateCervicalDilation(BuildContext mainContext) async {
+  Future<DateTime?> _showCreateCervicalDilation(
+      BuildContext mainContext) async {
     final timeController = TextEditingController();
     final valueController = TextEditingController();
     DateTime? selectedDateTime;

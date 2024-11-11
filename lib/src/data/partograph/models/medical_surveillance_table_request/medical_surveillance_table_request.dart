@@ -15,6 +15,7 @@ class MedicalSurveillanceTableRequest with _$MedicalSurveillanceTableRequest {
     required String contractionsDuration,
     required String frequencyContractions,
     required String pain,
+    required String letter,
     required DateTime time,
   }) = _MedicalSurveillanceTableRequest;
 

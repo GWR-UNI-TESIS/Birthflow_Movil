@@ -30,6 +30,7 @@ mixin _$MedicalSurveillanceTableRequest {
   String get contractionsDuration => throw _privateConstructorUsedError;
   String get frequencyContractions => throw _privateConstructorUsedError;
   String get pain => throw _privateConstructorUsedError;
+  String get letter => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $MedicalSurveillanceTableRequestCopyWith<$Res> {
       String contractionsDuration,
       String frequencyContractions,
       String pain,
+      String letter,
       DateTime time});
 }
 
@@ -82,6 +84,7 @@ class _$MedicalSurveillanceTableRequestCopyWithImpl<$Res,
     Object? contractionsDuration = null,
     Object? frequencyContractions = null,
     Object? pain = null,
+    Object? letter = null,
     Object? time = null,
   }) {
     return _then(_value.copyWith(
@@ -121,6 +124,10 @@ class _$MedicalSurveillanceTableRequestCopyWithImpl<$Res,
           ? _value.pain
           : pain // ignore: cast_nullable_to_non_nullable
               as String,
+      letter: null == letter
+          ? _value.letter
+          : letter // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -148,6 +155,7 @@ abstract class _$$MedicalSurveillanceTableRequestImplCopyWith<$Res>
       String contractionsDuration,
       String frequencyContractions,
       String pain,
+      String letter,
       DateTime time});
 }
 
@@ -173,6 +181,7 @@ class __$$MedicalSurveillanceTableRequestImplCopyWithImpl<$Res>
     Object? contractionsDuration = null,
     Object? frequencyContractions = null,
     Object? pain = null,
+    Object? letter = null,
     Object? time = null,
   }) {
     return _then(_$MedicalSurveillanceTableRequestImpl(
@@ -212,6 +221,10 @@ class __$$MedicalSurveillanceTableRequestImplCopyWithImpl<$Res>
           ? _value.pain
           : pain // ignore: cast_nullable_to_non_nullable
               as String,
+      letter: null == letter
+          ? _value.letter
+          : letter // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -234,6 +247,7 @@ class _$MedicalSurveillanceTableRequestImpl
       required this.contractionsDuration,
       required this.frequencyContractions,
       required this.pain,
+      required this.letter,
       required this.time});
 
   factory _$MedicalSurveillanceTableRequestImpl.fromJson(
@@ -259,11 +273,13 @@ class _$MedicalSurveillanceTableRequestImpl
   @override
   final String pain;
   @override
+  final String letter;
+  @override
   final DateTime time;
 
   @override
   String toString() {
-    return 'MedicalSurveillanceTableRequest(id: $id, partographId: $partographId, maternalPosition: $maternalPosition, arterialPressure: $arterialPressure, maternalPulse: $maternalPulse, fetalHeartRate: $fetalHeartRate, contractionsDuration: $contractionsDuration, frequencyContractions: $frequencyContractions, pain: $pain, time: $time)';
+    return 'MedicalSurveillanceTableRequest(id: $id, partographId: $partographId, maternalPosition: $maternalPosition, arterialPressure: $arterialPressure, maternalPulse: $maternalPulse, fetalHeartRate: $fetalHeartRate, contractionsDuration: $contractionsDuration, frequencyContractions: $frequencyContractions, pain: $pain, letter: $letter, time: $time)';
   }
 
   @override
@@ -287,6 +303,7 @@ class _$MedicalSurveillanceTableRequestImpl
             (identical(other.frequencyContractions, frequencyContractions) ||
                 other.frequencyContractions == frequencyContractions) &&
             (identical(other.pain, pain) || other.pain == pain) &&
+            (identical(other.letter, letter) || other.letter == letter) &&
             (identical(other.time, time) || other.time == time));
   }
 
@@ -303,6 +320,7 @@ class _$MedicalSurveillanceTableRequestImpl
       contractionsDuration,
       frequencyContractions,
       pain,
+      letter,
       time);
 
   @JsonKey(ignore: true)
@@ -333,6 +351,7 @@ abstract class _MedicalSurveillanceTableRequest
       required final String contractionsDuration,
       required final String frequencyContractions,
       required final String pain,
+      required final String letter,
       required final DateTime time}) = _$MedicalSurveillanceTableRequestImpl;
 
   factory _MedicalSurveillanceTableRequest.fromJson(Map<String, dynamic> json) =
@@ -356,6 +375,8 @@ abstract class _MedicalSurveillanceTableRequest
   String get frequencyContractions;
   @override
   String get pain;
+  @override
+  String get letter;
   @override
   DateTime get time;
   @override

@@ -17,7 +17,6 @@ class MedicalSurveillanceTableResponse with _$MedicalSurveillanceTableResponse {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-
   }) = _MedicalSurveillanceTableResponse;
 
   factory MedicalSurveillanceTableResponse.fromJson(
