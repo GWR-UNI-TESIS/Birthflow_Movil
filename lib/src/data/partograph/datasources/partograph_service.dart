@@ -90,25 +90,25 @@ abstract class PartographService {
 
 
     // Endpoints de vvp
-  @GET('/api/Partograph/Get/presentation-position-variety/{partographId}')
+  @GET('/api/partograph/presentation-position-variety/partograph/{parthographId}')
   Future<ApiResponse<List<PresentationPositionVarietyEntityResponse>>> getPresentationPositionVariety(
     @Header('Authorization') String token,
     @Path('partographId') String partographId,
   );
 
-  @POST('/api/Partograph/Create/presentation-position-variety')
+  @POST('/api/partograph/create/presentation-position-variety')
   Future<ApiResponse<PresentationPositionVarietyEntityResponse>> createPresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,
   );
 
-  @PUT('/api/Partograph/Update/presentation-position-variety')
+  @PUT('/api/partograph/update/presentation-position-variety')
   Future<ApiResponse<PresentationPositionVarietyEntityResponse>> updatePresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,
   );
 
-  @PUT('/api/Partograph/Delete/presentation-position-variety')
+  @DELETE('/api/partograph/delete/presentation-position-variety')
   Future<ApiResponse<PresentationPositionVarietyEntityResponse>> deletePresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,

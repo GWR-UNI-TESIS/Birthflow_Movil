@@ -15,7 +15,6 @@ _$PresentationPositionVarietyEntityRequestImpl
           hodgePlane: json['hodgePlane'] as String,
           position: json['position'] as String,
           time: DateTime.parse(json['time'] as String),
-          userId: json['userId'] as String?,
         );
 
 Map<String, dynamic> _$$PresentationPositionVarietyEntityRequestImplToJson(
@@ -26,5 +25,4 @@ Map<String, dynamic> _$$PresentationPositionVarietyEntityRequestImplToJson(
       'hodgePlane': instance.hodgePlane,
       'position': instance.position,
       'time': instance.time.toIso8601String(),
-      'userId': instance.userId,
     };

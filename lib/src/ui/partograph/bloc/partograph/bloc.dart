@@ -186,9 +186,15 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
+      final currentState = state as Loaded;
+
+      final value =  currentState.partograph.medicalSurveillanceTable!.length;
+
+      final letter =_intToChar(value+1);
+
       final newEntry = await _medicalSurveillanceCreateUsecase.execute(
         partographId: event.partographId,
-        letter: event.letter,
+        letter: letter,
         maternalPosition: event.maternalPosition,
         arterialPressure: event.arterialPressure,
         maternalPulse: event.maternalPulse,
@@ -199,8 +205,9 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         time: event.time,
       );
 
+
+
       if (state is Loaded && newEntry != null) {
-        final currentState = state as Loaded;
 
         // Crear una nueva lista de `MedicalSurveillanceTable` con el nuevo registro añadido
         final updatedMedicalSurveillanceList =
@@ -272,4 +279,9 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
       emit(Error(error.toString()));
     }
   }
+
+  String _intToChar(int number) {
+  // Sumar 96 para obtener el código Unicode correspondiente
+  return String.fromCharCode(96 + number);
+}
 }

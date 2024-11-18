@@ -22,10 +22,11 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (partograph, _) =>
-                partograph.medicalSurveillanceTable?.isEmpty ?? true
-                    ? const Center(child: Text('No hay datos'))
-                    : _buildTable(partograph.medicalSurveillanceTable!),
+            loaded: (partograph, _) => partograph
+                        .medicalSurveillanceTable?.isEmpty ??
+                    true
+                ? const Center(child: Text('No hay datos'))
+                : _buildTable(partograph.medicalSurveillanceTable!, context),
             error: (errorMessage) =>
                 Center(child: Text('Error: $errorMessage')),
             orElse: () => const Center(child: CircularProgressIndicator()),
@@ -39,7 +40,8 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTable(List<MedicalSurveillanceTable> list) {
+  Widget _buildTable(
+      List<MedicalSurveillanceTable> list, BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Table(
@@ -55,34 +57,50 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
             'Tiempo',
             list,
             (item) => '${item.time.hour}:${item.time.minute}',
+            context,
           ),
           _buildDataRow(
             'Posición Materna',
             list,
             (item) => item.maternalPosition,
+            context,
           ),
           _buildDataRow(
             'Presión Arterial',
             list,
             (item) => item.arterialPressure,
+            context,
           ),
-          _buildDataRow('Pulso Materno', list, (item) => item.maternalPulse),
+          _buildDataRow(
+            'Pulso Materno',
+            list,
+            (item) => item.maternalPulse,
+            context,
+          ),
           _buildDataRow(
             'Frec. Cardiaca Fetal',
             list,
             (item) => item.fetalHeartRate,
+            context,
           ),
           _buildDataRow(
             'Duración Contracciones',
             list,
             (item) => item.contractionsDuration,
+            context,
           ),
           _buildDataRow(
             'Frec. Contracciones',
             list,
             (item) => item.frequencyContractions,
+            context,
           ),
-          _buildDataRow('Dolor', list, (item) => item.pain),
+          _buildDataRow(
+            'Dolor',
+            list,
+            (item) => item.pain,
+            context,
+          ),
         ],
       ),
     );
@@ -118,12 +136,28 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
     String title,
     List<MedicalSurveillanceTable> list,
     String Function(MedicalSurveillanceTable) getValue,
+    BuildContext context,
   ) {
     return TableRow(
       children: [
         HeaderItem(value: title),
         for (int i = 0; i <= 15; i++)
-          Item(value: i >= list.length ? ' ' : getValue(list[i])),
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: GestureDetector(
+              onTap: () {
+                if (i < list.length) _navigateToEdit(context, list[i]);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 2),
+                child: Text(
+                  i < list.length ? getValue(list[i]) : '       ',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+            ),
+          )
       ],
     );
   }

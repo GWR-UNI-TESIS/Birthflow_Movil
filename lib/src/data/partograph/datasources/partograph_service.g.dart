@@ -517,7 +517,7 @@ class _PartographService implements PartographService {
     )
         .compose(
           _dio.options,
-          '/api/Partograph/Get/presentation-position-variety/${partographId}',
+          '/api/partograph/presentation-position-variety/partograph/{parthographId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -567,7 +567,7 @@ class _PartographService implements PartographService {
     )
                 .compose(
                   _dio.options,
-                  '/api/Partograph/Create/presentation-position-variety',
+                  '/api/partograph/create/presentation-position-variety',
                   queryParameters: queryParameters,
                   data: _data,
                 )
@@ -611,7 +611,7 @@ class _PartographService implements PartographService {
     )
                 .compose(
                   _dio.options,
-                  '/api/Partograph/Update/presentation-position-variety',
+                  '/api/partograph/update/presentation-position-variety',
                   queryParameters: queryParameters,
                   data: _data,
                 )
@@ -649,13 +649,13 @@ class _PartographService implements PartographService {
     final _options =
         _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
             Options(
-      method: 'PUT',
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
                 .compose(
                   _dio.options,
-                  '/api/Partograph/Delete/presentation-position-variety',
+                  '/api/partograph/delete/presentation-position-variety',
                   queryParameters: queryParameters,
                   data: _data,
                 )

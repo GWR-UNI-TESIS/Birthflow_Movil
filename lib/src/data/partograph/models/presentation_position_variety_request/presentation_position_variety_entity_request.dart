@@ -12,7 +12,6 @@ class PresentationPositionVarietyEntityRequest
     required String hodgePlane,
     required String position,
     required DateTime time,
-    String? userId,
   }) = _PresentationPositionVarietyEntityRequest;
 
   factory PresentationPositionVarietyEntityRequest.fromJson(

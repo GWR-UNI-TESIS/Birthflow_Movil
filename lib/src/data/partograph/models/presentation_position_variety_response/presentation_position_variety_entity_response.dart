@@ -12,6 +12,13 @@ class PresentationPositionVarietyEntityResponse
     required int hodgePlane,
     required int position,
     required DateTime time,
+    required bool isDelete,
+    required DateTime createAt,
+    DateTime? updateAt,
+    DateTime? deleteAt,
+    required String createdBy,
+    String? updateBy,
+    String? deleteBy,
   }) = _PresentationPositionVarietyEntityResponse;
 
   factory PresentationPositionVarietyEntityResponse.fromJson(

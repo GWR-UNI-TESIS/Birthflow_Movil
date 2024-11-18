@@ -122,9 +122,11 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.cervicalDilationEditData.cervicalDilation == null
-            ? 'Crear Dilatación Cervical'
-            : 'Editar Dilatación Cervical'),
+        title: Text(
+          widget.cervicalDilationEditData.cervicalDilation == null
+              ? 'Crear Dilatación Cervical'
+              : 'Editar Dilatación Cervical',
+        ),
       ),
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {

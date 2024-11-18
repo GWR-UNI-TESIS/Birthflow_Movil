@@ -410,7 +410,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         hodgePlane: hodgePlane,
         position: position,
         time: DateTime.now(),
-        userId: userId,
       );
 
       final result = await _partographService.createPresentationPositionVariety(
@@ -443,7 +442,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         hodgePlane: '',
         position: '',
         time: DateTime.now(),
-        userId: userId,
       );
 
       final result = await _partographService.deletePresentationPositionVariety(
@@ -505,7 +503,6 @@ class PartographRepositoryImplementation implements PartographRepository {
         hodgePlane: hodgePlane,
         position: position,
         time: DateTime.now(),
-        userId: userId,
       );
 
       final result = await _partographService.updatePresentationPositionVariety(

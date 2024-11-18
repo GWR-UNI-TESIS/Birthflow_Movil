@@ -27,7 +27,6 @@ mixin _$PresentationPositionVarietyEntityRequest {
   String get hodgePlane => throw _privateConstructorUsedError;
   String get position => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
-  String? get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,8 +48,7 @@ abstract class $PresentationPositionVarietyEntityRequestCopyWith<$Res> {
       String partographId,
       String hodgePlane,
       String position,
-      DateTime time,
-      String? userId});
+      DateTime time});
 }
 
 /// @nodoc
@@ -73,7 +71,6 @@ class _$PresentationPositionVarietyEntityRequestCopyWithImpl<$Res,
     Object? hodgePlane = null,
     Object? position = null,
     Object? time = null,
-    Object? userId = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -96,10 +93,6 @@ class _$PresentationPositionVarietyEntityRequestCopyWithImpl<$Res,
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -118,8 +111,7 @@ abstract class _$$PresentationPositionVarietyEntityRequestImplCopyWith<$Res>
       String partographId,
       String hodgePlane,
       String position,
-      DateTime time,
-      String? userId});
+      DateTime time});
 }
 
 /// @nodoc
@@ -140,7 +132,6 @@ class __$$PresentationPositionVarietyEntityRequestImplCopyWithImpl<$Res>
     Object? hodgePlane = null,
     Object? position = null,
     Object? time = null,
-    Object? userId = freezed,
   }) {
     return _then(_$PresentationPositionVarietyEntityRequestImpl(
       id: freezed == id
@@ -163,10 +154,6 @@ class __$$PresentationPositionVarietyEntityRequestImplCopyWithImpl<$Res>
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -180,8 +167,7 @@ class _$PresentationPositionVarietyEntityRequestImpl
       required this.partographId,
       required this.hodgePlane,
       required this.position,
-      required this.time,
-      this.userId});
+      required this.time});
 
   factory _$PresentationPositionVarietyEntityRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -197,12 +183,10 @@ class _$PresentationPositionVarietyEntityRequestImpl
   final String position;
   @override
   final DateTime time;
-  @override
-  final String? userId;
 
   @override
   String toString() {
-    return 'PresentationPositionVarietyEntityRequest(id: $id, partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time, userId: $userId)';
+    return 'PresentationPositionVarietyEntityRequest(id: $id, partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time)';
   }
 
   @override
@@ -217,14 +201,13 @@ class _$PresentationPositionVarietyEntityRequestImpl
                 other.hodgePlane == hodgePlane) &&
             (identical(other.position, position) ||
                 other.position == position) &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.time, time) || other.time == time));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, partographId, hodgePlane, position, time, userId);
+  int get hashCode =>
+      Object.hash(runtimeType, id, partographId, hodgePlane, position, time);
 
   @JsonKey(ignore: true)
   @override
@@ -246,12 +229,12 @@ class _$PresentationPositionVarietyEntityRequestImpl
 abstract class _PresentationPositionVarietyEntityRequest
     implements PresentationPositionVarietyEntityRequest {
   const factory _PresentationPositionVarietyEntityRequest(
-      {final int? id,
-      required final String partographId,
-      required final String hodgePlane,
-      required final String position,
-      required final DateTime time,
-      final String? userId}) = _$PresentationPositionVarietyEntityRequestImpl;
+          {final int? id,
+          required final String partographId,
+          required final String hodgePlane,
+          required final String position,
+          required final DateTime time}) =
+      _$PresentationPositionVarietyEntityRequestImpl;
 
   factory _PresentationPositionVarietyEntityRequest.fromJson(
           Map<String, dynamic> json) =
@@ -267,8 +250,6 @@ abstract class _PresentationPositionVarietyEntityRequest
   String get position;
   @override
   DateTime get time;
-  @override
-  String? get userId;
   @override
   @JsonKey(ignore: true)
   _$$PresentationPositionVarietyEntityRequestImplCopyWith<
