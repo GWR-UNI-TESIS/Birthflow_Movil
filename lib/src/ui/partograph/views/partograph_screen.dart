@@ -303,7 +303,7 @@ class _PartographState extends State<PartographScreen> {
             .map((contractionFrequency) {
           return DataRow(
             cells: [
-              DataCell(Text(contractionFrequency.value.toString())),
+              DataCell(Text(contractionFrequency.value)),
               DataCell(
                 Text(DateFormat.yMd().format(contractionFrequency.time)),
               ),

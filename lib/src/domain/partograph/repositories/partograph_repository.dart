@@ -48,7 +48,7 @@ abstract class PartographRepository {
     required String partographId,
     required double value,
     required DateTime hour,
-    required bool remOrRam
+    required bool remOrRam,
   });
 
   Future<CervicalDilation?> deleteCervicalDilation({

@@ -109,7 +109,7 @@ class _ChartState extends State<_ChartScreen> {
   }
 
   Widget _buildPageView(BuildContext context,
-      List<MedicalSurveillanceTable>? medicalSurveillance) {
+      List<MedicalSurveillanceTable>? medicalSurveillance,) {
     return PageView(
       scrollDirection: Axis.vertical,
       onPageChanged: _changedScrollFab,
@@ -155,7 +155,7 @@ class _ChartState extends State<_ChartScreen> {
   }
 
   Future<DateTime?> _showCreateCervicalDilation(
-      BuildContext mainContext) async {
+      BuildContext mainContext,) async {
     final timeController = TextEditingController();
     final valueController = TextEditingController();
     DateTime? selectedDateTime;
@@ -226,7 +226,7 @@ class _ChartState extends State<_ChartScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () => Navigator.pop(context, null),
+                    onPressed: () => Navigator.pop(context),
                     child: const Text('Cancelar'),
                   ),
                   TextButton(

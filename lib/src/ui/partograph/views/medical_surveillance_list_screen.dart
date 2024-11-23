@@ -41,7 +41,7 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
   }
 
   Widget _buildTable(
-      List<MedicalSurveillanceTable> list, BuildContext context) {
+      List<MedicalSurveillanceTable> list, BuildContext context,) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Table(
@@ -157,7 +157,7 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
       ],
     );
   }

@@ -34,7 +34,7 @@ class _ArterialPressureWidgetState extends State<ArterialPressureWidget> {
         _secondController.text = parts[1];
       }
     }
-    _compositeValue = ValueNotifier<String>(_firstController.text + '/' + _secondController.text);
+    _compositeValue = ValueNotifier<String>('${_firstController.text}/${_secondController.text}');
 
     _firstController.addListener(_updateCompositeValue);
     _secondController.addListener(_updateCompositeValue);
