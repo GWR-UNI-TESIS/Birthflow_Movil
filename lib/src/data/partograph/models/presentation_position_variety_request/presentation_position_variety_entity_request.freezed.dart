@@ -28,8 +28,12 @@ mixin _$PresentationPositionVarietyEntityRequest {
   String get position => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
 
+  /// Serializes this PresentationPositionVarietyEntityRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PresentationPositionVarietyEntityRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PresentationPositionVarietyEntityRequestCopyWith<
           PresentationPositionVarietyEntityRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -63,6 +67,8 @@ class _$PresentationPositionVarietyEntityRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PresentationPositionVarietyEntityRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -124,6 +130,8 @@ class __$$PresentationPositionVarietyEntityRequestImplCopyWithImpl<$Res>
       $Res Function(_$PresentationPositionVarietyEntityRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PresentationPositionVarietyEntityRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -204,12 +212,14 @@ class _$PresentationPositionVarietyEntityRequestImpl
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, partographId, hodgePlane, position, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PresentationPositionVarietyEntityRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PresentationPositionVarietyEntityRequestImplCopyWith<
@@ -250,8 +260,11 @@ abstract class _PresentationPositionVarietyEntityRequest
   String get position;
   @override
   DateTime get time;
+
+  /// Create a copy of PresentationPositionVarietyEntityRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PresentationPositionVarietyEntityRequestImplCopyWith<
           _$PresentationPositionVarietyEntityRequestImpl>
       get copyWith => throw _privateConstructorUsedError;

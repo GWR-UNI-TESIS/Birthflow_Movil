@@ -23,9 +23,14 @@ mixin _$PositionResponse {
   int get id => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  double get chartPosition => throw _privateConstructorUsedError;
 
+  /// Serializes this PositionResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PositionResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PositionResponseCopyWith<PositionResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -36,7 +41,7 @@ abstract class $PositionResponseCopyWith<$Res> {
           PositionResponse value, $Res Function(PositionResponse) then) =
       _$PositionResponseCopyWithImpl<$Res, PositionResponse>;
   @useResult
-  $Res call({int id, String code, String description});
+  $Res call({int id, String code, String description, double chartPosition});
 }
 
 /// @nodoc
@@ -49,12 +54,15 @@ class _$PositionResponseCopyWithImpl<$Res, $Val extends PositionResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PositionResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? code = null,
     Object? description = null,
+    Object? chartPosition = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -69,6 +77,10 @@ class _$PositionResponseCopyWithImpl<$Res, $Val extends PositionResponse>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      chartPosition: null == chartPosition
+          ? _value.chartPosition
+          : chartPosition // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -81,7 +93,7 @@ abstract class _$$PositionResponseImplCopyWith<$Res>
       __$$PositionResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String code, String description});
+  $Res call({int id, String code, String description, double chartPosition});
 }
 
 /// @nodoc
@@ -92,12 +104,15 @@ class __$$PositionResponseImplCopyWithImpl<$Res>
       $Res Function(_$PositionResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PositionResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? code = null,
     Object? description = null,
+    Object? chartPosition = null,
   }) {
     return _then(_$PositionResponseImpl(
       id: null == id
@@ -112,6 +127,10 @@ class __$$PositionResponseImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      chartPosition: null == chartPosition
+          ? _value.chartPosition
+          : chartPosition // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -120,7 +139,10 @@ class __$$PositionResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PositionResponseImpl implements _PositionResponse {
   const _$PositionResponseImpl(
-      {required this.id, required this.code, required this.description});
+      {required this.id,
+      required this.code,
+      required this.description,
+      required this.chartPosition});
 
   factory _$PositionResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PositionResponseImplFromJson(json);
@@ -131,10 +153,12 @@ class _$PositionResponseImpl implements _PositionResponse {
   final String code;
   @override
   final String description;
+  @override
+  final double chartPosition;
 
   @override
   String toString() {
-    return 'PositionResponse(id: $id, code: $code, description: $description)';
+    return 'PositionResponse(id: $id, code: $code, description: $description, chartPosition: $chartPosition)';
   }
 
   @override
@@ -145,14 +169,19 @@ class _$PositionResponseImpl implements _PositionResponse {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.chartPosition, chartPosition) ||
+                other.chartPosition == chartPosition));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, code, description);
+  int get hashCode =>
+      Object.hash(runtimeType, id, code, description, chartPosition);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PositionResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PositionResponseImplCopyWith<_$PositionResponseImpl> get copyWith =>
@@ -171,7 +200,8 @@ abstract class _PositionResponse implements PositionResponse {
   const factory _PositionResponse(
       {required final int id,
       required final String code,
-      required final String description}) = _$PositionResponseImpl;
+      required final String description,
+      required final double chartPosition}) = _$PositionResponseImpl;
 
   factory _PositionResponse.fromJson(Map<String, dynamic> json) =
       _$PositionResponseImpl.fromJson;
@@ -183,7 +213,12 @@ abstract class _PositionResponse implements PositionResponse {
   @override
   String get description;
   @override
-  @JsonKey(ignore: true)
+  double get chartPosition;
+
+  /// Create a copy of PositionResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PositionResponseImplCopyWith<_$PositionResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

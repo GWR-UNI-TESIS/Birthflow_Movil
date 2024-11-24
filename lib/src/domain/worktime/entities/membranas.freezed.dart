@@ -77,6 +77,9 @@ class _$MembranasCopyWithImpl<$Res, $Val extends Membranas>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of Membranas
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -92,6 +95,9 @@ class __$$InitImplCopyWithImpl<$Res>
     implements _$$InitImplCopyWith<$Res> {
   __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Membranas
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -196,6 +202,9 @@ class __$$IntegrasImplCopyWithImpl<$Res>
   __$$IntegrasImplCopyWithImpl(
       _$IntegrasImpl _value, $Res Function(_$IntegrasImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Membranas
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -300,6 +309,9 @@ class __$$RotasImplCopyWithImpl<$Res>
   __$$RotasImplCopyWithImpl(
       _$RotasImpl _value, $Res Function(_$RotasImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Membranas
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

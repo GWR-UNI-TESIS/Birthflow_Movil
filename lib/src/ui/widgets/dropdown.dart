@@ -1,47 +1,58 @@
 import 'package:flutter/material.dart';
 
-class CustomDropdownMenu extends StatefulWidget {
-  final String label;
-  final List<String> items;
-  final String currentValue;
-  final ValueChanged<String> onChanged;
-
-  const CustomDropdownMenu({
+class DynamicDropdownButton<T> extends StatefulWidget {
+  const DynamicDropdownButton({
     super.key,
-    required this.label,
-    required this.items,
-    required this.onChanged,
-    required this.currentValue,
+    required this.list,
+    required this.labelText,
+    required this.onValueChanged,
+    required this.displayField,
+    this.initialValue,
   });
 
+  final List<T> list; // Lista genérica
+  final String labelText; // Etiqueta para el campo
+  final ValueChanged<T> onValueChanged; // Callback con el objeto seleccionado
+  final String Function(T) displayField; // Función para mostrar el campo deseado
+  final T? initialValue; // Valor inicial opcional
+
   @override
-  State<CustomDropdownMenu> createState() => _CustomDropdownMenuState();
+  State<DynamicDropdownButton<T>> createState() =>
+      _DynamicDropdownButtonState<T>();
 }
 
-class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
-  late String dropdownValue;
+class _DynamicDropdownButtonState<T> extends State<DynamicDropdownButton<T>> {
+  late T dropdownValue;
 
   @override
   void initState() {
     super.initState();
-    dropdownValue = widget.currentValue;
+    // Establece el valor inicial
+    dropdownValue = widget.initialValue ?? widget.list.first;
   }
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
-      initialSelection: dropdownValue,
-      requestFocusOnTap: false,
-      label: Text(widget.label),
-      onSelected: (String? value) {
-        setState(() {
-          dropdownValue = value!;
-        });
-        widget.onChanged(value!);
+    return DropdownButtonFormField<T>(
+      value: dropdownValue,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: widget.labelText,
+      ),
+      onChanged: (T? value) {
+        if (value != null) {
+          setState(() {
+            dropdownValue = value;
+          });
+          widget.onValueChanged(value); // Retorna el objeto seleccionado
+        }
       },
-      dropdownMenuEntries:
-          widget.items.map<DropdownMenuEntry<String>>((String value) {
-        return DropdownMenuEntry<String>(value: value, label: value);
+      isExpanded: true,
+      items: widget.list.map<DropdownMenuItem<T>>((T item) {
+        return DropdownMenuItem<T>(
+          value: item,
+          child: Text(widget.displayField(item)), // Muestra el campo deseado
+        );
       }).toList(),
     );
   }

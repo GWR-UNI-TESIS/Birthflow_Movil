@@ -11,6 +11,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/expandable_fab.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
+import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -18,8 +19,11 @@ import 'package:intl/intl.dart';
 class ChartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final catalog = context.watch<CatalogCubit>();
+    
     return BlocProvider(
-      create: (context) => ChartBloc(const chartStates.Initial()),
+      create: (context) => ChartBloc(catalog, const chartStates.Initial()),
       child: const _ChartScreen(),
     );
   }

@@ -26,8 +26,12 @@ mixin _$FetalHeartRateResponse {
   String get value => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
 
+  /// Serializes this FetalHeartRateResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FetalHeartRateResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FetalHeartRateResponseCopyWith<FetalHeartRateResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$FetalHeartRateResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FetalHeartRateResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -103,6 +109,8 @@ class __$$FetalHeartRateResponseImplCopyWithImpl<$Res>
       $Res Function(_$FetalHeartRateResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FetalHeartRateResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -170,11 +178,13 @@ class _$FetalHeartRateResponseImpl implements _FetalHeartRateResponse {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, partographId, value, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FetalHeartRateResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FetalHeartRateResponseImplCopyWith<_$FetalHeartRateResponseImpl>
@@ -207,8 +217,11 @@ abstract class _FetalHeartRateResponse implements FetalHeartRateResponse {
   String get value;
   @override
   DateTime get time;
+
+  /// Create a copy of FetalHeartRateResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetalHeartRateResponseImplCopyWith<_$FetalHeartRateResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

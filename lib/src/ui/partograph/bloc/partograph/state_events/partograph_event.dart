@@ -53,4 +53,22 @@ class PartographEvent with _$PartographEvent {
     required String pain,
     required DateTime time,
   }) = UpdateMedicalSurveillance;
+
+const factory PartographEvent.createPresentationPositionVariety({
+    required String partographId,
+    required String hodgePlane,
+    required String position,
+    required DateTime time,
+    required String userId,
+  }) = CreatePresentationPositionVariety;
+
+  const factory PartographEvent.updatePresentationPositionVariety({
+    required int id,
+    required String partographId,
+    required String hodgePlane,
+    required String position,
+    required DateTime time,
+    required String userId,
+  }) = UpdatePresentationPositionVariety;
+  
 }

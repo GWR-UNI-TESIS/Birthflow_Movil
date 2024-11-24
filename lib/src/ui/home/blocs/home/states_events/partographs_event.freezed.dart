@@ -76,6 +76,9 @@ class _$PartographsEventCopyWithImpl<$Res, $Val extends PartographsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -95,6 +98,8 @@ class __$$FetchPartographsImplCopyWithImpl<$Res>
       $Res Function(_$FetchPartographsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,7 +138,9 @@ class _$FetchPartographsImpl implements FetchPartographs {
   @override
   int get hashCode => Object.hash(runtimeType, userId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FetchPartographsImplCopyWith<_$FetchPartographsImpl> get copyWith =>
@@ -212,7 +219,10 @@ abstract class FetchPartographs implements PartographsEvent {
       _$FetchPartographsImpl;
 
   String? get userId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchPartographsImplCopyWith<_$FetchPartographsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -235,6 +245,8 @@ class __$$ApplyFiltersAndSearchImplCopyWithImpl<$Res>
       $Res Function(_$ApplyFiltersAndSearchImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -283,7 +295,9 @@ class _$ApplyFiltersAndSearchImpl implements ApplyFiltersAndSearch {
   @override
   int get hashCode => Object.hash(runtimeType, filter, searchText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ApplyFiltersAndSearchImplCopyWith<_$ApplyFiltersAndSearchImpl>
@@ -364,7 +378,10 @@ abstract class ApplyFiltersAndSearch implements PartographsEvent {
 
   FilterModel get filter;
   String get searchText;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ApplyFiltersAndSearchImplCopyWith<_$ApplyFiltersAndSearchImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

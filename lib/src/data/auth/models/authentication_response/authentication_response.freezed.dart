@@ -26,8 +26,12 @@ mixin _$AuthenticationResponse {
   String get refreshToken => throw _privateConstructorUsedError;
   UserAuthentication? get user => throw _privateConstructorUsedError;
 
+  /// Serializes this AuthenticationResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthenticationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AuthenticationResponseCopyWith<AuthenticationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$AuthenticationResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AuthenticationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,6 +84,8 @@ class _$AuthenticationResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of AuthenticationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserAuthenticationCopyWith<$Res>? get user {
@@ -117,6 +125,8 @@ class __$$AuthenticationResponseImplCopyWithImpl<$Res>
       $Res Function(_$AuthenticationResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthenticationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -175,11 +185,13 @@ class _$AuthenticationResponseImpl implements _AuthenticationResponse {
             (identical(other.user, user) || other.user == user));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, accessToken, refreshToken, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthenticationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthenticationResponseImplCopyWith<_$AuthenticationResponseImpl>
@@ -204,13 +216,16 @@ abstract class _AuthenticationResponse implements AuthenticationResponse {
       _$AuthenticationResponseImpl.fromJson;
 
   @override
-  String get accessToken;
-  @override // Token de autenticación
+  String get accessToken; // Token de autenticación
+  @override
   String get refreshToken;
   @override
   UserAuthentication? get user;
+
+  /// Create a copy of AuthenticationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthenticationResponseImplCopyWith<_$AuthenticationResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

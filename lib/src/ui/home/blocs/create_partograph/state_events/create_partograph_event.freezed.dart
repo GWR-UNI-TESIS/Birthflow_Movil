@@ -80,7 +80,9 @@ mixin _$CreatePartographEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreatePartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CreatePartographEventCopyWith<CreatePartographEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -112,6 +114,8 @@ class _$CreatePartographEventCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CreatePartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,6 +185,8 @@ class __$$SaveImplCopyWithImpl<$Res>
   __$$SaveImplCopyWithImpl(_$SaveImpl _value, $Res Function(_$SaveImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreatePartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,7 +286,9 @@ class _$SaveImpl implements Save {
   int get hashCode => Object.hash(runtimeType, partogramaId, name, recordName,
       date, observation, worktime, createBy);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreatePartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveImplCopyWith<_$SaveImpl> get copyWith =>
@@ -394,8 +402,11 @@ abstract class Save implements CreatePartographEvent {
   String get worktime;
   @override
   String get createBy;
+
+  /// Create a copy of CreatePartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveImplCopyWith<_$SaveImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -25,8 +25,12 @@ mixin _$WorkTimeItemResponse {
   double get cervicalDilation => throw _privateConstructorUsedError;
   String get time => throw _privateConstructorUsedError;
 
+  /// Serializes this WorkTimeItemResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WorkTimeItemResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WorkTimeItemResponseCopyWith<WorkTimeItemResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$WorkTimeItemResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WorkTimeItemResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +105,8 @@ class __$$WorkTimeItemResponseImplCopyWithImpl<$Res>
       $Res Function(_$WorkTimeItemResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WorkTimeItemResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,12 +175,14 @@ class _$WorkTimeItemResponseImpl implements _WorkTimeItemResponse {
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, workTimeId, cervicalDilation, time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WorkTimeItemResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WorkTimeItemResponseImplCopyWith<_$WorkTimeItemResponseImpl>
@@ -206,8 +216,11 @@ abstract class _WorkTimeItemResponse implements WorkTimeItemResponse {
   double get cervicalDilation;
   @override
   String get time;
+
+  /// Create a copy of WorkTimeItemResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WorkTimeItemResponseImplCopyWith<_$WorkTimeItemResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -83,6 +83,9 @@ class _$ParidadCopyWithImpl<$Res, $Val extends Paridad>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of Paridad
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -98,6 +101,9 @@ class __$$InitImplCopyWithImpl<$Res>
     implements _$$InitImplCopyWith<$Res> {
   __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Paridad
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -208,6 +214,9 @@ class __$$TodasImplCopyWithImpl<$Res>
   __$$TodasImplCopyWithImpl(
       _$TodasImpl _value, $Res Function(_$TodasImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Paridad
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -318,6 +327,9 @@ class __$$MultiparasImplCopyWithImpl<$Res>
   __$$MultiparasImplCopyWithImpl(
       _$MultiparasImpl _value, $Res Function(_$MultiparasImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Paridad
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -428,6 +440,9 @@ class __$$NuliparasImplCopyWithImpl<$Res>
   __$$NuliparasImplCopyWithImpl(
       _$NuliparasImpl _value, $Res Function(_$NuliparasImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Paridad
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

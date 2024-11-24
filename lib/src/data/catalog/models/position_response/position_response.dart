@@ -9,6 +9,7 @@ class PositionResponse with _$PositionResponse {
     required int id,
     required String code,
     required String description,
+    required double chartPosition,
   }) = _PositionResponse;
 
   factory PositionResponse.fromJson(Map<String, dynamic> json) => _$PositionResponseFromJson(json);

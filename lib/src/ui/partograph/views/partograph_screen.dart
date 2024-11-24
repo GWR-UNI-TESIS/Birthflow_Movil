@@ -142,7 +142,14 @@ class _PartographState extends State<PartographScreen> {
           _buildGenericCard(
             title: 'Altura de la presentación',
             content: _presentationHeightContent(state, catalog),
-            onPressed: () {},
+            onPressed: () => context
+              ..go(
+                AppPaths.home.partographPath
+                    .define(widget.partographId)
+                    .presentationPositionVarietyPath
+                    .path,
+                extra: widget.partographId,
+              ),
           ),
           _buildGenericCard(
             title: 'Frecuencia Cardiaca Fetal',
@@ -270,6 +277,7 @@ class _PartographState extends State<PartographScreen> {
                   id: position.position,
                   code: '',
                   description: 'No disponible',
+                  chartPosition: 0,
                 ),
               )
               .description;

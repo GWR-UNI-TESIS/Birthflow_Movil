@@ -50,7 +50,9 @@ mixin _$ChartEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChartEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChartEventCopyWith<ChartEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -74,6 +76,8 @@ class _$ChartEventCopyWithImpl<$Res, $Val extends ChartEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChartEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,6 +111,8 @@ class __$$OnRefreshImplCopyWithImpl<$Res>
       _$OnRefreshImpl _value, $Res Function(_$OnRefreshImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChartEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,7 +152,9 @@ class _$OnRefreshImpl implements OnRefresh {
   @override
   int get hashCode => Object.hash(runtimeType, partograph);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChartEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OnRefreshImplCopyWith<_$OnRefreshImpl> get copyWith =>
@@ -215,8 +223,11 @@ abstract class OnRefresh implements ChartEvent {
 
   @override
   Partograph get partograph;
+
+  /// Create a copy of ChartEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OnRefreshImplCopyWith<_$OnRefreshImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -35,8 +35,12 @@ mixin _$PresentationPositionVarietyEntityResponse {
   String? get updateBy => throw _privateConstructorUsedError;
   String? get deleteBy => throw _privateConstructorUsedError;
 
+  /// Serializes this PresentationPositionVarietyEntityResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PresentationPositionVarietyEntityResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PresentationPositionVarietyEntityResponseCopyWith<
           PresentationPositionVarietyEntityResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -77,6 +81,8 @@ class _$PresentationPositionVarietyEntityResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PresentationPositionVarietyEntityResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -180,6 +186,8 @@ class __$$PresentationPositionVarietyEntityResponseImplCopyWithImpl<$Res>
       $Res Function(_$PresentationPositionVarietyEntityResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PresentationPositionVarietyEntityResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -330,7 +338,7 @@ class _$PresentationPositionVarietyEntityResponseImpl
                 other.deleteBy == deleteBy));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -347,7 +355,9 @@ class _$PresentationPositionVarietyEntityResponseImpl
       updateBy,
       deleteBy);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PresentationPositionVarietyEntityResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PresentationPositionVarietyEntityResponseImplCopyWith<
@@ -410,8 +420,11 @@ abstract class _PresentationPositionVarietyEntityResponse
   String? get updateBy;
   @override
   String? get deleteBy;
+
+  /// Create a copy of PresentationPositionVarietyEntityResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PresentationPositionVarietyEntityResponseImplCopyWith<
           _$PresentationPositionVarietyEntityResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

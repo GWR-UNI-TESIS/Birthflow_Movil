@@ -77,6 +77,9 @@ class _$PosicionCopyWithImpl<$Res, $Val extends Posicion>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of Posicion
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -92,6 +95,9 @@ class __$$InitImplCopyWithImpl<$Res>
     implements _$$InitImplCopyWith<$Res> {
   __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Posicion
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -196,6 +202,9 @@ class __$$VerticalImplCopyWithImpl<$Res>
   __$$VerticalImplCopyWithImpl(
       _$VerticalImpl _value, $Res Function(_$VerticalImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Posicion
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -300,6 +309,9 @@ class __$$HorizontalImplCopyWithImpl<$Res>
   __$$HorizontalImplCopyWithImpl(
       _$HorizontalImpl _value, $Res Function(_$HorizontalImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Posicion
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

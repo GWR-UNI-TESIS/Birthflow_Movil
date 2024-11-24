@@ -384,6 +384,7 @@ class $CatalogMapper implements _i1.AutoMapprInterface {
       id: model.id,
       code: model.code,
       description: model.description,
+      chartPosition: model.chartPosition,
     );
   }
 

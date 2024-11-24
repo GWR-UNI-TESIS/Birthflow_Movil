@@ -22,8 +22,12 @@ LogoutResponse _$LogoutResponseFromJson(Map<String, dynamic> json) {
 mixin _$LogoutResponse {
   String? get message => throw _privateConstructorUsedError;
 
+  /// Serializes this LogoutResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LogoutResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LogoutResponseCopyWith<LogoutResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$LogoutResponseCopyWithImpl<$Res, $Val extends LogoutResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LogoutResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$LogoutResponseImplCopyWithImpl<$Res>
       _$LogoutResponseImpl _value, $Res Function(_$LogoutResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LogoutResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,11 +126,13 @@ class _$LogoutResponseImpl implements _LogoutResponse {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogoutResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LogoutResponseImplCopyWith<_$LogoutResponseImpl> get copyWith =>
@@ -145,8 +155,11 @@ abstract class _LogoutResponse implements LogoutResponse {
 
   @override
   String? get message;
+
+  /// Create a copy of LogoutResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LogoutResponseImplCopyWith<_$LogoutResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

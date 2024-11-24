@@ -1,113 +1,160 @@
+import 'package:birthflow_movil/src/domain/catalog/entities/hodge_plane.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/position.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
-import 'package:birthflow_movil/src/ui/partograph/widget/dropdown_button_widget.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
+import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
+import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class PresentationPositionVarietyEditScreen extends StatefulWidget {
-  final PresentationPositionVariety? model;
+class PresentationPositionVarietyData {
+  final PresentationPositionVariety? presentationPositionVariety;
+  final String partographId;
 
-  // Constructor que acepta el modelo opcional
-  const PresentationPositionVarietyEditScreen({this.model});
-
-  @override
-  State<StatefulWidget> createState() => PresentationPositionVarietyEditState();
+  PresentationPositionVarietyData({
+    required this.presentationPositionVariety,
+    required this.partographId,
+  });
 }
 
-class PresentationPositionVarietyEditState
-    extends State<PresentationPositionVarietyEditScreen> {
-  final TextEditingController timeInput = TextEditingController();
-  //late Position _position;
-  late HodgePlanePosition _hodgePlanePosition;
+class PresentationPositionVarietyEditScreen extends StatefulWidget {
+  final PresentationPositionVarietyData data;
 
-  final today = DateTime.now();
+  const PresentationPositionVarietyEditScreen({required this.data, super.key});
+
+  @override
+  _PresentationPositionVarietyEditScreenState createState() =>
+      _PresentationPositionVarietyEditScreenState();
+}
+
+class _PresentationPositionVarietyEditScreenState
+    extends State<PresentationPositionVarietyEditScreen> with SnackbarsMixin {
+  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _timeController;
+  Position? _selectedPosition;
+  HodgePlane? _selectedHodgePlane;
 
   @override
   void initState() {
     super.initState();
+    final model = widget.data.presentationPositionVariety;
+    _timeController = TextEditingController(
+      text: model != null
+          ? DateFormat('HH:mm:ss').format(model.time)
+          : DateFormat('HH:mm:ss').format(DateTime.now()),
+    );
+    //_selectedPosition = model?.position;
+    //_selectedHodgePlane = model?.hodgePlane;
+  }
 
-    if (widget.model != null) {
-      // Si el modelo está presente, inicializa los valores
-      final model = widget.model!;
-      timeInput.text = DateFormat('HH:mm:ss').format(model.time);
-      //_position = Position.fromString(model.hodgePlane);
-      //_hodgePlanePosition = HodgePlanePosition.fromString(model.hodgePlane);
-    } else {
-      // Valores por defecto si no hay modelo
-      //_position = Position.values.first; // Ajusta según sea necesario
-      _hodgePlanePosition =
-          HodgePlanePosition.values.first; // Ajusta según sea necesario
+  @override
+  void dispose() {
+    _timeController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        _timeController.text = DateFormat('HH:mm:ss').format(
+          DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+            picked.hour,
+            picked.minute,
+          ),
+        );
+      });
+    }
+  }
+
+  void _saveData() {
+    if (_formKey.currentState?.validate() ?? false) {
+      final time = DateFormat('HH:mm:ss').parse(_timeController.text);
+
+      final bloc = context.read<PartographBloc>();
+      
+   //final event = widget.data.presentationPositionVariety == null
+
+      //Navigator.of(context).pop(presentationPositionVariety);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    timeInput.text = DateFormat('HH:mm:ss').format(today);
-    HodgePlanePosition hodgePlanePosition;
+    final catalog = context.watch<CatalogCubit>().state;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Modificando'),
+        title: Text(
+          widget.data.presentationPositionVariety == null
+              ? 'Crear Presentación'
+              : 'Editar Presentación',
+        ),
       ),
-      body: Container(
-        alignment: Alignment.topLeft,
-        padding: const EdgeInsets.only(top: 10),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Column(
-                children: [
-                  DropdownButtonWidget<HodgePlanePosition>(
-                    labelText: 'Posicion',
-                    enumValues: HodgePlanePosition.values,
-                    onValueChanged: (HodgePlanePosition position) {
-                      hodgePlanePosition = position;
-                    },
-                  ),
-                  /*DropdownButtonWidget<Position>(
-                    labelText: 'Plano',
-                    enumValues: Position.values,
-                    onValueChanged: (Position plane) {},
-                  ),*/
-                  TextField(
-                    controller:
-                        timeInput, //editing controller of this TextField
-                    decoration: const InputDecoration(
-                      //icon of text field
-                      border: OutlineInputBorder(),
-                      labelText: 'Tiempo', //label text of field
-                    ),
-                    readOnly:
-                        true, //set it true, so that user will not able to edit text
-                    onTap: () async {
-                      final TimeOfDay? pickedTime = await showTimePicker(
-                        initialTime: TimeOfDay.now(),
-                        context: context,
-                      );
-
-                      if (pickedTime != null) {
-                        final DateTime dateTime = DateTime(
-                          today.year,
-                          today.month,
-                          today.day,
-                          pickedTime.hour,
-                          pickedTime.minute,
-                          pickedTime.minute,
-                        );
-
-                        final String formattedTime =
-                            DateFormat('HH:mm:ss').format(dateTime);
-
-                        setState(() {
-                          timeInput.text = formattedTime;
-                        });
-                      }
-                    },
-                  ),
-                ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              DynamicDropdownButton<Position>(
+                labelText: 'Posición',
+                list: catalog.positionCatalog,
+                onValueChanged: (Position position) {
+                  setState(() {
+                    _selectedPosition = position;
+                  });
+                },
+                displayField: (Position position) => position.description,
+                initialValue: _selectedPosition,
               ),
-            );
-          },
+              const SizedBox(height: 16),
+              DynamicDropdownButton<HodgePlane>(
+                labelText: 'Plano de Hodge',
+                list: catalog.hodgePlanesCatalog,
+                onValueChanged: (HodgePlane hodgePlane) {
+                  setState(() {
+                    _selectedHodgePlane = hodgePlane;
+                  });
+                },
+                displayField: (HodgePlane hodgePlane) => hodgePlane.description,
+                initialValue: _selectedHodgePlane,
+              ),
+              const SizedBox(height: 16),
+              GestureDetector(
+                onTap: () => _selectTime(context),
+                child: AbsorbPointer(
+                  child: TextFormField(
+                    controller: _timeController,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.access_time),
+                      border: OutlineInputBorder(),
+                      labelText: 'Hora',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Seleccione una hora';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _saveData,
+                child: const Text('Guardar'),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -34,8 +34,12 @@ mixin _$UserRegisterRequest {
       throw _privateConstructorUsedError; // Número telefónico del usuario (opcional)
   String get passwordHash => throw _privateConstructorUsedError;
 
+  /// Serializes this UserRegisterRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserRegisterRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserRegisterRequestCopyWith<UserRegisterRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,6 +70,8 @@ class _$UserRegisterRequestCopyWithImpl<$Res, $Val extends UserRegisterRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserRegisterRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,6 +142,8 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
       $Res Function(_$UserRegisterRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserRegisterRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -239,12 +247,14 @@ class _$UserRegisterRequestImpl implements _UserRegisterRequest {
                 other.passwordHash == passwordHash));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, nombres, apellidos,
       nombreUsuario, email, phoneNumber, passwordHash);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserRegisterRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserRegisterRequestImplCopyWith<_$UserRegisterRequestImpl> get copyWith =>
@@ -273,21 +283,25 @@ abstract class _UserRegisterRequest implements UserRegisterRequest {
       _$UserRegisterRequestImpl.fromJson;
 
   @override
-  String? get id;
-  @override // Identificador único del usuario (usualmente autogenerado por el servidor)
-  String get nombres;
-  @override // Nombres del usuario
-  String get apellidos;
-  @override // Apellidos del usuario
-  String get nombreUsuario;
-  @override // Nombre de usuario para inicio de sesión
-  String get email;
-  @override // Correo electrónico del usuario
-  int? get phoneNumber;
-  @override // Número telefónico del usuario (opcional)
-  String get passwordHash;
+  String?
+      get id; // Identificador único del usuario (usualmente autogenerado por el servidor)
   @override
-  @JsonKey(ignore: true)
+  String get nombres; // Nombres del usuario
+  @override
+  String get apellidos; // Apellidos del usuario
+  @override
+  String get nombreUsuario; // Nombre de usuario para inicio de sesión
+  @override
+  String get email; // Correo electrónico del usuario
+  @override
+  int? get phoneNumber; // Número telefónico del usuario (opcional)
+  @override
+  String get passwordHash;
+
+  /// Create a copy of UserRegisterRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserRegisterRequestImplCopyWith<_$UserRegisterRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

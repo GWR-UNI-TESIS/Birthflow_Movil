@@ -27,8 +27,12 @@ mixin _$CervicalDilationRequest {
   DateTime get hour => throw _privateConstructorUsedError;
   bool get remOrRam => throw _privateConstructorUsedError;
 
+  /// Serializes this CervicalDilationRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CervicalDilationRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CervicalDilationRequestCopyWith<CervicalDilationRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$CervicalDilationRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CervicalDilationRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +125,8 @@ class __$$CervicalDilationRequestImplCopyWithImpl<$Res>
       $Res Function(_$CervicalDilationRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CervicalDilationRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,12 +204,14 @@ class _$CervicalDilationRequestImpl implements _CervicalDilationRequest {
                 other.remOrRam == remOrRam));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, partographId, value, hour, remOrRam);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CervicalDilationRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CervicalDilationRequestImplCopyWith<_$CervicalDilationRequestImpl>
@@ -237,8 +247,11 @@ abstract class _CervicalDilationRequest implements CervicalDilationRequest {
   DateTime get hour;
   @override
   bool get remOrRam;
+
+  /// Create a copy of CervicalDilationRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CervicalDilationRequestImplCopyWith<_$CervicalDilationRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -27,8 +27,12 @@ mixin _$PartographRequest {
   String get observation => throw _privateConstructorUsedError;
   String get workTime => throw _privateConstructorUsedError;
 
+  /// Serializes this PartographRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PartographRequestCopyWith<PartographRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$PartographRequestCopyWithImpl<$Res, $Val extends PartographRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PartographRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$PartographRequestImplCopyWithImpl<$Res>
       $Res Function(_$PartographRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,12 +218,14 @@ class _$PartographRequestImpl implements _PartographRequest {
                 other.workTime == workTime));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, partographId, name, recordName, date, observation, workTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PartographRequestImplCopyWith<_$PartographRequestImpl> get copyWith =>
@@ -254,8 +264,11 @@ abstract class _PartographRequest implements PartographRequest {
   String get observation;
   @override
   String get workTime;
+
+  /// Create a copy of PartographRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PartographRequestImplCopyWith<_$PartographRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -33,8 +33,12 @@ mixin _$MedicalSurveillanceTableRequest {
   String get letter => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
 
+  /// Serializes this MedicalSurveillanceTableRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MedicalSurveillanceTableRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MedicalSurveillanceTableRequestCopyWith<MedicalSurveillanceTableRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -72,6 +76,8 @@ class _$MedicalSurveillanceTableRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MedicalSurveillanceTableRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -169,6 +175,8 @@ class __$$MedicalSurveillanceTableRequestImplCopyWithImpl<$Res>
       $Res Function(_$MedicalSurveillanceTableRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MedicalSurveillanceTableRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -307,7 +315,7 @@ class _$MedicalSurveillanceTableRequestImpl
             (identical(other.time, time) || other.time == time));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -323,7 +331,9 @@ class _$MedicalSurveillanceTableRequestImpl
       letter,
       time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MedicalSurveillanceTableRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MedicalSurveillanceTableRequestImplCopyWith<
@@ -379,8 +389,11 @@ abstract class _MedicalSurveillanceTableRequest
   String get letter;
   @override
   DateTime get time;
+
+  /// Create a copy of MedicalSurveillanceTableRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MedicalSurveillanceTableRequestImplCopyWith<
           _$MedicalSurveillanceTableRequestImpl>
       get copyWith => throw _privateConstructorUsedError;

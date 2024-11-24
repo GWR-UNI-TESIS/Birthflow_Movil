@@ -38,8 +38,12 @@ mixin _$PartographListResponse {
   bool get silenced => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
 
+  /// Serializes this PartographListResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographListResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PartographListResponseCopyWith<PartographListResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -80,6 +84,8 @@ class _$PartographListResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PartographListResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -207,6 +213,8 @@ class __$$PartographListResponseImplCopyWithImpl<$Res>
       $Res Function(_$PartographListResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographListResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -392,7 +400,7 @@ class _$PartographListResponseImpl implements _PartographListResponse {
                 other.favorite == favorite));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -413,7 +421,9 @@ class _$PartographListResponseImpl implements _PartographListResponse {
       silenced,
       favorite);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographListResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PartographListResponseImplCopyWith<_$PartographListResponseImpl>
@@ -482,8 +492,11 @@ abstract class _PartographListResponse implements PartographListResponse {
   bool get silenced;
   @override
   bool get favorite;
+
+  /// Create a copy of PartographListResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PartographListResponseImplCopyWith<_$PartographListResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

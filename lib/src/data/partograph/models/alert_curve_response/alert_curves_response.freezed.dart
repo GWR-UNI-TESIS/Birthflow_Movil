@@ -25,8 +25,12 @@ mixin _$AlertCurvesResponse {
   List<AlertCurveResponse>? get newAlertCurve =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this AlertCurvesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AlertCurvesResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AlertCurvesResponseCopyWith<AlertCurvesResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$AlertCurvesResponseCopyWithImpl<$Res, $Val extends AlertCurvesResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AlertCurvesResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$AlertCurvesResponseImplCopyWithImpl<$Res>
       $Res Function(_$AlertCurvesResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AlertCurvesResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,14 +167,16 @@ class _$AlertCurvesResponseImpl implements _AlertCurvesResponse {
                 .equals(other._newAlertCurve, _newAlertCurve));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_alertCurve),
       const DeepCollectionEquality().hash(_newAlertCurve));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AlertCurvesResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AlertCurvesResponseImplCopyWith<_$AlertCurvesResponseImpl> get copyWith =>
@@ -194,8 +204,11 @@ abstract class _AlertCurvesResponse implements AlertCurvesResponse {
   List<AlertCurveResponse>? get alertCurve;
   @override
   List<AlertCurveResponse>? get newAlertCurve;
+
+  /// Create a copy of AlertCurvesResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AlertCurvesResponseImplCopyWith<_$AlertCurvesResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

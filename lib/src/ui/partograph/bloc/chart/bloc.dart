@@ -7,10 +7,13 @@ import 'package:birthflow_movil/src/core/chart/models/chart_data.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/events/chart_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/states/chart_state.dart';
+import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChartBloc extends Bloc<ChartEvent, ChartState> {
-  ChartBloc(super.initialState) {
+  final CatalogCubit catalogCubit;
+
+  ChartBloc(this.catalogCubit, super.initialState) {
     on<OnRefresh>(_onRefresh);
   }
 
@@ -24,6 +27,8 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
       final medicalsurveillanceData = partograph.medicalSurveillanceTable;
       final presentationPositionVarietyData =
           partograph.presentationPositionVarieties;
+
+      final catalogState = catalogCubit.state;
       if (cervicalDilations == null || cervicalDilations.isEmpty) {
         emit(const Error('Es necesario agregar una dilatacion cervical'));
       } else {
@@ -51,15 +56,17 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
           final hodgePlanePoints = HodgePlaneGenerator(
             hodgePlaneList: presentationPositionVarietyData,
             firstPoint: firstPoint,
+            catalog: catalogState,
           ).chartPoint;
 
           otherPointsPoints!.addAll(hodgePlanePoints!);
         }
 
-        final alertCurvePoints = 
+        final alertCurvePoints =
             ChartMapper.transformToChartPoint(data: alertcurve!);
-        final newAlertCurvePoints = (newAlertCurve != null)? 
-            ChartMapper.transformToChartPoint(data: newAlertCurve) : List<ChartPoint>.empty();
+        final newAlertCurvePoints = (newAlertCurve != null)
+            ? ChartMapper.transformToChartPoint(data: newAlertCurve)
+            : List<ChartPoint>.empty();
 
         emit(
           Loaded(

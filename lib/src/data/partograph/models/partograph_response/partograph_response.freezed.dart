@@ -40,8 +40,12 @@ mixin _$PartographResponse {
       throw _privateConstructorUsedError;
   AlertCurvesResponse? get curves => throw _privateConstructorUsedError;
 
+  /// Serializes this PartographResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PartographResponseCopyWith<PartographResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -82,6 +86,8 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,6 +161,8 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
     ) as $Val);
   }
 
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PartographStateResponseCopyWith<$Res>? get partographState {
@@ -168,6 +176,8 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
     });
   }
 
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AlertCurvesResponseCopyWith<$Res>? get curves {
@@ -219,6 +229,8 @@ class __$$PartographResponseImplCopyWithImpl<$Res>
       $Res Function(_$PartographResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -429,7 +441,7 @@ class _$PartographResponseImpl implements _PartographResponse {
             (identical(other.curves, curves) || other.curves == curves));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -447,7 +459,9 @@ class _$PartographResponseImpl implements _PartographResponse {
       partographState,
       curves);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PartographResponseImplCopyWith<_$PartographResponseImpl> get copyWith =>
@@ -509,8 +523,11 @@ abstract class _PartographResponse implements PartographResponse {
   PartographStateResponse? get partographState;
   @override
   AlertCurvesResponse? get curves;
+
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PartographResponseImplCopyWith<_$PartographResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

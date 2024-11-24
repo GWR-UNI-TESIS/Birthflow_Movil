@@ -28,8 +28,12 @@ mixin _$CervicalDilationResponse {
   bool get remOrRam => throw _privateConstructorUsedError;
   AlertCurvesResponse? get curves => throw _privateConstructorUsedError;
 
+  /// Serializes this CervicalDilationResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CervicalDilationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CervicalDilationResponseCopyWith<CervicalDilationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +66,8 @@ class _$CervicalDilationResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CervicalDilationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class _$CervicalDilationResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of CervicalDilationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AlertCurvesResponseCopyWith<$Res>? get curves {
@@ -144,6 +152,8 @@ class __$$CervicalDilationResponseImplCopyWithImpl<$Res>
       $Res Function(_$CervicalDilationResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CervicalDilationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -230,12 +240,14 @@ class _$CervicalDilationResponseImpl implements _CervicalDilationResponse {
             (identical(other.curves, curves) || other.curves == curves));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, partographId, value, hour, remOrRam, curves);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CervicalDilationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CervicalDilationResponseImplCopyWith<_$CervicalDilationResponseImpl>
@@ -274,8 +286,11 @@ abstract class _CervicalDilationResponse implements CervicalDilationResponse {
   bool get remOrRam;
   @override
   AlertCurvesResponse? get curves;
+
+  /// Create a copy of CervicalDilationResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CervicalDilationResponseImplCopyWith<_$CervicalDilationResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

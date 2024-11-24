@@ -27,8 +27,12 @@ mixin _$WorkTimeResponse {
   List<WorkTimeItemResponse> get workTimeItems =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this WorkTimeResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WorkTimeResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WorkTimeResponseCopyWith<WorkTimeResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +61,8 @@ class _$WorkTimeResponseCopyWithImpl<$Res, $Val extends WorkTimeResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WorkTimeResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,6 +121,8 @@ class __$$WorkTimeResponseImplCopyWithImpl<$Res>
       $Res Function(_$WorkTimeResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WorkTimeResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -199,12 +207,14 @@ class _$WorkTimeResponseImpl implements _WorkTimeResponse {
                 .equals(other._workTimeItems, _workTimeItems));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, paridad, posicion, membrana,
       const DeepCollectionEquality().hash(_workTimeItems));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WorkTimeResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WorkTimeResponseImplCopyWith<_$WorkTimeResponseImpl> get copyWith =>
@@ -241,8 +251,11 @@ abstract class _WorkTimeResponse implements WorkTimeResponse {
   String get membrana;
   @override
   List<WorkTimeItemResponse> get workTimeItems;
+
+  /// Create a copy of WorkTimeResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WorkTimeResponseImplCopyWith<_$WorkTimeResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

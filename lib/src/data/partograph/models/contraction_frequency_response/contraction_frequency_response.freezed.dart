@@ -33,8 +33,12 @@ mixin _$ContractionFrequencyResponse {
   String? get updateBy => throw _privateConstructorUsedError;
   String? get deleteBy => throw _privateConstructorUsedError;
 
+  /// Serializes this ContractionFrequencyResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ContractionFrequencyResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ContractionFrequencyResponseCopyWith<ContractionFrequencyResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -72,6 +76,8 @@ class _$ContractionFrequencyResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ContractionFrequencyResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -169,6 +175,8 @@ class __$$ContractionFrequencyResponseImplCopyWithImpl<$Res>
       $Res Function(_$ContractionFrequencyResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ContractionFrequencyResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -308,12 +316,14 @@ class _$ContractionFrequencyResponseImpl
                 other.deleteBy == deleteBy));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, partographId, value, time,
       isDelete, createAt, updateAt, deleteAt, createdBy, updateBy, deleteBy);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ContractionFrequencyResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ContractionFrequencyResponseImplCopyWith<
@@ -369,8 +379,11 @@ abstract class _ContractionFrequencyResponse
   String? get updateBy;
   @override
   String? get deleteBy;
+
+  /// Create a copy of ContractionFrequencyResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ContractionFrequencyResponseImplCopyWith<
           _$ContractionFrequencyResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

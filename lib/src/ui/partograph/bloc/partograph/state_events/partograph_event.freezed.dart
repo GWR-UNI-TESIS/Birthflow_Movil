@@ -51,6 +51,12 @@ mixin _$PartographEvent {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +94,12 @@ mixin _$PartographEvent {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -125,6 +137,12 @@ mixin _$PartographEvent {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,6 +158,10 @@ mixin _$PartographEvent {
         createMedicalSurveillance,
     required TResult Function(UpdateMedicalSurveillance value)
         updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -152,6 +174,10 @@ mixin _$PartographEvent {
         createMedicalSurveillance,
     TResult? Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -164,6 +190,10 @@ mixin _$PartographEvent {
         createMedicalSurveillance,
     TResult Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -185,6 +215,9 @@ class _$PartographEventCopyWithImpl<$Res, $Val extends PartographEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -204,6 +237,8 @@ class __$$onFetchDataImplCopyWithImpl<$Res>
       _$onFetchDataImpl _value, $Res Function(_$onFetchDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -243,7 +278,9 @@ class _$onFetchDataImpl implements onFetchData {
   @override
   int get hashCode => Object.hash(runtimeType, partographId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$onFetchDataImplCopyWith<_$onFetchDataImpl> get copyWith =>
@@ -285,6 +322,12 @@ class _$onFetchDataImpl implements onFetchData {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
   }) {
     return onFetchData(partographId);
   }
@@ -325,6 +368,12 @@ class _$onFetchDataImpl implements onFetchData {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
   }) {
     return onFetchData?.call(partographId);
   }
@@ -365,6 +414,12 @@ class _$onFetchDataImpl implements onFetchData {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (onFetchData != null) {
@@ -386,6 +441,10 @@ class _$onFetchDataImpl implements onFetchData {
         createMedicalSurveillance,
     required TResult Function(UpdateMedicalSurveillance value)
         updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
   }) {
     return onFetchData(this);
   }
@@ -401,6 +460,10 @@ class _$onFetchDataImpl implements onFetchData {
         createMedicalSurveillance,
     TResult? Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
   }) {
     return onFetchData?.call(this);
   }
@@ -416,6 +479,10 @@ class _$onFetchDataImpl implements onFetchData {
         createMedicalSurveillance,
     TResult Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (onFetchData != null) {
@@ -430,7 +497,10 @@ abstract class onFetchData implements PartographEvent {
       _$onFetchDataImpl;
 
   String get partographId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$onFetchDataImplCopyWith<_$onFetchDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -452,6 +522,8 @@ class __$$SaveCervicalDilationImplCopyWithImpl<$Res>
       $Res Function(_$SaveCervicalDilationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -521,7 +593,9 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
   int get hashCode =>
       Object.hash(runtimeType, partographId, value, hour, remOrRam);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveCervicalDilationImplCopyWith<_$SaveCervicalDilationImpl>
@@ -565,6 +639,12 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
   }) {
     return saveCervicalDilation(partographId, value, hour, remOrRam);
   }
@@ -605,6 +685,12 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
   }) {
     return saveCervicalDilation?.call(partographId, value, hour, remOrRam);
   }
@@ -645,6 +731,12 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (saveCervicalDilation != null) {
@@ -666,6 +758,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
         createMedicalSurveillance,
     required TResult Function(UpdateMedicalSurveillance value)
         updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
   }) {
     return saveCervicalDilation(this);
   }
@@ -681,6 +777,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
         createMedicalSurveillance,
     TResult? Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
   }) {
     return saveCervicalDilation?.call(this);
   }
@@ -696,6 +796,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
         createMedicalSurveillance,
     TResult Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (saveCervicalDilation != null) {
@@ -716,7 +820,10 @@ abstract class SaveCervicalDilation implements PartographEvent {
   double get value;
   DateTime get hour;
   bool get remOrRam;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveCervicalDilationImplCopyWith<_$SaveCervicalDilationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -745,6 +852,8 @@ class __$$UpdateCervicalDilationImplCopyWithImpl<$Res>
       $Res Function(_$UpdateCervicalDilationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -823,7 +932,9 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
   int get hashCode =>
       Object.hash(runtimeType, id, partographId, value, hour, remOrRam);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateCervicalDilationImplCopyWith<_$UpdateCervicalDilationImpl>
@@ -866,6 +977,12 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
   }) {
     return updateCervicalDilation(id, partographId, value, hour, remOrRam);
   }
@@ -906,6 +1023,12 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
   }) {
     return updateCervicalDilation?.call(
         id, partographId, value, hour, remOrRam);
@@ -947,6 +1070,12 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (updateCervicalDilation != null) {
@@ -968,6 +1097,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
         createMedicalSurveillance,
     required TResult Function(UpdateMedicalSurveillance value)
         updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
   }) {
     return updateCervicalDilation(this);
   }
@@ -983,6 +1116,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
         createMedicalSurveillance,
     TResult? Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
   }) {
     return updateCervicalDilation?.call(this);
   }
@@ -998,6 +1135,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
         createMedicalSurveillance,
     TResult Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (updateCervicalDilation != null) {
@@ -1020,7 +1161,10 @@ abstract class UpdateCervicalDilation implements PartographEvent {
   double get value;
   DateTime get hour;
   bool get remOrRam;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateCervicalDilationImplCopyWith<_$UpdateCervicalDilationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1044,6 +1188,8 @@ class __$$DeleteCervicalDilationImplCopyWithImpl<$Res>
       $Res Function(_$DeleteCervicalDilationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1082,7 +1228,9 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteCervicalDilationImplCopyWith<_$DeleteCervicalDilationImpl>
@@ -1125,6 +1273,12 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
   }) {
     return deleteCervicalDilation(id);
   }
@@ -1165,6 +1319,12 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
   }) {
     return deleteCervicalDilation?.call(id);
   }
@@ -1205,6 +1365,12 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (deleteCervicalDilation != null) {
@@ -1226,6 +1392,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
         createMedicalSurveillance,
     required TResult Function(UpdateMedicalSurveillance value)
         updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
   }) {
     return deleteCervicalDilation(this);
   }
@@ -1241,6 +1411,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
         createMedicalSurveillance,
     TResult? Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
   }) {
     return deleteCervicalDilation?.call(this);
   }
@@ -1256,6 +1430,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
         createMedicalSurveillance,
     TResult Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (deleteCervicalDilation != null) {
@@ -1270,7 +1448,10 @@ abstract class DeleteCervicalDilation implements PartographEvent {
       _$DeleteCervicalDilationImpl;
 
   int get id;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteCervicalDilationImplCopyWith<_$DeleteCervicalDilationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1304,6 +1485,8 @@ class __$$CreateMedicalSurveillanceImplCopyWithImpl<$Res>
       $Res Function(_$CreateMedicalSurveillanceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1442,7 +1625,9 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
       pain,
       time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateMedicalSurveillanceImplCopyWith<_$CreateMedicalSurveillanceImpl>
@@ -1485,6 +1670,12 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
   }) {
     return createMedicalSurveillance(
         partographId,
@@ -1535,6 +1726,12 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
   }) {
     return createMedicalSurveillance?.call(
         partographId,
@@ -1585,6 +1782,12 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (createMedicalSurveillance != null) {
@@ -1616,6 +1819,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
         createMedicalSurveillance,
     required TResult Function(UpdateMedicalSurveillance value)
         updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
   }) {
     return createMedicalSurveillance(this);
   }
@@ -1631,6 +1838,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
         createMedicalSurveillance,
     TResult? Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
   }) {
     return createMedicalSurveillance?.call(this);
   }
@@ -1646,6 +1857,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
         createMedicalSurveillance,
     TResult Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (createMedicalSurveillance != null) {
@@ -1678,7 +1893,10 @@ abstract class CreateMedicalSurveillance implements PartographEvent {
   String get frequencyContractions;
   String get pain;
   DateTime get time;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreateMedicalSurveillanceImplCopyWith<_$CreateMedicalSurveillanceImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1713,6 +1931,8 @@ class __$$UpdateMedicalSurveillanceImplCopyWithImpl<$Res>
       $Res Function(_$UpdateMedicalSurveillanceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1861,7 +2081,9 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
       pain,
       time);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateMedicalSurveillanceImplCopyWith<_$UpdateMedicalSurveillanceImpl>
@@ -1904,6 +2126,12 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
   }) {
     return updateMedicalSurveillance(
         id,
@@ -1955,6 +2183,12 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
   }) {
     return updateMedicalSurveillance?.call(
         id,
@@ -2006,6 +2240,12 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (updateMedicalSurveillance != null) {
@@ -2038,6 +2278,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
         createMedicalSurveillance,
     required TResult Function(UpdateMedicalSurveillance value)
         updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
   }) {
     return updateMedicalSurveillance(this);
   }
@@ -2053,6 +2297,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
         createMedicalSurveillance,
     TResult? Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
   }) {
     return updateMedicalSurveillance?.call(this);
   }
@@ -2068,6 +2316,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
         createMedicalSurveillance,
     TResult Function(UpdateMedicalSurveillance value)?
         updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (updateMedicalSurveillance != null) {
@@ -2102,7 +2354,718 @@ abstract class UpdateMedicalSurveillance implements PartographEvent {
   String get frequencyContractions;
   String get pain;
   DateTime get time;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateMedicalSurveillanceImplCopyWith<_$UpdateMedicalSurveillanceImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreatePresentationPositionVarietyImplCopyWith<$Res> {
+  factory _$$CreatePresentationPositionVarietyImplCopyWith(
+          _$CreatePresentationPositionVarietyImpl value,
+          $Res Function(_$CreatePresentationPositionVarietyImpl) then) =
+      __$$CreatePresentationPositionVarietyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String partographId,
+      String hodgePlane,
+      String position,
+      DateTime time,
+      String userId});
+}
+
+/// @nodoc
+class __$$CreatePresentationPositionVarietyImplCopyWithImpl<$Res>
+    extends _$PartographEventCopyWithImpl<$Res,
+        _$CreatePresentationPositionVarietyImpl>
+    implements _$$CreatePresentationPositionVarietyImplCopyWith<$Res> {
+  __$$CreatePresentationPositionVarietyImplCopyWithImpl(
+      _$CreatePresentationPositionVarietyImpl _value,
+      $Res Function(_$CreatePresentationPositionVarietyImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? partographId = null,
+    Object? hodgePlane = null,
+    Object? position = null,
+    Object? time = null,
+    Object? userId = null,
+  }) {
+    return _then(_$CreatePresentationPositionVarietyImpl(
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      hodgePlane: null == hodgePlane
+          ? _value.hodgePlane
+          : hodgePlane // ignore: cast_nullable_to_non_nullable
+              as String,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as String,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreatePresentationPositionVarietyImpl
+    implements CreatePresentationPositionVariety {
+  const _$CreatePresentationPositionVarietyImpl(
+      {required this.partographId,
+      required this.hodgePlane,
+      required this.position,
+      required this.time,
+      required this.userId});
+
+  @override
+  final String partographId;
+  @override
+  final String hodgePlane;
+  @override
+  final String position;
+  @override
+  final DateTime time;
+  @override
+  final String userId;
+
+  @override
+  String toString() {
+    return 'PartographEvent.createPresentationPositionVariety(partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time, userId: $userId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreatePresentationPositionVarietyImpl &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
+            (identical(other.hodgePlane, hodgePlane) ||
+                other.hodgePlane == hodgePlane) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, partographId, hodgePlane, position, time, userId);
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreatePresentationPositionVarietyImplCopyWith<
+          _$CreatePresentationPositionVarietyImpl>
+      get copyWith => __$$CreatePresentationPositionVarietyImplCopyWithImpl<
+          _$CreatePresentationPositionVarietyImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String partographId) onFetchData,
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
+        saveCervicalDilation,
+    required TResult Function(int id, String partographId, double value,
+            DateTime hour, bool remOrRam)
+        updateCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
+  }) {
+    return createPresentationPositionVariety(
+        partographId, hodgePlane, position, time, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String partographId)? onFetchData,
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult? Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
+  }) {
+    return createPresentationPositionVariety?.call(
+        partographId, hodgePlane, position, time, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String partographId)? onFetchData,
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
+    required TResult orElse(),
+  }) {
+    if (createPresentationPositionVariety != null) {
+      return createPresentationPositionVariety(
+          partographId, hodgePlane, position, time, userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(onFetchData value) onFetchData,
+    required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
+    required TResult Function(UpdateCervicalDilation value)
+        updateCervicalDilation,
+    required TResult Function(DeleteCervicalDilation value)
+        deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
+  }) {
+    return createPresentationPositionVariety(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(onFetchData value)? onFetchData,
+    TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
+  }) {
+    return createPresentationPositionVariety?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(onFetchData value)? onFetchData,
+    TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
+    required TResult orElse(),
+  }) {
+    if (createPresentationPositionVariety != null) {
+      return createPresentationPositionVariety(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreatePresentationPositionVariety implements PartographEvent {
+  const factory CreatePresentationPositionVariety(
+      {required final String partographId,
+      required final String hodgePlane,
+      required final String position,
+      required final DateTime time,
+      required final String userId}) = _$CreatePresentationPositionVarietyImpl;
+
+  String get partographId;
+  String get hodgePlane;
+  String get position;
+  DateTime get time;
+  String get userId;
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreatePresentationPositionVarietyImplCopyWith<
+          _$CreatePresentationPositionVarietyImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdatePresentationPositionVarietyImplCopyWith<$Res> {
+  factory _$$UpdatePresentationPositionVarietyImplCopyWith(
+          _$UpdatePresentationPositionVarietyImpl value,
+          $Res Function(_$UpdatePresentationPositionVarietyImpl) then) =
+      __$$UpdatePresentationPositionVarietyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {int id,
+      String partographId,
+      String hodgePlane,
+      String position,
+      DateTime time,
+      String userId});
+}
+
+/// @nodoc
+class __$$UpdatePresentationPositionVarietyImplCopyWithImpl<$Res>
+    extends _$PartographEventCopyWithImpl<$Res,
+        _$UpdatePresentationPositionVarietyImpl>
+    implements _$$UpdatePresentationPositionVarietyImplCopyWith<$Res> {
+  __$$UpdatePresentationPositionVarietyImplCopyWithImpl(
+      _$UpdatePresentationPositionVarietyImpl _value,
+      $Res Function(_$UpdatePresentationPositionVarietyImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? partographId = null,
+    Object? hodgePlane = null,
+    Object? position = null,
+    Object? time = null,
+    Object? userId = null,
+  }) {
+    return _then(_$UpdatePresentationPositionVarietyImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      hodgePlane: null == hodgePlane
+          ? _value.hodgePlane
+          : hodgePlane // ignore: cast_nullable_to_non_nullable
+              as String,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as String,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdatePresentationPositionVarietyImpl
+    implements UpdatePresentationPositionVariety {
+  const _$UpdatePresentationPositionVarietyImpl(
+      {required this.id,
+      required this.partographId,
+      required this.hodgePlane,
+      required this.position,
+      required this.time,
+      required this.userId});
+
+  @override
+  final int id;
+  @override
+  final String partographId;
+  @override
+  final String hodgePlane;
+  @override
+  final String position;
+  @override
+  final DateTime time;
+  @override
+  final String userId;
+
+  @override
+  String toString() {
+    return 'PartographEvent.updatePresentationPositionVariety(id: $id, partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time, userId: $userId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdatePresentationPositionVarietyImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
+            (identical(other.hodgePlane, hodgePlane) ||
+                other.hodgePlane == hodgePlane) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, partographId, hodgePlane, position, time, userId);
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdatePresentationPositionVarietyImplCopyWith<
+          _$UpdatePresentationPositionVarietyImpl>
+      get copyWith => __$$UpdatePresentationPositionVarietyImplCopyWithImpl<
+          _$UpdatePresentationPositionVarietyImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String partographId) onFetchData,
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
+        saveCervicalDilation,
+    required TResult Function(int id, String partographId, double value,
+            DateTime hour, bool remOrRam)
+        updateCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
+    required TResult Function(String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)
+        updatePresentationPositionVariety,
+  }) {
+    return updatePresentationPositionVariety(
+        id, partographId, hodgePlane, position, time, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String partographId)? onFetchData,
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult? Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    TResult? Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
+  }) {
+    return updatePresentationPositionVariety?.call(
+        id, partographId, hodgePlane, position, time, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String partographId)? onFetchData,
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    TResult Function(String partographId, String hodgePlane, String position,
+            DateTime time, String userId)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, String hodgePlane,
+            String position, DateTime time, String userId)?
+        updatePresentationPositionVariety,
+    required TResult orElse(),
+  }) {
+    if (updatePresentationPositionVariety != null) {
+      return updatePresentationPositionVariety(
+          id, partographId, hodgePlane, position, time, userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(onFetchData value) onFetchData,
+    required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
+    required TResult Function(UpdateCervicalDilation value)
+        updateCervicalDilation,
+    required TResult Function(DeleteCervicalDilation value)
+        deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
+  }) {
+    return updatePresentationPositionVariety(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(onFetchData value)? onFetchData,
+    TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
+  }) {
+    return updatePresentationPositionVariety?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(onFetchData value)? onFetchData,
+    TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
+    required TResult orElse(),
+  }) {
+    if (updatePresentationPositionVariety != null) {
+      return updatePresentationPositionVariety(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdatePresentationPositionVariety implements PartographEvent {
+  const factory UpdatePresentationPositionVariety(
+      {required final int id,
+      required final String partographId,
+      required final String hodgePlane,
+      required final String position,
+      required final DateTime time,
+      required final String userId}) = _$UpdatePresentationPositionVarietyImpl;
+
+  int get id;
+  String get partographId;
+  String get hodgePlane;
+  String get position;
+  DateTime get time;
+  String get userId;
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdatePresentationPositionVarietyImplCopyWith<
+          _$UpdatePresentationPositionVarietyImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
