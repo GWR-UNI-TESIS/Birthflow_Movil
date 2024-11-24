@@ -3,7 +3,7 @@ import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/models/filters.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
-import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
+import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
