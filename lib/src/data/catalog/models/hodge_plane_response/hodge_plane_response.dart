@@ -9,6 +9,8 @@ class HodgePlaneResponse with _$HodgePlaneResponse {
     required int id,
     required String code,
     required String description,
+    required double chartPosition,
+    
   }) = _HodgePlaneResponse;
 
   factory HodgePlaneResponse.fromJson(Map<String, dynamic> json) => _$HodgePlaneResponseFromJson(json);

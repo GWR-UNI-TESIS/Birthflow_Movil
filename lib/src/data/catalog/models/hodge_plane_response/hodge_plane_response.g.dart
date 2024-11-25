@@ -12,6 +12,7 @@ _$HodgePlaneResponseImpl _$$HodgePlaneResponseImplFromJson(
       id: (json['id'] as num).toInt(),
       code: json['code'] as String,
       description: json['description'] as String,
+      chartPosition: (json['chartPosition'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$HodgePlaneResponseImplToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$HodgePlaneResponseImplToJson(
       'id': instance.id,
       'code': instance.code,
       'description': instance.description,
+      'chartPosition': instance.chartPosition,
     };

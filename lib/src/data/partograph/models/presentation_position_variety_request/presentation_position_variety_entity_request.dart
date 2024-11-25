@@ -9,8 +9,8 @@ class PresentationPositionVarietyEntityRequest
   const factory PresentationPositionVarietyEntityRequest({
     int? id,
     required String partographId,
-    required String hodgePlane,
-    required String position,
+    required int hodgePlane,
+    required int position,
     required DateTime time,
   }) = _PresentationPositionVarietyEntityRequest;
 

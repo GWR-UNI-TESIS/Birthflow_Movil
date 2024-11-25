@@ -11,6 +11,8 @@ import 'package:birthflow_movil/src/data/partograph/models/presentation_position
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
@@ -396,20 +398,20 @@ class PartographRepositoryImplementation implements PartographRepository {
   @override
   Future<PresentationPositionVariety?> createPresentationPositionVariety({
     required String partographId,
-    required String hodgePlane,
-    required String position,
+    required int hodgePlane,
+    required int position,
     required DateTime time,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = PresentationPositionVarietyEntityRequest(
+        id: 0,
         partographId: partographId,
         hodgePlane: hodgePlane,
         position: position,
-        time: DateTime.now(),
+        time: time,
       );
 
       final result = await _partographService.createPresentationPositionVariety(
@@ -430,7 +432,6 @@ class PartographRepositoryImplementation implements PartographRepository {
   @override
   Future<PresentationPositionVariety?> deletePresentationPositionVariety({
     required int id,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -439,8 +440,8 @@ class PartographRepositoryImplementation implements PartographRepository {
       final request = PresentationPositionVarietyEntityRequest(
         id: id,
         partographId: '',
-        hodgePlane: '',
-        position: '',
+        hodgePlane: 0,
+        position: 0,
         time: DateTime.now(),
       );
 
@@ -488,10 +489,9 @@ class PartographRepositoryImplementation implements PartographRepository {
   Future<PresentationPositionVariety?> updatePresentationPositionVariety({
     required int id,
     required String partographId,
-    required String hodgePlane,
-    required String position,
+    required int hodgePlane,
+    required int position,
     required DateTime time,
-    required String userId,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -534,5 +534,78 @@ class PartographRepositoryImplementation implements PartographRepository {
       _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       rethrow;
     }
+  }
+
+  @override
+  Future<ContractionFrequency?> createContractionFrequency({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) async {
+    // TODO: implement createContractionFrequency
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<FetalHeartRate?> createFetalHeartRate({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) async {
+    // TODO: implement createFetalHeartRate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ContractionFrequency?> deleteContractionFrequency(
+      {required int id}) async {
+    // TODO: implement deleteContractionFrequency
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<FetalHeartRate?> deleteFetalHeartRate({required int id}) async {
+    // TODO: implement deleteFetalHeartRate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ContractionFrequency>?> getContractionFrequency({
+    required String partographId,
+  }) async {
+    // TODO: implement getContractionFrequency
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<FetalHeartRate>?> getFetalHeartRate({
+    required String partographId,
+  }) async {
+    // TODO: implement getFetalHeartRate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ContractionFrequency?> updateContractionFrequency({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) async {
+    // TODO: implement updateContractionFrequency
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<FetalHeartRate?> updateFetalHeartRate({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) async {
+    // TODO: implement updateFetalHeartRate
+    throw UnimplementedError();
   }
 }

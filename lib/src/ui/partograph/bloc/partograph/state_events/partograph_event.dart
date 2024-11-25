@@ -56,19 +56,17 @@ class PartographEvent with _$PartographEvent {
 
 const factory PartographEvent.createPresentationPositionVariety({
     required String partographId,
-    required String hodgePlane,
-    required String position,
+    required int hodgePlane,
+    required int position,
     required DateTime time,
-    required String userId,
   }) = CreatePresentationPositionVariety;
 
   const factory PartographEvent.updatePresentationPositionVariety({
     required int id,
     required String partographId,
-    required String hodgePlane,
-    required String position,
+    required int hodgePlane,
+    required int position,
     required DateTime time,
-    required String userId,
   }) = UpdatePresentationPositionVariety;
   
 }

@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/domain/catalog/entities/hodge_plane.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/position.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
@@ -35,18 +36,42 @@ class _PresentationPositionVarietyEditScreenState
   late final TextEditingController _timeController;
   Position? _selectedPosition;
   HodgePlane? _selectedHodgePlane;
-
+  DateTime _selectTime = DateTime.now();
   @override
   void initState() {
     super.initState();
     final model = widget.data.presentationPositionVariety;
+
+    _selectTime = model?.time ?? DateTime.now();
     _timeController = TextEditingController(
       text: model != null
           ? DateFormat('HH:mm:ss').format(model.time)
           : DateFormat('HH:mm:ss').format(DateTime.now()),
     );
-    //_selectedPosition = model?.position;
-    //_selectedHodgePlane = model?.hodgePlane;
+
+    final catalog = context.read<CatalogCubit>().state;
+
+    if (model != null) {
+      _selectedPosition = catalog.positionCatalog.firstWhere(
+        (position) => position.id == model.position,
+        orElse: () => catalog.positionCatalog
+            .first, // Usa el primer elemento como predeterminado
+      );
+    } else {
+      _selectedPosition = catalog.positionCatalog.first; // Valor predeterminado
+    }
+
+    // Buscar el modelo de HodgePlane basado en el ID o usar un valor predeterminado
+    if (model != null) {
+      _selectedHodgePlane = catalog.hodgePlanesCatalog.firstWhere(
+        (hodgePlane) => hodgePlane.id == model.hodgePlane,
+        orElse: () => catalog.hodgePlanesCatalog
+            .first, // Usa el primer elemento como predeterminado
+      );
+    } else {
+      _selectedHodgePlane =
+          catalog.hodgePlanesCatalog.first; // Valor predeterminado
+    }
   }
 
   @override
@@ -55,22 +80,21 @@ class _PresentationPositionVarietyEditScreenState
     super.dispose();
   }
 
-  Future<void> _selectTime(BuildContext context) async {
+  Future<void> _selectTimeFunction(BuildContext context) async {
     final picked = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
     );
     if (picked != null) {
       setState(() {
-        _timeController.text = DateFormat('HH:mm:ss').format(
-          DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day,
-            picked.hour,
-            picked.minute,
-          ),
+        _selectTime = DateTime(
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          picked.hour,
+          picked.minute,
         );
+        _timeController.text = DateFormat('HH:mm:ss').format(_selectTime);
       });
     }
   }
@@ -80,10 +104,22 @@ class _PresentationPositionVarietyEditScreenState
       final time = DateFormat('HH:mm:ss').parse(_timeController.text);
 
       final bloc = context.read<PartographBloc>();
-      
-   //final event = widget.data.presentationPositionVariety == null
 
-      //Navigator.of(context).pop(presentationPositionVariety);
+      final event = widget.data.presentationPositionVariety == null
+          ? CreatePresentationPositionVariety(
+              partographId: widget.data.partographId,
+              hodgePlane: _selectedHodgePlane!.id,
+              position: _selectedPosition!.id,
+              time: time,
+            )
+          : UpdatePresentationPositionVariety(
+              id: widget.data.presentationPositionVariety!.id!,
+              partographId: widget.data.partographId,
+              hodgePlane: _selectedHodgePlane!.id,
+              position: _selectedPosition!.id,
+              time: time,);
+
+      bloc.add(event);
     }
   }
 
@@ -130,7 +166,7 @@ class _PresentationPositionVarietyEditScreenState
               ),
               const SizedBox(height: 16),
               GestureDetector(
-                onTap: () => _selectTime(context),
+                onTap: () => _selectTimeFunction(context),
                 child: AbsorbPointer(
                   child: TextFormField(
                     controller: _timeController,

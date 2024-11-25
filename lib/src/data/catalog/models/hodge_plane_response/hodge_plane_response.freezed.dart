@@ -23,6 +23,7 @@ mixin _$HodgePlaneResponse {
   int get id => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  double get chartPosition => throw _privateConstructorUsedError;
 
   /// Serializes this HodgePlaneResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ abstract class $HodgePlaneResponseCopyWith<$Res> {
           HodgePlaneResponse value, $Res Function(HodgePlaneResponse) then) =
       _$HodgePlaneResponseCopyWithImpl<$Res, HodgePlaneResponse>;
   @useResult
-  $Res call({int id, String code, String description});
+  $Res call({int id, String code, String description, double chartPosition});
 }
 
 /// @nodoc
@@ -61,6 +62,7 @@ class _$HodgePlaneResponseCopyWithImpl<$Res, $Val extends HodgePlaneResponse>
     Object? id = null,
     Object? code = null,
     Object? description = null,
+    Object? chartPosition = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -75,6 +77,10 @@ class _$HodgePlaneResponseCopyWithImpl<$Res, $Val extends HodgePlaneResponse>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      chartPosition: null == chartPosition
+          ? _value.chartPosition
+          : chartPosition // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -87,7 +93,7 @@ abstract class _$$HodgePlaneResponseImplCopyWith<$Res>
       __$$HodgePlaneResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String code, String description});
+  $Res call({int id, String code, String description, double chartPosition});
 }
 
 /// @nodoc
@@ -106,6 +112,7 @@ class __$$HodgePlaneResponseImplCopyWithImpl<$Res>
     Object? id = null,
     Object? code = null,
     Object? description = null,
+    Object? chartPosition = null,
   }) {
     return _then(_$HodgePlaneResponseImpl(
       id: null == id
@@ -120,6 +127,10 @@ class __$$HodgePlaneResponseImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      chartPosition: null == chartPosition
+          ? _value.chartPosition
+          : chartPosition // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -128,7 +139,10 @@ class __$$HodgePlaneResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HodgePlaneResponseImpl implements _HodgePlaneResponse {
   const _$HodgePlaneResponseImpl(
-      {required this.id, required this.code, required this.description});
+      {required this.id,
+      required this.code,
+      required this.description,
+      required this.chartPosition});
 
   factory _$HodgePlaneResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$HodgePlaneResponseImplFromJson(json);
@@ -139,10 +153,12 @@ class _$HodgePlaneResponseImpl implements _HodgePlaneResponse {
   final String code;
   @override
   final String description;
+  @override
+  final double chartPosition;
 
   @override
   String toString() {
-    return 'HodgePlaneResponse(id: $id, code: $code, description: $description)';
+    return 'HodgePlaneResponse(id: $id, code: $code, description: $description, chartPosition: $chartPosition)';
   }
 
   @override
@@ -153,12 +169,15 @@ class _$HodgePlaneResponseImpl implements _HodgePlaneResponse {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.chartPosition, chartPosition) ||
+                other.chartPosition == chartPosition));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, code, description);
+  int get hashCode =>
+      Object.hash(runtimeType, id, code, description, chartPosition);
 
   /// Create a copy of HodgePlaneResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -181,7 +200,8 @@ abstract class _HodgePlaneResponse implements HodgePlaneResponse {
   const factory _HodgePlaneResponse(
       {required final int id,
       required final String code,
-      required final String description}) = _$HodgePlaneResponseImpl;
+      required final String description,
+      required final double chartPosition}) = _$HodgePlaneResponseImpl;
 
   factory _HodgePlaneResponse.fromJson(Map<String, dynamic> json) =
       _$HodgePlaneResponseImpl.fromJson;
@@ -192,6 +212,8 @@ abstract class _HodgePlaneResponse implements HodgePlaneResponse {
   String get code;
   @override
   String get description;
+  @override
+  double get chartPosition;
 
   /// Create a copy of HodgePlaneResponse
   /// with the given fields replaced by the non-null parameter values.

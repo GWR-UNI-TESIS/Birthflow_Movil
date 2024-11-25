@@ -5,10 +5,9 @@ abstract class PresentationPositionVarietyUpdateUsecase {
   Future<PresentationPositionVariety?> execute({
     required int id,
     required String partographId,
-    required String hodgePlane,
-    required String position,
+    required int hodgePlane,
+    required int position,
     required DateTime time,
-    required String userId,
   });
 }
 
@@ -23,10 +22,9 @@ class PresentationPositionVarietyUpdateUsecaseImplementation
   Future<PresentationPositionVariety?> execute({
       required int id,
     required String partographId,
-    required String hodgePlane,
-    required String position,
+    required int hodgePlane,
+    required int position,
     required DateTime time,
-    required String userId,
   }) async {
     return _partographRepository.updatePresentationPositionVariety(
       id: id,
@@ -34,7 +32,6 @@ class PresentationPositionVarietyUpdateUsecaseImplementation
       hodgePlane: hodgePlane,
       position: position,
       time: time,
-      userId: userId,
     );
   }
 }

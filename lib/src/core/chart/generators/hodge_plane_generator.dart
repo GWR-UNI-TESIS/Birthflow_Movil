@@ -33,7 +33,7 @@ class HodgePlaneGenerator implements IGenerator {
       final timeResult = timeDecimalValue - firstPoint;
 
       final double y =
-          catalog.positionCatalog[hodgePlaneList[index].position].chartPosition;
+          catalog.hodgePlanesCatalog[hodgePlaneList[index].position].chartPosition;
       final currentPoint = ChartPoint(
         x: timeResult,
         y: y,
@@ -41,7 +41,7 @@ class HodgePlaneGenerator implements IGenerator {
         strokeWidth: 2,
         fillColor: charts.Color.transparent,
         shape:
-            catalog.hodgePlanesCatalog[hodgePlaneList[index].hodgePlane].code,
+            catalog.positionCatalog[hodgePlaneList[index].hodgePlane].code,
       );
 
       points.add(currentPoint);

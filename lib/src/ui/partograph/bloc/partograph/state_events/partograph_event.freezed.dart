@@ -51,11 +51,11 @@ mixin _$PartographEvent {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) =>
       throw _privateConstructorUsedError;
@@ -94,11 +94,11 @@ mixin _$PartographEvent {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) =>
       throw _privateConstructorUsedError;
@@ -137,11 +137,11 @@ mixin _$PartographEvent {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) =>
@@ -322,11 +322,11 @@ class _$onFetchDataImpl implements onFetchData {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return onFetchData(partographId);
@@ -368,11 +368,11 @@ class _$onFetchDataImpl implements onFetchData {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return onFetchData?.call(partographId);
@@ -414,11 +414,11 @@ class _$onFetchDataImpl implements onFetchData {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
@@ -639,11 +639,11 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return saveCervicalDilation(partographId, value, hour, remOrRam);
@@ -685,11 +685,11 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return saveCervicalDilation?.call(partographId, value, hour, remOrRam);
@@ -731,11 +731,11 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
@@ -977,11 +977,11 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return updateCervicalDilation(id, partographId, value, hour, remOrRam);
@@ -1023,11 +1023,11 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return updateCervicalDilation?.call(
@@ -1070,11 +1070,11 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
@@ -1273,11 +1273,11 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return deleteCervicalDilation(id);
@@ -1319,11 +1319,11 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return deleteCervicalDilation?.call(id);
@@ -1365,11 +1365,11 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
@@ -1670,11 +1670,11 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return createMedicalSurveillance(
@@ -1726,11 +1726,11 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return createMedicalSurveillance?.call(
@@ -1782,11 +1782,11 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
@@ -2126,11 +2126,11 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return updateMedicalSurveillance(
@@ -2183,11 +2183,11 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return updateMedicalSurveillance?.call(
@@ -2240,11 +2240,11 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
@@ -2369,12 +2369,7 @@ abstract class _$$CreatePresentationPositionVarietyImplCopyWith<$Res> {
           $Res Function(_$CreatePresentationPositionVarietyImpl) then) =
       __$$CreatePresentationPositionVarietyImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {String partographId,
-      String hodgePlane,
-      String position,
-      DateTime time,
-      String userId});
+  $Res call({String partographId, int hodgePlane, int position, DateTime time});
 }
 
 /// @nodoc
@@ -2396,7 +2391,6 @@ class __$$CreatePresentationPositionVarietyImplCopyWithImpl<$Res>
     Object? hodgePlane = null,
     Object? position = null,
     Object? time = null,
-    Object? userId = null,
   }) {
     return _then(_$CreatePresentationPositionVarietyImpl(
       partographId: null == partographId
@@ -2406,19 +2400,15 @@ class __$$CreatePresentationPositionVarietyImplCopyWithImpl<$Res>
       hodgePlane: null == hodgePlane
           ? _value.hodgePlane
           : hodgePlane // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -2431,23 +2421,20 @@ class _$CreatePresentationPositionVarietyImpl
       {required this.partographId,
       required this.hodgePlane,
       required this.position,
-      required this.time,
-      required this.userId});
+      required this.time});
 
   @override
   final String partographId;
   @override
-  final String hodgePlane;
+  final int hodgePlane;
   @override
-  final String position;
+  final int position;
   @override
   final DateTime time;
-  @override
-  final String userId;
 
   @override
   String toString() {
-    return 'PartographEvent.createPresentationPositionVariety(partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time, userId: $userId)';
+    return 'PartographEvent.createPresentationPositionVariety(partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time)';
   }
 
   @override
@@ -2461,13 +2448,12 @@ class _$CreatePresentationPositionVarietyImpl
                 other.hodgePlane == hodgePlane) &&
             (identical(other.position, position) ||
                 other.position == position) &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, partographId, hodgePlane, position, time, userId);
+  int get hashCode =>
+      Object.hash(runtimeType, partographId, hodgePlane, position, time);
 
   /// Create a copy of PartographEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2515,15 +2501,15 @@ class _$CreatePresentationPositionVarietyImpl
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return createPresentationPositionVariety(
-        partographId, hodgePlane, position, time, userId);
+        partographId, hodgePlane, position, time);
   }
 
   @override
@@ -2562,15 +2548,15 @@ class _$CreatePresentationPositionVarietyImpl
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return createPresentationPositionVariety?.call(
-        partographId, hodgePlane, position, time, userId);
+        partographId, hodgePlane, position, time);
   }
 
   @override
@@ -2609,17 +2595,17 @@ class _$CreatePresentationPositionVarietyImpl
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (createPresentationPositionVariety != null) {
       return createPresentationPositionVariety(
-          partographId, hodgePlane, position, time, userId);
+          partographId, hodgePlane, position, time);
     }
     return orElse();
   }
@@ -2691,16 +2677,14 @@ class _$CreatePresentationPositionVarietyImpl
 abstract class CreatePresentationPositionVariety implements PartographEvent {
   const factory CreatePresentationPositionVariety(
       {required final String partographId,
-      required final String hodgePlane,
-      required final String position,
-      required final DateTime time,
-      required final String userId}) = _$CreatePresentationPositionVarietyImpl;
+      required final int hodgePlane,
+      required final int position,
+      required final DateTime time}) = _$CreatePresentationPositionVarietyImpl;
 
   String get partographId;
-  String get hodgePlane;
-  String get position;
+  int get hodgePlane;
+  int get position;
   DateTime get time;
-  String get userId;
 
   /// Create a copy of PartographEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2720,10 +2704,9 @@ abstract class _$$UpdatePresentationPositionVarietyImplCopyWith<$Res> {
   $Res call(
       {int id,
       String partographId,
-      String hodgePlane,
-      String position,
-      DateTime time,
-      String userId});
+      int hodgePlane,
+      int position,
+      DateTime time});
 }
 
 /// @nodoc
@@ -2746,7 +2729,6 @@ class __$$UpdatePresentationPositionVarietyImplCopyWithImpl<$Res>
     Object? hodgePlane = null,
     Object? position = null,
     Object? time = null,
-    Object? userId = null,
   }) {
     return _then(_$UpdatePresentationPositionVarietyImpl(
       id: null == id
@@ -2760,19 +2742,15 @@ class __$$UpdatePresentationPositionVarietyImplCopyWithImpl<$Res>
       hodgePlane: null == hodgePlane
           ? _value.hodgePlane
           : hodgePlane // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -2786,25 +2764,22 @@ class _$UpdatePresentationPositionVarietyImpl
       required this.partographId,
       required this.hodgePlane,
       required this.position,
-      required this.time,
-      required this.userId});
+      required this.time});
 
   @override
   final int id;
   @override
   final String partographId;
   @override
-  final String hodgePlane;
+  final int hodgePlane;
   @override
-  final String position;
+  final int position;
   @override
   final DateTime time;
-  @override
-  final String userId;
 
   @override
   String toString() {
-    return 'PartographEvent.updatePresentationPositionVariety(id: $id, partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time, userId: $userId)';
+    return 'PartographEvent.updatePresentationPositionVariety(id: $id, partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time)';
   }
 
   @override
@@ -2819,13 +2794,12 @@ class _$UpdatePresentationPositionVarietyImpl
                 other.hodgePlane == hodgePlane) &&
             (identical(other.position, position) ||
                 other.position == position) &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, partographId, hodgePlane, position, time, userId);
+  int get hashCode =>
+      Object.hash(runtimeType, id, partographId, hodgePlane, position, time);
 
   /// Create a copy of PartographEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -2873,15 +2847,15 @@ class _$UpdatePresentationPositionVarietyImpl
             String pain,
             DateTime time)
         updateMedicalSurveillance,
-    required TResult Function(String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
         createPresentationPositionVariety,
-    required TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
         updatePresentationPositionVariety,
   }) {
     return updatePresentationPositionVariety(
-        id, partographId, hodgePlane, position, time, userId);
+        id, partographId, hodgePlane, position, time);
   }
 
   @override
@@ -2920,15 +2894,15 @@ class _$UpdatePresentationPositionVarietyImpl
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult? Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult? Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
   }) {
     return updatePresentationPositionVariety?.call(
-        id, partographId, hodgePlane, position, time, userId);
+        id, partographId, hodgePlane, position, time);
   }
 
   @override
@@ -2967,17 +2941,17 @@ class _$UpdatePresentationPositionVarietyImpl
             String pain,
             DateTime time)?
         updateMedicalSurveillance,
-    TResult Function(String partographId, String hodgePlane, String position,
-            DateTime time, String userId)?
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
         createPresentationPositionVariety,
-    TResult Function(int id, String partographId, String hodgePlane,
-            String position, DateTime time, String userId)?
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
         updatePresentationPositionVariety,
     required TResult orElse(),
   }) {
     if (updatePresentationPositionVariety != null) {
       return updatePresentationPositionVariety(
-          id, partographId, hodgePlane, position, time, userId);
+          id, partographId, hodgePlane, position, time);
     }
     return orElse();
   }
@@ -3050,17 +3024,15 @@ abstract class UpdatePresentationPositionVariety implements PartographEvent {
   const factory UpdatePresentationPositionVariety(
       {required final int id,
       required final String partographId,
-      required final String hodgePlane,
-      required final String position,
-      required final DateTime time,
-      required final String userId}) = _$UpdatePresentationPositionVarietyImpl;
+      required final int hodgePlane,
+      required final int position,
+      required final DateTime time}) = _$UpdatePresentationPositionVarietyImpl;
 
   int get id;
   String get partographId;
-  String get hodgePlane;
-  String get position;
+  int get hodgePlane;
+  int get position;
   DateTime get time;
-  String get userId;
 
   /// Create a copy of PartographEvent
   /// with the given fields replaced by the non-null parameter values.

@@ -11,5 +11,6 @@ class PresentationPositionVariety {
     required this.hodgePlane,
     required this.position,
     required this.time,
+
   });
 }

@@ -23,7 +23,6 @@ mixin _$PositionResponse {
   int get id => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  double get chartPosition => throw _privateConstructorUsedError;
 
   /// Serializes this PositionResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +40,7 @@ abstract class $PositionResponseCopyWith<$Res> {
           PositionResponse value, $Res Function(PositionResponse) then) =
       _$PositionResponseCopyWithImpl<$Res, PositionResponse>;
   @useResult
-  $Res call({int id, String code, String description, double chartPosition});
+  $Res call({int id, String code, String description});
 }
 
 /// @nodoc
@@ -62,7 +61,6 @@ class _$PositionResponseCopyWithImpl<$Res, $Val extends PositionResponse>
     Object? id = null,
     Object? code = null,
     Object? description = null,
-    Object? chartPosition = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -77,10 +75,6 @@ class _$PositionResponseCopyWithImpl<$Res, $Val extends PositionResponse>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      chartPosition: null == chartPosition
-          ? _value.chartPosition
-          : chartPosition // ignore: cast_nullable_to_non_nullable
-              as double,
     ) as $Val);
   }
 }
@@ -93,7 +87,7 @@ abstract class _$$PositionResponseImplCopyWith<$Res>
       __$$PositionResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String code, String description, double chartPosition});
+  $Res call({int id, String code, String description});
 }
 
 /// @nodoc
@@ -112,7 +106,6 @@ class __$$PositionResponseImplCopyWithImpl<$Res>
     Object? id = null,
     Object? code = null,
     Object? description = null,
-    Object? chartPosition = null,
   }) {
     return _then(_$PositionResponseImpl(
       id: null == id
@@ -127,10 +120,6 @@ class __$$PositionResponseImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      chartPosition: null == chartPosition
-          ? _value.chartPosition
-          : chartPosition // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 }
@@ -139,10 +128,7 @@ class __$$PositionResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PositionResponseImpl implements _PositionResponse {
   const _$PositionResponseImpl(
-      {required this.id,
-      required this.code,
-      required this.description,
-      required this.chartPosition});
+      {required this.id, required this.code, required this.description});
 
   factory _$PositionResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PositionResponseImplFromJson(json);
@@ -153,12 +139,10 @@ class _$PositionResponseImpl implements _PositionResponse {
   final String code;
   @override
   final String description;
-  @override
-  final double chartPosition;
 
   @override
   String toString() {
-    return 'PositionResponse(id: $id, code: $code, description: $description, chartPosition: $chartPosition)';
+    return 'PositionResponse(id: $id, code: $code, description: $description)';
   }
 
   @override
@@ -169,15 +153,12 @@ class _$PositionResponseImpl implements _PositionResponse {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.chartPosition, chartPosition) ||
-                other.chartPosition == chartPosition));
+                other.description == description));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, code, description, chartPosition);
+  int get hashCode => Object.hash(runtimeType, id, code, description);
 
   /// Create a copy of PositionResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -200,8 +181,7 @@ abstract class _PositionResponse implements PositionResponse {
   const factory _PositionResponse(
       {required final int id,
       required final String code,
-      required final String description,
-      required final double chartPosition}) = _$PositionResponseImpl;
+      required final String description}) = _$PositionResponseImpl;
 
   factory _PositionResponse.fromJson(Map<String, dynamic> json) =
       _$PositionResponseImpl.fromJson;
@@ -212,8 +192,6 @@ abstract class _PositionResponse implements PositionResponse {
   String get code;
   @override
   String get description;
-  @override
-  double get chartPosition;
 
   /// Create a copy of PositionResponse
   /// with the given fields replaced by the non-null parameter values.

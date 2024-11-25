@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
@@ -7,6 +8,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +21,10 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   final CervicalDilationDeleteUseCase _cervicalDilationDeleteUseCase;
   final MedicalSurveillanceCreateUsecase _medicalSurveillanceCreateUsecase;
   final MedicalSurveillanceUpdateUsecase _medicalSurveillanceUpdateUsecase;
+  final PresentationPositionVarietyCreateUsecase
+      _presentationPositionVarietyCreateUsecase;
+  final PresentationPositionVarietyUpdateUsecase
+      _presentationPositionVarietyUpdateUsecase;
   final AlertCurvesGetUseCase _alertCurvesGetUsecase;
 
   PartographBloc(
@@ -28,6 +35,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     this._alertCurvesGetUsecase,
     this._medicalSurveillanceCreateUsecase,
     this._medicalSurveillanceUpdateUsecase,
+    this._presentationPositionVarietyCreateUsecase,
+    this._presentationPositionVarietyUpdateUsecase,
   ) : super(const Initial()) {
     on<onFetchData>(_onFetchData);
     on<SaveCervicalDilation>(_saveCervicalDilation);
@@ -35,6 +44,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     on<DeleteCervicalDilation>(_onDeleteCervicalDilation);
     on<CreateMedicalSurveillance>(_onCreateMedicalSurveillance);
     on<UpdateMedicalSurveillance>(_onUpdateMedicalSurveillance);
+    on<CreatePresentationPositionVariety>(_onCreatePresentationVarietyPosition);
+    on<UpdatePresentationPositionVariety>(_onUpdatePresentationVarietyPosition);
   }
 
   Future<void> _onFetchData(
@@ -188,9 +199,9 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     try {
       final currentState = state as Loaded;
 
-      final value =  currentState.partograph.medicalSurveillanceTable!.length;
+      final value = currentState.partograph.medicalSurveillanceTable!.length;
 
-      final letter =_intToChar(value+1);
+      final letter = _intToChar(value + 1);
 
       final newEntry = await _medicalSurveillanceCreateUsecase.execute(
         partographId: event.partographId,
@@ -205,10 +216,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         time: event.time,
       );
 
-
-
       if (state is Loaded && newEntry != null) {
-
         // Crear una nueva lista de `MedicalSurveillanceTable` con el nuevo registro añadido
         final updatedMedicalSurveillanceList =
             List<MedicalSurveillanceTable>.from(
@@ -232,7 +240,6 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     }
   }
 
-  // Método para manejar la actualización de registros en MedicalSurveillanceTable
   Future<void> _onUpdateMedicalSurveillance(
     UpdateMedicalSurveillance event,
     Emitter<PartographState> emit,
@@ -280,8 +287,84 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     }
   }
 
+  Future<void> _onCreatePresentationVarietyPosition(
+    CreatePresentationPositionVariety event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final currentState = state as Loaded;
+      final newEntry = await _presentationPositionVarietyCreateUsecase.execute(
+        partographId: event.partographId,
+        hodgePlane: event.hodgePlane,
+        position: event.position,
+        time: event.time,
+      );
+      if (state is Loaded && newEntry != null) {
+        final presentationPositionVarietyList =
+            List<PresentationPositionVariety>.from(
+          currentState.partograph.presentationPositionVarieties ?? [],
+        )..add(newEntry);
+
+        // Emitir el estado `Loaded` con el partograma actualizado parcialmente
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              presentationPositionVarieties: presentationPositionVarietyList,
+            ),
+            message: 'Añadido correctamente',
+          ),
+        );
+      } else {
+        emit(const Error('Error al añadir'));
+      }
+    } catch (error) {
+      emit(Error(error.toString()));
+    }
+  }
+
+  Future<void> _onUpdatePresentationVarietyPosition(
+    UpdatePresentationPositionVariety event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+
+      final updatedEntry = await _presentationPositionVarietyUpdateUsecase.execute(
+        id: event.id,
+        partographId: event.partographId,
+        hodgePlane: event.hodgePlane,
+        position: event.position,
+        time: event.time,
+      );
+       if (state is Loaded && updatedEntry != null) {
+        final currentState = state as Loaded;
+
+        // Actualizar la lista `medicalSurveillanceTable` reemplazando el elemento actualizado
+        final presentationPositionVarietiesList =
+            List<PresentationPositionVariety>.from(
+          currentState.partograph.presentationPositionVarieties!,
+        )..[currentState.partograph.presentationPositionVarieties!
+                    .indexWhere((entry) => entry.id == updatedEntry.id)] =
+                updatedEntry;
+
+        // Emitir el estado `Loaded` con el partograma actualizado parcialmente
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              presentationPositionVarieties: presentationPositionVarietiesList,
+            ),
+            message: 'actualizado correctamente',
+          ),
+        );
+      } else {
+        emit(const Error(' Medical Surveillance'));
+      }
+    } catch (error) {
+      emit(Error(error.toString()));
+    }
+  }
+
   String _intToChar(int number) {
-  // Sumar 96 para obtener el código Unicode correspondiente
-  return String.fromCharCode(96 + number);
-}
+    // Sumar 96 para obtener el código Unicode correspondiente
+    return String.fromCharCode(96 + number);
+  }
 }

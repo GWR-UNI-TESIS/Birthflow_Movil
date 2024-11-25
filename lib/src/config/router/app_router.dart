@@ -15,6 +15,7 @@ import 'package:birthflow_movil/src/ui/partograph/views/chart_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -191,9 +192,9 @@ class AppRouter {
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                      return MedicalSurveillanceEditScreen(
-                        model: MedicalSurveillanceEditData(
-                          medicalSurveillanceTable: null,
+                      return  PresentationPositionVarietyEditScreen(
+                        data: PresentationPositionVarietyData(
+                          presentationPositionVariety: null,
                           partographId: partographId,
                         ),
                       );
@@ -203,9 +204,9 @@ class AppRouter {
                     path: AppPaths
                         .home.partographPath.presentationPositionVarietyPath.edit.goRoute,
                     builder: (context, state) {
-                      final data = state.extra! as MedicalSurveillanceEditData;
-                      return MedicalSurveillanceEditScreen(
-                        model: data,
+                      final data = state.extra! as PresentationPositionVarietyData;
+                      return PresentationPositionVarietyEditScreen(
+                        data: data,
                       );
                     },
                   ),

@@ -24,8 +24,8 @@ PresentationPositionVarietyEntityRequest
 mixin _$PresentationPositionVarietyEntityRequest {
   int? get id => throw _privateConstructorUsedError;
   String get partographId => throw _privateConstructorUsedError;
-  String get hodgePlane => throw _privateConstructorUsedError;
-  String get position => throw _privateConstructorUsedError;
+  int get hodgePlane => throw _privateConstructorUsedError;
+  int get position => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
 
   /// Serializes this PresentationPositionVarietyEntityRequest to a JSON map.
@@ -50,8 +50,8 @@ abstract class $PresentationPositionVarietyEntityRequestCopyWith<$Res> {
   $Res call(
       {int? id,
       String partographId,
-      String hodgePlane,
-      String position,
+      int hodgePlane,
+      int position,
       DateTime time});
 }
 
@@ -90,11 +90,11 @@ class _$PresentationPositionVarietyEntityRequestCopyWithImpl<$Res,
       hodgePlane: null == hodgePlane
           ? _value.hodgePlane
           : hodgePlane // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -115,8 +115,8 @@ abstract class _$$PresentationPositionVarietyEntityRequestImplCopyWith<$Res>
   $Res call(
       {int? id,
       String partographId,
-      String hodgePlane,
-      String position,
+      int hodgePlane,
+      int position,
       DateTime time});
 }
 
@@ -153,11 +153,11 @@ class __$$PresentationPositionVarietyEntityRequestImplCopyWithImpl<$Res>
       hodgePlane: null == hodgePlane
           ? _value.hodgePlane
           : hodgePlane // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -186,9 +186,9 @@ class _$PresentationPositionVarietyEntityRequestImpl
   @override
   final String partographId;
   @override
-  final String hodgePlane;
+  final int hodgePlane;
   @override
-  final String position;
+  final int position;
   @override
   final DateTime time;
 
@@ -241,8 +241,8 @@ abstract class _PresentationPositionVarietyEntityRequest
   const factory _PresentationPositionVarietyEntityRequest(
           {final int? id,
           required final String partographId,
-          required final String hodgePlane,
-          required final String position,
+          required final int hodgePlane,
+          required final int position,
           required final DateTime time}) =
       _$PresentationPositionVarietyEntityRequestImpl;
 
@@ -255,9 +255,9 @@ abstract class _PresentationPositionVarietyEntityRequest
   @override
   String get partographId;
   @override
-  String get hodgePlane;
+  int get hodgePlane;
   @override
-  String get position;
+  int get position;
   @override
   DateTime get time;
 

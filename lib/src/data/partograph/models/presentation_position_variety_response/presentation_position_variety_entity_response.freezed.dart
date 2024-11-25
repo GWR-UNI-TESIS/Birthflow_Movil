@@ -27,13 +27,6 @@ mixin _$PresentationPositionVarietyEntityResponse {
   int get hodgePlane => throw _privateConstructorUsedError;
   int get position => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
-  bool get isDelete => throw _privateConstructorUsedError;
-  DateTime get createAt => throw _privateConstructorUsedError;
-  DateTime? get updateAt => throw _privateConstructorUsedError;
-  DateTime? get deleteAt => throw _privateConstructorUsedError;
-  String get createdBy => throw _privateConstructorUsedError;
-  String? get updateBy => throw _privateConstructorUsedError;
-  String? get deleteBy => throw _privateConstructorUsedError;
 
   /// Serializes this PresentationPositionVarietyEntityResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,14 +52,7 @@ abstract class $PresentationPositionVarietyEntityResponseCopyWith<$Res> {
       String partographId,
       int hodgePlane,
       int position,
-      DateTime time,
-      bool isDelete,
-      DateTime createAt,
-      DateTime? updateAt,
-      DateTime? deleteAt,
-      String createdBy,
-      String? updateBy,
-      String? deleteBy});
+      DateTime time});
 }
 
 /// @nodoc
@@ -91,13 +77,6 @@ class _$PresentationPositionVarietyEntityResponseCopyWithImpl<$Res,
     Object? hodgePlane = null,
     Object? position = null,
     Object? time = null,
-    Object? isDelete = null,
-    Object? createAt = null,
-    Object? updateAt = freezed,
-    Object? deleteAt = freezed,
-    Object? createdBy = null,
-    Object? updateBy = freezed,
-    Object? deleteBy = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -120,34 +99,6 @@ class _$PresentationPositionVarietyEntityResponseCopyWithImpl<$Res,
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deleteAt: freezed == deleteAt
-          ? _value.deleteAt
-          : deleteAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deleteBy: freezed == deleteBy
-          ? _value.deleteBy
-          : deleteBy // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -166,14 +117,7 @@ abstract class _$$PresentationPositionVarietyEntityResponseImplCopyWith<$Res>
       String partographId,
       int hodgePlane,
       int position,
-      DateTime time,
-      bool isDelete,
-      DateTime createAt,
-      DateTime? updateAt,
-      DateTime? deleteAt,
-      String createdBy,
-      String? updateBy,
-      String? deleteBy});
+      DateTime time});
 }
 
 /// @nodoc
@@ -196,13 +140,6 @@ class __$$PresentationPositionVarietyEntityResponseImplCopyWithImpl<$Res>
     Object? hodgePlane = null,
     Object? position = null,
     Object? time = null,
-    Object? isDelete = null,
-    Object? createAt = null,
-    Object? updateAt = freezed,
-    Object? deleteAt = freezed,
-    Object? createdBy = null,
-    Object? updateBy = freezed,
-    Object? deleteBy = freezed,
   }) {
     return _then(_$PresentationPositionVarietyEntityResponseImpl(
       id: freezed == id
@@ -225,34 +162,6 @@ class __$$PresentationPositionVarietyEntityResponseImplCopyWithImpl<$Res>
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deleteAt: freezed == deleteAt
-          ? _value.deleteAt
-          : deleteAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deleteBy: freezed == deleteBy
-          ? _value.deleteBy
-          : deleteBy // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -266,14 +175,7 @@ class _$PresentationPositionVarietyEntityResponseImpl
       required this.partographId,
       required this.hodgePlane,
       required this.position,
-      required this.time,
-      required this.isDelete,
-      required this.createAt,
-      this.updateAt,
-      this.deleteAt,
-      required this.createdBy,
-      this.updateBy,
-      this.deleteBy});
+      required this.time});
 
   factory _$PresentationPositionVarietyEntityResponseImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -289,24 +191,10 @@ class _$PresentationPositionVarietyEntityResponseImpl
   final int position;
   @override
   final DateTime time;
-  @override
-  final bool isDelete;
-  @override
-  final DateTime createAt;
-  @override
-  final DateTime? updateAt;
-  @override
-  final DateTime? deleteAt;
-  @override
-  final String createdBy;
-  @override
-  final String? updateBy;
-  @override
-  final String? deleteBy;
 
   @override
   String toString() {
-    return 'PresentationPositionVarietyEntityResponse(id: $id, partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time, isDelete: $isDelete, createAt: $createAt, updateAt: $updateAt, deleteAt: $deleteAt, createdBy: $createdBy, updateBy: $updateBy, deleteBy: $deleteBy)';
+    return 'PresentationPositionVarietyEntityResponse(id: $id, partographId: $partographId, hodgePlane: $hodgePlane, position: $position, time: $time)';
   }
 
   @override
@@ -321,39 +209,13 @@ class _$PresentationPositionVarietyEntityResponseImpl
                 other.hodgePlane == hodgePlane) &&
             (identical(other.position, position) ||
                 other.position == position) &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.isDelete, isDelete) ||
-                other.isDelete == isDelete) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt) &&
-            (identical(other.updateAt, updateAt) ||
-                other.updateAt == updateAt) &&
-            (identical(other.deleteAt, deleteAt) ||
-                other.deleteAt == deleteAt) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
-            (identical(other.updateBy, updateBy) ||
-                other.updateBy == updateBy) &&
-            (identical(other.deleteBy, deleteBy) ||
-                other.deleteBy == deleteBy));
+            (identical(other.time, time) || other.time == time));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      partographId,
-      hodgePlane,
-      position,
-      time,
-      isDelete,
-      createAt,
-      updateAt,
-      deleteAt,
-      createdBy,
-      updateBy,
-      deleteBy);
+  int get hashCode =>
+      Object.hash(runtimeType, id, partographId, hodgePlane, position, time);
 
   /// Create a copy of PresentationPositionVarietyEntityResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -382,14 +244,7 @@ abstract class _PresentationPositionVarietyEntityResponse
           required final String partographId,
           required final int hodgePlane,
           required final int position,
-          required final DateTime time,
-          required final bool isDelete,
-          required final DateTime createAt,
-          final DateTime? updateAt,
-          final DateTime? deleteAt,
-          required final String createdBy,
-          final String? updateBy,
-          final String? deleteBy}) =
+          required final DateTime time}) =
       _$PresentationPositionVarietyEntityResponseImpl;
 
   factory _PresentationPositionVarietyEntityResponse.fromJson(
@@ -406,20 +261,6 @@ abstract class _PresentationPositionVarietyEntityResponse
   int get position;
   @override
   DateTime get time;
-  @override
-  bool get isDelete;
-  @override
-  DateTime get createAt;
-  @override
-  DateTime? get updateAt;
-  @override
-  DateTime? get deleteAt;
-  @override
-  String get createdBy;
-  @override
-  String? get updateBy;
-  @override
-  String? get deleteBy;
 
   /// Create a copy of PresentationPositionVarietyEntityResponse
   /// with the given fields replaced by the non-null parameter values.

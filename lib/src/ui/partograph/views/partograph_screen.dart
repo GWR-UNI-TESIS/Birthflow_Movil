@@ -253,6 +253,7 @@ class _PartographState extends State<PartographScreen> {
       margin: const EdgeInsets.all(16),
       child: DataTable(
         columnSpacing: 5.0,
+        horizontalMargin: 4,
         columns: const [
           DataColumn(label: Text('Plano Hodge')),
           DataColumn(label: Text('Posición')),
@@ -266,6 +267,7 @@ class _PartographState extends State<PartographScreen> {
                   id: position.hodgePlane,
                   code: '',
                   description: 'No disponible',
+                  chartPosition: 0,
                 ),
               )
               .description;
@@ -277,7 +279,6 @@ class _PartographState extends State<PartographScreen> {
                   id: position.position,
                   code: '',
                   description: 'No disponible',
-                  chartPosition: 0,
                 ),
               )
               .description;

@@ -12,8 +12,8 @@ _$PresentationPositionVarietyEntityRequestImpl
         _$PresentationPositionVarietyEntityRequestImpl(
           id: (json['id'] as num?)?.toInt(),
           partographId: json['partographId'] as String,
-          hodgePlane: json['hodgePlane'] as String,
-          position: json['position'] as String,
+          hodgePlane: (json['hodgePlane'] as num).toInt(),
+          position: (json['position'] as num).toInt(),
           time: DateTime.parse(json['time'] as String),
         );
 

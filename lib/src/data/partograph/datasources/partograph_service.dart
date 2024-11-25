@@ -2,6 +2,10 @@ import 'package:birthflow_movil/src/core/models/api_reponse/api_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_request/contraction_frequency_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_response/contraction_frequency_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/fetal_heart_rate_request/fetal_heart_rate_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/fetal_heart_rate_response/fetal_heart_rate_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_list_response/partograph_list_response.dart';
@@ -112,6 +116,54 @@ abstract class PartographService {
   Future<ApiResponse<PresentationPositionVarietyEntityResponse>> deletePresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,
+  );
+
+  @GET('/api/partograph/contraction-frequency/partograph/{partographId}')
+  Future<ApiResponse<List<ContractionFrequencyResponse>>> getContractionFrequency(
+    @Header('Authorization') String token,
+    @Path('partographId') String partographId,
+  );
+
+  @POST('/api/partograph/create/contraction-frequency')
+  Future<ApiResponse<ContractionFrequencyResponse>> createContractionFrequency(
+    @Header('Authorization') String token,
+    @Body() ContractionFrequencyRequest request,
+  );
+
+  @PUT('/api/partograph/contraction-frequency/partograph/{partographId}')
+  Future<ApiResponse<ContractionFrequencyResponse>> updateContractionFrequency(
+    @Header('Authorization') String token,
+    @Body() ContractionFrequencyRequest request,
+  );
+
+  @DELETE('/api/partograph/delete/contraction-frequency')
+  Future<ApiResponse<ContractionFrequencyResponse>> deleteContractionFrequency(
+    @Header('Authorization') String token,
+    @Body() ContractionFrequencyRequest request,
+  );
+
+  @GET('/api/partograph/fetal-heart-rate/partograph/{partographId}')
+  Future<ApiResponse<List<FetalHeartRateResponse>>> getFetalHeartRate(
+    @Header('Authorization') String token,
+    @Path('partographId') String partographId,
+  );
+
+  @POST('/api/partograph/create/fetal-heart-rate')
+  Future<ApiResponse<FetalHeartRateResponse>> createFetalHeartRate(
+    @Header('Authorization') String token,
+    @Body() FetalHeartRateRequest request,
+  );
+
+  @PUT('/api/partograph/create/fetal-heart-rate')
+  Future<ApiResponse<FetalHeartRateResponse>> updateFetalHeartRate(
+    @Header('Authorization') String token,
+    @Body() FetalHeartRateRequest request,
+  );
+
+  @DELETE('/api/partograph/delete/fetal-heart-rate')
+  Future<ApiResponse<FetalHeartRateResponse>> deleteFetalHeartRate(
+    @Header('Authorization') String token,
+    @Body() FetalHeartRateRequest request,
   );
 
   @GET('/api/partograph/curve/{partographId}')

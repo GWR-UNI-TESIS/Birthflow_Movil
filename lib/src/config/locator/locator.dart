@@ -23,6 +23,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveilla
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -142,6 +144,18 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<MedicalSurveillanceUpdateUsecase>(
     MedicalSurveillanceUpdateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<PresentationPositionVarietyCreateUsecase>(
+    PresentationPositionVarietyCreateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<PresentationPositionVarietyUpdateUsecase>(
+    PresentationPositionVarietyUpdateUsecaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );

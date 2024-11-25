@@ -4,7 +4,6 @@ import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_re
 abstract class PresentationPositionVarietyDeleteUsecase {
   Future<PresentationPositionVariety?> execute({
     required int id,
-    required String userId,
   });
 }
 
@@ -18,11 +17,9 @@ class PresentationPositionVarietyDeleteUsecaseImplementation
   @override
   Future<PresentationPositionVariety?> execute({
     required int id,
-    required String userId,
   }) async {
     return _partographRepository.deletePresentationPositionVariety(
       id: id,
-      userId: userId,
     );
   }
 }
