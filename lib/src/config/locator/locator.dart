@@ -18,6 +18,10 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
@@ -159,4 +163,29 @@ Future<void> initializeDependencies() async {
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
+
+  locator.registerSingleton<ContractionFrequencyCreateUsecase>(
+    ContractionFrequencyCreateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<ContractionFrequencyUpdateUsecase>(
+    ContractionFrequencyUpdateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<FetalHeartRateCreateUsecase>(
+    FetalHeartRateCreateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<FetalHeartRateUpdateUsecase>(
+    FetalHeartRateUpdateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
 }

@@ -54,7 +54,7 @@ class PartographEvent with _$PartographEvent {
     required DateTime time,
   }) = UpdateMedicalSurveillance;
 
-const factory PartographEvent.createPresentationPositionVariety({
+  const factory PartographEvent.createPresentationPositionVariety({
     required String partographId,
     required int hodgePlane,
     required int position,
@@ -68,5 +68,30 @@ const factory PartographEvent.createPresentationPositionVariety({
     required int position,
     required DateTime time,
   }) = UpdatePresentationPositionVariety;
-  
+
+  const factory PartographEvent.createFetalHeartRate({
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) = CreateFetalHeartRate;
+
+  const factory PartographEvent.updateFetalHeartRate({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) = UpdateFetalHeartRate;
+
+  const factory PartographEvent.createContractionFrequency({
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) = CreateContractionFrequency;
+
+  const factory PartographEvent.updateContractionFrequency({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) = UpdateContractionFrequency;
 }

@@ -122,7 +122,6 @@ abstract class PartographRepository {
   });
 
   Future<FetalHeartRate?> createFetalHeartRate({
-    required int id,
     required String partographId,
     required String value,
     required DateTime time,
@@ -145,7 +144,6 @@ abstract class PartographRepository {
   });
 
   Future<ContractionFrequency?> createContractionFrequency({
-    required int id,
     required String partographId,
     required String value,
     required DateTime time,

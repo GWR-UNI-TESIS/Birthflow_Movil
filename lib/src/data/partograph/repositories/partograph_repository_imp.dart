@@ -2,6 +2,10 @@ import 'package:birthflow_movil/src/data/partograph/datasources/partograph_servi
 import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_request/contraction_frequency_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_response/contraction_frequency_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/fetal_heart_rate_request/fetal_heart_rate_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/fetal_heart_rate_response/fetal_heart_rate_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_request/medical_surveillance_table_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_list_response/partograph_list_response.dart';
@@ -538,53 +542,155 @@ class PartographRepositoryImplementation implements PartographRepository {
 
   @override
   Future<ContractionFrequency?> createContractionFrequency({
-    required int id,
     required String partographId,
     required String value,
     required DateTime time,
   }) async {
-    // TODO: implement createContractionFrequency
-    throw UnimplementedError();
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = ContractionFrequencyRequest(
+        id: 0,
+        partographId: partographId,
+        value: value,
+        time: time,
+      );
+
+      final result =
+          await _partographService.createContractionFrequency(token, request);
+
+      return _mapper
+          .convert<ContractionFrequencyResponse, ContractionFrequency>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override
   Future<FetalHeartRate?> createFetalHeartRate({
-    required int id,
     required String partographId,
     required String value,
     required DateTime time,
   }) async {
-    // TODO: implement createFetalHeartRate
-    throw UnimplementedError();
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = FetalHeartRateRequest(
+        id: 0,
+        partographId: partographId,
+        value: value,
+        time: time,
+      );
+
+      final result =
+          await _partographService.createFetalHeartRate(token, request);
+
+      return _mapper.convert<FetalHeartRateResponse, FetalHeartRate>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override
-  Future<ContractionFrequency?> deleteContractionFrequency(
-      {required int id}) async {
-    // TODO: implement deleteContractionFrequency
-    throw UnimplementedError();
+  Future<ContractionFrequency?> deleteContractionFrequency({
+    required int id,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = ContractionFrequencyRequest(
+        id: id,
+        partographId: '',
+        value: '',
+        time: DateTime.now(),
+      );
+
+      final result =
+          await _partographService.deleteContractionFrequency(token, request);
+
+      return _mapper
+          .convert<ContractionFrequencyResponse, ContractionFrequency>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override
   Future<FetalHeartRate?> deleteFetalHeartRate({required int id}) async {
-    // TODO: implement deleteFetalHeartRate
-    throw UnimplementedError();
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = FetalHeartRateRequest(
+        id: id,
+        partographId: '',
+        value: '',
+        time: DateTime.now(),
+      );
+
+      final result =
+          await _partographService.deleteFetalHeartRate(token, request);
+
+      return _mapper.convert<FetalHeartRateResponse, FetalHeartRate>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override
   Future<List<ContractionFrequency>?> getContractionFrequency({
     required String partographId,
   }) async {
-    // TODO: implement getContractionFrequency
-    throw UnimplementedError();
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final result =
+          await _partographService.getContractionFrequency(token, partographId);
+
+      return _mapper
+          .convertList<ContractionFrequencyResponse, ContractionFrequency>(
+        result.response!,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override
   Future<List<FetalHeartRate>?> getFetalHeartRate({
     required String partographId,
   }) async {
-    // TODO: implement getFetalHeartRate
-    throw UnimplementedError();
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final result =
+          await _partographService.getFetalHeartRate(token, partographId);
+
+      return _mapper.convertList<FetalHeartRateResponse, FetalHeartRate>(
+        result.response!,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override
@@ -594,8 +700,28 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String value,
     required DateTime time,
   }) async {
-    // TODO: implement updateContractionFrequency
-    throw UnimplementedError();
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = ContractionFrequencyRequest(
+        id: id,
+        partographId: partographId,
+        value: value,
+        time: time,
+      );
+
+      final result =
+          await _partographService.updateContractionFrequency(token, request);
+
+      return _mapper
+          .convert<ContractionFrequencyResponse, ContractionFrequency>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override
@@ -605,7 +731,26 @@ class PartographRepositoryImplementation implements PartographRepository {
     required String value,
     required DateTime time,
   }) async {
-    // TODO: implement updateFetalHeartRate
-    throw UnimplementedError();
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = FetalHeartRateRequest(
+        id: id,
+        partographId: partographId,
+        value: value,
+        time: time,
+      );
+
+      final result =
+          await _partographService.updateFetalHeartRate(token, request);
+
+      return _mapper.convert<FetalHeartRateResponse, FetalHeartRate>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 }

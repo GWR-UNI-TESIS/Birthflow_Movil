@@ -5,6 +5,10 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
@@ -39,16 +43,19 @@ class AppDev extends StatelessWidget {
         ),
         BlocProvider(
           create: (BuildContext context) => PartographBloc(
-            locator<PartographGetUsecase>(),
-            locator<CervicalDilationCreateUseCase>(),
-            locator<CervicalDilationUpdateUseCase>(),
-            locator<CervicalDilationDeleteUseCase>(),
-            locator<AlertCurvesGetUseCase>(),
-            locator<MedicalSurveillanceCreateUsecase>(),
-            locator<MedicalSurveillanceUpdateUsecase>(),
-            locator<PresentationPositionVarietyCreateUsecase>(),
-            locator<PresentationPositionVarietyUpdateUsecase>(),
-          ),
+              locator<PartographGetUsecase>(),
+              locator<CervicalDilationCreateUseCase>(),
+              locator<CervicalDilationUpdateUseCase>(),
+              locator<CervicalDilationDeleteUseCase>(),
+              locator<AlertCurvesGetUseCase>(),
+              locator<MedicalSurveillanceCreateUsecase>(),
+              locator<MedicalSurveillanceUpdateUsecase>(),
+              locator<PresentationPositionVarietyCreateUsecase>(),
+              locator<PresentationPositionVarietyUpdateUsecase>(),
+              locator<ContractionFrequencyCreateUsecase>(),
+              locator<ContractionFrequencyUpdateUsecase>(),
+              locator<FetalHeartRateCreateUsecase>(),
+              locator<FetalHeartRateUpdateUsecase>()),
         ),
       ],
       child: MaterialApp(

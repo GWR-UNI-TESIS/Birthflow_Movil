@@ -1,10 +1,16 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
@@ -25,6 +31,10 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
       _presentationPositionVarietyCreateUsecase;
   final PresentationPositionVarietyUpdateUsecase
       _presentationPositionVarietyUpdateUsecase;
+  final ContractionFrequencyCreateUsecase _contractionFrecuencyCreateUsecase;
+  final ContractionFrequencyUpdateUsecase _contractionFrecuencyUpdateUsecase;
+  final FetalHeartRateCreateUsecase _fetalHeartRateCreateUsecase;
+  final FetalHeartRateUpdateUsecase _fetalHeartRateUpdateUsecase;
   final AlertCurvesGetUseCase _alertCurvesGetUsecase;
 
   PartographBloc(
@@ -37,6 +47,10 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     this._medicalSurveillanceUpdateUsecase,
     this._presentationPositionVarietyCreateUsecase,
     this._presentationPositionVarietyUpdateUsecase,
+    this._contractionFrecuencyCreateUsecase,
+    this._contractionFrecuencyUpdateUsecase,
+    this._fetalHeartRateCreateUsecase,
+    this._fetalHeartRateUpdateUsecase,
   ) : super(const Initial()) {
     on<onFetchData>(_onFetchData);
     on<SaveCervicalDilation>(_saveCervicalDilation);
@@ -45,6 +59,12 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     on<CreateMedicalSurveillance>(_onCreateMedicalSurveillance);
     on<UpdateMedicalSurveillance>(_onUpdateMedicalSurveillance);
     on<CreatePresentationPositionVariety>(_onCreatePresentationVarietyPosition);
+    on<UpdatePresentationPositionVariety>(_onUpdatePresentationVarietyPosition);
+    on<UpdatePresentationPositionVariety>(_onUpdatePresentationVarietyPosition);
+    on<CreateFetalHeartRate>(_onCreateFetalHeartRate);
+    on<UpdateFetalHeartRate>(_onUpdateFetalHeartRate);
+    on<CreateContractionFrequency>(_onCreateContractionFrecuency);
+    on<UpdateContractionFrequency>(_onUpdateContractionFrecuency);
     on<UpdatePresentationPositionVariety>(_onUpdatePresentationVarietyPosition);
   }
 
@@ -327,15 +347,15 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
-
-      final updatedEntry = await _presentationPositionVarietyUpdateUsecase.execute(
+      final updatedEntry =
+          await _presentationPositionVarietyUpdateUsecase.execute(
         id: event.id,
         partographId: event.partographId,
         hodgePlane: event.hodgePlane,
         position: event.position,
         time: event.time,
       );
-       if (state is Loaded && updatedEntry != null) {
+      if (state is Loaded && updatedEntry != null) {
         final currentState = state as Loaded;
 
         // Actualizar la lista `medicalSurveillanceTable` reemplazando el elemento actualizado
@@ -351,6 +371,146 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
           Loaded(
             partograph: currentState.partograph.copyWith(
               presentationPositionVarieties: presentationPositionVarietiesList,
+            ),
+            message: 'actualizado correctamente',
+          ),
+        );
+      } else {
+        emit(const Error(' Medical Surveillance'));
+      }
+    } catch (error) {
+      emit(Error(error.toString()));
+    }
+  }
+
+  Future<void> _onCreateFetalHeartRate(
+    CreateFetalHeartRate event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final currentState = state as Loaded;
+      final newEntry = await _fetalHeartRateCreateUsecase.execute(
+        partographId: event.partographId,
+        value: event.value,
+        time: event.time,
+      );
+      if (state is Loaded && newEntry != null) {
+        final fetalHeartRateList = List<FetalHeartRate>.from(
+          currentState.partograph.fetalHeartRates ?? [],
+        )..add(newEntry);
+
+        // Emitir el estado `Loaded` con el partograma actualizado parcialmente
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              fetalHeartRates: fetalHeartRateList,
+            ),
+            message: 'Añadido correctamente',
+          ),
+        );
+      } else {
+        emit(const Error('Error al añadir'));
+      }
+    } catch (error) {
+      emit(Error(error.toString()));
+    }
+  }
+
+  Future<void> _onUpdateFetalHeartRate(
+    UpdateFetalHeartRate event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final updatedEntry = await _fetalHeartRateUpdateUsecase.execute(
+        id: event.id,
+        partographId: event.partographId,
+        value: event.value,
+        time: event.time,
+      );
+      if (state is Loaded && updatedEntry != null) {
+        final currentState = state as Loaded;
+
+        // Actualizar la lista `medicalSurveillanceTable` reemplazando el elemento actualizado
+        final fetalHeartRateList = List<FetalHeartRate>.from(
+          currentState.partograph.fetalHeartRates!,
+        )..[currentState.partograph.fetalHeartRates!
+            .indexWhere((entry) => entry.id == updatedEntry.id)] = updatedEntry;
+
+        // Emitir el estado `Loaded` con el partograma actualizado parcialmente
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              fetalHeartRates: fetalHeartRateList,
+            ),
+            message: 'actualizado correctamente',
+          ),
+        );
+      } else {
+        emit(const Error(' Medical Surveillance'));
+      }
+    } catch (error) {
+      emit(Error(error.toString()));
+    }
+  }
+
+  Future<void> _onCreateContractionFrecuency(
+    CreateContractionFrequency event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final currentState = state as Loaded;
+      final newEntry = await _contractionFrecuencyCreateUsecase.execute(
+        partographId: event.partographId,
+        value: event.value,
+        time: event.time,
+      );
+      if (state is Loaded && newEntry != null) {
+        final contractionFrequencyList = List<ContractionFrequency>.from(
+          currentState.partograph.contractionFrequencies ?? [],
+        )..add(newEntry);
+
+        // Emitir el estado `Loaded` con el partograma actualizado parcialmente
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              contractionFrequencies: contractionFrequencyList,
+            ),
+            message: 'Añadido correctamente',
+          ),
+        );
+      } else {
+        emit(const Error('Error al añadir'));
+      }
+    } catch (error) {
+      emit(Error(error.toString()));
+    }
+  }
+
+  Future<void> _onUpdateContractionFrecuency(
+    UpdateContractionFrequency event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final updatedEntry = await _contractionFrecuencyUpdateUsecase.execute(
+        id: event.id,
+        partographId: event.partographId,
+        value: event.value,
+        time: event.time,
+      );
+      if (state is Loaded && updatedEntry != null) {
+        final currentState = state as Loaded;
+
+        // Actualizar la lista `medicalSurveillanceTable` reemplazando el elemento actualizado
+        final contractionFrecuencyList = List<ContractionFrequency>.from(
+          currentState.partograph.contractionFrequencies!,
+        )..[currentState.partograph.contractionFrequencies!
+            .indexWhere((entry) => entry.id == updatedEntry.id)] = updatedEntry;
+
+        // Emitir el estado `Loaded` con el partograma actualizado parcialmente
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              contractionFrequencies: contractionFrecuencyList,
             ),
             message: 'actualizado correctamente',
           ),
