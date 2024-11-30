@@ -1,4 +1,4 @@
-import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
@@ -7,54 +7,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class CervicalDilationEditData {
-  final CervicalDilation? cervicalDilation;
+class FetalHeartRateEditData {
+  final FetalHeartRate? fetalHeartRate;
   final String partographId;
 
-  CervicalDilationEditData({
-    required this.cervicalDilation,
+  FetalHeartRateEditData({
+    required this.fetalHeartRate,
     required this.partographId,
   });
 }
 
-class CervicalDilationEditScreen extends StatefulWidget {
-  final CervicalDilationEditData cervicalDilationEditData;
+class FetalHeartRateEditScreen extends StatefulWidget {
+  final FetalHeartRateEditData fetalHeartRateEditData;
 
-  const CervicalDilationEditScreen({
-    super.key,
-    required this.cervicalDilationEditData,
-  });
+  const FetalHeartRateEditScreen(
+      {super.key, required this.fetalHeartRateEditData});
 
   @override
-  _CervicalDilationEditScreenState createState() =>
-      _CervicalDilationEditScreenState();
+  _FetalHeartRateEditScreenState createState() =>
+      _FetalHeartRateEditScreenState();
 }
 
-class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
+class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
     with SnackbarsMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
   TimeOfDay? _selectedTime;
-  bool _remOrRam = false;
 
   @override
   void initState() {
     super.initState();
-    final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
+    final fetalHeartRate = widget.fetalHeartRateEditData.fetalHeartRate;
 
     _valueController = TextEditingController(
-      text: cervicalDilation?.value.toString() ?? '',
+      text: fetalHeartRate?.value ?? '',
     );
     _dateTimeController = TextEditingController(
-      text: cervicalDilation != null
-          ? DateFormat('HH:mm:ss').format(cervicalDilation.hour)
+      text: fetalHeartRate != null
+          ? DateFormat('HH:mm:ss').format(fetalHeartRate.time)
           : '',
     );
-    _selectedTime = cervicalDilation != null
-        ? TimeOfDay.fromDateTime(cervicalDilation.hour)
+    _selectedTime = fetalHeartRate != null
+        ? TimeOfDay.fromDateTime(fetalHeartRate.time)
         : null;
-    _remOrRam = cervicalDilation?.remOrRam ?? false;
   }
 
   @override
@@ -64,7 +60,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
     super.dispose();
   }
 
-  void _saveCervicalDilation() {
+  void _saveFetalHeartRate() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
       final selectedDateTime = DateTime(
@@ -75,20 +71,18 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
         _selectedTime?.minute ?? DateTime.now().minute,
       );
 
-      final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
-      final event = cervicalDilation == null
-          ? SaveCervicalDilation(
-              partographId: widget.cervicalDilationEditData.partographId,
-              value: double.parse(_valueController.text),
-              hour: selectedDateTime,
-              remOrRam: _remOrRam,
+      final fetalHeartRate = widget.fetalHeartRateEditData.fetalHeartRate;
+      final event = fetalHeartRate == null
+          ? CreateFetalHeartRate(
+              partographId: widget.fetalHeartRateEditData.partographId,
+              value: _valueController.text,
+              time: selectedDateTime,
             )
-          : UpdateCervicalDilation(
-              id: cervicalDilation.id,
-              partographId: widget.cervicalDilationEditData.partographId,
-              value: double.parse(_valueController.text),
-              hour: selectedDateTime,
-              remOrRam: _remOrRam,
+          : UpdateFetalHeartRate(
+              id: fetalHeartRate.id!,
+              partographId: widget.fetalHeartRateEditData.partographId,
+              value: _valueController.text,
+              time: selectedDateTime,
             );
 
       bloc.add(event);
@@ -112,13 +106,12 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.cervicalDilationEditData.cervicalDilation == null
-              ? 'Crear Dilatación Cervical'
-              : 'Editar Dilatación Cervical',
+          widget.fetalHeartRateEditData.fetalHeartRate == null
+              ? 'Crear Frecuencia Cardiaca Fetal'
+              : 'Editar Frecuencia Cardiaca Fetal',
         ),
       ),
       body: BlocListener<PartographBloc, PartographState>(
@@ -139,10 +132,9 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
                 _buildValueField(),
                 const SizedBox(height: 20),
                 _buildTimeField(context),
-                _buildSwitch(),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => _saveCervicalDilation(),
+                  onPressed: () => _saveFetalHeartRate(),
                   child: const Text('Guardar'),
                 ),
               ],
@@ -158,7 +150,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
       controller: _valueController,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'Valor de Dilatación',
+        labelText: 'Frecuencia Cardiaca Fetal',
       ),
       keyboardType: TextInputType.number,
       validator: (value) {
@@ -195,18 +187,6 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
           },
         ),
       ),
-    );
-  }
-
-  Widget _buildSwitch() {
-    return SwitchListTile(
-      title: const Text('Ram O Rem'),
-      value: _remOrRam,
-      onChanged: (value) {
-        setState(() {
-          _remOrRam = value;
-        });
-      },
     );
   }
 }

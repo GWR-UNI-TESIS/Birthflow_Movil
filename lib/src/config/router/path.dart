@@ -1,29 +1,4 @@
-// ignore: avoid_classes_with_only_static_members
 import 'package:go_router_paths/go_router_paths.dart';
-
-/*
-class RoutePaths {
-  static final splash = RoutePath('splash', '/splash');
-  static final home = RoutePath('home', '/home');
-  static final search = RoutePath('search', 'search');
-  static final createPartograph =
-      RoutePath('createPartograph', 'createPartograph');
-  static final auth = RoutePath('auth', '/auth');
-  static final login = RoutePath('login', 'login');
-  static final register = RoutePath('register', 'register');
-  static final partograma = RoutePath('partograma', 'partograma');
-  static final cervicalDilationList =
-      RoutePath('cervicalDilationList', 'cervicalDilationList');
-  static final cervicalDilation =
-      RoutePath('cervicalDilation', 'cervicalDilation');
-}
-
-class RoutePath {
-  final String name;
-  final String path;
-
-  RoutePath(this.name, this.path);
-}*/
 
 // ignore: avoid_classes_with_only_static_members
 class AppPaths {
@@ -53,8 +28,13 @@ class PartographPath extends Param<PartographPath> {
       : super.only('partographId', parent: homePath);
 
   CervicalDilationPath get cervicalDilationList => CervicalDilationPath(this);
-  MedicalSurveillancePath get medicalSurveillanceListPath => MedicalSurveillancePath(this);
-  PresentationPositionVarietyPath get presentationPositionVarietyPath => PresentationPositionVarietyPath(this);
+  MedicalSurveillancePath get medicalSurveillanceListPath =>
+      MedicalSurveillancePath(this);
+  PresentationPositionVarietyPath get presentationPositionVarietyPath =>
+      PresentationPositionVarietyPath(this);
+  FetalHeartRatePath get fetalHeartRatePath => FetalHeartRatePath(this);
+  ContractionFrecuencyPath get contractionFrecuencyPath =>
+      ContractionFrecuencyPath(this);
   ChartPath get chart => ChartPath(this);
 }
 
@@ -77,9 +57,24 @@ class MedicalSurveillancePath extends Path<MedicalSurveillancePath> {
   Path get edit => Path('edit', parent: this);
 }
 
-class PresentationPositionVarietyPath extends Path<PresentationPositionVarietyPath> {
+class PresentationPositionVarietyPath
+    extends Path<PresentationPositionVarietyPath> {
   PresentationPositionVarietyPath(PartographPath partographPath)
-      : super('presentation-position-varietyPath', parent: partographPath);
+      : super('presentation-position-variety', parent: partographPath);
+  Path get create => Path('create', parent: this);
+  Path get edit => Path('edit', parent: this);
+}
+
+class FetalHeartRatePath extends Path<FetalHeartRatePath> {
+  FetalHeartRatePath(PartographPath partographPath)
+      : super('fetal-heart-rate', parent: partographPath);
+  Path get create => Path('create', parent: this);
+  Path get edit => Path('edit', parent: this);
+}
+
+class ContractionFrecuencyPath extends Path<ContractionFrecuencyPath> {
+  ContractionFrecuencyPath(PartographPath partographPath)
+      : super('contraction-frecuency', parent: partographPath);
   Path get create => Path('create', parent: this);
   Path get edit => Path('edit', parent: this);
 }
