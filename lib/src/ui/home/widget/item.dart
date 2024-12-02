@@ -2,7 +2,7 @@ import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ListItemWidget extends StatefulWidget {
+class ListItemWidget extends StatelessWidget {
   const ListItemWidget({
     super.key,
     required this.partographId,
@@ -19,88 +19,75 @@ class ListItemWidget extends StatefulWidget {
   final String lastUpdate;
   final bool set;
   final bool silenced;
-  @override
-  State<ListItemWidget> createState() => _ListItemState();
-}
 
-class _ListItemState extends State<ListItemWidget> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      titleAlignment: ListTileTitleAlignment.center,
-      title: Text(widget.title),
-      trailing: SizedBox(
-        width: 100,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(widget.lastUpdate),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+    final FocusNode buttonFocusNode = FocusNode();
+
+    return MenuAnchor(
+      childFocusNode: buttonFocusNode,
+      alignmentOffset: const Offset(200, 0),
+      menuChildren: <Widget>[
+        MenuItemButton(
+          onPressed: () {},
+          child: const Text('Compartir'),
+        ),
+        const Divider(),
+        MenuItemButton(
+          onPressed: () {},
+          child: const Text('Marcar como favorito'),
+        ),
+        MenuItemButton(
+          onPressed: () {},
+          child: Text(silenced ? 'Activar notificaciones' : 'Silenciar'),
+        ),
+        MenuItemButton(
+          onPressed: () {},
+          child: Text(set ? 'Desanclar' : 'Anclar'),
+        ),
+        MenuItemButton(
+          onPressed: () {},
+          child: const Text('Eliminar'),
+        ),
+      ],
+      builder: (_, MenuController controller, Widget? child) {
+        return ListTile(
+          titleAlignment: ListTileTitleAlignment.center,
+          title: Text(title),
+          subtitle: Text(subtitle),
+          trailing: SizedBox(
+            width: 100,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (widget.set) const Icon(Icons.push_pin),
-                if (widget.silenced) const Icon(Icons.notifications_off),
+                Text(lastUpdate),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    if (set) const Icon(Icons.push_pin),
+                    if (silenced) const Icon(Icons.notifications_off),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      ),
-      onTap: () {
-        context.go(
-          AppPaths.home.partographPath.define(widget.partographId).path,
-          extra: widget.partographId,
+          ),
+          onTap: () {
+            context.go(
+              AppPaths.home.partographPath.define(partographId).path,
+              extra: partographId,
+            );
+          },
+          focusNode: buttonFocusNode,
+          onLongPress: () {
+            if (controller.isOpen) {
+              controller.close();
+            } else {
+              controller.open();
+            }
+          },
         );
       },
-      subtitle: Text(widget.subtitle),
-      onLongPress: () => showModalBottomSheet<void>(
-        context: context,
-        showDragHandle: true,
-        builder: (BuildContext context) {
-          return SizedBox(
-            height: 120,
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  const Text('Estado'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.favorite),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: (widget.silenced)
-                            ? const Icon(Icons.notifications_off)
-                            : const Icon(Icons.notifications),
-                      ),
-                      IconButton(
-                        isSelected: widget.set,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        selectedIcon: const Icon(Icons.push_pin),
-                        icon: const Icon(Icons.push_pin),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.delete),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }
