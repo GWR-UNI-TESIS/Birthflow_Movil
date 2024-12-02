@@ -1,7 +1,8 @@
+import 'package:birthflow_movil/src/core/chart/generators/contraction_frequency_generator.dart';
+import 'package:birthflow_movil/src/core/chart/generators/fetal_heart_rate_generator.dart';
 import 'package:birthflow_movil/src/core/chart/generators/hodge_plane_generator.dart';
 import 'package:birthflow_movil/src/core/chart/generators/medical_surveillance_generator.dart';
 import 'package:birthflow_movil/src/core/chart/generators/real_curve_generator.dart';
-import 'package:birthflow_movil/src/core/chart/libs/helper.dart';
 import 'package:birthflow_movil/src/core/chart/libs/mapper.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_data.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
@@ -28,6 +29,8 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
       final presentationPositionVarietyData =
           partograph.presentationPositionVarieties;
 
+      final fetalHeartRateData = partograph.fetalHeartRates;
+      final contractionFrequencyData = partograph.contractionFrequencies;
       final catalogState = catalogCubit.state;
       if (cervicalDilations == null || cervicalDilations.isEmpty) {
         emit(const Error('Es necesario agregar una dilatacion cervical'));
@@ -35,8 +38,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
         final alertcurve = partograph.curves!.alertCurve;
         final newAlertCurve = partograph.curves!.newAlertCurve;
 
-        final firstPoint =
-            Helper.transformToDecimal(cervicalDilations.first.hour);
+        final startTime = cervicalDilations.first.hour;
 
         final realCurvePoints =
             RealCurveGenerator(cervicalList: cervicalDilations).chartPoint;
@@ -47,7 +49,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
             medicalsurveillanceData.isNotEmpty) {
           otherPointsPoints = MedicalSurveillanceGenerator(
             medicalSurveillanceList: medicalsurveillanceData,
-            firstPoint: firstPoint,
+            startTime: startTime,
           ).chartPoint;
         }
 
@@ -55,11 +57,28 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
             presentationPositionVarietyData.isNotEmpty) {
           final hodgePlanePoints = HodgePlaneGenerator(
             hodgePlaneList: presentationPositionVarietyData,
-            firstPoint: firstPoint,
+            startTime: startTime,
             catalog: catalogState,
           ).chartPoint;
 
           otherPointsPoints!.addAll(hodgePlanePoints!);
+        }
+
+        if (fetalHeartRateData != null && fetalHeartRateData.isNotEmpty) {
+          final fetalHeartRate = FetalHeartRateGenerator(
+            fetalHeartRateList: fetalHeartRateData,
+            startTime: startTime,
+          ).chartPoint;
+          otherPointsPoints!.addAll(fetalHeartRate!);
+        }
+
+        if (contractionFrequencyData != null &&
+            contractionFrequencyData.isNotEmpty) {
+          final contractionFrequency = ContractionFrequencyGenerator(
+            contractionFrequencyList: contractionFrequencyData,
+            startTime: startTime,
+          ).chartPoint;
+          otherPointsPoints!.addAll(contractionFrequency!);
         }
 
         final alertCurvePoints =

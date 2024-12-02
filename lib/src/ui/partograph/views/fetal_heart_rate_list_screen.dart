@@ -39,7 +39,7 @@ class FetalHeartRateListScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () => _navigateToEdit(context, null),
-        ));
+        ),);
   }
 
   Widget _buildFetalHeartRateList(List<FetalHeartRate> fetalHeartRates) {
@@ -69,7 +69,7 @@ class FetalHeartRateListScreen extends StatelessWidget {
     context.go(
       AppPaths.home.partographPath
           .define(partographId)
-          .cervicalDilationList
+          .fetalHeartRatePath
           .edit
           .path,
       extra: FetalHeartRateEditData(

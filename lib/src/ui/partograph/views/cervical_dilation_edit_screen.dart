@@ -103,8 +103,12 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
     if (picked != null && picked != _selectedTime) {
       setState(() {
         _selectedTime = picked;
+        final now = DateTime.now();
+        final dateTime =
+            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
+
         _dateTimeController.text = DateFormat('HH:mm:ss').format(
-          DateFormat.jm().parse(picked.format(context)),
+          dateTime,
         );
       });
     }
@@ -112,7 +116,6 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

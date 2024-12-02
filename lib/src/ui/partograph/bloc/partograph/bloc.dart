@@ -31,8 +31,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
       _presentationPositionVarietyCreateUsecase;
   final PresentationPositionVarietyUpdateUsecase
       _presentationPositionVarietyUpdateUsecase;
-  final ContractionFrequencyCreateUsecase _contractionFrecuencyCreateUsecase;
-  final ContractionFrequencyUpdateUsecase _contractionFrecuencyUpdateUsecase;
+  final ContractionFrequencyCreateUsecase _contractionFrequencyCreateUsecase;
+  final ContractionFrequencyUpdateUsecase _contractionFrequencyUpdateUsecase;
   final FetalHeartRateCreateUsecase _fetalHeartRateCreateUsecase;
   final FetalHeartRateUpdateUsecase _fetalHeartRateUpdateUsecase;
   final AlertCurvesGetUseCase _alertCurvesGetUsecase;
@@ -47,8 +47,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     this._medicalSurveillanceUpdateUsecase,
     this._presentationPositionVarietyCreateUsecase,
     this._presentationPositionVarietyUpdateUsecase,
-    this._contractionFrecuencyCreateUsecase,
-    this._contractionFrecuencyUpdateUsecase,
+    this._contractionFrequencyCreateUsecase,
+    this._contractionFrequencyUpdateUsecase,
     this._fetalHeartRateCreateUsecase,
     this._fetalHeartRateUpdateUsecase,
   ) : super(const Initial()) {
@@ -60,12 +60,10 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     on<UpdateMedicalSurveillance>(_onUpdateMedicalSurveillance);
     on<CreatePresentationPositionVariety>(_onCreatePresentationVarietyPosition);
     on<UpdatePresentationPositionVariety>(_onUpdatePresentationVarietyPosition);
-    on<UpdatePresentationPositionVariety>(_onUpdatePresentationVarietyPosition);
     on<CreateFetalHeartRate>(_onCreateFetalHeartRate);
     on<UpdateFetalHeartRate>(_onUpdateFetalHeartRate);
-    on<CreateContractionFrequency>(_onCreateContractionFrecuency);
-    on<UpdateContractionFrequency>(_onUpdateContractionFrecuency);
-    on<UpdatePresentationPositionVariety>(_onUpdatePresentationVarietyPosition);
+    on<CreateContractionFrequency>(_onCreateContractionFrequency);
+    on<UpdateContractionFrequency>(_onUpdateContractionFrequency);
   }
 
   Future<void> _onFetchData(
@@ -81,7 +79,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
       emit(
         Loaded(
           partograph: result,
-          message: 'Elementos cargados correctamente',
+          message: 'Partograma cargado correctamente',
         ),
       );
     } catch (e) {
@@ -249,14 +247,14 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               medicalSurveillanceTable: updatedMedicalSurveillanceList,
             ),
-            message: 'Medical Surveillance añadido correctamente',
+            message: 'Elemento añadido a la tabla correctamente',
           ),
         );
       } else {
-        emit(const Error('Error al añadir Medical Surveillance'));
+        emit(const Error('Error al añadir a la tabla'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 
@@ -296,14 +294,14 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               medicalSurveillanceTable: updatedMedicalSurveillanceList,
             ),
-            message: 'Medical Surveillance actualizado correctamente',
+            message: 'Elemento actualizado correctamente',
           ),
         );
       } else {
-        emit(const Error('Error al actualizar Medical Surveillance'));
+        emit(const Error('Error al actualizar el elemento'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 
@@ -331,14 +329,14 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               presentationPositionVarieties: presentationPositionVarietyList,
             ),
-            message: 'Añadido correctamente',
+            message: 'Elemento de la altura de la presentacion añadido correctamente',
           ),
         );
       } else {
         emit(const Error('Error al añadir'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 
@@ -372,14 +370,14 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               presentationPositionVarieties: presentationPositionVarietiesList,
             ),
-            message: 'actualizado correctamente',
+            message: 'Elemento de la altura de la presentacion modificado correctamente',
           ),
         );
       } else {
-        emit(const Error(' Medical Surveillance'));
+        emit(const Error('Error al modificar'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 
@@ -405,14 +403,14 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               fetalHeartRates: fetalHeartRateList,
             ),
-            message: 'Añadido correctamente',
+            message: 'Frec. Cardiaca Fetal añadido correctamente',
           ),
         );
       } else {
         emit(const Error('Error al añadir'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 
@@ -442,24 +440,24 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               fetalHeartRates: fetalHeartRateList,
             ),
-            message: 'actualizado correctamente',
+            message: 'Frec. Cardiaca Fetal modificado correctamente',
           ),
         );
       } else {
-        emit(const Error(' Medical Surveillance'));
+        emit(const Error('Ocurrio un error modificando'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 
-  Future<void> _onCreateContractionFrecuency(
+  Future<void> _onCreateContractionFrequency(
     CreateContractionFrequency event,
     Emitter<PartographState> emit,
   ) async {
     try {
       final currentState = state as Loaded;
-      final newEntry = await _contractionFrecuencyCreateUsecase.execute(
+      final newEntry = await _contractionFrequencyCreateUsecase.execute(
         partographId: event.partographId,
         value: event.value,
         time: event.time,
@@ -475,23 +473,23 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               contractionFrequencies: contractionFrequencyList,
             ),
-            message: 'Añadido correctamente',
+            message: 'Frec. Contracciones añadido correctamente',
           ),
         );
       } else {
-        emit(const Error('Error al añadir'));
+        emit(const Error('Ocurrio un error al añadir'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 
-  Future<void> _onUpdateContractionFrecuency(
+  Future<void> _onUpdateContractionFrequency(
     UpdateContractionFrequency event,
     Emitter<PartographState> emit,
   ) async {
     try {
-      final updatedEntry = await _contractionFrecuencyUpdateUsecase.execute(
+      final updatedEntry = await _contractionFrequencyUpdateUsecase.execute(
         id: event.id,
         partographId: event.partographId,
         value: event.value,
@@ -501,7 +499,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         final currentState = state as Loaded;
 
         // Actualizar la lista `medicalSurveillanceTable` reemplazando el elemento actualizado
-        final contractionFrecuencyList = List<ContractionFrequency>.from(
+        final contractionFrequencyList = List<ContractionFrequency>.from(
           currentState.partograph.contractionFrequencies!,
         )..[currentState.partograph.contractionFrequencies!
             .indexWhere((entry) => entry.id == updatedEntry.id)] = updatedEntry;
@@ -510,16 +508,16 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         emit(
           Loaded(
             partograph: currentState.partograph.copyWith(
-              contractionFrequencies: contractionFrecuencyList,
+              contractionFrequencies: contractionFrequencyList,
             ),
-            message: 'actualizado correctamente',
+            message: 'Frec. Contracciones modificado correctamente',
           ),
         );
       } else {
-        emit(const Error(' Medical Surveillance'));
+        emit(const Error('Frec. Contracciones no modificado'));
       }
     } catch (error) {
-      emit(Error(error.toString()));
+      emit(const Error('Ocurrio un error inesperado'));
     }
   }
 

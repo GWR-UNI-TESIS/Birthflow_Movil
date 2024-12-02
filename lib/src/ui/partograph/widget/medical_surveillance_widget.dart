@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MedicalSurveillanceWidget extends StatelessWidget {
   const MedicalSurveillanceWidget({super.key, required this.list});
@@ -63,7 +64,7 @@ class MedicalSurveillanceWidget extends StatelessWidget {
                       Item(
                         value: i >= list!.length
                             ? ' '
-                            : '${list![i].time.hour} : ${list![i].time.minute}',
+                            : DateFormat.Hm().format(DateTime.now()),
                       ),
                   ],
                 ),
@@ -147,8 +148,7 @@ class MedicalSurveillanceWidget extends StatelessWidget {
                     ),
                     for (int i = 0; i <= 15; i++)
                       Item(
-                        value:
-                            i >= list!.length ? ' ' : list![i].pain,
+                        value: i >= list!.length ? ' ' : list![i].pain,
                       ),
                   ],
                 ),

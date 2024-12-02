@@ -101,7 +101,6 @@ class _PresentationPositionVarietyEditScreenState
 
   void _saveData() {
     if (_formKey.currentState?.validate() ?? false) {
-      final time = DateFormat('HH:mm:ss').parse(_timeController.text);
 
       final bloc = context.read<PartographBloc>();
 
@@ -110,14 +109,14 @@ class _PresentationPositionVarietyEditScreenState
               partographId: widget.data.partographId,
               hodgePlane: _selectedHodgePlane!.id,
               position: _selectedPosition!.id,
-              time: time,
+              time: _selectTime,
             )
           : UpdatePresentationPositionVariety(
               id: widget.data.presentationPositionVariety!.id!,
               partographId: widget.data.partographId,
               hodgePlane: _selectedHodgePlane!.id,
               position: _selectedPosition!.id,
-              time: time,);
+              time: _selectTime,);
 
       bloc.add(event);
     }

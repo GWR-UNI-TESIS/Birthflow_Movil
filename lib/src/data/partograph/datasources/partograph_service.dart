@@ -55,13 +55,13 @@ abstract class PartographService {
     @Body() CervicalDilationRequest request,
   );
 
-  @PUT('/api/partograph/update/cervical-dilation')
+  @PATCH('/api/partograph/update/cervical-dilation')
   Future<ApiResponse<CervicalDilationResponse>> updateCervicalDilation(
     @Header('Authorization') String token,
     @Body() CervicalDilationRequest request,
   );
 
-  @PUT('/api/partograph/delete/cervical-dilation')
+  @DELETE('/api/partograph/delete/cervical-dilation')
   Future<ApiResponse<CervicalDilationResponse>> deleteCervicalDilation(
     @Header('Authorization') String token,
     @Body() CervicalDilationRequest request,
@@ -69,57 +69,66 @@ abstract class PartographService {
 
   // Endpoints de tabla
   @GET('/api/partograph/medical-surveillance-table/partograph/{parthographId}')
-  Future<ApiResponse<List<MedicalSurveillanceTableResponse>>> getMedicalSurveillanceTable(
+  Future<ApiResponse<List<MedicalSurveillanceTableResponse>>>
+      getMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Path('partographId') String partographId,
   );
 
   @POST('/api/partograph/create/medical-surveillance-table')
-  Future<ApiResponse<MedicalSurveillanceTableResponse>> createMedicalSurveillanceTable(
+  Future<ApiResponse<MedicalSurveillanceTableResponse>>
+      createMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Body() MedicalSurveillanceTableRequest request,
   );
 
   @PATCH('/api/partograph/update/medical-surveillance-table')
-  Future<ApiResponse<MedicalSurveillanceTableResponse>> updateMedicalSurveillanceTable(
+  Future<ApiResponse<MedicalSurveillanceTableResponse>>
+      updateMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Body() MedicalSurveillanceTableRequest request,
   );
 
-  @PUT('/api/partograph/delete/medical-surveillance-table')
-  Future<ApiResponse<MedicalSurveillanceTableResponse>> deleteMedicalSurveillanceTable(
+  @DELETE('/api/partograph/delete/medical-surveillance-table')
+  Future<ApiResponse<MedicalSurveillanceTableResponse>>
+      deleteMedicalSurveillanceTable(
     @Header('Authorization') String token,
     @Body() MedicalSurveillanceTableRequest request,
   );
 
-
-    // Endpoints de vvp
-  @GET('/api/partograph/presentation-position-variety/partograph/{parthographId}')
-  Future<ApiResponse<List<PresentationPositionVarietyEntityResponse>>> getPresentationPositionVariety(
+  // Endpoints de vvp
+  @GET(
+      '/api/partograph/presentation-position-variety/partograph/{parthographId}')
+  Future<ApiResponse<List<PresentationPositionVarietyEntityResponse>>>
+      getPresentationPositionVariety(
     @Header('Authorization') String token,
     @Path('partographId') String partographId,
   );
 
   @POST('/api/partograph/create/presentation-position-variety')
-  Future<ApiResponse<PresentationPositionVarietyEntityResponse>> createPresentationPositionVariety(
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>>
+      createPresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,
   );
 
-  @PUT('/api/partograph/update/presentation-position-variety')
-  Future<ApiResponse<PresentationPositionVarietyEntityResponse>> updatePresentationPositionVariety(
+  @PATCH('/api/partograph/update/presentation-position-variety')
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>>
+      updatePresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,
   );
 
   @DELETE('/api/partograph/delete/presentation-position-variety')
-  Future<ApiResponse<PresentationPositionVarietyEntityResponse>> deletePresentationPositionVariety(
+  Future<ApiResponse<PresentationPositionVarietyEntityResponse>>
+      deletePresentationPositionVariety(
     @Header('Authorization') String token,
     @Body() PresentationPositionVarietyEntityRequest request,
   );
 
   @GET('/api/partograph/contraction-frequency/partograph/{partographId}')
-  Future<ApiResponse<List<ContractionFrequencyResponse>>> getContractionFrequency(
+  Future<ApiResponse<List<ContractionFrequencyResponse>>>
+      getContractionFrequency(
     @Header('Authorization') String token,
     @Path('partographId') String partographId,
   );
@@ -130,7 +139,7 @@ abstract class PartographService {
     @Body() ContractionFrequencyRequest request,
   );
 
-  @PUT('/api/partograph/contraction-frequency/partograph/{partographId}')
+  @PATCH('/api/partograph/update/contraction-frequency')
   Future<ApiResponse<ContractionFrequencyResponse>> updateContractionFrequency(
     @Header('Authorization') String token,
     @Body() ContractionFrequencyRequest request,
@@ -154,7 +163,7 @@ abstract class PartographService {
     @Body() FetalHeartRateRequest request,
   );
 
-  @PUT('/api/partograph/create/fetal-heart-rate')
+  @PATCH('/api/partograph/update/fetal-heart-rate')
   Future<ApiResponse<FetalHeartRateResponse>> updateFetalHeartRate(
     @Header('Authorization') String token,
     @Body() FetalHeartRateRequest request,

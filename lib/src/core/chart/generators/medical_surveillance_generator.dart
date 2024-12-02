@@ -7,9 +7,9 @@ import 'package:charts_flutter/flutter.dart' as charts;
 class MedicalSurveillanceGenerator implements IGenerator {
   MedicalSurveillanceGenerator({
     required List<MedicalSurveillanceTable> medicalSurveillanceList,
-    required double firstPoint,
+    required DateTime startTime,
   }) {
-    _generate(medicalSurveillanceList, firstPoint);
+    _generate(medicalSurveillanceList, startTime);
   }
 
   List<ChartPoint>? _chartPoint;
@@ -19,7 +19,7 @@ class MedicalSurveillanceGenerator implements IGenerator {
 
   void _generate(
     List<MedicalSurveillanceTable> medicalSurveillanceList,
-    double firstPoint,
+    DateTime startTime,
   ) {
     List<ChartPoint> fetalHeartRateList;
 
@@ -37,10 +37,13 @@ class MedicalSurveillanceGenerator implements IGenerator {
       final double? frequencyContractions =
           double.tryParse(frequencyContractionsValue);
 
-      final timeDecimalValue =
-          Helper.transformToDecimal(medicalSurveillanceList[index].time);
+      final currentTime = medicalSurveillanceList[index].time;
 
-      final timeResult = timeDecimalValue - firstPoint;
+      // Calcula la diferencia total en minutos
+      final timeDifference = currentTime.difference(startTime).inMinutes;
+
+      // Convierte la diferencia total en formato decimal (horas decimales)
+      final timeResult = timeDifference / 60;
 
       final fetalHeartRateChartPoint = ChartPoint(
         x: timeResult,

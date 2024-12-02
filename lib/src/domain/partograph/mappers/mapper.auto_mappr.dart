@@ -613,12 +613,6 @@ class $Mappr implements _i1.AutoMapprInterface {
       partographId: model.partographId,
       value: model.value,
       time: model.time,
-      createAt: model.createAt,
-      updateAt: model.updateAt,
-      deleteAt: model.deleteAt,
-      createdBy: model.createdBy,
-      updateBy: model.updateBy,
-      deleteBy: model.deleteBy,
     );
   }
 

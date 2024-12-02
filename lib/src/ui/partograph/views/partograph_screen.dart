@@ -154,12 +154,26 @@ class _PartographState extends State<PartographScreen> {
           _buildGenericCard(
             title: 'Frecuencia Cardiaca Fetal',
             content: _fetalHeartRatesContent(state),
-            onPressed: () {},
+            onPressed: () => context
+              ..go(
+                AppPaths.home.partographPath
+                    .define(widget.partographId)
+                    .fetalHeartRatePath
+                    .path,
+                extra: widget.partographId,
+              ),
           ),
           _buildGenericCard(
-            title: 'Frecuencia de contraciones',
+            title: 'Frecuencia de Contracciones',
             content: _contractionFrequenciesContent(state),
-            onPressed: () {},
+            onPressed: () => context
+              ..go(
+                AppPaths.home.partographPath
+                    .define(widget.partographId)
+                    .contractionFrequencyPath
+                    .path,
+                extra: widget.partographId,
+              ),
           ),
         ],
       ),
@@ -173,13 +187,16 @@ class _PartographState extends State<PartographScreen> {
   }) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 10),
-            content,
+            Align(
+              child: content,
+            ),
+            const SizedBox(height: 10),
             Align(
               alignment: Alignment.bottomRight,
               child: TextButton(
@@ -211,7 +228,7 @@ class _PartographState extends State<PartographScreen> {
       return _noDataMessage();
     }
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(5),
       child: DataTable(
         columnSpacing: 10.0,
         columns: const [
@@ -223,7 +240,7 @@ class _PartographState extends State<PartographScreen> {
           return DataRow(
             cells: [
               DataCell(Text(dilatation.value.toString())),
-              DataCell(Text(DateFormat.yMd().format(dilatation.hour))),
+              DataCell(Text(DateFormat.Hms().format(dilatation.hour))),
               DataCell(
                 Checkbox(value: dilatation.remOrRam, onChanged: (value) {}),
               ),
@@ -245,15 +262,16 @@ class _PartographState extends State<PartographScreen> {
   }
 
   Widget _presentationHeightContent(Loaded state, Catalog catalog) {
-    if (state.partograph.presentationPositionVarieties == null ||
-        state.partograph.presentationPositionVarieties!.isEmpty) {
-      return _noDataMessage();
-    }
-    return Container(
-      margin: const EdgeInsets.all(16),
+  if (state.partograph.presentationPositionVarieties == null ||
+      state.partograph.presentationPositionVarieties!.isEmpty) {
+    return _noDataMessage();
+  }
+  
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal, // Habilita desplazamiento horizontal
+    child: SingleChildScrollView(
       child: DataTable(
-        columnSpacing: 5.0,
-        horizontalMargin: 4,
+         columnSpacing: 10.0,
         columns: const [
           DataColumn(label: Text('Plano Hodge')),
           DataColumn(label: Text('Posición')),
@@ -287,39 +305,36 @@ class _PartographState extends State<PartographScreen> {
             cells: [
               DataCell(Text(hodgePlaneDescription)),
               DataCell(Text(positionDescription)),
-              DataCell(Text(DateFormat.yMd().format(position.time))),
+              DataCell(Text(DateFormat.Hms().format(position.time))),
             ],
           );
         }).toList(),
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _contractionFrequenciesContent(Loaded state) {
     if (state.partograph.contractionFrequencies == null ||
         state.partograph.contractionFrequencies!.isEmpty) {
       return _noDataMessage();
     }
-    return Container(
-      margin: const EdgeInsets.all(16),
-      child: DataTable(
-        columnSpacing: 5.0,
-        columns: const [
-          DataColumn(label: Text('Valor')),
-          DataColumn(label: Text('Hora')),
-        ],
-        rows: state.partograph.contractionFrequencies!
-            .map((contractionFrequency) {
-          return DataRow(
-            cells: [
-              DataCell(Text(contractionFrequency.value)),
-              DataCell(
-                Text(DateFormat.yMd().format(contractionFrequency.time)),
-              ),
-            ],
-          );
-        }).toList(),
-      ),
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text('Valor')),
+        DataColumn(label: Text('Hora')),
+      ],
+      rows: state.partograph.contractionFrequencies!
+          .map((contractionFrequency) {
+        return DataRow(
+          cells: [
+            DataCell(Text(contractionFrequency.value)),
+            DataCell(
+              Text(DateFormat.Hms().format(contractionFrequency.time)),
+            ),
+          ],
+        );
+      }).toList(),
     );
   }
 
@@ -328,23 +343,19 @@ class _PartographState extends State<PartographScreen> {
         state.partograph.fetalHeartRates!.isEmpty) {
       return _noDataMessage();
     }
-    return Container(
-      margin: const EdgeInsets.all(16),
-      child: DataTable(
-        columnSpacing: 5.0,
-        columns: const [
-          DataColumn(label: Text('Valor')),
-          DataColumn(label: Text('Hora')),
-        ],
-        rows: state.partograph.fetalHeartRates!.map((fetalHeartRate) {
-          return DataRow(
-            cells: [
-              DataCell(Text(fetalHeartRate.value)),
-              DataCell(Text(DateFormat.yMd().format(fetalHeartRate.time))),
-            ],
-          );
-        }).toList(),
-      ),
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text('Valor')),
+        DataColumn(label: Text('Hora')),
+      ],
+      rows: state.partograph.fetalHeartRates!.map((fetalHeartRate) {
+        return DataRow(
+          cells: [
+            DataCell(Text(fetalHeartRate.value)),
+            DataCell(Text(DateFormat.Hms().format(fetalHeartRate.time))),
+          ],
+        );
+      }).toList(),
     );
   }
 }

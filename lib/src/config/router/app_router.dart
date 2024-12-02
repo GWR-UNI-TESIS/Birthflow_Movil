@@ -12,6 +12,10 @@ import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/chart_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frequency_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
@@ -175,9 +179,9 @@ class AppRouter {
                   ),
                 ],
               ),
-               GoRoute(
-                path: AppPaths
-                    .home.partographPath.presentationPositionVarietyPath.goRoute,
+              GoRoute(
+                path: AppPaths.home.partographPath
+                    .presentationPositionVarietyPath.goRoute,
                 builder: (context, state) {
                   final partographId =
                       state.pathParameters[AppPaths.home.partographPath.id]!;
@@ -192,7 +196,7 @@ class AppRouter {
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                      return  PresentationPositionVarietyEditScreen(
+                      return PresentationPositionVarietyEditScreen(
                         data: PresentationPositionVarietyData(
                           presentationPositionVariety: null,
                           partographId: partographId,
@@ -201,12 +205,87 @@ class AppRouter {
                     },
                   ),
                   GoRoute(
-                    path: AppPaths
-                        .home.partographPath.presentationPositionVarietyPath.edit.goRoute,
+                    path: AppPaths.home.partographPath
+                        .presentationPositionVarietyPath.edit.goRoute,
                     builder: (context, state) {
-                      final data = state.extra! as PresentationPositionVarietyData;
+                      final data =
+                          state.extra! as PresentationPositionVarietyData;
                       return PresentationPositionVarietyEditScreen(
                         data: data,
+                      );
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppPaths.home.partographPath.fetalHeartRatePath.goRoute,
+                builder: (context, state) {
+                  final partographId =
+                      state.pathParameters[AppPaths.home.partographPath.id]!;
+                  return FetalHeartRateListScreen(
+                    partographId: partographId,
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: AppPaths
+                        .home.partographPath.fetalHeartRatePath.create.goRoute,
+                    builder: (context, state) {
+                      final partographId = state
+                          .pathParameters[AppPaths.home.partographPath.id]!;
+                      return FetalHeartRateEditScreen(
+                        fetalHeartRateEditData: FetalHeartRateEditData(
+                          fetalHeartRate: null,
+                          partographId: partographId,
+                        ),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: AppPaths
+                        .home.partographPath.fetalHeartRatePath.edit.goRoute,
+                    builder: (context, state) {
+                      final data = state.extra! as FetalHeartRateEditData;
+                      return FetalHeartRateEditScreen(
+                        fetalHeartRateEditData: data,
+                      );
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppPaths
+                    .home.partographPath.contractionFrequencyPath.goRoute,
+                builder: (context, state) {
+                  final partographId =
+                      state.pathParameters[AppPaths.home.partographPath.id]!;
+                  return ContractionFrequencyListScreen(
+                    partographId: partographId,
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: AppPaths.home.partographPath.contractionFrequencyPath
+                        .create.goRoute,
+                    builder: (context, state) {
+                      final partographId = state
+                          .pathParameters[AppPaths.home.partographPath.id]!;
+                      return ContractionFrequencyEditScreen(
+                        contractionFrequencyEditData:
+                            ContractionFrequencyEditData(
+                          contractionFrequency: null,
+                          partographId: partographId,
+                        ),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: AppPaths.home.partographPath.contractionFrequencyPath
+                        .edit.goRoute,
+                    builder: (context, state) {
+                      final data = state.extra! as ContractionFrequencyEditData;
+                      return ContractionFrequencyEditScreen(
+                        contractionFrequencyEditData: data,
                       );
                     },
                   ),

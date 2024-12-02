@@ -346,8 +346,8 @@ class OitSymbolRenderer extends common.SymbolRenderer {
     final radius = min(bounds.width, bounds.height) / 2;
     final xy2 = Point(center.x - radius, center.y);
 
-    const double angle45Degrees = 45 * (pi / 180);
-    const double angle315Degrees = 315 * (pi / 180);
+    const double angle45Degrees = 90 * (pi / 180);
+    const double angle315Degrees = 45 * (pi / 180);
 
     // Coordenadas del punto en la base del círculo para 45 grados
     final double x1_45 = center.x + radius * cos(angle45Degrees);
@@ -390,4 +390,138 @@ class OitSymbolRenderer extends common.SymbolRenderer {
   // ignore: hash_and_equals
   bool operator ==(Object other) =>
       other is OitSymbolRenderer && super == other;
+}
+
+class OsSymbolRenderer extends common.SymbolRenderer {
+  OsSymbolRenderer({super.isSolid = true});
+
+  @override
+  void paint(
+    common.ChartCanvas canvas,
+    Rectangle<num> bounds, {
+    List<int>? dashPattern,
+    common.Color? fillColor,
+    common.FillPatternType? fillPattern,
+    common.Color? strokeColor,
+    double? strokeWidthPx,
+  }) {
+    final center = Point(
+      bounds.left + (bounds.width / 2),
+      bounds.top + (bounds.height / 2),
+    );
+
+    final radius = min(bounds.width, bounds.height) / 2;
+    final xy2 = Point(center.x, center.y - radius);
+
+    const double angle45Degrees =  135 * (pi / 180);
+    const double angle315Degrees = 45 * (pi / 180);
+
+    // Coordenadas del punto en la base del círculo para 45 grados
+    final double x1_45 = center.x + radius * cos(angle45Degrees);
+    final double y1_45 = center.y + radius * sin(angle45Degrees);
+
+    // Coordenadas del punto en la base del círculo para 315 grados
+    final double x1_315 = center.x + radius * cos(angle315Degrees);
+    final double y1_315 = center.y + radius * sin(angle315Degrees);
+
+    canvas.drawPoint(
+      point: center,
+      radius: radius,
+      fill: getSolidFillColor(fillColor),
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+    canvas.drawLine(
+      points: [center, xy2],
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+    canvas.drawLine(
+      points: [center, Point(x1_45, y1_45)],
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+    canvas.drawLine(
+      points: [center, Point(x1_315, y1_315)],
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+  }
+
+  @override
+  bool shouldRepaint(OsSymbolRenderer oldRenderer) {
+    return this != oldRenderer;
+  }
+
+  @override
+  // ignore: hash_and_equals
+  bool operator ==(Object other) =>
+      other is OsSymbolRenderer && super == other;
+}
+
+class OpSymbolRenderer extends common.SymbolRenderer {
+  OpSymbolRenderer({super.isSolid = true});
+
+  @override
+  void paint(
+    common.ChartCanvas canvas,
+    Rectangle<num> bounds, {
+    List<int>? dashPattern,
+    common.Color? fillColor,
+    common.FillPatternType? fillPattern,
+    common.Color? strokeColor,
+    double? strokeWidthPx,
+  }) {
+    final center = Point(
+      bounds.left + (bounds.width / 2),
+      bounds.top + (bounds.height / 2),
+    );
+
+    final radius = min(bounds.width, bounds.height) / 2;
+    final xy2 = Point(center.x, center.y + radius);
+
+    const double angle45Degrees =  315 * (pi / 180);
+    const double angle315Degrees = 225 * (pi / 180);
+
+    // Coordenadas del punto en la base del círculo para 45 grados
+    final double x1_45 = center.x + radius * cos(angle45Degrees);
+    final double y1_45 = center.y + radius * sin(angle45Degrees);
+
+    // Coordenadas del punto en la base del círculo para 315 grados
+    final double x1_315 = center.x + radius * cos(angle315Degrees);
+    final double y1_315 = center.y + radius * sin(angle315Degrees);
+
+    canvas.drawPoint(
+      point: center,
+      radius: radius,
+      fill: getSolidFillColor(fillColor),
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+    canvas.drawLine(
+      points: [center, xy2],
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+    canvas.drawLine(
+      points: [center, Point(x1_45, y1_45)],
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+    canvas.drawLine(
+      points: [center, Point(x1_315, y1_315)],
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+  }
+
+  @override
+  bool shouldRepaint(OpSymbolRenderer oldRenderer) {
+    return this != oldRenderer;
+  }
+
+  @override
+  // ignore: hash_and_equals
+  bool operator ==(Object other) =>
+      other is OpSymbolRenderer && super == other;
 }

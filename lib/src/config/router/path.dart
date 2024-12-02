@@ -33,8 +33,8 @@ class PartographPath extends Param<PartographPath> {
   PresentationPositionVarietyPath get presentationPositionVarietyPath =>
       PresentationPositionVarietyPath(this);
   FetalHeartRatePath get fetalHeartRatePath => FetalHeartRatePath(this);
-  ContractionFrecuencyPath get contractionFrecuencyPath =>
-      ContractionFrecuencyPath(this);
+  ContractionFrequencyPath get contractionFrequencyPath =>
+      ContractionFrequencyPath(this);
   ChartPath get chart => ChartPath(this);
 }
 
@@ -72,8 +72,8 @@ class FetalHeartRatePath extends Path<FetalHeartRatePath> {
   Path get edit => Path('edit', parent: this);
 }
 
-class ContractionFrecuencyPath extends Path<ContractionFrecuencyPath> {
-  ContractionFrecuencyPath(PartographPath partographPath)
+class ContractionFrequencyPath extends Path<ContractionFrequencyPath> {
+  ContractionFrequencyPath(PartographPath partographPath)
       : super('contraction-frecuency', parent: partographPath);
   Path get create => Path('create', parent: this);
   Path get edit => Path('edit', parent: this);

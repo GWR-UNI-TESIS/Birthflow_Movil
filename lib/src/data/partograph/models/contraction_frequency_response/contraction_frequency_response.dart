@@ -10,13 +10,6 @@ class ContractionFrequencyResponse with _$ContractionFrequencyResponse {
     required String partographId,
     required String value,
     required DateTime time,
-    required bool isDelete,
-    required DateTime createAt,
-    DateTime? updateAt,
-    DateTime? deleteAt,
-    String? createdBy,
-    String? updateBy,
-    String? deleteBy,
   }) = _ContractionFrequencyResponse;
 
   factory ContractionFrequencyResponse.fromJson(Map<String, dynamic> json) =>

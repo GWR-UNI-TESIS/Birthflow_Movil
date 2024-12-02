@@ -1,16 +1,16 @@
 import 'package:birthflow_movil/src/config/router/path.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frequency_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class FetalHeartRateListScreen extends StatelessWidget {
+class ContractionFrequencyListScreen extends StatelessWidget {
   final String partographId;
 
-  const FetalHeartRateListScreen({
+  const ContractionFrequencyListScreen({
     super.key,
     required this.partographId,
   });
@@ -20,16 +20,16 @@ class FetalHeartRateListScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 1,
-          title: const Text('Frecuencias Cardiacas Fetales'),
+          title: const Text('Frecuencias Contracciones'),
         ),
         body: BlocBuilder<PartographBloc, PartographState>(
           builder: (context, state) {
             return state.maybeWhen(
               loading: () => const Center(child: CircularProgressIndicator()),
               loaded: (partograph, _) =>
-                  partograph.fetalHeartRates?.isEmpty ?? true
+                  partograph.contractionFrequencies?.isEmpty ?? true
                       ? const Center(child: Text('No hay datos'))
-                      : _buildFetalHeartRateList(partograph.fetalHeartRates!),
+                      : _buildContractionFrequencyList(partograph.contractionFrequencies!),
               error: (errorMessage) =>
                   Center(child: Text('Error: $errorMessage')),
               orElse: () => const Center(child: CircularProgressIndicator()),
@@ -39,10 +39,10 @@ class FetalHeartRateListScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () => _navigateToEdit(context, null),
-        ));
+        ),);
   }
 
-  Widget _buildFetalHeartRateList(List<FetalHeartRate> fetalHeartRates) {
+  Widget _buildContractionFrequencyList(List<ContractionFrequency> fetalHeartRates) {
     return CustomScrollView(
       slivers: [
         SliverList(
@@ -58,22 +58,22 @@ class FetalHeartRateListScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCervicalDilationTile(BuildContext context, FetalHeartRate item) {
+  Widget _buildCervicalDilationTile(BuildContext context, ContractionFrequency item) {
     return ListTile(
       title: Text('${item.value} - ${item.time}'),
       onTap: () => _navigateToEdit(context, item),
     );
   }
 
-  void _navigateToEdit(BuildContext context, FetalHeartRate? item) {
+  void _navigateToEdit(BuildContext context, ContractionFrequency? item) {
     context.go(
       AppPaths.home.partographPath
           .define(partographId)
-          .cervicalDilationList
+          .contractionFrequencyPath
           .edit
           .path,
-      extra: FetalHeartRateEditData(
-        fetalHeartRate: item,
+      extra: ContractionFrequencyEditData(
+        contractionFrequency: item,
         partographId: partographId,
       ),
     );

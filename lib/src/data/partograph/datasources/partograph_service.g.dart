@@ -248,7 +248,7 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<CervicalDilationResponse>>(Options(
-      method: 'PUT',
+      method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
@@ -290,7 +290,7 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<CervicalDilationResponse>>(Options(
-      method: 'PUT',
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
@@ -468,7 +468,7 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(Options(
-      method: 'PUT',
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
@@ -605,7 +605,7 @@ class _PartographService implements PartographService {
     final _options =
         _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
             Options(
-      method: 'PUT',
+      method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
@@ -781,13 +781,13 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<ContractionFrequencyResponse>>(Options(
-      method: 'PUT',
+      method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/partograph/contraction-frequency/partograph/{partographId}',
+              '/api/partograph/update/contraction-frequency',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -952,13 +952,13 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<FetalHeartRateResponse>>(Options(
-      method: 'PUT',
+      method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/partograph/create/fetal-heart-rate',
+              '/api/partograph/update/fetal-heart-rate',
               queryParameters: queryParameters,
               data: _data,
             )

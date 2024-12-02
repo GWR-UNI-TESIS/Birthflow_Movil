@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,10 @@ class FetalHeartRateEditData {
 class FetalHeartRateEditScreen extends StatefulWidget {
   final FetalHeartRateEditData fetalHeartRateEditData;
 
-  const FetalHeartRateEditScreen(
-      {super.key, required this.fetalHeartRateEditData});
+  const FetalHeartRateEditScreen({
+    super.key,
+    required this.fetalHeartRateEditData,
+  });
 
   @override
   _FetalHeartRateEditScreenState createState() =>
@@ -31,18 +34,17 @@ class FetalHeartRateEditScreen extends StatefulWidget {
 class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
     with SnackbarsMixin {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
   TimeOfDay? _selectedTime;
+  String? _fetalHeartRateValue;
 
   @override
   void initState() {
     super.initState();
     final fetalHeartRate = widget.fetalHeartRateEditData.fetalHeartRate;
 
-    _valueController = TextEditingController(
-      text: fetalHeartRate?.value ?? '',
-    );
+    _fetalHeartRateValue = fetalHeartRate?.value ?? '';
+
     _dateTimeController = TextEditingController(
       text: fetalHeartRate != null
           ? DateFormat('HH:mm:ss').format(fetalHeartRate.time)
@@ -55,7 +57,6 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
 
   @override
   void dispose() {
-    _valueController.dispose();
     _dateTimeController.dispose();
     super.dispose();
   }
@@ -75,13 +76,13 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
       final event = fetalHeartRate == null
           ? CreateFetalHeartRate(
               partographId: widget.fetalHeartRateEditData.partographId,
-              value: _valueController.text,
+              value: _fetalHeartRateValue!,
               time: selectedDateTime,
             )
           : UpdateFetalHeartRate(
               id: fetalHeartRate.id!,
               partographId: widget.fetalHeartRateEditData.partographId,
-              value: _valueController.text,
+              value: _fetalHeartRateValue!,
               time: selectedDateTime,
             );
 
@@ -97,8 +98,11 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
     if (picked != null && picked != _selectedTime) {
       setState(() {
         _selectedTime = picked;
+        final now = DateTime.now();
+        final dateTime =
+            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
         _dateTimeController.text = DateFormat('HH:mm:ss').format(
-          DateFormat.jm().parse(picked.format(context)),
+          dateTime,
         );
       });
     }
@@ -129,7 +133,11 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
             key: _formKey,
             child: Column(
               children: [
-                _buildValueField(),
+                FormElementWidget(
+                  label: 'Frecuencia cardiaca fetal',
+                  initialValue: _fetalHeartRateValue,
+                  onChanged: (value) => _fetalHeartRateValue = value,
+                ),
                 const SizedBox(height: 20),
                 _buildTimeField(context),
                 const SizedBox(height: 20),
@@ -142,26 +150,6 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildValueField() {
-    return TextFormField(
-      controller: _valueController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Frecuencia Cardiaca Fetal',
-      ),
-      keyboardType: TextInputType.number,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Por favor ingrese un valor';
-        }
-        if (double.tryParse(value) == null) {
-          return 'Por favor ingrese un valor válido';
-        }
-        return null;
-      },
     );
   }
 

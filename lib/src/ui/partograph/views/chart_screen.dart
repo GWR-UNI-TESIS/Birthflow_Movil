@@ -19,9 +19,8 @@ import 'package:intl/intl.dart';
 class ChartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final catalog = context.watch<CatalogCubit>();
-    
+
     return BlocProvider(
       create: (context) => ChartBloc(catalog, const chartStates.Initial()),
       child: const _ChartScreen(),
@@ -70,6 +69,13 @@ class _ChartState extends State<_ChartScreen> {
           ),
         ],
       ),
+      FloatingActionButton(
+        onPressed: () {},
+        child: const Tooltip(
+          message: 'Agregar a la tabla',
+          child: Icon(Icons.add),
+        ),
+      ),
     ];
 
     return Builder(
@@ -85,6 +91,7 @@ class _ChartState extends State<_ChartScreen> {
 
         return Scaffold(
           appBar: AppBar(
+            elevation: 2,
             title: Text((partographBloc.state as Loaded).partograph.name),
           ),
           body: SafeArea(
@@ -112,8 +119,10 @@ class _ChartState extends State<_ChartScreen> {
     );
   }
 
-  Widget _buildPageView(BuildContext context,
-      List<MedicalSurveillanceTable>? medicalSurveillance,) {
+  Widget _buildPageView(
+    BuildContext context,
+    List<MedicalSurveillanceTable>? medicalSurveillance,
+  ) {
     return PageView(
       scrollDirection: Axis.vertical,
       onPageChanged: _changedScrollFab,
@@ -159,7 +168,8 @@ class _ChartState extends State<_ChartScreen> {
   }
 
   Future<DateTime?> _showCreateCervicalDilation(
-      BuildContext mainContext,) async {
+    BuildContext mainContext,
+  ) async {
     final timeController = TextEditingController();
     final valueController = TextEditingController();
     DateTime? selectedDateTime;

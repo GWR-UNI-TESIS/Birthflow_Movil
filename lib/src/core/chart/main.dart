@@ -89,6 +89,8 @@ class MainChart extends StatelessWidget {
           'OIDA': OdaSymbolRenderer(),
           'OIDT': OdtSymbolRenderer(),
           'OIDP': OdpSymbolRenderer(),
+          'OS': OsSymbolRenderer(),
+          'OP': OpSymbolRenderer(),
         },
       ),
 
