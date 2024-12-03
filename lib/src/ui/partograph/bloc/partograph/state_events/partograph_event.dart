@@ -7,6 +7,16 @@ class PartographEvent with _$PartographEvent {
   const factory PartographEvent.onFetchData({
     required String partographId,
   }) = onFetchData;
+
+  const factory PartographEvent.modifyingPartograph({
+    required String partographId,
+    required String name,
+    required String recordName,
+    required DateTime date,
+    required String observation,
+    required String workTime,
+  }) = ModifyingPartograph;
+
   const factory PartographEvent.saveCervicalDilation({
     required String partographId,
     required double value,

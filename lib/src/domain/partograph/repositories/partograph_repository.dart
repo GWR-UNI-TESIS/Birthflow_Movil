@@ -19,15 +19,15 @@ abstract class PartographRepository {
     required DateTime date,
     required String observation,
     required String worktime,
-    required String createBy,
   });
 
-  Future<void> updatePartograph({
-    required String partogramaId,
+  Future<Partograph?> updatePartograph({
+    required String partographId,
     required String name,
     required String recordName,
     required DateTime date,
     required String observation,
+    required String worktime,
   });
 
   Future<void> deletePartograph({

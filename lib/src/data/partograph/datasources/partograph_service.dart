@@ -42,6 +42,12 @@ abstract class PartographService {
     @Body() PartographRequest request,
   );
 
+  @PATCH('/api/partograph/update/partograph')
+  Future<ApiResponse<PartographResponse>> updatePartograph(
+    @Header('Authorization') String token,
+    @Body() PartographRequest request,
+  );
+
   // Endpoints de dilataciones cervicales
   @GET('/api/partograph/cervical-dilation/partograph/{partographId}')
   Future<ApiResponse<List<CervicalDilationResponse>>> getCervicalDilation(

@@ -27,6 +27,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveilla
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
@@ -110,6 +111,12 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  locator.registerSingleton<PartographUpdateUsecase>(
+    PartographUpdateUsecaseImplementation(
+      partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
   locator.registerSingleton<CervicalDilationCreateUseCase>(
     CervicalDilationCreateUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
@@ -187,5 +194,4 @@ Future<void> initializeDependencies() async {
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
-
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:birthflow_movil/src/config/router/path.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:birthflow_movil/src/ui/auth/views/login.dart';
@@ -18,6 +19,7 @@ import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate_edit_sc
 import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/partogram_modification_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety_list_screen.dart';
@@ -100,6 +102,15 @@ class AppRouter {
               return PartographScreen(partographId: partographId);
             },
             routes: [
+              GoRoute(
+                path: AppPaths.home.partographPath.update.goRoute,
+                builder: (context, state) {
+                  final data = state.extra! as Partograph;
+                  return PartogramModificationScreen(
+                    partograph: data,
+                  );
+                },
+              ),
               GoRoute(
                 path: AppPaths.home.partographPath.cervicalDilationList.goRoute,
                 builder: (context, state) {

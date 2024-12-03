@@ -44,7 +44,6 @@ class PartographRepositoryImplementation implements PartographRepository {
     required DateTime date,
     required String observation,
     required String worktime,
-    required String createBy,
   }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
@@ -55,7 +54,7 @@ class PartographRepositoryImplementation implements PartographRepository {
         partographId: null,
         name: name,
         recordName: recordName,
-        date: date.toIso8601String(),
+        date: date,
         observation: observation,
         workTime: worktime,
       );
@@ -115,15 +114,36 @@ class PartographRepositoryImplementation implements PartographRepository {
   }
 
   @override
-  Future<void> updatePartograph({
-    required String partogramaId,
+  Future<Partograph?> updatePartograph({
+    required String partographId,
     required String name,
     required String recordName,
     required DateTime date,
     required String observation,
-  }) {
-    // TODO: implement updateObservation
-    throw UnimplementedError();
+    required String worktime,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = PartographRequest(
+        partographId: partographId,
+        name: name,
+        recordName: recordName,
+        date: date,
+        observation: observation,
+        workTime: worktime,
+      );
+
+      final result = await _partographService.updatePartograph(token, request);
+
+      if (result.response == null) return null;
+
+      return _mapper.convert<PartographResponse, Partograph>(result.response);
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
   }
 
   @override

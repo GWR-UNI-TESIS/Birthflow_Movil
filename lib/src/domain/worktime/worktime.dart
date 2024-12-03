@@ -3,7 +3,6 @@ import 'package:birthflow_movil/src/domain/worktime/entities/paridad.dart';
 import 'package:birthflow_movil/src/domain/worktime/entities/posicion.dart';
 
 class WorkTime {
-
   WorkTime({
     required this.partographId,
     required this.posicion,
@@ -11,14 +10,14 @@ class WorkTime {
     required this.membranas,
   });
 
-  WorkTime.init(){
-    partographId = 0;
+  WorkTime.init() {
+    partographId = '';
     membranas = const Membranas.init();
     paridad = const Paridad.init();
     posicion = const Posicion.init();
   }
 
-  late int partographId;
+  late String partographId;
   late Posicion posicion;
   late Paridad paridad;
   late Membranas membranas;
@@ -41,5 +40,48 @@ class WorkTime {
     if (hni) return 'HNI';
     if (hnr) return 'HNR';
     return 'unknown state'; // Opcional: para manejar casos donde no se cumpla ningún estado
+  }
+
+  /// Método estático para convertir un estado en un WorkTime
+  static WorkTime fromEstado(String estado, String partographId) {
+    switch (estado) {
+      case 'VTI':
+        return WorkTime(
+          partographId: partographId,
+          posicion: const Posicion.vertical(),
+          paridad: const Paridad.todas(),
+          membranas: const Membranas.integras(),
+        );
+      case 'HMI':
+        return WorkTime(
+          partographId: partographId,
+          posicion: const Posicion.horizontal(),
+          paridad: const Paridad.multiparas(),
+          membranas: const Membranas.integras(),
+        );
+      case 'HMR':
+        return WorkTime(
+          partographId: partographId,
+          posicion: const Posicion.horizontal(),
+          paridad: const Paridad.multiparas(),
+          membranas: const Membranas.rotas(),
+        );
+      case 'HNI':
+        return WorkTime(
+          partographId: partographId,
+          posicion: const Posicion.horizontal(),
+          paridad: const Paridad.nuliparas(),
+          membranas: const Membranas.integras(),
+        );
+      case 'HNR':
+        return WorkTime(
+          partographId: partographId,
+          posicion: const Posicion.horizontal(),
+          paridad: const Paridad.nuliparas(),
+          membranas: const Membranas.rotas(),
+        );
+      default:
+        return WorkTime.init(); // Retorna un WorkTime inicial para estados desconocidos
+    }
   }
 }

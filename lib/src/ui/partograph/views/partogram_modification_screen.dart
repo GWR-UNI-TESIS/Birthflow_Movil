@@ -1,34 +1,191 @@
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
+import 'package:birthflow_movil/src/domain/worktime/worktime.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
+import 'package:birthflow_movil/src/ui/widgets/worktime/worktime_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PartogramModificationScreen extends StatelessWidget {
+class PartogramModificationScreen extends StatefulWidget {
+  final Partograph partograph;
+
+  const PartogramModificationScreen({super.key, required this.partograph});
+
+  @override
+  PartogramModificationState createState() => PartogramModificationState();
+}
+
+class PartogramModificationState extends State<PartogramModificationScreen>
+    with SnackbarsMixin {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late TextEditingController _nameController;
+  late TextEditingController _recordNameController;
+  late TextEditingController _dateController;
+  late TextEditingController _observationController;
+  DateTime? selectedDateTime;
+  late final WorkTime? _workTime;
+  @override
+  void initState() {
+    super.initState();
+
+    final Partograph partograph = widget.partograph;
+
+    // Inicializar los controladores con los valores actuales del Partograph
+    _nameController = TextEditingController(text: partograph.name);
+    _recordNameController = TextEditingController(text: partograph.recordName);
+    _dateController =
+        TextEditingController(text: partograph.date.toIso8601String());
+    selectedDateTime = partograph.date;
+    _observationController =
+        TextEditingController(text: partograph.observation);
+    _workTime =
+        WorkTime.fromEstado(partograph.workTime, partograph.partographId!);
+  }
+
+  @override
+  void dispose() {
+    // Limpiar los controladores al destruir la pantalla
+    _nameController.dispose();
+    _recordNameController.dispose();
+    _dateController.dispose();
+    _observationController.dispose();
+    super.dispose();
+  }
+
+  void _updatePartograph() {
+    final formState = _formKey.currentState;
+    if (formState != null && formState.validate()) {
+      final bloc = context.read<PartographBloc>();
+
+      final event = ModifyingPartograph(
+        partographId: widget.partograph.partographId!,
+        name: _nameController.text,
+        recordName: _recordNameController.text,
+        date: selectedDateTime!,
+        observation: _observationController.text,
+        workTime: _workTime!.estado,
+      );
+
+      bloc.add(event);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(),
+      appBar: AppBar(
+        title: const Text('Actualizar Partograma'),
+      ),
+      body: BlocListener<PartographBloc, PartographState>(
+        listener: (context, state) {
+          if (state is Loaded) {
+            showSnackbar(context, state.message);
+            Navigator.of(context).pop();
+          } else if (state is Error) {
+            showErrorSnackbar(context, state.errorMessage);
+          }
+        },
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTextField(
+                  controller: _nameController,
+                  label: 'Nombre',
+                  hint: 'Ingrese el nombre',
+                  maxLength: 50,
+                ),
+                const SizedBox(height: 16),
+                _buildTextField(
+                  controller: _recordNameController,
+                  label: 'Número de Expediente',
+                  hint: 'Ingrese el número de expediente',
+                  maxLength: 50,
+                ),
+                const SizedBox(height: 16),
+                _buildDateField(
+                  controller: _dateController,
+                  label: 'Fecha',
+                  context: context,
+                ),
+                const SizedBox(height: 16),
+                _buildTextField(
+                  controller: _observationController,
+                  label: 'Observaciones',
+                  hint: 'Ingrese las observaciones',
+                  maxLength: 300,
+                ),
+                const SizedBox(height: 32),
+                WorkTimeTableWidget(
+                  currentWorkTime: _workTime!,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _updatePartograph,
+                    child: const Text('Guardar Cambios'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 
- Widget _buildTextField({
+  Widget _buildTextField({
+    required TextEditingController controller,
     required String label,
+    required String hint,
     required int maxLength,
-    required ValueChanged<String> onChanged,
-    String? initialValue,
   }) {
     return TextFormField(
-      keyboardType: TextInputType.number,
+      controller: controller,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: label,
+        hintText: hint,
+      ),
+      maxLength: maxLength,
+      validator: (value) =>
+          value == null || value.isEmpty ? 'Por favor, ingrese un valor' : null,
+    );
+  }
+
+  Widget _buildDateField({
+    required TextEditingController controller,
+    required String label,
+    required BuildContext context,
+  }) {
+    return TextFormField(
+      controller: controller,
+      readOnly: true,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         labelText: label,
       ),
-      initialValue: initialValue,
-      maxLength: maxLength,
-      validator: (value) =>
-          value == null || value.isEmpty ? 'Por favor, ingrese un dato' : null,
-      onChanged: onChanged,
+      onTap: () async {
+        final pickedDate = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2000),
+          lastDate: DateTime(2101),
+        );
+        if (pickedDate != null) {
+          controller.text = pickedDate.toIso8601String();
+          selectedDateTime = pickedDate;
+        }
+      },
+      validator: (value) => value == null || value.isEmpty
+          ? 'Por favor, seleccione una fecha'
+          : null,
     );
   }
 }
-

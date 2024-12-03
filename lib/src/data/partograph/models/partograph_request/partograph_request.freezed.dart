@@ -23,7 +23,7 @@ mixin _$PartographRequest {
   String? get partographId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get recordName => throw _privateConstructorUsedError;
-  String get date => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
   String get observation => throw _privateConstructorUsedError;
   String get workTime => throw _privateConstructorUsedError;
 
@@ -47,7 +47,7 @@ abstract class $PartographRequestCopyWith<$Res> {
       {String? partographId,
       String name,
       String recordName,
-      String date,
+      DateTime date,
       String observation,
       String workTime});
 }
@@ -90,7 +90,7 @@ class _$PartographRequestCopyWithImpl<$Res, $Val extends PartographRequest>
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       observation: null == observation
           ? _value.observation
           : observation // ignore: cast_nullable_to_non_nullable
@@ -115,7 +115,7 @@ abstract class _$$PartographRequestImplCopyWith<$Res>
       {String? partographId,
       String name,
       String recordName,
-      String date,
+      DateTime date,
       String observation,
       String workTime});
 }
@@ -156,7 +156,7 @@ class __$$PartographRequestImplCopyWithImpl<$Res>
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       observation: null == observation
           ? _value.observation
           : observation // ignore: cast_nullable_to_non_nullable
@@ -190,7 +190,7 @@ class _$PartographRequestImpl implements _PartographRequest {
   @override
   final String recordName;
   @override
-  final String date;
+  final DateTime date;
   @override
   final String observation;
   @override
@@ -245,7 +245,7 @@ abstract class _PartographRequest implements PartographRequest {
       {final String? partographId,
       required final String name,
       required final String recordName,
-      required final String date,
+      required final DateTime date,
       required final String observation,
       required final String workTime}) = _$PartographRequestImpl;
 
@@ -259,7 +259,7 @@ abstract class _PartographRequest implements PartographRequest {
   @override
   String get recordName;
   @override
-  String get date;
+  DateTime get date;
   @override
   String get observation;
   @override

@@ -13,6 +13,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveilla
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
@@ -44,6 +45,7 @@ class AppDev extends StatelessWidget {
         BlocProvider(
           create: (BuildContext context) => PartographBloc(
             locator<PartographGetUsecase>(),
+            locator<PartographUpdateUsecase>(),
             locator<CervicalDilationCreateUseCase>(),
             locator<CervicalDilationUpdateUseCase>(),
             locator<CervicalDilationDeleteUseCase>(),

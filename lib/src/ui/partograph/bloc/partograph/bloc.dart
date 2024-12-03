@@ -14,6 +14,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PartographBloc extends Bloc<PartographEvent, PartographState> {
   final PartographGetUsecase _partographGetUsecase;
+  final PartographUpdateUsecase _partographUpdateUsecase;
   final CervicalDilationCreateUseCase _cervicalDilationCreateUseCase;
   final CervicalDilationUpdateUseCase _cervicalDilationUpdateUseCase;
   final CervicalDilationDeleteUseCase _cervicalDilationDeleteUseCase;
@@ -39,6 +41,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
 
   PartographBloc(
     this._partographGetUsecase,
+    this._partographUpdateUsecase,
     this._cervicalDilationCreateUseCase,
     this._cervicalDilationUpdateUseCase,
     this._cervicalDilationDeleteUseCase,
@@ -53,6 +56,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     this._fetalHeartRateUpdateUsecase,
   ) : super(const Initial()) {
     on<onFetchData>(_onFetchData);
+    on<ModifyingPartograph>(_onUpdatePartograph);
     on<SaveCervicalDilation>(_saveCervicalDilation);
     on<UpdateCervicalDilation>(_onUpdateCervicalDilation);
     on<DeleteCervicalDilation>(_onDeleteCervicalDilation);
@@ -122,6 +126,35 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
           Loaded(
             partograph: updatedPartograph,
             message: 'Dilatación cervical guardada correctamente',
+          ),
+        );
+      } else {
+        emit(const Error('Error al guardar la dilatación cervical'));
+      }
+    } catch (ex) {
+      emit(Error(ex.toString()));
+    }
+  }
+
+  Future<void> _onUpdatePartograph(
+    ModifyingPartograph event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final newDilation = await _partographUpdateUsecase.execute(
+        partographId: event.partographId,
+        name: event.name,
+        recordName: event.recordName,
+        date: event.date,
+        observation: event.observation,
+        worktime: event.workTime,
+      );
+
+      if (newDilation != null && state is Loaded) {
+        emit(
+          Loaded(
+            partograph: newDilation,
+            message: 'Partograma actualizado correctamente',
           ),
         );
       } else {
@@ -329,7 +362,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               presentationPositionVarieties: presentationPositionVarietyList,
             ),
-            message: 'Elemento de la altura de la presentacion añadido correctamente',
+            message:
+                'Elemento de la altura de la presentacion añadido correctamente',
           ),
         );
       } else {
@@ -370,7 +404,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
             partograph: currentState.partograph.copyWith(
               presentationPositionVarieties: presentationPositionVarietiesList,
             ),
-            message: 'Elemento de la altura de la presentacion modificado correctamente',
+            message:
+                'Elemento de la altura de la presentacion modificado correctamente',
           ),
         );
       } else {

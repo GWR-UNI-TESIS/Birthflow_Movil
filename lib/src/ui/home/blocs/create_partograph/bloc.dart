@@ -23,7 +23,6 @@ class CreatePartographBloc
         date: event.date,
         observation: event.observation,
         worktime: event.worktime,
-        createBy: event.createBy,
       );
       if (result == null) {
         emit(const Error('Ocurrio un error al crear los partograma'));

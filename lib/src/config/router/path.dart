@@ -27,6 +27,8 @@ class PartographPath extends Param<PartographPath> {
   PartographPath(HomePath homePath)
       : super.only('partographId', parent: homePath);
 
+  Path get update => Path('update', parent: this);
+
   CervicalDilationPath get cervicalDilationList => CervicalDilationPath(this);
   MedicalSurveillancePath get medicalSurveillanceListPath =>
       MedicalSurveillancePath(this);

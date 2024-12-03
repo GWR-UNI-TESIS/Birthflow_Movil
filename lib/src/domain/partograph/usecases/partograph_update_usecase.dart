@@ -1,9 +1,9 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class PartographCreateUseCase {
+abstract class PartographUpdateUsecase {
   Future<Partograph?> execute({
-    required String partogramaId,
+    required String partographId,
     required String name,
     required String recordName,
     required DateTime date,
@@ -12,24 +12,24 @@ abstract class PartographCreateUseCase {
   });
 }
 
-class PartographCreateUseCaseImplementation implements PartographCreateUseCase {
+class PartographUpdateUsecaseImplementation implements PartographUpdateUsecase {
   final PartographRepository _partographRepository;
 
-  PartographCreateUseCaseImplementation({
+  PartographUpdateUsecaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 
   @override
   Future<Partograph?> execute({
-    required String partogramaId,
+    required String partographId,
     required String name,
     required String recordName,
     required DateTime date,
     required String observation,
     required String worktime,
   }) async {
-    return await _partographRepository.createPartograph(
-      partogramaId: partogramaId,
+    return await _partographRepository.updatePartograph(
+      partographId: partographId,
       name: name,
       recordName: recordName,
       date: date,

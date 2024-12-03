@@ -12,7 +12,7 @@ _$PartographRequestImpl _$$PartographRequestImplFromJson(
       partographId: json['partographId'] as String?,
       name: json['name'] as String,
       recordName: json['recordName'] as String,
-      date: json['date'] as String,
+      date: DateTime.parse(json['date'] as String),
       observation: json['observation'] as String,
       workTime: json['workTime'] as String,
     );
@@ -23,7 +23,7 @@ Map<String, dynamic> _$$PartographRequestImplToJson(
       'partographId': instance.partographId,
       'name': instance.name,
       'recordName': instance.recordName,
-      'date': instance.date,
+      'date': instance.date.toIso8601String(),
       'observation': instance.observation,
       'workTime': instance.workTime,
     };

@@ -9,7 +9,7 @@ class PartographRequest with _$PartographRequest {
     String? partographId,
     required String name,
     required String recordName,
-    required String date,
+    required DateTime date,
     required String observation,
     required String workTime,
   }) = _PartographRequest;
