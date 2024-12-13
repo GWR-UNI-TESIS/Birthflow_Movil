@@ -148,6 +148,46 @@ class _PartographService implements PartographService {
   }
 
   @override
+  Future<ApiResponse<PartographResponse>> updatePartograph(
+    String token,
+    PartographRequest request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _options = _setStreamType<ApiResponse<PartographResponse>>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/partograph/update/partograph',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<PartographResponse> _value;
+    try {
+      _value = ApiResponse<PartographResponse>.fromJson(
+        _result.data!,
+        (json) => PartographResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ApiResponse<List<CervicalDilationResponse>>> getCervicalDilation(
     String token,
     String partographId,

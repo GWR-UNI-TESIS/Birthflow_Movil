@@ -90,4 +90,27 @@ class ListItemWidget extends StatelessWidget {
       },
     );
   }
+
+   void _showShareDialog(BuildContext context, String partographId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: const Text('Compartir Partograma'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+             
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: const Text('Cancelar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
