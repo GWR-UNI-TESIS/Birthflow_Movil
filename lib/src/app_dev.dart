@@ -5,6 +5,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/childbirth_note_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/childbirth_note_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_create_usecase.dart';
@@ -58,6 +60,8 @@ class AppDev extends StatelessWidget {
             locator<ContractionFrequencyUpdateUsecase>(),
             locator<FetalHeartRateCreateUsecase>(),
             locator<FetalHeartRateUpdateUsecase>(),
+            locator<ChildbirthNoteCreateUseCase>(),
+            locator<ChildbirthNoteUpdateUseCase>(),
           ),
         ),
       ],

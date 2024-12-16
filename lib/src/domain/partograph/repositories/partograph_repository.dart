@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
@@ -10,7 +11,7 @@ import 'package:birthflow_movil/src/domain/partograph/entities/presentation_posi
 abstract class PartographRepository {
   Future<List<PartographList>?> getPartographs({required String userId});
 
-   Future<Partograph> getPartograph({required String partographId});
+  Future<Partograph> getPartograph({required String partographId});
 
   Future<Partograph?> createPartograph({
     required String partogramaId,
@@ -86,7 +87,6 @@ abstract class PartographRepository {
     required String frequencyContractions,
     required String pain,
     required DateTime time,
-
   });
 
   Future<MedicalSurveillanceTable?> deleteMedicalSurveillance({
@@ -116,7 +116,6 @@ abstract class PartographRepository {
     required int id,
   });
 
-  
   Future<List<FetalHeartRate>?> getFetalHeartRate({
     required String partographId,
   });
@@ -137,7 +136,6 @@ abstract class PartographRepository {
   Future<FetalHeartRate?> deleteFetalHeartRate({
     required int id,
   });
-
 
   Future<List<ContractionFrequency>?> getContractionFrequency({
     required String partographId,
@@ -162,5 +160,51 @@ abstract class PartographRepository {
 
   Future<AlertCurves?> getCurves({
     required String partographId,
+  });
+
+  Future<ChildbirthNote?> createChildbirthNote({
+    required String partographId,
+    String? description,
+    required String hour,
+    required String sex,
+    required String apgar,
+    required String temperature,
+    required String caputto,
+    required String circular,
+    required String lamniotico,
+    required String miccion,
+    required String meconio,
+    required String pa,
+    required String expulsivo,
+    required String placenta,
+    required String alumbramiento,
+    required String huellaPlantar,
+    required String pc,
+    required String talla,
+    required String brazalete,
+    required String huellaDig,
+  });
+
+  Future<ChildbirthNote?> updateChildbirthNote({
+    required String partographId,
+    String? description,
+    required String hour,
+    required String sex,
+    required String apgar,
+    required String temperature,
+    required String caputto,
+    required String circular,
+    required String lamniotico,
+    required String miccion,
+    required String meconio,
+    required String pa,
+    required String expulsivo,
+    required String placenta,
+    required String alumbramiento,
+    required String huellaPlantar,
+    required String pc,
+    required String talla,
+    required String brazalete,
+    required String huellaDig,
   });
 }

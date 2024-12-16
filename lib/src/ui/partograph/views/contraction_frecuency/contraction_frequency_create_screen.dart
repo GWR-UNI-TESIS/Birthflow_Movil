@@ -1,4 +1,3 @@
-import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
@@ -7,54 +6,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class CervicalDilationEditData {
-  final CervicalDilation? cervicalDilation;
+class ContractionFrequencyCreateScreen extends StatefulWidget {
   final String partographId;
 
-  CervicalDilationEditData({
-    required this.cervicalDilation,
-    required this.partographId,
-  });
-}
-
-class CervicalDilationEditScreen extends StatefulWidget {
-  final CervicalDilationEditData cervicalDilationEditData;
-
-  const CervicalDilationEditScreen({
-    super.key,
-    required this.cervicalDilationEditData,
-  });
+  const ContractionFrequencyCreateScreen({super.key, required this.partographId});
 
   @override
-  _CervicalDilationEditScreenState createState() =>
-      _CervicalDilationEditScreenState();
+  _ContractionFrequencyCreateScreenState createState() =>
+      _ContractionFrequencyCreateScreenState();
 }
 
-class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
+class _ContractionFrequencyCreateScreenState extends State<ContractionFrequencyCreateScreen>
     with SnackbarsMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
   TimeOfDay? _selectedTime;
-  bool _remOrRam = false;
 
   @override
   void initState() {
     super.initState();
-    final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
-
-    _valueController = TextEditingController(
-      text: cervicalDilation?.value.toString() ?? '',
-    );
-    _dateTimeController = TextEditingController(
-      text: cervicalDilation != null
-          ? DateFormat('HH:mm:ss').format(cervicalDilation.hour)
-          : '',
-    );
-    _selectedTime = cervicalDilation != null
-        ? TimeOfDay.fromDateTime(cervicalDilation.hour)
-        : null;
-    _remOrRam = cervicalDilation?.remOrRam ?? false;
+    _valueController = TextEditingController();
+    _dateTimeController = TextEditingController();
   }
 
   @override
@@ -64,7 +37,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
     super.dispose();
   }
 
-  void _saveCervicalDilation() {
+  void _saveContractionFrequency() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
       final selectedDateTime = DateTime(
@@ -75,21 +48,11 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
         _selectedTime?.minute ?? DateTime.now().minute,
       );
 
-      final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
-      final event = cervicalDilation == null
-          ? SaveCervicalDilation(
-              partographId: widget.cervicalDilationEditData.partographId,
-              value: double.parse(_valueController.text),
-              hour: selectedDateTime,
-              remOrRam: _remOrRam,
-            )
-          : UpdateCervicalDilation(
-              id: cervicalDilation.id,
-              partographId: widget.cervicalDilationEditData.partographId,
-              value: double.parse(_valueController.text),
-              hour: selectedDateTime,
-              remOrRam: _remOrRam,
-            );
+      final event = CreateContractionFrequency(
+        partographId: widget.partographId,
+        value: _valueController.text,
+        time: selectedDateTime,
+      );
 
       bloc.add(event);
     }
@@ -100,16 +63,12 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
       context: context,
       initialTime: _selectedTime ?? TimeOfDay.now(),
     );
-    if (picked != null && picked != _selectedTime) {
+    if (picked != null) {
       setState(() {
         _selectedTime = picked;
         final now = DateTime.now();
-        final dateTime =
-            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-
-        _dateTimeController.text = DateFormat('HH:mm:ss').format(
-          dateTime,
-        );
+        final dateTime = DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
+        _dateTimeController.text = DateFormat('HH:mm:ss').format(dateTime);
       });
     }
   }
@@ -117,13 +76,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.cervicalDilationEditData.cervicalDilation == null
-              ? 'Crear Dilatación Cervical'
-              : 'Editar Dilatación Cervical',
-        ),
-      ),
+      appBar: AppBar(title: const Text('Crear Frecuencia de Contracciones')),
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
@@ -142,10 +95,9 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
                 _buildValueField(),
                 const SizedBox(height: 20),
                 _buildTimeField(context),
-                _buildSwitch(),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => _saveCervicalDilation(),
+                  onPressed: _saveContractionFrequency,
                   child: const Text('Guardar'),
                 ),
               ],
@@ -161,7 +113,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
       controller: _valueController,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'Valor de Dilatación',
+        labelText: 'Frecuencia de Contracciones',
       ),
       keyboardType: TextInputType.number,
       validator: (value) {
@@ -186,9 +138,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
             prefixIcon: const Icon(Icons.calendar_today),
             border: const OutlineInputBorder(),
             labelText: 'Hora',
-            hintText: _selectedTime != null
-                ? _selectedTime!.format(context)
-                : 'Seleccione una hora',
+            hintText: _selectedTime?.format(context) ?? 'Seleccione una hora',
           ),
           validator: (value) {
             if (_selectedTime == null) {
@@ -198,18 +148,6 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
           },
         ),
       ),
-    );
-  }
-
-  Widget _buildSwitch() {
-    return SwitchListTile(
-      title: const Text('Ram O Rem'),
-      value: _remOrRam,
-      onChanged: (value) {
-        setState(() {
-          _remOrRam = value;
-        });
-      },
     );
   }
 }

@@ -175,6 +175,11 @@ class _PartographState extends State<PartographScreen> {
                 extra: widget.partographId,
               ),
           ),
+           _buildGenericCard(
+            title: 'Nota de Parto',
+            content: _childbirthNoteContent(state),
+            onPressed: () {},
+          ),
         ],
       ),
     );
@@ -356,6 +361,37 @@ class _PartographState extends State<PartographScreen> {
           ],
         );
       }).toList(),
+    );
+  }
+
+  Widget _childbirthNoteContent(Loaded state) {
+    if (state.partograph.childbirthNote == null) {
+      return _noDataMessage();
+    }
+
+    final note = state.partograph.childbirthNote!;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Hora: ${note.hour}'),
+        Text('Sexo: ${note.sex}'),
+        Text('APGAR: ${note.apgar}'),
+        Text('Temperatura: ${note.temperature}'),
+        Text('Caputto: ${note.caputto}'),
+        Text('Circular: ${note.circular}'),
+        Text('Líquido amniótico: ${note.lamniotico}'),
+        Text('Micción: ${note.miccion}'),
+        Text('Meconio: ${note.meconio}'),
+        Text('PA: ${note.pa}'),
+        Text('Expulsivo: ${note.expulsivo}'),
+        Text('Placenta: ${note.placenta}'),
+        Text('Alumbramiento: ${note.alumbramiento}'),
+        Text('Huella plantar: ${note.huellaPlantar}'),
+        Text('PC: ${note.pc}'),
+        Text('Talla: ${note.talla}'),
+        Text('Brazalete: ${note.brazalete}'),
+        Text('Huella digital: ${note.huellaDig}'),
+      ],
     );
   }
 }

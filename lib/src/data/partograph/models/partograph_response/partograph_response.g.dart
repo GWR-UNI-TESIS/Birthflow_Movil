@@ -41,6 +41,10 @@ _$PartographResponseImpl _$$PartographResponseImplFromJson(
           ? null
           : PartographStateResponse.fromJson(
               json['partographState'] as Map<String, dynamic>),
+      childbirthNote: json['childbirthNote'] == null
+          ? null
+          : ChildbirthNoteResponse.fromJson(
+              json['childbirthNote'] as Map<String, dynamic>),
       curves: json['curves'] == null
           ? null
           : AlertCurvesResponse.fromJson(
@@ -68,5 +72,6 @@ Map<String, dynamic> _$$PartographResponseImplToJson(
       'contractionFrequencies':
           instance.contractionFrequencies?.map((e) => e.toJson()).toList(),
       'partographState': instance.partographState?.toJson(),
+      'childbirthNote': instance.childbirthNote?.toJson(),
       'curves': instance.curves?.toJson(),
     };

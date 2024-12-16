@@ -7,6 +7,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/childbirth_note_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/childbirth_note_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_create_usecase.dart';
@@ -37,6 +39,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   final ContractionFrequencyUpdateUsecase _contractionFrequencyUpdateUsecase;
   final FetalHeartRateCreateUsecase _fetalHeartRateCreateUsecase;
   final FetalHeartRateUpdateUsecase _fetalHeartRateUpdateUsecase;
+  final ChildbirthNoteCreateUseCase _childbirthNoteCreateUseCase;
+  final ChildbirthNoteUpdateUseCase _childbirthNoteUpdateUseCase;
   final AlertCurvesGetUseCase _alertCurvesGetUsecase;
 
   PartographBloc(
@@ -54,6 +58,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     this._contractionFrequencyUpdateUsecase,
     this._fetalHeartRateCreateUsecase,
     this._fetalHeartRateUpdateUsecase,
+    this._childbirthNoteCreateUseCase,
+    this._childbirthNoteUpdateUseCase,
   ) : super(const Initial()) {
     on<onFetchData>(_onFetchData);
     on<ModifyingPartograph>(_onUpdatePartograph);
@@ -68,6 +74,8 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     on<UpdateFetalHeartRate>(_onUpdateFetalHeartRate);
     on<CreateContractionFrequency>(_onCreateContractionFrequency);
     on<UpdateContractionFrequency>(_onUpdateContractionFrequency);
+    on<CreateChildbirthNote>(_onCreateChildbirthNote);
+    on<UpdateChildbirthNote>(_onUpdateChildbirthNote);
   }
 
   Future<void> _onFetchData(
@@ -550,6 +558,96 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         );
       } else {
         emit(const Error('Frec. Contracciones no modificado'));
+      }
+    } catch (error) {
+      emit(const Error('Ocurrio un error inesperado'));
+    }
+  }
+
+  Future<void> _onCreateChildbirthNote(
+    CreateChildbirthNote event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final currentState = state as Loaded;
+      final newEntry = await _childbirthNoteCreateUseCase.execute(
+        partographId: event.partographId,
+        hour: event.hour,
+        sex: event.sex,
+        apgar: event.apgar,
+        temperature: event.temperature,
+        caputto: event.caputto,
+        circular: event.circular,
+        lamniotico: event.lamniotico,
+        miccion: event.miccion,
+        meconio: event.meconio,
+        pa: event.pa,
+        expulsivo: event.expulsivo,
+        placenta: event.placenta,
+        alumbramiento: event.alumbramiento,
+        huellaPlantar: event.huellaPlantar,
+        pc: event.pc,
+        talla: event.talla,
+        brazalete: event.brazalete,
+        huellaDig: event.huellaDig,
+      );
+      if (state is Loaded && newEntry != null) {
+        // Actualizar el estado con la nueva nota de parto
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              childbirthNote: newEntry,
+            ),
+            message: 'Nota de parto añadida correctamente.',
+          ),
+        );
+      } else {
+        emit(const Error('Ocurrió un error al crear la nota de parto.'));
+      }
+    } catch (error) {
+      emit(const Error('Ocurrio un error inesperado'));
+    }
+  }
+
+  Future<void> _onUpdateChildbirthNote(
+    UpdateChildbirthNote event,
+    Emitter<PartographState> emit,
+  ) async {
+    try {
+      final currentState = state as Loaded;
+      final newEntry = await _childbirthNoteUpdateUseCase.execute(
+        partographId: event.partographId,
+        hour: event.hour,
+        sex: event.sex,
+        apgar: event.apgar,
+        temperature: event.temperature,
+        caputto: event.caputto,
+        circular: event.circular,
+        lamniotico: event.lamniotico,
+        miccion: event.miccion,
+        meconio: event.meconio,
+        pa: event.pa,
+        expulsivo: event.expulsivo,
+        placenta: event.placenta,
+        alumbramiento: event.alumbramiento,
+        huellaPlantar: event.huellaPlantar,
+        pc: event.pc,
+        talla: event.talla,
+        brazalete: event.brazalete,
+        huellaDig: event.huellaDig,
+      );
+      if (state is Loaded && newEntry != null) {
+        // Actualizar el estado con la nueva nota de parto
+        emit(
+          Loaded(
+            partograph: currentState.partograph.copyWith(
+              childbirthNote: newEntry,
+            ),
+            message: 'Nota de parto modificada correctamente',
+          ),
+        );
+      } else {
+        emit(const Error('Ocurrió un error al modificar la nota de parto'));
       }
     } catch (error) {
       emit(const Error('Ocurrio un error inesperado'));

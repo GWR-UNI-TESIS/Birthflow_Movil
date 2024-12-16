@@ -18,6 +18,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/childbirth_note_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/childbirth_note_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/contraction_frequency_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_create_usecase.dart';
@@ -192,6 +194,18 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<FetalHeartRateUpdateUsecase>(
     FetalHeartRateUpdateUsecaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<ChildbirthNoteCreateUseCase>(
+    ChildbirthNoteCreateUseCaseImplementation(
+      partographRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<ChildbirthNoteUpdateUseCase>(
+    ChildbirthNoteUpdateUseCaseImplementation(
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 }

@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
@@ -17,6 +18,7 @@ class Partograph {
   final List<PresentationPositionVariety>? presentationPositionVarieties;
   final List<FetalHeartRate>? fetalHeartRates;
   final List<ContractionFrequency>? contractionFrequencies;
+  final ChildbirthNote? childbirthNote;
   final AlertCurves? curves;
 
   Partograph({
@@ -31,6 +33,7 @@ class Partograph {
     this.presentationPositionVarieties,
     this.fetalHeartRates,
     this.contractionFrequencies,
+    this.childbirthNote,
     this.curves,
   });
 
@@ -46,6 +49,7 @@ class Partograph {
     List<PresentationPositionVariety>? presentationPositionVarieties,
     List<FetalHeartRate>? fetalHeartRates,
     List<ContractionFrequency>? contractionFrequencies,
+    ChildbirthNote? childbirthNote,
     AlertCurves? curves,
   }) {
     return Partograph(
@@ -63,6 +67,7 @@ class Partograph {
       fetalHeartRates: fetalHeartRates ?? this.fetalHeartRates,
       contractionFrequencies:
           contractionFrequencies ?? this.contractionFrequencies,
+      childbirthNote: childbirthNote ?? this.childbirthNote,
       curves: curves ?? this.curves,
     );
   }

@@ -2,7 +2,7 @@ import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/contraction_frequency_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -38,7 +38,7 @@ class ContractionFrequencyListScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => _navigateToEdit(context, null),
+          onPressed: () => _navigateToCreate(context),
         ),);
   }
 
@@ -76,6 +76,17 @@ class ContractionFrequencyListScreen extends StatelessWidget {
         contractionFrequency: item,
         partographId: partographId,
       ),
+    );
+  }
+
+   void _navigateToCreate(BuildContext context) {
+    context.go(
+      AppPaths.home.partographPath
+          .define(partographId)
+          .contractionFrequencyPath
+          .create
+          .path,
+    
     );
   }
 }

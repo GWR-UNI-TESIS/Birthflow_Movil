@@ -38,6 +38,8 @@ mixin _$PartographResponse {
       throw _privateConstructorUsedError;
   PartographStateResponse? get partographState =>
       throw _privateConstructorUsedError;
+  ChildbirthNoteResponse? get childbirthNote =>
+      throw _privateConstructorUsedError;
   AlertCurvesResponse? get curves => throw _privateConstructorUsedError;
 
   /// Serializes this PartographResponse to a JSON map.
@@ -70,9 +72,11 @@ abstract class $PartographResponseCopyWith<$Res> {
       List<FetalHeartRateResponse>? fetalHeartRates,
       List<ContractionFrequencyResponse>? contractionFrequencies,
       PartographStateResponse? partographState,
+      ChildbirthNoteResponse? childbirthNote,
       AlertCurvesResponse? curves});
 
   $PartographStateResponseCopyWith<$Res>? get partographState;
+  $ChildbirthNoteResponseCopyWith<$Res>? get childbirthNote;
   $AlertCurvesResponseCopyWith<$Res>? get curves;
 }
 
@@ -103,6 +107,7 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
     Object? fetalHeartRates = freezed,
     Object? contractionFrequencies = freezed,
     Object? partographState = freezed,
+    Object? childbirthNote = freezed,
     Object? curves = freezed,
   }) {
     return _then(_value.copyWith(
@@ -154,6 +159,10 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
           ? _value.partographState
           : partographState // ignore: cast_nullable_to_non_nullable
               as PartographStateResponse?,
+      childbirthNote: freezed == childbirthNote
+          ? _value.childbirthNote
+          : childbirthNote // ignore: cast_nullable_to_non_nullable
+              as ChildbirthNoteResponse?,
       curves: freezed == curves
           ? _value.curves
           : curves // ignore: cast_nullable_to_non_nullable
@@ -173,6 +182,21 @@ class _$PartographResponseCopyWithImpl<$Res, $Val extends PartographResponse>
     return $PartographStateResponseCopyWith<$Res>(_value.partographState!,
         (value) {
       return _then(_value.copyWith(partographState: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PartographResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChildbirthNoteResponseCopyWith<$Res>? get childbirthNote {
+    if (_value.childbirthNote == null) {
+      return null;
+    }
+
+    return $ChildbirthNoteResponseCopyWith<$Res>(_value.childbirthNote!,
+        (value) {
+      return _then(_value.copyWith(childbirthNote: value) as $Val);
     });
   }
 
@@ -213,10 +237,13 @@ abstract class _$$PartographResponseImplCopyWith<$Res>
       List<FetalHeartRateResponse>? fetalHeartRates,
       List<ContractionFrequencyResponse>? contractionFrequencies,
       PartographStateResponse? partographState,
+      ChildbirthNoteResponse? childbirthNote,
       AlertCurvesResponse? curves});
 
   @override
   $PartographStateResponseCopyWith<$Res>? get partographState;
+  @override
+  $ChildbirthNoteResponseCopyWith<$Res>? get childbirthNote;
   @override
   $AlertCurvesResponseCopyWith<$Res>? get curves;
 }
@@ -246,6 +273,7 @@ class __$$PartographResponseImplCopyWithImpl<$Res>
     Object? fetalHeartRates = freezed,
     Object? contractionFrequencies = freezed,
     Object? partographState = freezed,
+    Object? childbirthNote = freezed,
     Object? curves = freezed,
   }) {
     return _then(_$PartographResponseImpl(
@@ -297,6 +325,10 @@ class __$$PartographResponseImplCopyWithImpl<$Res>
           ? _value.partographState
           : partographState // ignore: cast_nullable_to_non_nullable
               as PartographStateResponse?,
+      childbirthNote: freezed == childbirthNote
+          ? _value.childbirthNote
+          : childbirthNote // ignore: cast_nullable_to_non_nullable
+              as ChildbirthNoteResponse?,
       curves: freezed == curves
           ? _value.curves
           : curves // ignore: cast_nullable_to_non_nullable
@@ -322,6 +354,7 @@ class _$PartographResponseImpl implements _PartographResponse {
       final List<FetalHeartRateResponse>? fetalHeartRates,
       final List<ContractionFrequencyResponse>? contractionFrequencies,
       this.partographState,
+      this.childbirthNote,
       this.curves})
       : _cervicalDilations = cervicalDilations,
         _medicalSurveillanceTable = medicalSurveillanceTable,
@@ -403,11 +436,13 @@ class _$PartographResponseImpl implements _PartographResponse {
   @override
   final PartographStateResponse? partographState;
   @override
+  final ChildbirthNoteResponse? childbirthNote;
+  @override
   final AlertCurvesResponse? curves;
 
   @override
   String toString() {
-    return 'PartographResponse(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime, cervicalDilations: $cervicalDilations, medicalSurveillanceTable: $medicalSurveillanceTable, presentationPositionVarieties: $presentationPositionVarieties, fetalHeartRates: $fetalHeartRates, contractionFrequencies: $contractionFrequencies, partographState: $partographState, curves: $curves)';
+    return 'PartographResponse(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime, cervicalDilations: $cervicalDilations, medicalSurveillanceTable: $medicalSurveillanceTable, presentationPositionVarieties: $presentationPositionVarieties, fetalHeartRates: $fetalHeartRates, contractionFrequencies: $contractionFrequencies, partographState: $partographState, childbirthNote: $childbirthNote, curves: $curves)';
   }
 
   @override
@@ -438,6 +473,8 @@ class _$PartographResponseImpl implements _PartographResponse {
                 other._contractionFrequencies, _contractionFrequencies) &&
             (identical(other.partographState, partographState) ||
                 other.partographState == partographState) &&
+            (identical(other.childbirthNote, childbirthNote) ||
+                other.childbirthNote == childbirthNote) &&
             (identical(other.curves, curves) || other.curves == curves));
   }
 
@@ -457,6 +494,7 @@ class _$PartographResponseImpl implements _PartographResponse {
       const DeepCollectionEquality().hash(_fetalHeartRates),
       const DeepCollectionEquality().hash(_contractionFrequencies),
       partographState,
+      childbirthNote,
       curves);
 
   /// Create a copy of PartographResponse
@@ -491,6 +529,7 @@ abstract class _PartographResponse implements PartographResponse {
       final List<FetalHeartRateResponse>? fetalHeartRates,
       final List<ContractionFrequencyResponse>? contractionFrequencies,
       final PartographStateResponse? partographState,
+      final ChildbirthNoteResponse? childbirthNote,
       final AlertCurvesResponse? curves}) = _$PartographResponseImpl;
 
   factory _PartographResponse.fromJson(Map<String, dynamic> json) =
@@ -521,6 +560,8 @@ abstract class _PartographResponse implements PartographResponse {
   List<ContractionFrequencyResponse>? get contractionFrequencies;
   @override
   PartographStateResponse? get partographState;
+  @override
+  ChildbirthNoteResponse? get childbirthNote;
   @override
   AlertCurvesResponse? get curves;
 

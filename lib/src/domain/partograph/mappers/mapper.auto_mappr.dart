@@ -15,6 +15,8 @@ import '../../../data/partograph/models/alert_curve_response/alert_curves_respon
     as _i18;
 import '../../../data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart'
     as _i6;
+import '../../../data/partograph/models/childbirth_note_response/childbirth_note_response.dart'
+    as _i21;
 import '../../../data/partograph/models/contraction_frequency_response/contraction_frequency_response.dart'
     as _i14;
 import '../../../data/partograph/models/fetal_heart_rate_response/fetal_heart_rate_response.dart'
@@ -31,6 +33,7 @@ import '../../../data/partograph/models/presentation_position_variety_response/p
     as _i10;
 import '../entities/alert_curves.dart' as _i19;
 import '../entities/cervical_dilation.dart' as _i7;
+import '../entities/childbirth_note.dart' as _i22;
 import '../entities/contraction_frequency.dart' as _i15;
 import '../entities/fetal_heart_rate.dart' as _i13;
 import '../entities/medical_surveillance_table.dart' as _i9;
@@ -51,6 +54,7 @@ import '../entities/presentation_position_variety.dart' as _i11;
 /// - `PartographStateResponse` → `PartographState`.
 /// - `AlertCurvesResponse` → `AlertCurves`.
 /// - `AlertCurveResponse` → `AlertCurve`.
+/// - `ChildbirthNoteResponse` → `ChildbirthNote`.
 /// {@endtemplate}
 class $Mappr implements _i1.AutoMapprInterface {
   const $Mappr();
@@ -125,6 +129,12 @@ class $Mappr implements _i1.AutoMapprInterface {
             sourceTypeOf == _typeOf<_i20.AlertCurveResponse?>()) &&
         (targetTypeOf == _typeOf<_i19.AlertCurve>() ||
             targetTypeOf == _typeOf<_i19.AlertCurve?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i21.ChildbirthNoteResponse>() ||
+            sourceTypeOf == _typeOf<_i21.ChildbirthNoteResponse?>()) &&
+        (targetTypeOf == _typeOf<_i22.ChildbirthNote>() ||
+            targetTypeOf == _typeOf<_i22.ChildbirthNote?>())) {
       return true;
     }
     if (recursive) {
@@ -421,6 +431,16 @@ class $Mappr implements _i1.AutoMapprInterface {
       return (_map__i20$AlertCurveResponse_To__i19$AlertCurve(
           (model as _i20.AlertCurveResponse?)) as TARGET);
     }
+    if ((sourceTypeOf == _typeOf<_i21.ChildbirthNoteResponse>() ||
+            sourceTypeOf == _typeOf<_i21.ChildbirthNoteResponse?>()) &&
+        (targetTypeOf == _typeOf<_i22.ChildbirthNote>() ||
+            targetTypeOf == _typeOf<_i22.ChildbirthNote?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i21$ChildbirthNoteResponse_To__i22$ChildbirthNote(
+          (model as _i21.ChildbirthNoteResponse?)) as TARGET);
+    }
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
   }
 
@@ -491,6 +511,9 @@ class $Mappr implements _i1.AutoMapprInterface {
               _map__i14$ContractionFrequencyResponse_To__i15$ContractionFrequency(
                   value))
           .toList(),
+      childbirthNote:
+          _map__i21$ChildbirthNoteResponse_To__i22$ChildbirthNote_Nullable(
+              model.childbirthNote),
       curves: _map__i18$AlertCurvesResponse_To__i19$AlertCurves_Nullable(
           model.curves),
     );
@@ -669,6 +692,44 @@ class $Mappr implements _i1.AutoMapprInterface {
     );
   }
 
+  _i22.ChildbirthNote _map__i21$ChildbirthNoteResponse_To__i22$ChildbirthNote(
+      _i21.ChildbirthNoteResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping ChildbirthNoteResponse → ChildbirthNote failed because ChildbirthNoteResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<ChildbirthNoteResponse, ChildbirthNote> to handle null values during mapping.');
+    }
+    return _i22.ChildbirthNote(
+      partographId: model.partographId,
+      description: model.description,
+      hour: model.hour,
+      sex: model.sex,
+      apgar: model.apgar,
+      temperature: model.temperature,
+      caputto: model.caputto,
+      circular: model.circular,
+      lamniotico: model.lamniotico,
+      miccion: model.miccion,
+      meconio: model.meconio,
+      pa: model.pa,
+      expulsivo: model.expulsivo,
+      placenta: model.placenta,
+      alumbramiento: model.alumbramiento,
+      huellaPlantar: model.huellaPlantar,
+      pc: model.pc,
+      talla: model.talla,
+      brazalete: model.brazalete,
+      huellaDig: model.huellaDig,
+      createAt: model.createAt,
+      updateAt: model.updateAt,
+      deleteAt: model.deleteAt,
+      createdBy: model.createdBy,
+      updateBy: model.updateBy,
+      deleteBy: model.deleteBy,
+    );
+  }
+
   _i19.AlertCurves? _map__i18$AlertCurvesResponse_To__i19$AlertCurves_Nullable(
       _i18.AlertCurvesResponse? input) {
     final model = input;
@@ -684,6 +745,43 @@ class $Mappr implements _i1.AutoMapprInterface {
           ?.map<_i19.AlertCurve>(
               (value) => _map__i20$AlertCurveResponse_To__i19$AlertCurve(value))
           .toList(),
+    );
+  }
+
+  _i22.ChildbirthNote?
+      _map__i21$ChildbirthNoteResponse_To__i22$ChildbirthNote_Nullable(
+          _i21.ChildbirthNoteResponse? input) {
+    final model = input;
+    if (model == null) {
+      return null;
+    }
+    return _i22.ChildbirthNote(
+      partographId: model.partographId,
+      description: model.description,
+      hour: model.hour,
+      sex: model.sex,
+      apgar: model.apgar,
+      temperature: model.temperature,
+      caputto: model.caputto,
+      circular: model.circular,
+      lamniotico: model.lamniotico,
+      miccion: model.miccion,
+      meconio: model.meconio,
+      pa: model.pa,
+      expulsivo: model.expulsivo,
+      placenta: model.placenta,
+      alumbramiento: model.alumbramiento,
+      huellaPlantar: model.huellaPlantar,
+      pc: model.pc,
+      talla: model.talla,
+      brazalete: model.brazalete,
+      huellaDig: model.huellaDig,
+      createAt: model.createAt,
+      updateAt: model.updateAt,
+      deleteAt: model.deleteAt,
+      createdBy: model.createdBy,
+      updateBy: model.updateBy,
+      deleteBy: model.deleteBy,
     );
   }
 }

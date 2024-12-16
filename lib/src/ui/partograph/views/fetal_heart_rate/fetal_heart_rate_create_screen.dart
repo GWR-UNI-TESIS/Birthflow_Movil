@@ -1,4 +1,3 @@
-import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
@@ -8,30 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class FetalHeartRateEditData {
-  final FetalHeartRate? fetalHeartRate;
+class FetalHeartRateCreateScreen extends StatefulWidget {
   final String partographId;
 
-  FetalHeartRateEditData({
-    required this.fetalHeartRate,
-    required this.partographId,
-  });
-}
-
-class FetalHeartRateEditScreen extends StatefulWidget {
-  final FetalHeartRateEditData fetalHeartRateEditData;
-
-  const FetalHeartRateEditScreen({
-    super.key,
-    required this.fetalHeartRateEditData,
-  });
+  const FetalHeartRateCreateScreen({super.key, required this.partographId});
 
   @override
-  _FetalHeartRateEditScreenState createState() =>
-      _FetalHeartRateEditScreenState();
+  _FetalHeartRateCreateScreenState createState() =>
+      _FetalHeartRateCreateScreenState();
 }
 
-class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
+class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
     with SnackbarsMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _dateTimeController;
@@ -41,18 +27,7 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
   @override
   void initState() {
     super.initState();
-    final fetalHeartRate = widget.fetalHeartRateEditData.fetalHeartRate;
-
-    _fetalHeartRateValue = fetalHeartRate?.value ?? '';
-
-    _dateTimeController = TextEditingController(
-      text: fetalHeartRate != null
-          ? DateFormat('HH:mm:ss').format(fetalHeartRate.time)
-          : '',
-    );
-    _selectedTime = fetalHeartRate != null
-        ? TimeOfDay.fromDateTime(fetalHeartRate.time)
-        : null;
+    _dateTimeController = TextEditingController();
   }
 
   @override
@@ -72,19 +47,11 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
         _selectedTime?.minute ?? DateTime.now().minute,
       );
 
-      final fetalHeartRate = widget.fetalHeartRateEditData.fetalHeartRate;
-      final event = fetalHeartRate == null
-          ? CreateFetalHeartRate(
-              partographId: widget.fetalHeartRateEditData.partographId,
-              value: _fetalHeartRateValue!,
-              time: selectedDateTime,
-            )
-          : UpdateFetalHeartRate(
-              id: fetalHeartRate.id!,
-              partographId: widget.fetalHeartRateEditData.partographId,
-              value: _fetalHeartRateValue!,
-              time: selectedDateTime,
-            );
+      final event = CreateFetalHeartRate(
+        partographId: widget.partographId,
+        value: _fetalHeartRateValue!,
+        time: selectedDateTime,
+      );
 
       bloc.add(event);
     }
@@ -95,15 +62,13 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
       context: context,
       initialTime: _selectedTime ?? TimeOfDay.now(),
     );
-    if (picked != null && picked != _selectedTime) {
+    if (picked != null) {
       setState(() {
         _selectedTime = picked;
         final now = DateTime.now();
         final dateTime =
             DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-        _dateTimeController.text = DateFormat('HH:mm:ss').format(
-          dateTime,
-        );
+        _dateTimeController.text = DateFormat('HH:mm:ss').format(dateTime);
       });
     }
   }
@@ -111,13 +76,7 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.fetalHeartRateEditData.fetalHeartRate == null
-              ? 'Crear Frecuencia Cardiaca Fetal'
-              : 'Editar Frecuencia Cardiaca Fetal',
-        ),
-      ),
+      appBar: AppBar(title: const Text('Crear Frecuencia Cardiaca Fetal')),
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
@@ -142,7 +101,7 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
                 _buildTimeField(context),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => _saveFetalHeartRate(),
+                  onPressed: _saveFetalHeartRate,
                   child: const Text('Guardar'),
                 ),
               ],
@@ -163,9 +122,7 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
             prefixIcon: const Icon(Icons.calendar_today),
             border: const OutlineInputBorder(),
             labelText: 'Hora',
-            hintText: _selectedTime != null
-                ? _selectedTime!.format(context)
-                : 'Seleccione una hora',
+            hintText: _selectedTime?.format(context) ?? 'Seleccione una hora',
           ),
           validator: (value) {
             if (_selectedTime == null) {

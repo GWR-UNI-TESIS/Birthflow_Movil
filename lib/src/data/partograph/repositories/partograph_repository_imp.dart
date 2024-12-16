@@ -2,6 +2,8 @@ import 'package:birthflow_movil/src/data/partograph/datasources/partograph_servi
 import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/childbirth_note_request/childbirth_note_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/childbirth_note_response/childbirth_note_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_request/contraction_frequency_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_response/contraction_frequency_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/fetal_heart_rate_request/fetal_heart_rate_request.dart';
@@ -15,6 +17,7 @@ import 'package:birthflow_movil/src/data/partograph/models/presentation_position
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
@@ -766,6 +769,128 @@ class PartographRepositoryImplementation implements PartographRepository {
           await _partographService.updateFetalHeartRate(token, request);
 
       return _mapper.convert<FetalHeartRateResponse, FetalHeartRate>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<ChildbirthNote?> createChildbirthNote(
+      {required String partographId,
+      String? description,
+      required String hour,
+      required String sex,
+      required String apgar,
+      required String temperature,
+      required String caputto,
+      required String circular,
+      required String lamniotico,
+      required String miccion,
+      required String meconio,
+      required String pa,
+      required String expulsivo,
+      required String placenta,
+      required String alumbramiento,
+      required String huellaPlantar,
+      required String pc,
+      required String talla,
+      required String brazalete,
+      required String huellaDig}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = ChildbirthNoteRequest(
+        partographId: partographId,
+        description: description,
+        hour: hour,
+        sex: sex,
+        apgar: apgar,
+        temperature: temperature,
+        caputto: caputto,
+        circular: circular,
+        lamniotico: lamniotico,
+        miccion: miccion,
+        meconio: meconio,
+        pa: pa,
+        expulsivo: expulsivo,
+        placenta: placenta,
+        alumbramiento: alumbramiento,
+        huellaPlantar: huellaPlantar,
+        pc: pc,
+        talla: talla,
+        brazalete: brazalete,
+        huellaDig: huellaDig,
+      );
+
+      final result =
+          await _partographService.createChildBirthNote(token, request);
+
+      return _mapper.convert<ChildbirthNoteResponse, ChildbirthNote>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<ChildbirthNote?> updateChildbirthNote(
+      {required String partographId,
+      String? description,
+      required String hour,
+      required String sex,
+      required String apgar,
+      required String temperature,
+      required String caputto,
+      required String circular,
+      required String lamniotico,
+      required String miccion,
+      required String meconio,
+      required String pa,
+      required String expulsivo,
+      required String placenta,
+      required String alumbramiento,
+      required String huellaPlantar,
+      required String pc,
+      required String talla,
+      required String brazalete,
+      required String huellaDig}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = ChildbirthNoteRequest(
+        partographId: partographId,
+        description: description,
+        hour: hour,
+        sex: sex,
+        apgar: apgar,
+        temperature: temperature,
+        caputto: caputto,
+        circular: circular,
+        lamniotico: lamniotico,
+        miccion: miccion,
+        meconio: meconio,
+        pa: pa,
+        expulsivo: expulsivo,
+        placenta: placenta,
+        alumbramiento: alumbramiento,
+        huellaPlantar: huellaPlantar,
+        pc: pc,
+        talla: talla,
+        brazalete: brazalete,
+        huellaDig: huellaDig,
+      );
+
+      final result =
+          await _partographService.createChildBirthNote(token, request);
+
+      return _mapper.convert<ChildbirthNoteResponse, ChildbirthNote>(
         result.response,
       );
     } catch (e, stackTrace) {

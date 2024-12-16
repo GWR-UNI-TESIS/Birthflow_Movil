@@ -1063,6 +1063,88 @@ class _PartographService implements PartographService {
   }
 
   @override
+  Future<ApiResponse<ChildbirthNoteResponse>> createChildBirthNote(
+    String token,
+    ChildbirthNoteRequest request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _options =
+        _setStreamType<ApiResponse<ChildbirthNoteResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/partograph/create/childbirth-note',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<ChildbirthNoteResponse> _value;
+    try {
+      _value = ApiResponse<ChildbirthNoteResponse>.fromJson(
+        _result.data!,
+        (json) => ChildbirthNoteResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponse<ChildbirthNoteResponse>> updateChildBirthNote(
+    String token,
+    ChildbirthNoteRequest request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _options =
+        _setStreamType<ApiResponse<ChildbirthNoteResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/partograph/update/childbirth-note',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<ChildbirthNoteResponse> _value;
+    try {
+      _value = ApiResponse<ChildbirthNoteResponse>.fromJson(
+        _result.data!,
+        (json) => ChildbirthNoteResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ApiResponse<AlertCurvesResponse>> getCurves(
     String token,
     String partographId,

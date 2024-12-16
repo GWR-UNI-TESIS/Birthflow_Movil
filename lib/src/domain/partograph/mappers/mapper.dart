@@ -2,6 +2,7 @@ import 'package:auto_mappr_annotation/auto_mappr_annotation.dart';
 import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curve_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/childbirth_note_response/childbirth_note_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_response/contraction_frequency_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/fetal_heart_rate_response/fetal_heart_rate_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_table_response/medical_surveillance_table_response.dart';
@@ -11,6 +12,7 @@ import 'package:birthflow_movil/src/data/partograph/models/partograph_state_resp
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
@@ -33,5 +35,6 @@ import 'package:birthflow_movil/src/domain/partograph/mappers/mapper.auto_mappr.
   MapType<PartographStateResponse, PartographState>(),
   MapType<AlertCurvesResponse, AlertCurves>(),
   MapType<AlertCurveResponse, AlertCurve>(),
+  MapType<ChildbirthNoteResponse, ChildbirthNote>(),
 ])
 class Mappr extends $Mappr {}

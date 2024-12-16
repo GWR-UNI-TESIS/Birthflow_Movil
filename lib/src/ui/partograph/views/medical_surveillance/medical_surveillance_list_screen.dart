@@ -2,7 +2,7 @@ import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,14 +34,16 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _navigateToEdit(context, null),
+        onPressed: () => _navigateToCreate(context),
         child: const Text('Agregar'),
       ),
     );
   }
 
   Widget _buildTable(
-      List<MedicalSurveillanceTable> list, BuildContext context,) {
+    List<MedicalSurveillanceTable> list,
+    BuildContext context,
+  ) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Table(
@@ -173,6 +175,16 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
         medicalSurveillanceTable: item,
         partographId: partographId,
       ),
+    );
+  }
+
+  void _navigateToCreate(BuildContext context) {
+    context.go(
+      AppPaths.home.partographPath
+          .define(partographId)
+          .medicalSurveillanceListPath
+          .create
+          .path,
     );
   }
 }

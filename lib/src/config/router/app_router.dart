@@ -10,19 +10,25 @@ import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
 import 'package:birthflow_movil/src/ui/home/view/create_partograph.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_edit_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_create_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/chart_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency_list_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/contraction_frequency_edit_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate_edit_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate_list_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_edit_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frecuency_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_create_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate/fetal_heart_rate_create_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate/fetal_heart_rate_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/fetal_heart_rate/fetal_heart_rate_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/medical_surveillance_create_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/medical_surveillance_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/medical_surveillance_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partogram_modification_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety_edit_screen.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety/presentation_position_variety_create_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety/presentation_position_variety_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety/presentation_position_variety_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -127,11 +133,8 @@ class AppRouter {
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                      return CervicalDilationEditScreen(
-                        cervicalDilationEditData: CervicalDilationEditData(
-                          cervicalDilation: null,
-                          partographId: partographId,
-                        ),
+                      return CervicalDilationCreateScreen(
+                        partographId: partographId,
                       );
                     },
                   ),
@@ -170,11 +173,8 @@ class AppRouter {
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                      return MedicalSurveillanceEditScreen(
-                        model: MedicalSurveillanceEditData(
-                          medicalSurveillanceTable: null,
-                          partographId: partographId,
-                        ),
+                      return MedicalSurveillanceCreateScreen(
+                        partographId: partographId,
                       );
                     },
                   ),
@@ -184,7 +184,7 @@ class AppRouter {
                     builder: (context, state) {
                       final data = state.extra! as MedicalSurveillanceEditData;
                       return MedicalSurveillanceEditScreen(
-                        model: data,
+                        medicalSurveillanceEditData: data,
                       );
                     },
                   ),
@@ -207,11 +207,8 @@ class AppRouter {
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                      return PresentationPositionVarietyEditScreen(
-                        data: PresentationPositionVarietyData(
-                          presentationPositionVariety: null,
-                          partographId: partographId,
-                        ),
+                      return PresentationPositionVarietyCreateScreen(
+                        partographId: partographId,
                       );
                     },
                   ),
@@ -244,11 +241,8 @@ class AppRouter {
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                      return FetalHeartRateEditScreen(
-                        fetalHeartRateEditData: FetalHeartRateEditData(
-                          fetalHeartRate: null,
-                          partographId: partographId,
-                        ),
+                      return FetalHeartRateCreateScreen(
+                        partographId: partographId,
                       );
                     },
                   ),
@@ -281,12 +275,8 @@ class AppRouter {
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                      return ContractionFrequencyEditScreen(
-                        contractionFrequencyEditData:
-                            ContractionFrequencyEditData(
-                          contractionFrequency: null,
-                          partographId: partographId,
-                        ),
+                      return ContractionFrequencyCreateScreen(
+                        partographId: partographId,
                       );
                     },
                   ),

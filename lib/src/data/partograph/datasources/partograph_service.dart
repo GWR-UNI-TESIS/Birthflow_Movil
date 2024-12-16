@@ -2,6 +2,8 @@ import 'package:birthflow_movil/src/core/models/api_reponse/api_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/alert_curve_response/alert_curves_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_request/cervical_dilation_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/cervical_dilation_response/cervical_dilation_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/childbirth_note_request/childbirth_note_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/childbirth_note_response/childbirth_note_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_request/contraction_frequency_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/contraction_frequency_response/contraction_frequency_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/fetal_heart_rate_request/fetal_heart_rate_request.dart';
@@ -179,6 +181,18 @@ abstract class PartographService {
   Future<ApiResponse<FetalHeartRateResponse>> deleteFetalHeartRate(
     @Header('Authorization') String token,
     @Body() FetalHeartRateRequest request,
+  );
+
+  @POST('/api/partograph/create/childbirth-note')
+  Future<ApiResponse<ChildbirthNoteResponse>> createChildBirthNote(
+    @Header('Authorization') String token,
+    @Body() ChildbirthNoteRequest request,
+  );
+
+  @POST('/api/partograph/update/childbirth-note')
+  Future<ApiResponse<ChildbirthNoteResponse>> updateChildBirthNote(
+    @Header('Authorization') String token,
+    @Body() ChildbirthNoteRequest request,
   );
 
   @GET('/api/partograph/curve/{partographId}')

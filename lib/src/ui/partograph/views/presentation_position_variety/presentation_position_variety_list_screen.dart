@@ -2,7 +2,7 @@ import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
-import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
 import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +29,8 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
             initial: () => const Center(child: CircularProgressIndicator()),
             loading: () => const Center(child: CircularProgressIndicator()),
             loaded: (data, message) {
-              return (data.presentationPositionVarieties == null ||data.presentationPositionVarieties!.isEmpty)
+              return (data.presentationPositionVarieties == null ||
+                      data.presentationPositionVarieties!.isEmpty)
                   ? const Center(child: Text('No hay datos'))
                   : CustomScrollView(
                       slivers: [
@@ -39,9 +40,13 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
                               final item =
                                   data.presentationPositionVarieties![index];
 
-                                  final hodgePlane = catalog.hodgePlanesCatalog.firstWhere((hodgePlane) => hodgePlane.id == item.hodgePlane);
+                              final hodgePlane = catalog.hodgePlanesCatalog
+                                  .firstWhere((hodgePlane) =>
+                                      hodgePlane.id == item.hodgePlane);
 
-                                  final position = catalog.positionCatalog.firstWhere((position) => position.id == item.position);
+                              final position = catalog.positionCatalog
+                                  .firstWhere((position) =>
+                                      position.id == item.position);
                               return ListTile(
                                 title: Text(
                                   '${hodgePlane.description} - ${position.description}',
@@ -70,18 +75,33 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => _navigateToEdit(context, null),
+        onPressed: () => _navigateToCreate(context),
       ),
     );
   }
 
-  void _navigateToEdit(BuildContext context, PresentationPositionVariety? item) {
+  void _navigateToEdit(
+      BuildContext context, PresentationPositionVariety? item) {
     context.go(
-      AppPaths.home.partographPath.define(partographId).presentationPositionVarietyPath.edit.path,
+      AppPaths.home.partographPath
+          .define(partographId)
+          .presentationPositionVarietyPath
+          .edit
+          .path,
       extra: PresentationPositionVarietyData(
         presentationPositionVariety: item,
         partographId: partographId,
       ),
+    );
+  }
+
+  void _navigateToCreate(BuildContext context) {
+    context.go(
+      AppPaths.home.partographPath
+          .define(partographId)
+          .presentationPositionVarietyPath
+          .create
+          .path,
     );
   }
 }
