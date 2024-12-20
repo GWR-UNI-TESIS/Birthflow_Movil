@@ -22,9 +22,9 @@ PartographShareRequest _$PartographShareRequestFromJson(
 /// @nodoc
 mixin _$PartographShareRequest {
   int? get id => throw _privateConstructorUsedError;
-  int get partographGroupId => throw _privateConstructorUsedError;
+  String get partographId => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  int get groupTd => throw _privateConstructorUsedError;
+  int get groupId => throw _privateConstructorUsedError;
   int get permissionTypeId => throw _privateConstructorUsedError;
 
   /// Serializes this PartographShareRequest to a JSON map.
@@ -45,9 +45,9 @@ abstract class $PartographShareRequestCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      int partographGroupId,
+      String partographId,
       String userId,
-      int groupTd,
+      int groupId,
       int permissionTypeId});
 }
 
@@ -68,9 +68,9 @@ class _$PartographShareRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = freezed,
-    Object? partographGroupId = null,
+    Object? partographId = null,
     Object? userId = null,
-    Object? groupTd = null,
+    Object? groupId = null,
     Object? permissionTypeId = null,
   }) {
     return _then(_value.copyWith(
@@ -78,17 +78,17 @@ class _$PartographShareRequestCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      partographGroupId: null == partographGroupId
-          ? _value.partographGroupId
-          : partographGroupId // ignore: cast_nullable_to_non_nullable
-              as int,
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupTd: null == groupTd
-          ? _value.groupTd
-          : groupTd // ignore: cast_nullable_to_non_nullable
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as int,
       permissionTypeId: null == permissionTypeId
           ? _value.permissionTypeId
@@ -109,9 +109,9 @@ abstract class _$$PartographShareRequestImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      int partographGroupId,
+      String partographId,
       String userId,
-      int groupTd,
+      int groupId,
       int permissionTypeId});
 }
 
@@ -131,9 +131,9 @@ class __$$PartographShareRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? partographGroupId = null,
+    Object? partographId = null,
     Object? userId = null,
-    Object? groupTd = null,
+    Object? groupId = null,
     Object? permissionTypeId = null,
   }) {
     return _then(_$PartographShareRequestImpl(
@@ -141,17 +141,17 @@ class __$$PartographShareRequestImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      partographGroupId: null == partographGroupId
-          ? _value.partographGroupId
-          : partographGroupId // ignore: cast_nullable_to_non_nullable
-              as int,
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupTd: null == groupTd
-          ? _value.groupTd
-          : groupTd // ignore: cast_nullable_to_non_nullable
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as int,
       permissionTypeId: null == permissionTypeId
           ? _value.permissionTypeId
@@ -166,9 +166,9 @@ class __$$PartographShareRequestImplCopyWithImpl<$Res>
 class _$PartographShareRequestImpl implements _PartographShareRequest {
   const _$PartographShareRequestImpl(
       {this.id,
-      required this.partographGroupId,
+      required this.partographId,
       required this.userId,
-      required this.groupTd,
+      required this.groupId,
       required this.permissionTypeId});
 
   factory _$PartographShareRequestImpl.fromJson(Map<String, dynamic> json) =>
@@ -177,17 +177,17 @@ class _$PartographShareRequestImpl implements _PartographShareRequest {
   @override
   final int? id;
   @override
-  final int partographGroupId;
+  final String partographId;
   @override
   final String userId;
   @override
-  final int groupTd;
+  final int groupId;
   @override
   final int permissionTypeId;
 
   @override
   String toString() {
-    return 'PartographShareRequest(id: $id, partographGroupId: $partographGroupId, userId: $userId, groupTd: $groupTd, permissionTypeId: $permissionTypeId)';
+    return 'PartographShareRequest(id: $id, partographId: $partographId, userId: $userId, groupId: $groupId, permissionTypeId: $permissionTypeId)';
   }
 
   @override
@@ -196,10 +196,10 @@ class _$PartographShareRequestImpl implements _PartographShareRequest {
         (other.runtimeType == runtimeType &&
             other is _$PartographShareRequestImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.partographGroupId, partographGroupId) ||
-                other.partographGroupId == partographGroupId) &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.groupTd, groupTd) || other.groupTd == groupTd) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.permissionTypeId, permissionTypeId) ||
                 other.permissionTypeId == permissionTypeId));
   }
@@ -207,7 +207,7 @@ class _$PartographShareRequestImpl implements _PartographShareRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, partographGroupId, userId, groupTd, permissionTypeId);
+      runtimeType, id, partographId, userId, groupId, permissionTypeId);
 
   /// Create a copy of PartographShareRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -229,9 +229,9 @@ class _$PartographShareRequestImpl implements _PartographShareRequest {
 abstract class _PartographShareRequest implements PartographShareRequest {
   const factory _PartographShareRequest(
       {final int? id,
-      required final int partographGroupId,
+      required final String partographId,
       required final String userId,
-      required final int groupTd,
+      required final int groupId,
       required final int permissionTypeId}) = _$PartographShareRequestImpl;
 
   factory _PartographShareRequest.fromJson(Map<String, dynamic> json) =
@@ -240,11 +240,11 @@ abstract class _PartographShareRequest implements PartographShareRequest {
   @override
   int? get id;
   @override
-  int get partographGroupId;
+  String get partographId;
   @override
   String get userId;
   @override
-  int get groupTd;
+  int get groupId;
   @override
   int get permissionTypeId;
 

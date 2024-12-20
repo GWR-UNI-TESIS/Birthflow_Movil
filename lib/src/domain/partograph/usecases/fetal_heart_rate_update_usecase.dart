@@ -1,7 +1,7 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class FetalHeartRateUpdateUsecase {
+abstract class UpdateFetalHeartRateUseCase {
   Future<FetalHeartRate?> execute({
     required int id,
     required String partographId,
@@ -10,11 +10,11 @@ abstract class FetalHeartRateUpdateUsecase {
   });
 }
 
-class FetalHeartRateUpdateUsecaseImplementation
-    implements FetalHeartRateUpdateUsecase {
+class UpdateFetalHeartRateUseCaseImplementation
+    implements UpdateFetalHeartRateUseCase {
   final PartographRepository _partographRepository;
 
-  FetalHeartRateUpdateUsecaseImplementation({
+  UpdateFetalHeartRateUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 

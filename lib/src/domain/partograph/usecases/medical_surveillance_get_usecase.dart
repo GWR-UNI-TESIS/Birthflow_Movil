@@ -1,16 +1,16 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class MedicalSurveillanceGetUsecase {
+abstract class GetMedicalSurveillanceUseCase {
   Future<List<MedicalSurveillanceTable>?> execute({
     required String partographId,
   });
 }
 
-class MedicalSurveillanceGetUsecaseImplementation
-    implements MedicalSurveillanceGetUsecase {
+class GetMedicalSurveillanceUseCaseImplementation
+    implements GetMedicalSurveillanceUseCase {
   final PartographRepository _partographRepository;
-  MedicalSurveillanceGetUsecaseImplementation({
+  GetMedicalSurveillanceUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 

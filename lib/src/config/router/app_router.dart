@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:birthflow_movil/src/config/router/path.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
@@ -15,6 +16,7 @@ import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervic
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/chart_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/childbirth_note/childbirth_note_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frecuency_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_create_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_edit_screen.dart';
@@ -290,6 +292,34 @@ class AppRouter {
                       );
                     },
                   ),
+                ],
+              ),
+               GoRoute(
+                path: AppPaths
+                    .home.partographPath.childbirthNotePath.goRoute,
+                builder: (context, state) {
+                  final partographId =
+                      state.pathParameters[AppPaths.home.partographPath.id]!;
+                  return ChildbirthNoteEditScreen(
+                    partographId: partographId,
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: AppPaths.home.partographPath.childbirthNotePath
+                        .edit.goRoute,
+                    builder: (context, state) {
+                      final partographId = state
+                          .pathParameters[AppPaths.home.partographPath.id]!;
+                           final data =
+                          state.extra! as ChildbirthNote;
+                      return ChildbirthNoteEditScreen(
+                        partographId: partographId,
+                        childbirthNote: data,
+                      );
+                    },
+                  ),
+                 
                 ],
               ),
             ],

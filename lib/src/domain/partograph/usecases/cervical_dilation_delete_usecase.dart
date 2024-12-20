@@ -1,17 +1,17 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class CervicalDilationDeleteUseCase {
+abstract class DeleteCervicalDilationUseCase {
   Future<CervicalDilation?> execute({
     required int id,
   });
 }
 
-class CervicalDilationDeleteUseCaseImplementation
-    implements CervicalDilationDeleteUseCase {
+class DeleteCervicalDilationUseCaseImplementation
+    implements DeleteCervicalDilationUseCase {
   final PartographRepository _partographRepository;
 
-  CervicalDilationDeleteUseCaseImplementation({
+  DeleteCervicalDilationUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 

@@ -1,7 +1,7 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class ContractionFrequencyUpdateUsecase {
+abstract class UpdateContractionFrequencyUseCase {
   Future<ContractionFrequency?> execute({
     required int id,
     required String partographId,
@@ -10,11 +10,11 @@ abstract class ContractionFrequencyUpdateUsecase {
   });
 }
 
-class ContractionFrequencyUpdateUsecaseImplementation
-    implements ContractionFrequencyUpdateUsecase {
+class UpdateContractionFrequencyUseCaseImplementation
+    implements UpdateContractionFrequencyUseCase {
   final PartographRepository _partographRepository;
 
-  ContractionFrequencyUpdateUsecaseImplementation({
+  UpdateContractionFrequencyUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 

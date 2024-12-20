@@ -1,17 +1,17 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class PartographListGetUseCase {
+abstract class GetPartographListUseCase {
   Future<List<PartographList>?> execute({
     required String userId,
   });
 }
 
-class PartographListGetUsecaseImplementation
-    implements PartographListGetUseCase {
+class GetPartographListUseCaseImplementation
+    implements GetPartographListUseCase {
   final PartographRepository _partographRepository;
 
-  PartographListGetUsecaseImplementation({
+  GetPartographListUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 

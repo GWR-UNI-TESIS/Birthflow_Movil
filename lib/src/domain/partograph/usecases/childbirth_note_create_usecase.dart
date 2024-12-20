@@ -1,7 +1,7 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class ChildbirthNoteCreateUseCase {
+abstract class CreateChildbirthNoteUseCase {
   Future<ChildbirthNote?> execute({
     required String partographId,
     String? description,
@@ -26,10 +26,10 @@ abstract class ChildbirthNoteCreateUseCase {
   });
 }
 
-class ChildbirthNoteCreateUseCaseImplementation implements ChildbirthNoteCreateUseCase {
+class CreateChildbirthNoteUseCaseImplementation implements CreateChildbirthNoteUseCase {
   final PartographRepository _partographRepository;
 
-  ChildbirthNoteCreateUseCaseImplementation({
+  CreateChildbirthNoteUseCaseImplementation({
     required PartographRepository partographRepository,
   }) : _partographRepository = partographRepository;
 

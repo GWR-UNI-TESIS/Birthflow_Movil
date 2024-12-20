@@ -9,7 +9,7 @@ class PartographShareResponse with _$PartographShareResponse {
     required int id,
     required String partographId,
     required String userId,
-    required int groupTd,
+    required int groupId,
     required int permissionTypeId,
     required DateTime createdAt,
     required String owner, 

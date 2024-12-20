@@ -24,42 +24,42 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PartographBloc extends Bloc<PartographEvent, PartographState> {
-  final PartographGetUsecase _partographGetUsecase;
-  final PartographUpdateUsecase _partographUpdateUsecase;
-  final CervicalDilationCreateUseCase _cervicalDilationCreateUseCase;
-  final CervicalDilationUpdateUseCase _cervicalDilationUpdateUseCase;
-  final CervicalDilationDeleteUseCase _cervicalDilationDeleteUseCase;
-  final MedicalSurveillanceCreateUsecase _medicalSurveillanceCreateUsecase;
-  final MedicalSurveillanceUpdateUsecase _medicalSurveillanceUpdateUsecase;
-  final PresentationPositionVarietyCreateUsecase
-      _presentationPositionVarietyCreateUsecase;
-  final PresentationPositionVarietyUpdateUsecase
-      _presentationPositionVarietyUpdateUsecase;
-  final ContractionFrequencyCreateUsecase _contractionFrequencyCreateUsecase;
-  final ContractionFrequencyUpdateUsecase _contractionFrequencyUpdateUsecase;
-  final FetalHeartRateCreateUsecase _fetalHeartRateCreateUsecase;
-  final FetalHeartRateUpdateUsecase _fetalHeartRateUpdateUsecase;
-  final ChildbirthNoteCreateUseCase _childbirthNoteCreateUseCase;
-  final ChildbirthNoteUpdateUseCase _childbirthNoteUpdateUseCase;
-  final AlertCurvesGetUseCase _alertCurvesGetUsecase;
+  final GetPartographUseCase _GetPartographUseCase;
+  final UpdatePartographUsecase _UpdatePartographUsecase;
+  final CreateCervicalDilationUseCase _CreateCervicalDilationUseCase;
+  final UpdateCervicalDilationUseCase _UpdateCervicalDilationUseCase;
+  final DeleteCervicalDilationUseCase _DeleteCervicalDilationUseCase;
+  final CreateMedicalSurveillanceUseCase _CreateMedicalSurveillanceUseCase;
+  final UpdateMedicalSurveillanceUseCase _UpdateMedicalSurveillanceUseCase;
+  final CreatePresentationPositionVarietyUseCase
+      _CreatePresentationPositionVarietyUseCase;
+  final UpdatePresentationPositionVarietyUseCase
+      _UpdatePresentationPositionVarietyUseCase;
+  final CreateContractionFrequencyUseCase _CreateContractionFrequencyUseCase;
+  final UpdateContractionFrequencyUseCase _UpdateContractionFrequencyUseCase;
+  final CreateFetalHeartRateUseCase _CreateFetalHeartRateUseCase;
+  final UpdateFetalHeartRateUseCase _UpdateFetalHeartRateUseCase;
+  final CreateChildbirthNoteUseCase _CreateChildbirthNoteUseCase;
+  final UpdateChildbirthNoteUseCase _UpdateChildbirthNoteUseCase;
+  final GetAlertCurvesUseCase _GetAlertCurvesUseCase;
 
   PartographBloc(
-    this._partographGetUsecase,
-    this._partographUpdateUsecase,
-    this._cervicalDilationCreateUseCase,
-    this._cervicalDilationUpdateUseCase,
-    this._cervicalDilationDeleteUseCase,
-    this._alertCurvesGetUsecase,
-    this._medicalSurveillanceCreateUsecase,
-    this._medicalSurveillanceUpdateUsecase,
-    this._presentationPositionVarietyCreateUsecase,
-    this._presentationPositionVarietyUpdateUsecase,
-    this._contractionFrequencyCreateUsecase,
-    this._contractionFrequencyUpdateUsecase,
-    this._fetalHeartRateCreateUsecase,
-    this._fetalHeartRateUpdateUsecase,
-    this._childbirthNoteCreateUseCase,
-    this._childbirthNoteUpdateUseCase,
+    this._GetPartographUseCase,
+    this._UpdatePartographUsecase,
+    this._CreateCervicalDilationUseCase,
+    this._UpdateCervicalDilationUseCase,
+    this._DeleteCervicalDilationUseCase,
+    this._GetAlertCurvesUseCase,
+    this._CreateMedicalSurveillanceUseCase,
+    this._UpdateMedicalSurveillanceUseCase,
+    this._CreatePresentationPositionVarietyUseCase,
+    this._UpdatePresentationPositionVarietyUseCase,
+    this._CreateContractionFrequencyUseCase,
+    this._UpdateContractionFrequencyUseCase,
+    this._CreateFetalHeartRateUseCase,
+    this._UpdateFetalHeartRateUseCase,
+    this._CreateChildbirthNoteUseCase,
+    this._UpdateChildbirthNoteUseCase,
   ) : super(const Initial()) {
     on<onFetchData>(_onFetchData);
     on<ModifyingPartograph>(_onUpdatePartograph);
@@ -84,7 +84,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       emit(const Loading());
-      final result = await _partographGetUsecase.execute(
+      final result = await _GetPartographUseCase.execute(
         partographId: event.partographId,
       );
 
@@ -104,7 +104,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
-      final newDilation = await _cervicalDilationCreateUseCase.execute(
+      final newDilation = await _CreateCervicalDilationUseCase.execute(
         partographId: event.partographId,
         value: event.value,
         hour: event.hour,
@@ -114,7 +114,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
       if (newDilation != null && state is Loaded) {
         final currentState = state as Loaded;
 
-        final updatedAlertCurves = await _alertCurvesGetUsecase.execute(
+        final updatedAlertCurves = await _GetAlertCurvesUseCase.execute(
           partographId: event.partographId,
         );
 
@@ -149,7 +149,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
-      final newDilation = await _partographUpdateUsecase.execute(
+      final newDilation = await _UpdatePartographUsecase.execute(
         partographId: event.partographId,
         name: event.name,
         recordName: event.recordName,
@@ -178,7 +178,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
-      final updatedDilation = await _cervicalDilationUpdateUseCase.execute(
+      final updatedDilation = await _UpdateCervicalDilationUseCase.execute(
         id: event.id,
         partographId: event.partographId,
         value: event.value,
@@ -189,7 +189,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
       if (state is Loaded && updatedDilation != null) {
         final currentState = state as Loaded;
 
-        final updatedAlertCurves = await _alertCurvesGetUsecase.execute(
+        final updatedAlertCurves = await _GetAlertCurvesUseCase.execute(
           partographId: event.partographId,
         );
 
@@ -221,12 +221,12 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       final deletedDilation =
-          await _cervicalDilationDeleteUseCase.execute(id: event.id);
+          await _DeleteCervicalDilationUseCase.execute(id: event.id);
 
       if (state is Loaded && deletedDilation != null) {
         final currentState = state as Loaded;
 
-        final updatedAlertCurves = await _alertCurvesGetUsecase.execute(
+        final updatedAlertCurves = await _GetAlertCurvesUseCase.execute(
           partographId: currentState.partograph.partographId!,
         );
 
@@ -262,7 +262,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
 
       final letter = _intToChar(value + 1);
 
-      final newEntry = await _medicalSurveillanceCreateUsecase.execute(
+      final newEntry = await _CreateMedicalSurveillanceUseCase.execute(
         partographId: event.partographId,
         letter: letter,
         maternalPosition: event.maternalPosition,
@@ -304,7 +304,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
-      final updatedEntry = await _medicalSurveillanceUpdateUsecase.execute(
+      final updatedEntry = await _UpdateMedicalSurveillanceUseCase.execute(
         id: event.id,
         partographId: event.partographId,
         letter: event.letter,
@@ -352,7 +352,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       final currentState = state as Loaded;
-      final newEntry = await _presentationPositionVarietyCreateUsecase.execute(
+      final newEntry = await _CreatePresentationPositionVarietyUseCase.execute(
         partographId: event.partographId,
         hodgePlane: event.hodgePlane,
         position: event.position,
@@ -388,7 +388,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       final updatedEntry =
-          await _presentationPositionVarietyUpdateUsecase.execute(
+          await _UpdatePresentationPositionVarietyUseCase.execute(
         id: event.id,
         partographId: event.partographId,
         hodgePlane: event.hodgePlane,
@@ -430,7 +430,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       final currentState = state as Loaded;
-      final newEntry = await _fetalHeartRateCreateUsecase.execute(
+      final newEntry = await _CreateFetalHeartRateUseCase.execute(
         partographId: event.partographId,
         value: event.value,
         time: event.time,
@@ -462,7 +462,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
-      final updatedEntry = await _fetalHeartRateUpdateUsecase.execute(
+      final updatedEntry = await _UpdateFetalHeartRateUseCase.execute(
         id: event.id,
         partographId: event.partographId,
         value: event.value,
@@ -500,7 +500,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       final currentState = state as Loaded;
-      final newEntry = await _contractionFrequencyCreateUsecase.execute(
+      final newEntry = await _CreateContractionFrequencyUseCase.execute(
         partographId: event.partographId,
         value: event.value,
         time: event.time,
@@ -532,7 +532,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     Emitter<PartographState> emit,
   ) async {
     try {
-      final updatedEntry = await _contractionFrequencyUpdateUsecase.execute(
+      final updatedEntry = await _UpdateContractionFrequencyUseCase.execute(
         id: event.id,
         partographId: event.partographId,
         value: event.value,
@@ -570,7 +570,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       final currentState = state as Loaded;
-      final newEntry = await _childbirthNoteCreateUseCase.execute(
+      final newEntry = await _CreateChildbirthNoteUseCase.execute(
         partographId: event.partographId,
         hour: event.hour,
         sex: event.sex,
@@ -615,7 +615,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   ) async {
     try {
       final currentState = state as Loaded;
-      final newEntry = await _childbirthNoteUpdateUseCase.execute(
+      final newEntry = await _UpdateChildbirthNoteUseCase.execute(
         partographId: event.partographId,
         hour: event.hour,
         sex: event.sex,

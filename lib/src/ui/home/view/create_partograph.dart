@@ -20,7 +20,7 @@ class CreatePartographScreen extends StatelessWidget with SnackbarsMixin {
       providers: [
         BlocProvider<CreatePartographBloc>(
           create: (context) => CreatePartographBloc(
-            locator<PartographCreateUseCase>(),
+            locator<CreatePartographUseCase>(),
           ),
         ),
       ],

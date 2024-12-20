@@ -94,117 +94,117 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-  // Registra el PartographGetUseCase como singleton en GetIt, inyectando PartographRepository
-  locator.registerSingleton<PartographGetUsecase>(
-    PartographGetUsecaseImplementation(
+  // Registra el GetPartographUseCase como singleton en GetIt, inyectando PartographRepository
+  locator.registerSingleton<GetPartographUseCase>(
+    GetPartographUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<PartographListGetUseCase>(
-    PartographListGetUsecaseImplementation(
+  locator.registerSingleton<GetPartographListUseCase>(
+    GetPartographListUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<PartographCreateUseCase>(
-    PartographCreateUseCaseImplementation(
+  locator.registerSingleton<CreatePartographUseCase>(
+    CreatePartographUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<PartographUpdateUsecase>(
-    PartographUpdateUsecaseImplementation(
+  locator.registerSingleton<UpdatePartographUsecase>(
+    UpdatePartographUsecaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<CervicalDilationCreateUseCase>(
-    CervicalDilationCreateUseCaseImplementation(
+  locator.registerSingleton<CreateCervicalDilationUseCase>(
+    CreateCervicalDilationUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<CervicalDilationDeleteUseCase>(
-    CervicalDilationDeleteUseCaseImplementation(
+  locator.registerSingleton<DeleteCervicalDilationUseCase>(
+    DeleteCervicalDilationUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<CervicalDilationGetUseCase>(
-    CervicalDilationGetUseCaseImplementation(
+  locator.registerSingleton<GetCervicalDilationUseCase>(
+    GetCervicalDilationUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<CervicalDilationUpdateUseCase>(
-    CervicalDilationUpdateUseCaseImplementation(
+  locator.registerSingleton<UpdateCervicalDilationUseCase>(
+    UpdateCervicalDilationUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<AlertCurvesGetUseCase>(
-    AlertCurvesGetUseCaseImplementation(
+  locator.registerSingleton<GetAlertCurvesUseCase>(
+    GetAlertCurvesUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<MedicalSurveillanceCreateUsecase>(
-    MedicalSurveillanceCreateUsecaseImplementation(
+  locator.registerSingleton<CreateMedicalSurveillanceUseCase>(
+    CreateMedicalSurveillanceUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<MedicalSurveillanceUpdateUsecase>(
-    MedicalSurveillanceUpdateUsecaseImplementation(
+  locator.registerSingleton<UpdateMedicalSurveillanceUseCase>(
+    UpdateMedicalSurveillanceUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<PresentationPositionVarietyCreateUsecase>(
-    PresentationPositionVarietyCreateUsecaseImplementation(
+  locator.registerSingleton<CreatePresentationPositionVarietyUseCase>(
+    CreatePresentationPositionVarietyUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<PresentationPositionVarietyUpdateUsecase>(
-    PresentationPositionVarietyUpdateUsecaseImplementation(
+  locator.registerSingleton<UpdatePresentationPositionVarietyUseCase>(
+    UpdatePresentationPositionVarietyUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<ContractionFrequencyCreateUsecase>(
-    ContractionFrequencyCreateUsecaseImplementation(
+  locator.registerSingleton<CreateContractionFrequencyUseCase>(
+    CreateContractionFrequencyUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<ContractionFrequencyUpdateUsecase>(
-    ContractionFrequencyUpdateUsecaseImplementation(
+  locator.registerSingleton<UpdateContractionFrequencyUseCase>(
+    UpdateContractionFrequencyUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<FetalHeartRateCreateUsecase>(
-    FetalHeartRateCreateUsecaseImplementation(
+  locator.registerSingleton<CreateFetalHeartRateUseCase>(
+    CreateFetalHeartRateUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<FetalHeartRateUpdateUsecase>(
-    FetalHeartRateUpdateUsecaseImplementation(
+  locator.registerSingleton<UpdateFetalHeartRateUseCase>(
+    UpdateFetalHeartRateUseCaseImplementation(
       partogramaRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<ChildbirthNoteCreateUseCase>(
-    ChildbirthNoteCreateUseCaseImplementation(
+  locator.registerSingleton<CreateChildbirthNoteUseCase>(
+    CreateChildbirthNoteUseCaseImplementation(
       partographRepository: locator<PartographRepository>(),
     ),
   );
 
-  locator.registerSingleton<ChildbirthNoteUpdateUseCase>(
-    ChildbirthNoteUpdateUseCaseImplementation(
+  locator.registerSingleton<UpdateChildbirthNoteUseCase>(
+    UpdateChildbirthNoteUseCaseImplementation(
       partographRepository: locator<PartographRepository>(),
     ),
   );

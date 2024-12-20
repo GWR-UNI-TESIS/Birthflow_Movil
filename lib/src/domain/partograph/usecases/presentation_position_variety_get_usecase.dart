@@ -1,16 +1,16 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class PresentationPositionVarietyGetUsecase {
+abstract class GetPresentationPositionVarietyUseCase {
   Future<List<PresentationPositionVariety>?> execute({
     required String partographId,
   });
 }
 
-class PresentationPositionVarietyGetUsecaseImplementation
-    implements PresentationPositionVarietyGetUsecase {
+class GetPresentationPositionVarietyUseCaseImplementation
+    implements GetPresentationPositionVarietyUseCase {
   final PartographRepository _partographRepository;
-  PresentationPositionVarietyGetUsecaseImplementation({
+  GetPresentationPositionVarietyUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 

@@ -1,7 +1,7 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class PartographCreateUseCase {
+abstract class CreatePartographUseCase {
   Future<Partograph?> execute({
     required String partogramaId,
     required String name,
@@ -12,10 +12,10 @@ abstract class PartographCreateUseCase {
   });
 }
 
-class PartographCreateUseCaseImplementation implements PartographCreateUseCase {
+class CreatePartographUseCaseImplementation implements CreatePartographUseCase {
   final PartographRepository _partographRepository;
 
-  PartographCreateUseCaseImplementation({
+  CreatePartographUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 

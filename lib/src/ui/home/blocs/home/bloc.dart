@@ -6,7 +6,7 @@ import 'package:birthflow_movil/src/ui/home/models/filters.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
-  final PartographListGetUseCase _partographsGetUseCase;
+  final GetPartographListUseCase _partographsGetUseCase;
   List<PartographList> _allPartographs = [];
 
 

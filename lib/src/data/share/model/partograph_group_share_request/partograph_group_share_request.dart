@@ -7,10 +7,10 @@ part 'partograph_group_share_request.g.dart';
 class PartographGroupShareRequest with _$PartographGroupShareRequest {
   const factory PartographGroupShareRequest({
     int? id,
-    required String partographId,
+    required int partographGroupId,
     required String userId,
     required int groupId,
-    required int permissionTypeId 
+    required int permissionTypeId,
   }) = _PartographGroupShareRequest;
 
   factory PartographGroupShareRequest.fromJson(Map<String, dynamic> json) =>

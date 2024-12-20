@@ -24,7 +24,7 @@ mixin _$PartographShareResponse {
   int get id => throw _privateConstructorUsedError;
   String get partographId => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  int get groupTd => throw _privateConstructorUsedError;
+  int get groupId => throw _privateConstructorUsedError;
   int get permissionTypeId => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $PartographShareResponseCopyWith<$Res> {
       {int id,
       String partographId,
       String userId,
-      int groupTd,
+      int groupId,
       int permissionTypeId,
       DateTime createdAt,
       String owner});
@@ -74,7 +74,7 @@ class _$PartographShareResponseCopyWithImpl<$Res,
     Object? id = null,
     Object? partographId = null,
     Object? userId = null,
-    Object? groupTd = null,
+    Object? groupId = null,
     Object? permissionTypeId = null,
     Object? createdAt = null,
     Object? owner = null,
@@ -92,9 +92,9 @@ class _$PartographShareResponseCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupTd: null == groupTd
-          ? _value.groupTd
-          : groupTd // ignore: cast_nullable_to_non_nullable
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as int,
       permissionTypeId: null == permissionTypeId
           ? _value.permissionTypeId
@@ -125,7 +125,7 @@ abstract class _$$PartographShareResponseImplCopyWith<$Res>
       {int id,
       String partographId,
       String userId,
-      int groupTd,
+      int groupId,
       int permissionTypeId,
       DateTime createdAt,
       String owner});
@@ -149,7 +149,7 @@ class __$$PartographShareResponseImplCopyWithImpl<$Res>
     Object? id = null,
     Object? partographId = null,
     Object? userId = null,
-    Object? groupTd = null,
+    Object? groupId = null,
     Object? permissionTypeId = null,
     Object? createdAt = null,
     Object? owner = null,
@@ -167,9 +167,9 @@ class __$$PartographShareResponseImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupTd: null == groupTd
-          ? _value.groupTd
-          : groupTd // ignore: cast_nullable_to_non_nullable
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as int,
       permissionTypeId: null == permissionTypeId
           ? _value.permissionTypeId
@@ -194,7 +194,7 @@ class _$PartographShareResponseImpl implements _PartographShareResponse {
       {required this.id,
       required this.partographId,
       required this.userId,
-      required this.groupTd,
+      required this.groupId,
       required this.permissionTypeId,
       required this.createdAt,
       required this.owner});
@@ -209,7 +209,7 @@ class _$PartographShareResponseImpl implements _PartographShareResponse {
   @override
   final String userId;
   @override
-  final int groupTd;
+  final int groupId;
   @override
   final int permissionTypeId;
   @override
@@ -219,7 +219,7 @@ class _$PartographShareResponseImpl implements _PartographShareResponse {
 
   @override
   String toString() {
-    return 'PartographShareResponse(id: $id, partographId: $partographId, userId: $userId, groupTd: $groupTd, permissionTypeId: $permissionTypeId, createdAt: $createdAt, owner: $owner)';
+    return 'PartographShareResponse(id: $id, partographId: $partographId, userId: $userId, groupId: $groupId, permissionTypeId: $permissionTypeId, createdAt: $createdAt, owner: $owner)';
   }
 
   @override
@@ -231,7 +231,7 @@ class _$PartographShareResponseImpl implements _PartographShareResponse {
             (identical(other.partographId, partographId) ||
                 other.partographId == partographId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.groupTd, groupTd) || other.groupTd == groupTd) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.permissionTypeId, permissionTypeId) ||
                 other.permissionTypeId == permissionTypeId) &&
             (identical(other.createdAt, createdAt) ||
@@ -242,7 +242,7 @@ class _$PartographShareResponseImpl implements _PartographShareResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, partographId, userId,
-      groupTd, permissionTypeId, createdAt, owner);
+      groupId, permissionTypeId, createdAt, owner);
 
   /// Create a copy of PartographShareResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -266,7 +266,7 @@ abstract class _PartographShareResponse implements PartographShareResponse {
       {required final int id,
       required final String partographId,
       required final String userId,
-      required final int groupTd,
+      required final int groupId,
       required final int permissionTypeId,
       required final DateTime createdAt,
       required final String owner}) = _$PartographShareResponseImpl;
@@ -281,7 +281,7 @@ abstract class _PartographShareResponse implements PartographShareResponse {
   @override
   String get userId;
   @override
-  int get groupTd;
+  int get groupId;
   @override
   int get permissionTypeId;
   @override

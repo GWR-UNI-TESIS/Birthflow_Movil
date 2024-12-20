@@ -10,7 +10,7 @@ _$PartographGroupShareRequestImpl _$$PartographGroupShareRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$PartographGroupShareRequestImpl(
       id: (json['id'] as num?)?.toInt(),
-      partographId: json['partographId'] as String,
+      partographGroupId: (json['partographGroupId'] as num).toInt(),
       userId: json['userId'] as String,
       groupId: (json['groupId'] as num).toInt(),
       permissionTypeId: (json['permissionTypeId'] as num).toInt(),
@@ -20,7 +20,7 @@ Map<String, dynamic> _$$PartographGroupShareRequestImplToJson(
         _$PartographGroupShareRequestImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'partographId': instance.partographId,
+      'partographGroupId': instance.partographGroupId,
       'userId': instance.userId,
       'groupId': instance.groupId,
       'permissionTypeId': instance.permissionTypeId,

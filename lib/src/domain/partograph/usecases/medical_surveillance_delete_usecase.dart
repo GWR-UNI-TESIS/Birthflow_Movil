@@ -1,16 +1,16 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
-abstract class MedicalSurveillanceDeleteUsecase {
+abstract class DeleteMedicalSurveillanceUseCase {
   Future<MedicalSurveillanceTable?> execute({
     required int id,
   });
 }
 
-class MedicalSurveillanceDeleteUsecaseImplementation
-    implements MedicalSurveillanceDeleteUsecase {
+class DeleteMedicalSurveillanceUseCaseImplementation
+    implements DeleteMedicalSurveillanceUseCase {
   final PartographRepository _partographRepository;
-  MedicalSurveillanceDeleteUsecaseImplementation({
+  DeleteMedicalSurveillanceUseCaseImplementation({
     required PartographRepository partogramaRepository,
   }) : _partographRepository = partogramaRepository;
 
