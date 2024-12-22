@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreatePartographBloc
     extends Bloc<CreatePartographEvent, CreatePartographState> {
-  final CreatePartographUseCase _CreatePartographUseCase;
-  CreatePartographBloc(this._CreatePartographUseCase) : super(const Initial()) {
+  final CreatePartographUseCase _createPartographUseCase;
+  CreatePartographBloc(this._createPartographUseCase) : super(const Initial()) {
     on<Save>(_onSave);
   }
 
@@ -16,7 +16,7 @@ class CreatePartographBloc
   ) async {
     emit(const Loading());
     try {
-      final result = await _CreatePartographUseCase.execute(
+      final result = await _createPartographUseCase.execute(
         partogramaId: event.partogramaId,
         name: event.name,
         recordName: event.recordName,

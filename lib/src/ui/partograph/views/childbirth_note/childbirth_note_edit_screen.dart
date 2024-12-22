@@ -4,7 +4,6 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class ChildbirthNoteEditScreen extends StatefulWidget {
   final String partographId;
   final ChildbirthNote? childbirthNote;
@@ -52,7 +51,8 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen> {
     _hourController = TextEditingController(text: note?.hour ?? '');
     _sexController = TextEditingController(text: note?.sex ?? '');
     _apgarController = TextEditingController(text: note?.apgar ?? '');
-    _temperatureController = TextEditingController(text: note?.temperature ?? '');
+    _temperatureController =
+        TextEditingController(text: note?.temperature ?? '');
     _caputtoController = TextEditingController(text: note?.caputto ?? '');
     _circularController = TextEditingController(text: note?.circular ?? '');
     _lamnioticoController = TextEditingController(text: note?.lamniotico ?? '');
@@ -100,50 +100,54 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen> {
 
       if (widget.childbirthNote == null) {
         // Crear nueva nota
-        bloc.add(CreateChildbirthNote(
-          partographId: widget.partographId,
-          hour: _hourController.text,
-          sex: _sexController.text,
-          apgar: _apgarController.text,
-          temperature: _temperatureController.text,
-          caputto: _caputtoController.text,
-          circular: _circularController.text,
-          lamniotico: _lamnioticoController.text,
-          miccion: _miccionController.text,
-          meconio: _meconioController.text,
-          pa: _paController.text,
-          expulsivo: _expulsivoController.text,
-          placenta: _placentaController.text,
-          alumbramiento: _alumbramientoController.text,
-          huellaPlantar: _huellaPlantarController.text,
-          pc: _pcController.text,
-          talla: _tallaController.text,
-          brazalete: _brazaleteController.text,
-          huellaDig: _huellaDigController.text,
-        ));
+        bloc.add(
+          CreateChildbirthNote(
+            partographId: widget.partographId,
+            hour: _hourController.text,
+            sex: _sexController.text,
+            apgar: _apgarController.text,
+            temperature: _temperatureController.text,
+            caputto: _caputtoController.text,
+            circular: _circularController.text,
+            lamniotico: _lamnioticoController.text,
+            miccion: _miccionController.text,
+            meconio: _meconioController.text,
+            pa: _paController.text,
+            expulsivo: _expulsivoController.text,
+            placenta: _placentaController.text,
+            alumbramiento: _alumbramientoController.text,
+            huellaPlantar: _huellaPlantarController.text,
+            pc: _pcController.text,
+            talla: _tallaController.text,
+            brazalete: _brazaleteController.text,
+            huellaDig: _huellaDigController.text,
+          ),
+        );
       } else {
         // Actualizar nota existente
-        bloc.add(UpdateChildbirthNote(
-          partographId: widget.partographId,
-          hour: _hourController.text,
-          sex: _sexController.text,
-          apgar: _apgarController.text,
-          temperature: _temperatureController.text,
-          caputto: _caputtoController.text,
-          circular: _circularController.text,
-          lamniotico: _lamnioticoController.text,
-          miccion: _miccionController.text,
-          meconio: _meconioController.text,
-          pa: _paController.text,
-          expulsivo: _expulsivoController.text,
-          placenta: _placentaController.text,
-          alumbramiento: _alumbramientoController.text,
-          huellaPlantar: _huellaPlantarController.text,
-          pc: _pcController.text,
-          talla: _tallaController.text,
-          brazalete: _brazaleteController.text,
-          huellaDig: _huellaDigController.text,
-        ));
+        bloc.add(
+          UpdateChildbirthNote(
+            partographId: widget.partographId,
+            hour: _hourController.text,
+            sex: _sexController.text,
+            apgar: _apgarController.text,
+            temperature: _temperatureController.text,
+            caputto: _caputtoController.text,
+            circular: _circularController.text,
+            lamniotico: _lamnioticoController.text,
+            miccion: _miccionController.text,
+            meconio: _meconioController.text,
+            pa: _paController.text,
+            expulsivo: _expulsivoController.text,
+            placenta: _placentaController.text,
+            alumbramiento: _alumbramientoController.text,
+            huellaPlantar: _huellaPlantarController.text,
+            pc: _pcController.text,
+            talla: _tallaController.text,
+            brazalete: _brazaleteController.text,
+            huellaDig: _huellaDigController.text,
+          ),
+        );
       }
 
       Navigator.pop(context);
@@ -154,9 +158,11 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.childbirthNote == null
-            ? 'Crear Nota de Parto'
-            : 'Editar Nota de Parto'),
+        title: Text(
+          widget.childbirthNote == null
+              ? 'Crear Nota de Parto'
+              : 'Editar Nota de Parto',
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

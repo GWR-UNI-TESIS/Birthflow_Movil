@@ -24,7 +24,7 @@ mixin _$SearchUserGroupResponse {
   int? get id => throw _privateConstructorUsedError;
   int get partographGroupId => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  int get groupTd => throw _privateConstructorUsedError;
+  int get groupId => throw _privateConstructorUsedError;
   int get permissionTypeId => throw _privateConstructorUsedError;
 
   /// Serializes this SearchUserGroupResponse to a JSON map.
@@ -47,7 +47,7 @@ abstract class $SearchUserGroupResponseCopyWith<$Res> {
       {int? id,
       int partographGroupId,
       String userId,
-      int groupTd,
+      int groupId,
       int permissionTypeId});
 }
 
@@ -70,7 +70,7 @@ class _$SearchUserGroupResponseCopyWithImpl<$Res,
     Object? id = freezed,
     Object? partographGroupId = null,
     Object? userId = null,
-    Object? groupTd = null,
+    Object? groupId = null,
     Object? permissionTypeId = null,
   }) {
     return _then(_value.copyWith(
@@ -86,9 +86,9 @@ class _$SearchUserGroupResponseCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupTd: null == groupTd
-          ? _value.groupTd
-          : groupTd // ignore: cast_nullable_to_non_nullable
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as int,
       permissionTypeId: null == permissionTypeId
           ? _value.permissionTypeId
@@ -111,7 +111,7 @@ abstract class _$$SearchUserGroupResponseImplCopyWith<$Res>
       {int? id,
       int partographGroupId,
       String userId,
-      int groupTd,
+      int groupId,
       int permissionTypeId});
 }
 
@@ -133,7 +133,7 @@ class __$$SearchUserGroupResponseImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? partographGroupId = null,
     Object? userId = null,
-    Object? groupTd = null,
+    Object? groupId = null,
     Object? permissionTypeId = null,
   }) {
     return _then(_$SearchUserGroupResponseImpl(
@@ -149,9 +149,9 @@ class __$$SearchUserGroupResponseImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      groupTd: null == groupTd
-          ? _value.groupTd
-          : groupTd // ignore: cast_nullable_to_non_nullable
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as int,
       permissionTypeId: null == permissionTypeId
           ? _value.permissionTypeId
@@ -168,7 +168,7 @@ class _$SearchUserGroupResponseImpl implements _SearchUserGroupResponse {
       {this.id,
       required this.partographGroupId,
       required this.userId,
-      required this.groupTd,
+      required this.groupId,
       required this.permissionTypeId});
 
   factory _$SearchUserGroupResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -181,13 +181,13 @@ class _$SearchUserGroupResponseImpl implements _SearchUserGroupResponse {
   @override
   final String userId;
   @override
-  final int groupTd;
+  final int groupId;
   @override
   final int permissionTypeId;
 
   @override
   String toString() {
-    return 'SearchUserGroupResponse(id: $id, partographGroupId: $partographGroupId, userId: $userId, groupTd: $groupTd, permissionTypeId: $permissionTypeId)';
+    return 'SearchUserGroupResponse(id: $id, partographGroupId: $partographGroupId, userId: $userId, groupId: $groupId, permissionTypeId: $permissionTypeId)';
   }
 
   @override
@@ -199,7 +199,7 @@ class _$SearchUserGroupResponseImpl implements _SearchUserGroupResponse {
             (identical(other.partographGroupId, partographGroupId) ||
                 other.partographGroupId == partographGroupId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.groupTd, groupTd) || other.groupTd == groupTd) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.permissionTypeId, permissionTypeId) ||
                 other.permissionTypeId == permissionTypeId));
   }
@@ -207,7 +207,7 @@ class _$SearchUserGroupResponseImpl implements _SearchUserGroupResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, partographGroupId, userId, groupTd, permissionTypeId);
+      runtimeType, id, partographGroupId, userId, groupId, permissionTypeId);
 
   /// Create a copy of SearchUserGroupResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -231,7 +231,7 @@ abstract class _SearchUserGroupResponse implements SearchUserGroupResponse {
       {final int? id,
       required final int partographGroupId,
       required final String userId,
-      required final int groupTd,
+      required final int groupId,
       required final int permissionTypeId}) = _$SearchUserGroupResponseImpl;
 
   factory _SearchUserGroupResponse.fromJson(Map<String, dynamic> json) =
@@ -244,7 +244,7 @@ abstract class _SearchUserGroupResponse implements SearchUserGroupResponse {
   @override
   String get userId;
   @override
-  int get groupTd;
+  int get groupId;
   @override
   int get permissionTypeId;
 

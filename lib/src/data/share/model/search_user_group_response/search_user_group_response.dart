@@ -7,10 +7,10 @@ part 'search_user_group_response.g.dart';
 class SearchUserGroupResponse with _$SearchUserGroupResponse {
   const factory SearchUserGroupResponse({
     int? id,
-    required int partographGroupId ,
+    required int partographGroupId,
     required String userId,
-    required int groupTd,
-    required int permissionTypeId 
+    required int groupId,
+    required int permissionTypeId,
   }) = _SearchUserGroupResponse;
 
   factory SearchUserGroupResponse.fromJson(Map<String, dynamic> json) =>

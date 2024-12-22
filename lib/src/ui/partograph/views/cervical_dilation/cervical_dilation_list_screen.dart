@@ -59,7 +59,9 @@ class CervicalDilationListScreen extends StatelessWidget {
   }
 
   Widget _buildCervicalDilationTile(
-      BuildContext context, CervicalDilation item) {
+    BuildContext context,
+    CervicalDilation item,
+  ) {
     return ListTile(
       title: Text('${item.value} - ${item.hour}'),
       subtitle: item.remOrRam ? const Chip(label: Text('Ram O Rem')) : null,

@@ -110,7 +110,6 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 1,
             child: Text(
               '$label:',
               style: const TextStyle(fontWeight: FontWeight.bold),

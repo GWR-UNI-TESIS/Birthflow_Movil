@@ -106,7 +106,8 @@ abstract class PartographService {
 
   // Endpoints de vvp
   @GET(
-      '/api/partograph/presentation-position-variety/partograph/{parthographId}')
+    '/api/partograph/presentation-position-variety/partograph/{parthographId}',
+  )
   Future<ApiResponse<List<PresentationPositionVarietyEntityResponse>>>
       getPresentationPositionVariety(
     @Header('Authorization') String token,

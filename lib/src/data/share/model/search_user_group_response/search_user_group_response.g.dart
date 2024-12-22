@@ -12,7 +12,7 @@ _$SearchUserGroupResponseImpl _$$SearchUserGroupResponseImplFromJson(
       id: (json['id'] as num?)?.toInt(),
       partographGroupId: (json['partographGroupId'] as num).toInt(),
       userId: json['userId'] as String,
-      groupTd: (json['groupTd'] as num).toInt(),
+      groupId: (json['groupId'] as num).toInt(),
       permissionTypeId: (json['permissionTypeId'] as num).toInt(),
     );
 
@@ -22,6 +22,6 @@ Map<String, dynamic> _$$SearchUserGroupResponseImplToJson(
       'id': instance.id,
       'partographGroupId': instance.partographGroupId,
       'userId': instance.userId,
-      'groupTd': instance.groupTd,
+      'groupId': instance.groupId,
       'permissionTypeId': instance.permissionTypeId,
     };

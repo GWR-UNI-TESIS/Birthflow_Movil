@@ -40,13 +40,16 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
                               final item =
                                   data.presentationPositionVarieties![index];
 
-                              final hodgePlane = catalog.hodgePlanesCatalog
-                                  .firstWhere((hodgePlane) =>
-                                      hodgePlane.id == item.hodgePlane);
+                              final hodgePlane =
+                                  catalog.hodgePlanesCatalog.firstWhere(
+                                (hodgePlane) =>
+                                    hodgePlane.id == item.hodgePlane,
+                              );
 
-                              final position = catalog.positionCatalog
-                                  .firstWhere((position) =>
-                                      position.id == item.position);
+                              final position =
+                                  catalog.positionCatalog.firstWhere(
+                                (position) => position.id == item.position,
+                              );
                               return ListTile(
                                 title: Text(
                                   '${hodgePlane.description} - ${position.description}',
@@ -81,7 +84,9 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
   }
 
   void _navigateToEdit(
-      BuildContext context, PresentationPositionVariety? item) {
+    BuildContext context,
+    PresentationPositionVariety? item,
+  ) {
     context.go(
       AppPaths.home.partographPath
           .define(partographId)

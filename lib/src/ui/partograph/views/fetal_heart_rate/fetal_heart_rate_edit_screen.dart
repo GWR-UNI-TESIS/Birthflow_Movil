@@ -11,8 +11,10 @@ import 'package:intl/intl.dart';
 class FetalHeartRateEditScreen extends StatefulWidget {
   final FetalHeartRateEditData fetalHeartRateEditData;
 
-  const FetalHeartRateEditScreen(
-      {super.key, required this.fetalHeartRateEditData});
+  const FetalHeartRateEditScreen({
+    super.key,
+    required this.fetalHeartRateEditData,
+  });
 
   @override
   _FetalHeartRateEditScreenState createState() =>

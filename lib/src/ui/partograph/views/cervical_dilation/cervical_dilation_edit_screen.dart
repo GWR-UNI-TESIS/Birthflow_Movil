@@ -10,8 +10,10 @@ import 'package:intl/intl.dart';
 class CervicalDilationEditScreen extends StatefulWidget {
   final CervicalDilationEditData cervicalDilationEditData;
 
-  const CervicalDilationEditScreen(
-      {super.key, required this.cervicalDilationEditData});
+  const CervicalDilationEditScreen({
+    super.key,
+    required this.cervicalDilationEditData,
+  });
 
   @override
   _CervicalDilationEditScreenState createState() =>
