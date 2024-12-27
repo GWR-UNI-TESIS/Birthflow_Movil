@@ -16,8 +16,8 @@ class UpdatePartographUsecaseImplementation implements UpdatePartographUsecase {
   final PartographRepository _partographRepository;
 
   UpdatePartographUsecaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<Partograph?> execute({

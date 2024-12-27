@@ -35,6 +35,14 @@ abstract class PartographRepository {
     required String partographId,
   });
 
+  Future<List<PartographList>?> searchPartographs({
+    required String name,
+    required int filterId,
+    required int activityId,
+    required int hourFilterId,
+  });
+
+
   Future<List<CervicalDilation>?> getCervicalDilation({
     required String partographId,
   });

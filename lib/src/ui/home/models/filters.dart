@@ -1,28 +1,12 @@
 
-enum Filters { all, openRecently, shared, favorites }
-
-extension FilterExtension on Filters {
-  // names in non-english
-  String get name {
-    switch (this) {
-      case Filters.all:
-        return 'Todos';
-      case Filters.openRecently:
-        return 'Abiertos Recientemente';
-      case Filters.shared:
-        return 'Compartidos';
-      case Filters.favorites:
-        return 'Favoritos';
-      default:
-        return 'No hay';
-    }
-  }
-}
+import 'package:birthflow_movil/src/domain/catalog/entities/activity.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/filter.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/hour_filter.dart';
 
 class FilterModel {
-  final Filters filter;
-  final String actividad;
-  final String hora;
+  final Filter filter;
+  final Activity actividad;
+  final HourFilter hora;
 
   FilterModel({
     required this.filter,

@@ -11,8 +11,8 @@ class DeleteMedicalSurveillanceUseCaseImplementation
     implements DeleteMedicalSurveillanceUseCase {
   final PartographRepository _partographRepository;
   DeleteMedicalSurveillanceUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<MedicalSurveillanceTable?> execute({

@@ -15,8 +15,8 @@ class CreateCervicalDilationUseCaseImplementation
   final PartographRepository _partographRepository;
 
   CreateCervicalDilationUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<CervicalDilation?> execute({

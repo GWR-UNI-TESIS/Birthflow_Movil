@@ -1,35 +1,65 @@
-import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
-import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
-import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
+import 'package:birthflow_movil/src/config/locator/locator.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/activity.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/filter.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/hour_filter.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/search_partographs_usecase.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/search_partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/search_partograph/events/search_partograph_event.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/search_partograph/states/search_partograph_state.dart';
 import 'package:birthflow_movil/src/ui/home/models/filters.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
-import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_menu.dart';
+import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
+import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+class SearchScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SearchPartographBloc(
+        searchPartographsUseCase: locator<SearchPartographsUseCase>(),
+      ),
+      child: SearchView(),
+    );
+  }
+}
 
-
-class SearchScreen extends StatefulWidget {
+class SearchView extends StatefulWidget {
   @override
   _SearchViewState createState() => _SearchViewState();
 }
 
-class _SearchViewState extends State<SearchScreen> {
+class _SearchViewState extends State<SearchView> {
   final TextEditingController textEditingController = TextEditingController();
   String searchText = '';
 
-  FilterModel filterModel = FilterModel(
-    filter: Filters.all,
-    actividad: 'Creado por mi',
-    hora: 'En cualquier momento',
-  );
+  late FilterModel filterModel;
+  @override
+  void initState() {
+    super.initState();
+    final catalog = context.read<CatalogCubit>().state;
+
+    // Inicializar filtros con valores predeterminados
+    filterModel = FilterModel(
+      filter: catalog.filterCatalog.first,
+      actividad: catalog.activityCatalog.first,
+      hora: catalog.hourFilterCatalog.first,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     void applyFiltersAndSearch() {
-      context.read<PartographsBloc>().add(
-            ApplyFiltersAndSearch(filter: filterModel, searchText: searchText),
+      context.read<SearchPartographBloc>().add(
+            SearchPartographEvent.search(
+              name: textEditingController.text,
+              filterId: filterModel.filter.id,
+              activityId: filterModel.actividad.id,
+              hourFilterId: filterModel.hora.id,
+            ),
           );
     }
 
@@ -62,28 +92,29 @@ class _SearchViewState extends State<SearchScreen> {
           ),
         ],
       ),
-      body: BlocBuilder<PartographsBloc, PartographsState>(
+      body: BlocBuilder<SearchPartographBloc, SearchPartographState>(
         builder: (context, state) {
           return state.maybeWhen(
             initial: () => const Center(child: CircularProgressIndicator()),
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (data) {
+            success: (data) {
               return CustomScrollView(
                 slivers: [
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                  
-                          final item = data[index ];
-                          return ListItemWidget(
-                            partographId: item.partographId!,
-                            title: item.name,
-                            subtitle:
-                                '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}', lastUpdate: '', set: false, silenced: false,
-                          );
-                      
+                        final item = data[index];
+                        return ListItemWidget(
+                          partographId: item.partographId!,
+                          title: item.name,
+                          subtitle:
+                              '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}',
+                          lastUpdate: '',
+                          set: false,
+                          silenced: false,
+                        );
                       },
-                      childCount: data.length ,
+                      childCount: data.length,
                     ),
                   ),
                 ],
@@ -101,133 +132,131 @@ class _SearchViewState extends State<SearchScreen> {
     );
   }
 
-  Future<FilterModel?> _dialogBuilder(BuildContext context) {
-    Filters selectedFilter = Filters.all;
-    String selectedActividad = 'Creado por mi';
-    String selectedHora = 'En cualquier momento';
+  Future<FilterModel?> _dialogBuilder(BuildContext context) async {
+    final catalog = context.read<CatalogCubit>().state;
 
     return showDialog<FilterModel>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Filtros'),
-          scrollable: true,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MultipleChoice(
-                onSelected: (filters) {
-                  selectedFilter = filters;
-                },
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: CustomDropdownMenu(
-                  label: 'Actividad',
-                  items: const [
-                    'Creado por mi',
-                    'Editado por mi',
-                    'Comentarios hechos por mi',
-                  ],
-                  currentValue: filterModel.actividad,
-                  onChanged: (String value) {
-                    selectedActividad = value;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: CustomDropdownMenu(
-                  label: 'Hora',
-                  items: const [
-                    'En cualquier momento',
-                    'Ayer',
-                    'Semana anterior',
-                    'Mes anterior',
-                  ],
-                  currentValue: filterModel.hora,
-                  onChanged: (String value) {
-                    selectedHora = value;
-                  },
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Cancelar'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Filtrar'),
-              onPressed: () {
-                Navigator.of(context).pop(
-                  FilterModel(
-                    filter: selectedFilter,
-                    actividad: selectedActividad,
-                    hora: selectedHora,
-                  ),
-                );
-              },
-            ),
-          ],
+        return FilterDialog(
+          initialFilterModel: filterModel,
+          catalog: catalog,
         );
       },
     );
   }
 }
 
-class MultipleChoice extends StatefulWidget {
-  final Function(Filters) onSelected;
+class FilterDialog extends StatefulWidget {
+  final FilterModel initialFilterModel;
+  final Catalog catalog;
 
-  const MultipleChoice({required this.onSelected});
+  const FilterDialog({
+    required this.initialFilterModel,
+    required this.catalog,
+  });
 
   @override
-  _MultipleChoiceState createState() => _MultipleChoiceState();
+  _FilterDialogState createState() => _FilterDialogState();
 }
 
-class _MultipleChoiceState extends State<MultipleChoice> {
-  Filters _filter = Filters.all;
+class _FilterDialogState extends State<FilterDialog> {
+  late Filter selectedFilter;
+  late Activity selectedActividad;
+  late HourFilter selectedHora;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedFilter = widget.initialFilterModel.filter;
+    selectedActividad = widget.initialFilterModel.actividad;
+    selectedHora = widget.initialFilterModel.hora;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Filtros'),
+      scrollable: true,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MultipleChoice(
+            onSelected: (filter) => setState(() => selectedFilter = filter),
+            filters: widget.catalog.filterCatalog,
+            selectedFilter: selectedFilter,
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: DynamicDropdownButton(
+              labelText: 'Actividad',
+              initialValue: selectedActividad,
+              onValueChanged: (value) =>
+                  setState(() => selectedActividad = value),
+              list: widget.catalog.activityCatalog,
+              displayField: (Activity activity) => activity.description,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: DynamicDropdownButton(
+              labelText: 'Hora',
+              initialValue: selectedHora,
+              list: widget.catalog.hourFilterCatalog,
+              displayField: (HourFilter hourFilter) => hourFilter.description,
+              onValueChanged: (value) => setState(() => selectedHora = value),
+            ),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancelar'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(
+            FilterModel(
+              filter: selectedFilter,
+              actividad: selectedActividad,
+              hora: selectedHora,
+            ),
+          ),
+          child: const Text('Filtrar'),
+        ),
+      ],
+    );
+  }
+}
+
+class MultipleChoice extends StatelessWidget {
+  final Function(Filter) onSelected;
+  final List<Filter> filters;
+  final Filter selectedFilter;
+
+  const MultipleChoice({
+    required this.onSelected,
+    required this.filters,
+    required this.selectedFilter,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       spacing: 10.0,
       runSpacing: 3.0,
-      children: List<Widget>.generate(
-        Filters.values.length,
-        (int index) {
-          final filter = Filters.values[index];
-          return ChoiceChip(
-            showCheckmark: false,
-            label: Text(
-              filter.name,
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
-            selected: _filter == filter, // Selecciona inicialmente "all"
-            onSelected: (selected) {
-              setState(() {
-                _filter = filter;
-              });
-              widget.onSelected(
-                _filter,
-              ); // Llama al callback con el filtro seleccionado
-            },
-          );
-        },
-      ).toList(),
+      children: filters.map((filter) {
+        return ChoiceChip(
+          label: Text(filter.description),
+          selected: filter == selectedFilter,
+          onSelected: (selected) {
+            onSelected(filter);
+          },
+        );
+      }).toList(),
     );
   }
 }

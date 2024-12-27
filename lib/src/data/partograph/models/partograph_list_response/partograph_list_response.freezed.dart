@@ -37,6 +37,7 @@ mixin _$PartographListResponse {
   bool get set => throw _privateConstructorUsedError;
   bool get silenced => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
+  int? get accessType => throw _privateConstructorUsedError;
 
   /// Serializes this PartographListResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -70,7 +71,8 @@ abstract class $PartographListResponseCopyWith<$Res> {
       bool isAchived,
       bool set,
       bool silenced,
-      bool favorite});
+      bool favorite,
+      int? accessType});
 }
 
 /// @nodoc
@@ -105,6 +107,7 @@ class _$PartographListResponseCopyWithImpl<$Res,
     Object? set = null,
     Object? silenced = null,
     Object? favorite = null,
+    Object? accessType = freezed,
   }) {
     return _then(_value.copyWith(
       partographId: null == partographId
@@ -171,6 +174,10 @@ class _$PartographListResponseCopyWithImpl<$Res,
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
+      accessType: freezed == accessType
+          ? _value.accessType
+          : accessType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -200,7 +207,8 @@ abstract class _$$PartographListResponseImplCopyWith<$Res>
       bool isAchived,
       bool set,
       bool silenced,
-      bool favorite});
+      bool favorite,
+      int? accessType});
 }
 
 /// @nodoc
@@ -234,6 +242,7 @@ class __$$PartographListResponseImplCopyWithImpl<$Res>
     Object? set = null,
     Object? silenced = null,
     Object? favorite = null,
+    Object? accessType = freezed,
   }) {
     return _then(_$PartographListResponseImpl(
       partographId: null == partographId
@@ -300,6 +309,10 @@ class __$$PartographListResponseImplCopyWithImpl<$Res>
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
+      accessType: freezed == accessType
+          ? _value.accessType
+          : accessType // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -323,7 +336,8 @@ class _$PartographListResponseImpl implements _PartographListResponse {
       required this.isAchived,
       required this.set,
       required this.silenced,
-      required this.favorite});
+      required this.favorite,
+      this.accessType});
 
   factory _$PartographListResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartographListResponseImplFromJson(json);
@@ -360,10 +374,12 @@ class _$PartographListResponseImpl implements _PartographListResponse {
   final bool silenced;
   @override
   final bool favorite;
+  @override
+  final int? accessType;
 
   @override
   String toString() {
-    return 'PartographListResponse(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime, createdAt: $createdAt, createdBy: $createdBy, updateAt: $updateAt, updateBy: $updateBy, stateId: $stateId, userId: $userId, isAchived: $isAchived, set: $set, silenced: $silenced, favorite: $favorite)';
+    return 'PartographListResponse(partographId: $partographId, name: $name, recordName: $recordName, date: $date, observation: $observation, workTime: $workTime, createdAt: $createdAt, createdBy: $createdBy, updateAt: $updateAt, updateBy: $updateBy, stateId: $stateId, userId: $userId, isAchived: $isAchived, set: $set, silenced: $silenced, favorite: $favorite, accessType: $accessType)';
   }
 
   @override
@@ -397,7 +413,9 @@ class _$PartographListResponseImpl implements _PartographListResponse {
             (identical(other.silenced, silenced) ||
                 other.silenced == silenced) &&
             (identical(other.favorite, favorite) ||
-                other.favorite == favorite));
+                other.favorite == favorite) &&
+            (identical(other.accessType, accessType) ||
+                other.accessType == accessType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -419,7 +437,8 @@ class _$PartographListResponseImpl implements _PartographListResponse {
       isAchived,
       set,
       silenced,
-      favorite);
+      favorite,
+      accessType);
 
   /// Create a copy of PartographListResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -455,7 +474,8 @@ abstract class _PartographListResponse implements PartographListResponse {
       required final bool isAchived,
       required final bool set,
       required final bool silenced,
-      required final bool favorite}) = _$PartographListResponseImpl;
+      required final bool favorite,
+      final int? accessType}) = _$PartographListResponseImpl;
 
   factory _PartographListResponse.fromJson(Map<String, dynamic> json) =
       _$PartographListResponseImpl.fromJson;
@@ -492,6 +512,8 @@ abstract class _PartographListResponse implements PartographListResponse {
   bool get silenced;
   @override
   bool get favorite;
+  @override
+  int? get accessType;
 
   /// Create a copy of PartographListResponse
   /// with the given fields replaced by the non-null parameter values.

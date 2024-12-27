@@ -16,43 +16,56 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ShareEvent {
+  String get partographId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String query) searchUsersGroup,
+    required TResult Function(String partographId) getAsignUserGroup,
+    required TResult Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)
+        asignUserGroup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String query)? searchUsersGroup,
+    TResult? Function(String partographId)? getAsignUserGroup,
+    TResult? Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)?
+        asignUserGroup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String query)? searchUsersGroup,
+    TResult Function(String partographId)? getAsignUserGroup,
+    TResult Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)?
+        asignUserGroup,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Init value) init,
-    required TResult Function(SearchUsersGroups value) searchUsersGroup,
+    required TResult Function(GetAsignUserGroupEvent value) getAsignUserGroup,
+    required TResult Function(AsignUserGroupEvent value) asignUserGroup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Init value)? init,
-    TResult? Function(SearchUsersGroups value)? searchUsersGroup,
+    TResult? Function(GetAsignUserGroupEvent value)? getAsignUserGroup,
+    TResult? Function(AsignUserGroupEvent value)? asignUserGroup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Init value)? init,
-    TResult Function(SearchUsersGroups value)? searchUsersGroup,
+    TResult Function(GetAsignUserGroupEvent value)? getAsignUserGroup,
+    TResult Function(AsignUserGroupEvent value)? asignUserGroup,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  /// Create a copy of ShareEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ShareEventCopyWith<ShareEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,6 +74,8 @@ abstract class $ShareEventCopyWith<$Res> {
   factory $ShareEventCopyWith(
           ShareEvent value, $Res Function(ShareEvent) then) =
       _$ShareEventCopyWithImpl<$Res, ShareEvent>;
+  @useResult
+  $Res call({String partographId});
 }
 
 /// @nodoc
@@ -75,127 +90,39 @@ class _$ShareEventCopyWithImpl<$Res, $Val extends ShareEvent>
 
   /// Create a copy of ShareEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? partographId = null,
+  }) {
+    return _then(_value.copyWith(
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$InitImplCopyWith<$Res> {
-  factory _$$InitImplCopyWith(
-          _$InitImpl value, $Res Function(_$InitImpl) then) =
-      __$$InitImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitImplCopyWithImpl<$Res>
-    extends _$ShareEventCopyWithImpl<$Res, _$InitImpl>
-    implements _$$InitImplCopyWith<$Res> {
-  __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ShareEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitImpl implements Init {
-  const _$InitImpl();
-
+abstract class _$$GetAsignUserGroupEventImplCopyWith<$Res>
+    implements $ShareEventCopyWith<$Res> {
+  factory _$$GetAsignUserGroupEventImplCopyWith(
+          _$GetAsignUserGroupEventImpl value,
+          $Res Function(_$GetAsignUserGroupEventImpl) then) =
+      __$$GetAsignUserGroupEventImplCopyWithImpl<$Res>;
   @override
-  String toString() {
-    return 'ShareEvent.init()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String query) searchUsersGroup,
-  }) {
-    return init();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String query)? searchUsersGroup,
-  }) {
-    return init?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String query)? searchUsersGroup,
-    required TResult orElse(),
-  }) {
-    if (init != null) {
-      return init();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Init value) init,
-    required TResult Function(SearchUsersGroups value) searchUsersGroup,
-  }) {
-    return init(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Init value)? init,
-    TResult? Function(SearchUsersGroups value)? searchUsersGroup,
-  }) {
-    return init?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Init value)? init,
-    TResult Function(SearchUsersGroups value)? searchUsersGroup,
-    required TResult orElse(),
-  }) {
-    if (init != null) {
-      return init(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Init implements ShareEvent {
-  const factory Init() = _$InitImpl;
-}
-
-/// @nodoc
-abstract class _$$SearchUsersGroupsImplCopyWith<$Res> {
-  factory _$$SearchUsersGroupsImplCopyWith(_$SearchUsersGroupsImpl value,
-          $Res Function(_$SearchUsersGroupsImpl) then) =
-      __$$SearchUsersGroupsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String query});
+  $Res call({String partographId});
 }
 
 /// @nodoc
-class __$$SearchUsersGroupsImplCopyWithImpl<$Res>
-    extends _$ShareEventCopyWithImpl<$Res, _$SearchUsersGroupsImpl>
-    implements _$$SearchUsersGroupsImplCopyWith<$Res> {
-  __$$SearchUsersGroupsImplCopyWithImpl(_$SearchUsersGroupsImpl _value,
-      $Res Function(_$SearchUsersGroupsImpl) _then)
+class __$$GetAsignUserGroupEventImplCopyWithImpl<$Res>
+    extends _$ShareEventCopyWithImpl<$Res, _$GetAsignUserGroupEventImpl>
+    implements _$$GetAsignUserGroupEventImplCopyWith<$Res> {
+  __$$GetAsignUserGroupEventImplCopyWithImpl(
+      _$GetAsignUserGroupEventImpl _value,
+      $Res Function(_$GetAsignUserGroupEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ShareEvent
@@ -203,12 +130,12 @@ class __$$SearchUsersGroupsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? query = null,
+    Object? partographId = null,
   }) {
-    return _then(_$SearchUsersGroupsImpl(
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
+    return _then(_$GetAsignUserGroupEventImpl(
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -216,64 +143,71 @@ class __$$SearchUsersGroupsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SearchUsersGroupsImpl implements SearchUsersGroups {
-  const _$SearchUsersGroupsImpl({required this.query});
+class _$GetAsignUserGroupEventImpl implements GetAsignUserGroupEvent {
+  const _$GetAsignUserGroupEventImpl({required this.partographId});
 
   @override
-  final String query;
+  final String partographId;
 
   @override
   String toString() {
-    return 'ShareEvent.searchUsersGroup(query: $query)';
+    return 'ShareEvent.getAsignUserGroup(partographId: $partographId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SearchUsersGroupsImpl &&
-            (identical(other.query, query) || other.query == query));
+            other is _$GetAsignUserGroupEventImpl &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query);
+  int get hashCode => Object.hash(runtimeType, partographId);
 
   /// Create a copy of ShareEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SearchUsersGroupsImplCopyWith<_$SearchUsersGroupsImpl> get copyWith =>
-      __$$SearchUsersGroupsImplCopyWithImpl<_$SearchUsersGroupsImpl>(
-          this, _$identity);
+  _$$GetAsignUserGroupEventImplCopyWith<_$GetAsignUserGroupEventImpl>
+      get copyWith => __$$GetAsignUserGroupEventImplCopyWithImpl<
+          _$GetAsignUserGroupEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String query) searchUsersGroup,
+    required TResult Function(String partographId) getAsignUserGroup,
+    required TResult Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)
+        asignUserGroup,
   }) {
-    return searchUsersGroup(query);
+    return getAsignUserGroup(partographId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String query)? searchUsersGroup,
+    TResult? Function(String partographId)? getAsignUserGroup,
+    TResult? Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)?
+        asignUserGroup,
   }) {
-    return searchUsersGroup?.call(query);
+    return getAsignUserGroup?.call(partographId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String query)? searchUsersGroup,
+    TResult Function(String partographId)? getAsignUserGroup,
+    TResult Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)?
+        asignUserGroup,
     required TResult orElse(),
   }) {
-    if (searchUsersGroup != null) {
-      return searchUsersGroup(query);
+    if (getAsignUserGroup != null) {
+      return getAsignUserGroup(partographId);
     }
     return orElse();
   }
@@ -281,44 +215,238 @@ class _$SearchUsersGroupsImpl implements SearchUsersGroups {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Init value) init,
-    required TResult Function(SearchUsersGroups value) searchUsersGroup,
+    required TResult Function(GetAsignUserGroupEvent value) getAsignUserGroup,
+    required TResult Function(AsignUserGroupEvent value) asignUserGroup,
   }) {
-    return searchUsersGroup(this);
+    return getAsignUserGroup(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Init value)? init,
-    TResult? Function(SearchUsersGroups value)? searchUsersGroup,
+    TResult? Function(GetAsignUserGroupEvent value)? getAsignUserGroup,
+    TResult? Function(AsignUserGroupEvent value)? asignUserGroup,
   }) {
-    return searchUsersGroup?.call(this);
+    return getAsignUserGroup?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Init value)? init,
-    TResult Function(SearchUsersGroups value)? searchUsersGroup,
+    TResult Function(GetAsignUserGroupEvent value)? getAsignUserGroup,
+    TResult Function(AsignUserGroupEvent value)? asignUserGroup,
     required TResult orElse(),
   }) {
-    if (searchUsersGroup != null) {
-      return searchUsersGroup(this);
+    if (getAsignUserGroup != null) {
+      return getAsignUserGroup(this);
     }
     return orElse();
   }
 }
 
-abstract class SearchUsersGroups implements ShareEvent {
-  const factory SearchUsersGroups({required final String query}) =
-      _$SearchUsersGroupsImpl;
+abstract class GetAsignUserGroupEvent implements ShareEvent {
+  const factory GetAsignUserGroupEvent({required final String partographId}) =
+      _$GetAsignUserGroupEventImpl;
 
-  String get query;
+  @override
+  String get partographId;
+
+  /// Create a copy of ShareEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetAsignUserGroupEventImplCopyWith<_$GetAsignUserGroupEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AsignUserGroupEventImplCopyWith<$Res>
+    implements $ShareEventCopyWith<$Res> {
+  factory _$$AsignUserGroupEventImplCopyWith(_$AsignUserGroupEventImpl value,
+          $Res Function(_$AsignUserGroupEventImpl) then) =
+      __$$AsignUserGroupEventImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String partographId,
+      int permissionTypeId,
+      List<SearchUserGroup> searchUserGroupDtos});
+}
+
+/// @nodoc
+class __$$AsignUserGroupEventImplCopyWithImpl<$Res>
+    extends _$ShareEventCopyWithImpl<$Res, _$AsignUserGroupEventImpl>
+    implements _$$AsignUserGroupEventImplCopyWith<$Res> {
+  __$$AsignUserGroupEventImplCopyWithImpl(_$AsignUserGroupEventImpl _value,
+      $Res Function(_$AsignUserGroupEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ShareEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? partographId = null,
+    Object? permissionTypeId = null,
+    Object? searchUserGroupDtos = null,
+  }) {
+    return _then(_$AsignUserGroupEventImpl(
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+      permissionTypeId: null == permissionTypeId
+          ? _value.permissionTypeId
+          : permissionTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
+      searchUserGroupDtos: null == searchUserGroupDtos
+          ? _value._searchUserGroupDtos
+          : searchUserGroupDtos // ignore: cast_nullable_to_non_nullable
+              as List<SearchUserGroup>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AsignUserGroupEventImpl implements AsignUserGroupEvent {
+  const _$AsignUserGroupEventImpl(
+      {required this.partographId,
+      required this.permissionTypeId,
+      required final List<SearchUserGroup> searchUserGroupDtos})
+      : _searchUserGroupDtos = searchUserGroupDtos;
+
+  @override
+  final String partographId;
+  @override
+  final int permissionTypeId;
+  final List<SearchUserGroup> _searchUserGroupDtos;
+  @override
+  List<SearchUserGroup> get searchUserGroupDtos {
+    if (_searchUserGroupDtos is EqualUnmodifiableListView)
+      return _searchUserGroupDtos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchUserGroupDtos);
+  }
+
+  @override
+  String toString() {
+    return 'ShareEvent.asignUserGroup(partographId: $partographId, permissionTypeId: $permissionTypeId, searchUserGroupDtos: $searchUserGroupDtos)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AsignUserGroupEventImpl &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId) &&
+            (identical(other.permissionTypeId, permissionTypeId) ||
+                other.permissionTypeId == permissionTypeId) &&
+            const DeepCollectionEquality()
+                .equals(other._searchUserGroupDtos, _searchUserGroupDtos));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, partographId, permissionTypeId,
+      const DeepCollectionEquality().hash(_searchUserGroupDtos));
 
   /// Create a copy of ShareEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SearchUsersGroupsImplCopyWith<_$SearchUsersGroupsImpl> get copyWith =>
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AsignUserGroupEventImplCopyWith<_$AsignUserGroupEventImpl> get copyWith =>
+      __$$AsignUserGroupEventImplCopyWithImpl<_$AsignUserGroupEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String partographId) getAsignUserGroup,
+    required TResult Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)
+        asignUserGroup,
+  }) {
+    return asignUserGroup(partographId, permissionTypeId, searchUserGroupDtos);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String partographId)? getAsignUserGroup,
+    TResult? Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)?
+        asignUserGroup,
+  }) {
+    return asignUserGroup?.call(
+        partographId, permissionTypeId, searchUserGroupDtos);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String partographId)? getAsignUserGroup,
+    TResult Function(String partographId, int permissionTypeId,
+            List<SearchUserGroup> searchUserGroupDtos)?
+        asignUserGroup,
+    required TResult orElse(),
+  }) {
+    if (asignUserGroup != null) {
+      return asignUserGroup(
+          partographId, permissionTypeId, searchUserGroupDtos);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetAsignUserGroupEvent value) getAsignUserGroup,
+    required TResult Function(AsignUserGroupEvent value) asignUserGroup,
+  }) {
+    return asignUserGroup(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetAsignUserGroupEvent value)? getAsignUserGroup,
+    TResult? Function(AsignUserGroupEvent value)? asignUserGroup,
+  }) {
+    return asignUserGroup?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetAsignUserGroupEvent value)? getAsignUserGroup,
+    TResult Function(AsignUserGroupEvent value)? asignUserGroup,
+    required TResult orElse(),
+  }) {
+    if (asignUserGroup != null) {
+      return asignUserGroup(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AsignUserGroupEvent implements ShareEvent {
+  const factory AsignUserGroupEvent(
+          {required final String partographId,
+          required final int permissionTypeId,
+          required final List<SearchUserGroup> searchUserGroupDtos}) =
+      _$AsignUserGroupEventImpl;
+
+  @override
+  String get partographId;
+  int get permissionTypeId;
+  List<SearchUserGroup> get searchUserGroupDtos;
+
+  /// Create a copy of ShareEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AsignUserGroupEventImplCopyWith<_$AsignUserGroupEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

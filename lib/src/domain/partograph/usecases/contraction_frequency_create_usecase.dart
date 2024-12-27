@@ -14,8 +14,8 @@ class CreateContractionFrequencyUseCaseImplementation
   final PartographRepository _partographRepository;
 
   CreateContractionFrequencyUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<ContractionFrequency?> execute({

@@ -68,6 +68,88 @@ class _ShareService implements ShareService {
   }
 
   @override
+  Future<ApiResponse<AsignUserGroupResponse>> asignUsersGroups(
+    String token,
+    AsignUserGroupResponse asignUserGroup,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = asignUserGroup;
+    final _options =
+        _setStreamType<ApiResponse<AsignUserGroupResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/share/asign-user-group',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<AsignUserGroupResponse> _value;
+    try {
+      _value = ApiResponse<AsignUserGroupResponse>.fromJson(
+        _result.data!,
+        (json) => AsignUserGroupResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponse<AsignUserGroupResponse>> getAsignUsersGroups(
+    String token,
+    String partographId,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'partographId': partographId};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<ApiResponse<AsignUserGroupResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/share/asign-user-group/get',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<AsignUserGroupResponse> _value;
+    try {
+      _value = ApiResponse<AsignUserGroupResponse>.fromJson(
+        _result.data!,
+        (json) => AsignUserGroupResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ApiResponse<PartographShareResponse>> createPartographShare(
     String token,
     PartographShareRequest body,

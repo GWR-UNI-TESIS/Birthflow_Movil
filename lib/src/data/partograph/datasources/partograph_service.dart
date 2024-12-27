@@ -15,6 +15,7 @@ import 'package:birthflow_movil/src/data/partograph/models/partograph_request/pa
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_request/presentation_position_variety_entity_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/search_model_request/search_model_request.dart';
 
 import 'package:dio/dio.dart';
 
@@ -48,6 +49,12 @@ abstract class PartographService {
   Future<ApiResponse<PartographResponse>> updatePartograph(
     @Header('Authorization') String token,
     @Body() PartographRequest request,
+  );
+
+  @POST('/api/partograph/search')
+  Future<ApiResponse<List<PartographListResponse>>> searchPartographs(
+    @Header('Authorization') String token,
+    @Body() SearchModelRequest request,
   );
 
   // Endpoints de dilataciones cervicales

@@ -22,6 +22,7 @@ class PartographListResponse with _$PartographListResponse {
     required bool set,
     required bool silenced,
     required bool favorite,
+    int? accessType,
   }) = _PartographListResponse;
 
   factory PartographListResponse.fromJson(Map<String, dynamic> json) =>

@@ -11,8 +11,8 @@ class GetPresentationPositionVarietyUseCaseImplementation
     implements GetPresentationPositionVarietyUseCase {
   final PartographRepository _partographRepository;
   GetPresentationPositionVarietyUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<List<PresentationPositionVariety>?> execute({

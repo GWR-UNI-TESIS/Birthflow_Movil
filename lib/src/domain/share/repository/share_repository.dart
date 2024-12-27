@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/domain/share/models/asign_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group_item.dart';
@@ -9,6 +10,17 @@ abstract class ShareRepository {
   Future<List<SearchUserGroup>?> getSearchUserGroup({
     required String query,
   });
+
+  Future<AsignUserGroup?> asignUserGroup({
+    required String partographId,
+    required int permissionTypeId,
+    List<SearchUserGroup>? searchUserGroupDtos,
+  });
+
+  Future<AsignUserGroup?> getAsignUserGroup({
+    required String partographId,
+  });
+
 
   Future<PartographShare?> createPartographShare({
     int? id,

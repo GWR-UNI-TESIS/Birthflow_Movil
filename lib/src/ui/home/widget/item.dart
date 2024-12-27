@@ -5,6 +5,9 @@ import 'package:birthflow_movil/src/domain/catalog/entities/permission_type.dart
 import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/share/events/share_event.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/share/states/share_state.dart';
+import 'package:birthflow_movil/src/ui/home/cubits/search/search_user_groups_cubit.dart';
 import 'package:birthflow_movil/src/ui/home/delegate/user_group_search_delegate.dart';
 import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
@@ -109,7 +112,7 @@ class ListItemWidget extends StatelessWidget {
     String partographId,
     Catalog catalog,
   ) {
-    final TextEditingController _searchController = TextEditingController();
+    final TextEditingController searchController = TextEditingController();
     PermissionType permissionType = catalog.permissionTypeCatalog.first;
     final List<SearchUserGroup> sharedList =
         []; // Lista de usuarios/grupos compartidos
@@ -117,114 +120,142 @@ class ListItemWidget extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: const Text('Compartir Partograma'),
-          content: BlocProvider(
-            create: (context) => ShareBloc(
-              getGroupUseCase: locator<GetSearchUserGroupUseCase>(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: context.read<ShareBloc>()
+                ..add(ShareEvent.getAsignUserGroup(partographId: partographId)),
             ),
-            child: StatefulBuilder(
+            BlocProvider(
+              create: (context) => UserGroupSearchCubit(
+                getGroupUseCase: locator<GetSearchUserGroupUseCase>(),
+              ),
+            ),
+          ],
+          child: AlertDialog(
+            title: const Text('Compartir Partograma'),
+            content: StatefulBuilder(
               builder: (context, setState) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Barra de búsqueda
-                    TextField(
-                      controller: _searchController,
-                      readOnly: true, // Evita la escritura directa
-                      onTap: () async {
-                        final SearchUserGroup? result =
-                            await showSearch<SearchUserGroup?>(
-                          context: context,
-                          delegate: UserGroupSearchDelegate(
-                            bloc: context.read<ShareBloc>(),
-                          ),
-                        );
-                        if (result != null &&
-                            !sharedList.any((item) => isEqual(result, item))) {
-                          // Agrega el resultado a la lista con permisos por defecto
-                          setState(() {
-                            sharedList.add(result);
-                          });
-                        }
+                return BlocListener<ShareBloc, ShareState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      loaded: (groups) {
+                        setState(() {
+                          sharedList.clear();
+                          sharedList.addAll(groups);
+                        });
                       },
-                      decoration: const InputDecoration(
-                        labelText: 'Buscar usuarios o grupos',
-                        suffixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    DynamicDropdownButton<PermissionType>(
-                      list: catalog.permissionTypeCatalog,
-                      labelText: 'Permisos',
-                      onValueChanged: (value) {
-                        permissionType = value;
-                      },
-                      displayField: (PermissionType permissionType) =>
-                          permissionType.name,
-                      initialValue: permissionType,
-                    ),
-                    const SizedBox(height: 15),
-                    Text(
-                      'Usuarios o grupos seleccionados',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 5),
-                    // Lista de usuarios o grupos seleccionados
-                    if (sharedList.isNotEmpty)
-                      SizedBox(
-                        height: 100,
-                        width: 300,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: sharedList.length,
-                          itemBuilder: (context, index) {
-                            final item = sharedList[index];
-                            return ListTile(
-                              title: Text(item.name),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    sharedList.removeWhere(
-                                      (current) =>
-                                          current.name == item.name &&
-                                          (current.userId == item.userId ||
-                                              current.groupId == item.groupId),
-                                    );
-                                  });
-                                },
-                                icon: const Icon(Icons.delete),
-                              ),
-                            );
-                          },
+                      orElse: () {},
+                    );
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Barra de búsqueda
+                      TextField(
+                        controller: searchController,
+                        readOnly: true, // Evita la escritura directa
+                        onTap: () async {
+                          final SearchUserGroup? result =
+                              await showSearch<SearchUserGroup?>(
+                            context: context,
+                            delegate: UserGroupSearchDelegate(
+                              cubit: context.read<UserGroupSearchCubit>(),
+                            ),
+                          );
+                          if (result != null &&
+                              !sharedList
+                                  .any((item) => isEqual(result, item))) {
+                            // Agrega el resultado a la lista con permisos por defecto
+                            setState(() {
+                              sharedList.add(result);
+                            });
+                          }
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Buscar usuarios o grupos',
+                          suffixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(),
                         ),
-                      )
-                    else
-                      const Text(
-                        'No hay usuarios o grupos seleccionados',
-                        style: TextStyle(color: Colors.grey),
                       ),
-                  ],
+                      const SizedBox(height: 20),
+                      DynamicDropdownButton<PermissionType>(
+                        list: catalog.permissionTypeCatalog,
+                        labelText: 'Permisos',
+                        onValueChanged: (value) {
+                          permissionType = value;
+                        },
+                        displayField: (PermissionType permissionType) =>
+                            permissionType.name,
+                        initialValue: permissionType,
+                      ),
+                      const SizedBox(height: 15),
+                      Text(
+                        'Usuarios o grupos seleccionados',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 5),
+                      // Lista de usuarios o grupos seleccionados
+                      if (sharedList.isNotEmpty)
+                        SizedBox(
+                          height: 100,
+                          width: 300,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: sharedList.length,
+                            itemBuilder: (context, index) {
+                              final item = sharedList[index];
+                              return ListTile(
+                                title: Text(item.name),
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      sharedList.removeWhere(
+                                        (current) =>
+                                            current.name == item.name &&
+                                            (current.userId == item.userId ||
+                                                current.groupId ==
+                                                    item.groupId),
+                                      );
+                                    });
+                                  },
+                                  icon: const Icon(Icons.delete),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      else
+                        const Text(
+                          'No hay usuarios o grupos seleccionados',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                    ],
+                  ),
                 );
               },
             ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<ShareBloc>().add(
+                        ShareEvent.asignUserGroup(
+                          partographId: partographId,
+                          permissionTypeId: permissionType.id,
+                          searchUserGroupDtos: sharedList,
+                        ),
+                      );
+                  Navigator.pop(dialogContext);
+                },
+                child: const Text('Aceptar'),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: const Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Lógica para manejar la lista compartida
-                debugPrint('Compartido con: $sharedList');
-                Navigator.pop(dialogContext);
-              },
-              child: const Text('Aceptar'),
-            ),
-          ],
         );
       },
     );

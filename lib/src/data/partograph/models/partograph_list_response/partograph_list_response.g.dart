@@ -27,6 +27,7 @@ _$PartographListResponseImpl _$$PartographListResponseImplFromJson(
       set: json['set'] as bool,
       silenced: json['silenced'] as bool,
       favorite: json['favorite'] as bool,
+      accessType: (json['accessType'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PartographListResponseImplToJson(
@@ -48,4 +49,5 @@ Map<String, dynamic> _$$PartographListResponseImplToJson(
       'set': instance.set,
       'silenced': instance.silenced,
       'favorite': instance.favorite,
+      'accessType': instance.accessType,
     };

@@ -1,14 +1,13 @@
 import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
-import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
-import 'package:birthflow_movil/src/ui/home/blocs/share/events/share_event.dart';
-import 'package:birthflow_movil/src/ui/home/blocs/share/states/share_state.dart';
+import 'package:birthflow_movil/src/ui/home/cubits/search/search_user_groups_cubit.dart';
+import 'package:birthflow_movil/src/ui/home/cubits/state/search_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserGroupSearchDelegate extends SearchDelegate<SearchUserGroup?> {
-  final ShareBloc bloc;
+  final UserGroupSearchCubit cubit;
 
-  UserGroupSearchDelegate({required this.bloc});
+  UserGroupSearchDelegate({required this.cubit});
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -17,7 +16,7 @@ class UserGroupSearchDelegate extends SearchDelegate<SearchUserGroup?> {
         icon: const Icon(Icons.clear),
         onPressed: () {
           query = ''; // Limpia la barra de búsqueda
-          bloc.add(const ShareEvent.searchUsersGroup(query: '')); // Limpia los resultados
+          cubit.clearSearch(); // Limpia los resultados
         },
       ),
     ];
@@ -35,14 +34,13 @@ class UserGroupSearchDelegate extends SearchDelegate<SearchUserGroup?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    bloc.add(ShareEvent.searchUsersGroup(query: query)); // Solicita los datos al Bloc
-
-    return BlocBuilder<ShareBloc, ShareState>(
-      bloc: bloc,
+    cubit.search(query);
+    return BlocBuilder<UserGroupSearchCubit, SearchState>(
+      bloc: cubit,
       builder: (context, state) {
         return state.maybeWhen(
           loading: () => const Center(child: CircularProgressIndicator()),
-          loaded: (groups) => ListView.builder(
+          success: (groups) => ListView.builder(
             itemCount: groups.length,
             itemBuilder: (context, index) {
               final group = groups[index];
@@ -55,7 +53,8 @@ class UserGroupSearchDelegate extends SearchDelegate<SearchUserGroup?> {
             },
           ),
           error: (message) => Center(child: Text('Error: $message')),
-          orElse: () => const Center(child: Text('No se encontraron resultados')),
+          orElse: () =>
+              const Center(child: Text('No se encontraron resultados')),
         );
       },
     );

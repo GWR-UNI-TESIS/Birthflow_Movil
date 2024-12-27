@@ -11,8 +11,8 @@ class GetPartographUseCaseImplementation implements GetPartographUseCase {
   final PartographRepository _partographRepository;
 
   GetPartographUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<Partograph> execute({

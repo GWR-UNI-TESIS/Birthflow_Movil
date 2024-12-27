@@ -8,5 +8,6 @@ class ShareState with _$ShareState {
   const factory ShareState.loading() = ShareLoading;
   const factory ShareState.empty() = ShareEmpty;
   const factory ShareState.loaded({required List<SearchUserGroup> groups}) = ShareLoaded;
+  const factory ShareState.assigned({required List<SearchUserGroup> groups}) = _ShareAssigned;
   const factory ShareState.error({required String message}) = ShareError;
 }

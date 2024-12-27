@@ -11,8 +11,8 @@ class DeletePresentationPositionVarietyUseCaseImplementation
     implements DeletePresentationPositionVarietyUseCase {
   final PartographRepository _partographRepository;
   DeletePresentationPositionVarietyUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<PresentationPositionVariety?> execute({

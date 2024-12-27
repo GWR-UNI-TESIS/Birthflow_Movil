@@ -14,8 +14,8 @@ class CreateFetalHeartRateUseCaseImplementation
   final PartographRepository _partographRepository;
 
   CreateFetalHeartRateUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<FetalHeartRate?> execute({

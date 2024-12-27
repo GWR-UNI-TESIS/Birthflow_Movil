@@ -12,8 +12,8 @@ class DeleteContractionFrequencyUseCaseImplementation
   final PartographRepository _partographRepository;
 
   DeleteContractionFrequencyUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<ContractionFrequency?> execute({

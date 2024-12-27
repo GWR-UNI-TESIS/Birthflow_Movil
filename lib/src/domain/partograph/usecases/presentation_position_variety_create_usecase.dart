@@ -14,8 +14,8 @@ class CreatePresentationPositionVarietyUseCaseImplementation
     implements CreatePresentationPositionVarietyUseCase {
   final PartographRepository _partographRepository;
   CreatePresentationPositionVarietyUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<PresentationPositionVariety?> execute({

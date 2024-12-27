@@ -12,8 +12,8 @@ class GetCervicalDilationUseCaseImplementation
   final PartographRepository _partographRepository;
 
   GetCervicalDilationUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<List<CervicalDilation>?> execute({

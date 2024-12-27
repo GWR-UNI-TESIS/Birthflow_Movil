@@ -12,8 +12,8 @@ class DeleteCervicalDilationUseCaseImplementation
   final PartographRepository _partographRepository;
 
   DeleteCervicalDilationUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<CervicalDilation?> execute({

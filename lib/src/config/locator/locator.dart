@@ -34,7 +34,10 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_us
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/search_partographs_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/repository/share_repository.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/asign_user_group_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/get_asign_user_group_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -101,103 +104,103 @@ Future<void> initializeDependencies() async {
   // Registra el GetPartographUseCase como singleton en GetIt, inyectando PartographRepository
   locator.registerSingleton<GetPartographUseCase>(
     GetPartographUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<GetPartographListUseCase>(
     GetPartographListUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<CreatePartographUseCase>(
     CreatePartographUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<UpdatePartographUsecase>(
     UpdatePartographUsecaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<CreateCervicalDilationUseCase>(
     CreateCervicalDilationUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<DeleteCervicalDilationUseCase>(
     DeleteCervicalDilationUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<GetCervicalDilationUseCase>(
     GetCervicalDilationUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<UpdateCervicalDilationUseCase>(
     UpdateCervicalDilationUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<GetAlertCurvesUseCase>(
     GetAlertCurvesUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<CreateMedicalSurveillanceUseCase>(
     CreateMedicalSurveillanceUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<UpdateMedicalSurveillanceUseCase>(
     UpdateMedicalSurveillanceUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<CreatePresentationPositionVarietyUseCase>(
     CreatePresentationPositionVarietyUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<UpdatePresentationPositionVarietyUseCase>(
     UpdatePresentationPositionVarietyUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<CreateContractionFrequencyUseCase>(
     CreateContractionFrequencyUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<UpdateContractionFrequencyUseCase>(
     UpdateContractionFrequencyUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<CreateFetalHeartRateUseCase>(
     CreateFetalHeartRateUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
   locator.registerSingleton<UpdateFetalHeartRateUseCase>(
     UpdateFetalHeartRateUseCaseImplementation(
-      partogramaRepository: locator<PartographRepository>(),
+      partographRepository: locator<PartographRepository>(),
     ),
   );
 
@@ -213,6 +216,12 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  locator.registerSingleton<SearchPartographsUseCase>(
+    SearchPartographsUseCaseImplementation(
+      partographRepository: locator<PartographRepository>(),
+    ),
+  );
+
   locator.registerSingleton<ShareService>(ShareService(dio));
 
   locator.registerSingleton<ShareRepository>(
@@ -223,6 +232,18 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<GetSearchUserGroupUseCase>(
     GetSearchUserGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<GetAsignUserGroupUseCase>(
+    GetAsignUserGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<AsignUserGroupUseCase>(
+    AsignUserGroupUseCaseImplementation(
       shareRepository: locator<ShareRepository>(),
     ),
   );

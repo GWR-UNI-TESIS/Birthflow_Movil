@@ -15,6 +15,7 @@ import 'package:birthflow_movil/src/data/partograph/models/partograph_request/pa
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_request/presentation_position_variety_entity_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/search_model_request/search_model_request.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
@@ -143,6 +144,36 @@ class PartographRepositoryImplementation implements PartographRepository {
       if (result.response == null) return null;
 
       return _mapper.convert<PartographResponse, Partograph>(result.response);
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
+
+  @override
+  Future<List<PartographList>?> searchPartographs({
+    required String name,
+    required int filterId,
+    required int activityId,
+    required int hourFilterId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = SearchModelRequest(
+        name: name,
+        filterId: filterId,
+        activityId: filterId,
+        hourFilterId: hourFilterId,
+      );
+
+      final result = await _partographService.searchPartographs(token, request);
+
+      if (result.response == null) return null;
+
+      return _mapper
+          .convertList<PartographListResponse, PartographList>(result.response!);
     } catch (e, stackTrace) {
       _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;

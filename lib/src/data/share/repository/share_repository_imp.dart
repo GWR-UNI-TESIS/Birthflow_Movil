@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
 import 'package:birthflow_movil/src/data/share/mappers/mapper.dart';
+import 'package:birthflow_movil/src/data/share/model/asign_user_group_response/asign_user_group_response.dart';
 import 'package:birthflow_movil/src/data/share/model/group_request/group_request.dart';
 import 'package:birthflow_movil/src/data/share/model/group_response/group_response.dart';
 import 'package:birthflow_movil/src/data/share/model/partograph_group_item_request/partograph_group_item_request.dart';
@@ -11,6 +12,7 @@ import 'package:birthflow_movil/src/data/share/model/partograph_group_share_resp
 import 'package:birthflow_movil/src/data/share/model/partograph_share_request/partograph_share_request.dart';
 import 'package:birthflow_movil/src/data/share/model/partograph_share_response/partograph_share_response.dart';
 import 'package:birthflow_movil/src/data/share/model/search_user_group_response/search_user_group_response.dart';
+import 'package:birthflow_movil/src/domain/share/models/asign_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group_item.dart';
@@ -27,7 +29,8 @@ class ShareRepositoryImplementation implements ShareRepository {
   final Logger _logger = Logger();
   final ShareApiMapper _mapper = ShareApiMapper();
 
-  ShareRepositoryImplementation({required ShareService shareService}): _shareService = shareService;
+  ShareRepositoryImplementation({required ShareService shareService})
+      : _shareService = shareService;
 
   @override
   Future<List<SearchUserGroup>?> getSearchUserGroup({
@@ -43,6 +46,61 @@ class ShareRepositoryImplementation implements ShareRepository {
 
       return _mapper.convertList<SearchUserGroupResponse, SearchUserGroup>(
         result.response!,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
+
+  @override
+  Future<AsignUserGroup?> asignUserGroup({
+    required String partographId,
+    required int permissionTypeId,
+    List<SearchUserGroup>? searchUserGroupDtos,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final list =
+          _mapper.convertList<SearchUserGroup, SearchUserGroupResponse>(
+        searchUserGroupDtos!,
+      );
+
+      final request = AsignUserGroupResponse(
+        partographId: partographId,
+        permissionTypeId: permissionTypeId,
+        searchUserGroupDtos: list,
+      );
+
+      final result = await _shareService.asignUsersGroups(token, request);
+
+      if (result.response == null) return null;
+
+      return _mapper.convert<AsignUserGroupResponse, AsignUserGroup>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
+
+  @override
+  Future<AsignUserGroup?> getAsignUserGroup({
+    required String partographId,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+      final result =
+          await _shareService.getAsignUsersGroups(token, partographId);
+
+      if (result.response == null) return null;
+
+      return _mapper.convert<AsignUserGroupResponse, AsignUserGroup>(
+        result.response,
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);

@@ -21,6 +21,7 @@ mixin _$ShareState {
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<SearchUserGroup> groups) loaded,
+    required TResult Function(List<SearchUserGroup> groups) assigned,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$ShareState {
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<SearchUserGroup> groups)? loaded,
+    TResult? Function(List<SearchUserGroup> groups)? assigned,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$ShareState {
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<SearchUserGroup> groups)? loaded,
+    TResult Function(List<SearchUserGroup> groups)? assigned,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$ShareState {
     required TResult Function(ShareLoading value) loading,
     required TResult Function(ShareEmpty value) empty,
     required TResult Function(ShareLoaded value) loaded,
+    required TResult Function(_ShareAssigned value) assigned,
     required TResult Function(ShareError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$ShareState {
     TResult? Function(ShareLoading value)? loading,
     TResult? Function(ShareEmpty value)? empty,
     TResult? Function(ShareLoaded value)? loaded,
+    TResult? Function(_ShareAssigned value)? assigned,
     TResult? Function(ShareError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$ShareState {
     TResult Function(ShareLoading value)? loading,
     TResult Function(ShareEmpty value)? empty,
     TResult Function(ShareLoaded value)? loaded,
+    TResult Function(_ShareAssigned value)? assigned,
     TResult Function(ShareError value)? error,
     required TResult orElse(),
   }) =>
@@ -133,6 +139,7 @@ class _$ShareLoadingImpl implements ShareLoading {
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<SearchUserGroup> groups) loaded,
+    required TResult Function(List<SearchUserGroup> groups) assigned,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -144,6 +151,7 @@ class _$ShareLoadingImpl implements ShareLoading {
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<SearchUserGroup> groups)? loaded,
+    TResult? Function(List<SearchUserGroup> groups)? assigned,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -155,6 +163,7 @@ class _$ShareLoadingImpl implements ShareLoading {
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<SearchUserGroup> groups)? loaded,
+    TResult Function(List<SearchUserGroup> groups)? assigned,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -170,6 +179,7 @@ class _$ShareLoadingImpl implements ShareLoading {
     required TResult Function(ShareLoading value) loading,
     required TResult Function(ShareEmpty value) empty,
     required TResult Function(ShareLoaded value) loaded,
+    required TResult Function(_ShareAssigned value) assigned,
     required TResult Function(ShareError value) error,
   }) {
     return loading(this);
@@ -181,6 +191,7 @@ class _$ShareLoadingImpl implements ShareLoading {
     TResult? Function(ShareLoading value)? loading,
     TResult? Function(ShareEmpty value)? empty,
     TResult? Function(ShareLoaded value)? loaded,
+    TResult? Function(_ShareAssigned value)? assigned,
     TResult? Function(ShareError value)? error,
   }) {
     return loading?.call(this);
@@ -192,6 +203,7 @@ class _$ShareLoadingImpl implements ShareLoading {
     TResult Function(ShareLoading value)? loading,
     TResult Function(ShareEmpty value)? empty,
     TResult Function(ShareLoaded value)? loaded,
+    TResult Function(_ShareAssigned value)? assigned,
     TResult Function(ShareError value)? error,
     required TResult orElse(),
   }) {
@@ -250,6 +262,7 @@ class _$ShareEmptyImpl implements ShareEmpty {
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<SearchUserGroup> groups) loaded,
+    required TResult Function(List<SearchUserGroup> groups) assigned,
     required TResult Function(String message) error,
   }) {
     return empty();
@@ -261,6 +274,7 @@ class _$ShareEmptyImpl implements ShareEmpty {
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<SearchUserGroup> groups)? loaded,
+    TResult? Function(List<SearchUserGroup> groups)? assigned,
     TResult? Function(String message)? error,
   }) {
     return empty?.call();
@@ -272,6 +286,7 @@ class _$ShareEmptyImpl implements ShareEmpty {
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<SearchUserGroup> groups)? loaded,
+    TResult Function(List<SearchUserGroup> groups)? assigned,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -287,6 +302,7 @@ class _$ShareEmptyImpl implements ShareEmpty {
     required TResult Function(ShareLoading value) loading,
     required TResult Function(ShareEmpty value) empty,
     required TResult Function(ShareLoaded value) loaded,
+    required TResult Function(_ShareAssigned value) assigned,
     required TResult Function(ShareError value) error,
   }) {
     return empty(this);
@@ -298,6 +314,7 @@ class _$ShareEmptyImpl implements ShareEmpty {
     TResult? Function(ShareLoading value)? loading,
     TResult? Function(ShareEmpty value)? empty,
     TResult? Function(ShareLoaded value)? loaded,
+    TResult? Function(_ShareAssigned value)? assigned,
     TResult? Function(ShareError value)? error,
   }) {
     return empty?.call(this);
@@ -309,6 +326,7 @@ class _$ShareEmptyImpl implements ShareEmpty {
     TResult Function(ShareLoading value)? loading,
     TResult Function(ShareEmpty value)? empty,
     TResult Function(ShareLoaded value)? loaded,
+    TResult Function(_ShareAssigned value)? assigned,
     TResult Function(ShareError value)? error,
     required TResult orElse(),
   }) {
@@ -401,6 +419,7 @@ class _$ShareLoadedImpl implements ShareLoaded {
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<SearchUserGroup> groups) loaded,
+    required TResult Function(List<SearchUserGroup> groups) assigned,
     required TResult Function(String message) error,
   }) {
     return loaded(groups);
@@ -412,6 +431,7 @@ class _$ShareLoadedImpl implements ShareLoaded {
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<SearchUserGroup> groups)? loaded,
+    TResult? Function(List<SearchUserGroup> groups)? assigned,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(groups);
@@ -423,6 +443,7 @@ class _$ShareLoadedImpl implements ShareLoaded {
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<SearchUserGroup> groups)? loaded,
+    TResult Function(List<SearchUserGroup> groups)? assigned,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -438,6 +459,7 @@ class _$ShareLoadedImpl implements ShareLoaded {
     required TResult Function(ShareLoading value) loading,
     required TResult Function(ShareEmpty value) empty,
     required TResult Function(ShareLoaded value) loaded,
+    required TResult Function(_ShareAssigned value) assigned,
     required TResult Function(ShareError value) error,
   }) {
     return loaded(this);
@@ -449,6 +471,7 @@ class _$ShareLoadedImpl implements ShareLoaded {
     TResult? Function(ShareLoading value)? loading,
     TResult? Function(ShareEmpty value)? empty,
     TResult? Function(ShareLoaded value)? loaded,
+    TResult? Function(_ShareAssigned value)? assigned,
     TResult? Function(ShareError value)? error,
   }) {
     return loaded?.call(this);
@@ -460,6 +483,7 @@ class _$ShareLoadedImpl implements ShareLoaded {
     TResult Function(ShareLoading value)? loading,
     TResult Function(ShareEmpty value)? empty,
     TResult Function(ShareLoaded value)? loaded,
+    TResult Function(_ShareAssigned value)? assigned,
     TResult Function(ShareError value)? error,
     required TResult orElse(),
   }) {
@@ -480,6 +504,172 @@ abstract class ShareLoaded implements ShareState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShareLoadedImplCopyWith<_$ShareLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ShareAssignedImplCopyWith<$Res> {
+  factory _$$ShareAssignedImplCopyWith(
+          _$ShareAssignedImpl value, $Res Function(_$ShareAssignedImpl) then) =
+      __$$ShareAssignedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SearchUserGroup> groups});
+}
+
+/// @nodoc
+class __$$ShareAssignedImplCopyWithImpl<$Res>
+    extends _$ShareStateCopyWithImpl<$Res, _$ShareAssignedImpl>
+    implements _$$ShareAssignedImplCopyWith<$Res> {
+  __$$ShareAssignedImplCopyWithImpl(
+      _$ShareAssignedImpl _value, $Res Function(_$ShareAssignedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ShareState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? groups = null,
+  }) {
+    return _then(_$ShareAssignedImpl(
+      groups: null == groups
+          ? _value._groups
+          : groups // ignore: cast_nullable_to_non_nullable
+              as List<SearchUserGroup>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShareAssignedImpl implements _ShareAssigned {
+  const _$ShareAssignedImpl({required final List<SearchUserGroup> groups})
+      : _groups = groups;
+
+  final List<SearchUserGroup> _groups;
+  @override
+  List<SearchUserGroup> get groups {
+    if (_groups is EqualUnmodifiableListView) return _groups;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_groups);
+  }
+
+  @override
+  String toString() {
+    return 'ShareState.assigned(groups: $groups)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShareAssignedImpl &&
+            const DeepCollectionEquality().equals(other._groups, _groups));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_groups));
+
+  /// Create a copy of ShareState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShareAssignedImplCopyWith<_$ShareAssignedImpl> get copyWith =>
+      __$$ShareAssignedImplCopyWithImpl<_$ShareAssignedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() empty,
+    required TResult Function(List<SearchUserGroup> groups) loaded,
+    required TResult Function(List<SearchUserGroup> groups) assigned,
+    required TResult Function(String message) error,
+  }) {
+    return assigned(groups);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function()? empty,
+    TResult? Function(List<SearchUserGroup> groups)? loaded,
+    TResult? Function(List<SearchUserGroup> groups)? assigned,
+    TResult? Function(String message)? error,
+  }) {
+    return assigned?.call(groups);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? empty,
+    TResult Function(List<SearchUserGroup> groups)? loaded,
+    TResult Function(List<SearchUserGroup> groups)? assigned,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (assigned != null) {
+      return assigned(groups);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ShareLoading value) loading,
+    required TResult Function(ShareEmpty value) empty,
+    required TResult Function(ShareLoaded value) loaded,
+    required TResult Function(_ShareAssigned value) assigned,
+    required TResult Function(ShareError value) error,
+  }) {
+    return assigned(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ShareLoading value)? loading,
+    TResult? Function(ShareEmpty value)? empty,
+    TResult? Function(ShareLoaded value)? loaded,
+    TResult? Function(_ShareAssigned value)? assigned,
+    TResult? Function(ShareError value)? error,
+  }) {
+    return assigned?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ShareLoading value)? loading,
+    TResult Function(ShareEmpty value)? empty,
+    TResult Function(ShareLoaded value)? loaded,
+    TResult Function(_ShareAssigned value)? assigned,
+    TResult Function(ShareError value)? error,
+    required TResult orElse(),
+  }) {
+    if (assigned != null) {
+      return assigned(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShareAssigned implements ShareState {
+  const factory _ShareAssigned({required final List<SearchUserGroup> groups}) =
+      _$ShareAssignedImpl;
+
+  List<SearchUserGroup> get groups;
+
+  /// Create a copy of ShareState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ShareAssignedImplCopyWith<_$ShareAssignedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -554,6 +744,7 @@ class _$ShareErrorImpl implements ShareError {
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<SearchUserGroup> groups) loaded,
+    required TResult Function(List<SearchUserGroup> groups) assigned,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -565,6 +756,7 @@ class _$ShareErrorImpl implements ShareError {
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<SearchUserGroup> groups)? loaded,
+    TResult? Function(List<SearchUserGroup> groups)? assigned,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -576,6 +768,7 @@ class _$ShareErrorImpl implements ShareError {
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<SearchUserGroup> groups)? loaded,
+    TResult Function(List<SearchUserGroup> groups)? assigned,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -591,6 +784,7 @@ class _$ShareErrorImpl implements ShareError {
     required TResult Function(ShareLoading value) loading,
     required TResult Function(ShareEmpty value) empty,
     required TResult Function(ShareLoaded value) loaded,
+    required TResult Function(_ShareAssigned value) assigned,
     required TResult Function(ShareError value) error,
   }) {
     return error(this);
@@ -602,6 +796,7 @@ class _$ShareErrorImpl implements ShareError {
     TResult? Function(ShareLoading value)? loading,
     TResult? Function(ShareEmpty value)? empty,
     TResult? Function(ShareLoaded value)? loaded,
+    TResult? Function(_ShareAssigned value)? assigned,
     TResult? Function(ShareError value)? error,
   }) {
     return error?.call(this);
@@ -613,6 +808,7 @@ class _$ShareErrorImpl implements ShareError {
     TResult Function(ShareLoading value)? loading,
     TResult Function(ShareEmpty value)? empty,
     TResult Function(ShareLoaded value)? loaded,
+    TResult Function(_ShareAssigned value)? assigned,
     TResult Function(ShareError value)? error,
     required TResult orElse(),
   }) {

@@ -12,8 +12,8 @@ class GetPartographListUseCaseImplementation
   final PartographRepository _partographRepository;
 
   GetPartographListUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<List<PartographList>?> execute({

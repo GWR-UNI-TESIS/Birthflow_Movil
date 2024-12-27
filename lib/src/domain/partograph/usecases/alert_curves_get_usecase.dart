@@ -11,8 +11,8 @@ class GetAlertCurvesUseCaseImplementation implements GetAlertCurvesUseCase {
   final PartographRepository _partographRepository;
 
   GetAlertCurvesUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<AlertCurves?> execute({

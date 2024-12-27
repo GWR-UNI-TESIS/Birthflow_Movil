@@ -9,12 +9,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 
+import '../../../domain/share/models/asign_user_group.dart' as _i15;
 import '../../../domain/share/models/group.dart' as _i5;
 import '../../../domain/share/models/partograph_group.dart' as _i9;
 import '../../../domain/share/models/partograph_group_item.dart' as _i7;
 import '../../../domain/share/models/partograph_group_share.dart' as _i11;
 import '../../../domain/share/models/partograph_share.dart' as _i3;
 import '../../../domain/share/models/search_user_group.dart' as _i13;
+import '../model/asign_user_group_response/asign_user_group_response.dart'
+    as _i14;
 import '../model/group_response/group_response.dart' as _i4;
 import '../model/partograph_group_item_response/partograph_group_item_response.dart'
     as _i6;
@@ -35,6 +38,8 @@ import '../model/search_user_group_response/search_user_group_response.dart'
 /// - `PartographGroupResponse` → `PartographGroup`.
 /// - `PartographGroupShareResponse` → `PartographGroupShare`.
 /// - `SearchUserGroupResponse` → `SearchUserGroup`.
+/// - `AsignUserGroupResponse` → `AsignUserGroup`.
+/// - `SearchUserGroup` → `SearchUserGroupResponse`.
 /// {@endtemplate}
 class $ShareApiMapper implements _i1.AutoMapprInterface {
   const $ShareApiMapper();
@@ -83,6 +88,18 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
             sourceTypeOf == _typeOf<_i12.SearchUserGroupResponse?>()) &&
         (targetTypeOf == _typeOf<_i13.SearchUserGroup>() ||
             targetTypeOf == _typeOf<_i13.SearchUserGroup?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i14.AsignUserGroupResponse>() ||
+            sourceTypeOf == _typeOf<_i14.AsignUserGroupResponse?>()) &&
+        (targetTypeOf == _typeOf<_i15.AsignUserGroup>() ||
+            targetTypeOf == _typeOf<_i15.AsignUserGroup?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i13.SearchUserGroup>() ||
+            sourceTypeOf == _typeOf<_i13.SearchUserGroup?>()) &&
+        (targetTypeOf == _typeOf<_i12.SearchUserGroupResponse>() ||
+            targetTypeOf == _typeOf<_i12.SearchUserGroupResponse?>())) {
       return true;
     }
     if (recursive) {
@@ -336,6 +353,26 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
       return (_map__i12$SearchUserGroupResponse_To__i13$SearchUserGroup(
           (model as _i12.SearchUserGroupResponse?)) as TARGET);
     }
+    if ((sourceTypeOf == _typeOf<_i14.AsignUserGroupResponse>() ||
+            sourceTypeOf == _typeOf<_i14.AsignUserGroupResponse?>()) &&
+        (targetTypeOf == _typeOf<_i15.AsignUserGroup>() ||
+            targetTypeOf == _typeOf<_i15.AsignUserGroup?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i14$AsignUserGroupResponse_To__i15$AsignUserGroup(
+          (model as _i14.AsignUserGroupResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i13.SearchUserGroup>() ||
+            sourceTypeOf == _typeOf<_i13.SearchUserGroup?>()) &&
+        (targetTypeOf == _typeOf<_i12.SearchUserGroupResponse>() ||
+            targetTypeOf == _typeOf<_i12.SearchUserGroupResponse?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i13$SearchUserGroup_To__i12$SearchUserGroupResponse(
+          (model as _i13.SearchUserGroup?)) as TARGET);
+    }
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
   }
 
@@ -470,6 +507,41 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
           r'Consider setting the whenSourceIsNull parameter on the MapType<SearchUserGroupResponse, SearchUserGroup> to handle null values during mapping.');
     }
     return _i13.SearchUserGroup(
+      name: model.name,
+      userId: model.userId,
+      groupId: model.groupId,
+      type: model.type,
+    );
+  }
+
+  _i15.AsignUserGroup _map__i14$AsignUserGroupResponse_To__i15$AsignUserGroup(
+      _i14.AsignUserGroupResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping AsignUserGroupResponse → AsignUserGroup failed because AsignUserGroupResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<AsignUserGroupResponse, AsignUserGroup> to handle null values during mapping.');
+    }
+    return _i15.AsignUserGroup(
+      partographId: model.partographId,
+      permissionTypeId: model.permissionTypeId,
+      searchUserGroupDtos: model.searchUserGroupDtos
+          ?.map<_i13.SearchUserGroup>((value) =>
+              _map__i12$SearchUserGroupResponse_To__i13$SearchUserGroup(value))
+          .toList(),
+    );
+  }
+
+  _i12.SearchUserGroupResponse
+      _map__i13$SearchUserGroup_To__i12$SearchUserGroupResponse(
+          _i13.SearchUserGroup? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping SearchUserGroup → SearchUserGroupResponse failed because SearchUserGroup was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<SearchUserGroup, SearchUserGroupResponse> to handle null values during mapping.');
+    }
+    return _i12.SearchUserGroupResponse(
       name: model.name,
       userId: model.userId,
       groupId: model.groupId,

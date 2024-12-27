@@ -12,8 +12,8 @@ class DeleteFetalHeartRateUseCaseImplementation
   final PartographRepository _partographRepository;
 
   DeleteFetalHeartRateUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<FetalHeartRate?> execute({

@@ -21,8 +21,8 @@ class UpdateMedicalSurveillanceUseCaseImplementation
     implements UpdateMedicalSurveillanceUseCase {
   final PartographRepository _partographRepository;
   UpdateMedicalSurveillanceUseCaseImplementation({
-    required PartographRepository partogramaRepository,
-  }) : _partographRepository = partogramaRepository;
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
 
   @override
   Future<MedicalSurveillanceTable?> execute({
