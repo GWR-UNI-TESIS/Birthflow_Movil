@@ -27,7 +27,7 @@ class _ShareService implements ShareService {
     String query,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'query': query};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -39,7 +39,7 @@ class _ShareService implements ShareService {
     )
             .compose(
               _dio.options,
-              '/api/share/search-user-group?query=${query}',
+              '/api/share/search-user-group',
               queryParameters: queryParameters,
               data: _data,
             )

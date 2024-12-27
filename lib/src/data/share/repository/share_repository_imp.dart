@@ -10,11 +10,13 @@ import 'package:birthflow_movil/src/data/share/model/partograph_group_share_requ
 import 'package:birthflow_movil/src/data/share/model/partograph_group_share_response/partograph_group_share_response.dart';
 import 'package:birthflow_movil/src/data/share/model/partograph_share_request/partograph_share_request.dart';
 import 'package:birthflow_movil/src/data/share/model/partograph_share_response/partograph_share_response.dart';
+import 'package:birthflow_movil/src/data/share/model/search_user_group_response/search_user_group_response.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group_item.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group_share.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_share.dart';
+import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/repository/share_repository.dart';
 import 'package:birthflow_movil/src/local_storage/token_storage.dart';
 import 'package:logger/logger.dart';
@@ -25,7 +27,28 @@ class ShareRepositoryImplementation implements ShareRepository {
   final Logger _logger = Logger();
   final ShareApiMapper _mapper = ShareApiMapper();
 
-  ShareRepositoryImplementation(this._shareService);
+  ShareRepositoryImplementation({required ShareService shareService}): _shareService = shareService;
+
+  @override
+  Future<List<SearchUserGroup>?> getSearchUserGroup({
+    required String query,
+  }) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final result = await _shareService.getSearchUserGroup(token, query);
+
+      if (result.response == null) return null;
+
+      return _mapper.convertList<SearchUserGroupResponse, SearchUserGroup>(
+        result.response!,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
 
   @override
   Future<Group?> createGroup({

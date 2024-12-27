@@ -20,10 +20,10 @@ part 'share_service.g.dart';
 abstract class ShareService {
   factory ShareService(Dio dio, {String baseUrl}) = _ShareService;
 
-  @GET('/api/share/search-user-group?query={query}')
+  @GET('/api/share/search-user-group')
   Future<ApiResponse<List<SearchUserGroupResponse>>> getSearchUserGroup(
     @Header('Authorization') String token,
-    @Path('query') String query,
+    @Query('query') String query,
   );
 
   @POST('/api/share/partograph-share/create')

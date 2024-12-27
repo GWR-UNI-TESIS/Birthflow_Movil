@@ -13,7 +13,7 @@ class RegisterScreen extends StatelessWidget {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) {
         if (state is RegistrationSuccess) {
-          _showSnackbar(context, 'Registro completado');
+          _showSnackbar(context, state.message);
         }
 
         if (state is Failure) {
@@ -57,7 +57,6 @@ class _RegisterView extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -145,21 +144,6 @@ class _RegisterView extends StatelessWidget {
                     ),
                     keyboardType: TextInputType.phone,
                   ),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      labelText: 'Contraseña',
-                      border: OutlineInputBorder(),
-                    ),
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrese una contraseña';
-                      }
-                      return null;
-                    },
-                  ),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: size.width / 1.3,
@@ -169,7 +153,6 @@ class _RegisterView extends StatelessWidget {
                         final secondname = _secondNamesController.text;
                         final username = _usernameController.text;
                         final email = _emailController.text;
-                        final password = _passwordController.text;
                         final phone = _phoneController.text;
 
                         if (_formKey.currentState!.validate()) {
@@ -180,7 +163,6 @@ class _RegisterView extends StatelessWidget {
                                   apellidos: secondname,
                                   nombreUsuario: username,
                                   email: email,
-                                  passwordHash: password,
                                   phoneNumber: phone,
                                 ),
                               );

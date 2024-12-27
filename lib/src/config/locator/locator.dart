@@ -6,6 +6,8 @@ import 'package:birthflow_movil/src/data/catalog/datasources/catalog_service.dar
 import 'package:birthflow_movil/src/data/catalog/repositories/catalog_repository_imp.dart';
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
 import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repository_imp.dart';
+import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
+import 'package:birthflow_movil/src/data/share/repository/share_repository_imp.dart';
 import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repository.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
@@ -32,6 +34,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_us
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/repository/share_repository.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -206,6 +210,20 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<UpdateChildbirthNoteUseCase>(
     UpdateChildbirthNoteUseCaseImplementation(
       partographRepository: locator<PartographRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<ShareService>(ShareService(dio));
+
+  locator.registerSingleton<ShareRepository>(
+    ShareRepositoryImplementation(
+      shareService: locator<ShareService>(),
+    ),
+  );
+
+  locator.registerSingleton<GetSearchUserGroupUseCase>(
+    GetSearchUserGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
     ),
   );
 }

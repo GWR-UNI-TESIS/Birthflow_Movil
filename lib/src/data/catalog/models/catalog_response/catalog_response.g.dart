@@ -21,6 +21,19 @@ _$CatalogResponseImpl _$$CatalogResponseImplFromJson(
       workTimeCatalog: (json['workTimeCatalog'] as List<dynamic>)
           .map((e) => WorkTimeResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      filterCatalog: (json['filterCatalog'] as List<dynamic>)
+          .map((e) => FilterResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      activityCatalog: (json['activityCatalog'] as List<dynamic>)
+          .map((e) => ActivityResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      hourFilterCatalog: (json['hourFilterCatalog'] as List<dynamic>)
+          .map((e) => HourFilterResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      permissionTypeCatalog: (json['permissionTypeCatalog'] as List<dynamic>)
+          .map(
+              (e) => PermissionTypeResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$CatalogResponseImplToJson(
@@ -34,4 +47,11 @@ Map<String, dynamic> _$$CatalogResponseImplToJson(
           instance.workTimeItemsCatalog.map((e) => e.toJson()).toList(),
       'workTimeCatalog':
           instance.workTimeCatalog.map((e) => e.toJson()).toList(),
+      'filterCatalog': instance.filterCatalog.map((e) => e.toJson()).toList(),
+      'activityCatalog':
+          instance.activityCatalog.map((e) => e.toJson()).toList(),
+      'hourFilterCatalog':
+          instance.hourFilterCatalog.map((e) => e.toJson()).toList(),
+      'permissionTypeCatalog':
+          instance.permissionTypeCatalog.map((e) => e.toJson()).toList(),
     };

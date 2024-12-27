@@ -1,13 +1,12 @@
 import 'package:birthflow_movil/src/domain/auth/entities/authentication.dart';
 
 abstract class AuthenticationRepository {
-  Future<void> registerUser({
+  Future<String> registerUser({
     required String name,
     required String secondName,
     required String email,
     required String userName,
-    int phoneNumber,
-    required String password,
+    double phoneNumber,
   });
 
   Future<Authentication> login({

@@ -3,8 +3,13 @@ import 'package:birthflow_movil/src/domain/share/models/partograph_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group_item.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group_share.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_share.dart';
+import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
 
 abstract class ShareRepository {
+  Future<List<SearchUserGroup>?> getSearchUserGroup({
+    required String query,
+  });
+
   Future<PartographShare?> createPartographShare({
     int? id,
     required String partographId,
@@ -12,7 +17,7 @@ abstract class ShareRepository {
     required int groupId,
     required int permissionTypeId,
   });
-  
+
   Future<PartographShare?> updatePartographShare({
     int? id,
     required String partographId,

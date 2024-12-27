@@ -22,17 +22,14 @@ UserRegisterRequest _$UserRegisterRequestFromJson(Map<String, dynamic> json) {
 mixin _$UserRegisterRequest {
   String? get id =>
       throw _privateConstructorUsedError; // Identificador único del usuario (usualmente autogenerado por el servidor)
-  String get nombres =>
-      throw _privateConstructorUsedError; // Nombres del usuario
-  String get apellidos =>
+  String get name => throw _privateConstructorUsedError; // Nombres del usuario
+  String get secondName =>
       throw _privateConstructorUsedError; // Apellidos del usuario
-  String get nombreUsuario =>
+  String get userName =>
       throw _privateConstructorUsedError; // Nombre de usuario para inicio de sesión
   String get email =>
       throw _privateConstructorUsedError; // Correo electrónico del usuario
-  int? get phoneNumber =>
-      throw _privateConstructorUsedError; // Número telefónico del usuario (opcional)
-  String get passwordHash => throw _privateConstructorUsedError;
+  double? get phoneNumber => throw _privateConstructorUsedError;
 
   /// Serializes this UserRegisterRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,12 +49,11 @@ abstract class $UserRegisterRequestCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      String nombres,
-      String apellidos,
-      String nombreUsuario,
+      String name,
+      String secondName,
+      String userName,
       String email,
-      int? phoneNumber,
-      String passwordHash});
+      double? phoneNumber});
 }
 
 /// @nodoc
@@ -76,29 +72,28 @@ class _$UserRegisterRequestCopyWithImpl<$Res, $Val extends UserRegisterRequest>
   @override
   $Res call({
     Object? id = freezed,
-    Object? nombres = null,
-    Object? apellidos = null,
-    Object? nombreUsuario = null,
+    Object? name = null,
+    Object? secondName = null,
+    Object? userName = null,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? passwordHash = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      nombres: null == nombres
-          ? _value.nombres
-          : nombres // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      apellidos: null == apellidos
-          ? _value.apellidos
-          : apellidos // ignore: cast_nullable_to_non_nullable
+      secondName: null == secondName
+          ? _value.secondName
+          : secondName // ignore: cast_nullable_to_non_nullable
               as String,
-      nombreUsuario: null == nombreUsuario
-          ? _value.nombreUsuario
-          : nombreUsuario // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -107,11 +102,7 @@ class _$UserRegisterRequestCopyWithImpl<$Res, $Val extends UserRegisterRequest>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
-      passwordHash: null == passwordHash
-          ? _value.passwordHash
-          : passwordHash // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double?,
     ) as $Val);
   }
 }
@@ -126,12 +117,11 @@ abstract class _$$UserRegisterRequestImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
-      String nombres,
-      String apellidos,
-      String nombreUsuario,
+      String name,
+      String secondName,
+      String userName,
       String email,
-      int? phoneNumber,
-      String passwordHash});
+      double? phoneNumber});
 }
 
 /// @nodoc
@@ -148,29 +138,28 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? nombres = null,
-    Object? apellidos = null,
-    Object? nombreUsuario = null,
+    Object? name = null,
+    Object? secondName = null,
+    Object? userName = null,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? passwordHash = null,
   }) {
     return _then(_$UserRegisterRequestImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      nombres: null == nombres
-          ? _value.nombres
-          : nombres // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      apellidos: null == apellidos
-          ? _value.apellidos
-          : apellidos // ignore: cast_nullable_to_non_nullable
+      secondName: null == secondName
+          ? _value.secondName
+          : secondName // ignore: cast_nullable_to_non_nullable
               as String,
-      nombreUsuario: null == nombreUsuario
-          ? _value.nombreUsuario
-          : nombreUsuario // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -179,11 +168,7 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
-      passwordHash: null == passwordHash
-          ? _value.passwordHash
-          : passwordHash // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double?,
     ));
   }
 }
@@ -193,12 +178,11 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
 class _$UserRegisterRequestImpl implements _UserRegisterRequest {
   const _$UserRegisterRequestImpl(
       {this.id,
-      required this.nombres,
-      required this.apellidos,
-      required this.nombreUsuario,
+      required this.name,
+      required this.secondName,
+      required this.userName,
       required this.email,
-      this.phoneNumber,
-      required this.passwordHash});
+      this.phoneNumber});
 
   factory _$UserRegisterRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserRegisterRequestImplFromJson(json);
@@ -207,26 +191,23 @@ class _$UserRegisterRequestImpl implements _UserRegisterRequest {
   final String? id;
 // Identificador único del usuario (usualmente autogenerado por el servidor)
   @override
-  final String nombres;
+  final String name;
 // Nombres del usuario
   @override
-  final String apellidos;
+  final String secondName;
 // Apellidos del usuario
   @override
-  final String nombreUsuario;
+  final String userName;
 // Nombre de usuario para inicio de sesión
   @override
   final String email;
 // Correo electrónico del usuario
   @override
-  final int? phoneNumber;
-// Número telefónico del usuario (opcional)
-  @override
-  final String passwordHash;
+  final double? phoneNumber;
 
   @override
   String toString() {
-    return 'UserRegisterRequest(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
+    return 'UserRegisterRequest(id: $id, name: $name, secondName: $secondName, userName: $userName, email: $email, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -235,22 +216,20 @@ class _$UserRegisterRequestImpl implements _UserRegisterRequest {
         (other.runtimeType == runtimeType &&
             other is _$UserRegisterRequestImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.nombres, nombres) || other.nombres == nombres) &&
-            (identical(other.apellidos, apellidos) ||
-                other.apellidos == apellidos) &&
-            (identical(other.nombreUsuario, nombreUsuario) ||
-                other.nombreUsuario == nombreUsuario) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.secondName, secondName) ||
+                other.secondName == secondName) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.passwordHash, passwordHash) ||
-                other.passwordHash == passwordHash));
+                other.phoneNumber == phoneNumber));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nombres, apellidos,
-      nombreUsuario, email, phoneNumber, passwordHash);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, secondName, userName, email, phoneNumber);
 
   /// Create a copy of UserRegisterRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -272,12 +251,11 @@ class _$UserRegisterRequestImpl implements _UserRegisterRequest {
 abstract class _UserRegisterRequest implements UserRegisterRequest {
   const factory _UserRegisterRequest(
       {final String? id,
-      required final String nombres,
-      required final String apellidos,
-      required final String nombreUsuario,
+      required final String name,
+      required final String secondName,
+      required final String userName,
       required final String email,
-      final int? phoneNumber,
-      required final String passwordHash}) = _$UserRegisterRequestImpl;
+      final double? phoneNumber}) = _$UserRegisterRequestImpl;
 
   factory _UserRegisterRequest.fromJson(Map<String, dynamic> json) =
       _$UserRegisterRequestImpl.fromJson;
@@ -286,17 +264,15 @@ abstract class _UserRegisterRequest implements UserRegisterRequest {
   String?
       get id; // Identificador único del usuario (usualmente autogenerado por el servidor)
   @override
-  String get nombres; // Nombres del usuario
+  String get name; // Nombres del usuario
   @override
-  String get apellidos; // Apellidos del usuario
+  String get secondName; // Apellidos del usuario
   @override
-  String get nombreUsuario; // Nombre de usuario para inicio de sesión
+  String get userName; // Nombre de usuario para inicio de sesión
   @override
   String get email; // Correo electrónico del usuario
   @override
-  int? get phoneNumber; // Número telefónico del usuario (opcional)
-  @override
-  String get passwordHash;
+  double? get phoneNumber;
 
   /// Create a copy of UserRegisterRequest
   /// with the given fields replaced by the non-null parameter values.

@@ -98,13 +98,12 @@ class _AuthenticationService implements AuthenticationService {
   }
 
   @override
-  Future<ApiResponse<UserAuthentication>> register(
-      UserRegisterRequest request) async {
+  Future<ApiResponse<String>> register(UserRegisterRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _options = _setStreamType<ApiResponse<UserAuthentication>>(Options(
+    final _options = _setStreamType<ApiResponse<String>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -121,11 +120,11 @@ class _AuthenticationService implements AuthenticationService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ApiResponse<UserAuthentication> _value;
+    late ApiResponse<String> _value;
     try {
-      _value = ApiResponse<UserAuthentication>.fromJson(
+      _value = ApiResponse<String>.fromJson(
         _result.data!,
-        (json) => UserAuthentication.fromJson(json as Map<String, dynamic>),
+        (json) => json as String,
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -135,35 +134,33 @@ class _AuthenticationService implements AuthenticationService {
   }
 
   @override
-  Future<ApiResponse<AuthenticationResponse>> logout(
-      TokenRequest request) async {
+  Future<ApiResponse<String>> logout(TokenRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<AuthenticationResponse>>(Options(
+    final _options = _setStreamType<ApiResponse<String>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/api/auth/logout',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+        .compose(
+          _dio.options,
+          '/api/auth/logout',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ApiResponse<AuthenticationResponse> _value;
+    late ApiResponse<String> _value;
     try {
-      _value = ApiResponse<AuthenticationResponse>.fromJson(
+      _value = ApiResponse<String>.fromJson(
         _result.data!,
-        (json) => AuthenticationResponse.fromJson(json as Map<String, dynamic>),
+        (json) => json as String,
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

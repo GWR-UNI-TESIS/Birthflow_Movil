@@ -71,6 +71,10 @@ class AuthenticationBloc
       if (result.authenticationCode == AuthenticationCode.success) {
         emit(Authenticated(response: result.user!));
       }
+
+      if (result.authenticationCode == AuthenticationCode.unauthorized) {
+        emit(Unauthenticated(message: result.message));
+      }
       if (result.authenticationCode == AuthenticationCode.error) {
         emit(Failure(error: result.message));
       }
@@ -85,15 +89,14 @@ class AuthenticationBloc
   ) async {
     emit(const AuthLoading());
     try {
-      _createUserUsecase.execute(
+      final result = await _createUserUsecase.execute(
         name: event.nombres,
         secondName: event.apellidos,
         email: event.email,
         userName: event.nombreUsuario,
-        password: event.passwordHash,
-        phoneNumber: int.tryParse(event.phoneNumber!)!,
+        phoneNumber: double.tryParse(event.phoneNumber!)!,
       );
-      emit(const RegistrationSuccess());
+      emit(RegistrationSuccess(message: result));
     } catch (e) {
       emit(Failure(error: e.toString()));
     }

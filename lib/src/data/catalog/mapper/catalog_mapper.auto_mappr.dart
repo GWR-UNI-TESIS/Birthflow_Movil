@@ -9,13 +9,22 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 
+import '../../../domain/catalog/entities/activity.dart' as _i15;
 import '../../../domain/catalog/entities/catalog.dart' as _i3;
+import '../../../domain/catalog/entities/filter.dart' as _i13;
 import '../../../domain/catalog/entities/hodge_plane.dart' as _i7;
+import '../../../domain/catalog/entities/hour_filter.dart' as _i17;
+import '../../../domain/catalog/entities/permission_type.dart' as _i19;
 import '../../../domain/catalog/entities/position.dart' as _i5;
 import '../../../domain/catalog/entities/work_time.dart' as _i9;
 import '../../../domain/catalog/entities/work_time_item.dart' as _i11;
+import '../models/activity_response/activity_response.dart' as _i14;
 import '../models/catalog_response/catalog_response.dart' as _i2;
+import '../models/filter_response/filter_response.dart' as _i12;
 import '../models/hodge_plane_response/hodge_plane_response.dart' as _i6;
+import '../models/hour_filter_response/hour_filter_response.dart' as _i16;
+import '../models/permission_type_response/permission_type_response.dart'
+    as _i18;
 import '../models/position_response/position_response.dart' as _i4;
 import '../models/work_time_item_response/work_time_item_response.dart' as _i10;
 import '../models/work_time_response/work_time_response.dart' as _i8;
@@ -27,6 +36,10 @@ import '../models/work_time_response/work_time_response.dart' as _i8;
 /// - `HodgePlaneResponse` → `HodgePlane`.
 /// - `WorkTimeResponse` → `WorkTime`.
 /// - `WorkTimeItemResponse` → `WorkTimeItem`.
+/// - `FilterResponse` → `Filter`.
+/// - `ActivityResponse` → `Activity`.
+/// - `HourFilterResponse` → `HourFilter`.
+/// - `PermissionTypeResponse` → `PermissionType`.
 /// {@endtemplate}
 class $CatalogMapper implements _i1.AutoMapprInterface {
   const $CatalogMapper();
@@ -69,6 +82,30 @@ class $CatalogMapper implements _i1.AutoMapprInterface {
             sourceTypeOf == _typeOf<_i10.WorkTimeItemResponse?>()) &&
         (targetTypeOf == _typeOf<_i11.WorkTimeItem>() ||
             targetTypeOf == _typeOf<_i11.WorkTimeItem?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i12.FilterResponse>() ||
+            sourceTypeOf == _typeOf<_i12.FilterResponse?>()) &&
+        (targetTypeOf == _typeOf<_i13.Filter>() ||
+            targetTypeOf == _typeOf<_i13.Filter?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i14.ActivityResponse>() ||
+            sourceTypeOf == _typeOf<_i14.ActivityResponse?>()) &&
+        (targetTypeOf == _typeOf<_i15.Activity>() ||
+            targetTypeOf == _typeOf<_i15.Activity?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i16.HourFilterResponse>() ||
+            sourceTypeOf == _typeOf<_i16.HourFilterResponse?>()) &&
+        (targetTypeOf == _typeOf<_i17.HourFilter>() ||
+            targetTypeOf == _typeOf<_i17.HourFilter?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i18.PermissionTypeResponse>() ||
+            sourceTypeOf == _typeOf<_i18.PermissionTypeResponse?>()) &&
+        (targetTypeOf == _typeOf<_i19.PermissionType>() ||
+            targetTypeOf == _typeOf<_i19.PermissionType?>())) {
       return true;
     }
     if (recursive) {
@@ -312,6 +349,46 @@ class $CatalogMapper implements _i1.AutoMapprInterface {
       return (_map__i10$WorkTimeItemResponse_To__i11$WorkTimeItem(
           (model as _i10.WorkTimeItemResponse?)) as TARGET);
     }
+    if ((sourceTypeOf == _typeOf<_i12.FilterResponse>() ||
+            sourceTypeOf == _typeOf<_i12.FilterResponse?>()) &&
+        (targetTypeOf == _typeOf<_i13.Filter>() ||
+            targetTypeOf == _typeOf<_i13.Filter?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i12$FilterResponse_To__i13$Filter(
+          (model as _i12.FilterResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i14.ActivityResponse>() ||
+            sourceTypeOf == _typeOf<_i14.ActivityResponse?>()) &&
+        (targetTypeOf == _typeOf<_i15.Activity>() ||
+            targetTypeOf == _typeOf<_i15.Activity?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i14$ActivityResponse_To__i15$Activity(
+          (model as _i14.ActivityResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i16.HourFilterResponse>() ||
+            sourceTypeOf == _typeOf<_i16.HourFilterResponse?>()) &&
+        (targetTypeOf == _typeOf<_i17.HourFilter>() ||
+            targetTypeOf == _typeOf<_i17.HourFilter?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i16$HourFilterResponse_To__i17$HourFilter(
+          (model as _i16.HourFilterResponse?)) as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i18.PermissionTypeResponse>() ||
+            sourceTypeOf == _typeOf<_i18.PermissionTypeResponse?>()) &&
+        (targetTypeOf == _typeOf<_i19.PermissionType>() ||
+            targetTypeOf == _typeOf<_i19.PermissionType?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i18$PermissionTypeResponse_To__i19$PermissionType(
+          (model as _i18.PermissionTypeResponse?)) as TARGET);
+    }
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
   }
 
@@ -368,6 +445,22 @@ class $CatalogMapper implements _i1.AutoMapprInterface {
       workTimeCatalog: model.workTimeCatalog
           .map<_i9.WorkTime>(
               (value) => _map__i8$WorkTimeResponse_To__i9$WorkTime(value))
+          .toList(),
+      filterCatalog: model.filterCatalog
+          .map<_i13.Filter>(
+              (value) => _map__i12$FilterResponse_To__i13$Filter(value))
+          .toList(),
+      activityCatalog: model.activityCatalog
+          .map<_i15.Activity>(
+              (value) => _map__i14$ActivityResponse_To__i15$Activity(value))
+          .toList(),
+      hourFilterCatalog: model.hourFilterCatalog
+          .map<_i17.HourFilter>(
+              (value) => _map__i16$HourFilterResponse_To__i17$HourFilter(value))
+          .toList(),
+      permissionTypeCatalog: model.permissionTypeCatalog
+          .map<_i19.PermissionType>((value) =>
+              _map__i18$PermissionTypeResponse_To__i19$PermissionType(value))
           .toList(),
     );
   }
@@ -436,6 +529,65 @@ class $CatalogMapper implements _i1.AutoMapprInterface {
       workTimeId: model.workTimeId,
       cervicalDilation: model.cervicalDilation,
       time: model.time,
+    );
+  }
+
+  _i13.Filter _map__i12$FilterResponse_To__i13$Filter(
+      _i12.FilterResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping FilterResponse → Filter failed because FilterResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<FilterResponse, Filter> to handle null values during mapping.');
+    }
+    return _i13.Filter(
+      id: model.id,
+      description: model.description,
+    );
+  }
+
+  _i15.Activity _map__i14$ActivityResponse_To__i15$Activity(
+      _i14.ActivityResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping ActivityResponse → Activity failed because ActivityResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<ActivityResponse, Activity> to handle null values during mapping.');
+    }
+    return _i15.Activity(
+      id: model.id,
+      description: model.description,
+    );
+  }
+
+  _i17.HourFilter _map__i16$HourFilterResponse_To__i17$HourFilter(
+      _i16.HourFilterResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping HourFilterResponse → HourFilter failed because HourFilterResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<HourFilterResponse, HourFilter> to handle null values during mapping.');
+    }
+    return _i17.HourFilter(
+      id: model.id,
+      description: model.description,
+    );
+  }
+
+  _i19.PermissionType _map__i18$PermissionTypeResponse_To__i19$PermissionType(
+      _i18.PermissionTypeResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping PermissionTypeResponse → PermissionType failed because PermissionTypeResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<PermissionTypeResponse, PermissionType> to handle null values during mapping.');
+    }
+    return _i19.PermissionType(
+      id: model.id,
+      identificator: model.identificator,
+      name: model.name,
+      description: model.description,
+      createAt: model.createAt,
     );
   }
 }

@@ -1,5 +1,15 @@
+import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/permission_type.dart';
+import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/delegate/user_group_search_delegate.dart';
+import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
+import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ListItemWidget extends StatelessWidget {
@@ -23,13 +33,16 @@ class ListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FocusNode buttonFocusNode = FocusNode();
+    final catalog = context.watch<CatalogCubit>().state;
 
     return MenuAnchor(
       childFocusNode: buttonFocusNode,
       alignmentOffset: const Offset(200, 0),
       menuChildren: <Widget>[
         MenuItemButton(
-          onPressed: () {},
+          onPressed: () {
+            _showShareDialog(context, partographId, catalog);
+          },
           child: const Text('Compartir'),
         ),
         const Divider(),
@@ -91,26 +104,136 @@ class ListItemWidget extends StatelessWidget {
     );
   }
 
-   void _showShareDialog(BuildContext context, String partographId) {
+  void _showShareDialog(
+    BuildContext context,
+    String partographId,
+    Catalog catalog,
+  ) {
+    final TextEditingController _searchController = TextEditingController();
+    PermissionType permissionType = catalog.permissionTypeCatalog.first;
+    final List<SearchUserGroup> sharedList =
+        []; // Lista de usuarios/grupos compartidos
+
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           title: const Text('Compartir Partograma'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-             
-            ],
+          content: BlocProvider(
+            create: (context) => ShareBloc(
+              getGroupUseCase: locator<GetSearchUserGroupUseCase>(),
+            ),
+            child: StatefulBuilder(
+              builder: (context, setState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Barra de búsqueda
+                    TextField(
+                      controller: _searchController,
+                      readOnly: true, // Evita la escritura directa
+                      onTap: () async {
+                        final SearchUserGroup? result =
+                            await showSearch<SearchUserGroup?>(
+                          context: context,
+                          delegate: UserGroupSearchDelegate(
+                            bloc: context.read<ShareBloc>(),
+                          ),
+                        );
+                        if (result != null &&
+                            !sharedList.any((item) => isEqual(result, item))) {
+                          // Agrega el resultado a la lista con permisos por defecto
+                          setState(() {
+                            sharedList.add(result);
+                          });
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Buscar usuarios o grupos',
+                        suffixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    DynamicDropdownButton<PermissionType>(
+                      list: catalog.permissionTypeCatalog,
+                      labelText: 'Permisos',
+                      onValueChanged: (value) {
+                        permissionType = value;
+                      },
+                      displayField: (PermissionType permissionType) =>
+                          permissionType.name,
+                      initialValue: permissionType,
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      'Usuarios o grupos seleccionados',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 5),
+                    // Lista de usuarios o grupos seleccionados
+                    if (sharedList.isNotEmpty)
+                      SizedBox(
+                        height: 100,
+                        width: 300,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: sharedList.length,
+                          itemBuilder: (context, index) {
+                            final item = sharedList[index];
+                            return ListTile(
+                              title: Text(item.name),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    sharedList.removeWhere(
+                                      (current) =>
+                                          current.name == item.name &&
+                                          (current.userId == item.userId ||
+                                              current.groupId == item.groupId),
+                                    );
+                                  });
+                                },
+                                icon: const Icon(Icons.delete),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    else
+                      const Text(
+                        'No hay usuarios o grupos seleccionados',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                  ],
+                );
+              },
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
               child: const Text('Cancelar'),
             ),
+            TextButton(
+              onPressed: () {
+                // Lógica para manejar la lista compartida
+                debugPrint('Compartido con: $sharedList');
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Aceptar'),
+            ),
           ],
         );
       },
     );
+  }
+
+  bool isEqual(SearchUserGroup obj1, SearchUserGroup obj2) {
+    return obj1.name == obj2.name &&
+        obj1.userId == obj2.userId &&
+        obj1.groupId == obj2.groupId &&
+        obj1.type == obj2.type;
   }
 }

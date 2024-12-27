@@ -12,7 +12,7 @@ class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState.loading() = AuthLoading;
 
   // Estado después de un registro exitoso
-  const factory AuthenticationState.registrationSuccess() = RegistrationSuccess;
+  const factory AuthenticationState.registrationSuccess({required String message}) = RegistrationSuccess;
 
   // Estado después de una autenticación exitosa (ej. inicio de sesión)
   const factory AuthenticationState.authenticated({

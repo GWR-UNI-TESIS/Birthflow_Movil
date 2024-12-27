@@ -20,7 +20,6 @@ class AuthenticationEvent with _$AuthenticationEvent {
     required String nombreUsuario,
     required String email,
     String? phoneNumber,
-    required String passwordHash,
   }) = Register;
 
   // Evento disparado para verificar el estado de autenticación del usuario

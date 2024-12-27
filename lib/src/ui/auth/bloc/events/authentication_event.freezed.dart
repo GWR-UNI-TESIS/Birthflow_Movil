@@ -20,14 +20,8 @@ mixin _$AuthenticationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function() logout,
-    required TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)
+    required TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)
         register,
     required TResult Function() refreshToken,
   }) =>
@@ -36,14 +30,8 @@ mixin _$AuthenticationEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function()? logout,
-    TResult? Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult? Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult? Function()? refreshToken,
   }) =>
@@ -52,14 +40,8 @@ mixin _$AuthenticationEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function()? logout,
-    TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult Function()? refreshToken,
     required TResult orElse(),
@@ -193,14 +175,8 @@ class _$LoggedInImpl implements LoggedIn {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function() logout,
-    required TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)
+    required TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)
         register,
     required TResult Function() refreshToken,
   }) {
@@ -212,14 +188,8 @@ class _$LoggedInImpl implements LoggedIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function()? logout,
-    TResult? Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult? Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult? Function()? refreshToken,
   }) {
@@ -231,14 +201,8 @@ class _$LoggedInImpl implements LoggedIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function()? logout,
-    TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult Function()? refreshToken,
     required TResult orElse(),
@@ -345,14 +309,8 @@ class _$LogoutImpl implements Logout {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function() logout,
-    required TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)
+    required TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)
         register,
     required TResult Function() refreshToken,
   }) {
@@ -364,14 +322,8 @@ class _$LogoutImpl implements Logout {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function()? logout,
-    TResult? Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult? Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult? Function()? refreshToken,
   }) {
@@ -383,14 +335,8 @@ class _$LogoutImpl implements Logout {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function()? logout,
-    TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult Function()? refreshToken,
     required TResult orElse(),
@@ -455,8 +401,7 @@ abstract class _$$RegisterImplCopyWith<$Res> {
       String apellidos,
       String nombreUsuario,
       String email,
-      String? phoneNumber,
-      String passwordHash});
+      String? phoneNumber});
 }
 
 /// @nodoc
@@ -478,7 +423,6 @@ class __$$RegisterImplCopyWithImpl<$Res>
     Object? nombreUsuario = null,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? passwordHash = null,
   }) {
     return _then(_$RegisterImpl(
       id: null == id
@@ -505,10 +449,6 @@ class __$$RegisterImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      passwordHash: null == passwordHash
-          ? _value.passwordHash
-          : passwordHash // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -522,8 +462,7 @@ class _$RegisterImpl implements Register {
       required this.apellidos,
       required this.nombreUsuario,
       required this.email,
-      this.phoneNumber,
-      required this.passwordHash});
+      this.phoneNumber});
 
   @override
   final int id;
@@ -537,12 +476,10 @@ class _$RegisterImpl implements Register {
   final String email;
   @override
   final String? phoneNumber;
-  @override
-  final String passwordHash;
 
   @override
   String toString() {
-    return 'AuthenticationEvent.register(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
+    return 'AuthenticationEvent.register(id: $id, nombres: $nombres, apellidos: $apellidos, nombreUsuario: $nombreUsuario, email: $email, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -558,14 +495,12 @@ class _$RegisterImpl implements Register {
                 other.nombreUsuario == nombreUsuario) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.passwordHash, passwordHash) ||
-                other.passwordHash == passwordHash));
+                other.phoneNumber == phoneNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, nombres, apellidos,
-      nombreUsuario, email, phoneNumber, passwordHash);
+  int get hashCode => Object.hash(
+      runtimeType, id, nombres, apellidos, nombreUsuario, email, phoneNumber);
 
   /// Create a copy of AuthenticationEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -580,19 +515,12 @@ class _$RegisterImpl implements Register {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function() logout,
-    required TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)
+    required TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)
         register,
     required TResult Function() refreshToken,
   }) {
-    return register(id, nombres, apellidos, nombreUsuario, email, phoneNumber,
-        passwordHash);
+    return register(id, nombres, apellidos, nombreUsuario, email, phoneNumber);
   }
 
   @override
@@ -600,19 +528,13 @@ class _$RegisterImpl implements Register {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function()? logout,
-    TResult? Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult? Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult? Function()? refreshToken,
   }) {
-    return register?.call(id, nombres, apellidos, nombreUsuario, email,
-        phoneNumber, passwordHash);
+    return register?.call(
+        id, nombres, apellidos, nombreUsuario, email, phoneNumber);
   }
 
   @override
@@ -620,21 +542,15 @@ class _$RegisterImpl implements Register {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function()? logout,
-    TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult Function()? refreshToken,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(id, nombres, apellidos, nombreUsuario, email, phoneNumber,
-          passwordHash);
+      return register(
+          id, nombres, apellidos, nombreUsuario, email, phoneNumber);
     }
     return orElse();
   }
@@ -684,8 +600,7 @@ abstract class Register implements AuthenticationEvent {
       required final String apellidos,
       required final String nombreUsuario,
       required final String email,
-      final String? phoneNumber,
-      required final String passwordHash}) = _$RegisterImpl;
+      final String? phoneNumber}) = _$RegisterImpl;
 
   int get id;
   String get nombres;
@@ -693,7 +608,6 @@ abstract class Register implements AuthenticationEvent {
   String get nombreUsuario;
   String get email;
   String? get phoneNumber;
-  String get passwordHash;
 
   /// Create a copy of AuthenticationEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -745,14 +659,8 @@ class _$RefreshTokenImpl implements RefreshToken {
   TResult when<TResult extends Object?>({
     required TResult Function(String username, String password) loggedIn,
     required TResult Function() logout,
-    required TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)
+    required TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)
         register,
     required TResult Function() refreshToken,
   }) {
@@ -764,14 +672,8 @@ class _$RefreshTokenImpl implements RefreshToken {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String username, String password)? loggedIn,
     TResult? Function()? logout,
-    TResult? Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult? Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult? Function()? refreshToken,
   }) {
@@ -783,14 +685,8 @@ class _$RefreshTokenImpl implements RefreshToken {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String username, String password)? loggedIn,
     TResult Function()? logout,
-    TResult Function(
-            int id,
-            String nombres,
-            String apellidos,
-            String nombreUsuario,
-            String email,
-            String? phoneNumber,
-            String passwordHash)?
+    TResult Function(int id, String nombres, String apellidos,
+            String nombreUsuario, String email, String? phoneNumber)?
         register,
     TResult Function()? refreshToken,
     required TResult orElse(),

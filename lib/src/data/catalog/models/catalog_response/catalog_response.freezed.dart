@@ -28,6 +28,13 @@ mixin _$CatalogResponse {
       throw _privateConstructorUsedError;
   List<WorkTimeResponse> get workTimeCatalog =>
       throw _privateConstructorUsedError;
+  List<FilterResponse> get filterCatalog => throw _privateConstructorUsedError;
+  List<ActivityResponse> get activityCatalog =>
+      throw _privateConstructorUsedError;
+  List<HourFilterResponse> get hourFilterCatalog =>
+      throw _privateConstructorUsedError;
+  List<PermissionTypeResponse> get permissionTypeCatalog =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this CatalogResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +56,11 @@ abstract class $CatalogResponseCopyWith<$Res> {
       {List<HodgePlaneResponse> hodgePlanesCatalog,
       List<PositionResponse> positionCatalog,
       List<WorkTimeItemResponse> workTimeItemsCatalog,
-      List<WorkTimeResponse> workTimeCatalog});
+      List<WorkTimeResponse> workTimeCatalog,
+      List<FilterResponse> filterCatalog,
+      List<ActivityResponse> activityCatalog,
+      List<HourFilterResponse> hourFilterCatalog,
+      List<PermissionTypeResponse> permissionTypeCatalog});
 }
 
 /// @nodoc
@@ -71,6 +82,10 @@ class _$CatalogResponseCopyWithImpl<$Res, $Val extends CatalogResponse>
     Object? positionCatalog = null,
     Object? workTimeItemsCatalog = null,
     Object? workTimeCatalog = null,
+    Object? filterCatalog = null,
+    Object? activityCatalog = null,
+    Object? hourFilterCatalog = null,
+    Object? permissionTypeCatalog = null,
   }) {
     return _then(_value.copyWith(
       hodgePlanesCatalog: null == hodgePlanesCatalog
@@ -89,6 +104,22 @@ class _$CatalogResponseCopyWithImpl<$Res, $Val extends CatalogResponse>
           ? _value.workTimeCatalog
           : workTimeCatalog // ignore: cast_nullable_to_non_nullable
               as List<WorkTimeResponse>,
+      filterCatalog: null == filterCatalog
+          ? _value.filterCatalog
+          : filterCatalog // ignore: cast_nullable_to_non_nullable
+              as List<FilterResponse>,
+      activityCatalog: null == activityCatalog
+          ? _value.activityCatalog
+          : activityCatalog // ignore: cast_nullable_to_non_nullable
+              as List<ActivityResponse>,
+      hourFilterCatalog: null == hourFilterCatalog
+          ? _value.hourFilterCatalog
+          : hourFilterCatalog // ignore: cast_nullable_to_non_nullable
+              as List<HourFilterResponse>,
+      permissionTypeCatalog: null == permissionTypeCatalog
+          ? _value.permissionTypeCatalog
+          : permissionTypeCatalog // ignore: cast_nullable_to_non_nullable
+              as List<PermissionTypeResponse>,
     ) as $Val);
   }
 }
@@ -105,7 +136,11 @@ abstract class _$$CatalogResponseImplCopyWith<$Res>
       {List<HodgePlaneResponse> hodgePlanesCatalog,
       List<PositionResponse> positionCatalog,
       List<WorkTimeItemResponse> workTimeItemsCatalog,
-      List<WorkTimeResponse> workTimeCatalog});
+      List<WorkTimeResponse> workTimeCatalog,
+      List<FilterResponse> filterCatalog,
+      List<ActivityResponse> activityCatalog,
+      List<HourFilterResponse> hourFilterCatalog,
+      List<PermissionTypeResponse> permissionTypeCatalog});
 }
 
 /// @nodoc
@@ -125,6 +160,10 @@ class __$$CatalogResponseImplCopyWithImpl<$Res>
     Object? positionCatalog = null,
     Object? workTimeItemsCatalog = null,
     Object? workTimeCatalog = null,
+    Object? filterCatalog = null,
+    Object? activityCatalog = null,
+    Object? hourFilterCatalog = null,
+    Object? permissionTypeCatalog = null,
   }) {
     return _then(_$CatalogResponseImpl(
       hodgePlanesCatalog: null == hodgePlanesCatalog
@@ -143,6 +182,22 @@ class __$$CatalogResponseImplCopyWithImpl<$Res>
           ? _value._workTimeCatalog
           : workTimeCatalog // ignore: cast_nullable_to_non_nullable
               as List<WorkTimeResponse>,
+      filterCatalog: null == filterCatalog
+          ? _value._filterCatalog
+          : filterCatalog // ignore: cast_nullable_to_non_nullable
+              as List<FilterResponse>,
+      activityCatalog: null == activityCatalog
+          ? _value._activityCatalog
+          : activityCatalog // ignore: cast_nullable_to_non_nullable
+              as List<ActivityResponse>,
+      hourFilterCatalog: null == hourFilterCatalog
+          ? _value._hourFilterCatalog
+          : hourFilterCatalog // ignore: cast_nullable_to_non_nullable
+              as List<HourFilterResponse>,
+      permissionTypeCatalog: null == permissionTypeCatalog
+          ? _value._permissionTypeCatalog
+          : permissionTypeCatalog // ignore: cast_nullable_to_non_nullable
+              as List<PermissionTypeResponse>,
     ));
   }
 }
@@ -154,11 +209,19 @@ class _$CatalogResponseImpl implements _CatalogResponse {
       {required final List<HodgePlaneResponse> hodgePlanesCatalog,
       required final List<PositionResponse> positionCatalog,
       required final List<WorkTimeItemResponse> workTimeItemsCatalog,
-      required final List<WorkTimeResponse> workTimeCatalog})
+      required final List<WorkTimeResponse> workTimeCatalog,
+      required final List<FilterResponse> filterCatalog,
+      required final List<ActivityResponse> activityCatalog,
+      required final List<HourFilterResponse> hourFilterCatalog,
+      required final List<PermissionTypeResponse> permissionTypeCatalog})
       : _hodgePlanesCatalog = hodgePlanesCatalog,
         _positionCatalog = positionCatalog,
         _workTimeItemsCatalog = workTimeItemsCatalog,
-        _workTimeCatalog = workTimeCatalog;
+        _workTimeCatalog = workTimeCatalog,
+        _filterCatalog = filterCatalog,
+        _activityCatalog = activityCatalog,
+        _hourFilterCatalog = hourFilterCatalog,
+        _permissionTypeCatalog = permissionTypeCatalog;
 
   factory _$CatalogResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$CatalogResponseImplFromJson(json);
@@ -197,9 +260,43 @@ class _$CatalogResponseImpl implements _CatalogResponse {
     return EqualUnmodifiableListView(_workTimeCatalog);
   }
 
+  final List<FilterResponse> _filterCatalog;
+  @override
+  List<FilterResponse> get filterCatalog {
+    if (_filterCatalog is EqualUnmodifiableListView) return _filterCatalog;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filterCatalog);
+  }
+
+  final List<ActivityResponse> _activityCatalog;
+  @override
+  List<ActivityResponse> get activityCatalog {
+    if (_activityCatalog is EqualUnmodifiableListView) return _activityCatalog;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activityCatalog);
+  }
+
+  final List<HourFilterResponse> _hourFilterCatalog;
+  @override
+  List<HourFilterResponse> get hourFilterCatalog {
+    if (_hourFilterCatalog is EqualUnmodifiableListView)
+      return _hourFilterCatalog;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_hourFilterCatalog);
+  }
+
+  final List<PermissionTypeResponse> _permissionTypeCatalog;
+  @override
+  List<PermissionTypeResponse> get permissionTypeCatalog {
+    if (_permissionTypeCatalog is EqualUnmodifiableListView)
+      return _permissionTypeCatalog;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_permissionTypeCatalog);
+  }
+
   @override
   String toString() {
-    return 'CatalogResponse(hodgePlanesCatalog: $hodgePlanesCatalog, positionCatalog: $positionCatalog, workTimeItemsCatalog: $workTimeItemsCatalog, workTimeCatalog: $workTimeCatalog)';
+    return 'CatalogResponse(hodgePlanesCatalog: $hodgePlanesCatalog, positionCatalog: $positionCatalog, workTimeItemsCatalog: $workTimeItemsCatalog, workTimeCatalog: $workTimeCatalog, filterCatalog: $filterCatalog, activityCatalog: $activityCatalog, hourFilterCatalog: $hourFilterCatalog, permissionTypeCatalog: $permissionTypeCatalog)';
   }
 
   @override
@@ -214,7 +311,15 @@ class _$CatalogResponseImpl implements _CatalogResponse {
             const DeepCollectionEquality()
                 .equals(other._workTimeItemsCatalog, _workTimeItemsCatalog) &&
             const DeepCollectionEquality()
-                .equals(other._workTimeCatalog, _workTimeCatalog));
+                .equals(other._workTimeCatalog, _workTimeCatalog) &&
+            const DeepCollectionEquality()
+                .equals(other._filterCatalog, _filterCatalog) &&
+            const DeepCollectionEquality()
+                .equals(other._activityCatalog, _activityCatalog) &&
+            const DeepCollectionEquality()
+                .equals(other._hourFilterCatalog, _hourFilterCatalog) &&
+            const DeepCollectionEquality()
+                .equals(other._permissionTypeCatalog, _permissionTypeCatalog));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -224,7 +329,11 @@ class _$CatalogResponseImpl implements _CatalogResponse {
       const DeepCollectionEquality().hash(_hodgePlanesCatalog),
       const DeepCollectionEquality().hash(_positionCatalog),
       const DeepCollectionEquality().hash(_workTimeItemsCatalog),
-      const DeepCollectionEquality().hash(_workTimeCatalog));
+      const DeepCollectionEquality().hash(_workTimeCatalog),
+      const DeepCollectionEquality().hash(_filterCatalog),
+      const DeepCollectionEquality().hash(_activityCatalog),
+      const DeepCollectionEquality().hash(_hourFilterCatalog),
+      const DeepCollectionEquality().hash(_permissionTypeCatalog));
 
   /// Create a copy of CatalogResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -248,7 +357,11 @@ abstract class _CatalogResponse implements CatalogResponse {
           {required final List<HodgePlaneResponse> hodgePlanesCatalog,
           required final List<PositionResponse> positionCatalog,
           required final List<WorkTimeItemResponse> workTimeItemsCatalog,
-          required final List<WorkTimeResponse> workTimeCatalog}) =
+          required final List<WorkTimeResponse> workTimeCatalog,
+          required final List<FilterResponse> filterCatalog,
+          required final List<ActivityResponse> activityCatalog,
+          required final List<HourFilterResponse> hourFilterCatalog,
+          required final List<PermissionTypeResponse> permissionTypeCatalog}) =
       _$CatalogResponseImpl;
 
   factory _CatalogResponse.fromJson(Map<String, dynamic> json) =
@@ -262,6 +375,14 @@ abstract class _CatalogResponse implements CatalogResponse {
   List<WorkTimeItemResponse> get workTimeItemsCatalog;
   @override
   List<WorkTimeResponse> get workTimeCatalog;
+  @override
+  List<FilterResponse> get filterCatalog;
+  @override
+  List<ActivityResponse> get activityCatalog;
+  @override
+  List<HourFilterResponse> get hourFilterCatalog;
+  @override
+  List<PermissionTypeResponse> get permissionTypeCatalog;
 
   /// Create a copy of CatalogResponse
   /// with the given fields replaced by the non-null parameter values.

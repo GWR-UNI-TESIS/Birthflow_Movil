@@ -1,5 +1,7 @@
 import 'package:birthflow_movil/src/config/router/path.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
@@ -9,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-enum _Options { newPartograph, configuration, information }
+enum _Options { newPartograph, configuration, information, logout }
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -17,11 +19,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AuthenticationBloc>().state;
-    final String user = state.maybeWhen(
+    final String userId = state.maybeWhen(
       authenticated: (response) => response.userId!,
       orElse: () => '',
     );
-    context.read<PartographsBloc>().add(FetchPartographs(userId: user));
+
+    // Solo dispara FetchPartographs si el usuario está autenticado
+    if (userId.isNotEmpty) {
+      context.read<PartographsBloc>().add(FetchPartographs(userId: userId));
+    }
 
     return DefaultTabController(
       length: 1,
@@ -32,149 +38,122 @@ class HomeScreen extends StatelessWidget {
           elevation: 2,
           actions: <Widget>[
             IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState!.openEndDrawer();
-              },
+              onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
               icon: const Icon(Icons.notifications),
             ),
             IconButton(
-              onPressed: () {
-                context.push(
-                  AppPaths.home.search.path,
-                );
-              },
+              onPressed: () => context.push(AppPaths.home.search.path),
               icon: const Icon(Icons.search),
             ),
             PopupMenuButton<_Options>(
-              padding: const EdgeInsets.all(12),
-              position: PopupMenuPosition.under,
-              onSelected: (_Options item) {
-                if (item == _Options.newPartograph) {}
-
-                if (item == _Options.configuration) {}
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<_Options>>[
-                const PopupMenuItem<_Options>(
-                  value: _Options.newPartograph,
-                  child: Text('Nuevo Partograma'),
-                ),
-                const PopupMenuItem<_Options>(
-                  value: _Options.configuration,
-                  child: Text('Configuracion'),
-                ),
-                const PopupMenuItem<_Options>(
-                  value: _Options.information,
-                  child: Text('Informacion'),
-                ),
-                const PopupMenuItem<_Options>(
-                  value: _Options.information,
-                  child: Text('Cerrar sesion'),
-                ),
+              onSelected: (item) => _handleMenuOption(context, item, userId),
+              itemBuilder: (_) => const [
+                PopupMenuItem(value: _Options.newPartograph, child: Text('Nuevo Partograma')),
+                PopupMenuItem(value: _Options.configuration, child: Text('Configuración')),
+                PopupMenuItem(value: _Options.information, child: Text('Información')),
+                PopupMenuItem(value: _Options.logout, child: Text('Cerrar sesión')),
               ],
             ),
           ],
           bottom: const PreferredSize(
-            preferredSize: Size.fromHeight(
-              kToolbarHeight,
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              child: TabBar(
-                tabAlignment: TabAlignment.start,
-                isScrollable: true,
-                tabs: <Widget>[
-                  Tab(
-                    text: 'Partogramas',
-                  ),
-                ],
-              ),
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: TabBar(
+              isScrollable: true,
+              tabs: [Tab(text: 'Partogramas')],
             ),
           ),
         ),
         body: TabBarView(
-          children: <Widget>[
+          children: [
             BlocBuilder<PartographsBloc, PartographsState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                  initial: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loaded: (data) {
-                    return CustomScrollView(
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              if (index == 0) {
-                                return const ListTile(
-                                  leading: Icon(Icons.archive),
-                                  title: Text('Archivados'),
-                                );
-                              } else {
-                                final item = data[index - 1];
-                                final lastModification = (item.updateAt == null)? item.createdAt : item.updateAt;
-                                return ListItemWidget(
-                                  partographId: item.partographId!,
-                                  title: item.name,
-                                  subtitle:
-                                      '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}',
-                                  lastUpdate: DateFormat('yyyy-MM-dd')
-                                      .format(lastModification!),
-                                  set: item.set,
-                                  silenced: item.silenced,
-                                );
-                              }
-                            },
-                            childCount: data.length + 1,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                  error: (errorMessage) =>
-                      Center(child: Text('Error: $errorMessage')),
-                  empty: () => const Center(
-                    child: Text('No hay datos'),
-                  ),
-                  orElse: () => Container(),
-                );
-              },
+              builder: (context, state) => state.when(
+                initial: () => const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                loaded: (data) => _buildPartographsList(data),
+                error: (message) => Center(child: Text('Error: $message')),
+                empty: () => const Center(child: Text('No hay datos')),
+              ),
             ),
           ],
         ),
-        endDrawer: NotificationsDrawer(),
+        endDrawer: const NotificationsDrawer(),
         floatingActionButton: FloatingActionButton(
           tooltip: 'Nuevo',
-          onPressed: () async {
-            final String? value = await context.push(AppPaths.home.create.path);
-
-            if (value != null) {
-              context
-                  .read<PartographsBloc>()
-                  .add(FetchPartographs(userId: user));
-
-              context.go(
-                AppPaths.home.partographPath.define(value).path,
-                extra: value,
-              );
-            }
-          },
+          onPressed: () => _handleNewPartograph(context, userId),
           child: const Icon(Icons.add),
         ),
       ),
     );
   }
+
+  void _handleMenuOption(BuildContext context, _Options item, String userId) {
+    switch (item) {
+      case _Options.newPartograph:
+        // Acción para Nuevo Partograma
+        break;
+      case _Options.configuration:
+        // Acción para Configuración
+        break;
+      case _Options.logout:
+        context.read<AuthenticationBloc>().add(const Logout());
+      default:
+        break;
+    }
+  }
+
+  void _handleNewPartograph(BuildContext context, String userId) async {
+    final String? value = await context.push(AppPaths.home.create.path);
+    if (value != null) {
+      context.read<PartographsBloc>().add(FetchPartographs(userId: userId));
+      context.go(AppPaths.home.partographPath.define(value).path, extra: value);
+    }
+  }
+
+  Widget _buildPartographsList(List<PartographList> data) {
+    return CustomScrollView(
+      slivers: [
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              if (index == 0) {
+                return const ListTile(
+                  leading: Icon(Icons.archive),
+                  title: Text('Archivados'),
+                );
+              } else {
+                final item = data[index - 1];
+                final lastModification = item.updateAt ?? item.createdAt;
+                return ListItemWidget(
+                  partographId: item.partographId!,
+                  title: item.name,
+                  subtitle:
+                      '${item.recordName}-${DateFormat('yyyy-MM-dd').format(item.date)}',
+                  lastUpdate: DateFormat('yyyy-MM-dd').format(lastModification!),
+                  set: item.set,
+                  silenced: item.silenced,
+                );
+              }
+            },
+            childCount: data.length + 1,
+          ),
+        ),
+      ],
+    );
+  }
 }
 
-class NotificationsDrawer extends Drawer {
+class NotificationsDrawer extends StatelessWidget {
+  const NotificationsDrawer();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Notificaciones'),
+    return Drawer(
+      child: Column(
+        children: [
+          AppBar(title: const Text('Notificaciones')),
+          const Expanded(child: Center(child: Text('No hay notificaciones'))),
+        ],
       ),
-      body: Container(),
     );
   }
 }

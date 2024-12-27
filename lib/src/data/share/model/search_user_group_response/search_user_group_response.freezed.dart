@@ -21,11 +21,10 @@ SearchUserGroupResponse _$SearchUserGroupResponseFromJson(
 
 /// @nodoc
 mixin _$SearchUserGroupResponse {
-  int? get id => throw _privateConstructorUsedError;
-  int get partographGroupId => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
-  int get groupId => throw _privateConstructorUsedError;
-  int get permissionTypeId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
+  int? get groupId => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
 
   /// Serializes this SearchUserGroupResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,12 +42,7 @@ abstract class $SearchUserGroupResponseCopyWith<$Res> {
           $Res Function(SearchUserGroupResponse) then) =
       _$SearchUserGroupResponseCopyWithImpl<$Res, SearchUserGroupResponse>;
   @useResult
-  $Res call(
-      {int? id,
-      int partographGroupId,
-      String userId,
-      int groupId,
-      int permissionTypeId});
+  $Res call({String name, String? userId, int? groupId, String type});
 }
 
 /// @nodoc
@@ -67,33 +61,28 @@ class _$SearchUserGroupResponseCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? partographGroupId = null,
-    Object? userId = null,
-    Object? groupId = null,
-    Object? permissionTypeId = null,
+    Object? name = null,
+    Object? userId = freezed,
+    Object? groupId = freezed,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      partographGroupId: null == partographGroupId
-          ? _value.partographGroupId
-          : partographGroupId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: null == userId
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      groupId: null == groupId
+              as String?,
+      groupId: freezed == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
-              as int,
-      permissionTypeId: null == permissionTypeId
-          ? _value.permissionTypeId
-          : permissionTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -107,12 +96,7 @@ abstract class _$$SearchUserGroupResponseImplCopyWith<$Res>
       __$$SearchUserGroupResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      int partographGroupId,
-      String userId,
-      int groupId,
-      int permissionTypeId});
+  $Res call({String name, String? userId, int? groupId, String type});
 }
 
 /// @nodoc
@@ -130,33 +114,28 @@ class __$$SearchUserGroupResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? partographGroupId = null,
-    Object? userId = null,
-    Object? groupId = null,
-    Object? permissionTypeId = null,
+    Object? name = null,
+    Object? userId = freezed,
+    Object? groupId = freezed,
+    Object? type = null,
   }) {
     return _then(_$SearchUserGroupResponseImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      partographGroupId: null == partographGroupId
-          ? _value.partographGroupId
-          : partographGroupId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: null == userId
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      groupId: null == groupId
+              as String?,
+      groupId: freezed == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
-              as int,
-      permissionTypeId: null == permissionTypeId
-          ? _value.permissionTypeId
-          : permissionTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -165,29 +144,26 @@ class __$$SearchUserGroupResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SearchUserGroupResponseImpl implements _SearchUserGroupResponse {
   const _$SearchUserGroupResponseImpl(
-      {this.id,
-      required this.partographGroupId,
+      {required this.name,
       required this.userId,
       required this.groupId,
-      required this.permissionTypeId});
+      required this.type});
 
   factory _$SearchUserGroupResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$SearchUserGroupResponseImplFromJson(json);
 
   @override
-  final int? id;
+  final String name;
   @override
-  final int partographGroupId;
+  final String? userId;
   @override
-  final String userId;
+  final int? groupId;
   @override
-  final int groupId;
-  @override
-  final int permissionTypeId;
+  final String type;
 
   @override
   String toString() {
-    return 'SearchUserGroupResponse(id: $id, partographGroupId: $partographGroupId, userId: $userId, groupId: $groupId, permissionTypeId: $permissionTypeId)';
+    return 'SearchUserGroupResponse(name: $name, userId: $userId, groupId: $groupId, type: $type)';
   }
 
   @override
@@ -195,19 +171,15 @@ class _$SearchUserGroupResponseImpl implements _SearchUserGroupResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchUserGroupResponseImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.partographGroupId, partographGroupId) ||
-                other.partographGroupId == partographGroupId) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.groupId, groupId) || other.groupId == groupId) &&
-            (identical(other.permissionTypeId, permissionTypeId) ||
-                other.permissionTypeId == permissionTypeId));
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, partographGroupId, userId, groupId, permissionTypeId);
+  int get hashCode => Object.hash(runtimeType, name, userId, groupId, type);
 
   /// Create a copy of SearchUserGroupResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -228,25 +200,22 @@ class _$SearchUserGroupResponseImpl implements _SearchUserGroupResponse {
 
 abstract class _SearchUserGroupResponse implements SearchUserGroupResponse {
   const factory _SearchUserGroupResponse(
-      {final int? id,
-      required final int partographGroupId,
-      required final String userId,
-      required final int groupId,
-      required final int permissionTypeId}) = _$SearchUserGroupResponseImpl;
+      {required final String name,
+      required final String? userId,
+      required final int? groupId,
+      required final String type}) = _$SearchUserGroupResponseImpl;
 
   factory _SearchUserGroupResponse.fromJson(Map<String, dynamic> json) =
       _$SearchUserGroupResponseImpl.fromJson;
 
   @override
-  int? get id;
+  String get name;
   @override
-  int get partographGroupId;
+  String? get userId;
   @override
-  String get userId;
+  int? get groupId;
   @override
-  int get groupId;
-  @override
-  int get permissionTypeId;
+  String get type;
 
   /// Create a copy of SearchUserGroupResponse
   /// with the given fields replaced by the non-null parameter values.

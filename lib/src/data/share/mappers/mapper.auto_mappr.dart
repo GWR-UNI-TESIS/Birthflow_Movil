@@ -14,6 +14,7 @@ import '../../../domain/share/models/partograph_group.dart' as _i9;
 import '../../../domain/share/models/partograph_group_item.dart' as _i7;
 import '../../../domain/share/models/partograph_group_share.dart' as _i11;
 import '../../../domain/share/models/partograph_share.dart' as _i3;
+import '../../../domain/share/models/search_user_group.dart' as _i13;
 import '../model/group_response/group_response.dart' as _i4;
 import '../model/partograph_group_item_response/partograph_group_item_response.dart'
     as _i6;
@@ -23,6 +24,8 @@ import '../model/partograph_group_share_response/partograph_group_share_response
     as _i10;
 import '../model/partograph_share_response/partograph_share_response.dart'
     as _i2;
+import '../model/search_user_group_response/search_user_group_response.dart'
+    as _i12;
 
 /// {@template package:birthflow_movil/src/data/share/mappers/mapper.dart}
 /// Available mappings:
@@ -31,6 +34,7 @@ import '../model/partograph_share_response/partograph_share_response.dart'
 /// - `PartographGroupItemResponse` → `PartographGroupItem`.
 /// - `PartographGroupResponse` → `PartographGroup`.
 /// - `PartographGroupShareResponse` → `PartographGroupShare`.
+/// - `SearchUserGroupResponse` → `SearchUserGroup`.
 /// {@endtemplate}
 class $ShareApiMapper implements _i1.AutoMapprInterface {
   const $ShareApiMapper();
@@ -73,6 +77,12 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
             sourceTypeOf == _typeOf<_i10.PartographGroupShareResponse?>()) &&
         (targetTypeOf == _typeOf<_i11.PartographGroupShare>() ||
             targetTypeOf == _typeOf<_i11.PartographGroupShare?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i12.SearchUserGroupResponse>() ||
+            sourceTypeOf == _typeOf<_i12.SearchUserGroupResponse?>()) &&
+        (targetTypeOf == _typeOf<_i13.SearchUserGroup>() ||
+            targetTypeOf == _typeOf<_i13.SearchUserGroup?>())) {
       return true;
     }
     if (recursive) {
@@ -316,6 +326,16 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
       return (_map__i10$PartographGroupShareResponse_To__i11$PartographGroupShare(
           (model as _i10.PartographGroupShareResponse?)) as TARGET);
     }
+    if ((sourceTypeOf == _typeOf<_i12.SearchUserGroupResponse>() ||
+            sourceTypeOf == _typeOf<_i12.SearchUserGroupResponse?>()) &&
+        (targetTypeOf == _typeOf<_i13.SearchUserGroup>() ||
+            targetTypeOf == _typeOf<_i13.SearchUserGroup?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i12$SearchUserGroupResponse_To__i13$SearchUserGroup(
+          (model as _i12.SearchUserGroupResponse?)) as TARGET);
+    }
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
   }
 
@@ -437,6 +457,23 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
       groupId: model.groupId,
       permissionTypeId: model.permissionTypeId,
       createdAt: model.createdAt,
+    );
+  }
+
+  _i13.SearchUserGroup
+      _map__i12$SearchUserGroupResponse_To__i13$SearchUserGroup(
+          _i12.SearchUserGroupResponse? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping SearchUserGroupResponse → SearchUserGroup failed because SearchUserGroupResponse was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<SearchUserGroupResponse, SearchUserGroup> to handle null values during mapping.');
+    }
+    return _i13.SearchUserGroup(
+      name: model.name,
+      userId: model.userId,
+      groupId: model.groupId,
+      type: model.type,
     );
   }
 }

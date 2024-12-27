@@ -33,7 +33,7 @@ class AuthenticationRepositoryImplementation
         return Authentication(
           user: null,
           message: 'Usuario no encontrado',
-          authenticationCode: AuthenticationCode.error,
+          authenticationCode: AuthenticationCode.unauthorized,
         );
       }
 
@@ -42,7 +42,7 @@ class AuthenticationRepositoryImplementation
         return Authentication(
           user: null,
           message: 'Credenciales inválidas',
-          authenticationCode: AuthenticationCode.error,
+          authenticationCode: AuthenticationCode.unauthorized,
         );
       }
 
@@ -85,30 +85,29 @@ class AuthenticationRepositoryImplementation
   }
 
   @override
-  Future<void> registerUser({
+  Future<String> registerUser({
     required String name,
     required String secondName,
     required String email,
-    int? phoneNumber,
+    double? phoneNumber,
     required String userName,
-    required String password,
   }) async {
     try {
       final request = UserRegisterRequest(
-        // ignore: avoid_redundant_argument_values
         id: null,
-        nombres: name,
-        apellidos: secondName,
+        name: name,
+        secondName: secondName,
         email: email,
-        nombreUsuario: userName,
-        passwordHash: password,
+        userName: userName,
         phoneNumber: phoneNumber,
       );
-      await _authenticactionService.register(request);
+      final result = await _authenticactionService.register(request);
+
       _logger.i('User registered successfully: $email');
+      return result.message;
     } catch (e, stackTrace) {
       _logger.e('Registration failed', error: e, stackTrace: stackTrace);
-      rethrow;
+      return 'Ocurrio un error al momento de crear el usuario';
     }
   }
 
@@ -118,11 +117,22 @@ class AuthenticationRepositoryImplementation
       // Obtener los tokens almacenados
       final tokens = await TokenStorage().getTokens();
 
+      if (tokens == null ||
+          tokens.refreshToken == null ||
+          tokens.accessToken == null) {
+        _logger.i('Token no existen en el dispositivos');
+        return Authentication(
+          user: null,
+          message: 'No existen token en la aplicacion',
+          authenticationCode: AuthenticationCode.unauthorized,
+        );
+      }
+
       // Preparar la solicitud de renovación con los tokens actuales
       final request = TokenRequest(
-        accessToken: tokens!.accessToken,
+        accessToken: tokens.accessToken!,
         refreshToken: tokens
-            .refreshToken, // Debe ser el refresh token, no el access token
+            .refreshToken!, // Debe ser el refresh token, no el access token
       );
 
       // Realizar la solicitud de renovación de tokens
@@ -155,7 +165,7 @@ class AuthenticationRepositoryImplementation
         );
       } else if (result.statusCode == 401) {
         // Si es no autorizado (401), manejar como fallo de autenticación
-        await TokenStorage().removeTokens(); 
+        await TokenStorage().removeTokens();
         _logger.e('Token refresh failed: Unauthorized.');
         return Authentication(
           user: null,
@@ -196,12 +206,12 @@ class AuthenticationRepositoryImplementation
       final tokens = await TokenStorage().getTokens();
 
       final request = TokenRequest(
-        accessToken: tokens!.accessToken,
-        refreshToken: tokens.accessToken,
+        accessToken: tokens!.accessToken!,
+        refreshToken: tokens.refreshToken!,
       );
 
       await _authenticactionService.logout(request);
-
+      await TokenStorage().removeTokens();
       _logger.i('Logout successful.');
     } catch (e, stackTrace) {
       _logger.e('Logout failed', error: e, stackTrace: stackTrace);

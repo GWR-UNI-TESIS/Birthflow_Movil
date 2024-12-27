@@ -24,7 +24,7 @@ class TokenStorage {
   Future<Tokens?> getTokens() async {
     final accessToken = await storage.read(key: 'accessToken');
     final refreshToken = await storage.read(key: 'refreshToken');
-    return Tokens(accessToken: accessToken!, refreshToken: refreshToken!);
+    return Tokens(accessToken: accessToken, refreshToken: refreshToken);
   }
 
   Future<String?> getAccessToken() async {

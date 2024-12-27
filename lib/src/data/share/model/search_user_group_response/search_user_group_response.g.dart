@@ -9,19 +9,17 @@ part of 'search_user_group_response.dart';
 _$SearchUserGroupResponseImpl _$$SearchUserGroupResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$SearchUserGroupResponseImpl(
-      id: (json['id'] as num?)?.toInt(),
-      partographGroupId: (json['partographGroupId'] as num).toInt(),
-      userId: json['userId'] as String,
-      groupId: (json['groupId'] as num).toInt(),
-      permissionTypeId: (json['permissionTypeId'] as num).toInt(),
+      name: json['name'] as String,
+      userId: json['userId'] as String?,
+      groupId: (json['groupId'] as num?)?.toInt(),
+      type: json['type'] as String,
     );
 
 Map<String, dynamic> _$$SearchUserGroupResponseImplToJson(
         _$SearchUserGroupResponseImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'partographGroupId': instance.partographGroupId,
+      'name': instance.name,
       'userId': instance.userId,
       'groupId': instance.groupId,
-      'permissionTypeId': instance.permissionTypeId,
+      'type': instance.type,
     };
