@@ -18,7 +18,12 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_us
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/groups_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/group_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/group_delete_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/group_update_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/groups/bloc/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
@@ -62,6 +67,14 @@ class AppDev extends StatelessWidget {
             locator<UpdateFetalHeartRateUseCase>(),
             locator<CreateChildbirthNoteUseCase>(),
             locator<UpdateChildbirthNoteUseCase>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => GroupsBloc(
+            getGroupsUseCase: locator<GetGroupsUseCase>(),
+            createGroupUseCase: locator<CreateGroupUseCase>(),
+            updateGroupUseCase: locator<UpdateGroupUseCase>(),
+            deleteGroupUseCase: locator<DeleteGroupUseCase>(),
           ),
         ),
       ],

@@ -29,9 +29,7 @@ mixin _$UserAuthentication {
       throw _privateConstructorUsedError; // Nombre de usuario para inicio de sesión
   String get email =>
       throw _privateConstructorUsedError; // Correo electrónico del usuario
-  int? get phoneNumber =>
-      throw _privateConstructorUsedError; // Número telefónico del usuario (opcional)
-  String? get passwordHash => throw _privateConstructorUsedError;
+  int? get phoneNumber => throw _privateConstructorUsedError;
 
   /// Serializes this UserAuthentication to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,8 +53,7 @@ abstract class $UserAuthenticationCopyWith<$Res> {
       String secondName,
       String userName,
       String email,
-      int? phoneNumber,
-      String? passwordHash});
+      int? phoneNumber});
 }
 
 /// @nodoc
@@ -80,7 +77,6 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
     Object? userName = null,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? passwordHash = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -107,10 +103,6 @@ class _$UserAuthenticationCopyWithImpl<$Res, $Val extends UserAuthentication>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as int?,
-      passwordHash: freezed == passwordHash
-          ? _value.passwordHash
-          : passwordHash // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -129,8 +121,7 @@ abstract class _$$UserAuthenticationImplCopyWith<$Res>
       String secondName,
       String userName,
       String email,
-      int? phoneNumber,
-      String? passwordHash});
+      int? phoneNumber});
 }
 
 /// @nodoc
@@ -152,7 +143,6 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? email = null,
     Object? phoneNumber = freezed,
-    Object? passwordHash = freezed,
   }) {
     return _then(_$UserAuthenticationImpl(
       id: freezed == id
@@ -179,10 +169,6 @@ class __$$UserAuthenticationImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as int?,
-      passwordHash: freezed == passwordHash
-          ? _value.passwordHash
-          : passwordHash // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -196,8 +182,7 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
       required this.secondName,
       required this.userName,
       required this.email,
-      this.phoneNumber,
-      this.passwordHash});
+      this.phoneNumber});
 
   factory _$UserAuthenticationImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserAuthenticationImplFromJson(json);
@@ -219,13 +204,10 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
 // Correo electrónico del usuario
   @override
   final int? phoneNumber;
-// Número telefónico del usuario (opcional)
-  @override
-  final String? passwordHash;
 
   @override
   String toString() {
-    return 'UserAuthentication(id: $id, name: $name, secondName: $secondName, userName: $userName, email: $email, phoneNumber: $phoneNumber, passwordHash: $passwordHash)';
+    return 'UserAuthentication(id: $id, name: $name, secondName: $secondName, userName: $userName, email: $email, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -241,15 +223,13 @@ class _$UserAuthenticationImpl implements _UserAuthentication {
                 other.userName == userName) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.passwordHash, passwordHash) ||
-                other.passwordHash == passwordHash));
+                other.phoneNumber == phoneNumber));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, secondName, userName,
-      email, phoneNumber, passwordHash);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, secondName, userName, email, phoneNumber);
 
   /// Create a copy of UserAuthentication
   /// with the given fields replaced by the non-null parameter values.
@@ -275,8 +255,7 @@ abstract class _UserAuthentication implements UserAuthentication {
       required final String secondName,
       required final String userName,
       required final String email,
-      final int? phoneNumber,
-      final String? passwordHash}) = _$UserAuthenticationImpl;
+      final int? phoneNumber}) = _$UserAuthenticationImpl;
 
   factory _UserAuthentication.fromJson(Map<String, dynamic> json) =
       _$UserAuthenticationImpl.fromJson;
@@ -292,9 +271,7 @@ abstract class _UserAuthentication implements UserAuthentication {
   @override
   String get email; // Correo electrónico del usuario
   @override
-  int? get phoneNumber; // Número telefónico del usuario (opcional)
-  @override
-  String? get passwordHash;
+  int? get phoneNumber;
 
   /// Create a copy of UserAuthentication
   /// with the given fields replaced by the non-null parameter values.

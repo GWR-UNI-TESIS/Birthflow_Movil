@@ -1,4 +1,5 @@
 import 'package:birthflow_movil/src/core/models/api_reponse/api_response.dart';
+import 'package:birthflow_movil/src/data/auth/models/authentication_user/authentication_user.dart';
 import 'package:birthflow_movil/src/data/share/model/asign_user_group_response/asign_user_group_response.dart';
 import 'package:birthflow_movil/src/data/share/model/group_request/group_request.dart';
 import 'package:birthflow_movil/src/data/share/model/group_response/group_response.dart';
@@ -11,6 +12,8 @@ import 'package:birthflow_movil/src/data/share/model/partograph_group_share_resp
 import 'package:birthflow_movil/src/data/share/model/partograph_share_request/partograph_share_request.dart';
 import 'package:birthflow_movil/src/data/share/model/partograph_share_response/partograph_share_response.dart';
 import 'package:birthflow_movil/src/data/share/model/search_user_group_response/search_user_group_response.dart';
+import 'package:birthflow_movil/src/data/share/model/user_group_request/user_group_request.dart';
+import 'package:birthflow_movil/src/data/share/model/user_group_response/user_group_response.dart';
 import 'package:dio/dio.dart';
 
 import 'package:retrofit/retrofit.dart';
@@ -23,6 +26,12 @@ abstract class ShareService {
 
   @GET('/api/share/search-user-group')
   Future<ApiResponse<List<SearchUserGroupResponse>>> getSearchUserGroup(
+    @Header('Authorization') String token,
+    @Query('query') String query,
+  );
+
+  @GET('/api/share/search-user')
+  Future<ApiResponse<List<SearchUserGroupResponse>>> getSearchUsers(
     @Header('Authorization') String token,
     @Query('query') String query,
   );
@@ -57,6 +66,11 @@ abstract class ShareService {
     @Body() PartographShareRequest body,
   );
 
+  @GET('/api/share/groups')
+  Future<ApiResponse<List<GroupResponse>>> getGroups(
+    @Header('Authorization') String token,
+  );
+
   @POST('/api/share/group/create')
   Future<ApiResponse<GroupResponse>> createGroup(
     @Header('Authorization') String token,
@@ -75,7 +89,25 @@ abstract class ShareService {
     @Body() GroupRequest body,
   );
 
-  @POST('/api/share/partograph-group-item/create')
+  @GET('/api/share/group/item')
+  Future<ApiResponse<List<UserAuthentication>>> getUsersInGroup(
+    @Header('Authorization') String token,
+    @Query('groupId') int groupId,
+  );
+
+  @POST('/api/share/group/item/create')
+  Future<ApiResponse<UserGroupResponse>> createUserGroup(
+    @Header('Authorization') String token,
+    @Body() UserGroupRequest request,
+  );
+
+  @DELETE('/api/share/group/item/delete')
+  Future<ApiResponse<UserGroupResponse>> deleteUserGroup(
+    @Header('Authorization') String token,
+    @Body() UserGroupRequest request,
+  );
+
+  @GET('/api/share/partograph-group-item')
   Future<ApiResponse<PartographGroupItemResponse>> createPartographGroupItem(
     @Header('Authorization') String token,
     @Body() PartographGroupItemRequest body,
@@ -85,6 +117,11 @@ abstract class ShareService {
   Future<ApiResponse<PartographGroupItemResponse>> deletPartographGroupItem(
     @Header('Authorization') String token,
     @Body() PartographGroupItemRequest body,
+  );
+
+  @GET('/api/share/partograph-groups')
+  Future<ApiResponse<List<PartographGroupResponse>>> getPartographGroups(
+    @Header('Authorization') String token,
   );
 
   @POST('/api/share/partograph-group/create')

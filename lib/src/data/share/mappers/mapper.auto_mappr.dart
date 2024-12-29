@@ -9,6 +9,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 
+import '../../../domain/auth/entities/user.dart' as _i17;
 import '../../../domain/share/models/asign_user_group.dart' as _i15;
 import '../../../domain/share/models/group.dart' as _i5;
 import '../../../domain/share/models/partograph_group.dart' as _i9;
@@ -16,6 +17,7 @@ import '../../../domain/share/models/partograph_group_item.dart' as _i7;
 import '../../../domain/share/models/partograph_group_share.dart' as _i11;
 import '../../../domain/share/models/partograph_share.dart' as _i3;
 import '../../../domain/share/models/search_user_group.dart' as _i13;
+import '../../auth/models/authentication_user/authentication_user.dart' as _i16;
 import '../model/asign_user_group_response/asign_user_group_response.dart'
     as _i14;
 import '../model/group_response/group_response.dart' as _i4;
@@ -40,6 +42,7 @@ import '../model/search_user_group_response/search_user_group_response.dart'
 /// - `SearchUserGroupResponse` → `SearchUserGroup`.
 /// - `AsignUserGroupResponse` → `AsignUserGroup`.
 /// - `SearchUserGroup` → `SearchUserGroupResponse`.
+/// - `UserAuthentication` → `User`.
 /// {@endtemplate}
 class $ShareApiMapper implements _i1.AutoMapprInterface {
   const $ShareApiMapper();
@@ -100,6 +103,12 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
             sourceTypeOf == _typeOf<_i13.SearchUserGroup?>()) &&
         (targetTypeOf == _typeOf<_i12.SearchUserGroupResponse>() ||
             targetTypeOf == _typeOf<_i12.SearchUserGroupResponse?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i16.UserAuthentication>() ||
+            sourceTypeOf == _typeOf<_i16.UserAuthentication?>()) &&
+        (targetTypeOf == _typeOf<_i17.User>() ||
+            targetTypeOf == _typeOf<_i17.User?>())) {
       return true;
     }
     if (recursive) {
@@ -373,6 +382,16 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
       return (_map__i13$SearchUserGroup_To__i12$SearchUserGroupResponse(
           (model as _i13.SearchUserGroup?)) as TARGET);
     }
+    if ((sourceTypeOf == _typeOf<_i16.UserAuthentication>() ||
+            sourceTypeOf == _typeOf<_i16.UserAuthentication?>()) &&
+        (targetTypeOf == _typeOf<_i17.User>() ||
+            targetTypeOf == _typeOf<_i17.User?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i16$UserAuthentication_To__i17$User(
+          (model as _i16.UserAuthentication?)) as TARGET);
+    }
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
   }
 
@@ -546,6 +565,24 @@ class $ShareApiMapper implements _i1.AutoMapprInterface {
       userId: model.userId,
       groupId: model.groupId,
       type: model.type,
+    );
+  }
+
+  _i17.User _map__i16$UserAuthentication_To__i17$User(
+      _i16.UserAuthentication? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping UserAuthentication → User failed because UserAuthentication was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<UserAuthentication, User> to handle null values during mapping.');
+    }
+    return _i17.User(
+      id: model.id,
+      name: model.name,
+      secondName: model.secondName,
+      userName: model.userName,
+      email: model.email,
+      phoneNumber: model.phoneNumber,
     );
   }
 }

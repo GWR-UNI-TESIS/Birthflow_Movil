@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/data/auth/models/authentication_user/authentication_user.dart';
 import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
 import 'package:birthflow_movil/src/data/share/mappers/mapper.dart';
 import 'package:birthflow_movil/src/data/share/model/asign_user_group_response/asign_user_group_response.dart';
@@ -12,6 +13,8 @@ import 'package:birthflow_movil/src/data/share/model/partograph_group_share_resp
 import 'package:birthflow_movil/src/data/share/model/partograph_share_request/partograph_share_request.dart';
 import 'package:birthflow_movil/src/data/share/model/partograph_share_response/partograph_share_response.dart';
 import 'package:birthflow_movil/src/data/share/model/search_user_group_response/search_user_group_response.dart';
+import 'package:birthflow_movil/src/data/share/model/user_group_request/user_group_request.dart';
+import 'package:birthflow_movil/src/domain/auth/entities/user.dart';
 import 'package:birthflow_movil/src/domain/share/models/asign_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group.dart';
@@ -41,6 +44,25 @@ class ShareRepositoryImplementation implements ShareRepository {
       final token = 'Bearer $tokenGuardado';
 
       final result = await _shareService.getSearchUserGroup(token, query);
+
+      if (result.response == null) return null;
+
+      return _mapper.convertList<SearchUserGroupResponse, SearchUserGroup>(
+        result.response!,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
+
+  @override
+  Future<List<SearchUserGroup>?> getSearchUsers({required String query}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final result = await _shareService.getSearchUsers(token, query);
 
       if (result.response == null) return null;
 
@@ -109,6 +131,91 @@ class ShareRepositoryImplementation implements ShareRepository {
   }
 
   @override
+  Future<List<Group>?> getGroups() async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final result = await _shareService.getGroups(token);
+
+      if (result.response == null) return null;
+
+      return _mapper.convertList<GroupResponse, Group>(result.response!);
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
+
+  @override
+  Future<List<PartographGroup>?> getPartographGroups() async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final result = await _shareService.getPartographGroups(token);
+
+      if (result.response == null) return null;
+
+      return _mapper.convertList<PartographGroupResponse, PartographGroup>(
+        result.response!,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
+
+  @override
+  Future<void> createUserGroup(
+      {required String userId, required int groupId}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = UserGroupRequest(userId: userId, groupId: groupId);
+
+      await _shareService.createUserGroup(token, request);
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  Future<void> deleteUserGroup(
+      {required String userId, required int groupId}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = UserGroupRequest(userId: userId, groupId: groupId);
+
+      await _shareService.deleteUserGroup(token, request);
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  Future<List<User>?> getUsersInGroup({required int groupId}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final result = await _shareService.getUsersInGroup(token, groupId);
+
+      if (result.response == null) return null;
+
+      return _mapper.convertList<UserAuthentication, User>(
+        result.response!,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
+
+  @override
   Future<Group?> createGroup({
     required String name,
   }) async {
@@ -117,7 +224,6 @@ class ShareRepositoryImplementation implements ShareRepository {
       final token = 'Bearer $tokenGuardado';
 
       final request = GroupRequest(
-        // ignore: avoid_redundant_argument_values
         id: 0,
         groupName: name,
       );

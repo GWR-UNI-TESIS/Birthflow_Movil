@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/domain/auth/entities/user.dart';
 import 'package:birthflow_movil/src/domain/share/models/asign_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
 import 'package:birthflow_movil/src/domain/share/models/partograph_group.dart';
@@ -11,6 +12,10 @@ abstract class ShareRepository {
     required String query,
   });
 
+  Future<List<SearchUserGroup>?> getSearchUsers({
+    required String query,
+  });
+
   Future<AsignUserGroup?> asignUserGroup({
     required String partographId,
     required int permissionTypeId,
@@ -20,7 +25,6 @@ abstract class ShareRepository {
   Future<AsignUserGroup?> getAsignUserGroup({
     required String partographId,
   });
-
 
   Future<PartographShare?> createPartographShare({
     int? id,
@@ -42,6 +46,8 @@ abstract class ShareRepository {
     required int id,
   });
 
+  Future<List<Group>?> getGroups();
+
   Future<Group?> createGroup({
     required String name,
   });
@@ -55,6 +61,20 @@ abstract class ShareRepository {
     required int id,
   });
 
+  Future<List<User>?> getUsersInGroup({
+    required int groupId,
+  });
+
+  Future<void> createUserGroup({
+    required String userId,
+    required int groupId,
+  });
+
+   Future<void> deleteUserGroup({
+    required String userId,
+    required int groupId,
+  });
+
   Future<PartographGroupItem?> createPartographGroupItem({
     required String partographId,
     required int partographGroupId,
@@ -64,6 +84,8 @@ abstract class ShareRepository {
     required String partographId,
     required int partographGroupId,
   });
+
+  Future<List<PartographGroup>?> getPartographGroups();
 
   Future<PartographGroup?> createPartographGroup({
     required String name,

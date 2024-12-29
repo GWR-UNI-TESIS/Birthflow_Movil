@@ -38,7 +38,15 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/search_partograph
 import 'package:birthflow_movil/src/domain/share/repository/share_repository.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/asign_user_group_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/get_asign_user_group_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/groups_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/group_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/group_delete_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/group_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/search_user_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/user_group_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/user_group_delete_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/users_in_group_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -244,6 +252,52 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<AsignUserGroupUseCase>(
     AsignUserGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<GetGroupsUseCase>(
+    GetGroupsUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<CreateGroupUseCase>(
+    CreateGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<UpdateGroupUseCase>(
+    UpdateGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<DeleteGroupUseCase>(
+    DeleteGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<GetUsersInGroupUseCase>(
+    GetUsersInGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+  locator.registerSingleton<CreateUserGroupUseCase>(
+    CreateUserGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+  locator.registerSingleton<DeleteUserGroupUseCase>(
+    DeleteUserGroupUseCaseImplementation(
+      shareRepository: locator<ShareRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<GetSearchUserUseCase>(
+    GetSearchUserUseCaseImplementation(
       shareRepository: locator<ShareRepository>(),
     ),
   );

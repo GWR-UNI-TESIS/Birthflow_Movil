@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/permission_type.dart';
 import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/events/share_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/states/share_state.dart';
@@ -24,6 +25,8 @@ class ListItemWidget extends StatelessWidget {
     required this.lastUpdate,
     required this.set,
     required this.silenced,
+    required this.createBy,
+    this.permissionTypeId,
   });
 
   final String partographId;
@@ -32,11 +35,14 @@ class ListItemWidget extends StatelessWidget {
   final String lastUpdate;
   final bool set;
   final bool silenced;
+  final String createBy;
+  final int? permissionTypeId;
 
   @override
   Widget build(BuildContext context) {
     final FocusNode buttonFocusNode = FocusNode();
     final catalog = context.watch<CatalogCubit>().state;
+    final auth = context.watch<AuthenticationBloc>().state;
 
     return MenuAnchor(
       childFocusNode: buttonFocusNode,
@@ -44,7 +50,21 @@ class ListItemWidget extends StatelessWidget {
       menuChildren: <Widget>[
         MenuItemButton(
           onPressed: () {
-            _showShareDialog(context, partographId, catalog);
+            final userId = auth.maybeWhen(
+              authenticated: (result) => result.id,
+              orElse: () => null,
+            );
+            if (createBy == userId) {
+              _showShareDialog(context, partographId, catalog);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Solo el creador del partograma tiene permiso a compartir',
+                  ),
+                ),
+              );
+            }
           },
           child: const Text('Compartir'),
         ),
@@ -89,10 +109,41 @@ class ListItemWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            context.go(
-              AppPaths.home.partographPath.define(partographId).path,
-              extra: partographId,
+            final userId = auth.maybeWhen(
+              authenticated: (result) => result.id,
+              orElse: () => null,
             );
+            final int lecturaId = catalog.permissionTypeCatalog
+                .firstWhere((item) => item.name == 'Lectura')
+                .id;
+            final int escrituraId = catalog.permissionTypeCatalog
+                .firstWhere((item) => item.name == 'Escritura')
+                .id;
+            if (createBy == userId) {
+              context.go(
+                AppPaths.home.partographPath.define(partographId).path,
+                extra: partographId,
+              );
+            } else {
+              if (permissionTypeId == lecturaId) {
+                context.go(
+                  AppPaths.home.partographReadOnlyPath
+                      .define(partographId)
+                      .path,
+                  extra: partographId,
+                );
+              } else if (permissionTypeId == escrituraId) {
+                context.go(
+                  AppPaths.home.partographPath.define(partographId).path,
+                  extra: partographId,
+                );
+              } else {
+                // Maneja casos no definidos
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Permiso no reconocido')),
+                );
+              }
+            }
           },
           focusNode: buttonFocusNode,
           onLongPress: () {

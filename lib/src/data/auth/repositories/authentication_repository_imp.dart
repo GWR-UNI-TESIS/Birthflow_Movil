@@ -56,10 +56,10 @@ class AuthenticationRepositoryImplementation
         _logger.i('Login successful for user: ${response.user!.email}');
         return Authentication(
           user: User(
-            userId: response.user!.id,
-            nombres: response.user!.name,
-            apellidos: response.user!.secondName,
-            nombreUsuario: response.user!.userName,
+            id: response.user!.id,
+            name: response.user!.name,
+            secondName: response.user!.secondName,
+            userName: response.user!.userName,
             email: response.user!.email,
             phoneNumber: phone,
           ),
@@ -94,6 +94,7 @@ class AuthenticationRepositoryImplementation
   }) async {
     try {
       final request = UserRegisterRequest(
+        // ignore: avoid_redundant_argument_values
         id: null,
         name: name,
         secondName: secondName,
@@ -153,10 +154,10 @@ class AuthenticationRepositoryImplementation
         // Devuelve una respuesta exitosa
         return Authentication(
           user: User(
-            userId: response.user!.id,
-            nombres: response.user!.name,
-            apellidos: response.user!.secondName,
-            nombreUsuario: response.user!.userName,
+            id: response.user!.id,
+            name: response.user!.name,
+            secondName: response.user!.secondName,
+            userName: response.user!.userName,
             email: response.user!.email,
             phoneNumber: response.user!.phoneNumber,
           ),

@@ -15,7 +15,6 @@ _$UserAuthenticationImpl _$$UserAuthenticationImplFromJson(
       userName: json['userName'] as String,
       email: json['email'] as String,
       phoneNumber: (json['phoneNumber'] as num?)?.toInt(),
-      passwordHash: json['passwordHash'] as String?,
     );
 
 Map<String, dynamic> _$$UserAuthenticationImplToJson(
@@ -27,5 +26,4 @@ Map<String, dynamic> _$$UserAuthenticationImplToJson(
       'userName': instance.userName,
       'email': instance.email,
       'phoneNumber': instance.phoneNumber,
-      'passwordHash': instance.passwordHash,
     };

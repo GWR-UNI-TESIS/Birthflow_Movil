@@ -112,6 +112,8 @@ class _SearchViewState extends State<SearchView> {
                           lastUpdate: '',
                           set: false,
                           silenced: false,
+                          createBy: item.createdBy!,
+                          permissionTypeId: item.accessType,
                         );
                       },
                       childCount: data.length,

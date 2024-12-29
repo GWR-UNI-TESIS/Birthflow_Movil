@@ -14,6 +14,7 @@ class PartographList {
   final bool set;
   final bool silenced;
   final bool favorite;
+  final int? accessType;
 
   PartographList({
     this.partographId,
@@ -31,5 +32,6 @@ class PartographList {
     required this.set,
     required this.silenced,
     required this.favorite,
+    this.accessType,
   });
 }

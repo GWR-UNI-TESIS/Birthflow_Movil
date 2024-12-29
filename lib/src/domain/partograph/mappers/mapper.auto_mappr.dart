@@ -543,6 +543,7 @@ class $Mappr implements _i1.AutoMapprInterface {
       set: model.set,
       silenced: model.silenced,
       favorite: model.favorite,
+      accessType: model.accessType,
     );
   }
 

@@ -2,12 +2,17 @@ import 'dart:async';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
+import 'package:birthflow_movil/src/domain/share/models/group.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:birthflow_movil/src/ui/auth/views/login.dart';
 import 'package:birthflow_movil/src/ui/auth/views/register.dart';
 import 'package:birthflow_movil/src/ui/auth/views/splash.dart';
 import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
+import 'package:birthflow_movil/src/ui/groups/create_group_screen.dart';
+import 'package:birthflow_movil/src/ui/groups/edit_group_screen.dart';
+import 'package:birthflow_movil/src/ui/groups/group/group_users_screen.dart';
+import 'package:birthflow_movil/src/ui/groups/groups_screen.dart';
 import 'package:birthflow_movil/src/ui/home/view/create_partograph.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
@@ -27,6 +32,7 @@ import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/med
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/medical_surveillance_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/medical_surveillance_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partogram_modification_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/partograph_readonly_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety/presentation_position_variety_create_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety/presentation_position_variety_edit_screen.dart';
@@ -100,6 +106,40 @@ class AppRouter {
             path: AppPaths.home.search.goRoute,
             screen: SearchScreen(),
           ),
+          _buildRoute(
+            path: AppPaths.home.groupsPath.goRoute,
+            screen: GroupsView(),
+            routeBase: [
+              _buildRoute(
+                path: AppPaths.home.groupsPath.create.goRoute,
+                screen: CreateGroupView(),
+              ),
+              GoRoute(
+                path: AppPaths.home.groupsPath.edit.goRoute,
+                builder: (context, state) {
+                  final data = state.extra! as Group;
+                  return EditGroupView(group: data);
+                },
+              ),
+              GoRoute(
+                path: AppPaths.home.groupsPath.group.goRoute,
+                builder: (context, state) {
+                  final profiler = state.extra! as GroupProfiler;
+                  return GroupUsersScreen(profiler: profiler,);
+                },
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppPaths.home.partographReadOnlyPath.goRoute,
+            builder: (context, state) {
+              final partographId =
+                  state.pathParameters[AppPaths.home.partographPath.id]!;
+
+              return PartographReadOnlyScreen(partographId: partographId);
+            },
+          ),
+
           // Ruta del partograma
           GoRoute(
             path: AppPaths.home.partographPath.goRoute,
@@ -294,9 +334,8 @@ class AppRouter {
                   ),
                 ],
               ),
-               GoRoute(
-                path: AppPaths
-                    .home.partographPath.childbirthNotePath.goRoute,
+              GoRoute(
+                path: AppPaths.home.partographPath.childbirthNotePath.goRoute,
                 builder: (context, state) {
                   final partographId =
                       state.pathParameters[AppPaths.home.partographPath.id]!;
@@ -306,20 +345,18 @@ class AppRouter {
                 },
                 routes: [
                   GoRoute(
-                    path: AppPaths.home.partographPath.childbirthNotePath
-                        .edit.goRoute,
+                    path: AppPaths
+                        .home.partographPath.childbirthNotePath.edit.goRoute,
                     builder: (context, state) {
                       final partographId = state
                           .pathParameters[AppPaths.home.partographPath.id]!;
-                           final data =
-                          state.extra! as ChildbirthNote;
+                      final data = state.extra! as ChildbirthNote;
                       return ChildbirthNoteEditScreen(
                         partographId: partographId,
                         childbirthNote: data,
                       );
                     },
                   ),
-                 
                 ],
               ),
             ],

@@ -15,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-enum _Options { newPartograph, configuration, information, logout }
+enum _Options { groups, configuration, information, logout }
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<AuthenticationBloc>().state;
     final String userId = state.maybeWhen(
-      authenticated: (response) => response.userId!,
+      authenticated: (response) => response.id!,
       orElse: () => '',
     );
 
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
         asignUserGroupUseCase: locator<AsignUserGroupUseCase>(),
       ),
       child: DefaultTabController(
-        length: 1,
+        length: 2,
         child: Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
@@ -58,8 +58,8 @@ class HomeScreen extends StatelessWidget {
                 onSelected: (item) => _handleMenuOption(context, item, userId),
                 itemBuilder: (_) => const [
                   PopupMenuItem(
-                    value: _Options.newPartograph,
-                    child: Text('Nuevo Partograma'),
+                    value: _Options.groups,
+                    child: Text('Grupos'),
                   ),
                   PopupMenuItem(
                     value: _Options.configuration,
@@ -80,7 +80,10 @@ class HomeScreen extends StatelessWidget {
               preferredSize: Size.fromHeight(kToolbarHeight),
               child: TabBar(
                 isScrollable: true,
-                tabs: [Tab(text: 'Partogramas')],
+                tabs: [
+                  Tab(text: 'Partogramas'),
+                  Tab(text: 'Grupos de Partogramas'),
+                ],
               ),
             ),
           ),
@@ -97,6 +100,7 @@ class HomeScreen extends StatelessWidget {
                   empty: () => const Center(child: Text('No hay datos')),
                 ),
               ),
+              Container()
             ],
           ),
           endDrawer: const NotificationsDrawer(),
@@ -112,9 +116,10 @@ class HomeScreen extends StatelessWidget {
 
   void _handleMenuOption(BuildContext context, _Options item, String userId) {
     switch (item) {
-      case _Options.newPartograph:
-        // Acción para Nuevo Partograma
-        break;
+      case _Options.groups:
+        context.go(
+          AppPaths.home.groupsPath.path,
+        );
       case _Options.configuration:
         // Acción para Configuración
         break;
@@ -156,6 +161,8 @@ class HomeScreen extends StatelessWidget {
                       DateFormat('yyyy-MM-dd').format(lastModification!),
                   set: item.set,
                   silenced: item.silenced,
+                  createBy: item.createdBy!,
+                  permissionTypeId: item.accessType,
                 );
               }
             },

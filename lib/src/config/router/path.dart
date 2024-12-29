@@ -21,6 +21,9 @@ class HomePath extends Path<HomePath> {
   Path get create => Path('create-partograph', parent: this);
 
   PartographPath get partographPath => PartographPath(this);
+  GroupsPath get groupsPath => GroupsPath(this);
+  PartographReadOnlyPath get partographReadOnlyPath =>
+      PartographReadOnlyPath(this);
 }
 
 class PartographPath extends Param<PartographPath> {
@@ -86,4 +89,16 @@ class ChildbirthNotePath extends Path<ChildbirthNotePath> {
   ChildbirthNotePath(PartographPath partographPath)
       : super('childbirth-note', parent: partographPath);
   Path get edit => Path('edit', parent: this);
+}
+
+class PartographReadOnlyPath extends Param<PartographReadOnlyPath> {
+  PartographReadOnlyPath(HomePath homePath)
+      : super('read-only', 'partographId', parent: homePath);
+}
+
+class GroupsPath extends Path<GroupsPath> {
+  GroupsPath(HomePath homePath) : super('groups', parent: homePath);
+  Path get create => Path('create', parent: this);
+  Path get edit => Path('edit', parent: this);
+  Path get group => Path('group', parent: this);
 }
