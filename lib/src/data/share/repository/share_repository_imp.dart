@@ -167,8 +167,10 @@ class ShareRepositoryImplementation implements ShareRepository {
   }
 
   @override
-  Future<void> createUserGroup(
-      {required String userId, required int groupId}) async {
+  Future<void> createUserGroup({
+    required String userId,
+    required int groupId,
+  }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
@@ -182,8 +184,10 @@ class ShareRepositoryImplementation implements ShareRepository {
   }
 
   @override
-  Future<void> deleteUserGroup(
-      {required String userId, required int groupId}) async {
+  Future<void> deleteUserGroup({
+    required String userId,
+    required int groupId,
+  }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';

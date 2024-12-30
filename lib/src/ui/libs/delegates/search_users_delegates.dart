@@ -11,7 +11,8 @@ class SearchUsersDelegate extends SearchDelegate<SearchUserGroup?> {
 
   SearchUsersDelegate()
       : cubit = SearchUsersCubit(
-            getSearchUserUseCase: locator<GetSearchUserUseCase>());
+          getSearchUserUseCase: locator<GetSearchUserUseCase>(),
+        );
 
   @override
   List<Widget>? buildActions(BuildContext context) {

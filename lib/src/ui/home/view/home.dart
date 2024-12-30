@@ -39,12 +39,12 @@ class HomeScreen extends StatelessWidget {
         asignUserGroupUseCase: locator<AsignUserGroupUseCase>(),
       ),
       child: DefaultTabController(
-        length: 2,
+        length: 1,
         child: Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
             title: const Text('BirthFlow'),
-            elevation: 2,
+            elevation: 1,
             actions: <Widget>[
               IconButton(
                 onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
@@ -82,7 +82,6 @@ class HomeScreen extends StatelessWidget {
                 isScrollable: true,
                 tabs: [
                   Tab(text: 'Partogramas'),
-                  Tab(text: 'Grupos de Partogramas'),
                 ],
               ),
             ),
@@ -100,7 +99,6 @@ class HomeScreen extends StatelessWidget {
                   empty: () => const Center(child: Text('No hay datos')),
                 ),
               ),
-              Container()
             ],
           ),
           endDrawer: const NotificationsDrawer(),

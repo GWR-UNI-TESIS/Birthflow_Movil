@@ -1,9 +1,12 @@
 import 'package:birthflow_movil/src/config/device_fingerprint/index.dart';
 import 'package:birthflow_movil/src/config/dio/dio.dart';
+import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
 import 'package:birthflow_movil/src/data/auth/datasources/authentication_service.dart';
 import 'package:birthflow_movil/src/data/auth/repositories/authentication_repository_imp.dart';
 import 'package:birthflow_movil/src/data/catalog/datasources/catalog_service.dart';
 import 'package:birthflow_movil/src/data/catalog/repositories/catalog_repository_imp.dart';
+import 'package:birthflow_movil/src/data/notification/datasources/notification_service.dart';
+import 'package:birthflow_movil/src/data/notification/repository/notification_repository_imp.dart';
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
 import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repository_imp.dart';
 import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
@@ -14,6 +17,8 @@ import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/logout_usercase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
+import 'package:birthflow_movil/src/domain/notification/repository/notification_repository.dart';
+import 'package:birthflow_movil/src/domain/notification/usecases/register_device_token_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
@@ -38,10 +43,10 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/search_partograph
 import 'package:birthflow_movil/src/domain/share/repository/share_repository.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/asign_user_group_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/get_asign_user_group_usecase.dart';
-import 'package:birthflow_movil/src/domain/share/usecases/groups_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/share/usecases/groups_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/user_group_create_usecase.dart';
@@ -301,4 +306,20 @@ Future<void> initializeDependencies() async {
       shareRepository: locator<ShareRepository>(),
     ),
   );
+
+  locator.registerSingleton<NotificationService>(NotificationService(dio));
+
+  locator.registerSingleton<NotificationRepository>(
+    NotificationRepositoryImplementation(
+      notificationService: locator<NotificationService>(),
+    ),
+  );
+
+  locator.registerSingleton<RegisterDeviceTokenUseCase>(
+    RegisterDeviceTokenUseCaseImplementation(
+      notificationRepository: locator<NotificationRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(() => FirebaseService());
 }

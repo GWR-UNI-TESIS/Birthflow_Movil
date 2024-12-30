@@ -104,9 +104,10 @@ class GroupUsersView extends StatelessWidget {
                   )
                   .toList();
               return UsersList(
-                  users: mappedUsers,
-                  groupId: profiler.groupId,
-                  isOwner: owner);
+                users: mappedUsers,
+                groupId: profiler.groupId,
+                isOwner: owner,
+              );
             },
             error: (message) => Center(child: Text(message)),
           );
@@ -121,8 +122,11 @@ class UsersList extends StatelessWidget {
   final int groupId;
   final bool isOwner;
 
-  const UsersList(
-      {required this.users, required this.groupId, required this.isOwner});
+  const UsersList({
+    required this.users,
+    required this.groupId,
+    required this.isOwner,
+  });
 
   @override
   Widget build(BuildContext context) {
