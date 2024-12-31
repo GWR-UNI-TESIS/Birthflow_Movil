@@ -1,7 +1,9 @@
 import 'package:birthflow_movil/src/app_dev.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
+import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -10,7 +12,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await loadEnvConfig();
   await initializeDependencies();
-
+ FirebaseMessaging.onBackgroundMessage(FirebaseService.backgroundMessageHandler);
   final catalog =
       await locator<CatalogRepository>().getCatalog(); // Carga el catálogo
   runApp(

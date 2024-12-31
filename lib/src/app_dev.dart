@@ -3,6 +3,7 @@ import 'package:birthflow_movil/src/config/router/app_router.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/bloc.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/event/notification_event.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
+import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/register_device_token_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
@@ -96,11 +97,13 @@ class AppDev extends StatelessWidget {
 }
 
 class AppEntry extends StatelessWidget {
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();
     final AppRouter appRouter = AppRouter(authBloc: authBloc);
- 
 
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) async {
@@ -124,8 +127,10 @@ class AppEntry extends StatelessWidget {
 
             // Escucha mensajes en primer plano
             firebaseService.listenToForegroundMessages((title, body) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('$title: $body')),
+              NotificationHelper.showNotification(
+                id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+                title: title,
+                body: body,
               );
             });
           }
@@ -133,6 +138,7 @@ class AppEntry extends StatelessWidget {
       },
       child: MaterialApp.router(
         title: 'Birthflow',
+        scaffoldMessengerKey: scaffoldMessengerKey,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
