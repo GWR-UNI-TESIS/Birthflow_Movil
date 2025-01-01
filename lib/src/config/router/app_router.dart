@@ -13,6 +13,7 @@ import 'package:birthflow_movil/src/ui/groups/create_group_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/edit_group_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/group/group_users_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/groups_screen.dart';
+import 'package:birthflow_movil/src/ui/home/view/archived_partograph_screen.dart';
 import 'package:birthflow_movil/src/ui/home/view/create_partograph.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
@@ -107,6 +108,10 @@ class AppRouter {
             screen: SearchScreen(),
           ),
           _buildRoute(
+            path: AppPaths.home.archived.goRoute,
+            screen: ArchivedPartographScreen(),
+          ),
+          _buildRoute(
             path: AppPaths.home.groupsPath.goRoute,
             screen: GroupsView(),
             routeBase: [
@@ -125,7 +130,9 @@ class AppRouter {
                 path: AppPaths.home.groupsPath.group.goRoute,
                 builder: (context, state) {
                   final profiler = state.extra! as GroupProfiler;
-                  return GroupUsersScreen(profiler: profiler,);
+                  return GroupUsersScreen(
+                    profiler: profiler,
+                  );
                 },
               ),
             ],

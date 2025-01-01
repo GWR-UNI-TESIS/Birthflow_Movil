@@ -5,6 +5,8 @@ import 'package:birthflow_movil/src/domain/catalog/entities/permission_type.dart
 import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/events/share_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/states/share_state.dart';
@@ -27,14 +29,18 @@ class ListItemWidget extends StatelessWidget {
     required this.silenced,
     required this.createBy,
     this.permissionTypeId,
+    required this.isAchived,
+    required this.favorite,
   });
 
   final String partographId;
   final String title;
   final String subtitle;
   final String lastUpdate;
+  final bool isAchived;
   final bool set;
   final bool silenced;
+  final bool favorite;
   final String createBy;
   final int? permissionTypeId;
 
@@ -72,17 +78,57 @@ class ListItemWidget extends StatelessWidget {
         MenuItemButton(
           onPressed: () {},
           child: const Text('Marcar como favorito'),
+        ),MenuItemButton(
+          onPressed: () {
+            context.read<PartographsBloc>().add(
+                  UpdatePartographState(
+          
+                    partographId: partographId,
+                    isAchived: !isAchived,
+                    set: set,
+                    silenced: silenced,
+                    favorite: favorite,
+                  ),
+                );
+          },
+          child: const Text('Archivar'),
         ),
         MenuItemButton(
           onPressed: () {},
           child: Text(silenced ? 'Activar notificaciones' : 'Silenciar'),
         ),
         MenuItemButton(
-          onPressed: () {},
+          onPressed: () {
+            context.read<PartographsBloc>().add(
+                  UpdatePartographState(
+          
+                    partographId: partographId,
+                    isAchived: isAchived,
+                    set: !set,
+                    silenced: silenced,
+                    favorite: favorite,
+                  ),
+                );
+          },
           child: Text(set ? 'Desanclar' : 'Anclar'),
         ),
         MenuItemButton(
-          onPressed: () {},
+          onPressed: () {
+            final userId = auth.maybeWhen(
+              authenticated: (result) => result.id,
+              orElse: () => null,
+            );
+            if (createBy == userId) {
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Solo el creador del partograma tiene permiso a eliminar',
+                  ),
+                ),
+              );
+            }
+          },
           child: const Text('Eliminar'),
         ),
       ],

@@ -34,4 +34,30 @@ class PartographList {
     required this.favorite,
     this.accessType,
   });
+
+   PartographList copyWith({
+    bool? isAchived,
+    bool? set,
+    bool? silenced,
+    bool? favorite,
+  }) {
+    return PartographList(
+      partographId: partographId,
+      name: name,
+      recordName: recordName,
+      date: date,
+      observation: observation,
+      createdAt: createdAt,
+      createdBy: createdBy,
+      updateAt: updateAt,
+      updateBy: updateBy,
+      stateId: stateId,
+      userId: userId,
+      isAchived: isAchived ?? this.isAchived,
+      set: set ?? this.set,
+      silenced: silenced ?? this.silenced,
+      favorite: favorite ?? this.favorite,
+      accessType: accessType,
+    );
+  }
 }

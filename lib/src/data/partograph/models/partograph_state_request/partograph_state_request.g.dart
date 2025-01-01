@@ -1,33 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'partograph_state_response.dart';
+part of 'partograph_state_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PartographStateResponseImpl _$$PartographStateResponseImplFromJson(
+_$PartographStateRequestImpl _$$PartographStateRequestImplFromJson(
         Map<String, dynamic> json) =>
-    _$PartographStateResponseImpl(
-      id: (json['id'] as num?)?.toInt(),
+    _$PartographStateRequestImpl(
       partographId: json['partographId'] as String,
       isAchived: json['isAchived'] as bool,
       set: json['set'] as bool,
       silenced: json['silenced'] as bool,
       favorite: json['favorite'] as bool,
-      lastViewDate: json['lastViewDate'] == null
-          ? null
-          : DateTime.parse(json['lastViewDate'] as String),
     );
 
-Map<String, dynamic> _$$PartographStateResponseImplToJson(
-        _$PartographStateResponseImpl instance) =>
+Map<String, dynamic> _$$PartographStateRequestImplToJson(
+        _$PartographStateRequestImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'partographId': instance.partographId,
       'isAchived': instance.isAchived,
       'set': instance.set,
       'silenced': instance.silenced,
       'favorite': instance.favorite,
-      'lastViewDate': instance.lastViewDate?.toIso8601String(),
     };

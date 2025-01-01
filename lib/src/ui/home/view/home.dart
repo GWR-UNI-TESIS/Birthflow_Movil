@@ -137,18 +137,28 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildPartographsList(List<PartographList> data) {
+    final mutableData = List<PartographList>.from(data);
+
+    // Ordenar los datos para que los elementos con set == true estén al inicio
+    mutableData.sort((a, b) {
+      if (a.set && !b.set) return -1;
+      if (!a.set && b.set) return 1;
+      return 0;
+    });
+
     return CustomScrollView(
       slivers: [
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
               if (index == 0) {
-                return const ListTile(
-                  leading: Icon(Icons.archive),
-                  title: Text('Archivados'),
+                return ListTile(
+                  leading: const Icon(Icons.archive),
+                  title: const Text('Archivados'),
+                  onTap:  ()=> context.go(AppPaths.home.archived.path),
                 );
               } else {
-                final item = data[index - 1];
+                final item = mutableData[index - 1];
                 final lastModification = item.updateAt ?? item.createdAt;
                 return ListItemWidget(
                   partographId: item.partographId!,
@@ -161,10 +171,12 @@ class HomeScreen extends StatelessWidget {
                   silenced: item.silenced,
                   createBy: item.createdBy!,
                   permissionTypeId: item.accessType,
+                  isAchived: item.isAchived,
+                  favorite: item.favorite,
                 );
               }
             },
-            childCount: data.length + 1,
+            childCount: mutableData.length + 1,
           ),
         ),
       ],

@@ -13,6 +13,8 @@ import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_
 import 'package:birthflow_movil/src/data/partograph/models/partograph_list_response/partograph_list_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_state_request/partograph_state_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_state_response/partograph_state_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_request/presentation_position_variety_entity_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/search_model_request/search_model_request.dart';
@@ -39,16 +41,22 @@ abstract class PartographService {
     @Path('partographId') String partographId,
   );
 
-  @POST('/api/partograph/create/partograph')
+  @POST('/api/partograph/create')
   Future<ApiResponse<PartographResponse>> create(
     @Header('Authorization') String token,
     @Body() PartographRequest request,
   );
 
-  @PATCH('/api/partograph/update/partograph')
+  @PATCH('/api/partograph/update')
   Future<ApiResponse<PartographResponse>> updatePartograph(
     @Header('Authorization') String token,
     @Body() PartographRequest request,
+  );
+
+  @DELETE('/api/partograph/delete/{partograph}')
+  Future<ApiResponse<PartographResponse>> deletePartograph(
+    @Header('Authorization') String token,
+    @Path() String partographId,
   );
 
   @POST('/api/partograph/search')
@@ -201,6 +209,12 @@ abstract class PartographService {
   Future<ApiResponse<ChildbirthNoteResponse>> updateChildBirthNote(
     @Header('Authorization') String token,
     @Body() ChildbirthNoteRequest request,
+  );
+
+  @PATCH('/api/partograph/update/state')
+  Future<ApiResponse<PartographStateResponse>> updatePartographState(
+    @Header('Authorization') String token,
+    @Body() PartographStateRequest request,
   );
 
   @GET('/api/partograph/curve/{partographId}')

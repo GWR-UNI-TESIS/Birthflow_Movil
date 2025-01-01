@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph_state.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 
 abstract class PartographRepository {
@@ -165,6 +166,15 @@ abstract class PartographRepository {
   Future<ContractionFrequency?> deleteContractionFrequency({
     required int id,
   });
+
+  Future<PartographState?> updatePartographState({
+    required String partographId,
+    required bool isAchived,
+    required bool set,
+    required bool silenced,
+    required bool favorite,
+  });
+
 
   Future<AlertCurves?> getCurves({
     required String partographId,

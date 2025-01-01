@@ -36,6 +36,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveilla
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_state_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
@@ -231,6 +232,12 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<SearchPartographsUseCase>(
     SearchPartographsUseCaseImplementation(
+      partographRepository: locator<PartographRepository>(),
+    ),
+  );
+
+   locator.registerSingleton<UpdatePartographStateUseCase>(
+    UpdatePartographStateUseCaseImplementation(
       partographRepository: locator<PartographRepository>(),
     ),
   );

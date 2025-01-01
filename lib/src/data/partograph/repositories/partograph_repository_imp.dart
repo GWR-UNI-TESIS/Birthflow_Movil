@@ -13,6 +13,8 @@ import 'package:birthflow_movil/src/data/partograph/models/medical_surveillance_
 import 'package:birthflow_movil/src/data/partograph/models/partograph_list_response/partograph_list_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_request/partograph_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/partograph_response/partograph_response.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_state_request/partograph_state_request.dart';
+import 'package:birthflow_movil/src/data/partograph/models/partograph_state_response/partograph_state_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_request/presentation_position_variety_entity_request.dart';
 import 'package:birthflow_movil/src/data/partograph/models/presentation_position_variety_response/presentation_position_variety_entity_response.dart';
 import 'package:birthflow_movil/src/data/partograph/models/search_model_request/search_model_request.dart';
@@ -24,6 +26,7 @@ import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph_state.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/domain/partograph/mappers/mapper.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
@@ -172,8 +175,8 @@ class PartographRepositoryImplementation implements PartographRepository {
 
       if (result.response == null) return null;
 
-      return _mapper
-          .convertList<PartographListResponse, PartographList>(result.response!);
+      return _mapper.convertList<PartographListResponse, PartographList>(
+          result.response!);
     } catch (e, stackTrace) {
       _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
@@ -924,6 +927,37 @@ class PartographRepositoryImplementation implements PartographRepository {
           await _partographService.createChildBirthNote(token, request);
 
       return _mapper.convert<ChildbirthNoteResponse, ChildbirthNote>(
+        result.response,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<PartographState?> updatePartographState(
+      {
+      required String partographId,
+      required bool isAchived,
+      required bool set,
+      required bool silenced,
+      required bool favorite}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+
+      final request = PartographStateRequest(
+          partographId: partographId,
+          isAchived: isAchived,
+          set: set,
+          silenced: silenced,
+          favorite: favorite);
+
+      final result =
+          await _partographService.updatePartographState(token, request);
+
+      return _mapper.convert<PartographStateResponse, PartographState>(
         result.response,
       );
     } catch (e, stackTrace) {

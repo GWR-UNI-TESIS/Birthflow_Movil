@@ -114,6 +114,8 @@ class _SearchViewState extends State<SearchView> {
                           silenced: false,
                           createBy: item.createdBy!,
                           permissionTypeId: item.accessType,
+                          isAchived: item.isAchived,
+                          favorite: item.favorite,
                         );
                       },
                       childCount: data.length,
