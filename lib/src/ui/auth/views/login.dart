@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
@@ -5,6 +6,7 @@ import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget with SnackbarsMixin {
   const LoginScreen({super.key});
@@ -98,6 +100,15 @@ class _LoginViewState extends State<_LoginView> {
                         }
                         return null;
                       },
+                    ),
+                    const SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () {
+                        context.go(
+                          AppPaths.welcome.login.forgetPassword.path,
+                        );
+                      },
+                      child: const Text('Has olvidado tu contraseña?'),
                     ),
 
                     const SizedBox(height: 50),

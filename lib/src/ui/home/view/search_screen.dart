@@ -48,21 +48,23 @@ class _SearchViewState extends State<SearchView> {
       actividad: catalog.activityCatalog.first,
       hora: catalog.hourFilterCatalog.first,
     );
+
+    applyFiltersAndSearch();
+  }
+
+  void applyFiltersAndSearch() {
+    context.read<SearchPartographBloc>().add(
+          SearchPartographEvent.search(
+            name: textEditingController.text,
+            filterId: filterModel.filter.id,
+            activityId: filterModel.actividad.id,
+            hourFilterId: filterModel.hora.id,
+          ),
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-    void applyFiltersAndSearch() {
-      context.read<SearchPartographBloc>().add(
-            SearchPartographEvent.search(
-              name: textEditingController.text,
-              filterId: filterModel.filter.id,
-              activityId: filterModel.actividad.id,
-              hourFilterId: filterModel.hora.id,
-            ),
-          );
-    }
-
     Future<void> openFilterDialog() async {
       final result = await _dialogBuilder(context);
       if (result != null) {

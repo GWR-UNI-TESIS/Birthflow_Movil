@@ -94,7 +94,16 @@ class ListItemWidget extends StatelessWidget {
           child: const Text('Archivar'),
         ),
         MenuItemButton(
-          onPressed: () {},
+          onPressed: () {     context.read<PartographsBloc>().add(
+                  UpdatePartographState(
+          
+                    partographId: partographId,
+                    isAchived: isAchived,
+                    set: set,
+                    silenced: !silenced,
+                    favorite: favorite,
+                  ),
+                );},
           child: Text(silenced ? 'Activar notificaciones' : 'Silenciar'),
         ),
         MenuItemButton(

@@ -176,7 +176,8 @@ class PartographRepositoryImplementation implements PartographRepository {
       if (result.response == null) return null;
 
       return _mapper.convertList<PartographListResponse, PartographList>(
-          result.response!);
+        result.response!,
+      );
     } catch (e, stackTrace) {
       _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       return null;
@@ -936,23 +937,24 @@ class PartographRepositoryImplementation implements PartographRepository {
   }
 
   @override
-  Future<PartographState?> updatePartographState(
-      {
-      required String partographId,
-      required bool isAchived,
-      required bool set,
-      required bool silenced,
-      required bool favorite}) async {
+  Future<PartographState?> updatePartographState({
+    required String partographId,
+    required bool isAchived,
+    required bool set,
+    required bool silenced,
+    required bool favorite,
+  }) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
       final request = PartographStateRequest(
-          partographId: partographId,
-          isAchived: isAchived,
-          set: set,
-          silenced: silenced,
-          favorite: favorite);
+        partographId: partographId,
+        isAchived: isAchived,
+        set: set,
+        silenced: silenced,
+        favorite: favorite,
+      );
 
       final result =
           await _partographService.updatePartographState(token, request);

@@ -6,9 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
   final GetPartographListUseCase _partographsGetUseCase;
-final UpdatePartographStateUseCase _updatePartographStateStateUsecase;
+  final UpdatePartographStateUseCase _updatePartographStateStateUsecase;
 
-  PartographsBloc(this._partographsGetUseCase, this._updatePartographStateStateUsecase)
+  PartographsBloc(
+      this._partographsGetUseCase, this._updatePartographStateStateUsecase)
       : super(const PartographsState.initial()) {
     on<FetchPartographs>(_onPostFetched);
     on<UpdatePartographState>(_onUpdatePartographState);
@@ -20,7 +21,8 @@ final UpdatePartographStateUseCase _updatePartographStateStateUsecase;
   ) async {
     emit(const PartographsState.loading());
     try {
-      final result = await _partographsGetUseCase.execute(userId: event.userId!);
+      final result =
+          await _partographsGetUseCase.execute(userId: event.userId!);
       if (result != null) {
         if (result.isEmpty) {
           emit(const PartographsState.empty());
@@ -33,7 +35,7 @@ final UpdatePartographStateUseCase _updatePartographStateStateUsecase;
     }
   }
 
-   Future<void> _onUpdatePartographState(
+  Future<void> _onUpdatePartographState(
     UpdatePartographState event,
     Emitter<PartographsState> emit,
   ) async {

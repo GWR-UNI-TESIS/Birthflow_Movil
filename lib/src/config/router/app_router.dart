@@ -9,6 +9,9 @@ import 'package:birthflow_movil/src/ui/auth/views/login.dart';
 import 'package:birthflow_movil/src/ui/auth/views/register.dart';
 import 'package:birthflow_movil/src/ui/auth/views/splash.dart';
 import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
+import 'package:birthflow_movil/src/ui/configuration/screens/change_password.dart';
+import 'package:birthflow_movil/src/ui/configuration/screens/configuration_screen.dart';
+import 'package:birthflow_movil/src/ui/forget_password/forget_password_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/create_group_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/edit_group_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/group/group_users_screen.dart';
@@ -23,6 +26,7 @@ import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervic
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/chart_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/childbirth_note/childbirth_note_edit_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/childbirth_note/childbirth_note_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frecuency_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_create_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_edit_screen.dart';
@@ -111,6 +115,16 @@ class AppRouter {
             path: AppPaths.home.archived.goRoute,
             screen: ArchivedPartographScreen(),
           ),
+          _buildRoute(
+              path: AppPaths.home.configurationPath.goRoute,
+              screen: ConfigurationScreen(),
+              routeBase: [
+                _buildRoute(
+                  path: AppPaths.home.configurationPath.changePassword.goRoute,
+                  screen: ChangePasswordScreen(),
+                ),
+              ]),
+
           _buildRoute(
             path: AppPaths.home.groupsPath.goRoute,
             screen: GroupsView(),
@@ -346,7 +360,7 @@ class AppRouter {
                 builder: (context, state) {
                   final partographId =
                       state.pathParameters[AppPaths.home.partographPath.id]!;
-                  return ChildbirthNoteEditScreen(
+                  return ChildbirthNoteViewScreen(
                     partographId: partographId,
                   );
                 },
@@ -377,9 +391,14 @@ class AppRouter {
         routeBase: <RouteBase>[
           // Rutas hijas de la ruta de autenticación (se agregan aquí)
           _buildRoute(
-            path: AppPaths.welcome.login.goRoute,
-            screen: const LoginScreen(),
-          ),
+              path: AppPaths.welcome.login.goRoute,
+              screen: const LoginScreen(),
+              routeBase: [
+                _buildRoute(
+                  path: AppPaths.welcome.login.forgetPassword.goRoute,
+                  screen: ForgetPasswordScreen(),
+                ),
+              ]),
           _buildRoute(
             path: AppPaths.welcome.register.goRoute,
             screen: const RegisterScreen(),

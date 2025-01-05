@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,8 +16,8 @@ class CervicalDilationCreateScreen extends StatefulWidget {
       _CervicalDilationCreateScreenState();
 }
 
-class _CervicalDilationCreateScreenState extends State<CervicalDilationCreateScreen>
-    with SnackbarsMixin {
+class _CervicalDilationCreateScreenState
+    extends State<CervicalDilationCreateScreen> with SnackbarsMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
@@ -80,7 +81,17 @@ class _CervicalDilationCreateScreenState extends State<CervicalDilationCreateScr
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Crear Dilatación Cervical')),
-      body: _buildForm(context),
+      body: BlocListener<PartographBloc, PartographState>(
+        listener: (context, state) {
+          if (state is Loaded) {
+            showSnackbar(context, state.message);
+            Navigator.of(context).pop();
+          } else if (state is Error) {
+            showErrorSnackbar(context, state.errorMessage);
+          }
+        },
+        child: _buildForm(context),
+      ),
     );
   }
 
@@ -104,7 +115,7 @@ class _CervicalDilationCreateScreenState extends State<CervicalDilationCreateScr
         ),
       ),
     );
-  }
+  } 
 
   Widget _buildValueField() {
     return TextFormField(

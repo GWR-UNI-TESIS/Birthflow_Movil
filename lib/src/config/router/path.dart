@@ -10,7 +10,7 @@ class AppPaths {
 class WelcomePath extends Path<WelcomePath> {
   WelcomePath() : super('welcome');
 
-  Path get login => Path('login', parent: this);
+  LoginPath get login => LoginPath(this);
   Path get register => Path('register', parent: this);
 }
 
@@ -25,6 +25,7 @@ class HomePath extends Path<HomePath> {
   GroupsPath get groupsPath => GroupsPath(this);
   PartographReadOnlyPath get partographReadOnlyPath =>
       PartographReadOnlyPath(this);
+  ConfigurationPath get configurationPath => ConfigurationPath(this);
 }
 
 class PartographPath extends Param<PartographPath> {
@@ -102,4 +103,16 @@ class GroupsPath extends Path<GroupsPath> {
   Path get create => Path('create', parent: this);
   Path get edit => Path('edit', parent: this);
   Path get group => Path('group', parent: this);
+}
+
+class LoginPath extends Path<LoginPath> {
+  LoginPath(WelcomePath welcomePath) : super('login', parent: welcomePath);
+  Path get forgetPassword => Path('forget-password', parent: this);
+}
+
+class ConfigurationPath extends Path<ConfigurationPath> {
+  ConfigurationPath(HomePath homePath)
+      : super('configuration', parent: homePath);
+  Path get user => Path('user', parent: this);
+  Path get changePassword => Path('change-password', parent: this);
 }

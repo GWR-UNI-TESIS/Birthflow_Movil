@@ -46,7 +46,6 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
             if (note == null) {
               return Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('No se encontró una nota de parto.'),
                     const SizedBox(height: 20),
@@ -68,7 +67,7 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
               );
             } else {
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(15.0),
                 child: ListView(
                   children: [
                     _buildDetailRow('Hora', note.hour),
@@ -112,7 +111,7 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
           Expanded(
             child: Text(
               '$label:',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style:  const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(

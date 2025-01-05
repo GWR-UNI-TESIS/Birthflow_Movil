@@ -119,7 +119,9 @@ class HomeScreen extends StatelessWidget {
           AppPaths.home.groupsPath.path,
         );
       case _Options.configuration:
-        // Acción para Configuración
+        context.go(
+          AppPaths.home.configurationPath.path,
+        );
         break;
       case _Options.logout:
         context.read<AuthenticationBloc>().add(const Logout());
@@ -137,15 +139,18 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildPartographsList(List<PartographList> data) {
+    // Crear una copia modificable de los datos
     final mutableData = List<PartographList>.from(data);
 
+    // Filtrar los partogramas para excluir los archivados
+    final filteredData = mutableData.where((item) => !item.isAchived).toList();
+
     // Ordenar los datos para que los elementos con set == true estén al inicio
-    mutableData.sort((a, b) {
+    filteredData.sort((a, b) {
       if (a.set && !b.set) return -1;
       if (!a.set && b.set) return 1;
       return 0;
     });
-
     return CustomScrollView(
       slivers: [
         SliverList(
@@ -155,10 +160,10 @@ class HomeScreen extends StatelessWidget {
                 return ListTile(
                   leading: const Icon(Icons.archive),
                   title: const Text('Archivados'),
-                  onTap:  ()=> context.go(AppPaths.home.archived.path),
+                  onTap: () => context.go(AppPaths.home.archived.path),
                 );
               } else {
-                final item = mutableData[index - 1];
+                final item = filteredData[index - 1];
                 final lastModification = item.updateAt ?? item.createdAt;
                 return ListItemWidget(
                   partographId: item.partographId!,
@@ -176,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                 );
               }
             },
-            childCount: mutableData.length + 1,
+            childCount: filteredData.length + 1,
           ),
         ),
       ],

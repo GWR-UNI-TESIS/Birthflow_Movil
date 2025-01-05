@@ -57,7 +57,7 @@ class ArchivedPartographScreen extends StatelessWidget {
                 favorite: item.favorite,
               );
             },
-            childCount: data.length + 1,
+            childCount: data.length-1,
           ),
         ),
       ],

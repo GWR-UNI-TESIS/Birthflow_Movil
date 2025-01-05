@@ -1,6 +1,8 @@
 import 'package:birthflow_movil/src/config/device_fingerprint/index.dart';
 import 'package:birthflow_movil/src/config/dio/dio.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
+import 'package:birthflow_movil/src/data/account/datasources/account_service.dart';
+import 'package:birthflow_movil/src/data/account/repository/account_repository_imp.dart';
 import 'package:birthflow_movil/src/data/auth/datasources/authentication_service.dart';
 import 'package:birthflow_movil/src/data/auth/repositories/authentication_repository_imp.dart';
 import 'package:birthflow_movil/src/data/catalog/datasources/catalog_service.dart';
@@ -11,6 +13,11 @@ import 'package:birthflow_movil/src/data/partograph/datasources/partograph_servi
 import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repository_imp.dart';
 import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
 import 'package:birthflow_movil/src/data/share/repository/share_repository_imp.dart';
+import 'package:birthflow_movil/src/domain/account/repository/account_repository.dart';
+import 'package:birthflow_movil/src/domain/account/usecases/change_password_use_case.dart';
+import 'package:birthflow_movil/src/domain/account/usecases/request_reset_use_case.dart';
+import 'package:birthflow_movil/src/domain/account/usecases/reset_password_use_case.dart';
+import 'package:birthflow_movil/src/domain/account/usecases/validate_otp_use_case.dart';
 import 'package:birthflow_movil/src/domain/auth/repositories/authentication_repository.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/create_user_usecase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/login_usecase.dart';
@@ -236,7 +243,7 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-   locator.registerSingleton<UpdatePartographStateUseCase>(
+  locator.registerSingleton<UpdatePartographStateUseCase>(
     UpdatePartographStateUseCaseImplementation(
       partographRepository: locator<PartographRepository>(),
     ),
@@ -328,5 +335,35 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  locator.registerSingleton<AccountService>(AccountService(dio));
+
+  locator.registerSingleton<AccountRepository>(
+    AccountRepositoryImplementation(
+      accountService: locator<AccountService>(),
+    ),
+  );
+
+  locator.registerSingleton<ChangePasswordUseCase>(
+    ChangePasswordUseCaseImplementation(
+      accountRepository: locator<AccountRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<RequestResetCodeUseCase>(
+    RequestResetCodeUseCaseImplementation(
+      accountRepository: locator<AccountRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<ValidateOtpUseCase>(
+    ValidateOtpUseCaseImplementation(
+      accountRepository: locator<AccountRepository>(),
+    ),
+  );
+  locator.registerSingleton<ResetPasswordUseCase>(
+    ResetPasswordUseCaseImplementation(
+      accountRepository: locator<AccountRepository>(),
+    ),
+  );
   locator.registerLazySingleton(() => FirebaseService());
 }

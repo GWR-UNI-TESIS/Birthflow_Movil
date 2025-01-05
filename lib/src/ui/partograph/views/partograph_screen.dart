@@ -95,7 +95,17 @@ class _PartographState extends State<PartographScreen> {
             ),
           ],
         ),
-        TextButton(onPressed: () {}, child: const Text('Modificar')),
+        TextButton(
+          onPressed: () => context
+            ..go(
+              AppPaths.home.partographPath
+                  .define(widget.partographId)
+                  .update
+                  .path,
+              extra: state.partograph,
+            ),
+          child: const Text('Modificar'),
+        ),
       ],
     );
   }
@@ -175,10 +185,17 @@ class _PartographState extends State<PartographScreen> {
                 extra: widget.partographId,
               ),
           ),
-           _buildGenericCard(
+          _buildGenericCard(
             title: 'Nota de Parto',
             content: _childbirthNoteContent(state),
-            onPressed: () {},
+             onPressed: () => context
+              ..go(
+                AppPaths.home.partographPath
+                    .define(widget.partographId)
+                    .childbirthNotePath
+                    .path,
+                extra: widget.partographId,
+              ),
           ),
         ],
       ),
@@ -267,57 +284,57 @@ class _PartographState extends State<PartographScreen> {
   }
 
   Widget _presentationHeightContent(Loaded state, Catalog catalog) {
-  if (state.partograph.presentationPositionVarieties == null ||
-      state.partograph.presentationPositionVarieties!.isEmpty) {
-    return _noDataMessage();
-  }
-  
-  return SingleChildScrollView(
-    scrollDirection: Axis.horizontal, // Habilita desplazamiento horizontal
-    child: SingleChildScrollView(
-      child: DataTable(
-         columnSpacing: 10.0,
-        columns: const [
-          DataColumn(label: Text('Plano Hodge')),
-          DataColumn(label: Text('Posición')),
-          DataColumn(label: Text('Hora')),
-        ],
-        rows: state.partograph.presentationPositionVarieties!.map((position) {
-          final hodgePlaneDescription = catalog.hodgePlanesCatalog
-              .firstWhere(
-                (h) => h.id == position.hodgePlane,
-                orElse: () => HodgePlane(
-                  id: position.hodgePlane,
-                  code: '',
-                  description: 'No disponible',
-                  chartPosition: 0,
-                ),
-              )
-              .description;
+    if (state.partograph.presentationPositionVarieties == null ||
+        state.partograph.presentationPositionVarieties!.isEmpty) {
+      return _noDataMessage();
+    }
 
-          final positionDescription = catalog.positionCatalog
-              .firstWhere(
-                (p) => p.id == position.position,
-                orElse: () => Position(
-                  id: position.position,
-                  code: '',
-                  description: 'No disponible',
-                ),
-              )
-              .description;
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal, // Habilita desplazamiento horizontal
+      child: SingleChildScrollView(
+        child: DataTable(
+          columnSpacing: 10.0,
+          columns: const [
+            DataColumn(label: Text('Plano Hodge')),
+            DataColumn(label: Text('Posición')),
+            DataColumn(label: Text('Hora')),
+          ],
+          rows: state.partograph.presentationPositionVarieties!.map((position) {
+            final hodgePlaneDescription = catalog.hodgePlanesCatalog
+                .firstWhere(
+                  (h) => h.id == position.hodgePlane,
+                  orElse: () => HodgePlane(
+                    id: position.hodgePlane,
+                    code: '',
+                    description: 'No disponible',
+                    chartPosition: 0,
+                  ),
+                )
+                .description;
 
-          return DataRow(
-            cells: [
-              DataCell(Text(hodgePlaneDescription)),
-              DataCell(Text(positionDescription)),
-              DataCell(Text(DateFormat.Hms().format(position.time))),
-            ],
-          );
-        }).toList(),
+            final positionDescription = catalog.positionCatalog
+                .firstWhere(
+                  (p) => p.id == position.position,
+                  orElse: () => Position(
+                    id: position.position,
+                    code: '',
+                    description: 'No disponible',
+                  ),
+                )
+                .description;
+
+            return DataRow(
+              cells: [
+                DataCell(Text(hodgePlaneDescription)),
+                DataCell(Text(positionDescription)),
+                DataCell(Text(DateFormat.Hms().format(position.time))),
+              ],
+            );
+          }).toList(),
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _contractionFrequenciesContent(Loaded state) {
     if (state.partograph.contractionFrequencies == null ||
@@ -329,8 +346,8 @@ class _PartographState extends State<PartographScreen> {
         DataColumn(label: Text('Valor')),
         DataColumn(label: Text('Hora')),
       ],
-      rows: state.partograph.contractionFrequencies!
-          .map((contractionFrequency) {
+      rows:
+          state.partograph.contractionFrequencies!.map((contractionFrequency) {
         return DataRow(
           cells: [
             DataCell(Text(contractionFrequency.value)),
