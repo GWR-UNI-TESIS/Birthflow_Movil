@@ -1,5 +1,8 @@
 import 'package:birthflow_movil/src/data/notification/datasources/notification_service.dart';
+import 'package:birthflow_movil/src/data/notification/mappers/notification_mapper.dart';
+import 'package:birthflow_movil/src/data/notification/models/notification_response/notification_response.dart';
 import 'package:birthflow_movil/src/data/notification/models/register_token_request/register_token_request.dart';
+import 'package:birthflow_movil/src/domain/notification/models/notification.dart';
 import 'package:birthflow_movil/src/domain/notification/repository/notification_repository.dart';
 import 'package:birthflow_movil/src/local_storage/token_storage.dart';
 import 'package:logger/logger.dart';
@@ -8,6 +11,7 @@ class NotificationRepositoryImplementation implements NotificationRepository {
   final NotificationService _notificationService;
   final TokenStorage _tokenStorage = TokenStorage();
   final Logger _logger = Logger(); // Inicializar logger
+  final NotificationMapper _mapper = NotificationMapper();
   NotificationRepositoryImplementation({
     required NotificationService notificationService,
   }) : _notificationService = notificationService;
@@ -29,6 +33,22 @@ class NotificationRepositoryImplementation implements NotificationRepository {
 
       await _notificationService.registerDeviceToken(tokenAuth, request);
       _logger.i('Funcionamiento correcto');
+    } catch (e, stackTrace) {
+      _logger.e('Login exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Notification>> getNotifications() async {
+    try {
+
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final tokenAuth = 'Bearer $tokenGuardado';
+
+      final response = await _notificationService.getNotifications(tokenAuth);
+
+      return _mapper.convertList<NotificationResponse, Notification>(response.response!);
     } catch (e, stackTrace) {
       _logger.e('Login exception', error: e, stackTrace: stackTrace);
       rethrow;

@@ -116,14 +116,15 @@ class AppRouter {
             screen: ArchivedPartographScreen(),
           ),
           _buildRoute(
-              path: AppPaths.home.configurationPath.goRoute,
-              screen: ConfigurationScreen(),
-              routeBase: [
-                _buildRoute(
-                  path: AppPaths.home.configurationPath.changePassword.goRoute,
-                  screen: ChangePasswordScreen(),
-                ),
-              ]),
+            path: AppPaths.home.configurationPath.goRoute,
+            screen: ConfigurationScreen(),
+            routeBase: [
+              _buildRoute(
+                path: AppPaths.home.configurationPath.changePassword.goRoute,
+                screen: ChangePasswordScreen(),
+              ),
+            ],
+          ),
 
           _buildRoute(
             path: AppPaths.home.groupsPath.goRoute,
@@ -391,14 +392,15 @@ class AppRouter {
         routeBase: <RouteBase>[
           // Rutas hijas de la ruta de autenticación (se agregan aquí)
           _buildRoute(
-              path: AppPaths.welcome.login.goRoute,
-              screen: const LoginScreen(),
-              routeBase: [
-                _buildRoute(
-                  path: AppPaths.welcome.login.forgetPassword.goRoute,
-                  screen: ForgetPasswordScreen(),
-                ),
-              ]),
+            path: AppPaths.welcome.login.goRoute,
+            screen: const LoginScreen(),
+            routeBase: [
+              _buildRoute(
+                path: AppPaths.welcome.login.forgetPassword.goRoute,
+                screen: ForgetPasswordScreen(),
+              ),
+            ],
+          ),
           _buildRoute(
             path: AppPaths.welcome.register.goRoute,
             screen: const RegisterScreen(),

@@ -9,8 +9,9 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
   final UpdatePartographStateUseCase _updatePartographStateStateUsecase;
 
   PartographsBloc(
-      this._partographsGetUseCase, this._updatePartographStateStateUsecase)
-      : super(const PartographsState.initial()) {
+    this._partographsGetUseCase,
+    this._updatePartographStateStateUsecase,
+  ) : super(const PartographsState.initial()) {
     on<FetchPartographs>(_onPostFetched);
     on<UpdatePartographState>(_onUpdatePartographState);
   }

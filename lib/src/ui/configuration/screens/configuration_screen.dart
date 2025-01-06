@@ -50,7 +50,7 @@ class ConfigurationScreen extends StatelessWidget {
                       leading: Icon(Icons.person),
                       title: Text('Nombre de usuario'),
                       subtitle: Text('usuario@example.com'),
-                    );
+                    );  
                   }
                 },
               ),

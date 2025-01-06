@@ -6,9 +6,9 @@ import 'package:birthflow_movil/src/core/chart/generators/real_curve_generator.d
 import 'package:birthflow_movil/src/core/chart/libs/mapper.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_data.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
+import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/events/chart_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/states/chart_state.dart';
-import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChartBloc extends Bloc<ChartEvent, ChartState> {

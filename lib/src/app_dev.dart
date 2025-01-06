@@ -5,6 +5,9 @@ import 'package:birthflow_movil/src/core/firebase/bloc/event/notification_event.
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
 import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
+import 'package:birthflow_movil/src/domain/notification/models/notification.dart'
+    as notificaciones;
+import 'package:birthflow_movil/src/domain/notification/usecases/get_notifications_usecase.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/register_device_token_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
@@ -28,12 +31,14 @@ import 'package:birthflow_movil/src/domain/share/usecases/group_create_usecase.d
 import 'package:birthflow_movil/src/domain/share/usecases/group_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/groups_get_usecase.dart';
+import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:birthflow_movil/src/ui/groups/bloc/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/notifications/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/notifications/events/notifications_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
-import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -90,6 +95,11 @@ class AppDev extends StatelessWidget {
             deleteGroupUseCase: locator<DeleteGroupUseCase>(),
           ),
         ),
+        BlocProvider(
+          create: (context) => NotificationsBloc(
+            getNotificationsUseCase: locator<GetNotificationsUseCase>(),
+          )..add(const NotificationsEvent.loadNotifications()),
+        ),
       ],
       child: MaterialApp(
         home: AppEntry(),
@@ -114,7 +124,7 @@ class AppEntry extends StatelessWidget {
               state.response.id; // Obtén el userId del estado de autenticación
           final firebaseService = FirebaseService();
           final notificationBloc = context.read<NotificationBloc>();
-
+          final notificationsBloc = context.read<NotificationsBloc>();
           // Obtén el token del dispositivo
           final token = await firebaseService.getDeviceToken();
           if (token != null) {
@@ -128,12 +138,26 @@ class AppEntry extends StatelessWidget {
             });
 
             // Escucha mensajes en primer plano
-            firebaseService.listenToForegroundMessages((title, body) {
+            firebaseService.listenToForegroundMessages((title, body, data) {
               NotificationHelper.showNotification(
                 id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
                 title: title,
                 body: body,
               );
+
+              final notification = notificaciones.Notification(
+                notificationId: int.parse(['NotificationId'].toString()),
+                title: data['Title']?.toString() ?? title,
+                message: data['Message']?.toString() ?? body,
+                scheduledFor: DateTime.tryParse(
+                      data['ScheduledTime']?.toString() ?? '',
+                    ) ??
+                    DateTime.now(),
+                partographId: data['PartographId']!.toString(),
+              );
+
+              notificationsBloc
+                  .add(NotificationsEvent.addNotification(notification));
             });
           }
         }

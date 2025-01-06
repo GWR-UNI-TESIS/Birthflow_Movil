@@ -2,6 +2,7 @@
 
 import 'package:birthflow_movil/src/core/chart/main.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
+import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/events/chart_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/states/chart_state.dart'
@@ -11,7 +12,6 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/expandable_fab.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
-import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';

@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/permission_type.dart';
 import 'package:birthflow_movil/src/domain/share/models/search_user_group.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_usecase.dart';
+import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
@@ -12,7 +13,6 @@ import 'package:birthflow_movil/src/ui/home/blocs/share/events/share_event.dart'
 import 'package:birthflow_movil/src/ui/home/blocs/share/states/share_state.dart';
 import 'package:birthflow_movil/src/ui/home/cubits/search/search_user_groups_cubit.dart';
 import 'package:birthflow_movil/src/ui/home/delegate/user_group_search_delegate.dart';
-import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

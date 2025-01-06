@@ -8,6 +8,8 @@ import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dar
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/notifications/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/notifications/states/notifications_state.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +124,6 @@ class HomeScreen extends StatelessWidget {
         context.go(
           AppPaths.home.configurationPath.path,
         );
-        break;
       case _Options.logout:
         context.read<AuthenticationBloc>().add(const Logout());
       default:
@@ -198,7 +199,31 @@ class NotificationsDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(title: const Text('Notificaciones')),
-          const Expanded(child: Center(child: Text('No hay notificaciones'))),
+          Expanded(
+            child: BlocBuilder<NotificationsBloc, NotificationsState>(
+              builder: (context, state) {
+                if (state is NotificationsLoaded) {
+                  final notifications = state.notifications;
+                  return ListView.builder(
+                    itemCount: notifications.length,
+                    itemBuilder: (context, index) {
+                      final notification = notifications[index];
+                      return ListTile(
+                        title: Text(notification.title),
+                        subtitle: Text(notification.message),
+                        trailing: Text(
+                          '${notification.scheduledFor.hour}:${notification.scheduledFor.minute}',
+                        ),
+                      );
+                    },
+                  );
+                } else if (state is NotificationsError) {
+                  return Center(child: Text(state.message));
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -25,6 +25,7 @@ import 'package:birthflow_movil/src/domain/auth/usecases/logout_usercase.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:birthflow_movil/src/domain/notification/repository/notification_repository.dart';
+import 'package:birthflow_movil/src/domain/notification/usecases/get_notifications_usecase.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/register_device_token_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
@@ -331,6 +332,12 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<RegisterDeviceTokenUseCase>(
     RegisterDeviceTokenUseCaseImplementation(
+      notificationRepository: locator<NotificationRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<GetNotificationsUseCase>(
+    GetNotificationsUseCaseImplementation(
       notificationRepository: locator<NotificationRepository>(),
     ),
   );

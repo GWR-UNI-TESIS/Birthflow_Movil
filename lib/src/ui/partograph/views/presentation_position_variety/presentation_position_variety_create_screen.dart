@@ -1,10 +1,10 @@
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/hodge_plane.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/position.dart';
+import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
-import 'package:birthflow_movil/src/ui/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
