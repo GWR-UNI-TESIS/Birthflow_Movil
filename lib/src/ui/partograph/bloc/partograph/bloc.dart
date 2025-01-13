@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
@@ -148,29 +149,52 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     ModifyingPartograph event,
     Emitter<PartographState> emit,
   ) async {
+    // Guardar temporalmente el estado actual
+    Partograph? previousPartograph;
     try {
-      final newDilation = await _updatePartographUsecase.execute(
-        partographId: event.partographId,
-        name: event.name,
-        recordName: event.recordName,
-        date: event.date,
-        observation: event.observation,
-        worktime: event.workTime,
+    
+    if (state is Loaded) {
+      previousPartograph = (state as Loaded).partograph;
+      emit(const Loading());
+    }
+
+    // Llamar al caso de uso para actualizar los campos específicos
+    final updatedPartograph = await _updatePartographUsecase.execute(
+      partographId: event.partographId,
+      name: event.name,
+      recordName: event.recordName,
+      date: event.date,
+      observation: event.observation,
+      worktime: event.workTime,
+    );
+
+    // Validar la respuesta y regresar al estado Loaded con los datos actualizados
+    if (updatedPartograph != null) {
+      final mergedPartograph = previousPartograph?.copyWith(
+        name: updatedPartograph.name,
+        recordName: updatedPartograph.recordName,
+        date: updatedPartograph.date,
+        observation: updatedPartograph.observation,
+        workTime: updatedPartograph.workTime,
       );
 
-      if (newDilation != null && state is Loaded) {
-        emit(
-          Loaded(
-            partograph: newDilation,
-            message: 'Partograma actualizado correctamente',
-          ),
-        );
-      } else {
-        emit(const Error('Error al guardar la dilatación cervical'));
-      }
-    } catch (ex) {
-      emit(Error(ex.toString()));
+      emit(
+        Loaded(
+          partograph: mergedPartograph ?? updatedPartograph,
+          message: 'Campos del partograma actualizados correctamente',
+        ),
+      );
+    } else {
+      emit(const Error('Error al actualizar los campos del partograma'));
     }
+  } catch (ex) {
+    // Capturar errores y regresar al estado anterior si es necesario
+    if (previousPartograph != null) {
+      emit(Loaded(partograph: previousPartograph, message: 'Error al actualizar'));
+    } else {
+      emit(Error('Error: $ex'));
+    }
+  }
   }
 
   Future<void> _onUpdateCervicalDilation(

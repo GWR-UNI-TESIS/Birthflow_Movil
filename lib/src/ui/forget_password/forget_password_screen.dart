@@ -170,7 +170,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   return 'Ingrese su nueva contraseña';
                                 }
                                 final passwordRegex = RegExp(
-                                  r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$&*~]).{8,}\$',
+                                  r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$&*~]).{8,}$',
                                 );
                                 if (!passwordRegex.hasMatch(value)) {
                                   return 'Debe contener mayúsculas, minúsculas, números y símbolos';

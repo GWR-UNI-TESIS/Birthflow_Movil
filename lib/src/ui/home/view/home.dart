@@ -9,6 +9,7 @@ import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/notifications/bloc.dart';
+import 'package:birthflow_movil/src/ui/home/blocs/notifications/events/notifications_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/notifications/states/notifications_state.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
@@ -96,7 +97,17 @@ class HomeScreen extends StatelessWidget {
                       const Center(child: CircularProgressIndicator()),
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
-                  loaded: (data) => _buildPartographsList(data),
+                  loaded: (data) {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        // Dispara el evento FetchPartographs para recargar los datos
+                        context
+                            .read<PartographsBloc>()
+                            .add(FetchPartographs(userId: userId));
+                      },
+                      child: _buildPartographsList(data),
+                    );
+                  },
                   error: (message) => Center(child: Text('Error: $message')),
                   empty: () => const Center(child: Text('No hay datos')),
                 ),
@@ -198,27 +209,81 @@ class NotificationsDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          AppBar(title: const Text('Notificaciones')),
+          AppBar(
+            title: const Text('Notificaciones'),
+            automaticallyImplyLeading: false,
+          ),
           Expanded(
             child: BlocBuilder<NotificationsBloc, NotificationsState>(
               builder: (context, state) {
                 if (state is NotificationsLoaded) {
                   final notifications = state.notifications;
-                  return ListView.builder(
-                    itemCount: notifications.length,
-                    itemBuilder: (context, index) {
-                      final notification = notifications[index];
-                      return ListTile(
-                        title: Text(notification.title),
-                        subtitle: Text(notification.message),
-                        trailing: Text(
-                          '${notification.scheduledFor.hour}:${notification.scheduledFor.minute}',
-                        ),
-                      );
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      // Dispara el evento para recargar las notificaciones
+                      context
+                          .read<NotificationsBloc>()
+                          .add(const LoadNotifications());
                     },
+                    child: ListView.separated(
+                      itemCount: notifications.length,
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemBuilder: (context, index) {
+                        final notification = notifications[index];
+                        final dateTime = DateFormat('yyyy-MM-dd HH:mm:ss')
+                            .parse(notification.scheduledFor.toString(), true);
+                        final dateLocal = dateTime.toLocal();
+
+                        // Formatear la fecha
+                        final dayFormat = DateFormat('yyyy-MM-dd');
+                        final timeFormat = DateFormat('HH:mm:ss');
+                        final formattedDay = dayFormat.format(dateLocal);
+                        final formattedTime = timeFormat.format(dateLocal);
+
+                        return ListTile(
+                          title: Text(
+                            notification.title,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          subtitle: Text(notification.message),
+                          trailing: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                formattedDay,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                formattedTime,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   );
                 } else if (state is NotificationsError) {
-                  return Center(child: Text(state.message));
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(state.message),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Vuelve a intentar cargar las notificaciones
+                            context
+                                .read<NotificationsBloc>()
+                                .add(const LoadNotifications());
+                          },
+                          child: const Text('Reintentar'),
+                        ),
+                      ],
+                    ),
+                  );
                 }
                 return const Center(child: CircularProgressIndicator());
               },

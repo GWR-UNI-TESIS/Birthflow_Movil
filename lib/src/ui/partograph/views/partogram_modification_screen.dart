@@ -79,7 +79,7 @@ class PartogramModificationState extends State<PartogramModificationScreen>
       appBar: AppBar(
         title: const Text('Actualizar Partograma'),
       ),
-      body: BlocListener<PartographBloc, PartographState>(
+      body:    BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
             showSnackbar(context, state.message);

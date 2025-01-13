@@ -32,7 +32,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Login failed: User not found.');
         return Authentication(
           user: null,
-          message: 'Usuario no encontrado',
+          message:  result.message,
           authenticationCode: AuthenticationCode.unauthorized,
         );
       }
@@ -41,7 +41,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Login failed: Invalid credentials.');
         return Authentication(
           user: null,
-          message: 'Credenciales inválidas',
+          message: result.message,
           authenticationCode: AuthenticationCode.unauthorized,
         );
       }
@@ -63,7 +63,7 @@ class AuthenticationRepositoryImplementation
             email: response.user!.email,
             phoneNumber: phone,
           ),
-          message: 'Login exitoso',
+          message: result.message,
           authenticationCode: AuthenticationCode.success,
         );
       } else {

@@ -146,7 +146,7 @@ class AppEntry extends StatelessWidget {
               );
 
               final notification = notificaciones.Notification(
-                notificationId: int.parse(['NotificationId'].toString()),
+                notificationId: int.parse(data['NotificationId'].toString()),
                 title: data['Title']?.toString() ?? title,
                 message: data['Message']?.toString() ?? body,
                 scheduledFor: DateTime.tryParse(
