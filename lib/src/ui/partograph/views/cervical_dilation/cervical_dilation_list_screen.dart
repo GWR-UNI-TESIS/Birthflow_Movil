@@ -35,9 +35,12 @@ class CervicalDilationListScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _navigateToCreate(context),
+        label: const Text('Agregar'),
+        icon: const Icon(
+          Icons.add,
+        ),
       ),
     );
   }

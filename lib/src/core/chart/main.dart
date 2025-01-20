@@ -1,4 +1,3 @@
-
 import 'package:birthflow_movil/src/core/chart/models/chart_data.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 import 'package:birthflow_movil/src/core/chart/renderers/symbols.dart';
@@ -69,7 +68,7 @@ class MainChart extends StatelessWidget {
         ),
         tickFormatterSpec: secondaryMeasureFormatter,
       ),
-
+      
       domainAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -221,9 +220,9 @@ class Data {
       );
     return [
       if (partograph.others.isNotEmpty) medicalSurveillancePoints,
+      if (partograph.realCurve.isNotEmpty) curvaReal,
       if (partograph.newAlertCurve.isNotEmpty) nuevaCurvaAlerta,
       if (partograph.alertCurve.isNotEmpty) curvaAlerta,
-      if (partograph.realCurve.isNotEmpty) curvaReal,
     ];
   }
 }

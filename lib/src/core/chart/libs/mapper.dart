@@ -28,11 +28,11 @@ class ChartMapper {
 
   static List<ChartPoint> transformToChartPoint({
     required List<AlertCurve> data,
+    required DateTime firstDate,
   }) {
     if (data.isEmpty) {
       return [];
     } else {
-      final firstDate = data.first.time;
 
       final result = data.map((model) {
         final Duration diferencia = model.time.difference(firstDate);

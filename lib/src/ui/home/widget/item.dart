@@ -78,11 +78,11 @@ class ListItemWidget extends StatelessWidget {
         MenuItemButton(
           onPressed: () {},
           child: const Text('Marcar como favorito'),
-        ),MenuItemButton(
+        ),
+        MenuItemButton(
           onPressed: () {
             context.read<PartographsBloc>().add(
                   UpdatePartographState(
-          
                     partographId: partographId,
                     isAchived: !isAchived,
                     set: set,
@@ -94,23 +94,23 @@ class ListItemWidget extends StatelessWidget {
           child: const Text('Archivar'),
         ),
         MenuItemButton(
-          onPressed: () {     context.read<PartographsBloc>().add(
+          onPressed: () {
+            context.read<PartographsBloc>().add(
                   UpdatePartographState(
-          
                     partographId: partographId,
                     isAchived: isAchived,
                     set: set,
                     silenced: !silenced,
                     favorite: favorite,
                   ),
-                );},
+                );
+          },
           child: Text(silenced ? 'Activar notificaciones' : 'Silenciar'),
         ),
         MenuItemButton(
           onPressed: () {
             context.read<PartographsBloc>().add(
                   UpdatePartographState(
-          
                     partographId: partographId,
                     isAchived: isAchived,
                     set: !set,
@@ -262,6 +262,7 @@ class ListItemWidget extends StatelessWidget {
                       TextField(
                         controller: searchController,
                         readOnly: true, // Evita la escritura directa
+                        onTapAlwaysCalled: true,
                         onTap: () async {
                           final SearchUserGroup? result =
                               await showSearch<SearchUserGroup?>(

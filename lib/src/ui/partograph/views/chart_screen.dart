@@ -69,12 +69,12 @@ class _ChartState extends State<_ChartScreen> {
           ),
         ],
       ),
-      FloatingActionButton(
+      FloatingActionButton.extended(
         onPressed: () {},
-        child: const Tooltip(
-          message: 'Agregar a la tabla',
-          child: Icon(Icons.add),
+        label: const Text(
+          'Agregar a la tabla',
         ),
+        icon: const Icon(Icons.add),
       ),
     ];
 
@@ -136,7 +136,7 @@ class _ChartState extends State<_ChartScreen> {
         Container(
           width: double.infinity,
           height: double.infinity,
-          margin: const EdgeInsets.all(5),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: MedicalSurveillanceWidget(list: medicalSurveillance),
         ),
       ],

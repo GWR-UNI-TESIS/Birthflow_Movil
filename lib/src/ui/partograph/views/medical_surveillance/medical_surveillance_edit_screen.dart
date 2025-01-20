@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/wid
 import 'package:birthflow_movil/src/ui/partograph/widget/arterial_pressure_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_button.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,9 +49,8 @@ class _MedicalSurveillanceEditScreenState
   void _initializeValues() {
     final model = widget.medicalSurveillanceEditData.medicalSurveillanceTable;
 
-    _timeController.text = model?.time != null
-        ? DateFormat('HH:mm:ss').format(model!.time)
-        : '';
+    _timeController.text =
+        model?.time != null ? DateFormat('HH:mm:ss').format(model!.time) : '';
     _dateTime = model?.time ?? DateTime.now();
     _maternalPositionValue = model?.maternalPosition ?? '';
     _frequencyContractions = model?.frequencyContractions ?? '';
@@ -59,7 +59,8 @@ class _MedicalSurveillanceEditScreenState
     _arterialPressureValue = ValueNotifier(model?.arterialPressure ?? '');
     _maternalPulseValue = ValueNotifier(model?.maternalPulse ?? '');
     _fetalHeartRateValue = ValueNotifier(model?.fetalHeartRate ?? '');
-    _contractionsDurationValue = ValueNotifier(model?.contractionsDuration ?? '');
+    _contractionsDurationValue =
+        ValueNotifier(model?.contractionsDuration ?? '');
   }
 
   @override
@@ -99,6 +100,7 @@ class _MedicalSurveillanceEditScreenState
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Vigilancia Médica')),
       body: BlocListener<PartographBloc, PartographState>(
@@ -110,11 +112,15 @@ class _MedicalSurveillanceEditScreenState
             showErrorSnackbar(context, state.errorMessage);
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          child: Form(
-            key: _formKey,
-            child: _buildFormContent(),
+        child: LoadingOverlay(
+          isLoading: isLoading,
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            child: Form(
+              key: _formKey,
+              child: _buildFormContent(),
+            ),
           ),
         ),
       ),
@@ -126,6 +132,7 @@ class _MedicalSurveillanceEditScreenState
       child: Column(
         children: [
           _buildTimePicker(),
+          const SizedBox(height: 20),
           _buildDropdownButton(
             labelText: 'Posición Materna',
             items: const [
@@ -137,18 +144,22 @@ class _MedicalSurveillanceEditScreenState
               'Parada o Caminando',
             ],
             initialValue: _maternalPositionValue,
-            onChanged: (value) => setState(() => _maternalPositionValue = value),
+            onChanged: (value) =>
+                setState(() => _maternalPositionValue = value),
           ),
+          const SizedBox(height: 16),
           ArterialPressureWidget(
             label: 'Tensión Arterial',
             initialValue: _arterialPressureValue.value,
             onChanged: (value) => _arterialPressureValue.value = value,
           ),
+          const SizedBox(height: 16),
           FormElementWidget(
             label: 'Pulso Materno',
             initialValue: _maternalPulseValue.value,
             onChanged: (value) => _maternalPulseValue.value = value,
           ),
+          const SizedBox(height: 16),
           FormElementWidget(
             label: 'Frecuencia cardiaca fetal',
             initialValue: _fetalHeartRateValue.value,
@@ -159,12 +170,14 @@ class _MedicalSurveillanceEditScreenState
             initialValue: _contractionsDurationValue.value,
             onChanged: (value) => _contractionsDurationValue.value = value,
           ),
+          const SizedBox(height: 16),
           _buildTextField(
             label: 'Frec. Contracciones',
             maxLength: 3,
             initialValue: _frequencyContractions,
             onChanged: (value) => _frequencyContractions = value,
           ),
+          const SizedBox(height: 16),
           UnifiedDropdownWidget(
             locationValues: const ['Sacro', 'Suprapúbico'],
             intensityValues: const ['Débil', 'Normal', 'Fuerte'],
@@ -172,9 +185,10 @@ class _MedicalSurveillanceEditScreenState
             onValueChanged: (value) => _pain = value,
           ),
           const SizedBox(height: 20),
-          ElevatedButton(
+          FilledButton.icon(
             onPressed: _handleSave,
-            child: const Text('Actualizar'),
+            icon: const Icon(Icons.save_alt),
+            label: const Text('Actualizar'),
           ),
         ],
       ),
@@ -186,7 +200,7 @@ class _MedicalSurveillanceEditScreenState
       controller: _timeController,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'Tiempo',
+        labelText: 'Hora',
       ),
       readOnly: true,
       onTap: () async {

@@ -41,13 +41,14 @@ class GroupsView extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           context.go(
             AppPaths.home.groupsPath.create.path,
           );
         },
-        child: const Icon(Icons.add),
+        label: const Text('Agregar nuevo grupo'),
+        icon: const Icon(Icons.add),
       ),
     );
   }
@@ -109,7 +110,8 @@ class GroupsList extends StatelessWidget {
             ],
           ),
           onTap: () {
-            final profiler = GroupProfiler(groupId: group.id, owner: group.createdBy);
+            final profiler =
+                GroupProfiler(groupId: group.id, owner: group.createdBy);
             context.go(
               AppPaths.home.groupsPath.group.path,
               extra: profiler,

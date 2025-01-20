@@ -29,13 +29,16 @@ class RealCurveGenerator implements IGenerator {
     );
 
     for (int index = 1; index <= cervicalList.length - 1; index++) {
-      final double previousItemhour = cervicalList[index - 1].hour.hour +
-          cervicalList[index - 1].hour.minute / 60;
+      // Convertir las fechas y horas a objetos DateTime
+      final DateTime previousDateTime = cervicalList[index - 1].hour;
+      final DateTime currentDateTime = cervicalList[index].hour;
 
-      final double currentItemhour =
-          cervicalList[index].hour.hour + cervicalList[index].hour.minute / 60;
+      // Calcular la diferencia en horas entre los dos DateTime
+      final double differenceInHours =
+          currentDateTime.difference(previousDateTime).inMinutes / 60.0;
 
-      final double result = (currentItemhour - previousItemhour) + lastDigit;
+      // Sumar la diferencia al último valor de lastDigit
+      final double result = differenceInHours + lastDigit;
 
       /*Se agrega el elemento a la lista */
       generatedPoint.add(

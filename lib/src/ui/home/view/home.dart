@@ -253,7 +253,8 @@ class NotificationsDrawer extends StatelessWidget {
                               Text(
                                 formattedDay,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 formattedTime,
@@ -261,6 +262,16 @@ class NotificationsDrawer extends StatelessWidget {
                               ),
                             ],
                           ),
+                          onTap: () {
+                            if (notification.partographId != null) {
+                              context.go(
+                                AppPaths.home.partographPath
+                                    .define(notification.partographId!)
+                                    .path,
+                                extra: notification.partographId,
+                              );
+                            }
+                          },
                         );
                       },
                     ),

@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -100,6 +101,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Dilatación Cervical')),
       body: BlocListener<PartographBloc, PartographState>(
@@ -111,7 +113,10 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
             showErrorSnackbar(context, state.errorMessage);
           }
         },
-        child: _buildForm(context),
+        child: LoadingOverlay(
+          isLoading: isLoading,
+          child: _buildForm(context),
+        ),
       ),
     );
   }

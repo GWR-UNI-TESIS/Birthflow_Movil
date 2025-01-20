@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,6 +76,7 @@ class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Crear Frecuencia Cardiaca Fetal')),
       body: BlocListener<PartographBloc, PartographState>(
@@ -86,25 +88,28 @@ class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
             showErrorSnackbar(context, state.errorMessage);
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                FormElementWidget(
-                  label: 'Frecuencia cardiaca fetal',
-                  initialValue: _fetalHeartRateValue,
-                  onChanged: (value) => _fetalHeartRateValue = value,
-                ),
-                const SizedBox(height: 20),
-                _buildTimeField(context),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _saveFetalHeartRate,
-                  child: const Text('Guardar'),
-                ),
-              ],
+        child: LoadingOverlay(
+          isLoading: isLoading,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  FormElementWidget(
+                    label: 'Frecuencia cardiaca fetal',
+                    initialValue: _fetalHeartRateValue,
+                    onChanged: (value) => _fetalHeartRateValue = value,
+                  ),
+                  const SizedBox(height: 20),
+                  _buildTimeField(context),
+                  const SizedBox(height: 20),
+                  FilledButton(
+                    onPressed: _saveFetalHeartRate,
+                    child: const Text('Guardar'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

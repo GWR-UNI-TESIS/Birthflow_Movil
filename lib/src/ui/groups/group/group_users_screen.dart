@@ -23,6 +23,17 @@ class GroupProfiler {
   final String owner;
 
   GroupProfiler({required this.groupId, required this.owner});
+
+  // Métodos para serializar y deserializar
+  Map<String, dynamic> toJson() => {
+        'groupId': groupId,
+        'owner': owner,
+      };
+
+  factory GroupProfiler.fromJson(Map<String, dynamic> json) => GroupProfiler(
+        groupId: int.parse(json['groupId'].toString()),
+        owner: json['owner'].toString(),
+      );
 }
 
 class GroupUsersScreen extends StatelessWidget {

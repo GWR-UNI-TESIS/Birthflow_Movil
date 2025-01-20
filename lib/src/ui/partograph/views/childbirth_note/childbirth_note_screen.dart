@@ -49,7 +49,7 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
                   children: [
                     const Text('No se encontró una nota de parto.'),
                     const SizedBox(height: 20),
-                    ElevatedButton(
+                    ElevatedButton.icon(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -60,7 +60,8 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const Text('Crear Nota de Parto'),
+                      label: const Text('Crear Nota de Parto'),
+                      icon: const Icon(Icons.add),
                     ),
                   ],
                 ),

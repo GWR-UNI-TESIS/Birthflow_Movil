@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -88,7 +89,7 @@ class _PresentationPositionVarietyCreateScreenState
   @override
   Widget build(BuildContext context) {
     final catalog = context.watch<CatalogCubit>().state;
-
+    final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Crear Presentación'),
@@ -102,11 +103,14 @@ class _PresentationPositionVarietyCreateScreenState
             showErrorSnackbar(context, state.errorMessage);
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: _buildFormContent(catalog),
+        child: LoadingOverlay(
+          isLoading: isLoading,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: _buildFormContent(catalog),
+            ),
           ),
         ),
       ),

@@ -33,9 +33,10 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _navigateToCreate(context),
-        child: const Text('Agregar'),
+        label: const Text('Agregar dato a la tabla'),
+        icon: const Icon(Icons.add,),
       ),
     );
   }

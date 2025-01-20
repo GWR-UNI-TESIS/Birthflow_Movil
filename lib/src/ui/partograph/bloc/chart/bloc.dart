@@ -81,10 +81,15 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
           otherPointsPoints!.addAll(contractionFrequency!);
         }
 
-        final alertCurvePoints =
-            ChartMapper.transformToChartPoint(data: alertcurve!);
+        final alertCurvePoints =  (alertcurve != null || alertcurve!.isEmpty) ? ChartMapper.transformToChartPoint(
+          data: alertcurve,
+          firstDate: startTime,
+        ) : List<ChartPoint>.empty();
         final newAlertCurvePoints = (newAlertCurve != null)
-            ? ChartMapper.transformToChartPoint(data: newAlertCurve)
+            ? ChartMapper.transformToChartPoint(
+                data: newAlertCurve,
+                firstDate: startTime,
+              )
             : List<ChartPoint>.empty();
 
         emit(

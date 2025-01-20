@@ -22,7 +22,7 @@ class EditGroupView extends StatelessWidget {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Group Name'),
+              decoration: const InputDecoration(labelText: 'Nombre de grupo'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
@@ -35,7 +35,7 @@ class EditGroupView extends StatelessWidget {
                   Navigator.pop(context);
                 }
               },
-              child: const Text('Update'),
+              child: const Text('Modificar'),
             ),
           ],
         ),

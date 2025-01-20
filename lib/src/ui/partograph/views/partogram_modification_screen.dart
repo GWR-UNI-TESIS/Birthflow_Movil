@@ -79,7 +79,7 @@ class PartogramModificationState extends State<PartogramModificationScreen>
       appBar: AppBar(
         title: const Text('Actualizar Partograma'),
       ),
-      body:    BlocListener<PartographBloc, PartographState>(
+      body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
             showSnackbar(context, state.message);
@@ -114,28 +114,63 @@ class PartogramModificationState extends State<PartogramModificationScreen>
                   label: 'Fecha',
                   context: context,
                 ),
-                const SizedBox(height: 16),
-                _buildTextField(
+                const SizedBox(height: 20),
+                _buildTextFieldObservation(
                   controller: _observationController,
                   label: 'Observaciones',
                   hint: 'Ingrese las observaciones',
                   maxLength: 300,
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 10),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Text(
+                    'Valores por defecto para la creacion de curva de alerta ',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                ),
                 WorkTimeTableWidget(
                   currentWorkTime: _workTime!,
                 ),
+                const SizedBox(height: 25),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
+                  child: FilledButton.icon(
                     onPressed: _updatePartograph,
-                    child: const Text('Guardar Cambios'),
+                    label: const Text('Guardar Cambios'),
+                    icon: const Icon(Icons.save_alt,),
                   ),
                 ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldObservation({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required int maxLength,
+  }) {
+    return Container(
+      constraints: const BoxConstraints(minHeight: 100, maxHeight: 150),
+      child: TextFormField(
+        controller: controller,
+        expands: true,
+        textAlignVertical: TextAlignVertical.top,
+        maxLines: null,
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          labelText: label,
+          hintText: hint,
+        ),
+        maxLength: maxLength,
+        validator: (value) => value == null || value.isEmpty
+            ? 'Por favor, ingrese un valor'
+            : null,
       ),
     );
   }

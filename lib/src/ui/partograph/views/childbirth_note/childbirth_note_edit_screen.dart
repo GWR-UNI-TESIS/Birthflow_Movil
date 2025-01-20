@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.d
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,8 @@ class ChildbirthNoteEditScreen extends StatefulWidget {
       _ChildbirthNoteEditScreenState();
 }
 
-class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen> with SnackbarsMixin {
+class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
+    with SnackbarsMixin {
   final _formKey = GlobalKey<FormState>();
 
   // Controladores para los campos
@@ -158,6 +160,7 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen> wit
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -175,36 +178,39 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen> wit
             showErrorSnackbar(context, state.errorMessage);
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                _buildTextField('Hora', _hourController),
-                _buildTextField('Sexo', _sexController),
-                _buildTextField('APGAR', _apgarController),
-                _buildTextField('Temperatura', _temperatureController),
-                _buildTextField('Caputto', _caputtoController),
-                _buildTextField('Circular', _circularController),
-                _buildTextField('Líquido Amniótico', _lamnioticoController),
-                _buildTextField('Micción', _miccionController),
-                _buildTextField('Meconio', _meconioController),
-                _buildTextField('PA', _paController),
-                _buildTextField('Expulsivo', _expulsivoController),
-                _buildTextField('Placenta', _placentaController),
-                _buildTextField('Alumbramiento', _alumbramientoController),
-                _buildTextField('Huella Plantar', _huellaPlantarController),
-                _buildTextField('PC', _pcController),
-                _buildTextField('Talla', _tallaController),
-                _buildTextField('Brazalete', _brazaleteController),
-                _buildTextField('Huella Digital', _huellaDigController),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _saveNote,
-                  child: const Text('Guardar'),
-                ),
-              ],
+        child: LoadingOverlay(
+          isLoading: isLoading,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  _buildTextField('Hora', _hourController),
+                  _buildTextField('Sexo', _sexController),
+                  _buildTextField('APGAR', _apgarController),
+                  _buildTextField('Temperatura', _temperatureController),
+                  _buildTextField('Caputto', _caputtoController),
+                  _buildTextField('Circular', _circularController),
+                  _buildTextField('Líquido Amniótico', _lamnioticoController),
+                  _buildTextField('Micción', _miccionController),
+                  _buildTextField('Meconio', _meconioController),
+                  _buildTextField('PA', _paController),
+                  _buildTextField('Expulsivo', _expulsivoController),
+                  _buildTextField('Placenta', _placentaController),
+                  _buildTextField('Alumbramiento', _alumbramientoController),
+                  _buildTextField('Huella Plantar', _huellaPlantarController),
+                  _buildTextField('PC', _pcController),
+                  _buildTextField('Talla', _tallaController),
+                  _buildTextField('Brazalete', _brazaleteController),
+                  _buildTextField('Huella Digital', _huellaDigController),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _saveNote,
+                    child: const Text('Guardar'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

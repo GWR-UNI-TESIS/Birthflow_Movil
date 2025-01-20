@@ -115,7 +115,7 @@ class _PartographState extends State<PartographScreen> {
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          FilledButton(
+          FilledButton.icon(
             onPressed: () => context
               ..go(
                 AppPaths.home.partographPath
@@ -123,7 +123,8 @@ class _PartographState extends State<PartographScreen> {
                     .chart
                     .path,
               ),
-            child: const Text('Mostrar grafica'),
+            icon: const Icon(Icons.ssid_chart),
+            label: const Text('Mostrar grafica'),
           ),
           _buildGenericCard(
             title: 'Dilataciones cervicales',
@@ -188,7 +189,7 @@ class _PartographState extends State<PartographScreen> {
           _buildGenericCard(
             title: 'Nota de Parto',
             content: _childbirthNoteContent(state),
-             onPressed: () => context
+            onPressed: () => context
               ..go(
                 AppPaths.home.partographPath
                     .define(widget.partographId)
