@@ -18,19 +18,13 @@ class CervicalDilationCreateScreen extends StatefulWidget {
 }
 
 class _CervicalDilationCreateScreenState
-    extends State<CervicalDilationCreateScreen> with SnackbarsMixin {
+    extends State<CervicalDilationCreateScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _valueController;
-  late final TextEditingController _dateTimeController;
+  final TextEditingController _valueController = TextEditingController();
+  final TextEditingController _dateTimeController = TextEditingController();
+
   TimeOfDay? _selectedTime;
   bool _remOrRam = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _valueController = TextEditingController();
-    _dateTimeController = TextEditingController();
-  }
 
   @override
   void dispose() {
@@ -42,14 +36,14 @@ class _CervicalDilationCreateScreenState
   void _saveCervicalDilation() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
+
       final selectedDateTime = DateTime(
         DateTime.now().year,
         DateTime.now().month,
         DateTime.now().day,
-        _selectedTime?.hour ?? DateTime.now().hour,
-        _selectedTime?.minute ?? DateTime.now().minute,
+        _selectedTime?.hour ?? 0,
+        _selectedTime?.minute ?? 0,
       );
-
       final event = SaveCervicalDilation(
         partographId: widget.partographId,
         value: double.parse(_valueController.text),
@@ -69,11 +63,15 @@ class _CervicalDilationCreateScreenState
     if (picked != null) {
       setState(() {
         _selectedTime = picked;
-        final now = DateTime.now();
-        final dateTime =
-            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-
-        _dateTimeController.text = DateFormat('HH:mm:ss').format(dateTime);
+        _dateTimeController.text = DateFormat('HH:mm:ss').format(
+          DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+            picked.hour,
+            picked.minute,
+          ),
+        );
       });
     }
   }
@@ -86,10 +84,10 @@ class _CervicalDilationCreateScreenState
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(
@@ -112,9 +110,10 @@ class _CervicalDilationCreateScreenState
             _buildTimeField(context),
             _buildSwitch(),
             const SizedBox(height: 20),
-            ElevatedButton(
+            FilledButton.icon(
               onPressed: _saveCervicalDilation,
-              child: const Text('Guardar'),
+              icon: const Icon(Icons.save_alt),
+              label: const Text('Guardar'),
             ),
           ],
         ),
@@ -148,11 +147,11 @@ class _CervicalDilationCreateScreenState
       child: AbsorbPointer(
         child: TextFormField(
           controller: _dateTimeController,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.calendar_today),
-            border: const OutlineInputBorder(),
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Icons.calendar_today),
+            border: OutlineInputBorder(),
             labelText: 'Hora',
-            hintText: _selectedTime?.format(context) ?? 'Seleccione una hora',
+            hintText: 'Seleccione una hora',
           ),
           validator: (value) {
             if (_selectedTime == null) {

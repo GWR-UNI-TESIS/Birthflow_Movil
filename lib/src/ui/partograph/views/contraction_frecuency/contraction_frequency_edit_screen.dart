@@ -22,26 +22,40 @@ class ContractionFrequencyEditScreen extends StatefulWidget {
 }
 
 class _ContractionFrequencyEditScreenState
-    extends State<ContractionFrequencyEditScreen> with SnackbarsMixin {
+    extends State<ContractionFrequencyEditScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
   TimeOfDay? _selectedTime;
 
   @override
-  void initState() {
-    super.initState();
-    final contractionFrequency =
-        widget.contractionFrequencyEditData.contractionFrequency;
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final contractionFrequencies = context
+        .watch<PartographBloc>()
+        .state
+        .whenOrNull(
+          loaded: (partograph, message) => partograph.contractionFrequencies,
+        );
+
+    final contractionFrequency = contractionFrequencies!
+        .where(
+          (e) =>
+              e.id ==
+              widget.contractionFrequencyEditData.contractionFrequencyId,
+        )
+        .first;
 
     _valueController = TextEditingController(
-      text: contractionFrequency?.value ?? '',
+      text: contractionFrequency.value,
     );
     _dateTimeController = TextEditingController(
+      // ignore: unnecessary_null_comparison
       text: contractionFrequency != null
           ? DateFormat('HH:mm:ss').format(contractionFrequency.time)
           : '',
     );
+    // ignore: unnecessary_null_comparison
     _selectedTime = contractionFrequency != null
         ? TimeOfDay.fromDateTime(contractionFrequency.time)
         : null;
@@ -65,19 +79,14 @@ class _ContractionFrequencyEditScreenState
         _selectedTime?.minute ?? DateTime.now().minute,
       );
 
-      final contractionFrequency =
-          widget.contractionFrequencyEditData.contractionFrequency;
+      final event = UpdateContractionFrequency(
+        id: widget.contractionFrequencyEditData.contractionFrequencyId!,
+        partographId: widget.contractionFrequencyEditData.partographId,
+        value: _valueController.text,
+        time: selectedDateTime,
+      );
 
-      if (contractionFrequency != null) {
-        final event = UpdateContractionFrequency(
-          id: contractionFrequency.id!,
-          partographId: widget.contractionFrequencyEditData.partographId,
-          value: _valueController.text,
-          time: selectedDateTime,
-        );
-
-        bloc.add(event);
-      }
+      bloc.add(event);
     }
   }
 
@@ -105,10 +114,10 @@ class _ContractionFrequencyEditScreenState
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar( state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(

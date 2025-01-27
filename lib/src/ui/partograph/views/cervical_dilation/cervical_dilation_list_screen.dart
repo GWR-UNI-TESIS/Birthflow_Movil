@@ -80,7 +80,7 @@ class CervicalDilationListScreen extends StatelessWidget {
           .edit
           .path,
       extra: CervicalDilationEditData(
-        cervicalDilation: item,
+        cervicalDilationId: item!.id,
         partographId: partographId,
       ),
     );

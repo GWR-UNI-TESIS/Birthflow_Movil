@@ -1,56 +1,129 @@
-
-import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
-
 class CervicalDilationEditData {
-  final CervicalDilation? cervicalDilation;
+  final int? cervicalDilationId;
   final String partographId;
 
   CervicalDilationEditData({
-    required this.cervicalDilation,
+    required this.cervicalDilationId,
     required this.partographId,
   });
+
+  factory CervicalDilationEditData.fromJson(Map<String, dynamic> json) {
+    return CervicalDilationEditData(
+      cervicalDilationId: json['cervicalDilationId'] != null
+          ? json['cervicalDilationId'] as int
+          : null,
+      partographId: json['partographId'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'cervicalDilationId': cervicalDilationId,
+      'partographId': partographId,
+    };
+  }
 }
 
 class FetalHeartRateEditData {
-  final FetalHeartRate? fetalHeartRate;
+  final int? fetalHeartRateId;
   final String partographId;
 
   FetalHeartRateEditData({
-    required this.fetalHeartRate,
+    required this.fetalHeartRateId,
     required this.partographId,
   });
+
+  factory FetalHeartRateEditData.fromJson(Map<String, dynamic> json) {
+    return FetalHeartRateEditData(
+      fetalHeartRateId: json['fetalHeartRateId'] != null
+          ? json['fetalHeartRateId'] as int
+          : null,
+      partographId: json['partographId'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'fetalHeartRateId': fetalHeartRateId,
+      'partographId': partographId,
+    };
+  }
 }
 
 class ContractionFrequencyEditData {
-  final ContractionFrequency? contractionFrequency;
+  final int? contractionFrequencyId;
   final String partographId;
 
   ContractionFrequencyEditData({
-    required this.contractionFrequency,
+    required this.contractionFrequencyId,
     required this.partographId,
   });
+
+  factory ContractionFrequencyEditData.fromJson(Map<String, dynamic> json) {
+    return ContractionFrequencyEditData(
+      contractionFrequencyId: json['contractionFrequencyId'] != null
+          ? json['contractionFrequencyId'] as int
+          : null,
+      partographId: json['partographId'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'contractionFrequencyId': contractionFrequencyId,
+      'partographId': partographId,
+    };
+  }
 }
 
 class MedicalSurveillanceEditData {
-  final MedicalSurveillanceTable? medicalSurveillanceTable;
+  final int? medicalSurveillanceTableId;
   final String partographId;
 
   MedicalSurveillanceEditData({
-    required this.medicalSurveillanceTable,
+    required this.medicalSurveillanceTableId,
     required this.partographId,
   });
+
+  factory MedicalSurveillanceEditData.fromJson(Map<String, dynamic> json) {
+    return MedicalSurveillanceEditData(
+      medicalSurveillanceTableId: json['medicalSurveillanceTableId'] != null
+          ? json['medicalSurveillanceTableId'] as int
+          : null,
+      partographId: json['partographId'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'medicalSurveillanceTableId': medicalSurveillanceTableId,
+      'partographId': partographId,
+    };
+  }
 }
 
 class PresentationPositionVarietyData {
-  final PresentationPositionVariety? presentationPositionVariety;
+  final int? presentationPositionVarietyId;
   final String partographId;
 
   PresentationPositionVarietyData({
-    required this.presentationPositionVariety,
+    required this.presentationPositionVarietyId,
     required this.partographId,
   });
+
+  factory PresentationPositionVarietyData.fromJson(Map<String, dynamic> json) {
+    return PresentationPositionVarietyData(
+      presentationPositionVarietyId: json['presentationPositionVarietyId'] != null
+          ? json['presentationPositionVarietyId'] as int
+          : null,
+      partographId: json['partographId'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'presentationPositionVarietyId': presentationPositionVarietyId,
+      'partographId': partographId,
+    };
+  }
 }

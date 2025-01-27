@@ -74,7 +74,7 @@ class FetalHeartRateListScreen extends StatelessWidget {
           .edit
           .path,
       extra: FetalHeartRateEditData(
-        fetalHeartRate: item,
+        fetalHeartRateId: item!.id,
         partographId: partographId,
       ),
     );

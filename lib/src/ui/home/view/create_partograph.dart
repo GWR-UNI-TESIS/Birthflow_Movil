@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class CreatePartographScreen extends StatelessWidget with SnackbarsMixin {
+class CreatePartographScreen extends StatelessWidget with SnackbarMixin {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -27,12 +27,12 @@ class CreatePartographScreen extends StatelessWidget with SnackbarsMixin {
       child: BlocListener<CreatePartographBloc, CreatePartographState>(
         listener: (BuildContext context, CreatePartographState state) {
           if (state is IsSaved) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.pop(context, state.partographId);
           }
 
           if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: _CreatePartographPage(),
@@ -47,7 +47,7 @@ class _CreatePartographPage extends StatefulWidget {
 }
 
 class _CreatePartographState extends State<_CreatePartographPage>
-    with TickerProviderStateMixin, SnackbarsMixin {
+    with TickerProviderStateMixin, SnackbarMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late final TabController _tabController;
@@ -93,7 +93,6 @@ class _CreatePartographState extends State<_CreatePartographPage>
           );
     } else {
       showErrorSnackbar(
-        context,
         'Ingresar todos los valores - Tabla de construccion de curvas',
       );
     }

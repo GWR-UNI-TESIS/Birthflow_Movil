@@ -2,10 +2,11 @@ import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
+import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget with SnackbarMixin {
   const RegisterScreen();
 
   @override
@@ -17,34 +18,15 @@ class RegisterScreen extends StatelessWidget {
         }
 
         if (state is Failure) {
-          _showErrorSnackbar(context, state.error);
+          showErrorSnackbar(state.error);
         }
       },
       child: _RegisterView(),
     );
   }
 
-  void _showErrorSnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(message),
-        backgroundColor: Colors.red,
-        showCloseIcon: true,
-      ),
-    );
-  }
-
   void _showSnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(message),
-        backgroundColor: Colors.green,
-        showCloseIcon: true,
-      ),
-    );
-
+    showSnackbar(message);
     Navigator.pop(context);
   }
 }

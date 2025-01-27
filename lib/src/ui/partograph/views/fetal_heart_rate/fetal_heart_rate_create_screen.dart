@@ -19,7 +19,7 @@ class FetalHeartRateCreateScreen extends StatefulWidget {
 }
 
 class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
-    with SnackbarsMixin {
+    with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _dateTimeController;
   TimeOfDay? _selectedTime;
@@ -82,10 +82,10 @@ class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(

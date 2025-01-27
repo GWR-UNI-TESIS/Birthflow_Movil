@@ -48,7 +48,6 @@ class MainChart extends StatelessWidget {
         return value!.round().toString();
       }
     });
-
     return charts.ScatterPlotChart(
       seriesList,
       animate: animate,
@@ -68,7 +67,6 @@ class MainChart extends StatelessWidget {
         ),
         tickFormatterSpec: secondaryMeasureFormatter,
       ),
-      
       domainAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -112,6 +110,7 @@ class MainChart extends StatelessWidget {
         ),
       ],
       behaviors: [
+        // Mostrar anotación solo si hay datos en realCurve
         charts.RangeAnnotation([
           charts.LineAnnotationSegment(
             4.5,
@@ -192,6 +191,7 @@ class Data {
       measureFn: (ChartPoint point, _) => point.y,
       data: partograph.alertCurve,
     )
+      ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId')
       // Configure our custom line renderer for this series.
       ..setAttribute(charts.rendererIdKey, 'alertCurveLine');
 
@@ -201,9 +201,7 @@ class Data {
       domainFn: (ChartPoint point, _) => point.x,
       measureFn: (ChartPoint point, _) => point.y,
       data: partograph.realCurve,
-    )
-      ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId')
-      ..setAttribute(charts.rendererIdKey, 'realCurveLine');
+    )..setAttribute(charts.rendererIdKey, 'realCurveLine');
     final medicalSurveillancePoints = charts.Series<ChartPoint, double>(
       id: 'MedicalSurveillance',
       displayName: '',
@@ -221,8 +219,8 @@ class Data {
     return [
       if (partograph.others.isNotEmpty) medicalSurveillancePoints,
       if (partograph.realCurve.isNotEmpty) curvaReal,
-      if (partograph.newAlertCurve.isNotEmpty) nuevaCurvaAlerta,
       if (partograph.alertCurve.isNotEmpty) curvaAlerta,
+      if (partograph.newAlertCurve.isNotEmpty) nuevaCurvaAlerta,
     ];
   }
 }

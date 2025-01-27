@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatelessWidget with SnackbarsMixin {
+class LoginScreen extends StatelessWidget with SnackbarMixin {
   const LoginScreen({super.key});
 
   @override
@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget with SnackbarsMixin {
         // Si el estado es Unauthenticated y hay un mensaje de error, muestra un SnackBar
         if (state is Unauthenticated) {
           if (state.message != null) {
-            showErrorSnackbar(context, state.message!);
+            showErrorSnackbar(state.message!);
           }
         }
       },

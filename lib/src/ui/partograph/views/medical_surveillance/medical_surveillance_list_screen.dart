@@ -36,7 +36,9 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _navigateToCreate(context),
         label: const Text('Agregar dato a la tabla'),
-        icon: const Icon(Icons.add,),
+        icon: const Icon(
+          Icons.add,
+        ),
       ),
     );
   }
@@ -173,7 +175,7 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
           .edit
           .path,
       extra: MedicalSurveillanceEditData(
-        medicalSurveillanceTable: item,
+        medicalSurveillanceTableId: item!.id,
         partographId: partographId,
       ),
     );

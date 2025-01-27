@@ -23,24 +23,35 @@ class FetalHeartRateEditScreen extends StatefulWidget {
 }
 
 class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
-    with SnackbarsMixin {
+    with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _dateTimeController;
   TimeOfDay? _selectedTime;
   String? _fetalHeartRateValue;
 
   @override
-  void initState() {
-    super.initState();
-    final fetalHeartRate = widget.fetalHeartRateEditData.fetalHeartRate;
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-    _fetalHeartRateValue = fetalHeartRate?.value ?? '';
+    final fetalheartrates = context.watch<PartographBloc>().state.whenOrNull(
+          loaded: (partograph, message) => partograph.contractionFrequencies,
+        );
+
+    final fetalHeartRate = fetalheartrates!
+        .where(
+          (e) => e.id == widget.fetalHeartRateEditData.fetalHeartRateId,
+        )
+        .first;
+
+    _fetalHeartRateValue = fetalHeartRate.value;
 
     _dateTimeController = TextEditingController(
+      // ignore: unnecessary_null_comparison
       text: fetalHeartRate != null
           ? DateFormat('HH:mm:ss').format(fetalHeartRate.time)
           : '',
     );
+    // ignore: unnecessary_null_comparison
     _selectedTime = fetalHeartRate != null
         ? TimeOfDay.fromDateTime(fetalHeartRate.time)
         : null;
@@ -63,18 +74,14 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
         _selectedTime?.minute ?? DateTime.now().minute,
       );
 
-      final fetalHeartRate = widget.fetalHeartRateEditData.fetalHeartRate;
+      final event = UpdateFetalHeartRate(
+        id: widget.fetalHeartRateEditData.fetalHeartRateId!,
+        partographId: widget.fetalHeartRateEditData.partographId,
+        value: _fetalHeartRateValue!,
+        time: selectedDateTime,
+      );
 
-      if (fetalHeartRate != null) {
-        final event = UpdateFetalHeartRate(
-          id: fetalHeartRate.id!,
-          partographId: widget.fetalHeartRateEditData.partographId,
-          value: _fetalHeartRateValue!,
-          time: selectedDateTime,
-        );
-
-        bloc.add(event);
-      }
+      bloc.add(event);
     }
   }
 
@@ -102,10 +109,10 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(

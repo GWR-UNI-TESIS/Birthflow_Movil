@@ -26,7 +26,7 @@ class PresentationPositionVarietyCreateScreen extends StatefulWidget {
 }
 
 class _PresentationPositionVarietyCreateScreenState
-    extends State<PresentationPositionVarietyCreateScreen> with SnackbarsMixin {
+    extends State<PresentationPositionVarietyCreateScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _timeController;
   Position? _selectedPosition;
@@ -97,10 +97,10 @@ class _PresentationPositionVarietyCreateScreenState
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(

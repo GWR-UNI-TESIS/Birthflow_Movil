@@ -73,7 +73,7 @@ class ContractionFrequencyListScreen extends StatelessWidget {
           .edit
           .path,
       extra: ContractionFrequencyEditData(
-        contractionFrequency: item,
+        contractionFrequencyId: item!.id,
         partographId: partographId,
       ),
     );

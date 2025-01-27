@@ -1,4 +1,3 @@
-import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/worktime/worktime.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
@@ -8,8 +7,48 @@ import 'package:birthflow_movil/src/ui/widgets/worktime/worktime_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+class PartographHelper {
+  final String? partographId;
+  final String name;
+  final String recordName;
+  final DateTime date;
+  final String observation;
+  final String workTime;
+
+  PartographHelper({
+    required this.partographId,
+    required this.name,
+    required this.recordName,
+    required this.date,
+    required this.observation,
+    required this.workTime,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'partographId': partographId,
+      'name': name,
+      'recordName': recordName,
+      'date': date.toIso8601String(),
+      'observation': observation,
+      'workTime': workTime,
+    };
+  }
+
+  factory PartographHelper.fromJson(Map<String, dynamic> json) {
+    return PartographHelper(
+      partographId: json['partographId'].toString(),
+      name: json['name'].toString(),
+      recordName: json['recordName'].toString(),
+      date: DateTime.parse(json['date'].toString()),
+      observation: json['observation'].toString(),
+      workTime: json['workTime'].toString(),
+    );
+  }
+}
+
 class PartogramModificationScreen extends StatefulWidget {
-  final Partograph partograph;
+  final PartographHelper partograph;
 
   const PartogramModificationScreen({super.key, required this.partograph});
 
@@ -18,7 +57,7 @@ class PartogramModificationScreen extends StatefulWidget {
 }
 
 class PartogramModificationState extends State<PartogramModificationScreen>
-    with SnackbarsMixin {
+    with SnackbarMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late TextEditingController _nameController;
@@ -31,7 +70,7 @@ class PartogramModificationState extends State<PartogramModificationScreen>
   void initState() {
     super.initState();
 
-    final Partograph partograph = widget.partograph;
+    final PartographHelper partograph = widget.partograph;
 
     // Inicializar los controladores con los valores actuales del Partograph
     _nameController = TextEditingController(text: partograph.name);
@@ -82,10 +121,10 @@ class PartogramModificationState extends State<PartogramModificationScreen>
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: SingleChildScrollView(
@@ -138,7 +177,9 @@ class PartogramModificationState extends State<PartogramModificationScreen>
                   child: FilledButton.icon(
                     onPressed: _updatePartograph,
                     label: const Text('Guardar Cambios'),
-                    icon: const Icon(Icons.save_alt,),
+                    icon: const Icon(
+                      Icons.save_alt,
+                    ),
                   ),
                 ),
               ],

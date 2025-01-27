@@ -27,7 +27,7 @@ class PresentationPositionVarietyEditScreen extends StatefulWidget {
 }
 
 class _PresentationPositionVarietyEditScreenState
-    extends State<PresentationPositionVarietyEditScreen> with SnackbarsMixin {
+    extends State<PresentationPositionVarietyEditScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _timeController;
   Position? _selectedPosition;
@@ -35,27 +35,41 @@ class _PresentationPositionVarietyEditScreenState
   DateTime _selectTime = DateTime.now();
 
   @override
-  void initState() {
-    super.initState();
-    final model = widget.data.presentationPositionVariety;
-    _selectTime = model?.time ?? DateTime.now();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final presentationPositionVarieties =
+        context.watch<PartographBloc>().state.whenOrNull(
+              loaded: (partograph, message) =>
+                  partograph.presentationPositionVarieties,
+            );
+
+    final item = presentationPositionVarieties!
+        .where(
+          (e) => e.id == widget.data.presentationPositionVarietyId,
+        )
+        .first;
+
+    _selectTime = item.time;
     _timeController = TextEditingController(
-      text: model != null
-          ? DateFormat('HH:mm:ss').format(model.time)
+      // ignore: unnecessary_null_comparison
+      text: item != null
+          ? DateFormat('HH:mm:ss').format(item.time)
           : DateFormat('HH:mm:ss').format(DateTime.now()),
     );
 
     final catalog = context.read<CatalogCubit>().state;
-    _selectedPosition = model != null
+    // ignore: unnecessary_null_comparison
+    _selectedPosition = item != null
         ? catalog.positionCatalog.firstWhere(
-            (position) => position.id == model.position,
+            (position) => position.id == item.position,
             orElse: () => catalog.positionCatalog.first,
           )
         : catalog.positionCatalog.first;
 
-    _selectedHodgePlane = model != null
+    // ignore: unnecessary_null_comparison
+    _selectedHodgePlane = item != null
         ? catalog.hodgePlanesCatalog.firstWhere(
-            (hodgePlane) => hodgePlane.id == model.hodgePlane,
+            (hodgePlane) => hodgePlane.id == item.hodgePlane,
             orElse: () => catalog.hodgePlanesCatalog.first,
           )
         : catalog.hodgePlanesCatalog.first;
@@ -89,19 +103,16 @@ class _PresentationPositionVarietyEditScreenState
   void _saveData() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
-      final model = widget.data.presentationPositionVariety;
 
-      if (model != null) {
-        final event = UpdatePresentationPositionVariety(
-          id: model.id!,
-          partographId: widget.data.partographId,
-          hodgePlane: _selectedHodgePlane!.id,
-          position: _selectedPosition!.id,
-          time: _selectTime,
-        );
+      final event = UpdatePresentationPositionVariety(
+        id: widget.data.presentationPositionVarietyId!,
+        partographId: widget.data.partographId,
+        hodgePlane: _selectedHodgePlane!.id,
+        position: _selectedPosition!.id,
+        time: _selectTime,
+      );
 
-        bloc.add(event);
-      }
+      bloc.add(event);
     }
   }
 
@@ -116,10 +127,10 @@ class _PresentationPositionVarietyEditScreenState
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(

@@ -22,7 +22,7 @@ class CervicalDilationEditScreen extends StatefulWidget {
 }
 
 class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
-    with SnackbarsMixin {
+    with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
@@ -30,22 +30,33 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
   bool _remOrRam = false;
 
   @override
-  void initState() {
-    super.initState();
-    final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final cervicalDilations = context.watch<PartographBloc>().state.whenOrNull(
+          loaded: (partograph, message) => partograph.cervicalDilations,
+        );
+
+    final cervicalDilation = cervicalDilations!
+        .where(
+          (e) => e.id == widget.cervicalDilationEditData.cervicalDilationId,
+        )
+        .first;
 
     _valueController = TextEditingController(
-      text: cervicalDilation?.value.toString() ?? '',
+      text: cervicalDilation.value.toString(),
     );
     _dateTimeController = TextEditingController(
+      // ignore: unnecessary_null_comparison
       text: cervicalDilation != null
           ? DateFormat('HH:mm:ss').format(cervicalDilation.hour)
           : '',
     );
+    // ignore: unnecessary_null_comparison
     _selectedTime = cervicalDilation != null
         ? TimeOfDay.fromDateTime(cervicalDilation.hour)
         : null;
-    _remOrRam = cervicalDilation?.remOrRam ?? false;
+    _remOrRam = cervicalDilation.remOrRam;
   }
 
   @override
@@ -66,19 +77,15 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
         _selectedTime?.minute ?? DateTime.now().minute,
       );
 
-      final cervicalDilation = widget.cervicalDilationEditData.cervicalDilation;
+      final event = UpdateCervicalDilation(
+        id: widget.cervicalDilationEditData.cervicalDilationId!,
+        partographId: widget.cervicalDilationEditData.partographId,
+        value: double.parse(_valueController.text),
+        hour: selectedDateTime,
+        remOrRam: _remOrRam,
+      );
 
-      if (cervicalDilation != null) {
-        final event = UpdateCervicalDilation(
-          id: cervicalDilation.id,
-          partographId: widget.cervicalDilationEditData.partographId,
-          value: double.parse(_valueController.text),
-          hour: selectedDateTime,
-          remOrRam: _remOrRam,
-        );
-
-        bloc.add(event);
-      }
+      bloc.add(event);
     }
   }
 
@@ -107,10 +114,10 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(
@@ -133,9 +140,10 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
             _buildTimeField(context),
             _buildSwitch(),
             const SizedBox(height: 20),
-            ElevatedButton(
+            FilledButton.icon(
               onPressed: _updateCervicalDilation,
-              child: const Text('Actualizar'),
+              icon: const Icon(Icons.save_alt),
+              label: const Text('Actualizar'),
             ),
           ],
         ),

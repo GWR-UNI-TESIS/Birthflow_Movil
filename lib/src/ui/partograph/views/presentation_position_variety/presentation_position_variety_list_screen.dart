@@ -94,7 +94,7 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
           .edit
           .path,
       extra: PresentationPositionVarietyData(
-        presentationPositionVariety: item,
+        presentationPositionVarietyId: item!.id,
         partographId: partographId,
       ),
     );

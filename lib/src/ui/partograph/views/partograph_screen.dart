@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/partogram_modification_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,7 +103,13 @@ class _PartographState extends State<PartographScreen> {
                   .define(widget.partographId)
                   .update
                   .path,
-              extra: state.partograph,
+              extra: PartographHelper(
+                  partographId: state.partograph.partographId,
+                  name: state.partograph.name,
+                  recordName: state.partograph.recordName,
+                  date: state.partograph.date,
+                  observation: state.partograph.observation,
+                  workTime: state.partograph.workTime),
             ),
           child: const Text('Modificar'),
         ),

@@ -19,7 +19,7 @@ class ContractionFrequencyCreateScreen extends StatefulWidget {
 }
 
 class _ContractionFrequencyCreateScreenState
-    extends State<ContractionFrequencyCreateScreen> with SnackbarsMixin {
+    extends State<ContractionFrequencyCreateScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
@@ -84,10 +84,10 @@ class _ContractionFrequencyCreateScreenState
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(

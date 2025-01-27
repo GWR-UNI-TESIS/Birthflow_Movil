@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
@@ -175,7 +174,7 @@ class AppRouter {
               GoRoute(
                 path: AppPaths.home.partographPath.update.goRoute,
                 builder: (context, state) {
-                  final data = state.extra! as Partograph;
+                  final data = state.extra! as PartographHelper;
                   return PartogramModificationScreen(
                     partograph: data,
                   );

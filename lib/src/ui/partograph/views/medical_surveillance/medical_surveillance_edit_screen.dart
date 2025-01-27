@@ -26,7 +26,7 @@ class MedicalSurveillanceEditScreen extends StatefulWidget {
 }
 
 class _MedicalSurveillanceEditScreenState
-    extends State<MedicalSurveillanceEditScreen> with SnackbarsMixin {
+    extends State<MedicalSurveillanceEditScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _timeController = TextEditingController();
 
@@ -41,26 +41,39 @@ class _MedicalSurveillanceEditScreenState
   DateTime _dateTime = DateTime.now();
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _initializeValues();
   }
 
   void _initializeValues() {
-    final model = widget.medicalSurveillanceEditData.medicalSurveillanceTable;
+    final medicalSurveillanceTable = context
+        .watch<PartographBloc>()
+        .state
+        .whenOrNull(
+          loaded: (partograph, message) => partograph.medicalSurveillanceTable,
+        );
+
+    final item = medicalSurveillanceTable!
+        .where(
+          (e) =>
+              e.id ==
+              widget.medicalSurveillanceEditData.medicalSurveillanceTableId,
+        )
+        .first;
 
     _timeController.text =
-        model?.time != null ? DateFormat('HH:mm:ss').format(model!.time) : '';
-    _dateTime = model?.time ?? DateTime.now();
-    _maternalPositionValue = model?.maternalPosition ?? '';
-    _frequencyContractions = model?.frequencyContractions ?? '';
-    _pain = model?.pain ?? '';
+        // ignore: unnecessary_null_comparison
+        item.time != null ? DateFormat('HH:mm:ss').format(item.time) : '';
+    _dateTime = item.time;
+    _maternalPositionValue = item.maternalPosition;
+    _frequencyContractions = item.frequencyContractions;
+    _pain = item.pain;
 
-    _arterialPressureValue = ValueNotifier(model?.arterialPressure ?? '');
-    _maternalPulseValue = ValueNotifier(model?.maternalPulse ?? '');
-    _fetalHeartRateValue = ValueNotifier(model?.fetalHeartRate ?? '');
-    _contractionsDurationValue =
-        ValueNotifier(model?.contractionsDuration ?? '');
+    _arterialPressureValue = ValueNotifier(item.arterialPressure);
+    _maternalPulseValue = ValueNotifier(item.maternalPulse);
+    _fetalHeartRateValue = ValueNotifier(item.fetalHeartRate);
+    _contractionsDurationValue = ValueNotifier(item.contractionsDuration);
   }
 
   @override
@@ -76,25 +89,36 @@ class _MedicalSurveillanceEditScreenState
   void _handleSave() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
-      final model = widget.medicalSurveillanceEditData.medicalSurveillanceTable;
 
-      if (model != null) {
-        final event = UpdateMedicalSurveillance(
-          id: model.id,
-          partographId: widget.medicalSurveillanceEditData.partographId,
-          letter: model.letter,
-          maternalPosition: _maternalPositionValue,
-          arterialPressure: _arterialPressureValue.value,
-          maternalPulse: _maternalPulseValue.value,
-          fetalHeartRate: _fetalHeartRateValue.value,
-          contractionsDuration: _contractionsDurationValue.value,
-          frequencyContractions: _frequencyContractions,
-          pain: _pain,
-          time: _dateTime,
-        );
+      final medicalSurveillanceTable =
+          context.watch<PartographBloc>().state.whenOrNull(
+                loaded: (partograph, message) =>
+                    partograph.medicalSurveillanceTable,
+              );
 
-        bloc.add(event);
-      }
+      final item = medicalSurveillanceTable!
+          .where(
+            (e) =>
+                e.id ==
+                widget.medicalSurveillanceEditData.medicalSurveillanceTableId,
+          )
+          .first;
+
+      final event = UpdateMedicalSurveillance(
+        id: item.id,
+        partographId: widget.medicalSurveillanceEditData.partographId,
+        letter: item.letter,
+        maternalPosition: _maternalPositionValue,
+        arterialPressure: _arterialPressureValue.value,
+        maternalPulse: _maternalPulseValue.value,
+        fetalHeartRate: _fetalHeartRateValue.value,
+        contractionsDuration: _contractionsDurationValue.value,
+        frequencyContractions: _frequencyContractions,
+        pain: _pain,
+        time: _dateTime,
+      );
+
+      bloc.add(event);
     }
   }
 
@@ -106,10 +130,10 @@ class _MedicalSurveillanceEditScreenState
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar(context, state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
-            showErrorSnackbar(context, state.errorMessage);
+            showErrorSnackbar(state.errorMessage);
           }
         },
         child: LoadingOverlay(
