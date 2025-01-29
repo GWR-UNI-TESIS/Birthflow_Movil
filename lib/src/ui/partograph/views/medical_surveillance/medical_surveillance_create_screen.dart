@@ -14,8 +14,10 @@ import 'package:intl/intl.dart';
 class MedicalSurveillanceCreateScreen extends StatefulWidget {
   final String partographId;
 
-  const MedicalSurveillanceCreateScreen(
-      {super.key, required this.partographId});
+  const MedicalSurveillanceCreateScreen({
+    super.key,
+    required this.partographId,
+  });
 
   @override
   _MedicalSurveillanceCreateScreenState createState() =>

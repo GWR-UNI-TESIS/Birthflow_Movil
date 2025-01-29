@@ -10,8 +10,10 @@ import 'package:intl/intl.dart';
 class ContractionFrequencyCreateScreen extends StatefulWidget {
   final String partographId;
 
-  const ContractionFrequencyCreateScreen(
-      {super.key, required this.partographId});
+  const ContractionFrequencyCreateScreen({
+    super.key,
+    required this.partographId,
+  });
 
   @override
   _ContractionFrequencyCreateScreenState createState() =>
