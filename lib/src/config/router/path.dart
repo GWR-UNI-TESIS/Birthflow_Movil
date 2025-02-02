@@ -44,6 +44,7 @@ class PartographPath extends Param<PartographPath> {
       ContractionFrequencyPath(this);
   ChildbirthNotePath get childbirthNotePath => ChildbirthNotePath(this);
   ChartPath get chart => ChartPath(this);
+  PartographHistoryPath get history => PartographHistoryPath(this);
 }
 
 class CervicalDilationPath extends Path<CervicalDilationPath> {
@@ -96,6 +97,11 @@ class ChildbirthNotePath extends Path<ChildbirthNotePath> {
 class PartographReadOnlyPath extends Param<PartographReadOnlyPath> {
   PartographReadOnlyPath(HomePath homePath)
       : super('read-only', 'partographId', parent: homePath);
+}
+
+class PartographHistoryPath extends Path<PartographHistoryPath> {
+  PartographHistoryPath(PartographPath partographPath)
+      : super('partograph-history', parent: partographPath);
 }
 
 class GroupsPath extends Path<GroupsPath> {

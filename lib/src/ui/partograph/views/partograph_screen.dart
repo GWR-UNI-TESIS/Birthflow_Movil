@@ -74,8 +74,17 @@ class _PartographState extends State<PartographScreen> {
     return [
       IconButton(icon: const Icon(Icons.description), onPressed: () {}),
       IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
-      IconButton(icon: const Icon(Icons.calendar_month), onPressed: () {}),
-      IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
+      IconButton(icon: const Icon(Icons.history), onPressed: () => context
+          ..go(
+            AppPaths.home.partographPath
+                .define(widget.partographId)
+                .history
+                .path,
+          ),),
+      IconButton(
+        icon: const Icon(Icons.more_vert),
+        onPressed: (){}
+      ),
     ];
   }
 

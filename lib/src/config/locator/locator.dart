@@ -11,6 +11,8 @@ import 'package:birthflow_movil/src/data/notification/datasources/notification_s
 import 'package:birthflow_movil/src/data/notification/repository/notification_repository_imp.dart';
 import 'package:birthflow_movil/src/data/partograph/datasources/partograph_service.dart';
 import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repository_imp.dart';
+import 'package:birthflow_movil/src/data/partograph_history/datasources/partograph_history_service.dart';
+import 'package:birthflow_movil/src/data/partograph_history/repositories/partograph_history_repository_imp.dart';
 import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
 import 'package:birthflow_movil/src/data/share/repository/share_repository_imp.dart';
 import 'package:birthflow_movil/src/domain/account/repository/account_repository.dart';
@@ -49,6 +51,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/search_partographs_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph_history/repositories/partograph_history_repository.dart';
+import 'package:birthflow_movil/src/domain/partograph_history/usecases/get_partograph_history_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/repository/share_repository.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/asign_user_group_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/get_asign_user_group_usecase.dart';
@@ -379,4 +383,19 @@ Future<void> initializeDependencies() async {
     () => GlobalKey<ScaffoldMessengerState>(),
   );
 
+  locator.registerSingleton<PartographHistoryService>(
+    PartographHistoryService(dio),
+  );
+
+  locator.registerSingleton<PartographHistoryRepository>(
+    PartographHistoryRepositoryImplementation(
+      partographHistoryService: locator<PartographHistoryService>(),
+    ),
+  );
+
+  locator.registerSingleton<GetPartographHistoryUsecase>(
+    GetPartographHistoryUsecaseImplementation(
+      partographHistoryRepository: locator<PartographHistoryRepository>(),
+    ),
+  );
 }
