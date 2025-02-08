@@ -30,9 +30,11 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
   String? _fetalHeartRateValue;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+  }
 
+  void _initializeControllers() {
     final fetalheartrates = context.watch<PartographBloc>().state.whenOrNull(
           loaded: (partograph, message) => partograph.contractionFrequencies,
         );
@@ -103,6 +105,7 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
 
   @override
   Widget build(BuildContext context) {
+    _initializeControllers();
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Frecuencia Cardiaca Fetal')),

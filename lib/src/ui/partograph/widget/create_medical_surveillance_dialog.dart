@@ -1,7 +1,8 @@
+import 'package:birthflow_movil/src/ui/partograph/bloc/chart/bloc.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/chart/events/chart_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
-import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/widgets/custom_dropdown.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/arterial_pressure_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
@@ -12,21 +13,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class MedicalSurveillanceEditScreen extends StatefulWidget {
-  final MedicalSurveillanceEditData medicalSurveillanceEditData;
+Future<void> showMedicalSurveillanceDialog({
+  required BuildContext context,
+}) async {
+  return showDialog<void>(
+    context: context,
+    builder: (context) => const MedicalSurveillanceDialog(),
+  );
+}
 
-  const MedicalSurveillanceEditScreen({
+class MedicalSurveillanceDialog extends StatefulWidget {
+  const MedicalSurveillanceDialog({
     super.key,
-    required this.medicalSurveillanceEditData,
   });
 
   @override
-  _MedicalSurveillanceEditScreenState createState() =>
-      _MedicalSurveillanceEditScreenState();
+  _MedicalSurveillanceDialogState createState() =>
+      _MedicalSurveillanceDialogState();
 }
 
-class _MedicalSurveillanceEditScreenState
-    extends State<MedicalSurveillanceEditScreen> with SnackbarMixin {
+class _MedicalSurveillanceDialogState extends State<MedicalSurveillanceDialog>
+    with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _timeController = TextEditingController();
 
@@ -43,36 +50,10 @@ class _MedicalSurveillanceEditScreenState
   @override
   void initState() {
     super.initState();
-  }
-
-  void _initializeControllers() {
-    final medicalSurveillanceTable = context
-        .watch<PartographBloc>()
-        .state
-        .whenOrNull(
-          loaded: (partograph, message) => partograph.medicalSurveillanceTable,
-        );
-
-    final item = medicalSurveillanceTable!
-        .where(
-          (e) =>
-              e.id ==
-              widget.medicalSurveillanceEditData.medicalSurveillanceTableId,
-        )
-        .first;
-
-    _timeController.text =
-        // ignore: unnecessary_null_comparison
-        item.time != null ? DateFormat('HH:mm:ss').format(item.time) : '';
-    _dateTime = item.time;
-    _maternalPositionValue = item.maternalPosition;
-    _frequencyContractions = item.frequencyContractions;
-    _pain = item.pain;
-
-    _arterialPressureValue = ValueNotifier(item.arterialPressure);
-    _maternalPulseValue = ValueNotifier(item.maternalPulse);
-    _fetalHeartRateValue = ValueNotifier(item.fetalHeartRate);
-    _contractionsDurationValue = ValueNotifier(item.contractionsDuration);
+    _arterialPressureValue = ValueNotifier('');
+    _maternalPulseValue = ValueNotifier('');
+    _fetalHeartRateValue = ValueNotifier('');
+    _contractionsDurationValue = ValueNotifier('');
   }
 
   @override
@@ -85,28 +66,18 @@ class _MedicalSurveillanceEditScreenState
     super.dispose();
   }
 
-  void _handleSave() {
+  void _handleSave(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      final bloc = context.read<PartographBloc>();
+      final partographBloc = context.read<PartographBloc>();
+      final chartBloc = context.read<ChartBloc>();
 
-      final medicalSurveillanceTable =
-          context.watch<PartographBloc>().state.whenOrNull(
-                loaded: (partograph, message) =>
-                    partograph.medicalSurveillanceTable,
-              );
+      final partographId = (partographBloc.state is Loaded)
+          ? (partographBloc.state as Loaded).partograph.partographId
+          : '';
 
-      final item = medicalSurveillanceTable!
-          .where(
-            (e) =>
-                e.id ==
-                widget.medicalSurveillanceEditData.medicalSurveillanceTableId,
-          )
-          .first;
-
-      final event = UpdateMedicalSurveillance(
-        id: item.id,
-        partographId: widget.medicalSurveillanceEditData.partographId,
-        letter: item.letter,
+      final event = CreateMedicalSurveillance(
+        partographId: partographId!,
+        letter: '',
         maternalPosition: _maternalPositionValue,
         arterialPressure: _arterialPressureValue.value,
         maternalPulse: _maternalPulseValue.value,
@@ -117,43 +88,55 @@ class _MedicalSurveillanceEditScreenState
         time: _dateTime,
       );
 
-      bloc.add(event);
+      partographBloc.add(event);
+
+      // Esperar a que el estado de PartographBloc se actualice
+      partographBloc.stream
+          .firstWhere((state) => state is Loaded)
+          .then((state) {
+        if (state is Loaded) {
+          final partograph = state.partograph;
+          chartBloc.add(OnRefresh(partograph: partograph));
+        }
+      });
+
+      // Cerrar el diálogo
+      Navigator.of(context).pop();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    _initializeControllers();
     final isLoading = context.watch<PartographBloc>().state is Loading;
-    return Scaffold(
-      appBar: AppBar(title: const Text('Editar Vigilancia Médica')),
-      body: BlocListener<PartographBloc, PartographState>(
-        listener: (context, state) {
-          if (state is Loaded) {
-            showSnackbar(state.message);
-            Navigator.of(context).pop();
-          } else if (state is Error) {
-            showErrorSnackbar(state.errorMessage);
-          }
-        },
-        child: LoadingOverlay(
-          isLoading: isLoading,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+    return SimpleDialog(
+      title: const Text('Crear Vigilancia Médica'),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      children: [
+        BlocListener<PartographBloc, PartographState>(
+          listener: (context, state) {
+            if (state is Loaded) {
+              showSnackbar(state.message);
+            } else if (state is Error) {
+              showErrorSnackbar(state.errorMessage);
+            }
+          },
+          child: LoadingOverlay(
+            isLoading: isLoading,
             child: Form(
               key: _formKey,
-              child: _buildFormContent(),
+              child: _buildFormContent(context),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 
-  Widget _buildFormContent() {
+  Widget _buildFormContent(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           _buildTimePicker(),
           const SizedBox(height: 20),
@@ -189,6 +172,7 @@ class _MedicalSurveillanceEditScreenState
             initialValue: _fetalHeartRateValue.value,
             onChanged: (value) => _fetalHeartRateValue.value = value,
           ),
+          const SizedBox(height: 16),
           FormElementWidget(
             label: 'Duración Contracciones',
             initialValue: _contractionsDurationValue.value,
@@ -210,9 +194,9 @@ class _MedicalSurveillanceEditScreenState
           ),
           const SizedBox(height: 20),
           FilledButton.icon(
-            onPressed: _handleSave,
+            onPressed: () => _handleSave(context),
             icon: const Icon(Icons.save_alt),
-            label: const Text('Actualizar'),
+            label: const Text('Guardar'),
           ),
         ],
       ),
@@ -224,7 +208,7 @@ class _MedicalSurveillanceEditScreenState
       controller: _timeController,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'Hora',
+        labelText: 'Tiempo',
       ),
       readOnly: true,
       onTap: () async {

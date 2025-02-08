@@ -90,7 +90,9 @@ class PartographHistoryScreen extends StatelessWidget {
   }
 
   Widget _buildVersionDetails(
-      PartographVersion? selectedVersion, PartographVersion? previousVersion,) {
+    PartographVersion? selectedVersion,
+    PartographVersion? previousVersion,
+  ) {
     if (selectedVersion == null) {
       return const Center(child: Text('No hay datos disponibles'));
     }
@@ -108,7 +110,8 @@ class PartographHistoryScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           ..._buildFullPartographData(
-              selectedData,), // Mostrar toda la información
+            selectedData,
+          ), // Mostrar toda la información
           const SizedBox(height: 24),
           if (previousVersion != null) ...[
             const Text(
@@ -117,7 +120,9 @@ class PartographHistoryScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             ..._buildComparison(
-                selectedData, previousVersion.partographDataJson,),
+              selectedData,
+              previousVersion.partographDataJson,
+            ),
           ],
         ],
       ),
@@ -166,7 +171,9 @@ class PartographHistoryScreen extends StatelessWidget {
   }
 
   List<Widget> _buildComparison(
-      Map<String, dynamic> selectedData, Map<String, dynamic> previousData,) {
+    Map<String, dynamic> selectedData,
+    Map<String, dynamic> previousData,
+  ) {
     final selectedLog =
         selectedData['partographLog'] as Map<String, dynamic>? ?? {};
     final previousLog =
@@ -185,23 +192,27 @@ class PartographHistoryScreen extends StatelessWidget {
               style: const TextStyle(color: Colors.black),
               children: [
                 const TextSpan(
-                    text: 'Anterior: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),),
+                  text: 'Anterior: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 TextSpan(
-                    text: '$previousValue\n',
-                    style: TextStyle(color: Colors.red),),
+                  text: '$previousValue\n',
+                  style: const TextStyle(color: Colors.red),
+                ),
                 const TextSpan(
-                    text: 'Nuevo: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),),
+                  text: 'Nuevo: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 TextSpan(
-                    text: '$selectedValue',
-                    style: const TextStyle(color: Colors.green),),
+                  text: '$selectedValue',
+                  style: const TextStyle(color: Colors.green),
+                ),
               ],
             ),
           ),
         );
       } else {
-        return SizedBox.shrink(); // No mostrar si no hay cambios
+        return const SizedBox.shrink(); // No mostrar si no hay cambios
       }
     }).toList();
   }

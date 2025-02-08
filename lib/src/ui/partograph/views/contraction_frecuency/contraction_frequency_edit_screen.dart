@@ -29,8 +29,11 @@ class _ContractionFrequencyEditScreenState
   TimeOfDay? _selectedTime;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+  }
+
+  void _initializeControllers() {
     final contractionFrequencies = context
         .watch<PartographBloc>()
         .state
@@ -108,13 +111,14 @@ class _ContractionFrequencyEditScreenState
 
   @override
   Widget build(BuildContext context) {
+    _initializeControllers();
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Frecuencia de Contracciones')),
       body: BlocListener<PartographBloc, PartographState>(
         listener: (context, state) {
           if (state is Loaded) {
-            showSnackbar( state.message);
+            showSnackbar(state.message);
             Navigator.of(context).pop();
           } else if (state is Error) {
             showErrorSnackbar(state.errorMessage);

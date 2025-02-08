@@ -17,8 +17,7 @@ mixin SnackbarMixin {
   void showErrorSnackbar(String message) {
     locator<GlobalKey<ScaffoldMessengerState>>().currentState?.showSnackBar(
           SnackBar(
-            content: Text(message, style: const TextStyle(color: Colors.white)),
-            backgroundColor: Colors.red,
+            content: Text(message),
             duration: const Duration(seconds: 5),
           ),
         );

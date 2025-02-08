@@ -35,8 +35,11 @@ class _PresentationPositionVarietyEditScreenState
   DateTime _selectTime = DateTime.now();
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+  }
+
+  void _initializeControllers() {
     final presentationPositionVarieties =
         context.watch<PartographBloc>().state.whenOrNull(
               loaded: (partograph, message) =>
@@ -118,6 +121,7 @@ class _PresentationPositionVarietyEditScreenState
 
   @override
   Widget build(BuildContext context) {
+    _initializeControllers();
     final catalog = context.watch<CatalogCubit>().state;
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
