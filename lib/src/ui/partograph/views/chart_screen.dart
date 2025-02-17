@@ -9,9 +9,12 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/chart/states/chart_state.
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
-import 'package:birthflow_movil/src/ui/partograph/widget/create_medical_surveillance_dialog.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/widgets/custom_dropdown.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/arterial_pressure_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/expandable_fab.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
+import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_button.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,9 +86,7 @@ class _ChartState extends State<_ChartScreen> {
         ],
       ),
       FloatingActionButton.extended(
-        onPressed: () => showMedicalSurveillanceDialog(
-          context: context,
-        ),
+        onPressed: () => _showCreateItemTable(context),
         label: const Text(
           'Agregar a la tabla',
         ),
@@ -200,7 +201,7 @@ class _ChartState extends State<_ChartScreen> {
     bool remOrRam = false;
     final today = DateTime.now();
     timeController.text = DateFormat('HH:mm:ss').format(today);
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     return showDialog<DateTime?>(
       context: mainContext,
       builder: (BuildContext context) => StatefulBuilder(
@@ -210,7 +211,7 @@ class _ChartState extends State<_ChartScreen> {
               const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           children: [
             Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 children: [
                   TextFormField(
@@ -247,7 +248,7 @@ class _ChartState extends State<_ChartScreen> {
                       selectedDateTime,
                       remOrRam,
                       context,
-                      _formKey,
+                      formKey,
                     ),
                   ),
                 ],
@@ -264,7 +265,7 @@ class _ChartState extends State<_ChartScreen> {
     TextEditingController valueController,
     DateTime? selectedDateTime,
     bool remOrRam,
-     BuildContext dialogContext,
+    BuildContext dialogContext,
     GlobalKey<FormState> formKey,
   ) {
     if (formKey.currentState!.validate()) {
@@ -286,6 +287,165 @@ class _ChartState extends State<_ChartScreen> {
           remOrRam: dilationRemOrRam,
         ),
       );
+      Navigator.pop(dialogContext);
+    }
+  }
+
+  //Dialog de Tabla
+
+  Future<void> _showCreateItemTable(BuildContext mainContext) {
+    // Copiamos el estado y la lógica de MedicalSurveillanceDialog
+    final formKey = GlobalKey<FormState>();
+    final TextEditingController timeController = TextEditingController();
+
+    final ValueNotifier<String> arterialPressureValue = ValueNotifier('');
+    final ValueNotifier<String> maternalPulseValue = ValueNotifier('');
+    final ValueNotifier<String> fetalHeartRateValue = ValueNotifier('');
+    final ValueNotifier<String> contractionsDurationValue = ValueNotifier('');
+
+    String maternalPositionValue = '';
+    String frequencyContractions = '';
+    String pain = '';
+    final today = DateTime.now();
+    DateTime? selectedDateTime;
+
+    Widget buildFormContent(BuildContext context) {
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildTimePickerField(context, timeController, today, (time) {
+              setState(() {
+                selectedDateTime = today;
+                timeController.text = DateFormat('HH:mm:ss').format(time);
+              });
+            }),
+            const SizedBox(height: 20),
+            _buildDropdownButton(
+              labelText: 'Posición Materna',
+              items: const [
+                'Lat. Derecho',
+                'Lat. Izquierdo',
+                'Dorsal',
+                'Semisentada',
+                'Sentada',
+                'Parada o Caminando',
+              ],
+              initialValue: maternalPositionValue,
+              onChanged: (value) => maternalPositionValue = value,
+            ),
+            const SizedBox(height: 16),
+            ArterialPressureWidget(
+              label: 'Tensión Arterial',
+              initialValue: arterialPressureValue.value,
+              onChanged: (value) => arterialPressureValue.value = value,
+            ),
+            const SizedBox(height: 16),
+            FormElementWidget(
+              label: 'Pulso Materno',
+              initialValue: maternalPulseValue.value,
+              onChanged: (value) => maternalPulseValue.value = value,
+            ),
+            const SizedBox(height: 16),
+            FormElementWidget(
+              label: 'Frecuencia cardiaca fetal',
+              initialValue: fetalHeartRateValue.value,
+              onChanged: (value) => fetalHeartRateValue.value = value,
+            ),
+            const SizedBox(height: 16),
+            FormElementWidget(
+              label: 'Duración Contracciones',
+              initialValue: contractionsDurationValue.value,
+              onChanged: (value) => contractionsDurationValue.value = value,
+            ),
+            const SizedBox(height: 16),
+            _buildTextField(
+              label: 'Frec. Contracciones',
+              maxLength: 2,
+              initialValue: frequencyContractions,
+              onChanged: (value) => frequencyContractions = value,
+            ),
+            const SizedBox(height: 16),
+            UnifiedDropdownWidget(
+              locationValues: const ['Sacro', 'Suprapúbico'],
+              intensityValues: const ['Débil', 'Normal', 'Fuerte'],
+              initialValue: pain,
+              onValueChanged: (value) => pain = value,
+            ),
+            const SizedBox(height: 20),
+            _buildDialogActions(
+              context,
+              () => _saveItemTable(
+                mainContext,
+                maternalPositionValue,
+                arterialPressureValue.value,
+                maternalPulseValue.value,
+                fetalHeartRateValue.value,
+                contractionsDurationValue.value,
+                frequencyContractions,
+                selectedDateTime!,
+                pain,
+                context,
+                formKey,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return showDialog<void>(
+      context: mainContext,
+      builder: (BuildContext context) => StatefulBuilder(
+        builder: (context, setState) => SimpleDialog(
+          children: [
+            Form(
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: buildFormContent(context),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _saveItemTable(
+    BuildContext mainContext,
+    String maternalPositionValue,
+    String arterialPressureValue,
+    String maternalPulseValue,
+    String fetalHeartRateValue,
+    String contractionsDurationValue,
+    String frequencyContractions,
+    DateTime selectedDateTime,
+    String pain,
+    BuildContext dialogContext,
+    GlobalKey<FormState> formKey,
+  ) {
+    if (formKey.currentState!.validate()) {
+      final partographBloc = mainContext.read<PartographBloc>();
+
+      final partographId = (partographBloc.state is Loaded)
+          ? (partographBloc.state as Loaded).partograph.partographId
+          : '';
+
+      final event = CreateMedicalSurveillance(
+        partographId: partographId!,
+        letter: '',
+        maternalPosition: maternalPositionValue,
+        arterialPressure: arterialPressureValue,
+        maternalPulse: maternalPulseValue,
+        fetalHeartRate: fetalHeartRateValue,
+        contractionsDuration: contractionsDurationValue,
+        frequencyContractions: frequencyContractions,
+        pain: pain,
+        time: selectedDateTime,
+      );
+
+      partographBloc.add(event);
       Navigator.pop(dialogContext);
     }
   }
@@ -342,6 +502,40 @@ class _ChartState extends State<_ChartScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDropdownButton({
+    required String labelText,
+    required List<String> items,
+    required ValueChanged<String> onChanged,
+    String? initialValue,
+  }) {
+    return CustomDropdownButton(
+      list: items,
+      labelText: labelText,
+      onValueChanged: onChanged,
+      initialValue: initialValue,
+    );
+  }
+
+  Widget _buildTextField({
+    required String label,
+    required int maxLength,
+    required ValueChanged<String> onChanged,
+    String? initialValue,
+  }) {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: label,
+      ),
+      initialValue: initialValue,
+      maxLength: maxLength,
+      validator: (value) =>
+          value == null || value.isEmpty ? 'Por favor, ingrese un dato' : null,
+      onChanged: onChanged,
     );
   }
 
