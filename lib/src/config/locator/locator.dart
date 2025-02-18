@@ -67,6 +67,7 @@ import 'package:birthflow_movil/src/domain/share/usecases/user_group_create_usec
 import 'package:birthflow_movil/src/domain/share/usecases/user_group_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/users_in_group_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
+import 'package:birthflow_movil/src/ui/configuration/blocs/change_user_info/events/change_user_info_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -378,6 +379,13 @@ Future<void> initializeDependencies() async {
       accountRepository: locator<AccountRepository>(),
     ),
   );
+
+  locator.registerSingleton<ChangeUserInfoUseCase>(
+    ChangeUserInfoUseCaseImplementation(
+      accountRepository: locator<AccountRepository>(),
+    ),
+  );
+  
   locator.registerLazySingleton(() => FirebaseService());
 
   locator.registerLazySingleton<GlobalKey<ScaffoldMessengerState>>(
