@@ -17,6 +17,7 @@ import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
 import 'package:birthflow_movil/src/data/share/repository/share_repository_imp.dart';
 import 'package:birthflow_movil/src/domain/account/repository/account_repository.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/change_password_use_case.dart';
+import 'package:birthflow_movil/src/domain/account/usecases/change_user_info.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/request_reset_use_case.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/reset_password_use_case.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/validate_otp_use_case.dart';
@@ -396,6 +397,12 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<GetPartographHistoryUsecase>(
     GetPartographHistoryUsecaseImplementation(
       partographHistoryRepository: locator<PartographHistoryRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<ChangeUserInfoUseCase>(
+    ChangeUserInfoUseCaseImplementation(
+      accountRepository: locator<AccountRepository>(),
     ),
   );
 }
