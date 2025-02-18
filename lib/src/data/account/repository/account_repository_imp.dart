@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/data/account/datasources/account_service.dar
 import 'package:birthflow_movil/src/data/account/models/change_password_request/change_password_request.dart';
 import 'package:birthflow_movil/src/data/account/models/forgot_password_request/forgot_password_request.dart';
 import 'package:birthflow_movil/src/data/account/models/reset_password_request/reset_password_request.dart';
+import 'package:birthflow_movil/src/data/account/models/user_info_request/user_info_request.dart';
 import 'package:birthflow_movil/src/data/account/models/validate_otp_request/validate_otp_request.dart';
 import 'package:birthflow_movil/src/data/auth/models/authentication_user/authentication_user.dart';
 import 'package:birthflow_movil/src/data/share/mappers/mapper.dart';
@@ -38,7 +39,7 @@ class AccountRepositoryImplementation implements AccountRepository {
 
       return result.response!;
     } catch (e, stackTrace) {
-      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      _logger.e('Account exception', error: e, stackTrace: stackTrace);
       return 'Error';
     }
   }
@@ -53,7 +54,7 @@ class AccountRepositoryImplementation implements AccountRepository {
 
       return _mapper.convert<UserAuthentication, User>(result.response);
     } catch (e, stackTrace) {
-      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      _logger.e('Account exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -65,12 +66,11 @@ class AccountRepositoryImplementation implements AccountRepository {
 
       final result = await _accountService.requestResetCode(request);
 
-      
-      final user =  _mapper.convert<UserAuthentication, User>(result.response);
+      final user = _mapper.convert<UserAuthentication, User>(result.response);
 
       return Result(user: user, message: result.message);
     } catch (e, stackTrace) {
-      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      _logger.e('Account exception', error: e, stackTrace: stackTrace);
       return null;
     }
   }
@@ -92,7 +92,7 @@ class AccountRepositoryImplementation implements AccountRepository {
 
       return result.response!;
     } catch (e, stackTrace) {
-      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      _logger.e('Account exception', error: e, stackTrace: stackTrace);
       return 'error';
     }
   }
@@ -109,8 +109,34 @@ class AccountRepositoryImplementation implements AccountRepository {
 
       return result.response!;
     } catch (e, stackTrace) {
-      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      _logger.e('Account exception', error: e, stackTrace: stackTrace);
       return 'error';
+    }
+  }
+
+  @override
+  Future<UserAuthentication?> changeUserInfo({
+    required String? id,
+    required String name,
+    required String secondName,
+    required String userName,
+    required String email,
+    int? phoneNumber,
+  }) async {
+    try {
+      final request = UserInfoRequest(
+          id: id,
+          name: name,
+          secondName: secondName,
+          userName: userName,
+          email: email);
+
+      final result = await _accountService.changeUserInfo(request);
+
+      return result.response!;
+    } catch (e, stackTrace) {
+      _logger.e('Account exception', error: e, stackTrace: stackTrace);
+      return null;
     }
   }
 }
