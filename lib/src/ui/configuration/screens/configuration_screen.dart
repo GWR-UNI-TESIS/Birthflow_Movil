@@ -41,6 +41,9 @@ class ConfigurationScreen extends StatelessWidget {
                       trailing: IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
+                          context.go(
+                            AppPaths.home.configurationPath.editInfo.path,
+                          );
                           // Lógica para editar información del usuario
                         },
                       ),
@@ -50,7 +53,7 @@ class ConfigurationScreen extends StatelessWidget {
                       leading: Icon(Icons.person),
                       title: Text('Nombre de usuario'),
                       subtitle: Text('usuario@example.com'),
-                    );  
+                    );
                   }
                 },
               ),
@@ -112,7 +115,9 @@ class ConfigurationScreen extends StatelessWidget {
                 trailing: IconButton(
                   icon: const Icon(Icons.arrow_forward_ios),
                   onPressed: () {
-                    // Lógica para abrir página de ayuda
+                    context.go(
+                      AppPaths.home.configurationPath.ayudaSop.path,
+                    );
                   },
                 ),
               ),

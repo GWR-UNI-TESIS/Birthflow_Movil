@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
@@ -8,8 +9,10 @@ import 'package:birthflow_movil/src/ui/auth/views/login.dart';
 import 'package:birthflow_movil/src/ui/auth/views/register.dart';
 import 'package:birthflow_movil/src/ui/auth/views/splash.dart';
 import 'package:birthflow_movil/src/ui/auth/views/welcome.dart';
+import 'package:birthflow_movil/src/ui/configuration/screens/ayuda_s.dart';
 import 'package:birthflow_movil/src/ui/configuration/screens/change_password.dart';
 import 'package:birthflow_movil/src/ui/configuration/screens/configuration_screen.dart';
+import 'package:birthflow_movil/src/ui/configuration/screens/editar_info.dart';
 import 'package:birthflow_movil/src/ui/forget_password/forget_password_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/create_group_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/edit_group_screen.dart';
@@ -121,6 +124,28 @@ class AppRouter {
               _buildRoute(
                 path: AppPaths.home.configurationPath.changePassword.goRoute,
                 screen: ChangePasswordScreen(),
+              ),
+            ],
+          ),
+
+          _buildRoute(
+            path: AppPaths.home.configurationPath.goRoute,
+            screen: ConfigurationScreen(),
+            routeBase: [
+              _buildRoute(
+                path: AppPaths.home.configurationPath.editInfo.goRoute,
+                screen: EditarInfoScreen(),
+              ),
+            ],
+          ),
+
+          _buildRoute(
+            path: AppPaths.home.configurationPath.goRoute,
+            screen: ConfigurationScreen(),
+            routeBase: [
+              _buildRoute(
+                path: AppPaths.home.configurationPath.ayudaSop.goRoute,
+                screen: AyudaSoportScreen(),
               ),
             ],
           ),

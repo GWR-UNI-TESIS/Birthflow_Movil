@@ -115,4 +115,6 @@ class ConfigurationPath extends Path<ConfigurationPath> {
       : super('configuration', parent: homePath);
   Path get user => Path('user', parent: this);
   Path get changePassword => Path('change-password', parent: this);
+  Path get editInfo => Path('change-info', parent: this);
+  Path get ayudaSop => Path('ayuda-soport', parent: this);
 }
