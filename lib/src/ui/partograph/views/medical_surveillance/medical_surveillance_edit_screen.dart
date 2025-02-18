@@ -41,12 +41,11 @@ class _MedicalSurveillanceEditScreenState
   DateTime _dateTime = DateTime.now();
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _initializeValues();
+  void initState() {
+    super.initState();
   }
 
-  void _initializeValues() {
+  void _initializeControllers() {
     final medicalSurveillanceTable = context
         .watch<PartographBloc>()
         .state
@@ -124,6 +123,7 @@ class _MedicalSurveillanceEditScreenState
 
   @override
   Widget build(BuildContext context) {
+    _initializeControllers();
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Vigilancia Médica')),

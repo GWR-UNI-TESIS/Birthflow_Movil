@@ -24,39 +24,41 @@ class CervicalDilationEditScreen extends StatefulWidget {
 class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
     with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _valueController;
-  late final TextEditingController _dateTimeController;
+  final TextEditingController _valueController = TextEditingController();
+  final TextEditingController _dateTimeController = TextEditingController();
   TimeOfDay? _selectedTime;
   bool _remOrRam = false;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+  }
 
-    final cervicalDilations = context.watch<PartographBloc>().state.whenOrNull(
-          loaded: (partograph, message) => partograph.cervicalDilations,
-        );
+  void _initializeControllers() {
+    final partographBloc = context.watch<PartographBloc>().state;
+    if (partographBloc is Loaded) {
+      final cervicalDilations = partographBloc.whenOrNull(
+        loaded: (partograph, message) => partograph.cervicalDilations,
+      );
 
-    final cervicalDilation = cervicalDilations!
-        .where(
-          (e) => e.id == widget.cervicalDilationEditData.cervicalDilationId,
-        )
-        .first;
+      final cervicalDilation = cervicalDilations!
+          .where(
+            (e) => e.id == widget.cervicalDilationEditData.cervicalDilationId,
+          )
+          .first;
 
-    _valueController = TextEditingController(
-      text: cervicalDilation.value.toString(),
-    );
-    _dateTimeController = TextEditingController(
+      _valueController.text = cervicalDilation.value.toString();
       // ignore: unnecessary_null_comparison
-      text: cervicalDilation != null
+      _dateTimeController.text = cervicalDilation != null
           ? DateFormat('HH:mm:ss').format(cervicalDilation.hour)
-          : '',
-    );
-    // ignore: unnecessary_null_comparison
-    _selectedTime = cervicalDilation != null
-        ? TimeOfDay.fromDateTime(cervicalDilation.hour)
-        : null;
-    _remOrRam = cervicalDilation.remOrRam;
+          : '';
+
+      // ignore: unnecessary_null_comparison
+      _selectedTime = cervicalDilation != null
+          ? TimeOfDay.fromDateTime(cervicalDilation.hour)
+          : null;
+      _remOrRam = cervicalDilation.remOrRam;
+    }
   }
 
   @override
@@ -108,6 +110,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
 
   @override
   Widget build(BuildContext context) {
+    _initializeControllers();
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Dilatación Cervical')),

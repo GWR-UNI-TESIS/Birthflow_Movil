@@ -109,7 +109,7 @@ class _CreatePartographState extends State<_CreatePartographPage>
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (bool didPop) async {
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
         if (didPop) {
           return;
         }
@@ -227,6 +227,20 @@ class _CreatePartographState extends State<_CreatePartographPage>
                             },
                           ),
                         ),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width,
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 45,
+                          ),
+                          child: FilledButton(
+                            child: const Text('Siguiente'),
+                            onPressed: () {
+                              _tabController
+                                  .animateTo(_tabController.index + 1);
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),

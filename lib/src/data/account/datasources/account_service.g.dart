@@ -172,6 +172,43 @@ class _AccountService implements AccountService {
   }
 
   @override
+  Future<ApiResponse<UserAuthentication>> changeUserInfo(
+      UserInfoRequest request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _options = _setStreamType<ApiResponse<UserAuthentication>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/account/change-user-info',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<UserAuthentication> _value;
+    try {
+      _value = ApiResponse<UserAuthentication>.fromJson(
+        _result.data!,
+        (json) => UserAuthentication.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ApiResponse<UserAuthentication>> getUser(String token) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

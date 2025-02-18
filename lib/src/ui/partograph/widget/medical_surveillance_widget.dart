@@ -9,6 +9,16 @@ class MedicalSurveillanceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Verifica si la lista es nula
+    if (list == null) {
+      return Center(
+        child: Text(
+          'Cargando...',
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      );
+    }
+
     return Container(
       alignment: Alignment.topLeft,
       padding: const EdgeInsets.only(top: 10),

@@ -1,4 +1,5 @@
 import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseService {
@@ -43,7 +44,9 @@ class FirebaseService {
     });
   }
 
+  @pragma('vm:entry-point')
   static Future<void> backgroundMessageHandler(RemoteMessage message) async {
+    await Firebase.initializeApp();
     await NotificationHelper.initialize();
     final notification = message.notification;
     if (notification != null) {

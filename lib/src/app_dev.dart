@@ -109,9 +109,7 @@ class AppDev extends StatelessWidget {
 }
 
 class AppEntry extends StatelessWidget {
-  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
-
+ 
   @override
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();
@@ -164,7 +162,7 @@ class AppEntry extends StatelessWidget {
       },
       child: MaterialApp.router(
         title: 'Birthflow',
-        scaffoldMessengerKey: scaffoldMessengerKey,
+        scaffoldMessengerKey: locator<GlobalKey<ScaffoldMessengerState>>(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
