@@ -8,7 +8,7 @@ part 'change_user_info_states.freezed.dart';
 class ChangeUserInfoState with _$ChangeUserInfoState {
   const factory ChangeUserInfoState.initial() = Initial;
   const factory ChangeUserInfoState.loading() = Loading;
-  const factory ChangeUserInfoState.loaded(User user) = _Loaded;
-  const factory ChangeUserInfoState.updated(UserAuthentication auth, String message) = _Updated;
+  const factory ChangeUserInfoState.loaded(User user) = Loaded;
+  const factory ChangeUserInfoState.updated(UserAuthentication auth, String message) = Updated;
   const factory ChangeUserInfoState.error(String errorMessage) = Error;
 }

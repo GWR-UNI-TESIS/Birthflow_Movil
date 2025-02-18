@@ -48,8 +48,8 @@ mixin _$ChangeUserInfoState {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Updated value) updated,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Updated value) updated,
     required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -57,8 +57,8 @@ mixin _$ChangeUserInfoState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Updated value)? updated,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Updated value)? updated,
     TResult? Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -66,8 +66,8 @@ mixin _$ChangeUserInfoState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Updated value)? updated,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Updated value)? updated,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) =>
@@ -178,8 +178,8 @@ class _$InitialImpl implements Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Updated value) updated,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Updated value) updated,
     required TResult Function(Error value) error,
   }) {
     return initial(this);
@@ -190,8 +190,8 @@ class _$InitialImpl implements Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Updated value)? updated,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Updated value)? updated,
     TResult? Function(Error value)? error,
   }) {
     return initial?.call(this);
@@ -202,8 +202,8 @@ class _$InitialImpl implements Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Updated value)? updated,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Updated value)? updated,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -301,8 +301,8 @@ class _$LoadingImpl implements Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Updated value) updated,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Updated value) updated,
     required TResult Function(Error value) error,
   }) {
     return loading(this);
@@ -313,8 +313,8 @@ class _$LoadingImpl implements Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Updated value)? updated,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Updated value)? updated,
     TResult? Function(Error value)? error,
   }) {
     return loading?.call(this);
@@ -325,8 +325,8 @@ class _$LoadingImpl implements Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Updated value)? updated,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Updated value)? updated,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -376,7 +376,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
+class _$LoadedImpl implements Loaded {
   const _$LoadedImpl(this.user);
 
   @override
@@ -451,8 +451,8 @@ class _$LoadedImpl implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Updated value) updated,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Updated value) updated,
     required TResult Function(Error value) error,
   }) {
     return loaded(this);
@@ -463,8 +463,8 @@ class _$LoadedImpl implements _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Updated value)? updated,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Updated value)? updated,
     TResult? Function(Error value)? error,
   }) {
     return loaded?.call(this);
@@ -475,8 +475,8 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Updated value)? updated,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Updated value)? updated,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -487,8 +487,8 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ChangeUserInfoState {
-  const factory _Loaded(final User user) = _$LoadedImpl;
+abstract class Loaded implements ChangeUserInfoState {
+  const factory Loaded(final User user) = _$LoadedImpl;
 
   User get user;
 
@@ -551,7 +551,7 @@ class __$$UpdatedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdatedImpl implements _Updated {
+class _$UpdatedImpl implements Updated {
   const _$UpdatedImpl(this.auth, this.message);
 
   @override
@@ -629,8 +629,8 @@ class _$UpdatedImpl implements _Updated {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Updated value) updated,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Updated value) updated,
     required TResult Function(Error value) error,
   }) {
     return updated(this);
@@ -641,8 +641,8 @@ class _$UpdatedImpl implements _Updated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Updated value)? updated,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Updated value)? updated,
     TResult? Function(Error value)? error,
   }) {
     return updated?.call(this);
@@ -653,8 +653,8 @@ class _$UpdatedImpl implements _Updated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Updated value)? updated,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Updated value)? updated,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -665,8 +665,8 @@ class _$UpdatedImpl implements _Updated {
   }
 }
 
-abstract class _Updated implements ChangeUserInfoState {
-  const factory _Updated(final UserAuthentication auth, final String message) =
+abstract class Updated implements ChangeUserInfoState {
+  const factory Updated(final UserAuthentication auth, final String message) =
       _$UpdatedImpl;
 
   UserAuthentication get auth;
@@ -790,8 +790,8 @@ class _$ErrorImpl implements Error {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Updated value) updated,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Updated value) updated,
     required TResult Function(Error value) error,
   }) {
     return error(this);
@@ -802,8 +802,8 @@ class _$ErrorImpl implements Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Updated value)? updated,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Updated value)? updated,
     TResult? Function(Error value)? error,
   }) {
     return error?.call(this);
@@ -814,8 +814,8 @@ class _$ErrorImpl implements Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Updated value)? updated,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Updated value)? updated,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
