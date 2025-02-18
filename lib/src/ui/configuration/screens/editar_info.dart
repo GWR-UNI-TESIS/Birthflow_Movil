@@ -44,95 +44,98 @@ class _EditarInfoState extends State<EditarInfoScreen> {
               locator<ChangeUserInfoUseCase>(),
             )..add(GetUser()),
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Editar Información'),
-            centerTitle: true,
-          ),
-          body: BlocConsumer<ChangeUserInfoBloc, ChangeUserInfoState>(
-listener: (context, state) {
-if (state is Error) {
-ScaffoldMessenger.of(context).showSnackBar(
-SnackBar(content: Text(state.message)),
-);
-}
-if (state is Updated) {
-ScaffoldMessenger.of(context).showSnackBar(
-SnackBar(content: Text(state.message)),
-);
-Navigator.pop(context);
-}
-},
-builder: (context, state) {
-           Padding(
-            padding: const EdgeInsets.all(15),
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Mostrar datos actuales
-                    _InfoRow(label: 'Correo actual:', value: _currentCorreo),
-                    _InfoRow(label: 'Nombre actual:', value: _currentNombre),
+            appBar: AppBar(
+              title: const Text('Editar Información'),
+              centerTitle: true,
+            ),
+            body: BlocConsumer<ChangeUserInfoBloc, ChangeUserInfoState>(
+                listener: (context, state) {
+              if (state is Error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.errorMessage)),
+                );
+              }
+              if (state is Updated) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.message)),
+                );
+                Navigator.pop(context);
+              }
+            }, builder: (context, state) {
+              if (state is Loaded) {
+                _newCorreo.text = state.user.email;
+                _newNombre.text = state.user.userName;
 
-                    const SizedBox(height: 30),
-                    const Text('Nuevos datos:', style: TextStyle(fontSize: 16)),
-                    const SizedBox(height: 20),
+                return _buildForm(state);
+              }
+              if (state is Loading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return Center(child: Text('Cargando...'));
+            })));
+  }
 
-                    TextFormField(
-                      controller: _newCorreo,
-                      decoration: const InputDecoration(
-                        labelText: 'Nuevo Correo',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese un correo';
-                        }
-                        if (!value.contains('@')) {
-                          return 'Correo no válido';
-                        }
-                        return null;
-                      },
-                    ),
-
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      controller: _newNombre,
-                      decoration: const InputDecoration(
-                        labelText: 'Nuevo Nombre de usuario',
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese un nombre';
-                        }
-                        if (value.length < 3) {
-                          return 'Mínimo 3 caracteres';
-                        }
-                        return null;
-                      },
-                    ),
-
-                    const SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: _updateData,
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: Colors.blue[700],
-                      ),
-                      child: const Text(
-                        'Actualizar Datos',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
+  Widget _buildForm(Loaded state) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _InfoRow(label: 'Correo actual:', value: state.user.email),
+              _InfoRow(label: 'Nombre actual:', value: state.user.userName),
+              const SizedBox(height: 30),
+              const Text('Nuevos datos:', style: TextStyle(fontSize: 16)),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _newCorreo,
+                decoration: const InputDecoration(
+                  labelText: 'Nuevo Correo',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) => _validateEmail(value),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _newNombre,
+                decoration: const InputDecoration(
+                  labelText: 'Nuevo Nombre de usuario',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => _validateName(value),
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () => {}, //_submitForm(context, state.user.id!),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                  backgroundColor: Colors.blue[700],
+                ),
+                child: const Text(
+                  'Actualizar Datos',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-            ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) return 'Por favor ingrese un correo';
+    if (!value.contains('@')) return 'Correo no válido';
+    return null;
+  }
+
+  String? _validateName(String? value) {
+    if (value == null || value.isEmpty) return 'Por favor ingrese un nombre';
+    if (value.length < 3) return 'Mínimo 3 caracteres';
+    return null;
   }
 }
 

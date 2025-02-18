@@ -18,6 +18,7 @@ import 'package:birthflow_movil/src/data/share/repository/share_repository_imp.d
 import 'package:birthflow_movil/src/domain/account/repository/account_repository.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/change_password_use_case.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/change_user_info.dart';
+import 'package:birthflow_movil/src/domain/account/usecases/get_user_usecase.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/request_reset_use_case.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/reset_password_use_case.dart';
 import 'package:birthflow_movil/src/domain/account/usecases/validate_otp_use_case.dart';
@@ -385,7 +386,7 @@ Future<void> initializeDependencies() async {
       accountRepository: locator<AccountRepository>(),
     ),
   );
-  
+
   locator.registerLazySingleton(() => FirebaseService());
 
   locator.registerLazySingleton<GlobalKey<ScaffoldMessengerState>>(
@@ -407,9 +408,8 @@ Future<void> initializeDependencies() async {
       partographHistoryRepository: locator<PartographHistoryRepository>(),
     ),
   );
-
-  locator.registerSingleton<ChangeUserInfoUseCase>(
-    ChangeUserInfoUseCaseImplementation(
+  locator.registerSingleton<GetUserUseCase>(
+    GetUserUseCaseImplementation(
       accountRepository: locator<AccountRepository>(),
     ),
   );
