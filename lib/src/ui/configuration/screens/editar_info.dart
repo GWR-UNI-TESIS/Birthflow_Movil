@@ -16,66 +16,57 @@ class _EditarInfoState extends State<EditarInfoScreen> {
   final _formKey = GlobalKey<FormState>();
   final _newCorreo = TextEditingController();
   final _newNombre = TextEditingController();
-  String _currentCorreo = 'correo@ejemplo.com'; // Valor inicial
-  String _currentNombre = 'UsuarioEjemplo'; // Valor inicial
-
-  void _updateData() {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        _currentCorreo = _newCorreo.text;
-        _currentNombre = _newNombre.text;
-      });
-
-      // Limpiar campos después de actualizar
-      _newCorreo.clear();
-      _newNombre.clear();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Datos actualizados exitosamente!')),
-      );
-    }
-  }
+  final _newFirstName = TextEditingController();
+  final _newSecondName = TextEditingController();
+  final _newPhoneNumber = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ChangeUserInfoBloc(
-              locator<GetUserUseCase>(),
-              locator<ChangeUserInfoUseCase>(),
-            )..add(GetUser()),
-        child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Editar Información'),
-              centerTitle: true,
-            ),
-            body: BlocConsumer<ChangeUserInfoBloc, ChangeUserInfoState>(
-                listener: (context, state) {
-              if (state is Error) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.errorMessage)),
-                );
-              }
-              if (state is Updated) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.message)),
-                );
-                Navigator.pop(context);
-              }
-            }, builder: (context, state) {
-              if (state is Loaded) {
-                _newCorreo.text = state.user.email;
-                _newNombre.text = state.user.userName;
+      create: (context) => ChangeUserInfoBloc(
+        locator<GetUserUseCase>(),
+        locator<ChangeUserInfoUseCase>(),
+      )..add(const GetUser()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Editar Información'),
+          centerTitle: true,
+        ),
+        body: BlocConsumer<ChangeUserInfoBloc, ChangeUserInfoState>(
+          listener: (context, state) {
+            if (state is Error) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.errorMessage)),
+              );
+            }
+            if (state is Updated) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
+              Navigator.pop(context);
+            }
+          },
+          builder: (context, state) {
+            if (state is Loaded) {
+              _newCorreo.text = state.user.email;
+              _newNombre.text = state.user.userName;
+              _newFirstName.text = state.user.name;
+              _newSecondName.text = state.user.secondName;
+              _newPhoneNumber.text = state.user.phoneNumber.toString();
 
-                return _buildForm(state);
-              }
-              if (state is Loading) {
-                return Center(child: CircularProgressIndicator());
-              }
-              return Center(child: Text('Cargando...'));
-            })));
+              return _buildForm(context, state);
+            }
+            if (state is Loading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return const Center(child: Text('Cargando...'));
+          },
+        ),
+      ),
+    );
   }
 
-  Widget _buildForm(Loaded state) {
+  Widget _buildForm(BuildContext context, Loaded state) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: SingleChildScrollView(
@@ -84,8 +75,6 @@ class _EditarInfoState extends State<EditarInfoScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _InfoRow(label: 'Correo actual:', value: state.user.email),
-              _InfoRow(label: 'Nombre actual:', value: state.user.userName),
               const SizedBox(height: 30),
               const Text('Nuevos datos:', style: TextStyle(fontSize: 16)),
               const SizedBox(height: 20),
@@ -107,9 +96,37 @@ class _EditarInfoState extends State<EditarInfoScreen> {
                 ),
                 validator: (value) => _validateName(value),
               ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _newFirstName,
+                decoration: const InputDecoration(
+                  labelText: 'Nuevo Primer Nombre',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => _validateName(value),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _newSecondName,
+                decoration: const InputDecoration(
+                  labelText: 'Nuevo Segundo Nombre',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => _validateName(value),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _newPhoneNumber,
+                decoration: const InputDecoration(
+                  labelText: 'Nuevo Número de Teléfono',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.phone,
+                validator: (value) => _validatePhone(value),
+              ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () => {}, //_submitForm(context, state.user.id!),
+                onPressed: () => _submitForm(context, state.user.id!),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   backgroundColor: Colors.blue[700],
@@ -126,6 +143,21 @@ class _EditarInfoState extends State<EditarInfoScreen> {
     );
   }
 
+  void _submitForm(BuildContext context, String userId) {
+    if (_formKey.currentState!.validate()) {
+      context.read<ChangeUserInfoBloc>().add(
+            ChangeUserInfo(
+              id: userId,
+              userName: _newNombre.text,
+              email: _newCorreo.text,
+              name: _newFirstName.text,
+              secondName: _newSecondName.text,
+              phoneNumber: int.parse(_newPhoneNumber.text),
+            ),
+          );
+    }
+  }
+
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) return 'Por favor ingrese un correo';
     if (!value.contains('@')) return 'Correo no válido';
@@ -137,26 +169,11 @@ class _EditarInfoState extends State<EditarInfoScreen> {
     if (value.length < 3) return 'Mínimo 3 caracteres';
     return null;
   }
-}
 
-// Widget para mostrar los datos actuales
-class _InfoRow extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _InfoRow({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(width: 10),
-          Text(value),
-        ],
-      ),
-    );
+  String? _validatePhone(String? value) {
+    if (value == null || value.isEmpty)
+      return 'Por favor ingrese un número de teléfono';
+    if (value.length < 8) return 'Número de teléfono no válido';
+    return null;
   }
 }

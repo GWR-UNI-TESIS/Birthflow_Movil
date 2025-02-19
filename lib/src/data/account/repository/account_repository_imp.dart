@@ -124,14 +124,18 @@ class AccountRepositoryImplementation implements AccountRepository {
     int? phoneNumber,
   }) async {
     try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
       final request = UserInfoRequest(
-          id: id,
-          name: name,
-          secondName: secondName,
-          userName: userName,
-          email: email);
+        id: id,
+        name: name,
+        secondName: secondName,
+        userName: userName,
+        email: email,
+        phoneNumber: phoneNumber,
+      );
 
-      final result = await _accountService.changeUserInfo(request);
+      final result = await _accountService.changeUserInfo(request, token);
 
       return result.response!;
     } catch (e, stackTrace) {

@@ -173,10 +173,13 @@ class _AccountService implements AccountService {
 
   @override
   Future<ApiResponse<UserAuthentication>> changeUserInfo(
-      UserInfoRequest request) async {
+    UserInfoRequest request,
+    String token,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _options = _setStreamType<ApiResponse<UserAuthentication>>(Options(
       method: 'POST',

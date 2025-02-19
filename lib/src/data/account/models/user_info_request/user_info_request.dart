@@ -7,7 +7,7 @@ part 'user_info_request.g.dart';
 class UserInfoRequest with _$UserInfoRequest {
   // Representa la información de un usuario autenticado
   const factory UserInfoRequest({
-    required String? id, // Identificador único del usuario (opcional)
+    String? id, // Identificador único del usuario
     required String name, // Nombres del usuario
     required String secondName, // Apellidos del usuario
     required String userName, // Nombre de usuario para inicio de sesión

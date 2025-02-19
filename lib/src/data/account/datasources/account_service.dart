@@ -37,6 +37,7 @@ abstract class AccountService {
   @POST('/api/account/change-user-info')
   Future<ApiResponse<UserAuthentication>> changeUserInfo(
     @Body() UserInfoRequest request,
+    @Header('Authorization') String token,
   );
 
   @GET('/api/account/me')

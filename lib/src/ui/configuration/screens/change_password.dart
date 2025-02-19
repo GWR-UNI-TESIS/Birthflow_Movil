@@ -1,4 +1,8 @@
+import 'package:birthflow_movil/src/ui/configuration/blocs/change_password/bloc.dart';
+import 'package:birthflow_movil/src/ui/configuration/blocs/change_password/events/change_password_events.dart';
+import 'package:birthflow_movil/src/ui/configuration/blocs/change_password/states/change_password_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   @override
@@ -31,17 +35,19 @@ class _ChangePasswordState extends State<ChangePasswordScreen> {
     return null;
   }
 
-  void _updatePassword() {
+  void _updatePassword(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       if (_newPasswordController.text != _confirmPasswordController.text) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Las contraseñas no coinciden')),
         );
       } else {
-        // Lógica para actualizar la contraseña
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Contraseña actualizada con éxito')),
-        );
+        context.read<ChangePasswordBloc>().add(
+              ChangePasswordEvent.submitted(
+                oldPassword: _currentPasswordController.text,
+                newPassword: _newPasswordController.text,
+              ),
+            );
       }
     }
   }
@@ -55,59 +61,78 @@ class _ChangePasswordState extends State<ChangePasswordScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Cambiar Contraseña',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _currentPasswordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Contraseña Actual',
-                    border: OutlineInputBorder(),
+        child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
+          listener: (context, state) {
+            state.when(
+              initial: () {},
+              loading: () {},
+              success: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Contraseña actualizada con éxito')),
+                );
+                _currentPasswordController.clear();
+                _newPasswordController.clear();
+                _confirmPasswordController.clear();
+              },
+              failure: (message) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(message)),
+                );
+              },
+            );
+          },
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _currentPasswordController,
+                    decoration: const InputDecoration(
+                      labelText: 'Contraseña Actual',
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
                   ),
-                  obscureText: true,
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Ingrese su contraseña actual'
-                      : null,
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _newPasswordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Nueva Contraseña',
-                    border: OutlineInputBorder(),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _newPasswordController,
+                    decoration: const InputDecoration(
+                      labelText: 'Nueva Contraseña',
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
+                    validator: _validatePassword,
                   ),
-                  obscureText: true,
-                  validator: _validatePassword,
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Confirmar Nueva Contraseña',
-                    border: OutlineInputBorder(),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _confirmPasswordController,
+                    decoration: const InputDecoration(
+                      labelText: 'Confirmar Nueva Contraseña',
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
                   ),
-                  obscureText: true,
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Confirme su nueva contraseña'
-                      : null,
-                ),
-                const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: _updatePassword,
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
+                  const SizedBox(height: 30),
+                  BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: state.maybeWhen(
+                          loading: () => null,
+                          orElse: () => () => _updatePassword(context),
+                        ),
+                        child: state.maybeWhen(
+                          loading: () => const CircularProgressIndicator(),
+                          orElse: () => const Text('Actualizar Contraseña'),
+                        ),
+                      );
+                    },
                   ),
-                  child: const Text('Actualizar Contraseña'),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

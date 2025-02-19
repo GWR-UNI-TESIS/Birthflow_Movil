@@ -21,7 +21,7 @@ UserInfoRequest _$UserInfoRequestFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserInfoRequest {
   String? get id =>
-      throw _privateConstructorUsedError; // Identificador único del usuario (opcional)
+      throw _privateConstructorUsedError; // Identificador único del usuario
   String get name => throw _privateConstructorUsedError; // Nombres del usuario
   String get secondName =>
       throw _privateConstructorUsedError; // Apellidos del usuario
@@ -177,7 +177,7 @@ class __$$UserInfoRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserInfoRequestImpl implements _UserInfoRequest {
   const _$UserInfoRequestImpl(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.secondName,
       required this.userName,
@@ -189,7 +189,7 @@ class _$UserInfoRequestImpl implements _UserInfoRequest {
 
   @override
   final String? id;
-// Identificador único del usuario (opcional)
+// Identificador único del usuario
   @override
   final String name;
 // Nombres del usuario
@@ -250,7 +250,7 @@ class _$UserInfoRequestImpl implements _UserInfoRequest {
 
 abstract class _UserInfoRequest implements UserInfoRequest {
   const factory _UserInfoRequest(
-      {required final String? id,
+      {final String? id,
       required final String name,
       required final String secondName,
       required final String userName,
@@ -261,7 +261,7 @@ abstract class _UserInfoRequest implements UserInfoRequest {
       _$UserInfoRequestImpl.fromJson;
 
   @override
-  String? get id; // Identificador único del usuario (opcional)
+  String? get id; // Identificador único del usuario
   @override
   String get name; // Nombres del usuario
   @override
