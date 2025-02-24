@@ -12,7 +12,7 @@ _$PartographVersionResponseImpl _$$PartographVersionResponseImplFromJson(
       id: (json['id'] as num).toInt(),
       partographId: json['partographId'] as String,
       changedAt: DateTime.parse(json['changedAt'] as String),
-      changedBy: json['changedBy'] as String,
+      changedByName: json['changedByName'] as String?,
       partographDataJson: json['partographDataJson'] as String,
       auditLogs: (json['auditLogs'] as List<dynamic>?)
           ?.map((e) =>
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$PartographVersionResponseImplToJson(
       'id': instance.id,
       'partographId': instance.partographId,
       'changedAt': instance.changedAt.toIso8601String(),
-      'changedBy': instance.changedBy,
+      'changedByName': instance.changedByName,
       'partographDataJson': instance.partographDataJson,
       'auditLogs': instance.auditLogs?.map((e) => e.toJson()).toList(),
     };

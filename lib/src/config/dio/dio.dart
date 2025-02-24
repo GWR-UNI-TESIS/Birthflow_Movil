@@ -1,3 +1,5 @@
+import 'package:birthflow_movil/src/config/locator/locator.dart';
+import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:dio/dio.dart';
 
 Dio buildDioClient(String base, String deviceInfo) {
@@ -11,7 +13,7 @@ Dio buildDioClient(String base, String deviceInfo) {
       followRedirects: true,
       validateStatus: (status) {
         // Aceptar todos los códigos de estado menores a 500
-        return status != null && status < 500;
+        return status != null && status < 500 && status != 401;
       },
       headers: {
         'Content-Type': 'application/json',
@@ -22,20 +24,51 @@ Dio buildDioClient(String base, String deviceInfo) {
     ),
   );
 
-  dio.interceptors.add(
+   dio.interceptors.add(
     InterceptorsWrapper(
       onRequest: (options, handler) {
-        // Puedes agregar aquí headers de autenticación o hacer modificaciones a la solicitud
-        handler.next(options); // Permite que la solicitud continúe
+        // Aquí puedes actualizar o agregar headers si fuera necesario
+        handler.next(options);
       },
       onResponse: (response, handler) {
-        // Puedes agregar lógica para manejar respuestas aquí
-        handler.next(response); // Permite que la respuesta continúe
+        handler.next(response);
       },
-      // ignore: deprecated_member_use
-      onError: (DioError e, handler) {
-        // Puedes agregar lógica para manejar errores aquí
-        handler.next(e); // Permite que el error continúe
+      onError: (error, handler) async {
+        // Si se recibe un error 401, se intenta refrescar el token
+        if (error.response?.statusCode == 401 &&
+          error.requestOptions.extra['isRetry'] != true) {
+          try {
+            // Ejecutar el caso de uso de refresh para obtener un nuevo token
+            final auth = await  locator<RefreshUsecase>().execute();
+            final newAccessToken = auth.accessToken;
+
+            // Actualizar el header global de Dio
+            dio.options.headers['Authorization'] =
+                'Bearer $newAccessToken';
+
+            // Actualizar el header en la solicitud original
+            error.requestOptions.headers['Authorization'] =
+                'Bearer $newAccessToken';
+
+            // Reintentar la solicitud original con el nuevo token
+            final opts = error.requestOptions;
+            final response = await dio.request(
+              opts.path,
+              options: Options(
+                method: opts.method,
+                headers: opts.headers,
+              ),
+              data: opts.data,
+              queryParameters: opts.queryParameters,
+            );
+            return handler.resolve(response);
+          } catch (e) {
+            // Si ocurre un error en el refresh, se propaga el error original
+            return handler.reject(error);
+          }
+        }
+        // Para otros errores, continuar el flujo normal
+        return handler.next(error);
       },
     ),
   );

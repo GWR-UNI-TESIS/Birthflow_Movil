@@ -40,7 +40,7 @@ class AccountRepositoryImplementation implements AccountRepository {
       return result.response!;
     } catch (e, stackTrace) {
       _logger.e('Account exception', error: e, stackTrace: stackTrace);
-      return 'Error';
+      rethrow;
     }
   }
 

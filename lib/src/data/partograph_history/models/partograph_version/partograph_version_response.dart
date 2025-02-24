@@ -10,7 +10,7 @@ class PartographVersionResponse  with _$PartographVersionResponse  {
     required int id,
     required String partographId,
     required DateTime changedAt,
-    required String changedBy,
+     String? changedByName,
     required String partographDataJson,
     List<PartographAuditLogResponse>? auditLogs,
 

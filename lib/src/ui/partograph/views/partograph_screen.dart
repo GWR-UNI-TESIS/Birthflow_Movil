@@ -8,6 +8,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partogram_modification_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/notifications_drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,9 @@ class PartographScreen extends StatefulWidget {
 }
 
 class _PartographState extends State<PartographScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(); // Clave para controlar el Scaffold
+
   @override
   void initState() {
     BlocProvider.of<PartographBloc>(context).add(
@@ -33,11 +37,14 @@ class _PartographState extends State<PartographScreen> {
   @override
   Widget build(BuildContext context) {
     final catalog = context.watch<CatalogCubit>().state;
+
     return Scaffold(
+      key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(135.0),
         child: _buildAppBar(context),
       ),
+      drawer: NotificationDrawer(partographId: widget.partographId),
       body: SingleChildScrollView(
         child: BlocBuilder<PartographBloc, PartographState>(
           builder: (context, state) {
@@ -56,6 +63,14 @@ class _PartographState extends State<PartographScreen> {
     return AppBar(
       elevation: 1,
       actions: _buildAppBarActions(),
+      automaticallyImplyLeading: false,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back), // Tu icono personalizado
+        onPressed: () {
+          // Acción deseada (por ejemplo, volver a la pantalla anterior)
+          Navigator.pop(context);
+        },
+      ),
       flexibleSpace: Padding(
         padding: const EdgeInsets.only(top: 40.0, left: 16.0, right: 10.0),
         child: BlocBuilder<PartographBloc, PartographState>(
@@ -73,17 +88,21 @@ class _PartographState extends State<PartographScreen> {
   List<Widget> _buildAppBarActions() {
     return [
       IconButton(icon: const Icon(Icons.description), onPressed: () {}),
-      IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
-      IconButton(icon: const Icon(Icons.history), onPressed: () => context
+      IconButton(
+        icon: const Icon(Icons.notifications),
+        onPressed: () {
+          _scaffoldKey.currentState?.openDrawer();
+        },
+      ),
+      IconButton(
+        icon: const Icon(Icons.history),
+        onPressed: () => context
           ..go(
             AppPaths.home.partographPath
                 .define(widget.partographId)
                 .history
                 .path,
-          ),),
-      IconButton(
-        icon: const Icon(Icons.more_vert),
-        onPressed: (){}
+          ),
       ),
     ];
   }
@@ -113,12 +132,13 @@ class _PartographState extends State<PartographScreen> {
                   .update
                   .path,
               extra: PartographHelper(
-                  partographId: state.partograph.partographId,
-                  name: state.partograph.name,
-                  recordName: state.partograph.recordName,
-                  date: state.partograph.date,
-                  observation: state.partograph.observation,
-                  workTime: state.partograph.workTime),
+                partographId: state.partograph.partographId,
+                name: state.partograph.name,
+                recordName: state.partograph.recordName,
+                date: state.partograph.date,
+                observation: state.partograph.observation,
+                workTime: state.partograph.workTime,
+              ),
             ),
           child: const Text('Modificar'),
         ),

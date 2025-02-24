@@ -42,13 +42,34 @@ class NotificationRepositoryImplementation implements NotificationRepository {
   @override
   Future<List<Notification>> getNotifications() async {
     try {
-
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final tokenAuth = 'Bearer $tokenGuardado';
 
       final response = await _notificationService.getNotifications(tokenAuth);
 
-      return _mapper.convertList<NotificationResponse, Notification>(response.response!);
+      return _mapper
+          .convertList<NotificationResponse, Notification>(response.response!);
+    } catch (e, stackTrace) {
+      _logger.e('Login exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Notification>> getPartographNotifications(
+    String partographId,
+  ) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final tokenAuth = 'Bearer $tokenGuardado';
+
+      final response = await _notificationService.getPartographNotifications(
+        tokenAuth,
+        partographId,
+      );
+
+      return _mapper
+          .convertList<NotificationResponse, Notification>(response.response!);
     } catch (e, stackTrace) {
       _logger.e('Login exception', error: e, stackTrace: stackTrace);
       rethrow;

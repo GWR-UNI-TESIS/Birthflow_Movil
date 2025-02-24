@@ -4,7 +4,7 @@ class PartographVersion {
   final int id;
   final String partographId;
   final DateTime changedAt;
-  final String changedBy;
+  final String? changedByName;
   final Map<String, dynamic> partographDataJson; // Este campo es un Map
   final List<PartographAuditLog>? auditLogs;
 
@@ -12,7 +12,7 @@ class PartographVersion {
     required this.id,
     required this.partographId,
     required this.changedAt,
-    required this.changedBy,
+    required this.changedByName,
     required this.partographDataJson,
     this.auditLogs,
   });

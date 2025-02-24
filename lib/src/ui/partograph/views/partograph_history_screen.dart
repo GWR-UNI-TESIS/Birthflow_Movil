@@ -65,7 +65,7 @@ class PartographHistoryScreen extends StatelessWidget {
                         version.id == currentVersion.id;
 
                     return ListTile(
-                      title: Text('Versión ${version.id}'),
+                      title: Text('Cambiado por ${version.changedByName}'),
                       subtitle: Text('Cambiado el ${version.changedAt}'),
                       selected: version == selectedVersion,
                       tileColor: isCurrent

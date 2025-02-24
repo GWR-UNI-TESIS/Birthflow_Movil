@@ -109,7 +109,17 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                   error: (message) => Center(child: Text('Error: $message')),
-                  empty: () => const Center(child: Text('No hay datos')),
+                  empty: () {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        // Dispara el evento FetchPartographs para recargar los datos
+                        context
+                            .read<PartographsBloc>()
+                            .add(FetchPartographs(userId: userId));
+                      },
+                      child: const Center(child: Text('No hay datos')),
+                    );
+                  },
                 ),
               ),
             ],

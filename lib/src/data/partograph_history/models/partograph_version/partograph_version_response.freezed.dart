@@ -24,7 +24,7 @@ mixin _$PartographVersionResponse {
   int get id => throw _privateConstructorUsedError;
   String get partographId => throw _privateConstructorUsedError;
   DateTime get changedAt => throw _privateConstructorUsedError;
-  String get changedBy => throw _privateConstructorUsedError;
+  String? get changedByName => throw _privateConstructorUsedError;
   String get partographDataJson => throw _privateConstructorUsedError;
   List<PartographAuditLogResponse>? get auditLogs =>
       throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $PartographVersionResponseCopyWith<$Res> {
       {int id,
       String partographId,
       DateTime changedAt,
-      String changedBy,
+      String? changedByName,
       String partographDataJson,
       List<PartographAuditLogResponse>? auditLogs});
 }
@@ -73,7 +73,7 @@ class _$PartographVersionResponseCopyWithImpl<$Res,
     Object? id = null,
     Object? partographId = null,
     Object? changedAt = null,
-    Object? changedBy = null,
+    Object? changedByName = freezed,
     Object? partographDataJson = null,
     Object? auditLogs = freezed,
   }) {
@@ -90,10 +90,10 @@ class _$PartographVersionResponseCopyWithImpl<$Res,
           ? _value.changedAt
           : changedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      changedBy: null == changedBy
-          ? _value.changedBy
-          : changedBy // ignore: cast_nullable_to_non_nullable
-              as String,
+      changedByName: freezed == changedByName
+          ? _value.changedByName
+          : changedByName // ignore: cast_nullable_to_non_nullable
+              as String?,
       partographDataJson: null == partographDataJson
           ? _value.partographDataJson
           : partographDataJson // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ abstract class _$$PartographVersionResponseImplCopyWith<$Res>
       {int id,
       String partographId,
       DateTime changedAt,
-      String changedBy,
+      String? changedByName,
       String partographDataJson,
       List<PartographAuditLogResponse>? auditLogs});
 }
@@ -142,7 +142,7 @@ class __$$PartographVersionResponseImplCopyWithImpl<$Res>
     Object? id = null,
     Object? partographId = null,
     Object? changedAt = null,
-    Object? changedBy = null,
+    Object? changedByName = freezed,
     Object? partographDataJson = null,
     Object? auditLogs = freezed,
   }) {
@@ -159,10 +159,10 @@ class __$$PartographVersionResponseImplCopyWithImpl<$Res>
           ? _value.changedAt
           : changedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      changedBy: null == changedBy
-          ? _value.changedBy
-          : changedBy // ignore: cast_nullable_to_non_nullable
-              as String,
+      changedByName: freezed == changedByName
+          ? _value.changedByName
+          : changedByName // ignore: cast_nullable_to_non_nullable
+              as String?,
       partographDataJson: null == partographDataJson
           ? _value.partographDataJson
           : partographDataJson // ignore: cast_nullable_to_non_nullable
@@ -182,7 +182,7 @@ class _$PartographVersionResponseImpl implements _PartographVersionResponse {
       {required this.id,
       required this.partographId,
       required this.changedAt,
-      required this.changedBy,
+      this.changedByName,
       required this.partographDataJson,
       final List<PartographAuditLogResponse>? auditLogs})
       : _auditLogs = auditLogs;
@@ -197,7 +197,7 @@ class _$PartographVersionResponseImpl implements _PartographVersionResponse {
   @override
   final DateTime changedAt;
   @override
-  final String changedBy;
+  final String? changedByName;
   @override
   final String partographDataJson;
   final List<PartographAuditLogResponse>? _auditLogs;
@@ -212,7 +212,7 @@ class _$PartographVersionResponseImpl implements _PartographVersionResponse {
 
   @override
   String toString() {
-    return 'PartographVersionResponse(id: $id, partographId: $partographId, changedAt: $changedAt, changedBy: $changedBy, partographDataJson: $partographDataJson, auditLogs: $auditLogs)';
+    return 'PartographVersionResponse(id: $id, partographId: $partographId, changedAt: $changedAt, changedByName: $changedByName, partographDataJson: $partographDataJson, auditLogs: $auditLogs)';
   }
 
   @override
@@ -225,8 +225,8 @@ class _$PartographVersionResponseImpl implements _PartographVersionResponse {
                 other.partographId == partographId) &&
             (identical(other.changedAt, changedAt) ||
                 other.changedAt == changedAt) &&
-            (identical(other.changedBy, changedBy) ||
-                other.changedBy == changedBy) &&
+            (identical(other.changedByName, changedByName) ||
+                other.changedByName == changedByName) &&
             (identical(other.partographDataJson, partographDataJson) ||
                 other.partographDataJson == partographDataJson) &&
             const DeepCollectionEquality()
@@ -240,7 +240,7 @@ class _$PartographVersionResponseImpl implements _PartographVersionResponse {
       id,
       partographId,
       changedAt,
-      changedBy,
+      changedByName,
       partographDataJson,
       const DeepCollectionEquality().hash(_auditLogs));
 
@@ -266,7 +266,7 @@ abstract class _PartographVersionResponse implements PartographVersionResponse {
           {required final int id,
           required final String partographId,
           required final DateTime changedAt,
-          required final String changedBy,
+          final String? changedByName,
           required final String partographDataJson,
           final List<PartographAuditLogResponse>? auditLogs}) =
       _$PartographVersionResponseImpl;
@@ -281,7 +281,7 @@ abstract class _PartographVersionResponse implements PartographVersionResponse {
   @override
   DateTime get changedAt;
   @override
-  String get changedBy;
+  String? get changedByName;
   @override
   String get partographDataJson;
   @override

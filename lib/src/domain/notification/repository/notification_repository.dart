@@ -8,4 +8,6 @@ abstract class NotificationRepository {
   });
 
   Future<List<Notification>> getNotifications();
+
+  Future<List<Notification>> getPartographNotifications(String partographId);
 }

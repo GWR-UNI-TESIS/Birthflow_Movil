@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/config/device_fingerprint/index.dart';
 import 'package:birthflow_movil/src/config/dio/dio.dart';
+import 'package:birthflow_movil/src/config/dio/dio_auth.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
 import 'package:birthflow_movil/src/data/account/datasources/account_service.dart';
 import 'package:birthflow_movil/src/data/account/repository/account_repository_imp.dart';
@@ -30,6 +31,7 @@ import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:birthflow_movil/src/domain/notification/repository/notification_repository.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/get_notifications_usecase.dart';
+import 'package:birthflow_movil/src/domain/notification/usecases/get_partograph_notifications_usecase.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/register_device_token_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
@@ -68,7 +70,6 @@ import 'package:birthflow_movil/src/domain/share/usecases/user_group_create_usec
 import 'package:birthflow_movil/src/domain/share/usecases/user_group_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/users_in_group_get_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
-import 'package:birthflow_movil/src/ui/configuration/blocs/change_user_info/events/change_user_info_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -82,14 +83,16 @@ Future<void> initializeDependencies() async {
   // Crea un cliente Dio para realizar llamadas HTTP a la API
   final dio = buildDioClient(apiUrl!, device);
 
-  locator.registerSingleton<CatalogService>(CatalogService(dio));
+  final dioAuth = buildDioAuth(apiUrl, device);
+
+  locator.registerSingleton<CatalogService>(CatalogService(dioAuth));
 
   locator.registerSingleton<CatalogRepository>(
     CatalogRepositoryImplementation(locator<CatalogService>()),
   );
 
   // Registra el AuthenticationService como singleton en GetIt
-  locator.registerSingleton<AuthenticationService>(AuthenticationService(dio));
+  locator.registerSingleton<AuthenticationService>(AuthenticationService(dioAuth));
 
   locator.registerSingleton<AuthenticationRepository>(
     AuthenticationRepositoryImplementation(locator<AuthenticationService>()),
@@ -346,6 +349,12 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<GetNotificationsUseCase>(
     GetNotificationsUseCaseImplementation(
+      notificationRepository: locator<NotificationRepository>(),
+    ),
+  );
+
+   locator.registerSingleton<GetPartographNotificationsUseCase>(
+    GetPartographNotificationsUseCaseImplementation(
       notificationRepository: locator<NotificationRepository>(),
     ),
   );

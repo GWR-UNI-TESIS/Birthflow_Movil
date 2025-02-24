@@ -32,6 +32,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Login failed: User not found.');
         return Authentication(
           user: null,
+          accessToken: null,
           message:  result.message,
           authenticationCode: AuthenticationCode.unauthorized,
         );
@@ -41,6 +42,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Login failed: Invalid credentials.');
         return Authentication(
           user: null,
+          accessToken: null,
           message: result.message,
           authenticationCode: AuthenticationCode.unauthorized,
         );
@@ -63,6 +65,7 @@ class AuthenticationRepositoryImplementation
             email: response.user!.email,
             phoneNumber: phone,
           ),
+          accessToken: response.accessToken,
           message: result.message,
           authenticationCode: AuthenticationCode.success,
         );
@@ -70,6 +73,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Login failed: Unknown error.');
         return Authentication(
           user: null,
+          accessToken: null,
           message: 'Error desconocido',
           authenticationCode: AuthenticationCode.error,
         );
@@ -78,6 +82,7 @@ class AuthenticationRepositoryImplementation
       _logger.e('Login exception', error: e, stackTrace: stackTrace);
       return Authentication(
         user: null,
+        accessToken: null,
         message: 'Ocurrió un error al iniciar sesión.',
         authenticationCode: AuthenticationCode.error,
       );
@@ -124,6 +129,7 @@ class AuthenticationRepositoryImplementation
         _logger.i('Token no existen en el dispositivos');
         return Authentication(
           user: null,
+          accessToken: null,
           message: 'No existen token en la aplicacion',
           authenticationCode: AuthenticationCode.unauthorized,
         );
@@ -161,6 +167,7 @@ class AuthenticationRepositoryImplementation
             email: response.user!.email,
             phoneNumber: response.user!.phoneNumber,
           ),
+          accessToken: response.accessToken,
           message: 'Tokens actualizados correctamente',
           authenticationCode: AuthenticationCode.success,
         );
@@ -170,6 +177,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Token refresh failed: Unauthorized.');
         return Authentication(
           user: null,
+          accessToken: null,
           message: 'No autorizado para renovar el token.',
           authenticationCode: AuthenticationCode.unauthorized,
         );
@@ -178,6 +186,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Token refresh failed: Bad Request.');
         return Authentication(
           user: null,
+          accessToken: null,
           message: 'Solicitud inválida para renovar el token.',
           authenticationCode: AuthenticationCode.error,
         );
@@ -186,6 +195,7 @@ class AuthenticationRepositoryImplementation
         _logger.e('Token refresh failed: Unknown error.');
         return Authentication(
           user: null,
+          accessToken: null,
           message: 'Error desconocido al renovar el token.',
           authenticationCode: AuthenticationCode.error,
         );
@@ -195,6 +205,7 @@ class AuthenticationRepositoryImplementation
       _logger.e('Token refresh exception', error: e, stackTrace: stackTrace);
       return Authentication(
         user: null,
+        accessToken: null,
         message: 'Ocurrió un error al refrescar el token.',
         authenticationCode: AuthenticationCode.error,
       );

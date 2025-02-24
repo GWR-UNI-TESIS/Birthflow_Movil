@@ -326,7 +326,7 @@ class $PartographHistoryMapper implements _i1.AutoMapprInterface {
       id: model.id,
       partographId: model.partographId,
       changedAt: model.changedAt,
-      changedBy: model.changedBy,
+      changedByName: model.changedByName,
       partographDataJson: _i6.PartographHistoryMapper.jsonStringToMap(model),
       auditLogs: model.auditLogs
           ?.map<_i3.PartographAuditLog>((value) =>

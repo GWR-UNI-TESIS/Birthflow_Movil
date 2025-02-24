@@ -21,4 +21,10 @@ abstract class NotificationService {
   Future<ApiResponse<List<NotificationResponse>>> getNotifications(
     @Header('Authorization') String token,
   );
+
+  @GET('/api/notification/notifications-partograph/{partographId}')
+  Future<ApiResponse<List<NotificationResponse>>> getPartographNotifications(
+    @Header('Authorization') String token,
+    @Path('partographId') String partographId,
+  );
 }
