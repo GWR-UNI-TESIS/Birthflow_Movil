@@ -23,30 +23,24 @@ ChildbirthNoteResponse _$ChildbirthNoteResponseFromJson(
 mixin _$ChildbirthNoteResponse {
   String get partographId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  String get hour => throw _privateConstructorUsedError;
-  String get sex => throw _privateConstructorUsedError;
-  String get apgar => throw _privateConstructorUsedError;
-  String get temperature => throw _privateConstructorUsedError;
-  String get caputto => throw _privateConstructorUsedError;
-  String get circular => throw _privateConstructorUsedError;
-  String get lamniotico => throw _privateConstructorUsedError;
-  String get miccion => throw _privateConstructorUsedError;
-  String get meconio => throw _privateConstructorUsedError;
-  String get pa => throw _privateConstructorUsedError;
-  String get expulsivo => throw _privateConstructorUsedError;
-  String get placenta => throw _privateConstructorUsedError;
-  String get alumbramiento => throw _privateConstructorUsedError;
-  String get huellaPlantar => throw _privateConstructorUsedError;
-  String get pc => throw _privateConstructorUsedError;
-  String get talla => throw _privateConstructorUsedError;
-  String get brazalete => throw _privateConstructorUsedError;
-  String get huellaDig => throw _privateConstructorUsedError;
-  DateTime get createAt => throw _privateConstructorUsedError;
-  DateTime? get updateAt => throw _privateConstructorUsedError;
-  DateTime? get deleteAt => throw _privateConstructorUsedError;
-  String? get createdBy => throw _privateConstructorUsedError;
-  String? get updateBy => throw _privateConstructorUsedError;
-  String? get deleteBy => throw _privateConstructorUsedError;
+  String? get hour => throw _privateConstructorUsedError;
+  String? get sex => throw _privateConstructorUsedError;
+  String? get apgar => throw _privateConstructorUsedError;
+  String? get temperature => throw _privateConstructorUsedError;
+  String? get caputto => throw _privateConstructorUsedError;
+  String? get circular => throw _privateConstructorUsedError;
+  String? get lamniotico => throw _privateConstructorUsedError;
+  String? get miccion => throw _privateConstructorUsedError;
+  String? get meconio => throw _privateConstructorUsedError;
+  String? get pa => throw _privateConstructorUsedError;
+  String? get expulsivo => throw _privateConstructorUsedError;
+  String? get placenta => throw _privateConstructorUsedError;
+  String? get alumbramiento => throw _privateConstructorUsedError;
+  String? get huellaPlantar => throw _privateConstructorUsedError;
+  String? get pc => throw _privateConstructorUsedError;
+  String? get talla => throw _privateConstructorUsedError;
+  String? get brazalete => throw _privateConstructorUsedError;
+  String? get huellaDig => throw _privateConstructorUsedError;
 
   /// Serializes this ChildbirthNoteResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -67,30 +61,24 @@ abstract class $ChildbirthNoteResponseCopyWith<$Res> {
   $Res call(
       {String partographId,
       String? description,
-      String hour,
-      String sex,
-      String apgar,
-      String temperature,
-      String caputto,
-      String circular,
-      String lamniotico,
-      String miccion,
-      String meconio,
-      String pa,
-      String expulsivo,
-      String placenta,
-      String alumbramiento,
-      String huellaPlantar,
-      String pc,
-      String talla,
-      String brazalete,
-      String huellaDig,
-      DateTime createAt,
-      DateTime? updateAt,
-      DateTime? deleteAt,
-      String? createdBy,
-      String? updateBy,
-      String? deleteBy});
+      String? hour,
+      String? sex,
+      String? apgar,
+      String? temperature,
+      String? caputto,
+      String? circular,
+      String? lamniotico,
+      String? miccion,
+      String? meconio,
+      String? pa,
+      String? expulsivo,
+      String? placenta,
+      String? alumbramiento,
+      String? huellaPlantar,
+      String? pc,
+      String? talla,
+      String? brazalete,
+      String? huellaDig});
 }
 
 /// @nodoc
@@ -111,30 +99,24 @@ class _$ChildbirthNoteResponseCopyWithImpl<$Res,
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
-    Object? hour = null,
-    Object? sex = null,
-    Object? apgar = null,
-    Object? temperature = null,
-    Object? caputto = null,
-    Object? circular = null,
-    Object? lamniotico = null,
-    Object? miccion = null,
-    Object? meconio = null,
-    Object? pa = null,
-    Object? expulsivo = null,
-    Object? placenta = null,
-    Object? alumbramiento = null,
-    Object? huellaPlantar = null,
-    Object? pc = null,
-    Object? talla = null,
-    Object? brazalete = null,
-    Object? huellaDig = null,
-    Object? createAt = null,
-    Object? updateAt = freezed,
-    Object? deleteAt = freezed,
-    Object? createdBy = freezed,
-    Object? updateBy = freezed,
-    Object? deleteBy = freezed,
+    Object? hour = freezed,
+    Object? sex = freezed,
+    Object? apgar = freezed,
+    Object? temperature = freezed,
+    Object? caputto = freezed,
+    Object? circular = freezed,
+    Object? lamniotico = freezed,
+    Object? miccion = freezed,
+    Object? meconio = freezed,
+    Object? pa = freezed,
+    Object? expulsivo = freezed,
+    Object? placenta = freezed,
+    Object? alumbramiento = freezed,
+    Object? huellaPlantar = freezed,
+    Object? pc = freezed,
+    Object? talla = freezed,
+    Object? brazalete = freezed,
+    Object? huellaDig = freezed,
   }) {
     return _then(_value.copyWith(
       partographId: null == partographId
@@ -145,101 +127,77 @@ class _$ChildbirthNoteResponseCopyWithImpl<$Res,
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      hour: null == hour
+      hour: freezed == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
-              as String,
-      sex: null == sex
+              as String?,
+      sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
-      apgar: null == apgar
+              as String?,
+      apgar: freezed == apgar
           ? _value.apgar
           : apgar // ignore: cast_nullable_to_non_nullable
-              as String,
-      temperature: null == temperature
+              as String?,
+      temperature: freezed == temperature
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
-              as String,
-      caputto: null == caputto
+              as String?,
+      caputto: freezed == caputto
           ? _value.caputto
           : caputto // ignore: cast_nullable_to_non_nullable
-              as String,
-      circular: null == circular
+              as String?,
+      circular: freezed == circular
           ? _value.circular
           : circular // ignore: cast_nullable_to_non_nullable
-              as String,
-      lamniotico: null == lamniotico
+              as String?,
+      lamniotico: freezed == lamniotico
           ? _value.lamniotico
           : lamniotico // ignore: cast_nullable_to_non_nullable
-              as String,
-      miccion: null == miccion
+              as String?,
+      miccion: freezed == miccion
           ? _value.miccion
           : miccion // ignore: cast_nullable_to_non_nullable
-              as String,
-      meconio: null == meconio
+              as String?,
+      meconio: freezed == meconio
           ? _value.meconio
           : meconio // ignore: cast_nullable_to_non_nullable
-              as String,
-      pa: null == pa
+              as String?,
+      pa: freezed == pa
           ? _value.pa
           : pa // ignore: cast_nullable_to_non_nullable
-              as String,
-      expulsivo: null == expulsivo
+              as String?,
+      expulsivo: freezed == expulsivo
           ? _value.expulsivo
           : expulsivo // ignore: cast_nullable_to_non_nullable
-              as String,
-      placenta: null == placenta
+              as String?,
+      placenta: freezed == placenta
           ? _value.placenta
           : placenta // ignore: cast_nullable_to_non_nullable
-              as String,
-      alumbramiento: null == alumbramiento
+              as String?,
+      alumbramiento: freezed == alumbramiento
           ? _value.alumbramiento
           : alumbramiento // ignore: cast_nullable_to_non_nullable
-              as String,
-      huellaPlantar: null == huellaPlantar
+              as String?,
+      huellaPlantar: freezed == huellaPlantar
           ? _value.huellaPlantar
           : huellaPlantar // ignore: cast_nullable_to_non_nullable
-              as String,
-      pc: null == pc
+              as String?,
+      pc: freezed == pc
           ? _value.pc
           : pc // ignore: cast_nullable_to_non_nullable
-              as String,
-      talla: null == talla
+              as String?,
+      talla: freezed == talla
           ? _value.talla
           : talla // ignore: cast_nullable_to_non_nullable
-              as String,
-      brazalete: null == brazalete
+              as String?,
+      brazalete: freezed == brazalete
           ? _value.brazalete
           : brazalete // ignore: cast_nullable_to_non_nullable
-              as String,
-      huellaDig: null == huellaDig
+              as String?,
+      huellaDig: freezed == huellaDig
           ? _value.huellaDig
           : huellaDig // ignore: cast_nullable_to_non_nullable
-              as String,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deleteAt: freezed == deleteAt
-          ? _value.deleteAt
-          : deleteAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deleteBy: freezed == deleteBy
-          ? _value.deleteBy
-          : deleteBy // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -257,30 +215,24 @@ abstract class _$$ChildbirthNoteResponseImplCopyWith<$Res>
   $Res call(
       {String partographId,
       String? description,
-      String hour,
-      String sex,
-      String apgar,
-      String temperature,
-      String caputto,
-      String circular,
-      String lamniotico,
-      String miccion,
-      String meconio,
-      String pa,
-      String expulsivo,
-      String placenta,
-      String alumbramiento,
-      String huellaPlantar,
-      String pc,
-      String talla,
-      String brazalete,
-      String huellaDig,
-      DateTime createAt,
-      DateTime? updateAt,
-      DateTime? deleteAt,
-      String? createdBy,
-      String? updateBy,
-      String? deleteBy});
+      String? hour,
+      String? sex,
+      String? apgar,
+      String? temperature,
+      String? caputto,
+      String? circular,
+      String? lamniotico,
+      String? miccion,
+      String? meconio,
+      String? pa,
+      String? expulsivo,
+      String? placenta,
+      String? alumbramiento,
+      String? huellaPlantar,
+      String? pc,
+      String? talla,
+      String? brazalete,
+      String? huellaDig});
 }
 
 /// @nodoc
@@ -300,30 +252,24 @@ class __$$ChildbirthNoteResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
-    Object? hour = null,
-    Object? sex = null,
-    Object? apgar = null,
-    Object? temperature = null,
-    Object? caputto = null,
-    Object? circular = null,
-    Object? lamniotico = null,
-    Object? miccion = null,
-    Object? meconio = null,
-    Object? pa = null,
-    Object? expulsivo = null,
-    Object? placenta = null,
-    Object? alumbramiento = null,
-    Object? huellaPlantar = null,
-    Object? pc = null,
-    Object? talla = null,
-    Object? brazalete = null,
-    Object? huellaDig = null,
-    Object? createAt = null,
-    Object? updateAt = freezed,
-    Object? deleteAt = freezed,
-    Object? createdBy = freezed,
-    Object? updateBy = freezed,
-    Object? deleteBy = freezed,
+    Object? hour = freezed,
+    Object? sex = freezed,
+    Object? apgar = freezed,
+    Object? temperature = freezed,
+    Object? caputto = freezed,
+    Object? circular = freezed,
+    Object? lamniotico = freezed,
+    Object? miccion = freezed,
+    Object? meconio = freezed,
+    Object? pa = freezed,
+    Object? expulsivo = freezed,
+    Object? placenta = freezed,
+    Object? alumbramiento = freezed,
+    Object? huellaPlantar = freezed,
+    Object? pc = freezed,
+    Object? talla = freezed,
+    Object? brazalete = freezed,
+    Object? huellaDig = freezed,
   }) {
     return _then(_$ChildbirthNoteResponseImpl(
       partographId: null == partographId
@@ -334,101 +280,77 @@ class __$$ChildbirthNoteResponseImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      hour: null == hour
+      hour: freezed == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
-              as String,
-      sex: null == sex
+              as String?,
+      sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
-      apgar: null == apgar
+              as String?,
+      apgar: freezed == apgar
           ? _value.apgar
           : apgar // ignore: cast_nullable_to_non_nullable
-              as String,
-      temperature: null == temperature
+              as String?,
+      temperature: freezed == temperature
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
-              as String,
-      caputto: null == caputto
+              as String?,
+      caputto: freezed == caputto
           ? _value.caputto
           : caputto // ignore: cast_nullable_to_non_nullable
-              as String,
-      circular: null == circular
+              as String?,
+      circular: freezed == circular
           ? _value.circular
           : circular // ignore: cast_nullable_to_non_nullable
-              as String,
-      lamniotico: null == lamniotico
+              as String?,
+      lamniotico: freezed == lamniotico
           ? _value.lamniotico
           : lamniotico // ignore: cast_nullable_to_non_nullable
-              as String,
-      miccion: null == miccion
+              as String?,
+      miccion: freezed == miccion
           ? _value.miccion
           : miccion // ignore: cast_nullable_to_non_nullable
-              as String,
-      meconio: null == meconio
+              as String?,
+      meconio: freezed == meconio
           ? _value.meconio
           : meconio // ignore: cast_nullable_to_non_nullable
-              as String,
-      pa: null == pa
+              as String?,
+      pa: freezed == pa
           ? _value.pa
           : pa // ignore: cast_nullable_to_non_nullable
-              as String,
-      expulsivo: null == expulsivo
+              as String?,
+      expulsivo: freezed == expulsivo
           ? _value.expulsivo
           : expulsivo // ignore: cast_nullable_to_non_nullable
-              as String,
-      placenta: null == placenta
+              as String?,
+      placenta: freezed == placenta
           ? _value.placenta
           : placenta // ignore: cast_nullable_to_non_nullable
-              as String,
-      alumbramiento: null == alumbramiento
+              as String?,
+      alumbramiento: freezed == alumbramiento
           ? _value.alumbramiento
           : alumbramiento // ignore: cast_nullable_to_non_nullable
-              as String,
-      huellaPlantar: null == huellaPlantar
+              as String?,
+      huellaPlantar: freezed == huellaPlantar
           ? _value.huellaPlantar
           : huellaPlantar // ignore: cast_nullable_to_non_nullable
-              as String,
-      pc: null == pc
+              as String?,
+      pc: freezed == pc
           ? _value.pc
           : pc // ignore: cast_nullable_to_non_nullable
-              as String,
-      talla: null == talla
+              as String?,
+      talla: freezed == talla
           ? _value.talla
           : talla // ignore: cast_nullable_to_non_nullable
-              as String,
-      brazalete: null == brazalete
+              as String?,
+      brazalete: freezed == brazalete
           ? _value.brazalete
           : brazalete // ignore: cast_nullable_to_non_nullable
-              as String,
-      huellaDig: null == huellaDig
+              as String?,
+      huellaDig: freezed == huellaDig
           ? _value.huellaDig
           : huellaDig // ignore: cast_nullable_to_non_nullable
-              as String,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateAt: freezed == updateAt
-          ? _value.updateAt
-          : updateAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deleteAt: freezed == deleteAt
-          ? _value.deleteAt
-          : deleteAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updateBy: freezed == updateBy
-          ? _value.updateBy
-          : updateBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deleteBy: freezed == deleteBy
-          ? _value.deleteBy
-          : deleteBy // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -440,30 +362,24 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
   const _$ChildbirthNoteResponseImpl(
       {required this.partographId,
       this.description,
-      required this.hour,
-      required this.sex,
-      required this.apgar,
-      required this.temperature,
-      required this.caputto,
-      required this.circular,
-      required this.lamniotico,
-      required this.miccion,
-      required this.meconio,
-      required this.pa,
-      required this.expulsivo,
-      required this.placenta,
-      required this.alumbramiento,
-      required this.huellaPlantar,
-      required this.pc,
-      required this.talla,
-      required this.brazalete,
-      required this.huellaDig,
-      required this.createAt,
-      this.updateAt,
-      this.deleteAt,
-      this.createdBy,
-      this.updateBy,
-      this.deleteBy});
+      this.hour,
+      this.sex,
+      this.apgar,
+      this.temperature,
+      this.caputto,
+      this.circular,
+      this.lamniotico,
+      this.miccion,
+      this.meconio,
+      this.pa,
+      this.expulsivo,
+      this.placenta,
+      this.alumbramiento,
+      this.huellaPlantar,
+      this.pc,
+      this.talla,
+      this.brazalete,
+      this.huellaDig});
 
   factory _$ChildbirthNoteResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChildbirthNoteResponseImplFromJson(json);
@@ -473,57 +389,45 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
   @override
   final String? description;
   @override
-  final String hour;
+  final String? hour;
   @override
-  final String sex;
+  final String? sex;
   @override
-  final String apgar;
+  final String? apgar;
   @override
-  final String temperature;
+  final String? temperature;
   @override
-  final String caputto;
+  final String? caputto;
   @override
-  final String circular;
+  final String? circular;
   @override
-  final String lamniotico;
+  final String? lamniotico;
   @override
-  final String miccion;
+  final String? miccion;
   @override
-  final String meconio;
+  final String? meconio;
   @override
-  final String pa;
+  final String? pa;
   @override
-  final String expulsivo;
+  final String? expulsivo;
   @override
-  final String placenta;
+  final String? placenta;
   @override
-  final String alumbramiento;
+  final String? alumbramiento;
   @override
-  final String huellaPlantar;
+  final String? huellaPlantar;
   @override
-  final String pc;
+  final String? pc;
   @override
-  final String talla;
+  final String? talla;
   @override
-  final String brazalete;
+  final String? brazalete;
   @override
-  final String huellaDig;
-  @override
-  final DateTime createAt;
-  @override
-  final DateTime? updateAt;
-  @override
-  final DateTime? deleteAt;
-  @override
-  final String? createdBy;
-  @override
-  final String? updateBy;
-  @override
-  final String? deleteBy;
+  final String? huellaDig;
 
   @override
   String toString() {
-    return 'ChildbirthNoteResponse(partographId: $partographId, description: $description, hour: $hour, sex: $sex, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig, createAt: $createAt, updateAt: $updateAt, deleteAt: $deleteAt, createdBy: $createdBy, updateBy: $updateBy, deleteBy: $deleteBy)';
+    return 'ChildbirthNoteResponse(partographId: $partographId, description: $description, hour: $hour, sex: $sex, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
   }
 
   @override
@@ -561,19 +465,7 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
             (identical(other.brazalete, brazalete) ||
                 other.brazalete == brazalete) &&
             (identical(other.huellaDig, huellaDig) ||
-                other.huellaDig == huellaDig) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt) &&
-            (identical(other.updateAt, updateAt) ||
-                other.updateAt == updateAt) &&
-            (identical(other.deleteAt, deleteAt) ||
-                other.deleteAt == deleteAt) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
-            (identical(other.updateBy, updateBy) ||
-                other.updateBy == updateBy) &&
-            (identical(other.deleteBy, deleteBy) ||
-                other.deleteBy == deleteBy));
+                other.huellaDig == huellaDig));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -599,13 +491,7 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
         pc,
         talla,
         brazalete,
-        huellaDig,
-        createAt,
-        updateAt,
-        deleteAt,
-        createdBy,
-        updateBy,
-        deleteBy
+        huellaDig
       ]);
 
   /// Create a copy of ChildbirthNoteResponse
@@ -629,30 +515,24 @@ abstract class _ChildbirthNoteResponse implements ChildbirthNoteResponse {
   const factory _ChildbirthNoteResponse(
       {required final String partographId,
       final String? description,
-      required final String hour,
-      required final String sex,
-      required final String apgar,
-      required final String temperature,
-      required final String caputto,
-      required final String circular,
-      required final String lamniotico,
-      required final String miccion,
-      required final String meconio,
-      required final String pa,
-      required final String expulsivo,
-      required final String placenta,
-      required final String alumbramiento,
-      required final String huellaPlantar,
-      required final String pc,
-      required final String talla,
-      required final String brazalete,
-      required final String huellaDig,
-      required final DateTime createAt,
-      final DateTime? updateAt,
-      final DateTime? deleteAt,
-      final String? createdBy,
-      final String? updateBy,
-      final String? deleteBy}) = _$ChildbirthNoteResponseImpl;
+      final String? hour,
+      final String? sex,
+      final String? apgar,
+      final String? temperature,
+      final String? caputto,
+      final String? circular,
+      final String? lamniotico,
+      final String? miccion,
+      final String? meconio,
+      final String? pa,
+      final String? expulsivo,
+      final String? placenta,
+      final String? alumbramiento,
+      final String? huellaPlantar,
+      final String? pc,
+      final String? talla,
+      final String? brazalete,
+      final String? huellaDig}) = _$ChildbirthNoteResponseImpl;
 
   factory _ChildbirthNoteResponse.fromJson(Map<String, dynamic> json) =
       _$ChildbirthNoteResponseImpl.fromJson;
@@ -662,53 +542,41 @@ abstract class _ChildbirthNoteResponse implements ChildbirthNoteResponse {
   @override
   String? get description;
   @override
-  String get hour;
+  String? get hour;
   @override
-  String get sex;
+  String? get sex;
   @override
-  String get apgar;
+  String? get apgar;
   @override
-  String get temperature;
+  String? get temperature;
   @override
-  String get caputto;
+  String? get caputto;
   @override
-  String get circular;
+  String? get circular;
   @override
-  String get lamniotico;
+  String? get lamniotico;
   @override
-  String get miccion;
+  String? get miccion;
   @override
-  String get meconio;
+  String? get meconio;
   @override
-  String get pa;
+  String? get pa;
   @override
-  String get expulsivo;
+  String? get expulsivo;
   @override
-  String get placenta;
+  String? get placenta;
   @override
-  String get alumbramiento;
+  String? get alumbramiento;
   @override
-  String get huellaPlantar;
+  String? get huellaPlantar;
   @override
-  String get pc;
+  String? get pc;
   @override
-  String get talla;
+  String? get talla;
   @override
-  String get brazalete;
+  String? get brazalete;
   @override
-  String get huellaDig;
-  @override
-  DateTime get createAt;
-  @override
-  DateTime? get updateAt;
-  @override
-  DateTime? get deleteAt;
-  @override
-  String? get createdBy;
-  @override
-  String? get updateBy;
-  @override
-  String? get deleteBy;
+  String? get huellaDig;
 
   /// Create a copy of ChildbirthNoteResponse
   /// with the given fields replaced by the non-null parameter values.

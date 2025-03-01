@@ -925,7 +925,7 @@ class PartographRepositoryImplementation implements PartographRepository {
       );
 
       final result =
-          await _partographService.createChildBirthNote(token, request);
+          await _partographService.updateChildBirthNote(token, request);
 
       return _mapper.convert<ChildbirthNoteResponse, ChildbirthNote>(
         result.response,

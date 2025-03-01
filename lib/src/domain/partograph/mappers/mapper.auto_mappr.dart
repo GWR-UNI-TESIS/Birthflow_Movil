@@ -514,6 +514,9 @@ class $Mappr implements _i1.AutoMapprInterface {
       childbirthNote:
           _map__i21$ChildbirthNoteResponse_To__i22$ChildbirthNote_Nullable(
               model.childbirthNote),
+      partographState:
+          _map__i16$PartographStateResponse_To__i17$PartographState_Nullable(
+              model.partographState),
       curves: _map__i18$AlertCurvesResponse_To__i19$AlertCurves_Nullable(
           model.curves),
     );
@@ -722,12 +725,23 @@ class $Mappr implements _i1.AutoMapprInterface {
       talla: model.talla,
       brazalete: model.brazalete,
       huellaDig: model.huellaDig,
-      createAt: model.createAt,
-      updateAt: model.updateAt,
-      deleteAt: model.deleteAt,
-      createdBy: model.createdBy,
-      updateBy: model.updateBy,
-      deleteBy: model.deleteBy,
+    );
+  }
+
+  _i17.PartographState?
+      _map__i16$PartographStateResponse_To__i17$PartographState_Nullable(
+          _i16.PartographStateResponse? input) {
+    final model = input;
+    if (model == null) {
+      return null;
+    }
+    return _i17.PartographState(
+      id: model.id,
+      partographId: model.partographId,
+      isAchived: model.isAchived,
+      set: model.set,
+      silenced: model.silenced,
+      favorite: model.favorite,
     );
   }
 
@@ -777,12 +791,6 @@ class $Mappr implements _i1.AutoMapprInterface {
       talla: model.talla,
       brazalete: model.brazalete,
       huellaDig: model.huellaDig,
-      createAt: model.createAt,
-      updateAt: model.updateAt,
-      deleteAt: model.deleteAt,
-      createdBy: model.createdBy,
-      updateBy: model.updateBy,
-      deleteBy: model.deleteBy,
     );
   }
 }

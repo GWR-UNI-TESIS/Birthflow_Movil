@@ -18,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-enum _Options { groups, configuration, information, logout }
+enum _Options { groups, configuration, favorite, information, logout }
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -67,6 +67,10 @@ class HomeScreen extends StatelessWidget {
                   PopupMenuItem(
                     value: _Options.configuration,
                     child: Text('Configuración'),
+                  ),
+                  PopupMenuItem(
+                    value: _Options.favorite,
+                    child: Text('Favoritos'),
                   ),
                   PopupMenuItem(
                     value: _Options.information,
@@ -144,6 +148,10 @@ class HomeScreen extends StatelessWidget {
       case _Options.configuration:
         context.go(
           AppPaths.home.configurationPath.path,
+        );
+      case _Options.favorite:
+        context.go(
+          AppPaths.home.favorite.path,
         );
       case _Options.logout:
         context.read<AuthenticationBloc>().add(const Logout());

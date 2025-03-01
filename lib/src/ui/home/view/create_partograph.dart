@@ -240,7 +240,7 @@ class _CreatePartographState extends State<_CreatePartographPage>
                                   .animateTo(_tabController.index + 1);
                             },
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

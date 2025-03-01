@@ -1201,7 +1201,7 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<ChildbirthNoteResponse>>(Options(
-      method: 'POST',
+      method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )

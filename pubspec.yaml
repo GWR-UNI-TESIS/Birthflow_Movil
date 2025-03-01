@@ -58,8 +58,10 @@ dependencies:
   json_annotation: ^4.9.0
   logger: ^2.4.0
   numberpicker: ^2.1.2
+  open_app_settings: ^2.0.1
   package_info_plus: ^8.1.2
   retrofit: ^4.1.0
+  shared_preferences: ^2.5.2
   sqflite: ^2.3.0
 
 

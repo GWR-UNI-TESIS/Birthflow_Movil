@@ -22,11 +22,16 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (partograph, _) => partograph
-                        .medicalSurveillanceTable?.isEmpty ??
-                    true
-                ? const Center(child: Text('No hay datos'))
-                : _buildTable(partograph.medicalSurveillanceTable!, context),
+            loaded: (partograph, _) =>
+                partograph.medicalSurveillanceTable?.isEmpty ?? true
+                    ? const Center(child: Text('No hay datos'))
+                    : Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: _buildTable(
+                          partograph.medicalSurveillanceTable!,
+                          context,
+                        ),
+                      ),
             error: (errorMessage) =>
                 Center(child: Text('Error: $errorMessage')),
             orElse: () => const Center(child: CircularProgressIndicator()),

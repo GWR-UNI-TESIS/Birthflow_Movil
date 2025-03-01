@@ -27,6 +27,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_state_
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph_history/usecases/get_partograph_history_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_update_usecase.dart';
@@ -39,6 +40,7 @@ import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/notifications/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/notifications/events/notifications_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph_history/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -100,6 +102,10 @@ class AppDev extends StatelessWidget {
             getNotificationsUseCase: locator<GetNotificationsUseCase>(),
           )..add(const NotificationsEvent.loadNotifications()),
         ),
+        BlocProvider(
+          create: (context) =>
+              PartographHistoryBloc(locator<GetPartographHistoryUsecase>()),
+        )
       ],
       child: MaterialApp(
         home: AppEntry(),
@@ -109,7 +115,6 @@ class AppDev extends StatelessWidget {
 }
 
 class AppEntry extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();

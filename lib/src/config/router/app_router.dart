@@ -20,6 +20,7 @@ import 'package:birthflow_movil/src/ui/groups/group/group_users_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/groups_screen.dart';
 import 'package:birthflow_movil/src/ui/home/view/archived_partograph_screen.dart';
 import 'package:birthflow_movil/src/ui/home/view/create_partograph.dart';
+import 'package:birthflow_movil/src/ui/home/view/favorite_screen.dart';
 import 'package:birthflow_movil/src/ui/home/view/home.dart';
 import 'package:birthflow_movil/src/ui/home/view/search_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
@@ -119,12 +120,16 @@ class AppRouter {
             screen: ArchivedPartographScreen(),
           ),
           _buildRoute(
+            path: AppPaths.home.favorite.goRoute,
+            screen: FavoritePartographScreen(),
+          ),
+          _buildRoute(
             path: AppPaths.home.configurationPath.goRoute,
             screen: ConfigurationScreen(),
             routeBase: [
               _buildRoute(
                 path: AppPaths.home.configurationPath.changePassword.goRoute,
-                screen: ChangePasswordScreen(),
+                screen: const ChangePasswordScreen(),
               ),
             ],
           ),

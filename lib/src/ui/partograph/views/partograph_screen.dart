@@ -48,9 +48,13 @@ class _PartographState extends State<PartographScreen> {
       body: SingleChildScrollView(
         child: BlocBuilder<PartographBloc, PartographState>(
           builder: (context, state) {
-            final state = context.watch<PartographBloc>().state;
             if (state is Loaded) {
               return _buildContent(context, state, catalog);
+            }
+            if (state is Error) {
+              return const Center(
+                child: Text('Ha ocurrido un error'),
+              );
             }
             return const LinearProgressIndicator();
           },
@@ -424,28 +428,85 @@ class _PartographState extends State<PartographScreen> {
     }
 
     final note = state.partograph.childbirthNote!;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Hora: ${note.hour}'),
-        Text('Sexo: ${note.sex}'),
-        Text('APGAR: ${note.apgar}'),
-        Text('Temperatura: ${note.temperature}'),
-        Text('Caputto: ${note.caputto}'),
-        Text('Circular: ${note.circular}'),
-        Text('Líquido amniótico: ${note.lamniotico}'),
-        Text('Micción: ${note.miccion}'),
-        Text('Meconio: ${note.meconio}'),
-        Text('PA: ${note.pa}'),
-        Text('Expulsivo: ${note.expulsivo}'),
-        Text('Placenta: ${note.placenta}'),
-        Text('Alumbramiento: ${note.alumbramiento}'),
-        Text('Huella plantar: ${note.huellaPlantar}'),
-        Text('PC: ${note.pc}'),
-        Text('Talla: ${note.talla}'),
-        Text('Brazalete: ${note.brazalete}'),
-        Text('Huella digital: ${note.huellaDig}'),
-      ],
+    return Align(
+      alignment: Alignment.topLeft,
+      child: RichText(
+        text: TextSpan(
+          style: Theme.of(context).textTheme.bodyMedium,
+          children: [
+            const TextSpan(
+              text: 'Hora: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.hour}\n'),
+            const TextSpan(
+              text: 'Sexo: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.sex}\n'),
+            const TextSpan(
+              text: 'APGAR: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.apgar}\n'),
+            const TextSpan(
+              text: 'Temperatura: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.temperature}\n'),
+            const TextSpan(
+              text: 'Caputto: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.caputto}\n'),
+            const TextSpan(
+              text: 'Circular: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.circular}\n'),
+            const TextSpan(
+              text: 'Líquido amniótico: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.lamniotico}\n'),
+            const TextSpan(
+              text: 'Micción: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.miccion}\n'),
+            const TextSpan(
+              text: 'Meconio: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.meconio}\n'),
+            const TextSpan(
+              text: 'PA: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.pa}\n'),
+            const TextSpan(
+              text: 'Expulsivo: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.expulsivo}\n'),
+            const TextSpan(
+              text: 'Placenta: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.placenta}\n'),
+            const TextSpan(
+              text: 'Alumbramiento: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.alumbramiento}\n'),
+            const TextSpan(
+              text: 'Huella plantar: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.huellaPlantar}\n'),
+          ],
+        ),
+      ),
     );
   }
 }

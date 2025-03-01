@@ -205,7 +205,7 @@ abstract class PartographService {
     @Body() ChildbirthNoteRequest request,
   );
 
-  @POST('/api/partograph/update/childbirth-note')
+  @PATCH('/api/partograph/update/childbirth-note')
   Future<ApiResponse<ChildbirthNoteResponse>> updateChildBirthNote(
     @Header('Authorization') String token,
     @Body() ChildbirthNoteRequest request,

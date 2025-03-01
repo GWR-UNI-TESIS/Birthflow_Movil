@@ -30,49 +30,61 @@ class _MedicalSurveillanceEditScreenState
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _timeController = TextEditingController();
 
-  late final ValueNotifier<String> _arterialPressureValue;
-  late final ValueNotifier<String> _maternalPulseValue;
-  late final ValueNotifier<String> _fetalHeartRateValue;
-  late final ValueNotifier<String> _contractionsDurationValue;
+  // Inicialización temprana
+  late ValueNotifier<String> _arterialPressureValue;
+  late ValueNotifier<String> _maternalPulseValue;
+  late ValueNotifier<String> _fetalHeartRateValue;
+  late ValueNotifier<String> _contractionsDurationValue;
 
   String _maternalPositionValue = '';
   String _frequencyContractions = '';
   String _pain = '';
   DateTime _dateTime = DateTime.now();
 
+  bool _isInitialized = false; // Bandera para evitar sobrescribir valores
+
   @override
   void initState() {
     super.initState();
+
+    // Inicializa los ValueNotifier con valores vacíos (se actualizarán luego)
+    _arterialPressureValue = ValueNotifier('');
+    _maternalPulseValue = ValueNotifier('');
+    _fetalHeartRateValue = ValueNotifier('');
+    _contractionsDurationValue = ValueNotifier('');
   }
 
   void _initializeControllers() {
-    final medicalSurveillanceTable = context
-        .watch<PartographBloc>()
-        .state
-        .whenOrNull(
-          loaded: (partograph, message) => partograph.medicalSurveillanceTable,
-        );
+    final partographBloc = context.watch<PartographBloc>().state;
+    if (partographBloc is Loaded) {
+      final medicalSurveillanceTable =
+          context.read<PartographBloc>().state.whenOrNull(
+                loaded: (partograph, message) =>
+                    partograph.medicalSurveillanceTable,
+              );
 
-    final item = medicalSurveillanceTable!
-        .where(
-          (e) =>
-              e.id ==
-              widget.medicalSurveillanceEditData.medicalSurveillanceTableId,
-        )
-        .first;
+      final item = medicalSurveillanceTable!
+          .where(
+            (e) =>
+                e.id ==
+                widget.medicalSurveillanceEditData.medicalSurveillanceTableId,
+          )
+          .first;
+      if (!_isInitialized) {
+        _timeController.text = DateFormat('HH:mm:ss').format(item.time);
+        _dateTime = item.time;
+        _maternalPositionValue = item.maternalPosition;
+        _frequencyContractions = item.frequencyContractions;
+        _pain = item.pain;
 
-    _timeController.text =
-        // ignore: unnecessary_null_comparison
-        item.time != null ? DateFormat('HH:mm:ss').format(item.time) : '';
-    _dateTime = item.time;
-    _maternalPositionValue = item.maternalPosition;
-    _frequencyContractions = item.frequencyContractions;
-    _pain = item.pain;
-
-    _arterialPressureValue = ValueNotifier(item.arterialPressure);
-    _maternalPulseValue = ValueNotifier(item.maternalPulse);
-    _fetalHeartRateValue = ValueNotifier(item.fetalHeartRate);
-    _contractionsDurationValue = ValueNotifier(item.contractionsDuration);
+        // En lugar de crear nuevos ValueNotifier, actualizamos su valor
+        _arterialPressureValue.value = item.arterialPressure;
+        _maternalPulseValue.value = item.maternalPulse;
+        _fetalHeartRateValue.value = item.fetalHeartRate;
+        _contractionsDurationValue.value = item.contractionsDuration;
+        _isInitialized = true;
+      }
+    }
   }
 
   @override
@@ -89,11 +101,9 @@ class _MedicalSurveillanceEditScreenState
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
 
-      final medicalSurveillanceTable =
-          context.watch<PartographBloc>().state.whenOrNull(
-                loaded: (partograph, message) =>
-                    partograph.medicalSurveillanceTable,
-              );
+      final medicalSurveillanceTable = bloc.state.whenOrNull(
+        loaded: (partograph, message) => partograph.medicalSurveillanceTable,
+      );
 
       final item = medicalSurveillanceTable!
           .where(
@@ -143,7 +153,7 @@ class _MedicalSurveillanceEditScreenState
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Form(
               key: _formKey,
-              child: _buildFormContent(),
+              child: _buildFormContent(context),
             ),
           ),
         ),
@@ -151,7 +161,7 @@ class _MedicalSurveillanceEditScreenState
     );
   }
 
-  Widget _buildFormContent() {
+  Widget _buildFormContent(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [

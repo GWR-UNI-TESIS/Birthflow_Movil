@@ -32,13 +32,15 @@ class PartographHistoryBloc
         versions.sort((a, b) => b.changedAt.compareTo(a.changedAt));
         currentVersion = versions.first; // La primera es la más reciente
       }
-      emit(PartographHistoryState.loaded(
-        versions: versions,
-        selectedVersion: currentVersion,
-        previousVersion: versions.length > 1
-            ? versions[1]
-            : null, // La segunda es la anterior
-      ));
+      emit(
+        PartographHistoryState.loaded(
+          versions: versions,
+          selectedVersion: currentVersion,
+          previousVersion: versions.length > 1
+              ? versions[1]
+              : null, // La segunda es la anterior
+        ),
+      );
     } catch (e) {
       emit(PartographHistoryState.error(e.toString()));
     }

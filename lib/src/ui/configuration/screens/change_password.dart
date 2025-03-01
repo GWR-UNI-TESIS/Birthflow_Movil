@@ -60,7 +60,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return null;
   }
 
-
   Widget _buildPasswordField({
     required String label,
     required TextEditingController controller,
@@ -90,7 +89,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             success: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                    content: Text('Contraseña actualizada con éxito')),
+                  content: Text('Contraseña actualizada con éxito'),
+                ),
               );
               _formKey.currentState?.reset();
               _currentPasswordController.clear();
@@ -139,7 +139,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
                       builder: (context, state) {
                         final isLoading = state.maybeWhen(
-                            loading: () => true, orElse: () => false);
+                          loading: () => true,
+                          orElse: () => false,
+                        );
                         return SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(

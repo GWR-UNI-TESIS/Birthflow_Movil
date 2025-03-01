@@ -36,8 +36,8 @@ class _UnifiedDropdownWidgetState extends State<UnifiedDropdownWidget> {
     selectedLocation = values[0].trim();
     selectedIntensity = values[1].trim();
     }else {
-      selectedLocation = '';
-      selectedIntensity= '';
+      selectedLocation = widget.locationValues.first;
+      selectedIntensity= widget.intensityValues.first;
     }
     // Llamar al callback con los valores iniciales, si ambos están definidos
     if (selectedLocation != null && selectedIntensity != null) {

@@ -34,7 +34,7 @@ class _MedicalSurveillanceCreateScreenState
   late final ValueNotifier<String> _fetalHeartRateValue;
   late final ValueNotifier<String> _contractionsDurationValue;
 
-  String _maternalPositionValue = '';
+  String _maternalPositionValue = 'Lat. Derecho';
   String _frequencyContractions = '';
   String _pain = '';
   DateTime _dateTime = DateTime.now();

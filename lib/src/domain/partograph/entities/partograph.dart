@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.d
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph_state.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 
 class Partograph {
@@ -19,6 +20,7 @@ class Partograph {
   final List<FetalHeartRate>? fetalHeartRates;
   final List<ContractionFrequency>? contractionFrequencies;
   final ChildbirthNote? childbirthNote;
+  final PartographState? partographState;
   final AlertCurves? curves;
 
   Partograph({
@@ -34,6 +36,7 @@ class Partograph {
     this.fetalHeartRates,
     this.contractionFrequencies,
     this.childbirthNote,
+    this.partographState,
     this.curves,
   });
 

@@ -19,6 +19,7 @@ class HomePath extends Path<HomePath> {
 
   Path get search => Path('search', parent: this);
   Path get archived => Path('archived', parent: this);
+  Path get favorite => Path('favorite', parent: this);
   Path get create => Path('create-partograph', parent: this);
 
   PartographPath get partographPath => PartographPath(this);

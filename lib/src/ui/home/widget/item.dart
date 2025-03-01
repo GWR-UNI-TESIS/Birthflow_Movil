@@ -76,8 +76,18 @@ class ListItemWidget extends StatelessWidget {
         ),
         const Divider(),
         MenuItemButton(
-          onPressed: () {},
-          child: const Text('Marcar como favorito'),
+          onPressed: () {
+            context.read<PartographsBloc>().add(
+                  UpdatePartographState(
+                    partographId: partographId,
+                    isAchived: isAchived,
+                    set: set,
+                    silenced: silenced,
+                    favorite: !favorite,
+                  ),
+                );
+          },
+          child: Text( favorite ? 'Desmarcar como favorito' : 'Marcar como favorito' ),
         ),
         MenuItemButton(
           onPressed: () {
@@ -128,6 +138,7 @@ class ListItemWidget extends StatelessWidget {
               orElse: () => null,
             );
             if (createBy == userId) {
+              
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(

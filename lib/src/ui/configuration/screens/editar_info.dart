@@ -171,8 +171,9 @@ class _EditarInfoState extends State<EditarInfoScreen> {
   }
 
   String? _validatePhone(String? value) {
-    if (value == null || value.isEmpty)
+    if (value == null || value.isEmpty) {
       return 'Por favor ingrese un número de teléfono';
+    }
     if (value.length < 8) return 'Número de teléfono no válido';
     return null;
   }

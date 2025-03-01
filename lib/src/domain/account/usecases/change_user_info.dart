@@ -34,7 +34,7 @@ class ChangeUserInfoUseCaseImplementation implements ChangeUserInfoUseCase {
       secondName: secondName,
       userName: userName,
       email: email,
-      phoneNumber: phoneNumber
+      phoneNumber: phoneNumber,
     );
   }
 }

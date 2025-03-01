@@ -1,35 +1,56 @@
-import 'package:birthflow_movil/src/config/locator/locator.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/hodge_plane.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/position.dart';
+import 'package:birthflow_movil/src/domain/partograph_history/models/global_partograph_log/global_partograph_log.dart';
 import 'package:birthflow_movil/src/domain/partograph_history/models/partograph_version/partograph_version.dart';
-import 'package:birthflow_movil/src/domain/partograph_history/usecases/get_partograph_history_usecase.dart';
+import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph_history/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph_history/events/partograph_history_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph_history/states/partograph_history_state.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_log_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
-class PartographHistoryScreen extends StatelessWidget {
+class PartographHistoryScreen extends StatefulWidget {
   final String partographId;
 
   const PartographHistoryScreen({super.key, required this.partographId});
 
   @override
+  State<PartographHistoryScreen> createState() => _PartographHistoryViewState();
+}
+
+class _PartographHistoryViewState extends State<PartographHistoryScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    // Dispara el evento para cargar el historial
+    context
+        .read<PartographHistoryBloc>()
+        .add(FetchHistory(widget.partographId));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          PartographHistoryBloc(locator<GetPartographHistoryUsecase>())
-            ..add(FetchHistory(partographId)),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Historial del Partograma'),
-        ),
-        endDrawer: _buildDrawer(context),
-        body: BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(135.0),
+        child: _buildAppBar(context),
+      ),
+      drawer: _buildDrawer(context),
+      body: SingleChildScrollView(
+        child: BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
           builder: (context, state) {
             return state.when(
               initial: () => const Center(child: Text('Inicializando...')),
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => const LinearProgressIndicator(),
               loaded: (versions, selectedVersion, previousVersion) {
-                return _buildVersionDetails(selectedVersion, previousVersion);
+                // Aquí se obtiene la versión seleccionada (en JSON)
+                return _buildContent(context, selectedVersion, previousVersion);
               },
               error: (message) => Center(child: Text('Error: $message')),
             );
@@ -39,22 +60,67 @@ class PartographHistoryScreen extends StatelessWidget {
     );
   }
 
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      elevation: 1,
+      automaticallyImplyLeading: false,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () => Navigator.pop(context),
+      ),
+      flexibleSpace: Padding(
+        padding: const EdgeInsets.only(top: 40.0, left: 16.0, right: 10.0),
+        child: BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
+          builder: (context, state) {
+            if (state is Loaded) {
+              final jsonData = state.selectedVersion?.partographDataJson;
+              final value = GlobalPartographLog.fromJson(jsonData!);
+              final title = value.partographLog.name;
+              final date =
+                  DateFormat('dd/MM/yyyy').format(value.partographLog.date);
+
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title,
+                          style: Theme.of(context).textTheme.titleMedium),
+                      Text(date),
+                    ],
+                  ),
+                 
+                ],
+              );
+            }
+            return Container();
+          },
+        ),
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+        ),
+      ],
+    );
+  }
+
   Widget _buildDrawer(BuildContext context) {
     return BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
       builder: (context, state) {
         return state.maybeWhen(
           loaded: (versions, selectedVersion, previousVersion) {
-            // Obtener la versión actual (la más reciente)
+            // Marca la versión actual (la más reciente)
             final currentVersion = versions.isNotEmpty ? versions.first : null;
-
             return Drawer(
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
                   const DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                    ),
+                    decoration: BoxDecoration(color: Colors.blue),
                     child: Text(
                       'Versiones del Partograma',
                       style: TextStyle(color: Colors.white, fontSize: 24),
@@ -63,19 +129,16 @@ class PartographHistoryScreen extends StatelessWidget {
                   ...versions.map((version) {
                     final isCurrent = currentVersion != null &&
                         version.id == currentVersion.id;
-
                     return ListTile(
                       title: Text('Cambiado por ${version.changedByName}'),
                       subtitle: Text('Cambiado el ${version.changedAt}'),
                       selected: version == selectedVersion,
-                      tileColor: isCurrent
-                          ? Colors.green[100]
-                          : null, // Resaltar la versión actual
+                      tileColor: isCurrent ? Colors.green[100] : null,
                       onTap: () {
                         context
                             .read<PartographHistoryBloc>()
                             .add(SelectVersion(version));
-                        Navigator.pop(context); // Cerrar el drawer
+                        Navigator.pop(context);
                       },
                     );
                   }),
@@ -83,137 +146,249 @@ class PartographHistoryScreen extends StatelessWidget {
               ),
             );
           },
-          orElse: () => const Drawer(), // Drawer vacío si no hay datos
+          orElse: () => const Drawer(),
         );
       },
     );
   }
 
-  Widget _buildVersionDetails(
-    PartographVersion? selectedVersion,
-    PartographVersion? previousVersion,
-  ) {
+  Widget _buildContent(BuildContext context, PartographVersion? selectedVersion,
+      PartographVersion? previousVersion) {
+    final catalog = context.watch<CatalogCubit>().state;
     if (selectedVersion == null) {
       return const Center(child: Text('No hay datos disponibles'));
     }
 
-    final selectedData = selectedVersion.partographDataJson;
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Datos de la Versión Actual (${selectedVersion.id})',
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          ..._buildFullPartographData(
-            selectedData,
-          ), // Mostrar toda la información
-          const SizedBox(height: 24),
-          if (previousVersion != null) ...[
-            const Text(
-              'Cambios respecto a la versión anterior:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    final jsonData =
+        GlobalPartographLog.fromJson(selectedVersion.partographDataJson);
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            _buildGenericCard(
+              context,
+              title: 'Dilataciones cervicales',
+              content: _buildCervicalDilationContent(jsonData),
             ),
-            const SizedBox(height: 8),
-            ..._buildComparison(
-              selectedData,
-              previousVersion.partographDataJson,
+            _buildGenericCard(
+              context,
+              title: 'Tabla de Vigilancia',
+              content: _buildMedicalSurveillanceContent(jsonData),
+            ),
+            _buildGenericCard(
+              context,
+              title: 'Altura de la presentación',
+              content: _buildPresentationPositionContent(jsonData, catalog),
+            ),
+            _buildGenericCard(
+              context,
+              title: 'Frecuencia de Contracciones',
+              content: _buildContractionFrequencyContent(jsonData),
+            ),
+            _buildGenericCard(
+              context,
+              title: 'Frecuencia Cardiaca Fetal',
+              content: _buildFetalHeartRateContent(jsonData),
+            ),
+            _buildGenericCard(
+              context,
+              title: 'Nota de Parto',
+              content: _buildChildbirthNoteContent(jsonData),
             ),
           ],
-        ],
+        ),
       ),
     );
   }
 
-  List<Widget> _buildFullPartographData(Map<String, dynamic> data) {
-    final List<Widget> widgets = [];
-
-    data.forEach((key, value) {
-      if (value is Map<String, dynamic>) {
-        widgets.add(
-          ExpansionTile(
-            title: Text(key),
-            children: _buildFullPartographData(value).toList(),
-          ),
-        );
-      } else if (value is List) {
-        widgets.add(
-          ExpansionTile(
-            title: Text(key),
-            children: value.map((item) {
-              if (item is Map<String, dynamic>) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: _buildFullPartographData(item),
-                );
-              } else {
-                return ListTile(
-                  title: Text(item.toString()),
-                );
-              }
-            }).toList(),
-          ),
-        );
-      } else {
-        widgets.add(
-          ListTile(
-            title: Text('$key: $value'),
-          ),
-        );
-      }
-    });
-
-    return widgets;
+  Widget _buildGenericCard(
+    BuildContext context, {
+    required String title,
+    required Widget content,
+  }) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 10),
+            content,
+          ],
+        ),
+      ),
+    );
   }
 
-  List<Widget> _buildComparison(
-    Map<String, dynamic> selectedData,
-    Map<String, dynamic> previousData,
-  ) {
-    final selectedLog =
-        selectedData['partographLog'] as Map<String, dynamic>? ?? {};
-    final previousLog =
-        previousData['partographLog'] as Map<String, dynamic>? ?? {};
+  Widget _buildNoDataMessage() {
+    return const Center(child: Text('No existen datos'));
+  }
 
-    return selectedLog.entries.map((entry) {
-      final key = entry.key;
-      final selectedValue = entry.value;
-      final previousValue = previousLog[key];
+  Widget _buildCervicalDilationContent(GlobalPartographLog model) {
+    final list = model.cervicalDilationLog;
 
-      if (selectedValue != previousValue) {
-        return ListTile(
-          title: Text(key),
-          subtitle: RichText(
-            text: TextSpan(
-              style: const TextStyle(color: Colors.black),
-              children: [
-                const TextSpan(
-                  text: 'Anterior: ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextSpan(
-                  text: '$previousValue\n',
-                  style: const TextStyle(color: Colors.red),
-                ),
-                const TextSpan(
-                  text: 'Nuevo: ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextSpan(
-                  text: '$selectedValue',
-                  style: const TextStyle(color: Colors.green),
-                ),
-              ],
+    if (list.isEmpty) {
+      return _buildNoDataMessage();
+    }
+    return DataTable(
+      columnSpacing: 10.0,
+      columns: const [
+        DataColumn(label: Text('Dilatación')),
+        DataColumn(label: Text('Hora')),
+        DataColumn(label: Text('RAM o REM')),
+      ],
+      rows: list.map((item) {
+        return DataRow(
+          cells: [
+            DataCell(Text(item.value.toString())),
+            DataCell(Text(DateFormat.Hms().format(item.hour))),
+            DataCell(
+              Checkbox(
+                value: item.remOrRam,
+                onChanged: (_) {},
+              ),
             ),
-          ),
+          ],
         );
-      } else {
-        return const SizedBox.shrink(); // No mostrar si no hay cambios
-      }
-    }).toList();
+      }).toList(),
+    );
+  }
+
+  Widget _buildMedicalSurveillanceContent(GlobalPartographLog model) {
+    final list = model.medicalSurveillanceTableLog;
+    if (list.isEmpty) {
+      return _buildNoDataMessage();
+    }
+    return MedicalSurveillanceLogWidget(list: list);
+  }
+
+  Widget _buildPresentationPositionContent(
+      GlobalPartographLog model, Catalog catalog) {
+    final list = model.presentationPositionVarietyLog;
+    if (list.isEmpty) {
+      return _buildNoDataMessage();
+    }
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal, // Habilita desplazamiento horizontal
+      child: SingleChildScrollView(
+        child: DataTable(
+          columnSpacing: 10.0,
+          columns: const [
+            DataColumn(label: Text('Plano Hodge')),
+            DataColumn(label: Text('Posición')),
+            DataColumn(label: Text('Hora')),
+          ],
+          rows: list.map((position) {
+            final hodgePlaneDescription = catalog.hodgePlanesCatalog
+                .firstWhere(
+                  (h) => h.id == position.hodgePlane,
+                  orElse: () => HodgePlane(
+                    id: position.hodgePlane,
+                    code: '',
+                    description: 'No disponible',
+                    chartPosition: 0,
+                  ),
+                )
+                .description;
+
+            final positionDescription = catalog.positionCatalog
+                .firstWhere(
+                  (p) => p.id == position.position,
+                  orElse: () => Position(
+                    id: position.position,
+                    code: '',
+                    description: 'No disponible',
+                  ),
+                )
+                .description;
+
+            return DataRow(
+              cells: [
+                DataCell(Text(hodgePlaneDescription)),
+                DataCell(Text(positionDescription)),
+                DataCell(Text(DateFormat.Hms().format(position.time))),
+              ],
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContractionFrequencyContent(
+    GlobalPartographLog model,
+  ) {
+    final list = model.contractionFrequencyLog;
+    if (list.isEmpty) {
+      return _buildNoDataMessage();
+    }
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text('Valor')),
+        DataColumn(label: Text('Hora')),
+      ],
+      rows: list.map((item) {
+        return DataRow(
+          cells: [
+            DataCell(Text(item.value)),
+            DataCell(Text(DateFormat.Hms().format(item.time))),
+          ],
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildFetalHeartRateContent(GlobalPartographLog model) {
+    final list = model.fetalHeartRateLog;
+    if (list.isEmpty) {
+      return _buildNoDataMessage();
+    }
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text('Valor')),
+        DataColumn(label: Text('Hora')),
+      ],
+      rows: list.map((item) {
+        return DataRow(
+          cells: [
+            DataCell(Text(item.value)),
+            DataCell(Text(DateFormat.Hms().format(item.time))),
+          ],
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildChildbirthNoteContent(GlobalPartographLog model) {
+    final note = model.childbirthNoteLog;
+    if (note == null) {
+      return _buildNoDataMessage();
+    }
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child:  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (note.description != null) Text('Descripción: ${note.description}'),
+        Text('Hora: ${note.hour}'),
+        Text('Sexo: ${note.sex}'),
+        Text('APGAR: ${note.apgar}'),
+        Text('Temperatura: ${note.temperature}'),
+        Text('Caputto: ${note.caputto}'),
+        Text('Circular: ${note.circular}'),
+        Text('Líquido amniótico: ${note.lamniotico}'),
+        Text('Micción: ${note.miccion}'),
+        Text('Meconio: ${note.meconio}'),
+        Text('PA: ${note.pa}'),
+        Text('Expulsivo: ${note.expulsivo}'),
+        Text('Placenta: ${note.placenta}'),
+        Text('Alumbramiento: ${note.alumbramiento}'),
+        Text('Huella plantar: ${note.huellaPlantar}'),
+      ],),
+    );
   }
 }

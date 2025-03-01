@@ -8,5 +8,6 @@ class PartographHistoryEvent with _$PartographHistoryEvent {
   const factory PartographHistoryEvent.fetchHistory(String partographId) =
       FetchHistory;
   const factory PartographHistoryEvent.selectVersion(
-      PartographVersion version) = SelectVersion;
+    PartographVersion version,
+  ) = SelectVersion;
 }

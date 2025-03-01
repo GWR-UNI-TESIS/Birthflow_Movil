@@ -1,11 +1,11 @@
-import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
+import 'package:birthflow_movil/src/domain/partograph_history/models/global_partograph_log/global_partograph_log.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MedicalSurveillanceWidget extends StatelessWidget {
-  const MedicalSurveillanceWidget({super.key, required this.list});
+class MedicalSurveillanceLogWidget extends StatelessWidget {
+  const MedicalSurveillanceLogWidget({super.key, required this.list});
 
-  final List<MedicalSurveillanceTable>? list;
+  final List<MedicalSurveillanceTableLog>? list;
 
   @override
   Widget build(BuildContext context) {

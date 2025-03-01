@@ -3,10 +3,12 @@ import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
+import 'package:birthflow_movil/src/ui/welcome_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,18 +39,59 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Future<bool> _isFirstTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFirstTime = _checkFirstTime();
+  }
+
+  Future<bool> _checkFirstTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isFirstTime = prefs.getBool('is_first_time') ?? true;
+    return isFirstTime;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<bool>(
+      future: _isFirstTime,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            ),
+          );
+        }
+
+        final bool isFirstTime = snapshot.data ?? false;
+
+        return MaterialApp(
+          home: isFirstTime ? WelcomeAppScreen() : AppLoader(),
+        );
+      },
+    );
+  }
+}
+
+class AppLoader extends StatefulWidget {
+  @override
+  _AppLoaderState createState() => _AppLoaderState();
+}
+
+class _AppLoaderState extends State<AppLoader> {
   late Future catalogFuture;
 
   @override
   void initState() {
     super.initState();
-    // Se intenta obtener el catálogo desde el servidor.
     catalogFuture = locator<CatalogRepository>().getCatalog();
   }
 
   void _retry() {
     setState(() {
-      // Vuelve a intentar cargar el catálogo.
       catalogFuture = locator<CatalogRepository>().getCatalog();
     });
   }
@@ -59,14 +102,12 @@ class _MyAppState extends State<MyApp> {
       future: catalogFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Mientras se espera la respuesta, se muestra un indicador de carga.
           return const MaterialApp(
             home: Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
           );
         } else if (snapshot.hasError) {
-          // Si ocurre un error (por ejemplo, fallo al conectar con el servidor)
           return MaterialApp(
             home: Scaffold(
               body: Center(
@@ -85,7 +126,6 @@ class _MyAppState extends State<MyApp> {
             ),
           );
         } else {
-          // Si se obtiene el catálogo exitosamente, se invoca AppDev pasando el catálogo.
           return AppDev(catalog: snapshot.data as Catalog);
         }
       },

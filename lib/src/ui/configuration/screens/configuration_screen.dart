@@ -1,12 +1,86 @@
 import 'package:birthflow_movil/src/config/router/path.dart';
+import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:open_app_settings/open_app_settings.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ConfigurationScreen extends StatelessWidget {
+class ConfigurationScreen extends StatefulWidget {
+  @override
+  _ConfigurationScreenState createState() => _ConfigurationScreenState();
+}
+
+class _ConfigurationScreenState extends State<ConfigurationScreen> {
+  bool _notificationsEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadNotificationPreference();
+  }
+
+  Future<void> _loadNotificationPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool isEnabled = prefs.getBool('notifications_enabled') ?? false;
+    setState(() {
+      _notificationsEnabled = isEnabled;
+    });
+  }
+
+  Future<void> _updateNotificationPreference(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('notifications_enabled', value);
+    setState(() {
+      _notificationsEnabled = value;
+    });
+
+    if (value) {
+      final NotificationSettings settings =
+          await FirebaseMessaging.instance.requestPermission();
+
+      if (settings.authorizationStatus == AuthorizationStatus.denied) {
+        _showEnableNotificationsDialog();
+      } else {
+        await FirebaseMessaging.instance.subscribeToTopic('general');
+      }
+    } else {
+      await FirebaseMessaging.instance.unsubscribeFromTopic('general');
+      await NotificationHelper.flutterLocalNotificationsPlugin.cancelAll();
+    }
+  }
+
+  void _showEnableNotificationsDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Activar Notificaciones'),
+          content: const Text(
+            'Las notificaciones están desactivadas en el sistema. Actívalas en la configuración para recibir alertas importantes.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                OpenAppSettings.openAppSettings();
+              },
+              child: const Text('Ir a Configuración'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<String> _getAppVersion() async {
     final packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
@@ -25,7 +99,6 @@ class ConfigurationScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Información del usuario
               const Text(
                 'Información del Usuario',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -44,7 +117,6 @@ class ConfigurationScreen extends StatelessWidget {
                           context.go(
                             AppPaths.home.configurationPath.editInfo.path,
                           );
-                          // Lógica para editar información del usuario
                         },
                       ),
                     );
@@ -58,8 +130,21 @@ class ConfigurationScreen extends StatelessWidget {
                 },
               ),
               const Divider(),
-
-              // Cambio de contraseña
+              const Text(
+                'Notificaciones',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              CheckboxListTile(
+                title: const Text('Habilitar Notificaciones'),
+                value: _notificationsEnabled,
+                onChanged: (bool? value) {
+                  if (value != null) {
+                    _updateNotificationPreference(value);
+                  }
+                },
+              ),
+              const Divider(),
               const Text(
                 'Cambio de Contraseña',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -78,8 +163,6 @@ class ConfigurationScreen extends StatelessWidget {
                 ),
               ),
               const Divider(),
-
-              // Información de la aplicación
               const Text(
                 'Información de la Aplicación',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -108,18 +191,6 @@ class ConfigurationScreen extends StatelessWidget {
                     );
                   }
                 },
-              ),
-              ListTile(
-                leading: const Icon(Icons.help),
-                title: const Text('Ayuda y Soporte'),
-                trailing: IconButton(
-                  icon: const Icon(Icons.arrow_forward_ios),
-                  onPressed: () {
-                    context.go(
-                      AppPaths.home.configurationPath.ayudaSop.path,
-                    );
-                  },
-                ),
               ),
             ],
           ),
