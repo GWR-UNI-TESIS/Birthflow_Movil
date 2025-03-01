@@ -78,9 +78,15 @@ class PartographRepositoryImplementation implements PartographRepository {
   }
 
   @override
-  Future<void> deletePartograph({required String partographId}) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> deletePartograph({required String partographId}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final token = 'Bearer $tokenGuardado';
+      await _partographService.deletePartograph(token, partographId);
+    } catch (e, stackTrace) {
+      _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
   }
 
   @override

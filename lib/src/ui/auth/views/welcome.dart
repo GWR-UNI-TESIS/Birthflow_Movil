@@ -1,3 +1,5 @@
+import 'package:birthflow_movil/src/config/dio/dio_client.dart';
+import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    locator<DioClient>().setContext(context);
     return Scaffold(
       body: Center(
         child: Column(

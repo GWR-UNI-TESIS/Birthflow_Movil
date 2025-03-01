@@ -13,6 +13,7 @@ import 'package:birthflow_movil/src/ui/configuration/screens/ayuda_s.dart';
 import 'package:birthflow_movil/src/ui/configuration/screens/change_password.dart';
 import 'package:birthflow_movil/src/ui/configuration/screens/configuration_screen.dart';
 import 'package:birthflow_movil/src/ui/configuration/screens/editar_info.dart';
+import 'package:birthflow_movil/src/ui/error_screen.dart';
 import 'package:birthflow_movil/src/ui/forget_password/forget_password_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/create_group_screen.dart';
 import 'package:birthflow_movil/src/ui/groups/edit_group_screen.dart';
@@ -100,6 +101,13 @@ class AppRouter {
       _buildRoute(
         path: AppPaths.splash.goRoute,
         screen: const SplashScreen(),
+      ),
+      GoRoute(
+        path: '/error',
+        builder: (context, state) {
+          final String message = state.extra as String? ?? 'Error desconocido.';
+          return ErrorScreen(message: message);
+        },
       ),
       // Ruta de inicio
       _buildRoute(

@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/src/config/dio/dio_client.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/app_router.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/bloc.dart';
@@ -119,7 +120,7 @@ class AppEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();
     final AppRouter appRouter = AppRouter(authBloc: authBloc);
-
+    locator<DioClient>().setContext(context);
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) async {
         if (state is Authenticated) {

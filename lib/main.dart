@@ -48,8 +48,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<bool> _checkFirstTime() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isFirstTime = prefs.getBool('is_first_time') ?? true;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool isFirstTime = prefs.getBool('is_first_time') ?? true;
     return isFirstTime;
   }
 
