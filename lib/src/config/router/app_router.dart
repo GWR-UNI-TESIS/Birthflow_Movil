@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/share/models/group.dart';
@@ -53,7 +54,7 @@ import 'package:go_router/go_router.dart';
 // ignore: avoid_classes_with_only_static_members
 class AppRouter {
   final AuthenticationBloc authBloc;
-  final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
   AppRouter({required this.authBloc});
 
   // Construye una página con una transición predeterminada
@@ -91,7 +92,7 @@ class AppRouter {
   // Inicializa el enrutador GoRouter
   late final GoRouter router = GoRouter(
     debugLogDiagnostics: true,
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: locator<GlobalKey<NavigatorState>>(),
 
     // Ubicación inicial de la aplicación (ruta del splash)
     initialLocation: AppPaths.splash.goRoute,

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
@@ -15,6 +17,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_
 import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_position_variety_create_usecase.dart';
@@ -26,6 +29,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PartographBloc extends Bloc<PartographEvent, PartographState> {
   final GetPartographUseCase _getPartographUseCase;
   final UpdatePartographUsecase _updatePartographUsecase;
+  final DeletePartographUseCase _deletePartographUseCase;
   final CreateCervicalDilationUseCase _createCervicalDilationUseCase;
   final UpdateCervicalDilationUseCase _updateCervicalDilationUseCase;
   final DeleteCervicalDilationUseCase _deleteCervicalDilationUseCase;
@@ -46,6 +50,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
   PartographBloc(
     this._getPartographUseCase,
     this._updatePartographUsecase,
+    this._deletePartographUseCase,
     this._createCervicalDilationUseCase,
     this._updateCervicalDilationUseCase,
     this._deleteCervicalDilationUseCase,
@@ -64,6 +69,7 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
     on<onFetchData>(_onFetchData);
     on<ModifyingPartograph>(_onUpdatePartograph);
     on<SaveCervicalDilation>(_saveCervicalDilation);
+    on<OnDeletePartograph>(_onDeletePartograph);
     on<UpdateCervicalDilation>(_onUpdateCervicalDilation);
     on<DeleteCervicalDilation>(_onDeleteCervicalDilation);
     on<CreateMedicalSurveillance>(_onCreateMedicalSurveillance);
@@ -161,6 +167,59 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
       emit(
         const Error(
           'Estado inválido: no se puede actualizar el partograma.',
+        ),
+      );
+    }
+  }
+
+  Future<void> _onDeletePartograph(
+    OnDeletePartograph event,
+    Emitter<PartographState> emit,
+  ) async {
+    if (state is Loaded) {
+      final currentPartograph = (state as Loaded).partograph;
+
+      // Emitir un estado de carga temporal
+      emit(const Loading());
+
+      try {
+        // Llamar al caso de uso para eliminar el partograma
+        final wasDeleted = await _deletePartographUseCase.execute(
+          partographId: event.partographId,
+        );
+
+        if (wasDeleted != null) {
+          // Emitir el estado con un mensaje de éxito
+          emit(
+            Loaded(
+              partograph: wasDeleted,
+              message: 'Partograma eliminado correctamente',
+              isDeleteEvent: true,
+            ),
+          );
+        } else {
+          // Regresar al estado anterior con un mensaje de error si la eliminación falla
+          emit(
+            Loaded(
+              partograph: currentPartograph,
+              message: 'Error: No se pudo eliminar el partograma.',
+            ),
+          );
+        }
+      } catch (ex) {
+        // Manejar errores y regresar al estado anterior con un mensaje de error
+        emit(
+          Loaded(
+            partograph: currentPartograph,
+            message: 'Error al eliminar el partograma: $ex',
+          ),
+        );
+      }
+    } else {
+      // Emitir un estado de error si no hay un partograma cargado
+      emit(
+        const Error(
+          'Estado inválido: no se puede eliminar el partograma.',
         ),
       );
     }

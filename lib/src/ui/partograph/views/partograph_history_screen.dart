@@ -86,12 +86,13 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title,
-                          style: Theme.of(context).textTheme.titleMedium),
+                      Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                       Text(date),
                     ],
                   ),
-                 
                 ],
               );
             }
@@ -152,8 +153,11 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     );
   }
 
-  Widget _buildContent(BuildContext context, PartographVersion? selectedVersion,
-      PartographVersion? previousVersion) {
+  Widget _buildContent(
+    BuildContext context,
+    PartographVersion? selectedVersion,
+    PartographVersion? previousVersion,
+  ) {
     final catalog = context.watch<CatalogCubit>().state;
     if (selectedVersion == null) {
       return const Center(child: Text('No hay datos disponibles'));
@@ -267,7 +271,9 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
   }
 
   Widget _buildPresentationPositionContent(
-      GlobalPartographLog model, Catalog catalog) {
+    GlobalPartographLog model,
+    Catalog catalog,
+  ) {
     final list = model.presentationPositionVarietyLog;
     if (list.isEmpty) {
       return _buildNoDataMessage();
@@ -370,25 +376,27 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     }
     return Container(
       padding: const EdgeInsets.all(20),
-      child:  Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (note.description != null) Text('Descripción: ${note.description}'),
-        Text('Hora: ${note.hour}'),
-        Text('Sexo: ${note.sex}'),
-        Text('APGAR: ${note.apgar}'),
-        Text('Temperatura: ${note.temperature}'),
-        Text('Caputto: ${note.caputto}'),
-        Text('Circular: ${note.circular}'),
-        Text('Líquido amniótico: ${note.lamniotico}'),
-        Text('Micción: ${note.miccion}'),
-        Text('Meconio: ${note.meconio}'),
-        Text('PA: ${note.pa}'),
-        Text('Expulsivo: ${note.expulsivo}'),
-        Text('Placenta: ${note.placenta}'),
-        Text('Alumbramiento: ${note.alumbramiento}'),
-        Text('Huella plantar: ${note.huellaPlantar}'),
-      ],),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (note.description != null)
+            Text('Descripción: ${note.description}'),
+          Text('Hora: ${note.hour}'),
+          Text('Sexo: ${note.sex}'),
+          Text('APGAR: ${note.apgar}'),
+          Text('Temperatura: ${note.temperature}'),
+          Text('Caputto: ${note.caputto}'),
+          Text('Circular: ${note.circular}'),
+          Text('Líquido amniótico: ${note.lamniotico}'),
+          Text('Micción: ${note.miccion}'),
+          Text('Meconio: ${note.meconio}'),
+          Text('PA: ${note.pa}'),
+          Text('Expulsivo: ${note.expulsivo}'),
+          Text('Placenta: ${note.placenta}'),
+          Text('Alumbramiento: ${note.alumbramiento}'),
+          Text('Huella plantar: ${note.huellaPlantar}'),
+        ],
+      ),
     );
   }
 }

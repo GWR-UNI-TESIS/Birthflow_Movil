@@ -28,7 +28,7 @@ class PresentationPositionVarietyListScreen extends StatelessWidget {
           return state.maybeWhen(
             initial: () => const Center(child: CircularProgressIndicator()),
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (data, message) {
+            loaded: (data, message, d) {
               return (data.presentationPositionVarieties == null ||
                       data.presentationPositionVarieties!.isEmpty)
                   ? const Center(child: Text('No hay datos'))

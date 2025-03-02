@@ -1,6 +1,6 @@
 import 'package:birthflow_movil/src/config/device_fingerprint/index.dart';
-import 'package:birthflow_movil/src/config/dio/dio_client.dart';
 import 'package:birthflow_movil/src/config/dio/dio_auth.dart';
+import 'package:birthflow_movil/src/config/dio/dio_client.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
 import 'package:birthflow_movil/src/data/account/datasources/account_service.dart';
 import 'package:birthflow_movil/src/data/account/repository/account_repository_imp.dart';
@@ -48,6 +48,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_create_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_state_update_usecase.dart';
@@ -75,13 +76,18 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt locator = GetIt.instance;
+// GlobalKey para la navegación con GoRouter
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> initializeDependencies() async {
   // Obtiene la URL de la API desde el archivo .env (asumiendo que existe un paquete dotenv)
   final String? apiUrl = dotenv.env['API_URL'];
   final device = await getDeviceFingerprint();
+
+  locator.registerSingleton<GlobalKey<NavigatorState>>(navigatorKey);
+
   // Crea un cliente Dio para realizar llamadas HTTP a la API
-   locator.registerLazySingleton<DioClient>(() => DioClient());
+  locator.registerLazySingleton<DioClient>(() => DioClient());
 
   // Establece la base URL en DioClient
   locator<DioClient>().dio.options.baseUrl = apiUrl!;
@@ -98,7 +104,8 @@ Future<void> initializeDependencies() async {
   );
 
   // Registra el AuthenticationService como singleton en GetIt
-  locator.registerSingleton<AuthenticationService>(AuthenticationService(dioAuth));
+  locator
+      .registerSingleton<AuthenticationService>(AuthenticationService(dioAuth));
 
   locator.registerSingleton<AuthenticationRepository>(
     AuthenticationRepositoryImplementation(locator<AuthenticationService>()),
@@ -131,7 +138,9 @@ Future<void> initializeDependencies() async {
   );
 
   // Registra el PartographService como singleton en GetIt
-  locator.registerSingleton<PartographService>(PartographService(locator<DioClient>().dio));
+  locator.registerSingleton<PartographService>(
+    PartographService(locator<DioClient>().dio),
+  );
 
   // Registra el PartographRepositoryImplementation como singleton en GetIt, inyectando PartographService
   locator.registerSingleton<PartographRepository>(
@@ -161,6 +170,11 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<UpdatePartographUsecase>(
     UpdatePartographUsecaseImplementation(
+      partographRepository: locator<PartographRepository>(),
+    ),
+  );
+  locator.registerSingleton<DeletePartographUseCase>(
+    DeletePartographUseCaseImplementation(
       partographRepository: locator<PartographRepository>(),
     ),
   );
@@ -267,7 +281,8 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-  locator.registerSingleton<ShareService>(ShareService(locator<DioClient>().dio));
+  locator
+      .registerSingleton<ShareService>(ShareService(locator<DioClient>().dio));
 
   locator.registerSingleton<ShareRepository>(
     ShareRepositoryImplementation(
@@ -339,7 +354,9 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-  locator.registerSingleton<NotificationService>(NotificationService(locator<DioClient>().dio));
+  locator.registerSingleton<NotificationService>(
+    NotificationService(locator<DioClient>().dio),
+  );
 
   locator.registerSingleton<NotificationRepository>(
     NotificationRepositoryImplementation(
@@ -359,13 +376,15 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-   locator.registerSingleton<GetPartographNotificationsUseCase>(
+  locator.registerSingleton<GetPartographNotificationsUseCase>(
     GetPartographNotificationsUseCaseImplementation(
       notificationRepository: locator<NotificationRepository>(),
     ),
   );
 
-  locator.registerSingleton<AccountService>(AccountService(locator<DioClient>().dio));
+  locator.registerSingleton<AccountService>(
+    AccountService(locator<DioClient>().dio),
+  );
 
   locator.registerSingleton<AccountRepository>(
     AccountRepositoryImplementation(

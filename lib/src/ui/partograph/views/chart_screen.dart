@@ -1,5 +1,7 @@
 // ignore_for_file: sized_box_shrink_expand, library_prefixes
 import 'package:birthflow_movil/src/core/chart/main.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/hodge_plane.dart';
+import 'package:birthflow_movil/src/domain/catalog/entities/position.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/chart/bloc.dart';
@@ -15,6 +17,7 @@ import 'package:birthflow_movil/src/ui/partograph/widget/expandable_fab.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_button.dart';
+import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,12 +68,11 @@ class _ChartState extends State<_ChartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final medicalSurveillance = context
-        .watch<PartographBloc>()
-        .state
-        .whenOrNull(
-          loaded: (partograph, message) => partograph.medicalSurveillanceTable,
-        );
+    final medicalSurveillance =
+        context.watch<PartographBloc>().state.whenOrNull(
+              loaded: (partograph, message, isDeleteEvent) =>
+                  partograph.medicalSurveillanceTable,
+            );
 
     final List<Widget> fabs = [
       ExpandableFab(
@@ -80,6 +82,13 @@ class _ChartState extends State<_ChartScreen> {
             message: 'Agregar Dilatacion Cervical',
             child: ActionButton(
               onPressed: () => _showCreateCervicalDilation(context),
+              icon: const Icon(Icons.add),
+            ),
+          ),
+          Tooltip(
+            message: 'Agregar Plano Hodge Cervical',
+            child: ActionButton(
+              onPressed: () => _showPresentationPosition(context),
               icon: const Icon(Icons.add),
             ),
           ),
@@ -291,6 +300,150 @@ class _ChartState extends State<_ChartScreen> {
     }
   }
 
+  Future<DateTime?> _showPresentationPosition(
+    BuildContext mainContext,
+  ) async {
+    final timeController = TextEditingController();
+    Position? selectedPosition;
+    HodgePlane? selectedHodgePlane;
+    DateTime? selectedDateTime = DateTime.now();
+    final today = DateTime.now();
+    timeController.text = DateFormat('HH:mm:ss').format(today);
+    final formKey = GlobalKey<FormState>();
+
+    final catalog = mainContext.read<CatalogCubit>().state;
+    selectedPosition = catalog.positionCatalog.first;
+    selectedHodgePlane = catalog.hodgePlanesCatalog.first;
+
+    return showDialog<DateTime?>(
+      context: mainContext,
+      builder: (BuildContext context) => StatefulBuilder(
+        builder: (context, setState) => SimpleDialog(
+          title: const Text('Nueva Presentación (Plano Hodge)'),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+          children: [
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  DynamicDropdownButton<Position>(
+                    labelText: 'Posición',
+                    list: catalog.positionCatalog,
+                    onValueChanged: (Position position) {
+                      setState(() {
+                        selectedPosition = position;
+                      });
+                    },
+                    displayField: (Position position) => position.description,
+                    initialValue: selectedPosition,
+                  ),
+                  const SizedBox(height: 16),
+                  DynamicDropdownButton<HodgePlane>(
+                    labelText: 'Plano de Hodge',
+                    list: catalog.hodgePlanesCatalog,
+                    onValueChanged: (HodgePlane hodgePlane) {
+                      setState(() {
+                        selectedHodgePlane = hodgePlane;
+                      });
+                    },
+                    displayField: (HodgePlane hodgePlane) =>
+                        hodgePlane.description,
+                    initialValue: selectedHodgePlane,
+                  ),
+                  const SizedBox(height: 16),
+                  GestureDetector(
+                    onTap: () async {
+                      final picked = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+                      if (picked != null) {
+                        setState(() {
+                          selectedDateTime = DateTime(
+                            today.year,
+                            today.month,
+                            today.day,
+                            picked.hour,
+                            picked.minute,
+                          );
+                          timeController.text =
+                              DateFormat('HH:mm:ss').format(selectedDateTime!);
+                        });
+                      }
+                    },
+                    child: AbsorbPointer(
+                      child: TextFormField(
+                        controller: timeController,
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.access_time),
+                          border: OutlineInputBorder(),
+                          labelText: 'Hora',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Seleccione una hora';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState?.validate() ?? false) {
+                        _savePresentationPosition(
+                          mainContext,
+                          selectedHodgePlane,
+                          selectedPosition,
+                          selectedDateTime,
+                          context,
+                          formKey,
+                        );
+                      }
+                    },
+                    child: const Text('Guardar'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _savePresentationPosition(
+    BuildContext mainContext,
+    HodgePlane? selectedHodgePlane,
+    Position? selectedPosition,
+    DateTime? selectedDateTime,
+    BuildContext dialogContext,
+    GlobalKey<FormState> formKey,
+  ) {
+    if (selectedHodgePlane != null &&
+        selectedPosition != null &&
+        selectedDateTime != null) {
+
+final partographBloc = mainContext.read<PartographBloc>();
+
+      final partographId = (partographBloc.state is Loaded)
+          ? (partographBloc.state as Loaded).partograph.partographId
+          : '';
+
+      partographBloc.add(
+        CreatePresentationPositionVariety(
+          partographId: partographId!,
+          hodgePlane: selectedHodgePlane.id,
+          position: selectedPosition.id,
+          time: selectedDateTime,
+        ),
+      );
+
+      Navigator.pop(dialogContext);
+    }
+  }
   //Dialog de Tabla
 
   Future<void> _showCreateItemTable(BuildContext mainContext) {

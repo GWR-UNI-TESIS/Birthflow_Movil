@@ -87,7 +87,9 @@ class ListItemWidget extends StatelessWidget {
                   ),
                 );
           },
-          child: Text( favorite ? 'Desmarcar como favorito' : 'Marcar como favorito' ),
+          child: Text(
+            favorite ? 'Desmarcar como favorito' : 'Marcar como favorito',
+          ),
         ),
         MenuItemButton(
           onPressed: () {
@@ -138,7 +140,33 @@ class ListItemWidget extends StatelessWidget {
               orElse: () => null,
             );
             if (createBy == userId) {
-              
+              showDialog(
+                context: context,
+                builder: (dialogContext) => AlertDialog(
+                  title: const Text('Eliminar Partograma'),
+                  content: const Text(
+                    '¿Estás seguro de que deseas eliminar este partograma?',
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Cancelar'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        context.read<PartographsBloc>().add(
+                              DeletePartograph(partographId: partographId),
+                            );
+                        Navigator.of(dialogContext).pop();
+                      },
+                      child: const Text(
+                        'Eliminar',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
+              );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(

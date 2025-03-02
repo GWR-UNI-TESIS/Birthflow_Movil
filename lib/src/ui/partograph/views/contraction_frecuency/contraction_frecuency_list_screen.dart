@@ -26,7 +26,7 @@ class ContractionFrequencyListScreen extends StatelessWidget {
           builder: (context, state) {
             return state.maybeWhen(
               loading: () => const Center(child: CircularProgressIndicator()),
-              loaded: (partograph, _) =>
+              loaded: (partograph, _, d ) =>
                   partograph.contractionFrequencies?.isEmpty ?? true
                       ? const Center(child: Text('No hay datos'))
                       : _buildContractionFrequencyList(partograph.contractionFrequencies!),

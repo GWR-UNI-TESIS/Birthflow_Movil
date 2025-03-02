@@ -59,7 +59,7 @@ class _MedicalSurveillanceEditScreenState
     if (partographBloc is Loaded) {
       final medicalSurveillanceTable =
           context.read<PartographBloc>().state.whenOrNull(
-                loaded: (partograph, message) =>
+                loaded: (partograph, message, isDeleteEvent) =>
                     partograph.medicalSurveillanceTable,
               );
 
@@ -102,7 +102,7 @@ class _MedicalSurveillanceEditScreenState
       final bloc = context.read<PartographBloc>();
 
       final medicalSurveillanceTable = bloc.state.whenOrNull(
-        loaded: (partograph, message) => partograph.medicalSurveillanceTable,
+        loaded: (partograph, message, isDeleteEvent) => partograph.medicalSurveillanceTable,
       );
 
       final item = medicalSurveillanceTable!

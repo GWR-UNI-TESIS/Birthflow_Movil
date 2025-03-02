@@ -36,7 +36,7 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
 
   void _initializeControllers() {
     final fetalheartrates = context.watch<PartographBloc>().state.whenOrNull(
-          loaded: (partograph, message) => partograph.contractionFrequencies,
+          loaded: (partograph, message, isDeleteEvent) => partograph.contractionFrequencies,
         );
 
     final fetalHeartRate = fetalheartrates!

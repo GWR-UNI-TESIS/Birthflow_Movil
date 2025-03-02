@@ -47,6 +47,7 @@ class HomeScreen extends StatelessWidget {
           key: _scaffoldKey,
           appBar: AppBar(
             title: const Text('BirthFlow'),
+            automaticallyImplyLeading: false,
             elevation: 1,
             actions: <Widget>[
               IconButton(
@@ -230,6 +231,7 @@ class NotificationsDrawer extends StatelessWidget {
           AppBar(
             title: const Text('Notificaciones'),
             automaticallyImplyLeading: false,
+            
           ),
           Expanded(
             child: BlocBuilder<NotificationsBloc, NotificationsState>(

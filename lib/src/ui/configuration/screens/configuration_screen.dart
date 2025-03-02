@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
@@ -6,7 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:open_app_settings/open_app_settings.dart';
+
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,7 +72,7 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                OpenAppSettings.openAppSettings();
+                AppSettings.openAppSettings();
               },
               child: const Text('Ir a Configuración'),
             ),
@@ -175,7 +176,7 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                     return const ListTile(
                       leading: Icon(Icons.info),
                       title: Text('Versión de la Aplicación'),
-                      subtitle: Text('Cargando...'),
+                      subtitle: Text(''),
                     );
                   } else if (snapshot.hasError) {
                     return const ListTile(

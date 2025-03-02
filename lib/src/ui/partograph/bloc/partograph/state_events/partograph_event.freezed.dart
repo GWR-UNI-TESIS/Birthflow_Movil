@@ -27,6 +27,7 @@ mixin _$PartographEvent {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -127,6 +128,7 @@ mixin _$PartographEvent {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -225,6 +227,7 @@ mixin _$PartographEvent {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -322,6 +325,7 @@ mixin _$PartographEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -349,6 +353,7 @@ mixin _$PartographEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -374,6 +379,7 @@ mixin _$PartographEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -497,6 +503,7 @@ class _$onFetchDataImpl implements onFetchData {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -600,6 +607,7 @@ class _$onFetchDataImpl implements onFetchData {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -701,6 +709,7 @@ class _$onFetchDataImpl implements onFetchData {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -804,6 +813,7 @@ class _$onFetchDataImpl implements onFetchData {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -834,6 +844,7 @@ class _$onFetchDataImpl implements onFetchData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -862,6 +873,7 @@ class _$onFetchDataImpl implements onFetchData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -1038,6 +1050,7 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -1142,6 +1155,7 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -1244,6 +1258,7 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -1348,6 +1363,7 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -1378,6 +1394,7 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -1406,6 +1423,7 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -1454,6 +1472,497 @@ abstract class ModifyingPartograph implements PartographEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ModifyingPartographImplCopyWith<_$ModifyingPartographImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnDeletePartographImplCopyWith<$Res> {
+  factory _$$OnDeletePartographImplCopyWith(_$OnDeletePartographImpl value,
+          $Res Function(_$OnDeletePartographImpl) then) =
+      __$$OnDeletePartographImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String partographId});
+}
+
+/// @nodoc
+class __$$OnDeletePartographImplCopyWithImpl<$Res>
+    extends _$PartographEventCopyWithImpl<$Res, _$OnDeletePartographImpl>
+    implements _$$OnDeletePartographImplCopyWith<$Res> {
+  __$$OnDeletePartographImplCopyWithImpl(_$OnDeletePartographImpl _value,
+      $Res Function(_$OnDeletePartographImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? partographId = null,
+  }) {
+    return _then(_$OnDeletePartographImpl(
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnDeletePartographImpl implements OnDeletePartograph {
+  const _$OnDeletePartographImpl({required this.partographId});
+
+  @override
+  final String partographId;
+
+  @override
+  String toString() {
+    return 'PartographEvent.onDeletePartograph(partographId: $partographId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnDeletePartographImpl &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, partographId);
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnDeletePartographImplCopyWith<_$OnDeletePartographImpl> get copyWith =>
+      __$$OnDeletePartographImplCopyWithImpl<_$OnDeletePartographImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String partographId) onFetchData,
+    required TResult Function(
+            String partographId,
+            String name,
+            String recordName,
+            DateTime date,
+            String observation,
+            String workTime)
+        modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
+    required TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)
+        saveCervicalDilation,
+    required TResult Function(int id, String partographId, double value,
+            DateTime hour, bool remOrRam)
+        updateCervicalDilation,
+    required TResult Function(int id) deleteCervicalDilation,
+    required TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        createMedicalSurveillance,
+    required TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)
+        updateMedicalSurveillance,
+    required TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)
+        createPresentationPositionVariety,
+    required TResult Function(int id, String partographId, int hodgePlane,
+            int position, DateTime time)
+        updatePresentationPositionVariety,
+    required TResult Function(String partographId, String value, DateTime time)
+        createFetalHeartRate,
+    required TResult Function(
+            int id, String partographId, String value, DateTime time)
+        updateFetalHeartRate,
+    required TResult Function(String partographId, String value, DateTime time)
+        createContractionFrequency,
+    required TResult Function(
+            int id, String partographId, String value, DateTime time)
+        updateContractionFrequency,
+    required TResult Function(
+            String partographId,
+            String? description,
+            String hour,
+            String sex,
+            String apgar,
+            String temperature,
+            String caputto,
+            String circular,
+            String lamniotico,
+            String miccion,
+            String meconio,
+            String pa,
+            String expulsivo,
+            String placenta,
+            String alumbramiento,
+            String huellaPlantar,
+            String pc,
+            String talla,
+            String brazalete,
+            String huellaDig)
+        createChildbirthNote,
+    required TResult Function(
+            String partographId,
+            String? description,
+            String hour,
+            String sex,
+            String apgar,
+            String temperature,
+            String caputto,
+            String circular,
+            String lamniotico,
+            String miccion,
+            String meconio,
+            String pa,
+            String expulsivo,
+            String placenta,
+            String alumbramiento,
+            String huellaPlantar,
+            String pc,
+            String talla,
+            String brazalete,
+            String huellaDig)
+        updateChildbirthNote,
+  }) {
+    return onDeletePartograph(partographId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String partographId)? onFetchData,
+    TResult? Function(String partographId, String name, String recordName,
+            DateTime date, String observation, String workTime)?
+        modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
+    TResult? Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult? Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult? Function(int id)? deleteCervicalDilation,
+    TResult? Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult? Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    TResult? Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
+        createPresentationPositionVariety,
+    TResult? Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
+        updatePresentationPositionVariety,
+    TResult? Function(String partographId, String value, DateTime time)?
+        createFetalHeartRate,
+    TResult? Function(int id, String partographId, String value, DateTime time)?
+        updateFetalHeartRate,
+    TResult? Function(String partographId, String value, DateTime time)?
+        createContractionFrequency,
+    TResult? Function(int id, String partographId, String value, DateTime time)?
+        updateContractionFrequency,
+    TResult? Function(
+            String partographId,
+            String? description,
+            String hour,
+            String sex,
+            String apgar,
+            String temperature,
+            String caputto,
+            String circular,
+            String lamniotico,
+            String miccion,
+            String meconio,
+            String pa,
+            String expulsivo,
+            String placenta,
+            String alumbramiento,
+            String huellaPlantar,
+            String pc,
+            String talla,
+            String brazalete,
+            String huellaDig)?
+        createChildbirthNote,
+    TResult? Function(
+            String partographId,
+            String? description,
+            String hour,
+            String sex,
+            String apgar,
+            String temperature,
+            String caputto,
+            String circular,
+            String lamniotico,
+            String miccion,
+            String meconio,
+            String pa,
+            String expulsivo,
+            String placenta,
+            String alumbramiento,
+            String huellaPlantar,
+            String pc,
+            String talla,
+            String brazalete,
+            String huellaDig)?
+        updateChildbirthNote,
+  }) {
+    return onDeletePartograph?.call(partographId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String partographId)? onFetchData,
+    TResult Function(String partographId, String name, String recordName,
+            DateTime date, String observation, String workTime)?
+        modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
+    TResult Function(
+            String partographId, double value, DateTime hour, bool remOrRam)?
+        saveCervicalDilation,
+    TResult Function(int id, String partographId, double value, DateTime hour,
+            bool remOrRam)?
+        updateCervicalDilation,
+    TResult Function(int id)? deleteCervicalDilation,
+    TResult Function(
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        createMedicalSurveillance,
+    TResult Function(
+            int id,
+            String partographId,
+            String letter,
+            String maternalPosition,
+            String arterialPressure,
+            String maternalPulse,
+            String fetalHeartRate,
+            String contractionsDuration,
+            String frequencyContractions,
+            String pain,
+            DateTime time)?
+        updateMedicalSurveillance,
+    TResult Function(
+            String partographId, int hodgePlane, int position, DateTime time)?
+        createPresentationPositionVariety,
+    TResult Function(int id, String partographId, int hodgePlane, int position,
+            DateTime time)?
+        updatePresentationPositionVariety,
+    TResult Function(String partographId, String value, DateTime time)?
+        createFetalHeartRate,
+    TResult Function(int id, String partographId, String value, DateTime time)?
+        updateFetalHeartRate,
+    TResult Function(String partographId, String value, DateTime time)?
+        createContractionFrequency,
+    TResult Function(int id, String partographId, String value, DateTime time)?
+        updateContractionFrequency,
+    TResult Function(
+            String partographId,
+            String? description,
+            String hour,
+            String sex,
+            String apgar,
+            String temperature,
+            String caputto,
+            String circular,
+            String lamniotico,
+            String miccion,
+            String meconio,
+            String pa,
+            String expulsivo,
+            String placenta,
+            String alumbramiento,
+            String huellaPlantar,
+            String pc,
+            String talla,
+            String brazalete,
+            String huellaDig)?
+        createChildbirthNote,
+    TResult Function(
+            String partographId,
+            String? description,
+            String hour,
+            String sex,
+            String apgar,
+            String temperature,
+            String caputto,
+            String circular,
+            String lamniotico,
+            String miccion,
+            String meconio,
+            String pa,
+            String expulsivo,
+            String placenta,
+            String alumbramiento,
+            String huellaPlantar,
+            String pc,
+            String talla,
+            String brazalete,
+            String huellaDig)?
+        updateChildbirthNote,
+    required TResult orElse(),
+  }) {
+    if (onDeletePartograph != null) {
+      return onDeletePartograph(partographId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(onFetchData value) onFetchData,
+    required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
+    required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
+    required TResult Function(UpdateCervicalDilation value)
+        updateCervicalDilation,
+    required TResult Function(DeleteCervicalDilation value)
+        deleteCervicalDilation,
+    required TResult Function(CreateMedicalSurveillance value)
+        createMedicalSurveillance,
+    required TResult Function(UpdateMedicalSurveillance value)
+        updateMedicalSurveillance,
+    required TResult Function(CreatePresentationPositionVariety value)
+        createPresentationPositionVariety,
+    required TResult Function(UpdatePresentationPositionVariety value)
+        updatePresentationPositionVariety,
+    required TResult Function(CreateFetalHeartRate value) createFetalHeartRate,
+    required TResult Function(UpdateFetalHeartRate value) updateFetalHeartRate,
+    required TResult Function(CreateContractionFrequency value)
+        createContractionFrequency,
+    required TResult Function(UpdateContractionFrequency value)
+        updateContractionFrequency,
+    required TResult Function(CreateChildbirthNote value) createChildbirthNote,
+    required TResult Function(UpdateChildbirthNote value) updateChildbirthNote,
+  }) {
+    return onDeletePartograph(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(onFetchData value)? onFetchData,
+    TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
+    TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult? Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult? Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    TResult? Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult? Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
+    TResult? Function(CreateFetalHeartRate value)? createFetalHeartRate,
+    TResult? Function(UpdateFetalHeartRate value)? updateFetalHeartRate,
+    TResult? Function(CreateContractionFrequency value)?
+        createContractionFrequency,
+    TResult? Function(UpdateContractionFrequency value)?
+        updateContractionFrequency,
+    TResult? Function(CreateChildbirthNote value)? createChildbirthNote,
+    TResult? Function(UpdateChildbirthNote value)? updateChildbirthNote,
+  }) {
+    return onDeletePartograph?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(onFetchData value)? onFetchData,
+    TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
+    TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
+    TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
+    TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
+    TResult Function(CreateMedicalSurveillance value)?
+        createMedicalSurveillance,
+    TResult Function(UpdateMedicalSurveillance value)?
+        updateMedicalSurveillance,
+    TResult Function(CreatePresentationPositionVariety value)?
+        createPresentationPositionVariety,
+    TResult Function(UpdatePresentationPositionVariety value)?
+        updatePresentationPositionVariety,
+    TResult Function(CreateFetalHeartRate value)? createFetalHeartRate,
+    TResult Function(UpdateFetalHeartRate value)? updateFetalHeartRate,
+    TResult Function(CreateContractionFrequency value)?
+        createContractionFrequency,
+    TResult Function(UpdateContractionFrequency value)?
+        updateContractionFrequency,
+    TResult Function(CreateChildbirthNote value)? createChildbirthNote,
+    TResult Function(UpdateChildbirthNote value)? updateChildbirthNote,
+    required TResult orElse(),
+  }) {
+    if (onDeletePartograph != null) {
+      return onDeletePartograph(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnDeletePartograph implements PartographEvent {
+  const factory OnDeletePartograph({required final String partographId}) =
+      _$OnDeletePartographImpl;
+
+  String get partographId;
+
+  /// Create a copy of PartographEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OnDeletePartographImplCopyWith<_$OnDeletePartographImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1567,6 +2076,7 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -1670,6 +2180,7 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -1771,6 +2282,7 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -1874,6 +2386,7 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -1904,6 +2417,7 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -1932,6 +2446,7 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -2104,6 +2619,7 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -2207,6 +2723,7 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -2309,6 +2826,7 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -2412,6 +2930,7 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -2442,6 +2961,7 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -2470,6 +2990,7 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -2599,6 +3120,7 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -2702,6 +3224,7 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -2803,6 +3326,7 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -2906,6 +3430,7 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -2936,6 +3461,7 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -2964,6 +3490,7 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -3195,6 +3722,7 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -3308,6 +3836,7 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -3419,6 +3948,7 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -3532,6 +4062,7 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -3562,6 +4093,7 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -3590,6 +4122,7 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -3850,6 +4383,7 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -3964,6 +4498,7 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -4076,6 +4611,7 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -4190,6 +4726,7 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -4220,6 +4757,7 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -4248,6 +4786,7 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -4424,6 +4963,7 @@ class _$CreatePresentationPositionVarietyImpl
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -4528,6 +5068,7 @@ class _$CreatePresentationPositionVarietyImpl
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -4630,6 +5171,7 @@ class _$CreatePresentationPositionVarietyImpl
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -4734,6 +5276,7 @@ class _$CreatePresentationPositionVarietyImpl
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -4764,6 +5307,7 @@ class _$CreatePresentationPositionVarietyImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -4792,6 +5336,7 @@ class _$CreatePresentationPositionVarietyImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -4969,6 +5514,7 @@ class _$UpdatePresentationPositionVarietyImpl
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -5073,6 +5619,7 @@ class _$UpdatePresentationPositionVarietyImpl
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -5175,6 +5722,7 @@ class _$UpdatePresentationPositionVarietyImpl
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -5279,6 +5827,7 @@ class _$UpdatePresentationPositionVarietyImpl
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -5309,6 +5858,7 @@ class _$UpdatePresentationPositionVarietyImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -5337,6 +5887,7 @@ class _$UpdatePresentationPositionVarietyImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -5484,6 +6035,7 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -5587,6 +6139,7 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -5688,6 +6241,7 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -5791,6 +6345,7 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -5821,6 +6376,7 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -5849,6 +6405,7 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -6002,6 +6559,7 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -6105,6 +6663,7 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -6206,6 +6765,7 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -6309,6 +6869,7 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -6339,6 +6900,7 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -6367,6 +6929,7 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -6513,6 +7076,7 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -6616,6 +7180,7 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -6717,6 +7282,7 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -6820,6 +7386,7 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -6850,6 +7417,7 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -6878,6 +7446,7 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -7033,6 +7602,7 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -7136,6 +7706,7 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -7237,6 +7808,7 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -7340,6 +7912,7 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -7370,6 +7943,7 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -7398,6 +7972,7 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -7749,6 +8324,7 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -7872,6 +8448,7 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -7993,6 +8570,7 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -8116,6 +8694,7 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -8146,6 +8725,7 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -8174,6 +8754,7 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -8557,6 +9138,7 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
             String observation,
             String workTime)
         modifyingPartograph,
+    required TResult Function(String partographId) onDeletePartograph,
     required TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)
         saveCervicalDilation,
@@ -8680,6 +9262,7 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     TResult? Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult? Function(String partographId)? onDeletePartograph,
     TResult? Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -8801,6 +9384,7 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     TResult Function(String partographId, String name, String recordName,
             DateTime date, String observation, String workTime)?
         modifyingPartograph,
+    TResult Function(String partographId)? onDeletePartograph,
     TResult Function(
             String partographId, double value, DateTime hour, bool remOrRam)?
         saveCervicalDilation,
@@ -8924,6 +9508,7 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
   TResult map<TResult extends Object?>({
     required TResult Function(onFetchData value) onFetchData,
     required TResult Function(ModifyingPartograph value) modifyingPartograph,
+    required TResult Function(OnDeletePartograph value) onDeletePartograph,
     required TResult Function(SaveCervicalDilation value) saveCervicalDilation,
     required TResult Function(UpdateCervicalDilation value)
         updateCervicalDilation,
@@ -8954,6 +9539,7 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(onFetchData value)? onFetchData,
     TResult? Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult? Function(OnDeletePartograph value)? onDeletePartograph,
     TResult? Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult? Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult? Function(DeleteCervicalDilation value)? deleteCervicalDilation,
@@ -8982,6 +9568,7 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(onFetchData value)? onFetchData,
     TResult Function(ModifyingPartograph value)? modifyingPartograph,
+    TResult Function(OnDeletePartograph value)? onDeletePartograph,
     TResult Function(SaveCervicalDilation value)? saveCervicalDilation,
     TResult Function(UpdateCervicalDilation value)? updateCervicalDilation,
     TResult Function(DeleteCervicalDilation value)? deleteCervicalDilation,

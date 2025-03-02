@@ -17,6 +17,10 @@ class PartographEvent with _$PartographEvent {
     required String workTime,
   }) = ModifyingPartograph;
 
+  const factory PartographEvent.onDeletePartograph({
+    required String partographId,
+  }) = OnDeletePartograph;
+
   const factory PartographEvent.saveCervicalDilation({
     required String partographId,
     required double value,

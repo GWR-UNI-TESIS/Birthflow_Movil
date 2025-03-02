@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_constructors_over_static_methods
+
 import 'package:birthflow_movil/src/domain/worktime/entities/membranas.dart';
 import 'package:birthflow_movil/src/domain/worktime/entities/paridad.dart';
 import 'package:birthflow_movil/src/domain/worktime/entities/posicion.dart';

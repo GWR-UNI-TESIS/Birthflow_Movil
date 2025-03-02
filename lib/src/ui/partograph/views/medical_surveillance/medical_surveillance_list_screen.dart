@@ -22,7 +22,7 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (partograph, _) =>
+            loaded: (partograph, _, d) =>
                 partograph.medicalSurveillanceTable?.isEmpty ?? true
                     ? const Center(child: Text('No hay datos'))
                     : Padding(

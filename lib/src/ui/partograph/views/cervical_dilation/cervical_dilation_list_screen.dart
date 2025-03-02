@@ -1,6 +1,7 @@
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
+import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class CervicalDilationListScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (partograph, _) =>
+            loaded: (partograph, _, d) =>
                 partograph.cervicalDilations?.isEmpty ?? true
                     ? const Center(child: Text('No hay datos'))
                     : _buildCervicalDilationList(partograph.cervicalDilations!),
@@ -68,7 +69,40 @@ class CervicalDilationListScreen extends StatelessWidget {
     return ListTile(
       title: Text('${item.value} - ${item.hour}'),
       subtitle: item.remOrRam ? const Chip(label: Text('Ram O Rem')) : null,
+      trailing: IconButton(
+        icon: const Icon(Icons.delete, color: Colors.red),
+        onPressed: () => _confirmDelete(context, item.id),
+      ),
       onTap: () => _navigateToEdit(context, item),
+    );
+  }
+
+  void _confirmDelete(BuildContext context, int id) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Eliminar Dilatación Cervical'),
+          content:
+              const Text('¿Estás seguro de que deseas eliminar este registro?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                context
+                    .read<PartographBloc>()
+                    .add(DeleteCervicalDilation(id: id));
+              },
+              child:
+                  const Text('Eliminar', style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
     );
   }
 

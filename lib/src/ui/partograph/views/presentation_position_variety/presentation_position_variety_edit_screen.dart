@@ -42,7 +42,7 @@ class _PresentationPositionVarietyEditScreenState
   void _initializeControllers() {
     final presentationPositionVarieties =
         context.watch<PartographBloc>().state.whenOrNull(
-              loaded: (partograph, message) =>
+              loaded: (partograph, message, isDeleteEvent) =>
                   partograph.presentationPositionVarieties,
             );
 

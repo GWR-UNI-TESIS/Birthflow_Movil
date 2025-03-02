@@ -38,7 +38,7 @@ class _ContractionFrequencyEditScreenState
         .watch<PartographBloc>()
         .state
         .whenOrNull(
-          loaded: (partograph, message) => partograph.contractionFrequencies,
+          loaded: (partograph, message, isDeleteEvent) => partograph.contractionFrequencies,
         );
 
     final contractionFrequency = contractionFrequencies!

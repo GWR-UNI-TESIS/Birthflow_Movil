@@ -53,7 +53,7 @@ abstract class PartographService {
     @Body() PartographRequest request,
   );
 
-  @DELETE('/api/partograph/delete/{partograph}')
+  @DELETE('/api/partograph/delete/{partographId}')
   Future<ApiResponse<PartographResponse>> deletePartograph(
     @Header('Authorization') String token,
     @Path() String partographId,

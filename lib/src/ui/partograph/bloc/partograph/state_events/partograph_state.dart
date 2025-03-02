@@ -11,6 +11,7 @@ class PartographState with _$PartographState {
   const factory PartographState.loaded({
     required Partograph partograph,
     required String message,
+    bool? isDeleteEvent,
   }) = Loaded;
   const factory PartographState.error(String errorMessage) = Error;
 }

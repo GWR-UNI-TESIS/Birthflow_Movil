@@ -1,4 +1,3 @@
-import 'package:birthflow_movil/src/config/dio/dio_client.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/app_router.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/bloc.dart';
@@ -22,6 +21,7 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_
 import 'package:birthflow_movil/src/domain/partograph/usecases/fetal_heart_rate_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/medical_surveillance_update_usecase.dart';
+import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_list_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/partograph_state_update_usecase.dart';
@@ -63,6 +63,7 @@ class AppDev extends StatelessWidget {
           create: (context) => PartographsBloc(
             locator<GetPartographListUseCase>(),
             locator<UpdatePartographStateUseCase>(),
+            locator<DeletePartographUseCase>(),
           ),
         ),
         BlocProvider(
@@ -74,6 +75,7 @@ class AppDev extends StatelessWidget {
           create: (BuildContext context) => PartographBloc(
             locator<GetPartographUseCase>(),
             locator<UpdatePartographUsecase>(),
+            locator<DeletePartographUseCase>(),
             locator<CreateCervicalDilationUseCase>(),
             locator<UpdateCervicalDilationUseCase>(),
             locator<DeleteCervicalDilationUseCase>(),
@@ -106,7 +108,7 @@ class AppDev extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               PartographHistoryBloc(locator<GetPartographHistoryUsecase>()),
-        )
+        ),
       ],
       child: MaterialApp(
         home: AppEntry(),
@@ -120,7 +122,7 @@ class AppEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();
     final AppRouter appRouter = AppRouter(authBloc: authBloc);
-    locator<DioClient>().setContext(context);
+
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) async {
         if (state is Authenticated) {

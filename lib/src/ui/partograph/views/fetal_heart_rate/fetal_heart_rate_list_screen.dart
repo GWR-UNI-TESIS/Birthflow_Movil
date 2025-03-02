@@ -26,7 +26,7 @@ class FetalHeartRateListScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (partograph, _) =>
+            loaded: (partograph, _, d) =>
                 partograph.fetalHeartRates?.isEmpty ?? true
                     ? const Center(child: Text('No hay datos'))
                     : _buildFetalHeartRateList(partograph.fetalHeartRates!),

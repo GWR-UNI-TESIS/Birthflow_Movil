@@ -1,10 +1,10 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:birthflow_movil/src/app_dev.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:open_app_settings/open_app_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeAppScreen extends StatelessWidget {
@@ -39,7 +39,7 @@ class WelcomeAppScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                OpenAppSettings.openAppSettings();
+                AppSettings.openAppSettings();
               },
               child: const Text('Ir a Configuración'),
             ),

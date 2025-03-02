@@ -14,4 +14,8 @@ class PartographsEvent with _$PartographsEvent {
     required bool silenced,
     required bool favorite,
   }) = UpdatePartographState;
+
+   const factory PartographsEvent.deletePartographState({
+    required String partographId,
+  }) = DeletePartograph;
 }

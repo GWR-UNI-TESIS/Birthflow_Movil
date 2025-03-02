@@ -204,7 +204,7 @@ class _PartographService implements PartographService {
     )
         .compose(
           _dio.options,
-          '/api/partograph/delete/{partograph}',
+          '/api/partograph/delete/${partographId}',
           queryParameters: queryParameters,
           data: _data,
         )

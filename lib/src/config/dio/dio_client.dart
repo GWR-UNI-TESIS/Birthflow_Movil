@@ -2,11 +2,9 @@ import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DioClient {
   late Dio _dio;
-  BuildContext? _context; // Contexto dinámico para manejar la navegación
 
   static final DioClient _instance = DioClient._internal();
 
@@ -68,18 +66,16 @@ class DioClient {
             }
           }
 
-          if (_context != null) {
-            if (error.type == DioExceptionType.connectionTimeout ||
-                error.type == DioExceptionType.receiveTimeout ||
-                error.type == DioExceptionType.sendTimeout) {
-              mostrarPantallaDeError(
-                  'Tiempo de espera agotado. Verifica tu conexión.');
-            } else if (error.type == DioExceptionType.connectionError) {
-              mostrarPantallaDeError(
-                  'Error de conexión. Verifica tu Internet.');
-            } else {
-              mostrarPantallaDeError('Ocurrió un error inesperado.');
-            }
+          if (error.type == DioExceptionType.connectionTimeout ||
+              error.type == DioExceptionType.receiveTimeout ||
+              error.type == DioExceptionType.sendTimeout) {
+            mostrarPantallaDeError(
+              'Tiempo de espera agotado. Verifica tu conexión.',
+            );
+          } else if (error.type == DioExceptionType.connectionError) {
+            mostrarPantallaDeError('Error de conexión. Verifica tu Internet.');
+          } else {
+            mostrarPantallaDeError('Ocurrió un error inesperado.');
           }
 
           // Para otros errores, continuar el flujo normal
@@ -89,13 +85,11 @@ class DioClient {
     );
   }
 
-  // Setter para inyectar el contexto en tiempo de ejecución
-  void setContext(BuildContext context) {
-    _context = context;
-  }
-
   void mostrarPantallaDeError(String message) {
-    _context!.go('/error', extra: message);
+    final navigator = locator<GlobalKey<NavigatorState>>().currentState;
+    if (navigator != null) {
+      navigator.pushNamed('/error', arguments: message);
+    }
   }
 
   Dio get dio => _dio;

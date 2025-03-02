@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/get_partograph_notifications_usecase.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/notifications/bloc.dart';

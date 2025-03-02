@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:birthflow_movil/src/ui/widgets/worktime/worktime_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class PartographHelper {
   final String? partographId;
@@ -75,8 +76,9 @@ class PartogramModificationState extends State<PartogramModificationScreen>
     // Inicializar los controladores con los valores actuales del Partograph
     _nameController = TextEditingController(text: partograph.name);
     _recordNameController = TextEditingController(text: partograph.recordName);
-    _dateController =
-        TextEditingController(text: partograph.date.toIso8601String());
+    _dateController = TextEditingController(
+      text: DateFormat('yyyy-MM-dd').format(partograph.date),
+    );
     selectedDateTime = partograph.date;
     _observationController =
         TextEditingController(text: partograph.observation);
@@ -128,7 +130,7 @@ class PartogramModificationState extends State<PartogramModificationScreen>
           }
         },
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(22.0),
           child: Form(
             key: _formKey,
             child: Column(

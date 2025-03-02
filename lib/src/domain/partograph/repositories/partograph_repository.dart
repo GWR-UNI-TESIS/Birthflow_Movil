@@ -32,7 +32,7 @@ abstract class PartographRepository {
     required String worktime,
   });
 
-  Future<void> deletePartograph({
+  Future<Partograph> deletePartograph({
     required String partographId,
   });
 

@@ -38,7 +38,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
     final partographBloc = context.watch<PartographBloc>().state;
     if (partographBloc is Loaded) {
       final cervicalDilations = partographBloc.whenOrNull(
-        loaded: (partograph, message) => partograph.cervicalDilations,
+        loaded: (partograph, message, isDeleteEvent) => partograph.cervicalDilations,
       );
 
       final cervicalDilation = cervicalDilations!

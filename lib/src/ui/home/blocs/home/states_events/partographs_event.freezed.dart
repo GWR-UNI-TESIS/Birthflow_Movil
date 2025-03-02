@@ -22,6 +22,7 @@ mixin _$PartographsEvent {
     required TResult Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)
         updatePartographState,
+    required TResult Function(String partographId) deletePartographState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$PartographsEvent {
     TResult? Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)?
         updatePartographState,
+    TResult? Function(String partographId)? deletePartographState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$PartographsEvent {
     TResult Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)?
         updatePartographState,
+    TResult Function(String partographId)? deletePartographState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,18 +49,21 @@ mixin _$PartographsEvent {
     required TResult Function(FetchPartographs value) fetchPartographs,
     required TResult Function(UpdatePartographState value)
         updatePartographState,
+    required TResult Function(DeletePartograph value) deletePartographState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FetchPartographs value)? fetchPartographs,
     TResult? Function(UpdatePartographState value)? updatePartographState,
+    TResult? Function(DeletePartograph value)? deletePartographState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchPartographs value)? fetchPartographs,
     TResult Function(UpdatePartographState value)? updatePartographState,
+    TResult Function(DeletePartograph value)? deletePartographState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -157,6 +163,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
     required TResult Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)
         updatePartographState,
+    required TResult Function(String partographId) deletePartographState,
   }) {
     return fetchPartographs(userId);
   }
@@ -168,6 +175,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
     TResult? Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)?
         updatePartographState,
+    TResult? Function(String partographId)? deletePartographState,
   }) {
     return fetchPartographs?.call(userId);
   }
@@ -179,6 +187,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
     TResult Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)?
         updatePartographState,
+    TResult Function(String partographId)? deletePartographState,
     required TResult orElse(),
   }) {
     if (fetchPartographs != null) {
@@ -193,6 +202,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
     required TResult Function(FetchPartographs value) fetchPartographs,
     required TResult Function(UpdatePartographState value)
         updatePartographState,
+    required TResult Function(DeletePartograph value) deletePartographState,
   }) {
     return fetchPartographs(this);
   }
@@ -202,6 +212,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FetchPartographs value)? fetchPartographs,
     TResult? Function(UpdatePartographState value)? updatePartographState,
+    TResult? Function(DeletePartograph value)? deletePartographState,
   }) {
     return fetchPartographs?.call(this);
   }
@@ -211,6 +222,7 @@ class _$FetchPartographsImpl implements FetchPartographs {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchPartographs value)? fetchPartographs,
     TResult Function(UpdatePartographState value)? updatePartographState,
+    TResult Function(DeletePartograph value)? deletePartographState,
     required TResult orElse(),
   }) {
     if (fetchPartographs != null) {
@@ -354,6 +366,7 @@ class _$UpdatePartographStateImpl implements UpdatePartographState {
     required TResult Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)
         updatePartographState,
+    required TResult Function(String partographId) deletePartographState,
   }) {
     return updatePartographState(
         partographId, isAchived, set, silenced, favorite);
@@ -366,6 +379,7 @@ class _$UpdatePartographStateImpl implements UpdatePartographState {
     TResult? Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)?
         updatePartographState,
+    TResult? Function(String partographId)? deletePartographState,
   }) {
     return updatePartographState?.call(
         partographId, isAchived, set, silenced, favorite);
@@ -378,6 +392,7 @@ class _$UpdatePartographStateImpl implements UpdatePartographState {
     TResult Function(String partographId, bool isAchived, bool set,
             bool silenced, bool favorite)?
         updatePartographState,
+    TResult Function(String partographId)? deletePartographState,
     required TResult orElse(),
   }) {
     if (updatePartographState != null) {
@@ -393,6 +408,7 @@ class _$UpdatePartographStateImpl implements UpdatePartographState {
     required TResult Function(FetchPartographs value) fetchPartographs,
     required TResult Function(UpdatePartographState value)
         updatePartographState,
+    required TResult Function(DeletePartograph value) deletePartographState,
   }) {
     return updatePartographState(this);
   }
@@ -402,6 +418,7 @@ class _$UpdatePartographStateImpl implements UpdatePartographState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FetchPartographs value)? fetchPartographs,
     TResult? Function(UpdatePartographState value)? updatePartographState,
+    TResult? Function(DeletePartograph value)? deletePartographState,
   }) {
     return updatePartographState?.call(this);
   }
@@ -411,6 +428,7 @@ class _$UpdatePartographStateImpl implements UpdatePartographState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchPartographs value)? fetchPartographs,
     TResult Function(UpdatePartographState value)? updatePartographState,
+    TResult Function(DeletePartograph value)? deletePartographState,
     required TResult orElse(),
   }) {
     if (updatePartographState != null) {
@@ -439,4 +457,160 @@ abstract class UpdatePartographState implements PartographsEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdatePartographStateImplCopyWith<_$UpdatePartographStateImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeletePartographImplCopyWith<$Res> {
+  factory _$$DeletePartographImplCopyWith(_$DeletePartographImpl value,
+          $Res Function(_$DeletePartographImpl) then) =
+      __$$DeletePartographImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String partographId});
+}
+
+/// @nodoc
+class __$$DeletePartographImplCopyWithImpl<$Res>
+    extends _$PartographsEventCopyWithImpl<$Res, _$DeletePartographImpl>
+    implements _$$DeletePartographImplCopyWith<$Res> {
+  __$$DeletePartographImplCopyWithImpl(_$DeletePartographImpl _value,
+      $Res Function(_$DeletePartographImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? partographId = null,
+  }) {
+    return _then(_$DeletePartographImpl(
+      partographId: null == partographId
+          ? _value.partographId
+          : partographId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeletePartographImpl implements DeletePartograph {
+  const _$DeletePartographImpl({required this.partographId});
+
+  @override
+  final String partographId;
+
+  @override
+  String toString() {
+    return 'PartographsEvent.deletePartographState(partographId: $partographId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeletePartographImpl &&
+            (identical(other.partographId, partographId) ||
+                other.partographId == partographId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, partographId);
+
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeletePartographImplCopyWith<_$DeletePartographImpl> get copyWith =>
+      __$$DeletePartographImplCopyWithImpl<_$DeletePartographImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? userId) fetchPartographs,
+    required TResult Function(String partographId, bool isAchived, bool set,
+            bool silenced, bool favorite)
+        updatePartographState,
+    required TResult Function(String partographId) deletePartographState,
+  }) {
+    return deletePartographState(partographId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? userId)? fetchPartographs,
+    TResult? Function(String partographId, bool isAchived, bool set,
+            bool silenced, bool favorite)?
+        updatePartographState,
+    TResult? Function(String partographId)? deletePartographState,
+  }) {
+    return deletePartographState?.call(partographId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? userId)? fetchPartographs,
+    TResult Function(String partographId, bool isAchived, bool set,
+            bool silenced, bool favorite)?
+        updatePartographState,
+    TResult Function(String partographId)? deletePartographState,
+    required TResult orElse(),
+  }) {
+    if (deletePartographState != null) {
+      return deletePartographState(partographId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FetchPartographs value) fetchPartographs,
+    required TResult Function(UpdatePartographState value)
+        updatePartographState,
+    required TResult Function(DeletePartograph value) deletePartographState,
+  }) {
+    return deletePartographState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FetchPartographs value)? fetchPartographs,
+    TResult? Function(UpdatePartographState value)? updatePartographState,
+    TResult? Function(DeletePartograph value)? deletePartographState,
+  }) {
+    return deletePartographState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FetchPartographs value)? fetchPartographs,
+    TResult Function(UpdatePartographState value)? updatePartographState,
+    TResult Function(DeletePartograph value)? deletePartographState,
+    required TResult orElse(),
+  }) {
+    if (deletePartographState != null) {
+      return deletePartographState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeletePartograph implements PartographsEvent {
+  const factory DeletePartograph({required final String partographId}) =
+      _$DeletePartographImpl;
+
+  String get partographId;
+
+  /// Create a copy of PartographsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeletePartographImplCopyWith<_$DeletePartographImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

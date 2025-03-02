@@ -78,11 +78,13 @@ class PartographRepositoryImplementation implements PartographRepository {
   }
 
   @override
-  Future<void> deletePartograph({required String partographId}) async {
+  Future<Partograph> deletePartograph({required String partographId}) async {
     try {
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
-      await _partographService.deletePartograph(token, partographId);
+      final result =
+          await _partographService.deletePartograph(token, partographId);
+      return _mapper.convert<PartographResponse, Partograph>(result.response);
     } catch (e, stackTrace) {
       _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
       rethrow;

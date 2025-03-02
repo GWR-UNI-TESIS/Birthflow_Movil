@@ -21,7 +21,9 @@ mixin _$PartographState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(Partograph partograph, String message) loaded,
+    required TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)
+        loaded,
     required TResult Function(String errorMessage) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +32,9 @@ mixin _$PartographState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(Partograph partograph, String message)? loaded,
+    TResult? Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult? Function(String errorMessage)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +43,9 @@ mixin _$PartographState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(Partograph partograph, String message)? loaded,
+    TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) =>
@@ -139,7 +145,9 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(Partograph partograph, String message) loaded,
+    required TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)
+        loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return initial();
@@ -151,7 +159,9 @@ class _$InitialImpl implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(Partograph partograph, String message)? loaded,
+    TResult? Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return initial?.call();
@@ -163,7 +173,9 @@ class _$InitialImpl implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(Partograph partograph, String message)? loaded,
+    TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -262,7 +274,9 @@ class _$LoadingImpl implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(Partograph partograph, String message) loaded,
+    required TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)
+        loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return loading();
@@ -274,7 +288,9 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(Partograph partograph, String message)? loaded,
+    TResult? Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return loading?.call();
@@ -286,7 +302,9 @@ class _$LoadingImpl implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(Partograph partograph, String message)? loaded,
+    TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -385,7 +403,9 @@ class _$EmptyImpl implements Empty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(Partograph partograph, String message) loaded,
+    required TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)
+        loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return empty();
@@ -397,7 +417,9 @@ class _$EmptyImpl implements Empty {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(Partograph partograph, String message)? loaded,
+    TResult? Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return empty?.call();
@@ -409,7 +431,9 @@ class _$EmptyImpl implements Empty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(Partograph partograph, String message)? loaded,
+    TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -470,7 +494,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Partograph partograph, String message});
+  $Res call({Partograph partograph, String message, bool? isDeleteEvent});
 }
 
 /// @nodoc
@@ -488,6 +512,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
   $Res call({
     Object? partograph = null,
     Object? message = null,
+    Object? isDeleteEvent = freezed,
   }) {
     return _then(_$LoadedImpl(
       partograph: null == partograph
@@ -498,6 +523,10 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      isDeleteEvent: freezed == isDeleteEvent
+          ? _value.isDeleteEvent
+          : isDeleteEvent // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -505,16 +534,19 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements Loaded {
-  const _$LoadedImpl({required this.partograph, required this.message});
+  const _$LoadedImpl(
+      {required this.partograph, required this.message, this.isDeleteEvent});
 
   @override
   final Partograph partograph;
   @override
   final String message;
+  @override
+  final bool? isDeleteEvent;
 
   @override
   String toString() {
-    return 'PartographState.loaded(partograph: $partograph, message: $message)';
+    return 'PartographState.loaded(partograph: $partograph, message: $message, isDeleteEvent: $isDeleteEvent)';
   }
 
   @override
@@ -524,11 +556,14 @@ class _$LoadedImpl implements Loaded {
             other is _$LoadedImpl &&
             (identical(other.partograph, partograph) ||
                 other.partograph == partograph) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.isDeleteEvent, isDeleteEvent) ||
+                other.isDeleteEvent == isDeleteEvent));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, partograph, message);
+  int get hashCode =>
+      Object.hash(runtimeType, partograph, message, isDeleteEvent);
 
   /// Create a copy of PartographState
   /// with the given fields replaced by the non-null parameter values.
@@ -544,10 +579,12 @@ class _$LoadedImpl implements Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(Partograph partograph, String message) loaded,
+    required TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)
+        loaded,
     required TResult Function(String errorMessage) error,
   }) {
-    return loaded(partograph, message);
+    return loaded(partograph, message, isDeleteEvent);
   }
 
   @override
@@ -556,10 +593,12 @@ class _$LoadedImpl implements Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(Partograph partograph, String message)? loaded,
+    TResult? Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult? Function(String errorMessage)? error,
   }) {
-    return loaded?.call(partograph, message);
+    return loaded?.call(partograph, message, isDeleteEvent);
   }
 
   @override
@@ -568,12 +607,14 @@ class _$LoadedImpl implements Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(Partograph partograph, String message)? loaded,
+    TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(partograph, message);
+      return loaded(partograph, message, isDeleteEvent);
     }
     return orElse();
   }
@@ -622,10 +663,12 @@ class _$LoadedImpl implements Loaded {
 abstract class Loaded implements PartographState {
   const factory Loaded(
       {required final Partograph partograph,
-      required final String message}) = _$LoadedImpl;
+      required final String message,
+      final bool? isDeleteEvent}) = _$LoadedImpl;
 
   Partograph get partograph;
   String get message;
+  bool? get isDeleteEvent;
 
   /// Create a copy of PartographState
   /// with the given fields replaced by the non-null parameter values.
@@ -706,7 +749,9 @@ class _$ErrorImpl implements Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(Partograph partograph, String message) loaded,
+    required TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)
+        loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return error(errorMessage);
@@ -718,7 +763,9 @@ class _$ErrorImpl implements Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(Partograph partograph, String message)? loaded,
+    TResult? Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return error?.call(errorMessage);
@@ -730,7 +777,9 @@ class _$ErrorImpl implements Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(Partograph partograph, String message)? loaded,
+    TResult Function(
+            Partograph partograph, String message, bool? isDeleteEvent)?
+        loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {

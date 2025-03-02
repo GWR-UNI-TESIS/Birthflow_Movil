@@ -197,7 +197,7 @@ class _CreatePartographState extends State<_CreatePartographPage>
                             controller: _dateTextController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Tiempo',
+                              labelText: 'Fecha',
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
