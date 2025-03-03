@@ -121,20 +121,30 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
                 padding: EdgeInsets.zero,
                 children: [
                   const DrawerHeader(
-                    decoration: BoxDecoration(color: Colors.blue),
                     child: Text(
                       'Versiones del Partograma',
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(fontSize: 24),
                     ),
                   ),
                   ...versions.map((version) {
                     final isCurrent = currentVersion != null &&
                         version.id == currentVersion.id;
                     return ListTile(
-                      title: Text('Cambiado por ${version.changedByName}'),
-                      subtitle: Text('Cambiado el ${version.changedAt}'),
+                      title: Text(
+                        'Cambiado por ${version.changedByName} ${isCurrent ? "- Version Actual" : ""}',
+                      ),
+                      subtitle: Text(
+                          'Cambiado el ${DateFormat('dd/MM/yyyy hh:mm a').format(
+                        DateTime.utc(
+                          version.changedAt.year,
+                          version.changedAt.month,
+                          version.changedAt.day,
+                          version.changedAt.hour,
+                          version.changedAt.minute,
+                        ).toLocal(),
+                      )}'),
                       selected: version == selectedVersion,
-                      tileColor: isCurrent ? Colors.green[100] : null,
+                      tileColor: isCurrent ? Colors.purple[50] : null,
                       onTap: () {
                         context
                             .read<PartographHistoryBloc>()

@@ -155,35 +155,43 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                   empty: () {
-                    return RefreshIndicator(
+                   return RefreshIndicator(
                       onRefresh: () async {
                         // Dispara el evento FetchPartographs para recargar los datos
                         context
                             .read<PartographsBloc>()
                             .add(FetchPartographs(userId: userId));
                       },
-                      child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height,
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/no_data.png',
-                                  height: 260.0,
-                                  fit: BoxFit.fill,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SingleChildScrollView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: constraints.maxHeight,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/no_data.png',
+                                      height: 260.0,
+                                      fit: BoxFit.fill,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'No hay datos',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  'No hay datos',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       ),
                     );
                   },

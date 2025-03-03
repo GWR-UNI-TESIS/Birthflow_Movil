@@ -103,7 +103,9 @@ class ListItemWidget extends StatelessWidget {
                   ),
                 );
           },
-          child: const Text('Archivar'),
+          child: Text(
+            isAchived ? 'Desarchivar' : 'Archivar',
+          ),
         ),
         MenuItemButton(
           onPressed: () {

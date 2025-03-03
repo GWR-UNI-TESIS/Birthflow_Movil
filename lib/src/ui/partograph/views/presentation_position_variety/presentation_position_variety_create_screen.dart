@@ -130,7 +130,7 @@ class _PresentationPositionVarietyCreateScreenState
           dateTimeController: _dateTimeController,
         ),
         const SizedBox(height: 20),
-        ElevatedButton(
+        FilledButton(
           onPressed: _saveData,
           child: const Text('Guardar'),
         ),

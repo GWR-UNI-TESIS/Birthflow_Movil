@@ -143,7 +143,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       return _mapper.convertList<GroupResponse, Group>(result.response!);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 

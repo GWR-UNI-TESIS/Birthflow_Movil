@@ -161,7 +161,7 @@ class _PresentationPositionVarietyEditScreenState
           initialDateTime: initialValue,
         ),
         const SizedBox(height: 20),
-        ElevatedButton(
+        FilledButton(
           onPressed: _saveData,
           child: const Text('Actualizar'),
         ),

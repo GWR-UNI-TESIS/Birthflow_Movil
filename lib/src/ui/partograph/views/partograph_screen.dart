@@ -45,18 +45,52 @@ class _PartographState extends State<PartographScreen> {
         child: _buildAppBar(context),
       ),
       drawer: NotificationDrawer(partographId: widget.partographId),
-      body: SingleChildScrollView(
-        child: BlocBuilder<PartographBloc, PartographState>(
-          builder: (context, state) {
-            if (state is Loaded) {
-              return _buildContent(context, state, catalog);
-            }
-            if (state is Error) {
-              return const Center(
-                child: Text('Ha ocurrido un error'),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          // Dispara el evento FetchPartographs para recargar los datos
+          context.read<PartographBloc>().add(
+                onFetchData(partographId: widget.partographId),
               );
-            }
-            return const LinearProgressIndicator();
+        },
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: BlocBuilder<PartographBloc, PartographState>(
+                builder: (context, state) {
+                  if (state is Loaded) {
+                    return _buildContent(context, state, catalog);
+                  }
+                  if (state is Error) {
+                    return ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/503_error_service.png',
+                              height: 260.0,
+                              fit: BoxFit.fill,
+                            ),
+                            const SizedBox(height: 5),
+                            const Text(
+                              'Ha ocurrido un error, vuelva intentarlo en otro momento ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                  return const LinearProgressIndicator();
+                },
+              ),
+            );
           },
         ),
       ),
@@ -75,16 +109,17 @@ class _PartographState extends State<PartographScreen> {
           Navigator.pop(context);
         },
       ),
-      flexibleSpace: Padding(
-        padding: const EdgeInsets.only(top: 40.0, left: 16.0, right: 10.0),
-        child: BlocBuilder<PartographBloc, PartographState>(
-          builder: (context, state) {
-            if (state is Loaded) {
-              return _buildAppBarContent(context, state);
-            }
-            return Container(); // Placeholder if not loaded
-          },
-        ),
+      flexibleSpace: BlocBuilder<PartographBloc, PartographState>(
+        builder: (context, state) {
+          if (state is Loaded) {
+            return Padding(
+              padding:
+                  const EdgeInsets.only(top: 40.0, left: 16.0, right: 10.0),
+              child: _buildAppBarContent(context, state),
+            );
+          }
+          return Container(height: 10,);
+        },
       ),
     );
   }

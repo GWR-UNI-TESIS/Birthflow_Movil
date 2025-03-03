@@ -41,9 +41,11 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
     });
 
     if (value) {
+      await NotificationHelper
+          .initialize(); // Reinicializar notificaciones locales
+
       final NotificationSettings settings =
           await FirebaseMessaging.instance.requestPermission();
-
       if (settings.authorizationStatus == AuthorizationStatus.denied) {
         _showEnableNotificationsDialog();
       } else {

@@ -23,13 +23,45 @@ class ArchivedPartographScreen extends StatelessWidget {
                 data.where((partograph) => partograph.isAchived).toList();
 
             if (archivedData.isEmpty) {
-              return const Center(child: Text('No hay partogramas archivados'));
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/no_data.png',
+                      height: 260.0,
+                      fit: BoxFit.fill,
+                    ),
+                    const SizedBox(height: 5),
+                    const Text(
+                      'No se encuentran partogramas en favoritos',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              );
             }
 
             return _buildPartographsList(archivedData);
           },
           error: (message) => Center(child: Text('Error: $message')),
-          empty: () => const Center(child: Text('No hay datos')),
+          empty: () => Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/no_data.png',
+                  height: 260.0,
+                  fit: BoxFit.fill,
+                ),
+                const SizedBox(height: 5),
+                const Text(
+                  'No hay partogramas disponibles',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -57,7 +89,7 @@ class ArchivedPartographScreen extends StatelessWidget {
                 favorite: item.favorite,
               );
             },
-            childCount: data.length-1,
+            childCount: data.length - 1,
           ),
         ),
       ],
