@@ -35,7 +35,7 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
         }
       }
     } catch (e) {
-      emit(const PartographsState.error('Error al cargar los partograma'));
+      emit(const PartographsState.error('Ha ocurrido un error al cargar los partograma'));
     }
   }
 

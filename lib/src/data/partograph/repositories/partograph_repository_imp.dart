@@ -105,7 +105,7 @@ class PartographRepositoryImplementation implements PartographRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
-      return [];
+      rethrow;
     }
   }
 
@@ -188,7 +188,7 @@ class PartographRepositoryImplementation implements PartographRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Partograma exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 

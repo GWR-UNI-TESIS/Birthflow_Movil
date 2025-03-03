@@ -70,6 +70,7 @@ import 'package:birthflow_movil/src/domain/share/usecases/search_user_group_get_
 import 'package:birthflow_movil/src/domain/share/usecases/user_group_create_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/user_group_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/users_in_group_get_usecase.dart';
+import 'package:birthflow_movil/src/notifiers/error_notifier.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -96,6 +97,8 @@ Future<void> initializeDependencies() async {
   locator<DioClient>().dio.options.headers['Device-Info'] = device;
 
   final dioAuth = buildDioAuth(apiUrl, device);
+
+  locator.registerSingleton<ErrorNotifier>(ErrorNotifier());
 
   locator.registerSingleton<CatalogService>(CatalogService(dioAuth));
 

@@ -1,6 +1,7 @@
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
@@ -21,15 +22,11 @@ class FetalHeartRateCreateScreen extends StatefulWidget {
 class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
     with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _dateTimeController;
-  TimeOfDay? _selectedTime;
+  final TextEditingController _dateTimeController = TextEditingController();
+
   String? _fetalHeartRateValue;
 
-  @override
-  void initState() {
-    super.initState();
-    _dateTimeController = TextEditingController();
-  }
+
 
   @override
   void dispose() {
@@ -40,13 +37,8 @@ class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
   void _saveFetalHeartRate() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
-      final selectedDateTime = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        _selectedTime?.hour ?? DateTime.now().hour,
-        _selectedTime?.minute ?? DateTime.now().minute,
-      );
+      final selectedDateTime =
+          DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
       final event = CreateFetalHeartRate(
         partographId: widget.partographId,
@@ -58,21 +50,7 @@ class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTime ?? TimeOfDay.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _selectedTime = picked;
-        final now = DateTime.now();
-        final dateTime =
-            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-        _dateTimeController.text = DateFormat('HH:mm:ss').format(dateTime);
-      });
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +80,9 @@ class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
                     onChanged: (value) => _fetalHeartRateValue = value,
                   ),
                   const SizedBox(height: 20),
-                  _buildTimeField(context),
+                  DateTimePickerField(
+                    dateTimeController: _dateTimeController,
+                  ),
                   const SizedBox(height: 20),
                   FilledButton(
                     onPressed: _saveFetalHeartRate,
@@ -112,29 +92,6 @@ class _FetalHeartRateCreateScreenState extends State<FetalHeartRateCreateScreen>
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTimeField(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _selectTime(context),
-      child: AbsorbPointer(
-        child: TextFormField(
-          controller: _dateTimeController,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.calendar_today),
-            border: const OutlineInputBorder(),
-            labelText: 'Hora',
-            hintText: _selectedTime?.format(context) ?? 'Seleccione una hora',
-          ),
-          validator: (value) {
-            if (_selectedTime == null) {
-              return 'Por favor seleccione una hora';
-            }
-            return null;
-          },
         ),
       ),
     );

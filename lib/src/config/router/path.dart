@@ -5,6 +5,7 @@ class AppPaths {
   static Path get splash => Path('splash');
   static WelcomePath get welcome => WelcomePath();
   static HomePath get home => HomePath();
+  static Path get error => Path('error');
 }
 
 class WelcomePath extends Path<WelcomePath> {
@@ -98,6 +99,7 @@ class ChildbirthNotePath extends Path<ChildbirthNotePath> {
 class PartographReadOnlyPath extends Param<PartographReadOnlyPath> {
   PartographReadOnlyPath(HomePath homePath)
       : super('read-only', 'partographId', parent: homePath);
+  Path get chart => Path('chart', parent: this);
 }
 
 class PartographHistoryPath extends Path<PartographHistoryPath> {

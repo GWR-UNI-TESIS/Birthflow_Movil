@@ -139,109 +139,113 @@ class _CreatePartographState extends State<_CreatePartographPage>
           child: TabBarView(
             controller: _tabController,
             children: <Widget>[
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-                child: KeepAliveWrapper(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 16,
-                          ),
-                          child: TextFormField(
-                            controller: _nameTextController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Nombre',
-                              hintText: 'Ingrese el nombre',
+              SingleChildScrollView(
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                  child: KeepAliveWrapper(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 16,
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Porfavor ingrese el nombre';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 16,
-                          ),
-                          child: TextFormField(
-                            controller: _recordNumberTextController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Expediente',
-                              hintText: 'Ingrese el numero de expediente',
+                            child: TextFormField(
+                              controller: _nameTextController,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Nombre',
+                                hintText: 'Ingrese el nombre',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Porfavor ingrese el nombre';
+                                }
+                                return null;
+                              },
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Porfavor ingrese el expediente';
-                              }
-                              return null;
-                            },
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 16,
-                          ),
-                          child: TextFormField(
-                            controller: _dateTextController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Fecha',
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 16,
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Porfavor ingrese la fecha';
-                              }
-                              return null;
-                            },
-                            readOnly: true,
-                            onTap: () async {
-                              final DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(
-                                  2000,
-                                ),
-                                lastDate: DateTime(2101),
-                              );
+                            child: TextFormField(
+                              controller: _recordNumberTextController,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Expediente',
+                                hintText: 'Ingrese el numero de expediente',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Porfavor ingrese el expediente';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 16,
+                            ),
+                            child: TextFormField(
+                              controller: _dateTextController,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Fecha',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Porfavor ingrese la fecha';
+                                }
+                                return null;
+                              },
+                              readOnly: true,
+                              onTap: () async {
+                                final DateTime? pickedDate =
+                                    await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(
+                                    2000,
+                                  ),
+                                  lastDate: DateTime(2101),
+                                );
 
-                              if (pickedDate != null) {
-                                final String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                                if (pickedDate != null) {
+                                  final String formattedDate =
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(pickedDate);
 
-                                setState(() {
-                                  _dateTextController.text = formattedDate;
-                                });
-                              }
-                            },
+                                  setState(() {
+                                    _dateTextController.text = formattedDate;
+                                  });
+                                }
+                              },
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width,
-                          margin: const EdgeInsets.symmetric(
-                            vertical: 15,
-                            horizontal: 45,
+                          Container(
+                            width: MediaQuery.sizeOf(context).width,
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 45,
+                            ),
+                            child: FilledButton(
+                              child: const Text('Siguiente'),
+                              onPressed: () {
+                                _tabController
+                                    .animateTo(_tabController.index + 1);
+                              },
+                            ),
                           ),
-                          child: FilledButton(
-                            child: const Text('Siguiente'),
-                            onPressed: () {
-                              _tabController
-                                  .animateTo(_tabController.index + 1);
-                            },
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

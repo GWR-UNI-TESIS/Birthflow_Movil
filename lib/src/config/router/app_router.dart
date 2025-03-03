@@ -29,6 +29,7 @@ import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.da
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_create_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/cervical_dilation/cervical_dilation_list_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/chart_readonly_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/chart_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/childbirth_note/childbirth_note_edit_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/childbirth_note/childbirth_note_screen.dart';
@@ -104,7 +105,7 @@ class AppRouter {
         screen: const SplashScreen(),
       ),
       GoRoute(
-        path: '/error',
+        path: AppPaths.error.goRoute,
         builder: (context, state) {
           final String message = state.extra as String? ?? 'Error desconocido.';
           return ErrorScreen(message: message);
@@ -199,6 +200,12 @@ class AppRouter {
 
               return PartographReadOnlyScreen(partographId: partographId);
             },
+            routes: [
+              _buildRoute(
+                path: AppPaths.home.partographReadOnlyPath.chart.goRoute,
+                screen: ChartReadOnlyScreen(),
+              ),
+            ],
           ),
 
           // Ruta del partograma

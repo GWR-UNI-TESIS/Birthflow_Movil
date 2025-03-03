@@ -3,6 +3,7 @@ import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/catalog/repositories/catalog_repository.dart';
+import 'package:birthflow_movil/src/ui/connection_error_screen.dart';
 import 'package:birthflow_movil/src/ui/welcome_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -110,18 +111,8 @@ class _AppLoaderState extends State<AppLoader> {
         } else if (snapshot.hasError) {
           return MaterialApp(
             home: Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Error al conectar con el servidor'),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _retry,
-                      child: const Text('Reintentar'),
-                    ),
-                  ],
-                ),
+              body: ConnectionErrorScreen(
+                onRetry: _retry,
               ),
             ),
           );

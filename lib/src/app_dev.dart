@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/app_router.dart';
+import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/bloc.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/event/notification_event.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
@@ -33,6 +36,7 @@ import 'package:birthflow_movil/src/domain/share/usecases/group_create_usecase.d
 import 'package:birthflow_movil/src/domain/share/usecases/group_delete_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/group_update_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/groups_get_usecase.dart';
+import 'package:birthflow_movil/src/notifiers/error_notifier.dart';
 import 'package:birthflow_movil/src/providers/catalog_cubit.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
@@ -44,6 +48,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph_history/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class AppDev extends StatelessWidget {
   final Catalog catalog;
@@ -117,7 +122,30 @@ class AppDev extends StatelessWidget {
   }
 }
 
-class AppEntry extends StatelessWidget {
+class AppEntry extends StatefulWidget {
+  @override
+  AppEntryState createState() => AppEntryState();
+}
+
+class AppEntryState extends State<AppEntry> {
+
+  late final StreamSubscription<String> _errorSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _errorSubscription = locator<ErrorNotifier>().stream.listen((message) {
+      // Realiza la navegación usando GoRouter con el BuildContext
+      GoRouter.of(context).go(AppPaths.error.path, extra: message);
+    });
+  }
+
+  @override
+  void dispose() {
+    _errorSubscription.cancel();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();

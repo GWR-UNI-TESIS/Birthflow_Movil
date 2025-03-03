@@ -144,7 +144,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         );
                         return SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
+                          child: FilledButton(
                             onPressed: isLoading
                                 ? null
                                 : () {

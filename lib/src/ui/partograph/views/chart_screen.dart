@@ -89,7 +89,7 @@ class _ChartState extends State<_ChartScreen> {
             message: 'Agregar Plano Hodge Cervical',
             child: ActionButton(
               onPressed: () => _showPresentationPosition(context),
-              icon: const Icon(Icons.add),
+              icon: const Icon(Icons.add_box),
             ),
           ),
         ],
@@ -321,7 +321,7 @@ class _ChartState extends State<_ChartScreen> {
         builder: (context, setState) => SimpleDialog(
           title: const Text('Nueva Presentación (Plano Hodge)'),
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           children: [
             Form(
               key: formKey,

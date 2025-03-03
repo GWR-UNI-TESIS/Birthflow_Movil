@@ -1,6 +1,7 @@
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,6 @@ class _CervicalDilationCreateScreenState
   final TextEditingController _valueController = TextEditingController();
   final TextEditingController _dateTimeController = TextEditingController();
 
-  TimeOfDay? _selectedTime;
   bool _remOrRam = false;
 
   @override
@@ -37,13 +37,9 @@ class _CervicalDilationCreateScreenState
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
 
-      final selectedDateTime = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        _selectedTime?.hour ?? 0,
-        _selectedTime?.minute ?? 0,
-      );
+      final selectedDateTime =
+          DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
+
       final event = SaveCervicalDilation(
         partographId: widget.partographId,
         value: double.parse(_valueController.text),
@@ -52,27 +48,6 @@ class _CervicalDilationCreateScreenState
       );
 
       bloc.add(event);
-    }
-  }
-
-  Future<void> _selectTime(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTime ?? TimeOfDay.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _selectedTime = picked;
-        _dateTimeController.text = DateFormat('HH:mm:ss').format(
-          DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day,
-            picked.hour,
-            picked.minute,
-          ),
-        );
-      });
     }
   }
 
@@ -107,7 +82,7 @@ class _CervicalDilationCreateScreenState
           children: [
             _buildValueField(),
             const SizedBox(height: 20),
-            _buildTimeField(context),
+            DateTimePickerField(dateTimeController: _dateTimeController),
             _buildSwitch(),
             const SizedBox(height: 20),
             FilledButton.icon(
@@ -138,29 +113,6 @@ class _CervicalDilationCreateScreenState
         }
         return null;
       },
-    );
-  }
-
-  Widget _buildTimeField(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _selectTime(context),
-      child: AbsorbPointer(
-        child: TextFormField(
-          controller: _dateTimeController,
-          decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.calendar_today),
-            border: OutlineInputBorder(),
-            labelText: 'Hora',
-            hintText: 'Seleccione una hora',
-          ),
-          validator: (value) {
-            if (_selectedTime == null) {
-              return 'Por favor seleccione una hora';
-            }
-            return null;
-          },
-        ),
-      ),
     );
   }
 

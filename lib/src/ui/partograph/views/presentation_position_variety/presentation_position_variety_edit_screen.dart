@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/dropdown.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
@@ -29,10 +30,10 @@ class PresentationPositionVarietyEditScreen extends StatefulWidget {
 class _PresentationPositionVarietyEditScreenState
     extends State<PresentationPositionVarietyEditScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _timeController;
+  final TextEditingController _dateTimeController = TextEditingController();
   Position? _selectedPosition;
   HodgePlane? _selectedHodgePlane;
-  DateTime _selectTime = DateTime.now();
+  DateTime initialValue = DateTime.now();
 
   @override
   void initState() {
@@ -52,13 +53,7 @@ class _PresentationPositionVarietyEditScreenState
         )
         .first;
 
-    _selectTime = item.time;
-    _timeController = TextEditingController(
-      // ignore: unnecessary_null_comparison
-      text: item != null
-          ? DateFormat('HH:mm:ss').format(item.time)
-          : DateFormat('HH:mm:ss').format(DateTime.now()),
-    );
+    initialValue = item.time;
 
     final catalog = context.read<CatalogCubit>().state;
     // ignore: unnecessary_null_comparison
@@ -80,39 +75,22 @@ class _PresentationPositionVarietyEditScreenState
 
   @override
   void dispose() {
-    _timeController.dispose();
+    _dateTimeController.dispose();
     super.dispose();
-  }
-
-  Future<void> _selectTimeFunction(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _selectTime = DateTime(
-          DateTime.now().year,
-          DateTime.now().month,
-          DateTime.now().day,
-          picked.hour,
-          picked.minute,
-        );
-        _timeController.text = DateFormat('HH:mm:ss').format(_selectTime);
-      });
-    }
   }
 
   void _saveData() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
+      final selectedDateTime =
+          DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
       final event = UpdatePresentationPositionVariety(
         id: widget.data.presentationPositionVarietyId!,
         partographId: widget.data.partographId,
         hodgePlane: _selectedHodgePlane!.id,
         position: _selectedPosition!.id,
-        time: _selectTime,
+        time: selectedDateTime,
       );
 
       bloc.add(event);
@@ -178,24 +156,9 @@ class _PresentationPositionVarietyEditScreenState
           initialValue: _selectedHodgePlane,
         ),
         const SizedBox(height: 16),
-        GestureDetector(
-          onTap: () => _selectTimeFunction(context),
-          child: AbsorbPointer(
-            child: TextFormField(
-              controller: _timeController,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.access_time),
-                border: OutlineInputBorder(),
-                labelText: 'Hora',
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Seleccione una hora';
-                }
-                return null;
-              },
-            ),
-          ),
+        DateTimePickerField(
+          dateTimeController: _dateTimeController,
+          initialDateTime: initialValue,
         ),
         const SizedBox(height: 20),
         ElevatedButton(

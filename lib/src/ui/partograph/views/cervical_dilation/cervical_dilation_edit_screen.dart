@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _valueController = TextEditingController();
   final TextEditingController _dateTimeController = TextEditingController();
-  TimeOfDay? _selectedTime;
+  DateTime? initialDateTime;
   bool _remOrRam = false;
 
   @override
@@ -38,7 +39,8 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
     final partographBloc = context.watch<PartographBloc>().state;
     if (partographBloc is Loaded) {
       final cervicalDilations = partographBloc.whenOrNull(
-        loaded: (partograph, message, isDeleteEvent) => partograph.cervicalDilations,
+        loaded: (partograph, message, isDeleteEvent) =>
+            partograph.cervicalDilations,
       );
 
       final cervicalDilation = cervicalDilations!
@@ -48,15 +50,8 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
           .first;
 
       _valueController.text = cervicalDilation.value.toString();
-      // ignore: unnecessary_null_comparison
-      _dateTimeController.text = cervicalDilation != null
-          ? DateFormat('HH:mm:ss').format(cervicalDilation.hour)
-          : '';
 
-      // ignore: unnecessary_null_comparison
-      _selectedTime = cervicalDilation != null
-          ? TimeOfDay.fromDateTime(cervicalDilation.hour)
-          : null;
+      initialDateTime = cervicalDilation.hour;
       _remOrRam = cervicalDilation.remOrRam;
     }
   }
@@ -71,13 +66,8 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
   void _updateCervicalDilation() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
-      final selectedDateTime = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        _selectedTime?.hour ?? DateTime.now().hour,
-        _selectedTime?.minute ?? DateTime.now().minute,
-      );
+      final selectedDateTime =
+          DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
       final event = UpdateCervicalDilation(
         id: widget.cervicalDilationEditData.cervicalDilationId!,
@@ -88,23 +78,6 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
       );
 
       bloc.add(event);
-    }
-  }
-
-  Future<void> _selectTime(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTime ?? TimeOfDay.now(),
-    );
-    if (picked != null && picked != _selectedTime) {
-      setState(() {
-        _selectedTime = picked;
-        final now = DateTime.now();
-        final dateTime =
-            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-
-        _dateTimeController.text = DateFormat('HH:mm:ss').format(dateTime);
-      });
     }
   }
 
@@ -140,7 +113,10 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
           children: [
             _buildValueField(),
             const SizedBox(height: 20),
-            _buildTimeField(context),
+            DateTimePickerField(
+              dateTimeController: _dateTimeController,
+              initialDateTime: initialDateTime,
+            ),
             _buildSwitch(),
             const SizedBox(height: 20),
             FilledButton.icon(
@@ -171,29 +147,6 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
         }
         return null;
       },
-    );
-  }
-
-  Widget _buildTimeField(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _selectTime(context),
-      child: AbsorbPointer(
-        child: TextFormField(
-          controller: _dateTimeController,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.calendar_today),
-            border: const OutlineInputBorder(),
-            labelText: 'Hora',
-            hintText: _selectedTime?.format(context) ?? 'Seleccione una hora',
-          ),
-          validator: (value) {
-            if (_selectedTime == null) {
-              return 'Por favor seleccione una hora';
-            }
-            return null;
-          },
-        ),
-      ),
     );
   }
 

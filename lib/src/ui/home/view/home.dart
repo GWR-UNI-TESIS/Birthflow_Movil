@@ -113,7 +113,47 @@ class HomeScreen extends StatelessWidget {
                       child: _buildPartographsList(data),
                     );
                   },
-                  error: (message) => Center(child: Text('Error: $message')),
+                  error: (message) {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        // Dispara el evento FetchPartographs para recargar los datos
+                        context
+                            .read<PartographsBloc>()
+                            .add(FetchPartographs(userId: userId));
+                      },
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SingleChildScrollView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: constraints.maxHeight,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/503_error_service.png',
+                                      height: 260.0,
+                                      fit: BoxFit.fill,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      message,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
                   empty: () {
                     return RefreshIndicator(
                       onRefresh: () async {
@@ -122,7 +162,29 @@ class HomeScreen extends StatelessWidget {
                             .read<PartographsBloc>()
                             .add(FetchPartographs(userId: userId));
                       },
-                      child: const Center(child: Text('No hay datos')),
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/no_data.png',
+                                  height: 260.0,
+                                  fit: BoxFit.fill,
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'No hay datos',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -230,8 +292,14 @@ class NotificationsDrawer extends StatelessWidget {
         children: [
           AppBar(
             title: const Text('Notificaciones'),
+            elevation: 2,
             automaticallyImplyLeading: false,
-            
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.notifications_none),
+              ),
+            ],
           ),
           Expanded(
             child: BlocBuilder<NotificationsBloc, NotificationsState>(

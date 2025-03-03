@@ -94,7 +94,9 @@ flutter:
   assets:
     - .env.development
     - assets/welcome_illustration.png
-    
+    - assets/503_error_service.png
+    - assets/500_internal_server.png
+    - assets/no_data.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

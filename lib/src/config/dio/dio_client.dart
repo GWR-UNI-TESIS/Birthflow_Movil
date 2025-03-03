@@ -1,7 +1,6 @@
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/domain/auth/usecases/refresh_usecase.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class DioClient {
   late Dio _dio;
@@ -86,11 +85,8 @@ class DioClient {
   }
 
   void mostrarPantallaDeError(String message) {
-    final navigator = locator<GlobalKey<NavigatorState>>().currentState;
-    if (navigator != null) {
-      navigator.pushNamed('/error', arguments: message);
-    }
-  }
+
+}
 
   Dio get dio => _dio;
 }

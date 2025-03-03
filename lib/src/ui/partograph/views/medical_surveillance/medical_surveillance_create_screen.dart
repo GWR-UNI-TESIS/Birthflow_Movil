@@ -3,6 +3,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/widgets/custom_dropdown.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/arterial_pressure_widget.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_button.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
@@ -27,7 +28,7 @@ class MedicalSurveillanceCreateScreen extends StatefulWidget {
 class _MedicalSurveillanceCreateScreenState
     extends State<MedicalSurveillanceCreateScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _timeController = TextEditingController();
+  final TextEditingController _dateTimeController = TextEditingController();
 
   late final ValueNotifier<String> _arterialPressureValue;
   late final ValueNotifier<String> _maternalPulseValue;
@@ -37,8 +38,7 @@ class _MedicalSurveillanceCreateScreenState
   String _maternalPositionValue = 'Lat. Derecho';
   String _frequencyContractions = '';
   String _pain = '';
-  DateTime _dateTime = DateTime.now();
-
+  
   @override
   void initState() {
     super.initState();
@@ -50,7 +50,7 @@ class _MedicalSurveillanceCreateScreenState
 
   @override
   void dispose() {
-    _timeController.dispose();
+    _dateTimeController.dispose();
     _arterialPressureValue.dispose();
     _maternalPulseValue.dispose();
     _fetalHeartRateValue.dispose();
@@ -61,6 +61,8 @@ class _MedicalSurveillanceCreateScreenState
   void _handleSave() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
+      final selectedDateTime =
+          DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
       final event = CreateMedicalSurveillance(
         partographId: widget.partographId,
@@ -72,7 +74,7 @@ class _MedicalSurveillanceCreateScreenState
         contractionsDuration: _contractionsDurationValue.value,
         frequencyContractions: _frequencyContractions,
         pain: _pain,
-        time: _dateTime,
+        time: selectedDateTime,
       );
 
       bloc.add(event);
@@ -112,7 +114,9 @@ class _MedicalSurveillanceCreateScreenState
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildTimePicker(),
+          DateTimePickerField(
+            dateTimeController: _dateTimeController,
+          ),
           const SizedBox(height: 20),
           _buildDropdownButton(
             labelText: 'Posición Materna',
@@ -174,36 +178,6 @@ class _MedicalSurveillanceCreateScreenState
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildTimePicker() {
-    return TextFormField(
-      controller: _timeController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Tiempo',
-      ),
-      readOnly: true,
-      onTap: () async {
-        _timeController.text = DateFormat('HH:mm:ss').format(_dateTime);
-        final pickedTime = await showTimePicker(
-          context: context,
-          initialTime: TimeOfDay.fromDateTime(_dateTime),
-        );
-        if (pickedTime != null) {
-          _dateTime = DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day,
-            pickedTime.hour,
-            pickedTime.minute,
-          );
-          setState(() {
-            _timeController.text = DateFormat('HH:mm:ss').format(_dateTime);
-          });
-        }
-      },
     );
   }
 

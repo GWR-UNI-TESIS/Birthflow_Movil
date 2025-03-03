@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _ContractionFrequencyEditScreenState
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
-  TimeOfDay? _selectedTime;
+  DateTime? initialDateTime;
 
   @override
   void initState() {
@@ -34,12 +35,11 @@ class _ContractionFrequencyEditScreenState
   }
 
   void _initializeControllers() {
-    final contractionFrequencies = context
-        .watch<PartographBloc>()
-        .state
-        .whenOrNull(
-          loaded: (partograph, message, isDeleteEvent) => partograph.contractionFrequencies,
-        );
+    final contractionFrequencies =
+        context.watch<PartographBloc>().state.whenOrNull(
+              loaded: (partograph, message, isDeleteEvent) =>
+                  partograph.contractionFrequencies,
+            );
 
     final contractionFrequency = contractionFrequencies!
         .where(
@@ -52,16 +52,9 @@ class _ContractionFrequencyEditScreenState
     _valueController = TextEditingController(
       text: contractionFrequency.value,
     );
-    _dateTimeController = TextEditingController(
-      // ignore: unnecessary_null_comparison
-      text: contractionFrequency != null
-          ? DateFormat('HH:mm:ss').format(contractionFrequency.time)
-          : '',
-    );
+
     // ignore: unnecessary_null_comparison
-    _selectedTime = contractionFrequency != null
-        ? TimeOfDay.fromDateTime(contractionFrequency.time)
-        : null;
+    initialDateTime = contractionFrequency.time;
   }
 
   @override
@@ -74,13 +67,8 @@ class _ContractionFrequencyEditScreenState
   void _updateContractionFrequency() {
     if (_formKey.currentState?.validate() ?? false) {
       final bloc = context.read<PartographBloc>();
-      final selectedDateTime = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        _selectedTime?.hour ?? DateTime.now().hour,
-        _selectedTime?.minute ?? DateTime.now().minute,
-      );
+      final selectedDateTime =
+          DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
       final event = UpdateContractionFrequency(
         id: widget.contractionFrequencyEditData.contractionFrequencyId!,
@@ -90,22 +78,6 @@ class _ContractionFrequencyEditScreenState
       );
 
       bloc.add(event);
-    }
-  }
-
-  Future<void> _selectTime(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTime ?? TimeOfDay.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _selectedTime = picked;
-        final now = DateTime.now();
-        final dateTime =
-            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-        _dateTimeController.text = DateFormat('HH:mm:ss').format(dateTime);
-      });
     }
   }
 
@@ -134,7 +106,10 @@ class _ContractionFrequencyEditScreenState
                 children: [
                   _buildValueField(),
                   const SizedBox(height: 20),
-                  _buildTimeField(context),
+                  DateTimePickerField(
+                    dateTimeController: _dateTimeController,
+                    initialDateTime: initialDateTime,
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _updateContractionFrequency,
@@ -166,29 +141,6 @@ class _ContractionFrequencyEditScreenState
         }
         return null;
       },
-    );
-  }
-
-  Widget _buildTimeField(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _selectTime(context),
-      child: AbsorbPointer(
-        child: TextFormField(
-          controller: _dateTimeController,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.calendar_today),
-            border: const OutlineInputBorder(),
-            labelText: 'Hora',
-            hintText: _selectedTime?.format(context) ?? 'Seleccione una hora',
-          ),
-          validator: (value) {
-            if (_selectedTime == null) {
-              return 'Por favor seleccione una hora';
-            }
-            return null;
-          },
-        ),
-      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/widgets/custom_dropdown.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/arterial_pressure_widget.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/widgets/custom_dropdown_button.dart';
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
@@ -28,7 +29,7 @@ class MedicalSurveillanceEditScreen extends StatefulWidget {
 class _MedicalSurveillanceEditScreenState
     extends State<MedicalSurveillanceEditScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _timeController = TextEditingController();
+  final TextEditingController _dateTimeController = TextEditingController();
 
   // Inicialización temprana
   late ValueNotifier<String> _arterialPressureValue;
@@ -39,7 +40,7 @@ class _MedicalSurveillanceEditScreenState
   String _maternalPositionValue = '';
   String _frequencyContractions = '';
   String _pain = '';
-  DateTime _dateTime = DateTime.now();
+  DateTime _initialDateTime = DateTime.now();
 
   bool _isInitialized = false; // Bandera para evitar sobrescribir valores
 
@@ -71,8 +72,7 @@ class _MedicalSurveillanceEditScreenState
           )
           .first;
       if (!_isInitialized) {
-        _timeController.text = DateFormat('HH:mm:ss').format(item.time);
-        _dateTime = item.time;
+        _initialDateTime = item.time;
         _maternalPositionValue = item.maternalPosition;
         _frequencyContractions = item.frequencyContractions;
         _pain = item.pain;
@@ -89,7 +89,7 @@ class _MedicalSurveillanceEditScreenState
 
   @override
   void dispose() {
-    _timeController.dispose();
+    _dateTimeController.dispose();
     _arterialPressureValue.dispose();
     _maternalPulseValue.dispose();
     _fetalHeartRateValue.dispose();
@@ -102,7 +102,8 @@ class _MedicalSurveillanceEditScreenState
       final bloc = context.read<PartographBloc>();
 
       final medicalSurveillanceTable = bloc.state.whenOrNull(
-        loaded: (partograph, message, isDeleteEvent) => partograph.medicalSurveillanceTable,
+        loaded: (partograph, message, isDeleteEvent) =>
+            partograph.medicalSurveillanceTable,
       );
 
       final item = medicalSurveillanceTable!
@@ -112,6 +113,9 @@ class _MedicalSurveillanceEditScreenState
                 widget.medicalSurveillanceEditData.medicalSurveillanceTableId,
           )
           .first;
+
+      final selectedDateTime =
+          DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
       final event = UpdateMedicalSurveillance(
         id: item.id,
@@ -124,7 +128,7 @@ class _MedicalSurveillanceEditScreenState
         contractionsDuration: _contractionsDurationValue.value,
         frequencyContractions: _frequencyContractions,
         pain: _pain,
-        time: _dateTime,
+        time: selectedDateTime,
       );
 
       bloc.add(event);
@@ -165,7 +169,10 @@ class _MedicalSurveillanceEditScreenState
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildTimePicker(),
+          DateTimePickerField(
+            dateTimeController: _dateTimeController,
+            initialDateTime: _initialDateTime,
+          ),
           const SizedBox(height: 20),
           _buildDropdownButton(
             labelText: 'Posición Materna',
@@ -226,36 +233,6 @@ class _MedicalSurveillanceEditScreenState
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildTimePicker() {
-    return TextFormField(
-      controller: _timeController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Hora',
-      ),
-      readOnly: true,
-      onTap: () async {
-        _timeController.text = DateFormat('HH:mm:ss').format(_dateTime);
-        final pickedTime = await showTimePicker(
-          context: context,
-          initialTime: TimeOfDay.fromDateTime(_dateTime),
-        );
-        if (pickedTime != null) {
-          _dateTime = DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day,
-            pickedTime.hour,
-            pickedTime.minute,
-          );
-          setState(() {
-            _timeController.text = DateFormat('HH:mm:ss').format(_dateTime);
-          });
-        }
-      },
     );
   }
 
