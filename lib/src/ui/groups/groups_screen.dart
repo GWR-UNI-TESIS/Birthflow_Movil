@@ -36,7 +36,47 @@ class GroupsView extends StatelessWidget {
               loading: () => const Center(child: CircularProgressIndicator()),
               loaded: (groups) => GroupsList(groups: groups),
               actionSuccess: (_) => Container(),
-              error: (message) => Center(child: Text(message)),
+              error: (message) {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    
+                    context.read<GroupsBloc>().add(
+                          const GroupsEvent.loadGroups(),
+                        );
+                  },
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/503_error_service.png',
+                                  height: 260.0,
+                                  fit: BoxFit.fill,
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  message,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             );
           },
         ),

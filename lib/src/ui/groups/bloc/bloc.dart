@@ -21,12 +21,16 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
         _updateGroupUseCase = updateGroupUseCase,
         _deleteGroupUseCase = deleteGroupUseCase,
         super(const GroupsState.loading()) {
-     on<LoadGroups>((event, emit) async {
+    on<LoadGroups>((event, emit) async {
       try {
         final groups = await _getGroupsUseCase.execute();
         emit(GroupsState.loaded(groups ?? []));
       } catch (e) {
-        emit(GroupsState.error(e.toString()));
+        emit(
+          const GroupsState.error(
+            'Ha ocurrido un error al obtener los grupos del usuario',
+          ),
+        );
       }
     });
 
@@ -49,7 +53,6 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
         emit(GroupsState.error(e.toString()));
       }
     });
-
 
     on<DeleteGroup>((event, emit) async {
       try {

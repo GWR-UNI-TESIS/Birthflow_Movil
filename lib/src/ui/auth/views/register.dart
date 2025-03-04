@@ -45,27 +45,31 @@ class _RegisterView extends StatelessWidget {
     final isLoading = context.watch<AuthenticationBloc>().state is AuthLoading;
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Solicitud de Registro'),
+        centerTitle: true,
+      ),
       body: LoadingOverlay(
         isLoading: isLoading,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40),
+            padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 40),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Registro',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    'Complete los siguientes datos para solicitar su cuenta. Un administrador revisará su solicitud y aprobará la creación de su cuenta.',
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: _nameController,
                     decoration: const InputDecoration(
                       labelText: 'Nombres',
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.person),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -80,6 +84,7 @@ class _RegisterView extends StatelessWidget {
                     decoration: const InputDecoration(
                       labelText: 'Apellidos',
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.person_outline),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -94,6 +99,7 @@ class _RegisterView extends StatelessWidget {
                     decoration: const InputDecoration(
                       labelText: 'Nombre de Usuario',
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.account_circle),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -108,6 +114,7 @@ class _RegisterView extends StatelessWidget {
                     decoration: const InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.email),
                     ),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
@@ -123,34 +130,29 @@ class _RegisterView extends StatelessWidget {
                     decoration: const InputDecoration(
                       labelText: 'Celular',
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.phone),
                     ),
                     keyboardType: TextInputType.phone,
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
-                    width: size.width / 1.3,
+                    width: size.width,
                     child: FilledButton(
                       onPressed: () {
-                        final name = _nameController.text;
-                        final secondname = _secondNamesController.text;
-                        final username = _usernameController.text;
-                        final email = _emailController.text;
-                        final phone = _phoneController.text;
-
                         if (_formKey.currentState!.validate()) {
                           context.read<AuthenticationBloc>().add(
                                 Register(
                                   id: 0,
-                                  nombres: name,
-                                  apellidos: secondname,
-                                  nombreUsuario: username,
-                                  email: email,
-                                  phoneNumber: phone,
+                                  nombres: _nameController.text,
+                                  apellidos: _secondNamesController.text,
+                                  nombreUsuario: _usernameController.text,
+                                  email: _emailController.text,
+                                  phoneNumber: _phoneController.text,
                                 ),
                               );
                         }
                       },
-                      child: const Text('Registrar'),
+                      child: const Text('Enviar Solicitud de Registro'),
                     ),
                   ),
                 ],

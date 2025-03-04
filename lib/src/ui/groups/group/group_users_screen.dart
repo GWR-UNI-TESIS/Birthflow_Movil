@@ -14,8 +14,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class _UserProfiler {
   final String userId;
   final String name;
+  final String userName;
 
-  _UserProfiler({required this.userId, required this.name});
+  _UserProfiler({
+    required this.userId,
+    required this.name,
+    required this.userName,
+  });
 }
 
 class GroupProfiler {
@@ -111,7 +116,11 @@ class GroupUsersView extends StatelessWidget {
             loaded: (users) {
               final mappedUsers = users
                   .map(
-                    (user) => _UserProfiler(userId: user.id!, name: user.name),
+                    (user) => _UserProfiler(
+                      userId: user.id!,
+                      name: '${user.name} ${user.secondName}',
+                      userName: user.userName,
+                    ),
                   )
                   .toList();
               return UsersList(
@@ -120,7 +129,48 @@ class GroupUsersView extends StatelessWidget {
                 isOwner: owner,
               );
             },
-            error: (message) => Center(child: Text(message)),
+            error: (message) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  context.read<UsersBloc>().add(
+                        UsersEvent.loadUsers(
+                          profiler.groupId,
+                        ),
+                      );
+                },
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/503_error_service.png',
+                                height: 260.0,
+                                fit: BoxFit.fill,
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                message,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
           );
         },
       ),
@@ -146,7 +196,8 @@ class UsersList extends StatelessWidget {
       itemBuilder: (context, index) {
         final user = users[index];
         return ListTile(
-          title: Text(user.name),
+          title: Text('Nombre: ${user.name}'),
+          subtitle: Text('Usuario: ${user.userName}'),
           trailing: IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () {

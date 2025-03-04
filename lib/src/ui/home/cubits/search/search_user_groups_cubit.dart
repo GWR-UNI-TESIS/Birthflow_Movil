@@ -15,7 +15,7 @@ class UserGroupSearchCubit extends Cubit<SearchState> {
       final results = await _getGroupUseCase.execute(query: query);
       emit(SearchState.success(results ?? []));
     } catch (e) {
-      emit(SearchState.error(e.toString()));
+      emit(const SearchState.error('Ocurrio un error buscando los usuarios y grupos'));
     }
   }
 

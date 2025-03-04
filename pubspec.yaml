@@ -78,6 +78,10 @@ dev_dependencies:
   lint: ^2.0.0
   retrofit_generator: ^8.1.0
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/birthflow-icon-logo.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -97,7 +101,9 @@ flutter:
     - assets/503_error_service.png
     - assets/500_internal_server.png
     - assets/no_data.png
-
+    - assets/birthflow_full_logo.png
+    - assets/birthflow-icon-logo.png
+    - assets/welcome-amico.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

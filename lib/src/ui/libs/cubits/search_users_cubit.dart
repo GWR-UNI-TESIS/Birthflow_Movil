@@ -15,7 +15,11 @@ class SearchUsersCubit extends Cubit<SearchUsersState> {
       final results = await _getSearchUserUseCase.execute(query: query);
       emit(SearchUsersState.success(results ?? []));
     } catch (e) {
-      emit(SearchUsersState.error(e.toString()));
+      emit(
+        const SearchUsersState.error(
+          'Ha ocurrido un error vuelva a intentarlo mas tarde',
+        ),
+      );
     }
   }
 

@@ -15,7 +15,6 @@ class LoginScreen extends StatelessWidget with SnackbarMixin {
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) {
-        // Si el estado es Unauthenticated y hay un mensaje de error, muestra un SnackBar
         if (state is Unauthenticated) {
           if (state.message != null) {
             showErrorSnackbar(state.message!);
@@ -35,9 +34,9 @@ class _LoginView extends StatefulWidget {
 class _LoginViewState extends State<_LoginView> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controladores para los campos de usuario y contraseña
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,31 +44,27 @@ class _LoginViewState extends State<_LoginView> {
     final isLoading = context.watch<AuthenticationBloc>().state is AuthLoading;
 
     return PopScope(
-      canPop:
-          !isLoading, // Deshabilitar la acción de retroceso cuando está cargando
+      canPop: !isLoading,
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text('Iniciar sesión'),
+        ),
         body: LoadingOverlay(
           isLoading: isLoading,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(40.0),
+            padding: const EdgeInsets.all(30.0),
             child: Center(
               child: Form(
                 key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'BirthFlow',
-                      style: Theme.of(context).textTheme.displaySmall,
+                    Image.asset(
+                      'assets/birthflow_full_logo.png',
+                      height: 150.0,
+                      fit: BoxFit.fill,
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Iniciar sesión',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 40),
-                    // Email
+                    const SizedBox(height: 20),
                     TextFormField(
                       controller: _usernameController,
                       keyboardType: TextInputType.emailAddress,
@@ -84,15 +79,25 @@ class _LoginViewState extends State<_LoginView> {
                         return null;
                       },
                     ),
-
                     const SizedBox(height: 20),
-
                     TextFormField(
                       controller: _passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      obscureText: _obscurePassword,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
                         labelText: 'Contraseña',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -104,15 +109,11 @@ class _LoginViewState extends State<_LoginView> {
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
-                        context.go(
-                          AppPaths.welcome.login.forgetPassword.path,
-                        );
+                        context.go(AppPaths.welcome.login.forgetPassword.path);
                       },
-                      child: const Text('Has olvidado tu contraseña?'),
+                      child: const Text('¿Has olvidado tu contraseña?'),
                     ),
-
                     const SizedBox(height: 50),
-                    // Button
                     SizedBox(
                       width: size.width / 1.3,
                       child: FilledButton(
@@ -120,19 +121,13 @@ class _LoginViewState extends State<_LoginView> {
                           if (_formKey.currentState!.validate()) {
                             final username = _usernameController.text;
                             final password = _passwordController.text;
-
-                            // Dispara el evento del bloc con los valores ingresados
                             context.read<AuthenticationBloc>().add(
                                   LoggedIn(
-                                    username: username,
-                                    password: password,
-                                  ),
+                                      username: username, password: password),
                                 );
                           }
                         },
-                        child: const Text(
-                          'Continuar',
-                        ),
+                        child: const Text('Continuar'),
                       ),
                     ),
                   ],
@@ -147,7 +142,6 @@ class _LoginViewState extends State<_LoginView> {
 
   @override
   void dispose() {
-    // Limpia los controladores cuando ya no se necesiten
     _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();

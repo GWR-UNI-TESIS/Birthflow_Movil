@@ -14,12 +14,13 @@ class WelcomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-              'assets/welcome_illustration.png',
-              height: 260.0,
+              'assets/birthflow_full_logo.png',
+              height: 220.0,
               fit: BoxFit.fill,
+              
             ),
             Text(
-              'Bienvenido a Birthflow',
+              'Bienvenido',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 5.0),

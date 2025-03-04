@@ -44,20 +44,21 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget _buildSplashContent() {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido
         children: [
-          Text(
-            'BirthFlow',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Image.asset(
+            'assets/birthflow_full_logo.png',
+            height: 260.0,
+            fit: BoxFit.fill,
           ),
-          Text(
+          const Text(
             'Sistema de gestión de partogramas',
             style: TextStyle(fontSize: 16),
           ),
-          SizedBox(height: 20),
-          CircularProgressIndicator(), // Muestra un indicador de progreso circular
+          const SizedBox(height: 20),
+          const CircularProgressIndicator(), // Muestra un indicador de progreso circular
         ],
       ),
     );

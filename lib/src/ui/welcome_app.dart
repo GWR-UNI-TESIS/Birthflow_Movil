@@ -70,6 +70,12 @@ class WelcomeAppScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              'assets/welcome-amico.png',
+              height: 260.0,
+              fit: BoxFit.fill,
+            ),
+            const SizedBox(height: 20),
             const Text(
               '¡Bienvenido a Birthflow!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

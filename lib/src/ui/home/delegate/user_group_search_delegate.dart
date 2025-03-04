@@ -52,7 +52,25 @@ class UserGroupSearchDelegate extends SearchDelegate<SearchUserGroup?> {
               );
             },
           ),
-          error: (message) => Center(child: Text('Error: $message')),
+          error: (message) => Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/503_error_service.png',
+                  height: 260.0,
+                  fit: BoxFit.fill,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  message,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
           orElse: () =>
               const Center(child: Text('No se encontraron resultados')),
         );

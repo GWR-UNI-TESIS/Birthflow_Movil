@@ -52,7 +52,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -71,7 +71,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -105,7 +105,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -126,7 +126,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -162,7 +162,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -180,6 +180,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       await _shareService.createUserGroup(token, request);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      rethrow;
     }
   }
 
@@ -197,6 +198,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       await _shareService.deleteUserGroup(token, request);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
+      rethrow;
     }
   }
 
@@ -215,7 +217,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -239,7 +241,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       return _mapper.convert<GroupResponse, Group>(result.response);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -267,7 +269,7 @@ class ShareRepositoryImplementation implements ShareRepository {
           .convert<PartographGroupResponse, PartographGroup>(result.response);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -295,7 +297,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -330,7 +332,8 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
+
     }
   }
 
@@ -363,7 +366,8 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
+
     }
   }
 
@@ -385,7 +389,8 @@ class ShareRepositoryImplementation implements ShareRepository {
       return _mapper.convert<GroupResponse, Group>(result.response);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
+
     }
   }
 
@@ -410,7 +415,7 @@ class ShareRepositoryImplementation implements ShareRepository {
           .convert<PartographGroupResponse, PartographGroup>(result.response);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -438,7 +443,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -469,7 +474,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -496,7 +501,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -521,7 +526,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       return _mapper.convert<GroupResponse, Group>(result.response);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -549,7 +554,7 @@ class ShareRepositoryImplementation implements ShareRepository {
           .convert<PartographGroupResponse, PartographGroup>(result.response);
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -584,7 +589,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+      rethrow;
     }
   }
 
@@ -617,7 +622,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       );
     } catch (e, stackTrace) {
       _logger.e('Share exception', error: e, stackTrace: stackTrace);
-      return null;
+       rethrow;
     }
   }
 }

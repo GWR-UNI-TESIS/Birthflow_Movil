@@ -24,7 +24,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
         final users = await _getUsersInGroupUseCase.execute(groupId: event.groupId);
         emit(UsersState.loaded(users ?? []));
       } catch (e) {
-        emit(UsersState.error(e.toString()));
+        emit(const UsersState.error('Ha ocurrido un error al obtener los usuarios del grupo'));
       }
     });
 
