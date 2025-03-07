@@ -28,6 +28,7 @@ class _ContractionFrequencyEditScreenState
   late final TextEditingController _valueController;
   late final TextEditingController _dateTimeController;
   DateTime? initialDateTime;
+  bool _isInitialized = false; // Bandera para evitar sobrescribir valores
 
   @override
   void initState() {
@@ -48,13 +49,15 @@ class _ContractionFrequencyEditScreenState
               widget.contractionFrequencyEditData.contractionFrequencyId,
         )
         .first;
+    if (!_isInitialized) {
+      _valueController = TextEditingController(
+        text: contractionFrequency.value,
+      );
 
-    _valueController = TextEditingController(
-      text: contractionFrequency.value,
-    );
-
-    // ignore: unnecessary_null_comparison
-    initialDateTime = contractionFrequency.time;
+      // ignore: unnecessary_null_comparison
+      initialDateTime = contractionFrequency.time;
+      _isInitialized = true;
+    }
   }
 
   @override

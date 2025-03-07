@@ -48,7 +48,7 @@ class AuthenticationBloc
     try {
       final result = await _refreshUsecase.execute();
       if (result.authenticationCode == AuthenticationCode.success) {
-        emit(Authenticated(response: result.user!));
+        emit(Authenticated(response: result.user!, message: result.message));
       } else {
         emit(const Unauthenticated());
       }
@@ -69,7 +69,7 @@ class AuthenticationBloc
       );
 
       if (result.authenticationCode == AuthenticationCode.success) {
-        emit(Authenticated(response: result.user!));
+        emit(Authenticated(response: result.user!, message: result.message));
       }
 
       if (result.authenticationCode == AuthenticationCode.unauthorized) {

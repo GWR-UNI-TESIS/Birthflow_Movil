@@ -43,7 +43,7 @@ class ShareRepositoryImplementation implements ShareRepository {
       final tokenGuardado = await _tokenStorage.getAccessToken();
       final token = 'Bearer $tokenGuardado';
 
-      final result = await _shareService.getSearchUserGroup(token, query);
+      final result = await _shareService.getSearchUsers(token, query);
 
       if (result.response == null) return null;
 

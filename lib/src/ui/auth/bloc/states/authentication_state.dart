@@ -17,6 +17,7 @@ class AuthenticationState with _$AuthenticationState {
   // Estado después de una autenticación exitosa (ej. inicio de sesión)
   const factory AuthenticationState.authenticated({
     required User response,
+    required String message,
   }) = Authenticated;
 
   // Estado después de una autenticación fallida

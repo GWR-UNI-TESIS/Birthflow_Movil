@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<AuthenticationBloc>().state;
     final String userId = state.maybeWhen(
-      authenticated: (response) => response.id!,
+      authenticated: (response, message) => response.id!,
       orElse: () => '',
     );
 

@@ -20,6 +20,9 @@ class LoginScreen extends StatelessWidget with SnackbarMixin {
             showErrorSnackbar(state.message!);
           }
         }
+        if (state is Authenticated) {
+          showSnackbar(state.message);
+        }
       },
       child: _LoginView(),
     );
@@ -123,7 +126,9 @@ class _LoginViewState extends State<_LoginView> {
                             final password = _passwordController.text;
                             context.read<AuthenticationBloc>().add(
                                   LoggedIn(
-                                      username: username, password: password),
+                                    username: username,
+                                    password: password,
+                                  ),
                                 );
                           }
                         },

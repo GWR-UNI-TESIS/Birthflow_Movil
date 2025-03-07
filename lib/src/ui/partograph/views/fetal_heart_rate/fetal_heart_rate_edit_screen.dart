@@ -29,7 +29,7 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
   final TextEditingController _dateTimeController = TextEditingController();
   DateTime? initialDateTime;
   String? _fetalHeartRateValue;
-
+  bool _isInitialized = false; // Bandera para evitar sobrescribir valores
   @override
   void initState() {
     super.initState();
@@ -37,7 +37,8 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
 
   void _initializeControllers() {
     final fetalheartrates = context.watch<PartographBloc>().state.whenOrNull(
-          loaded: (partograph, message, isDeleteEvent) => partograph.contractionFrequencies,
+          loaded: (partograph, message, isDeleteEvent) =>
+              partograph.contractionFrequencies,
         );
 
     final fetalHeartRate = fetalheartrates!
@@ -45,10 +46,12 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
           (e) => e.id == widget.fetalHeartRateEditData.fetalHeartRateId,
         )
         .first;
+    if (!_isInitialized) {
+      _fetalHeartRateValue = fetalHeartRate.value;
 
-    _fetalHeartRateValue = fetalHeartRate.value;
-    
-    initialDateTime = fetalHeartRate.time;
+      initialDateTime = fetalHeartRate.time;
+      _isInitialized = true;
+    }
   }
 
   @override
@@ -63,7 +66,6 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
       final selectedDateTime =
           DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
-
       final event = UpdateFetalHeartRate(
         id: widget.fetalHeartRateEditData.fetalHeartRateId!,
         partographId: widget.fetalHeartRateEditData.partographId,
@@ -74,7 +76,6 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
       bloc.add(event);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +107,9 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
                   ),
                   const SizedBox(height: 20),
                   DateTimePickerField(
-              dateTimeController: _dateTimeController,
-              initialDateTime: initialDateTime,
-            ),
+                    dateTimeController: _dateTimeController,
+                    initialDateTime: initialDateTime,
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _updateFetalHeartRate,

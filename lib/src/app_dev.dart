@@ -48,6 +48,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph_history/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 class AppDev extends StatelessWidget {
@@ -198,6 +199,15 @@ class AppEntryState extends State<AppEntry> {
       },
       child: MaterialApp.router(
         title: 'Birthflow',
+        locale: const Locale('es', 'ES'), // Establece el idioma a español
+      supportedLocales: const [
+        Locale('es', 'ES'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
         scaffoldMessengerKey: locator<GlobalKey<ScaffoldMessengerState>>(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

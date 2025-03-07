@@ -34,7 +34,7 @@ class ArchivedPartographScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     const Text(
-                      'No se encuentran partogramas en favoritos',
+                      'No se encuentran partogramas en archivados',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],

@@ -67,6 +67,7 @@ class _DateTimePickerFieldState extends State<DateTimePickerField> {
       initialDate: initialDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
+      locale: const Locale('es', 'ES'),
     );
 
     if (pickedDate != null) {

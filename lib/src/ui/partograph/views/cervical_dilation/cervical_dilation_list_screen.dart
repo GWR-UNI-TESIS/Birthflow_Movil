@@ -70,7 +70,7 @@ class CervicalDilationListScreen extends StatelessWidget {
       title: Text('${item.value} - ${item.hour}'),
       subtitle: item.remOrRam ? const Chip(label: Text('Ram O Rem')) : null,
       trailing: IconButton(
-        icon: const Icon(Icons.delete, color: Colors.red),
+        icon: const Icon(Icons.delete),
         onPressed: () => _confirmDelete(context, item.id),
       ),
       onTap: () => _navigateToEdit(context, item),

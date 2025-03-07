@@ -29,7 +29,7 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
   final TextEditingController _dateTimeController = TextEditingController();
   DateTime? initialDateTime;
   bool _remOrRam = false;
-
+  bool _isInitialized = false; // Bandera para evitar sobrescribir valores
   @override
   void initState() {
     super.initState();
@@ -49,10 +49,13 @@ class _CervicalDilationEditScreenState extends State<CervicalDilationEditScreen>
           )
           .first;
 
-      _valueController.text = cervicalDilation.value.toString();
+      if (!_isInitialized) {
+        _valueController.text = cervicalDilation.value.toString();
 
-      initialDateTime = cervicalDilation.hour;
-      _remOrRam = cervicalDilation.remOrRam;
+        initialDateTime = cervicalDilation.hour;
+        _remOrRam = cervicalDilation.remOrRam;
+        _isInitialized = true;
+      }
     }
   }
 

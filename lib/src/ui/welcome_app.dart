@@ -37,9 +37,12 @@ class WelcomeAppScreen extends StatelessWidget {
               child: const Text('Omitir'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop();
                 AppSettings.openAppSettings();
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                await prefs.setBool('notifications_enabled', true);
               },
               child: const Text('Ir a Configuración'),
             ),

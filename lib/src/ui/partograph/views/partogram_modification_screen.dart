@@ -255,6 +255,7 @@ class PartogramModificationState extends State<PartogramModificationScreen>
           initialDate: DateTime.now(),
           firstDate: DateTime(2000),
           lastDate: DateTime(2101),
+          locale: const Locale('es', 'ES'),
         );
         if (pickedDate != null) {
           controller.text = pickedDate.toIso8601String();

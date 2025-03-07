@@ -34,7 +34,7 @@ class _PresentationPositionVarietyEditScreenState
   Position? _selectedPosition;
   HodgePlane? _selectedHodgePlane;
   DateTime initialValue = DateTime.now();
-
+  bool _isInitialized = false; // Bandera para evitar sobrescribir valores
   @override
   void initState() {
     super.initState();
@@ -52,25 +52,27 @@ class _PresentationPositionVarietyEditScreenState
           (e) => e.id == widget.data.presentationPositionVarietyId,
         )
         .first;
+    if (!_isInitialized) {
+      initialValue = item.time;
 
-    initialValue = item.time;
+      final catalog = context.read<CatalogCubit>().state;
+      // ignore: unnecessary_null_comparison
+      _selectedPosition = item != null
+          ? catalog.positionCatalog.firstWhere(
+              (position) => position.id == item.position,
+              orElse: () => catalog.positionCatalog.first,
+            )
+          : catalog.positionCatalog.first;
 
-    final catalog = context.read<CatalogCubit>().state;
-    // ignore: unnecessary_null_comparison
-    _selectedPosition = item != null
-        ? catalog.positionCatalog.firstWhere(
-            (position) => position.id == item.position,
-            orElse: () => catalog.positionCatalog.first,
-          )
-        : catalog.positionCatalog.first;
-
-    // ignore: unnecessary_null_comparison
-    _selectedHodgePlane = item != null
-        ? catalog.hodgePlanesCatalog.firstWhere(
-            (hodgePlane) => hodgePlane.id == item.hodgePlane,
-            orElse: () => catalog.hodgePlanesCatalog.first,
-          )
-        : catalog.hodgePlanesCatalog.first;
+      // ignore: unnecessary_null_comparison
+      _selectedHodgePlane = item != null
+          ? catalog.hodgePlanesCatalog.firstWhere(
+              (hodgePlane) => hodgePlane.id == item.hodgePlane,
+              orElse: () => catalog.hodgePlanesCatalog.first,
+            )
+          : catalog.hodgePlanesCatalog.first;
+      _isInitialized = true;
+    }
   }
 
   @override
