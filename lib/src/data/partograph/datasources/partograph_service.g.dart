@@ -6,14 +6,10 @@ part of 'partograph_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _PartographService implements PartographService {
-  _PartographService(
-    this._dio, {
-    this.baseUrl,
-    this.errorLogger,
-  });
+  _PartographService(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -31,23 +27,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<ApiResponse<List<PartographListResponse>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/partographs/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<List<PartographListResponse>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/partographs/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<PartographListResponse>> _value;
     try {
@@ -55,8 +44,11 @@ class _PartographService implements PartographService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<PartographListResponse>((i) =>
-                    PartographListResponse.fromJson(i as Map<String, dynamic>))
+                .map<PartographListResponse>(
+                  (i) => PartographListResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -77,22 +69,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ApiResponse<PartographResponse>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/partograph/partograph/${partographId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<ApiResponse<PartographResponse>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/partograph/${partographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PartographResponse> _value;
     try {
@@ -117,22 +103,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options = _setStreamType<ApiResponse<PartographResponse>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/partograph/create',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<ApiResponse<PartographResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/create',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PartographResponse> _value;
     try {
@@ -157,22 +137,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options = _setStreamType<ApiResponse<PartographResponse>>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/partograph/update',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<ApiResponse<PartographResponse>>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PartographResponse> _value;
     try {
@@ -197,22 +171,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ApiResponse<PartographResponse>>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/partograph/delete/${partographId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<ApiResponse<PartographResponse>>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/delete/${partographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PartographResponse> _value;
     try {
@@ -237,23 +205,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<List<PartographListResponse>>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/search',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<List<PartographListResponse>>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/search',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<PartographListResponse>> _value;
     try {
@@ -261,8 +222,11 @@ class _PartographService implements PartographService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<PartographListResponse>((i) =>
-                    PartographListResponse.fromJson(i as Map<String, dynamic>))
+                .map<PartographListResponse>(
+                  (i) => PartographListResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -284,22 +248,18 @@ class _PartographService implements PartographService {
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options =
-        _setStreamType<ApiResponse<List<CervicalDilationResponse>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/cervical-dilation/partograph/${partographId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+        _setStreamType<ApiResponse<List<CervicalDilationResponse>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/cervical-dilation/partograph/${partographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<CervicalDilationResponse>> _value;
     try {
@@ -307,9 +267,11 @@ class _PartographService implements PartographService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<CervicalDilationResponse>((i) =>
-                    CervicalDilationResponse.fromJson(
-                        i as Map<String, dynamic>))
+                .map<CervicalDilationResponse>(
+                  (i) => CervicalDilationResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -330,23 +292,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<CervicalDilationResponse>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/create/cervical-dilation',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<CervicalDilationResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/create/cervical-dilation',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<CervicalDilationResponse> _value;
     try {
@@ -372,23 +327,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<CervicalDilationResponse>>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/update/cervical-dilation',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<CervicalDilationResponse>>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update/cervical-dilation',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<CervicalDilationResponse> _value;
     try {
@@ -414,23 +362,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<CervicalDilationResponse>>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/delete/cervical-dilation',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<CervicalDilationResponse>>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/delete/cervical-dilation',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<CervicalDilationResponse> _value;
     try {
@@ -448,10 +389,7 @@ class _PartographService implements PartographService {
 
   @override
   Future<ApiResponse<List<MedicalSurveillanceTableResponse>>>
-      getMedicalSurveillanceTable(
-    String token,
-    String partographId,
-  ) async {
+      getMedicalSurveillanceTable(String token, String partographId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -459,22 +397,15 @@ class _PartographService implements PartographService {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<ApiResponse<List<MedicalSurveillanceTableResponse>>>(
-            Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-                .compose(
-                  _dio.options,
-                  '/api/partograph/medical-surveillance-table/partograph/{parthographId}',
-                  queryParameters: queryParameters,
-                  data: _data,
-                )
-                .copyWith(
-                    baseUrl: _combineBaseUrls(
-                  _dio.options.baseUrl,
-                  baseUrl,
-                )));
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/medical-surveillance-table/partograph/{parthographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<MedicalSurveillanceTableResponse>> _value;
     try {
@@ -482,9 +413,11 @@ class _PartographService implements PartographService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<MedicalSurveillanceTableResponse>((i) =>
-                    MedicalSurveillanceTableResponse.fromJson(
-                        i as Map<String, dynamic>))
+                .map<MedicalSurveillanceTableResponse>(
+                  (i) => MedicalSurveillanceTableResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -507,29 +440,26 @@ class _PartographService implements PartographService {
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _options =
-        _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/create/medical-surveillance-table',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+        _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/create/medical-surveillance-table',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<MedicalSurveillanceTableResponse> _value;
     try {
       _value = ApiResponse<MedicalSurveillanceTableResponse>.fromJson(
         _result.data!,
         (json) => MedicalSurveillanceTableResponse.fromJson(
-            json as Map<String, dynamic>),
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -550,29 +480,26 @@ class _PartographService implements PartographService {
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _options =
-        _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/update/medical-surveillance-table',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+        _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update/medical-surveillance-table',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<MedicalSurveillanceTableResponse> _value;
     try {
       _value = ApiResponse<MedicalSurveillanceTableResponse>.fromJson(
         _result.data!,
         (json) => MedicalSurveillanceTableResponse.fromJson(
-            json as Map<String, dynamic>),
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -593,29 +520,26 @@ class _PartographService implements PartographService {
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _options =
-        _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/delete/medical-surveillance-table',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+        _setStreamType<ApiResponse<MedicalSurveillanceTableResponse>>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/delete/medical-surveillance-table',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<MedicalSurveillanceTableResponse> _value;
     try {
       _value = ApiResponse<MedicalSurveillanceTableResponse>.fromJson(
         _result.data!,
         (json) => MedicalSurveillanceTableResponse.fromJson(
-            json as Map<String, dynamic>),
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -626,32 +550,23 @@ class _PartographService implements PartographService {
 
   @override
   Future<ApiResponse<List<PresentationPositionVarietyEntityResponse>>>
-      getPresentationPositionVariety(
-    String token,
-    String partographId,
-  ) async {
+      getPresentationPositionVariety(String token, String partographId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<
-        ApiResponse<List<PresentationPositionVarietyEntityResponse>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/partograph/presentation-position-variety/partograph/{parthographId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+        ApiResponse<List<PresentationPositionVarietyEntityResponse>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/presentation-position-variety/partograph/{parthographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<PresentationPositionVarietyEntityResponse>> _value;
     try {
@@ -660,9 +575,11 @@ class _PartographService implements PartographService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<PresentationPositionVarietyEntityResponse>((i) =>
-                    PresentationPositionVarietyEntityResponse.fromJson(
-                        i as Map<String, dynamic>))
+                .map<PresentationPositionVarietyEntityResponse>(
+                  (i) => PresentationPositionVarietyEntityResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -686,29 +603,25 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
-            Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-                .compose(
-                  _dio.options,
-                  '/api/partograph/create/presentation-position-variety',
-                  queryParameters: queryParameters,
-                  data: _data,
-                )
-                .copyWith(
-                    baseUrl: _combineBaseUrls(
-                  _dio.options.baseUrl,
-                  baseUrl,
-                )));
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/create/presentation-position-variety',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PresentationPositionVarietyEntityResponse> _value;
     try {
       _value = ApiResponse<PresentationPositionVarietyEntityResponse>.fromJson(
         _result.data!,
         (json) => PresentationPositionVarietyEntityResponse.fromJson(
-            json as Map<String, dynamic>),
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -730,29 +643,25 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
-            Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-                .compose(
-                  _dio.options,
-                  '/api/partograph/update/presentation-position-variety',
-                  queryParameters: queryParameters,
-                  data: _data,
-                )
-                .copyWith(
-                    baseUrl: _combineBaseUrls(
-                  _dio.options.baseUrl,
-                  baseUrl,
-                )));
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update/presentation-position-variety',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PresentationPositionVarietyEntityResponse> _value;
     try {
       _value = ApiResponse<PresentationPositionVarietyEntityResponse>.fromJson(
         _result.data!,
         (json) => PresentationPositionVarietyEntityResponse.fromJson(
-            json as Map<String, dynamic>),
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -774,29 +683,25 @@ class _PartographService implements PartographService {
     final _data = request;
     final _options =
         _setStreamType<ApiResponse<PresentationPositionVarietyEntityResponse>>(
-            Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-                .compose(
-                  _dio.options,
-                  '/api/partograph/delete/presentation-position-variety',
-                  queryParameters: queryParameters,
-                  data: _data,
-                )
-                .copyWith(
-                    baseUrl: _combineBaseUrls(
-                  _dio.options.baseUrl,
-                  baseUrl,
-                )));
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/delete/presentation-position-variety',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PresentationPositionVarietyEntityResponse> _value;
     try {
       _value = ApiResponse<PresentationPositionVarietyEntityResponse>.fromJson(
         _result.data!,
         (json) => PresentationPositionVarietyEntityResponse.fromJson(
-            json as Map<String, dynamic>),
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -807,32 +712,23 @@ class _PartographService implements PartographService {
 
   @override
   Future<ApiResponse<List<ContractionFrequencyResponse>>>
-      getContractionFrequency(
-    String token,
-    String partographId,
-  ) async {
+      getContractionFrequency(String token, String partographId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options =
-        _setStreamType<ApiResponse<List<ContractionFrequencyResponse>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/contraction-frequency/partograph/${partographId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+        _setStreamType<ApiResponse<List<ContractionFrequencyResponse>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/contraction-frequency/partograph/${partographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<ContractionFrequencyResponse>> _value;
     try {
@@ -840,9 +736,11 @@ class _PartographService implements PartographService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<ContractionFrequencyResponse>((i) =>
-                    ContractionFrequencyResponse.fromJson(
-                        i as Map<String, dynamic>))
+                .map<ContractionFrequencyResponse>(
+                  (i) => ContractionFrequencyResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -863,23 +761,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<ContractionFrequencyResponse>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/create/contraction-frequency',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<ContractionFrequencyResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/create/contraction-frequency',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<ContractionFrequencyResponse> _value;
     try {
@@ -905,23 +796,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<ContractionFrequencyResponse>>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/update/contraction-frequency',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<ContractionFrequencyResponse>>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update/contraction-frequency',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<ContractionFrequencyResponse> _value;
     try {
@@ -947,23 +831,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<ContractionFrequencyResponse>>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/delete/contraction-frequency',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<ContractionFrequencyResponse>>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/delete/contraction-frequency',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<ContractionFrequencyResponse> _value;
     try {
@@ -989,23 +866,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<ApiResponse<List<FetalHeartRateResponse>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/fetal-heart-rate/partograph/${partographId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<List<FetalHeartRateResponse>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/fetal-heart-rate/partograph/${partographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<FetalHeartRateResponse>> _value;
     try {
@@ -1013,8 +883,11 @@ class _PartographService implements PartographService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<FetalHeartRateResponse>((i) =>
-                    FetalHeartRateResponse.fromJson(i as Map<String, dynamic>))
+                .map<FetalHeartRateResponse>(
+                  (i) => FetalHeartRateResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -1035,23 +908,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<FetalHeartRateResponse>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/create/fetal-heart-rate',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<FetalHeartRateResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/create/fetal-heart-rate',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<FetalHeartRateResponse> _value;
     try {
@@ -1076,23 +942,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<FetalHeartRateResponse>>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/update/fetal-heart-rate',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<FetalHeartRateResponse>>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update/fetal-heart-rate',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<FetalHeartRateResponse> _value;
     try {
@@ -1117,23 +976,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<FetalHeartRateResponse>>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/delete/fetal-heart-rate',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<FetalHeartRateResponse>>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/delete/fetal-heart-rate',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<FetalHeartRateResponse> _value;
     try {
@@ -1158,23 +1010,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<ChildbirthNoteResponse>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/create/childbirth-note',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<ChildbirthNoteResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/create/childbirth-note',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<ChildbirthNoteResponse> _value;
     try {
@@ -1199,23 +1044,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<ChildbirthNoteResponse>>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/update/childbirth-note',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<ChildbirthNoteResponse>>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update/childbirth-note',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<ChildbirthNoteResponse> _value;
     try {
@@ -1240,23 +1078,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _options =
-        _setStreamType<ApiResponse<PartographStateResponse>>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/partograph/update/state',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<PartographStateResponse>>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/update/state',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<PartographStateResponse> _value;
     try {
@@ -1282,22 +1113,16 @@ class _PartographService implements PartographService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ApiResponse<AlertCurvesResponse>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/partograph/curve/${partographId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<ApiResponse<AlertCurvesResponse>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/partograph/curve/${partographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<AlertCurvesResponse> _value;
     try {
@@ -1325,10 +1150,7 @@ class _PartographService implements PartographService {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

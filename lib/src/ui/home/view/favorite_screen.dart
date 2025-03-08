@@ -17,7 +17,7 @@ class FavoritePartographScreen extends StatelessWidget {
         builder: (context, state) => state.when(
           initial: () => const Center(child: CircularProgressIndicator()),
           loading: () => const Center(child: CircularProgressIndicator()),
-          loaded: (data) {
+          loaded: (data, message) {
             // Filtrar los partogramas archivados
             final archivedData =
                 data.where((partograph) => partograph.favorite).toList();
@@ -89,7 +89,7 @@ class FavoritePartographScreen extends StatelessWidget {
                 favorite: item.favorite,
               );
             },
-            childCount: data.length - 1,
+            childCount: data.length,
           ),
         ),
       ],

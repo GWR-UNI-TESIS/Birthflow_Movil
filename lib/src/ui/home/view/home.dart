@@ -36,174 +36,178 @@ class HomeScreen extends StatelessWidget {
       context.read<PartographsBloc>().add(FetchPartographs(userId: userId));
     }
 
-    return BlocProvider(
-      create: (context) => ShareBloc(
-        getAsignUserGroupUseCase: locator<GetAsignUserGroupUseCase>(),
-        asignUserGroupUseCase: locator<AsignUserGroupUseCase>(),
-      ),
-      child: DefaultTabController(
-        length: 1,
-        child: Scaffold(
-          key: _scaffoldKey,
-          appBar: AppBar(
-            title: const Text('BirthFlow'),
-            automaticallyImplyLeading: false,
-            elevation: 1,
-            actions: <Widget>[
-              IconButton(
-                onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
-                icon: const Icon(Icons.notifications),
-              ),
-              IconButton(
-                onPressed: () => context.push(AppPaths.home.search.path),
-                icon: const Icon(Icons.search),
-              ),
-              PopupMenuButton<_Options>(
-                onSelected: (item) => _handleMenuOption(context, item, userId),
-                itemBuilder: (_) => const [
-                  PopupMenuItem(
-                    value: _Options.groups,
-                    child: Text('Grupos'),
-                  ),
-                  PopupMenuItem(
-                    value: _Options.configuration,
-                    child: Text('Configuración'),
-                  ),
-                  PopupMenuItem(
-                    value: _Options.favorite,
-                    child: Text('Favoritos'),
-                  ),
-                  PopupMenuItem(
-                    value: _Options.information,
-                    child: Text('Información'),
-                  ),
-                  PopupMenuItem(
-                    value: _Options.logout,
-                    child: Text('Cerrar sesión'),
-                  ),
-                ],
-              ),
-            ],
-            bottom: const PreferredSize(
-              preferredSize: Size.fromHeight(kToolbarHeight),
-              child: TabBar(
-                isScrollable: true,
-                tabs: [
-                  Tab(text: 'Partogramas'),
-                ],
-              ),
-            ),
-          ),
-          body: TabBarView(
-            children: [
-              BlocBuilder<PartographsBloc, PartographsState>(
-                builder: (context, state) => state.when(
-                  initial: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loaded: (data) {
-                    return RefreshIndicator(
-                      onRefresh: () async {
-                        // Dispara el evento FetchPartographs para recargar los datos
-                        context
-                            .read<PartographsBloc>()
-                            .add(FetchPartographs(userId: userId));
-                      },
-                      child: _buildPartographsList(data),
-                    );
-                  },
-                  error: (message) {
-                    return RefreshIndicator(
-                      onRefresh: () async {
-                        // Dispara el evento FetchPartographs para recargar los datos
-                        context
-                            .read<PartographsBloc>()
-                            .add(FetchPartographs(userId: userId));
-                      },
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          return SingleChildScrollView(
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minHeight: constraints.maxHeight,
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/503_error_service.png',
-                                      height: 260.0,
-                                      fit: BoxFit.fill,
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      message,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  empty: () {
-                   return RefreshIndicator(
-                      onRefresh: () async {
-                        // Dispara el evento FetchPartographs para recargar los datos
-                        context
-                            .read<PartographsBloc>()
-                            .add(FetchPartographs(userId: userId));
-                      },
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          return SingleChildScrollView(
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minHeight: constraints.maxHeight,
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/no_data.png',
-                                      height: 260.0,
-                                      fit: BoxFit.fill,
-                                    ),
-                                    const SizedBox(height: 5),
-                                    const Text(
-                                      'No hay datos',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
+    return BlocListener<PartographsBloc, PartographsState>(
+      listener: (context, state) {},
+      child: BlocProvider(
+        create: (context) => ShareBloc(
+          getAsignUserGroupUseCase: locator<GetAsignUserGroupUseCase>(),
+          asignUserGroupUseCase: locator<AsignUserGroupUseCase>(),
+        ),
+        child: DefaultTabController(
+          length: 1,
+          child: Scaffold(
+            key: _scaffoldKey,
+            appBar: AppBar(
+              title: const Text('BirthFlow'),
+              automaticallyImplyLeading: false,
+              elevation: 1,
+              actions: <Widget>[
+                IconButton(
+                  onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
+                  icon: const Icon(Icons.notifications),
+                ),
+                IconButton(
+                  onPressed: () => context.push(AppPaths.home.search.path),
+                  icon: const Icon(Icons.search),
+                ),
+                PopupMenuButton<_Options>(
+                  onSelected: (item) =>
+                      _handleMenuOption(context, item, userId),
+                  itemBuilder: (_) => const [
+                    PopupMenuItem(
+                      value: _Options.groups,
+                      child: Text('Grupos'),
+                    ),
+                    PopupMenuItem(
+                      value: _Options.configuration,
+                      child: Text('Configuración'),
+                    ),
+                    PopupMenuItem(
+                      value: _Options.favorite,
+                      child: Text('Favoritos'),
+                    ),
+                    PopupMenuItem(
+                      value: _Options.information,
+                      child: Text('Información'),
+                    ),
+                    PopupMenuItem(
+                      value: _Options.logout,
+                      child: Text('Cerrar sesión'),
+                    ),
+                  ],
+                ),
+              ],
+              bottom: const PreferredSize(
+                preferredSize: Size.fromHeight(kToolbarHeight),
+                child: TabBar(
+                  isScrollable: true,
+                  tabs: [
+                    Tab(text: 'Partogramas'),
+                  ],
                 ),
               ),
-            ],
-          ),
-          endDrawer: const NotificationsDrawer(),
-          floatingActionButton: FloatingActionButton(
-            tooltip: 'Nuevo',
-            onPressed: () => _handleNewPartograph(context, userId),
-            child: const Icon(Icons.add),
+            ),
+            body: TabBarView(
+              children: [
+                BlocBuilder<PartographsBloc, PartographsState>(
+                  builder: (context, state) => state.when(
+                    initial: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    loaded: (data, message) {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          // Dispara el evento FetchPartographs para recargar los datos
+                          context
+                              .read<PartographsBloc>()
+                              .add(FetchPartographs(userId: userId));
+                        },
+                        child: _buildPartographsList(data),
+                      );
+                    },
+                    error: (message) {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          // Dispara el evento FetchPartographs para recargar los datos
+                          context
+                              .read<PartographsBloc>()
+                              .add(FetchPartographs(userId: userId));
+                        },
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            return SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  minHeight: constraints.maxHeight,
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/503_error_service.png',
+                                        height: 260.0,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        message,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    empty: () {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          // Dispara el evento FetchPartographs para recargar los datos
+                          context
+                              .read<PartographsBloc>()
+                              .add(FetchPartographs(userId: userId));
+                        },
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            return SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  minHeight: constraints.maxHeight,
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/no_data.png',
+                                        height: 260.0,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      const Text(
+                                        'No hay datos',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            endDrawer: const NotificationsDrawer(),
+            floatingActionButton: FloatingActionButton(
+              tooltip: 'Nuevo',
+              onPressed: () => _handleNewPartograph(context, userId),
+              child: const Icon(Icons.add),
+            ),
           ),
         ),
       ),

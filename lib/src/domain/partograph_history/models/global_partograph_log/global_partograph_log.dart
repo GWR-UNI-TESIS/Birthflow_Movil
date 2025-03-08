@@ -30,7 +30,7 @@ DateTime _dateTimeFromJson(dynamic value) {
 String _dateTimeToJson(DateTime date) => date.toIso8601String();
 
 @freezed
-class GlobalPartographLog with _$GlobalPartographLog {
+abstract class GlobalPartographLog with _$GlobalPartographLog {
   factory GlobalPartographLog({
     @JsonKey(name: 'partographLog') required PartographLog partographLog,
     @JsonKey(name: 'cervicalDilationLog') @Default([]) List<CervicalDilationLog> cervicalDilationLog,
@@ -47,7 +47,7 @@ class GlobalPartographLog with _$GlobalPartographLog {
 }
 
 @freezed
-class PartographLog with _$PartographLog {
+abstract class PartographLog with _$PartographLog {
   factory PartographLog({
     @JsonKey(name: 'Name', fromJson: _stringFromJson) required String name,
     @JsonKey(name: 'RecordName', fromJson: _stringFromJson) required String recordName,
@@ -61,7 +61,7 @@ class PartographLog with _$PartographLog {
 }
 
 @freezed
-class CervicalDilationLog with _$CervicalDilationLog {
+abstract class CervicalDilationLog with _$CervicalDilationLog {
   factory CervicalDilationLog({
     @JsonKey(name: 'Value', fromJson: _doubleFromJson) required double value,
     @JsonKey(name: 'Hour', fromJson: _dateTimeFromJson, toJson: _dateTimeToJson) required DateTime hour,
@@ -73,7 +73,7 @@ class CervicalDilationLog with _$CervicalDilationLog {
 }
 
 @freezed
-class MedicalSurveillanceTableLog with _$MedicalSurveillanceTableLog {
+abstract class MedicalSurveillanceTableLog with _$MedicalSurveillanceTableLog {
   factory MedicalSurveillanceTableLog({
     @JsonKey(name: 'MaternalPosition', fromJson: _stringFromJson) required String maternalPosition,
     @JsonKey(name: 'ArterialPressure', fromJson: _stringFromJson) required String arterialPressure,
@@ -91,7 +91,7 @@ class MedicalSurveillanceTableLog with _$MedicalSurveillanceTableLog {
 }
 
 @freezed
-class PresentationPositionVarietyLog with _$PresentationPositionVarietyLog {
+abstract class PresentationPositionVarietyLog with _$PresentationPositionVarietyLog {
   factory PresentationPositionVarietyLog({
     @JsonKey(name: 'HodgePlane', fromJson: _intFromJson) required int hodgePlane,
     @JsonKey(name: 'Position', fromJson: _intFromJson) required int position,
@@ -103,7 +103,7 @@ class PresentationPositionVarietyLog with _$PresentationPositionVarietyLog {
 }
 
 @freezed
-class ContractionFrequencyLog with _$ContractionFrequencyLog {
+abstract class ContractionFrequencyLog with _$ContractionFrequencyLog {
   factory ContractionFrequencyLog({
     @JsonKey(name: 'PartographId', fromJson: _stringFromJson) required String partographId,
     @JsonKey(name: 'Value', fromJson: _stringFromJson) required String value,
@@ -115,7 +115,7 @@ class ContractionFrequencyLog with _$ContractionFrequencyLog {
 }
 
 @freezed
-class FetalHeartRateLog with _$FetalHeartRateLog {
+abstract class FetalHeartRateLog with _$FetalHeartRateLog {
   factory FetalHeartRateLog({
     @JsonKey(name: 'Value', fromJson: _stringFromJson) required String value,
     @JsonKey(name: 'Time', fromJson: _dateTimeFromJson, toJson: _dateTimeToJson) required DateTime time,
@@ -126,7 +126,7 @@ class FetalHeartRateLog with _$FetalHeartRateLog {
 }
 
 @freezed
-class ChildbirthNoteLog with _$ChildbirthNoteLog {
+abstract class ChildbirthNoteLog with _$ChildbirthNoteLog {
   factory ChildbirthNoteLog({
     @JsonKey(name: 'Description', fromJson: _stringFromJson) String? description,
     @JsonKey(name: 'Hour', fromJson: _stringFromJson) required String hour,
@@ -150,7 +150,7 @@ class ChildbirthNoteLog with _$ChildbirthNoteLog {
 }
 
 @freezed
-class AlertCurve with _$AlertCurve {
+abstract class AlertCurve with _$AlertCurve {
   factory AlertCurve({
     @JsonKey(name: 'CervicalDilation', fromJson: _doubleFromJson) required double cervicalDilation,
     @JsonKey(name: 'Time', fromJson: _dateTimeFromJson, toJson: _dateTimeToJson) required DateTime time,
@@ -161,7 +161,7 @@ class AlertCurve with _$AlertCurve {
 }
 
 @freezed
-class Curves with _$Curves {
+abstract class Curves with _$Curves {
   factory Curves({
     @JsonKey(name: 'AlertCurve') List<AlertCurve>? alertCurve,
     @JsonKey(name: 'newAlertCurve') List<AlertCurve>? newAlertCurve,

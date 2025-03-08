@@ -31,11 +31,15 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
         if (result.isEmpty) {
           emit(const PartographsState.empty());
         } else {
-          emit(PartographsState.loaded(result));
+          emit(PartographsState.loaded(result, ''));
         }
       }
     } catch (e) {
-      emit(const PartographsState.error('Ha ocurrido un error al cargar los partograma'));
+      emit(
+        const PartographsState.error(
+          'Ha ocurrido un error al cargar los partograma',
+        ),
+      );
     }
   }
 
@@ -69,7 +73,12 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
             return partograph;
           }).toList();
 
-          emit(PartographsState.loaded(updatedList));
+          emit(
+            PartographsState.loaded(
+              updatedList,
+              'Se actulizo el estado del partograma',
+            ),
+          );
         }
       }
     } catch (e) {
@@ -104,7 +113,12 @@ class PartographsBloc extends Bloc<PartographsEvent, PartographsState> {
           if (updatedList.isEmpty) {
             emit(const PartographsState.empty());
           } else {
-            emit(PartographsState.loaded(updatedList));
+            emit(
+              PartographsState.loaded(
+                updatedList,
+                'Se eliminado el partograma${wasDeleted.recordName}',
+              ),
+            );
           }
         } else {
           emit(

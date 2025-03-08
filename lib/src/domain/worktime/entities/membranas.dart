@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'membranas.freezed.dart';
 
 @freezed
-class Membranas with _$Membranas {
+sealed  class Membranas with _$Membranas {
   const factory Membranas.init() = Init;
   const factory Membranas.integras() = Integras;
   const factory Membranas.rotas() = Rotas;

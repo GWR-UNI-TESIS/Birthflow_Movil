@@ -7,6 +7,7 @@ import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class CervicalDilationListScreen extends StatelessWidget {
   final String partographId;
@@ -67,7 +68,7 @@ class CervicalDilationListScreen extends StatelessWidget {
     CervicalDilation item,
   ) {
     return ListTile(
-      title: Text('${item.value} - ${item.hour}'),
+      title: Text('Valor: ${item.value} - Hora: ${DateFormat('dd/MM/yyyy hh:mm:ss').format(item.hour)}'),
       subtitle: item.remOrRam ? const Chip(label: Text('Ram O Rem')) : null,
       trailing: IconButton(
         icon: const Icon(Icons.delete),

@@ -50,6 +50,13 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
         _showEnableNotificationsDialog();
       } else {
         await FirebaseMessaging.instance.subscribeToTopic('general');
+
+        NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+  badge: true,
+  sound: true,
+);
+
+print('Permiso de notificación: ${settings.authorizationStatus}');
       }
     } else {
       await FirebaseMessaging.instance.unsubscribeFromTopic('general');

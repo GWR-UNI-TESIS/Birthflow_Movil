@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'posicion.freezed.dart';
 
 @freezed
-class Posicion with _$Posicion {
+sealed class Posicion with _$Posicion {
   const factory Posicion.init() = Init;
   const factory Posicion.vertical() = Vertical;
   const factory Posicion.horizontal() = Horizontal;

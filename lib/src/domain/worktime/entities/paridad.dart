@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'paridad.freezed.dart';
 
 @freezed
-class Paridad with _$Paridad {
+sealed class Paridad with _$Paridad {
   const factory Paridad.init() = Init;
   const factory Paridad.todas() = Todas;
   const factory Paridad.multiparas() = Multiparas;

@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class FetalHeartRateListScreen extends StatelessWidget {
   final String partographId;
@@ -61,7 +62,7 @@ class FetalHeartRateListScreen extends StatelessWidget {
 
   Widget _buildCervicalDilationTile(BuildContext context, FetalHeartRate item) {
     return ListTile(
-      title: Text('${item.value} - ${item.time}'),
+      title: Text('${item.value} - ${DateFormat('dd/MM/yyyy hh:mm:ss').format(item.time)}'),
       onTap: () => _navigateToEdit(context, item),
     );
   }

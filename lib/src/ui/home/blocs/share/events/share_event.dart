@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'share_event.freezed.dart';
 
 @freezed
-class ShareEvent with _$ShareEvent {
+abstract class ShareEvent with _$ShareEvent {
    const factory ShareEvent.getAsignUserGroup({required String partographId}) = GetAsignUserGroupEvent;
   const factory ShareEvent.asignUserGroup({
     required String partographId,

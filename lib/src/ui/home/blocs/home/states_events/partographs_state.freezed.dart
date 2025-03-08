@@ -21,7 +21,7 @@ mixin _$PartographsState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(List<PartographList> data) loaded,
+    required TResult Function(List<PartographList> data, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ mixin _$PartographsState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(List<PartographList> data)? loaded,
+    TResult? Function(List<PartographList> data, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$PartographsState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(List<PartographList> data)? loaded,
+    TResult Function(List<PartographList> data, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) =>
@@ -139,7 +139,7 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(List<PartographList> data) loaded,
+    required TResult Function(List<PartographList> data, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return initial();
@@ -151,7 +151,7 @@ class _$InitialImpl implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(List<PartographList> data)? loaded,
+    TResult? Function(List<PartographList> data, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return initial?.call();
@@ -163,7 +163,7 @@ class _$InitialImpl implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(List<PartographList> data)? loaded,
+    TResult Function(List<PartographList> data, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -262,7 +262,7 @@ class _$LoadingImpl implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(List<PartographList> data) loaded,
+    required TResult Function(List<PartographList> data, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return loading();
@@ -274,7 +274,7 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(List<PartographList> data)? loaded,
+    TResult? Function(List<PartographList> data, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return loading?.call();
@@ -286,7 +286,7 @@ class _$LoadingImpl implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(List<PartographList> data)? loaded,
+    TResult Function(List<PartographList> data, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -385,7 +385,7 @@ class _$EmptyImpl implements Empty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(List<PartographList> data) loaded,
+    required TResult Function(List<PartographList> data, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return empty();
@@ -397,7 +397,7 @@ class _$EmptyImpl implements Empty {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(List<PartographList> data)? loaded,
+    TResult? Function(List<PartographList> data, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return empty?.call();
@@ -409,7 +409,7 @@ class _$EmptyImpl implements Empty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(List<PartographList> data)? loaded,
+    TResult Function(List<PartographList> data, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -470,7 +470,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PartographList> data});
+  $Res call({List<PartographList> data, String message});
 }
 
 /// @nodoc
@@ -487,12 +487,17 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = null,
+    Object? message = null,
   }) {
     return _then(_$LoadedImpl(
       null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<PartographList>,
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -500,7 +505,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements Loaded {
-  const _$LoadedImpl(final List<PartographList> data) : _data = data;
+  const _$LoadedImpl(final List<PartographList> data, this.message)
+      : _data = data;
 
   final List<PartographList> _data;
   @override
@@ -511,8 +517,11 @@ class _$LoadedImpl implements Loaded {
   }
 
   @override
+  final String message;
+
+  @override
   String toString() {
-    return 'PartographsState.loaded(data: $data)';
+    return 'PartographsState.loaded(data: $data, message: $message)';
   }
 
   @override
@@ -520,12 +529,13 @@ class _$LoadedImpl implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_data), message);
 
   /// Create a copy of PartographsState
   /// with the given fields replaced by the non-null parameter values.
@@ -541,10 +551,10 @@ class _$LoadedImpl implements Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(List<PartographList> data) loaded,
+    required TResult Function(List<PartographList> data, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
-    return loaded(data);
+    return loaded(data, message);
   }
 
   @override
@@ -553,10 +563,10 @@ class _$LoadedImpl implements Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(List<PartographList> data)? loaded,
+    TResult? Function(List<PartographList> data, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
-    return loaded?.call(data);
+    return loaded?.call(data, message);
   }
 
   @override
@@ -565,12 +575,12 @@ class _$LoadedImpl implements Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(List<PartographList> data)? loaded,
+    TResult Function(List<PartographList> data, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(data);
+      return loaded(data, message);
     }
     return orElse();
   }
@@ -617,9 +627,11 @@ class _$LoadedImpl implements Loaded {
 }
 
 abstract class Loaded implements PartographsState {
-  const factory Loaded(final List<PartographList> data) = _$LoadedImpl;
+  const factory Loaded(final List<PartographList> data, final String message) =
+      _$LoadedImpl;
 
   List<PartographList> get data;
+  String get message;
 
   /// Create a copy of PartographsState
   /// with the given fields replaced by the non-null parameter values.
@@ -700,7 +712,7 @@ class _$ErrorImpl implements Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(List<PartographList> data) loaded,
+    required TResult Function(List<PartographList> data, String message) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return error(errorMessage);
@@ -712,7 +724,7 @@ class _$ErrorImpl implements Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? empty,
-    TResult? Function(List<PartographList> data)? loaded,
+    TResult? Function(List<PartographList> data, String message)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return error?.call(errorMessage);
@@ -724,7 +736,7 @@ class _$ErrorImpl implements Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(List<PartographList> data)? loaded,
+    TResult Function(List<PartographList> data, String message)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {

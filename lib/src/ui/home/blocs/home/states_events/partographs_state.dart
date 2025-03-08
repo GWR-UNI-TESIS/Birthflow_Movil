@@ -9,6 +9,6 @@ class PartographsState with _$PartographsState {
   const factory PartographsState.initial() = Initial;
   const factory PartographsState.loading() = Loading;
   const factory PartographsState.empty() = Empty;
-  const factory PartographsState.loaded(List<PartographList> data) = Loaded;
+  const factory PartographsState.loaded(List<PartographList> data, String message) = Loaded;
   const factory PartographsState.error(String errorMessage) = Error;
 }

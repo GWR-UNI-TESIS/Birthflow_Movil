@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'search_partograph_event.freezed.dart';
 
 @freezed
-class SearchPartographEvent with _$SearchPartographEvent {
+sealed  class SearchPartographEvent with _$SearchPartographEvent {
   const factory SearchPartographEvent.search({
     required String name,
     required int filterId,

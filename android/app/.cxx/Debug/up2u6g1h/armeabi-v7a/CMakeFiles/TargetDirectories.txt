@@ -1,0 +1,2 @@
+C:/Development/Birthflow_Movil/android/app/.cxx/Debug/up2u6g1h/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Development/Birthflow_Movil/android/app/.cxx/Debug/up2u6g1h/armeabi-v7a/CMakeFiles/rebuild_cache.dir

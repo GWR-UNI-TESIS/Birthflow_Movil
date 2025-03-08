@@ -6,6 +6,7 @@ import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class ContractionFrequencyListScreen extends StatelessWidget {
   final String partographId;
@@ -18,49 +19,59 @@ class ContractionFrequencyListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 1,
-          title: const Text('Frecuencias Contracciones'),
-        ),
-        body: BlocBuilder<PartographBloc, PartographState>(
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              loaded: (partograph, _, d ) =>
-                  partograph.contractionFrequencies?.isEmpty ?? true
-                      ? const Center(child: Text('No hay datos'))
-                      : _buildContractionFrequencyList(partograph.contractionFrequencies!),
-              error: (errorMessage) =>
-                  Center(child: Text('Error: $errorMessage')),
-              orElse: () => const Center(child: CircularProgressIndicator()),
-            );
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () => _navigateToCreate(context),
-        ),);
+      appBar: AppBar(
+        elevation: 1,
+        title: const Text('Frecuencias Contracciones'),
+      ),
+      body: BlocBuilder<PartographBloc, PartographState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            loaded: (partograph, _, d) =>
+                partograph.contractionFrequencies?.isEmpty ?? true
+                    ? const Center(child: Text('No hay datos'))
+                    : _buildContractionFrequencyList(
+                        partograph.contractionFrequencies!,
+                      ),
+            error: (errorMessage) =>
+                Center(child: Text('Error: $errorMessage')),
+            orElse: () => const Center(child: CircularProgressIndicator()),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () => _navigateToCreate(context),
+      ),
+    );
   }
 
-  Widget _buildContractionFrequencyList(List<ContractionFrequency> fetalHeartRates) {
+  Widget _buildContractionFrequencyList(
+    List<ContractionFrequency> contractionFrequencies,
+  ) {
     return CustomScrollView(
       slivers: [
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              final item = fetalHeartRates[index];
+              final item = contractionFrequencies[index];
               return _buildCervicalDilationTile(context, item);
             },
-            childCount: fetalHeartRates.length,
+            childCount: contractionFrequencies.length,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildCervicalDilationTile(BuildContext context, ContractionFrequency item) {
+  Widget _buildCervicalDilationTile(
+    BuildContext context,
+    ContractionFrequency item,
+  ) {
     return ListTile(
-      title: Text('${item.value} - ${item.time}'),
+      title: Text(
+        '${item.value} - ${DateFormat('dd/MM/yyyy hh:mm:ss').format(item.time)}',
+      ),
       onTap: () => _navigateToEdit(context, item),
     );
   }
@@ -79,14 +90,13 @@ class ContractionFrequencyListScreen extends StatelessWidget {
     );
   }
 
-   void _navigateToCreate(BuildContext context) {
+  void _navigateToCreate(BuildContext context) {
     context.go(
       AppPaths.home.partographPath
           .define(partographId)
           .contractionFrequencyPath
           .create
           .path,
-    
     );
   }
 }

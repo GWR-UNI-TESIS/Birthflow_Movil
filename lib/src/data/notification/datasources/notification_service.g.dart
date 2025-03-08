@@ -6,14 +6,10 @@ part of 'notification_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _NotificationService implements NotificationService {
-  _NotificationService(
-    this._dio, {
-    this.baseUrl,
-    this.errorLogger,
-  });
+  _NotificationService(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -31,22 +27,16 @@ class _NotificationService implements NotificationService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = body;
-    final _options = _setStreamType<ApiResponse<String>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/notification/register-device',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<ApiResponse<String>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/notification/register-device',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<String> _value;
     try {
@@ -63,29 +53,23 @@ class _NotificationService implements NotificationService {
 
   @override
   Future<ApiResponse<List<NotificationResponse>>> getNotifications(
-      String token) async {
+    String token,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<ApiResponse<List<NotificationResponse>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/notification/notifications',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<List<NotificationResponse>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/notification/notifications',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<NotificationResponse>> _value;
     try {
@@ -93,8 +77,11 @@ class _NotificationService implements NotificationService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<NotificationResponse>((i) =>
-                    NotificationResponse.fromJson(i as Map<String, dynamic>))
+                .map<NotificationResponse>(
+                  (i) => NotificationResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -115,23 +102,16 @@ class _NotificationService implements NotificationService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<ApiResponse<List<NotificationResponse>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/notification/notifications-partograph/${partographId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<ApiResponse<List<NotificationResponse>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/notification/notifications-partograph/${partographId}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ApiResponse<List<NotificationResponse>> _value;
     try {
@@ -139,8 +119,11 @@ class _NotificationService implements NotificationService {
         _result.data!,
         (json) => json is List<dynamic>
             ? json
-                .map<NotificationResponse>((i) =>
-                    NotificationResponse.fromJson(i as Map<String, dynamic>))
+                .map<NotificationResponse>(
+                  (i) => NotificationResponse.fromJson(
+                    i as Map<String, dynamic>,
+                  ),
+                )
                 .toList()
             : List.empty(),
       );
@@ -164,10 +147,7 @@ class _NotificationService implements NotificationService {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }
