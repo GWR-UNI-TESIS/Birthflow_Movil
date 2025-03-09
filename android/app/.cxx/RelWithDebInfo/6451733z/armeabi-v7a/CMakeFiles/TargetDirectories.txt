@@ -1,0 +1,2 @@
+C:/Tesis/birthflow_movil/android/app/.cxx/RelWithDebInfo/6451733z/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Tesis/birthflow_movil/android/app/.cxx/RelWithDebInfo/6451733z/armeabi-v7a/CMakeFiles/rebuild_cache.dir

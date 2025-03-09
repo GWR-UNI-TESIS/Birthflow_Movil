@@ -1,0 +1,32 @@
+import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
+import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
+
+abstract class GetFetalHeartRateUseCase {
+  Future<List<FetalHeartRate>?> execute({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  });
+}
+
+class GetFetalHeartRateUseCaseImplementation
+    implements GetFetalHeartRateUseCase {
+  final PartographRepository _partographRepository;
+
+  GetFetalHeartRateUseCaseImplementation({
+    required PartographRepository partographRepository,
+  }) : _partographRepository = partographRepository;
+
+  @override
+  Future<List<FetalHeartRate>?> execute({
+    required int id,
+    required String partographId,
+    required String value,
+    required DateTime time,
+  }) async {
+    return await _partographRepository.getFetalHeartRate(
+      partographId: partographId,
+    );
+  }
+}
