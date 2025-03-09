@@ -31,7 +31,7 @@ class AccountRepositoryImplementation implements AccountRepository {
       final token = 'Bearer $tokenGuardado';
 
       final request = ChangePasswordRequest(
-        mewPassword: mewPassword,
+        newPassword: mewPassword,
         oldPassword: oldPassword,
       );
 

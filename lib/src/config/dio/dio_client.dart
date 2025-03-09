@@ -13,8 +13,8 @@ class DioClient {
     _dio = Dio(
       BaseOptions(
         baseUrl: 'https://tu-api.com', // Esto se puede modificar en el locator
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
         followRedirects: true,
         headers: {
           'Content-Type': 'application/json',

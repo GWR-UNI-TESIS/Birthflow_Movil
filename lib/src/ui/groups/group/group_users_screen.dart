@@ -74,7 +74,7 @@ class GroupUsersView extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.watch<AuthenticationBloc>().state;
     final userId = auth.maybeWhen(
-      authenticated: (result, message) => result.id,
+      authenticated: (result, message, _) => result.id,
       orElse: () => null,
     );
     final owner = profiler.owner == userId;

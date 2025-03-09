@@ -15,6 +15,8 @@ class WelcomeAppScreen extends StatelessWidget {
     if (settings.authorizationStatus == AuthorizationStatus.denied) {
       _showEnableNotificationsDialog(context);
     } else {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('notifications_enabled', true);
       _navigateToApp(context);
     }
   }
@@ -37,12 +39,10 @@ class WelcomeAppScreen extends StatelessWidget {
               child: const Text('Omitir'),
             ),
             TextButton(
-              onPressed: () async {
+              onPressed: () {
                 Navigator.of(context).pop();
                 AppSettings.openAppSettings();
-                final SharedPreferences prefs =
-                    await SharedPreferences.getInstance();
-                await prefs.setBool('notifications_enabled', true);
+                _navigateToApp(context);
               },
               child: const Text('Ir a Configuración'),
             ),

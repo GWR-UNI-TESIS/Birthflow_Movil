@@ -7,7 +7,7 @@ part 'change_password_request.g.dart';
 abstract class ChangePasswordRequest with _$ChangePasswordRequest {
 
   const factory ChangePasswordRequest({
-    required String mewPassword,
+    required String newPassword,
     required String oldPassword,
   }) = _ChangePasswordRequest;
 

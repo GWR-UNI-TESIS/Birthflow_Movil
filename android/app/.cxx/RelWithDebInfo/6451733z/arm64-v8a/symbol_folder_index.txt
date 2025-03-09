@@ -1,0 +1,1 @@
+C:\Tesis\birthflow_movil\build\app\intermediates\cxx\RelWithDebInfo\6451733z\obj\arm64-v8a

@@ -5,6 +5,7 @@ import 'package:birthflow_movil/src/domain/share/usecases/asign_user_group_useca
 import 'package:birthflow_movil/src/domain/share/usecases/get_asign_user_group_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dart';
+import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_event.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/home/states_events/partographs_state.dart';
@@ -13,6 +14,7 @@ import 'package:birthflow_movil/src/ui/home/blocs/notifications/events/notificat
 import 'package:birthflow_movil/src/ui/home/blocs/notifications/states/notifications_state.dart';
 import 'package:birthflow_movil/src/ui/home/blocs/share/bloc.dart';
 import 'package:birthflow_movil/src/ui/home/widget/item.dart';
+import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -20,14 +22,14 @@ import 'package:intl/intl.dart';
 
 enum _Options { groups, configuration, favorite, information, logout }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget with SnackbarMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AuthenticationBloc>().state;
     final String userId = state.maybeWhen(
-      authenticated: (response, message) => response.id!,
+      authenticated: (response, message, _) => response.id!,
       orElse: () => '',
     );
 
@@ -36,8 +38,25 @@ class HomeScreen extends StatelessWidget {
       context.read<PartographsBloc>().add(FetchPartographs(userId: userId));
     }
 
-    return BlocListener<PartographsBloc, PartographsState>(
-      listener: (context, state) {},
+    Future.microtask(() {
+      if (state is Authenticated) {
+        if (state.isPasswordTemporal != null &&
+            state.isPasswordTemporal == true) {
+          showTemporaryPasswordDialog(context);
+        }
+      }
+    });
+
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<PartographsBloc, PartographsState>(
+          listener: (context, state) {
+            if (state is Loaded && state.message.isNotEmpty) {
+              showSnackbar(state.message);
+            }
+          },
+        ),
+      ],
       child: BlocProvider(
         create: (context) => ShareBloc(
           getAsignUserGroupUseCase: locator<GetAsignUserGroupUseCase>(),
@@ -290,6 +309,34 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Future<void> showTemporaryPasswordDialog(BuildContext mainContext) async {
+    await showDialog(
+      context: mainContext,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Contraseña temporal'),
+          content: const Text('Actualmente su contraseña es temporal'),
+          icon: const Icon(Icons.password),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                mainContext.go(
+                  AppPaths.home.configurationPath.changePassword.path,
+                );
+              },
+              child: const Text('Cambiar contraseña'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

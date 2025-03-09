@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:birthflow_movil/src/config/locator/locator.dart';
@@ -50,6 +52,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppDev extends StatelessWidget {
   final Catalog catalog;
@@ -129,7 +132,6 @@ class AppEntry extends StatefulWidget {
 }
 
 class AppEntryState extends State<AppEntry> {
-
   late final StreamSubscription<String> _errorSubscription;
 
   @override
@@ -146,7 +148,7 @@ class AppEntryState extends State<AppEntry> {
     _errorSubscription.cancel();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthenticationBloc>();
@@ -155,59 +157,64 @@ class AppEntryState extends State<AppEntry> {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) async {
         if (state is Authenticated) {
-          final userId =
-              state.response.id; // Obtén el userId del estado de autenticación
+          final userId = state.response.id;
           final firebaseService = FirebaseService();
           final notificationBloc = context.read<NotificationBloc>();
           final notificationsBloc = context.read<NotificationsBloc>();
           // Obtén el token del dispositivo
-          final token = await firebaseService.getDeviceToken();
-          if (token != null) {
-            notificationBloc
-                .add(RegisterTokenEvent(userId: userId!, token: token));
+          await registerDeviceToken(userId!, firebaseService, notificationBloc);
 
-            // Escucha cambios en el token
-            firebaseService.listenToTokenRefresh((newToken) {
-              notificationBloc
-                  .add(TokenRefreshedEvent(userId: userId, token: newToken));
-            });
+          // Escucha cambios en el token
+          firebaseService.listenToTokenRefresh((newToken) async {
+            final prefs = await SharedPreferences.getInstance();
+            final savedToken = prefs.getString('device_token');
 
-            // Escucha mensajes en primer plano
-            firebaseService.listenToForegroundMessages((title, body, data) {
-              NotificationHelper.showNotification(
-                id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
-                title: title,
-                body: body,
-              );
+            if (savedToken != newToken) {
+              context.read<NotificationBloc>().add(
+                    TokenRefreshedEvent(userId: userId, token: newToken),
+                  );
+              await prefs.setString('device_token', newToken);
+              print('Token actualizado y guardado localmente');
+            } else {
+              print('El token ya es válido. No se envía al servidor.');
+            }
+          });
 
-              final notification = notificaciones.Notification(
-                notificationId: int.parse(data['NotificationId'].toString()),
-                title: data['Title']?.toString() ?? title,
-                message: data['Message']?.toString() ?? body,
-                scheduledFor: DateTime.tryParse(
-                      data['ScheduledTime']?.toString() ?? '',
-                    ) ??
-                    DateTime.now(),
-                partographId: data['PartographId']!.toString(),
-              );
+          // Escucha mensajes en primer plano
+          firebaseService.listenToForegroundMessages((title, body, data) {
+            NotificationHelper.showNotification(
+              id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+              title: title,
+              body: body,
+            );
 
-              notificationsBloc
-                  .add(NotificationsEvent.addNotification(notification));
-            });
-          }
+            final notification = notificaciones.Notification(
+              notificationId: int.parse(data['NotificationId'].toString()),
+              title: data['Title']?.toString() ?? title,
+              message: data['Message']?.toString() ?? body,
+              scheduledFor: DateTime.tryParse(
+                    data['ScheduledTime']?.toString() ?? '',
+                  ) ??
+                  DateTime.now(),
+              partographId: data['PartographId']!.toString(),
+            );
+
+            notificationsBloc
+                .add(NotificationsEvent.addNotification(notification));
+          });
         }
       },
       child: MaterialApp.router(
         title: 'Birthflow',
         locale: const Locale('es', 'ES'), // Establece el idioma a español
-      supportedLocales: const [
-        Locale('es', 'ES'),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+        supportedLocales: const [
+          Locale('es', 'ES'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         scaffoldMessengerKey: locator<GlobalKey<ScaffoldMessengerState>>(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -216,5 +223,24 @@ class AppEntryState extends State<AppEntry> {
         routerConfig: appRouter.router,
       ),
     );
+  }
+
+  Future<void> registerDeviceToken(String userId,
+      FirebaseService firebaseService, NotificationBloc firebaseBloc) async {
+    final token = await firebaseService.getDeviceToken();
+    if (token == null) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    final savedToken = prefs.getString('device_token');
+
+    if (savedToken != token) {
+      // Envía el nuevo token al servidor solo si ha cambiado
+      print('Enviando nuevo token al servidor: $token');
+      firebaseBloc.add(RegisterTokenEvent(userId: userId, token: token));
+      await prefs.setString('device_token', token);
+      print('Token registrado y guardado localmente');
+    } else {
+      print('El token ya es válido. No se envía al servidor.');
+    }
   }
 }

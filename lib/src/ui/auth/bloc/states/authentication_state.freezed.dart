@@ -21,7 +21,9 @@ mixin _$AuthenticationState {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function(String message) registrationSuccess,
-    required TResult Function(User response, String message) authenticated,
+    required TResult Function(
+            User response, String message, bool? isPasswordTemporal)
+        authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) =>
@@ -31,7 +33,8 @@ mixin _$AuthenticationState {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(String message)? registrationSuccess,
-    TResult? Function(User response, String message)? authenticated,
+    TResult? Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) =>
@@ -41,7 +44,8 @@ mixin _$AuthenticationState {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function(String message)? registrationSuccess,
-    TResult Function(User response, String message)? authenticated,
+    TResult Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -145,7 +149,9 @@ class _$UninitializedImpl implements Uninitialized {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function(String message) registrationSuccess,
-    required TResult Function(User response, String message) authenticated,
+    required TResult Function(
+            User response, String message, bool? isPasswordTemporal)
+        authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -158,7 +164,8 @@ class _$UninitializedImpl implements Uninitialized {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(String message)? registrationSuccess,
-    TResult? Function(User response, String message)? authenticated,
+    TResult? Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -171,7 +178,8 @@ class _$UninitializedImpl implements Uninitialized {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function(String message)? registrationSuccess,
-    TResult Function(User response, String message)? authenticated,
+    TResult Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -274,7 +282,9 @@ class _$AuthLoadingImpl implements AuthLoading {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function(String message) registrationSuccess,
-    required TResult Function(User response, String message) authenticated,
+    required TResult Function(
+            User response, String message, bool? isPasswordTemporal)
+        authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -287,7 +297,8 @@ class _$AuthLoadingImpl implements AuthLoading {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(String message)? registrationSuccess,
-    TResult? Function(User response, String message)? authenticated,
+    TResult? Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -300,7 +311,8 @@ class _$AuthLoadingImpl implements AuthLoading {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function(String message)? registrationSuccess,
-    TResult Function(User response, String message)? authenticated,
+    TResult Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -431,7 +443,9 @@ class _$RegistrationSuccessImpl implements RegistrationSuccess {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function(String message) registrationSuccess,
-    required TResult Function(User response, String message) authenticated,
+    required TResult Function(
+            User response, String message, bool? isPasswordTemporal)
+        authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -444,7 +458,8 @@ class _$RegistrationSuccessImpl implements RegistrationSuccess {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(String message)? registrationSuccess,
-    TResult? Function(User response, String message)? authenticated,
+    TResult? Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -457,7 +472,8 @@ class _$RegistrationSuccessImpl implements RegistrationSuccess {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function(String message)? registrationSuccess,
-    TResult Function(User response, String message)? authenticated,
+    TResult Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -531,7 +547,7 @@ abstract class _$$AuthenticatedImplCopyWith<$Res> {
           _$AuthenticatedImpl value, $Res Function(_$AuthenticatedImpl) then) =
       __$$AuthenticatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({User response, String message});
+  $Res call({User response, String message, bool? isPasswordTemporal});
 }
 
 /// @nodoc
@@ -549,6 +565,7 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
   $Res call({
     Object? response = null,
     Object? message = null,
+    Object? isPasswordTemporal = freezed,
   }) {
     return _then(_$AuthenticatedImpl(
       response: null == response
@@ -559,6 +576,10 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      isPasswordTemporal: freezed == isPasswordTemporal
+          ? _value.isPasswordTemporal
+          : isPasswordTemporal // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -566,16 +587,19 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthenticatedImpl implements Authenticated {
-  const _$AuthenticatedImpl({required this.response, required this.message});
+  const _$AuthenticatedImpl(
+      {required this.response, required this.message, this.isPasswordTemporal});
 
   @override
   final User response;
   @override
   final String message;
+  @override
+  final bool? isPasswordTemporal;
 
   @override
   String toString() {
-    return 'AuthenticationState.authenticated(response: $response, message: $message)';
+    return 'AuthenticationState.authenticated(response: $response, message: $message, isPasswordTemporal: $isPasswordTemporal)';
   }
 
   @override
@@ -585,11 +609,14 @@ class _$AuthenticatedImpl implements Authenticated {
             other is _$AuthenticatedImpl &&
             (identical(other.response, response) ||
                 other.response == response) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.isPasswordTemporal, isPasswordTemporal) ||
+                other.isPasswordTemporal == isPasswordTemporal));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, response, message);
+  int get hashCode =>
+      Object.hash(runtimeType, response, message, isPasswordTemporal);
 
   /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
@@ -605,11 +632,13 @@ class _$AuthenticatedImpl implements Authenticated {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function(String message) registrationSuccess,
-    required TResult Function(User response, String message) authenticated,
+    required TResult Function(
+            User response, String message, bool? isPasswordTemporal)
+        authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
-    return authenticated(response, message);
+    return authenticated(response, message, isPasswordTemporal);
   }
 
   @override
@@ -618,11 +647,12 @@ class _$AuthenticatedImpl implements Authenticated {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(String message)? registrationSuccess,
-    TResult? Function(User response, String message)? authenticated,
+    TResult? Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
-    return authenticated?.call(response, message);
+    return authenticated?.call(response, message, isPasswordTemporal);
   }
 
   @override
@@ -631,13 +661,14 @@ class _$AuthenticatedImpl implements Authenticated {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function(String message)? registrationSuccess,
-    TResult Function(User response, String message)? authenticated,
+    TResult Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(response, message);
+      return authenticated(response, message, isPasswordTemporal);
     }
     return orElse();
   }
@@ -689,10 +720,12 @@ class _$AuthenticatedImpl implements Authenticated {
 abstract class Authenticated implements AuthenticationState {
   const factory Authenticated(
       {required final User response,
-      required final String message}) = _$AuthenticatedImpl;
+      required final String message,
+      final bool? isPasswordTemporal}) = _$AuthenticatedImpl;
 
   User get response;
   String get message;
+  bool? get isPasswordTemporal;
 
   /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
@@ -773,7 +806,9 @@ class _$UnauthenticatedImpl implements Unauthenticated {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function(String message) registrationSuccess,
-    required TResult Function(User response, String message) authenticated,
+    required TResult Function(
+            User response, String message, bool? isPasswordTemporal)
+        authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -786,7 +821,8 @@ class _$UnauthenticatedImpl implements Unauthenticated {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(String message)? registrationSuccess,
-    TResult? Function(User response, String message)? authenticated,
+    TResult? Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -799,7 +835,8 @@ class _$UnauthenticatedImpl implements Unauthenticated {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function(String message)? registrationSuccess,
-    TResult Function(User response, String message)? authenticated,
+    TResult Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),
@@ -938,7 +975,9 @@ class _$FailureImpl implements Failure {
     required TResult Function() uninitialized,
     required TResult Function() loading,
     required TResult Function(String message) registrationSuccess,
-    required TResult Function(User response, String message) authenticated,
+    required TResult Function(
+            User response, String message, bool? isPasswordTemporal)
+        authenticated,
     required TResult Function(String? message) unauthenticated,
     required TResult Function(String error) failure,
   }) {
@@ -951,7 +990,8 @@ class _$FailureImpl implements Failure {
     TResult? Function()? uninitialized,
     TResult? Function()? loading,
     TResult? Function(String message)? registrationSuccess,
-    TResult? Function(User response, String message)? authenticated,
+    TResult? Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult? Function(String? message)? unauthenticated,
     TResult? Function(String error)? failure,
   }) {
@@ -964,7 +1004,8 @@ class _$FailureImpl implements Failure {
     TResult Function()? uninitialized,
     TResult Function()? loading,
     TResult Function(String message)? registrationSuccess,
-    TResult Function(User response, String message)? authenticated,
+    TResult Function(User response, String message, bool? isPasswordTemporal)?
+        authenticated,
     TResult Function(String? message)? unauthenticated,
     TResult Function(String error)? failure,
     required TResult orElse(),

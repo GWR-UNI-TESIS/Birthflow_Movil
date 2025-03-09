@@ -21,7 +21,7 @@ ChangePasswordRequest _$ChangePasswordRequestFromJson(
 
 /// @nodoc
 mixin _$ChangePasswordRequest {
-  String get mewPassword => throw _privateConstructorUsedError;
+  String get newPassword => throw _privateConstructorUsedError;
   String get oldPassword => throw _privateConstructorUsedError;
 
   /// Serializes this ChangePasswordRequest to a JSON map.
@@ -40,7 +40,7 @@ abstract class $ChangePasswordRequestCopyWith<$Res> {
           $Res Function(ChangePasswordRequest) then) =
       _$ChangePasswordRequestCopyWithImpl<$Res, ChangePasswordRequest>;
   @useResult
-  $Res call({String mewPassword, String oldPassword});
+  $Res call({String newPassword, String oldPassword});
 }
 
 /// @nodoc
@@ -59,13 +59,13 @@ class _$ChangePasswordRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mewPassword = null,
+    Object? newPassword = null,
     Object? oldPassword = null,
   }) {
     return _then(_value.copyWith(
-      mewPassword: null == mewPassword
-          ? _value.mewPassword
-          : mewPassword // ignore: cast_nullable_to_non_nullable
+      newPassword: null == newPassword
+          ? _value.newPassword
+          : newPassword // ignore: cast_nullable_to_non_nullable
               as String,
       oldPassword: null == oldPassword
           ? _value.oldPassword
@@ -84,7 +84,7 @@ abstract class _$$ChangePasswordRequestImplCopyWith<$Res>
       __$$ChangePasswordRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String mewPassword, String oldPassword});
+  $Res call({String newPassword, String oldPassword});
 }
 
 /// @nodoc
@@ -101,13 +101,13 @@ class __$$ChangePasswordRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mewPassword = null,
+    Object? newPassword = null,
     Object? oldPassword = null,
   }) {
     return _then(_$ChangePasswordRequestImpl(
-      mewPassword: null == mewPassword
-          ? _value.mewPassword
-          : mewPassword // ignore: cast_nullable_to_non_nullable
+      newPassword: null == newPassword
+          ? _value.newPassword
+          : newPassword // ignore: cast_nullable_to_non_nullable
               as String,
       oldPassword: null == oldPassword
           ? _value.oldPassword
@@ -121,19 +121,19 @@ class __$$ChangePasswordRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ChangePasswordRequestImpl implements _ChangePasswordRequest {
   const _$ChangePasswordRequestImpl(
-      {required this.mewPassword, required this.oldPassword});
+      {required this.newPassword, required this.oldPassword});
 
   factory _$ChangePasswordRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChangePasswordRequestImplFromJson(json);
 
   @override
-  final String mewPassword;
+  final String newPassword;
   @override
   final String oldPassword;
 
   @override
   String toString() {
-    return 'ChangePasswordRequest(mewPassword: $mewPassword, oldPassword: $oldPassword)';
+    return 'ChangePasswordRequest(newPassword: $newPassword, oldPassword: $oldPassword)';
   }
 
   @override
@@ -141,15 +141,15 @@ class _$ChangePasswordRequestImpl implements _ChangePasswordRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChangePasswordRequestImpl &&
-            (identical(other.mewPassword, mewPassword) ||
-                other.mewPassword == mewPassword) &&
+            (identical(other.newPassword, newPassword) ||
+                other.newPassword == newPassword) &&
             (identical(other.oldPassword, oldPassword) ||
                 other.oldPassword == oldPassword));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, mewPassword, oldPassword);
+  int get hashCode => Object.hash(runtimeType, newPassword, oldPassword);
 
   /// Create a copy of ChangePasswordRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -170,14 +170,14 @@ class _$ChangePasswordRequestImpl implements _ChangePasswordRequest {
 
 abstract class _ChangePasswordRequest implements ChangePasswordRequest {
   const factory _ChangePasswordRequest(
-      {required final String mewPassword,
+      {required final String newPassword,
       required final String oldPassword}) = _$ChangePasswordRequestImpl;
 
   factory _ChangePasswordRequest.fromJson(Map<String, dynamic> json) =
       _$ChangePasswordRequestImpl.fromJson;
 
   @override
-  String get mewPassword;
+  String get newPassword;
   @override
   String get oldPassword;
 

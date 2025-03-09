@@ -18,6 +18,7 @@ class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState.authenticated({
     required User response,
     required String message,
+    bool? isPasswordTemporal,
   }) = Authenticated;
 
   // Estado después de una autenticación fallida

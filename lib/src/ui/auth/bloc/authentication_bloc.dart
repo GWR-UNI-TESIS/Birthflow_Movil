@@ -69,7 +69,8 @@ class AuthenticationBloc
       );
 
       if (result.authenticationCode == AuthenticationCode.success) {
-        emit(Authenticated(response: result.user!, message: result.message));
+        final isPasswordTemporal = result.message.contains('Temporal');
+        emit(Authenticated(response: result.user!, message: result.message, isPasswordTemporal: isPasswordTemporal));
       }
 
       if (result.authenticationCode == AuthenticationCode.unauthorized) {

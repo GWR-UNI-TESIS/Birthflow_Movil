@@ -22,7 +22,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       }
     });
 
-    on<TokenRefreshedEvent>((event, emit) async {
+    on<TokenRefreshedEvent>((event, emit) {
       add(RegisterTokenEvent(userId: event.userId, token: event.token));
     });
   }

@@ -103,7 +103,7 @@ class _CreatePartographState extends State<_CreatePartographPage>
     final state = context.watch<AuthenticationBloc>().state;
     final isLoading = context.watch<CreatePartographBloc>().state is Loading;
     final String user = state.maybeWhen(
-      authenticated: (response, message) => response.id!,
+      authenticated: (response, message, _) => response.id!,
       orElse: () => '',
     );
 

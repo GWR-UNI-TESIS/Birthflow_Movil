@@ -103,7 +103,7 @@ class GroupsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.watch<AuthenticationBloc>().state;
     final userId = auth.maybeWhen(
-      authenticated: (result, message) => result.id,
+      authenticated: (result, message, _) => result.id,
       orElse: () => null,
     );
     return ListView.builder(

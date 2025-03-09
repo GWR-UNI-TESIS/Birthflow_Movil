@@ -57,7 +57,7 @@ class ListItemWidget extends StatelessWidget {
         MenuItemButton(
           onPressed: () {
             final userId = auth.maybeWhen(
-              authenticated: (result, message) => result.id,
+              authenticated: (result, message, _) => result.id,
               orElse: () => null,
             );
             if (createBy == userId) {
@@ -138,7 +138,7 @@ class ListItemWidget extends StatelessWidget {
         MenuItemButton(
           onPressed: () {
             final userId = auth.maybeWhen(
-              authenticated: (result, message) => result.id,
+              authenticated: (result, message, _) => result.id,
               orElse: () => null,
             );
             if (createBy == userId) {
@@ -206,7 +206,7 @@ class ListItemWidget extends StatelessWidget {
           ),
           onTap: () {
             final userId = auth.maybeWhen(
-              authenticated: (result, message) => result.id,
+              authenticated: (result, message, _) => result.id,
               orElse: () => null,
             );
             final int lecturaId = catalog.permissionTypeCatalog

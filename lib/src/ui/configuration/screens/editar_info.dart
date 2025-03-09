@@ -125,12 +125,8 @@ class _EditarInfoState extends State<EditarInfoScreen> {
                 validator: (value) => _validatePhone(value),
               ),
               const SizedBox(height: 30),
-              ElevatedButton(
+              FilledButton(
                 onPressed: () => _submitForm(context, state.user.id!),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.blue[700],
-                ),
                 child: const Text(
                   'Actualizar Datos',
                   style: TextStyle(color: Colors.white),

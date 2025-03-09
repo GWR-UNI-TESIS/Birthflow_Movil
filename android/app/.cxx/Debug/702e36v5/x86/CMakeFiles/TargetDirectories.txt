@@ -1,0 +1,2 @@
+C:/Tesis/birthflow_movil/android/app/.cxx/Debug/702e36v5/x86/CMakeFiles/edit_cache.dir
+C:/Tesis/birthflow_movil/android/app/.cxx/Debug/702e36v5/x86/CMakeFiles/rebuild_cache.dir
