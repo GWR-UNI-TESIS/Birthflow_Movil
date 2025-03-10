@@ -9,7 +9,6 @@ class FirebaseService {
     try {
       return await _messaging.getToken();
     } catch (e) {
-      // ignore: avoid_print
       print('Error al obtener el token FCM: $e');
       return null;
     }
@@ -31,10 +30,9 @@ class FirebaseService {
         onMessage(
           message.notification!.title ?? 'Notificación',
           message.notification!.body ?? '',
-          message.data,
+          message.data.isNotEmpty ? message.data : {},
         );
 
-        // Mostrar la notificación local
         NotificationHelper.showNotification(
           id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
           title: message.notification!.title ?? 'Notificación',

@@ -23,8 +23,8 @@ class NotificationHelper {
   }) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
-      'default_channel_id', // ID del canal
-      'Default Channel', // Nombre del canal
+      'high_importance_channel', // ID del canal
+      'High Importance Notifications ', // Nombre del canal
       importance: Importance.max,
       priority: Priority.high,
       icon: '@drawable/ic_notification', // Icono pequeño

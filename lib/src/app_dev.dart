@@ -8,7 +8,6 @@ import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/bloc.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/event/notification_event.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
-import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/notification/models/notification.dart'
     as notificaciones;
@@ -182,12 +181,6 @@ class AppEntryState extends State<AppEntry> {
 
           // Escucha mensajes en primer plano
           firebaseService.listenToForegroundMessages((title, body, data) {
-            NotificationHelper.showNotification(
-              id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
-              title: title,
-              body: body,
-            );
-
             final notification = notificaciones.Notification(
               notificationId: int.parse(data['NotificationId'].toString()),
               title: data['Title']?.toString() ?? title,
