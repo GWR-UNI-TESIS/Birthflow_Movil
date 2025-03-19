@@ -9,6 +9,7 @@ class FirebaseService {
     try {
       return await _messaging.getToken();
     } catch (e) {
+      // ignore: avoid_print
       print('Error al obtener el token FCM: $e');
       return null;
     }

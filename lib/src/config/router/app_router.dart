@@ -540,5 +540,6 @@ class _StreamToListenable extends ChangeNotifier {
     super.dispose();
   }
 
+  // ignore: strict_top_level_inference
   void _tt(event) => notifyListeners();
 }

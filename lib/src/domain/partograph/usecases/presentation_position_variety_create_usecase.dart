@@ -24,7 +24,7 @@ class CreatePresentationPositionVarietyUseCaseImplementation
     required int position,
     required DateTime time,
   }) async {
-    return _partographRepository.createPresentationPositionVariety(
+    return await _partographRepository.createPresentationPositionVariety(
       partographId: partographId,
       hodgePlane: hodgePlane,
       position: position,

@@ -18,7 +18,7 @@ class GetMedicalSurveillanceUseCaseImplementation
   Future<List<MedicalSurveillanceTable>?> execute({
     required String partographId,
   }) async {
-    return _partographRepository.getMedicalSurveillance(
+    return await _partographRepository.getMedicalSurveillance(
       partographId: partographId,
     );
   }

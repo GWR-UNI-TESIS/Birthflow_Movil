@@ -18,7 +18,7 @@ class DeleteMedicalSurveillanceUseCaseImplementation
   Future<MedicalSurveillanceTable?> execute({
     required int id,
   }) async {
-    return _partographRepository.deleteMedicalSurveillance(
+    return await _partographRepository.deleteMedicalSurveillance(
       id: id,
     );
   }

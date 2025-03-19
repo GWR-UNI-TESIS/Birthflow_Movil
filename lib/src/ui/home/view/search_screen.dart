@@ -141,7 +141,7 @@ class _SearchViewState extends State<SearchView> {
   Future<FilterModel?> _dialogBuilder(BuildContext context) async {
     final catalog = context.read<CatalogCubit>().state;
 
-    return showDialog<FilterModel>(
+    return await  showDialog<FilterModel>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {

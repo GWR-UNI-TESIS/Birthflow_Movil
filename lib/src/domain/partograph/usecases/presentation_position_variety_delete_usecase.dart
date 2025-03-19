@@ -18,7 +18,7 @@ class DeletePresentationPositionVarietyUseCaseImplementation
   Future<PresentationPositionVariety?> execute({
     required int id,
   }) async {
-    return _partographRepository.deletePresentationPositionVariety(
+    return await _partographRepository.deletePresentationPositionVariety(
       id: id,
     );
   }

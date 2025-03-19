@@ -211,7 +211,7 @@ class _ChartState extends State<_ChartScreen> {
     final today = DateTime.now();
     timeController.text = DateFormat('HH:mm:ss').format(today);
     final formKey = GlobalKey<FormState>();
-    return showDialog<DateTime?>(
+    return await showDialog<DateTime?>(
       context: mainContext,
       builder: (BuildContext context) => StatefulBuilder(
         builder: (context, setState) => SimpleDialog(
@@ -315,7 +315,7 @@ class _ChartState extends State<_ChartScreen> {
     selectedPosition = catalog.positionCatalog.first;
     selectedHodgePlane = catalog.hodgePlanesCatalog.first;
 
-    return showDialog<DateTime?>(
+    return await showDialog<DateTime?>(
       context: mainContext,
       builder: (BuildContext context) => StatefulBuilder(
         builder: (context, setState) => SimpleDialog(

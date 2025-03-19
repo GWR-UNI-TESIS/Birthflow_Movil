@@ -18,7 +18,7 @@ class GetPresentationPositionVarietyUseCaseImplementation
   Future<List<PresentationPositionVariety>?> execute({
     required String partographId,
   }) async {
-    return _partographRepository.getPresentationPositionVariety(
+    return await _partographRepository.getPresentationPositionVariety(
       partographId: partographId,
     );
   }

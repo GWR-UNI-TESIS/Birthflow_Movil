@@ -346,7 +346,7 @@ class OitSymbolRenderer extends common.SymbolRenderer {
     final radius = min(bounds.width, bounds.height) / 2;
     final xy2 = Point(center.x - radius, center.y);
 
-    const double angle45Degrees = 90 * (pi / 180);
+    const double angle45Degrees = 315 * (pi / 180);
     const double angle315Degrees = 45 * (pi / 180);
 
     // Coordenadas del punto en la base del círculo para 45 grados

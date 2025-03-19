@@ -38,7 +38,7 @@ class UpdateMedicalSurveillanceUseCaseImplementation
     required String pain,
     required DateTime time,
   }) async {
-    return _partographRepository.updateMedicalSurveillance(
+    return await _partographRepository.updateMedicalSurveillance(
       id: id,
       partographId: partographId,
       letter: letter,

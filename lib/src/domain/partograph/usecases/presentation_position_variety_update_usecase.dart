@@ -26,7 +26,7 @@ class UpdatePresentationPositionVarietyUseCaseImplementation
     required int position,
     required DateTime time,
   }) async {
-    return _partographRepository.updatePresentationPositionVariety(
+    return await _partographRepository.updatePresentationPositionVariety(
       id: id,
       partographId: partographId,
       hodgePlane: hodgePlane,

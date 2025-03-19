@@ -16,7 +16,7 @@ import 'package:intl/intl.dart';
 Future<void> showMedicalSurveillanceDialog({
   required BuildContext context,
 }) async {
-  return showDialog<void>(
+  return await showDialog<void>(
     context: context,
     builder: (context) => const MedicalSurveillanceDialog(),
   );

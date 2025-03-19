@@ -163,7 +163,7 @@ class GroupsList extends StatelessWidget {
   }
 
   Future<void> _showDeleteDialog(BuildContext context, int id) async {
-    return showDialog<void>(
+    return await showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {

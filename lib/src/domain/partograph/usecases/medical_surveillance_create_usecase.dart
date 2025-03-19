@@ -36,7 +36,7 @@ class CreateMedicalSurveillanceUseCaseImplementation
     required String pain,
     required DateTime time,
   }) async {
-    return _partographRepository.createMedicalSurveillance(
+    return  await _partographRepository.createMedicalSurveillance(
       partographId: partographId,
       letter: letter,
       maternalPosition: maternalPosition,
