@@ -13,6 +13,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/p
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/widgets/custom_dropdown.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/arterial_pressure_widget.dart';
+import 'package:birthflow_movil/src/ui/partograph/widget/date_time_picker_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/expandable_fab.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/form_element_widget.dart';
 import 'package:birthflow_movil/src/ui/partograph/widget/medical_surveillance_widget.dart';
@@ -206,7 +207,6 @@ class _ChartState extends State<_ChartScreen> {
   ) async {
     final timeController = TextEditingController();
     final cervicalDilationController = TextEditingController();
-    DateTime? selectedDateTime;
     bool remOrRam = false;
     final today = DateTime.now();
     timeController.text = DateFormat('HH:mm:ss').format(today);
@@ -238,12 +238,7 @@ class _ChartState extends State<_ChartScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-                  _buildTimePickerField(context, timeController, today, (time) {
-                    setState(() {
-                      selectedDateTime = today;
-                      timeController.text = DateFormat('HH:mm:ss').format(time);
-                    });
-                  }),
+                  DateTimePickerField(dateTimeController: timeController),
                   SwitchListTile(
                     title: const Text('Ram O Rem'),
                     value: remOrRam,
@@ -254,7 +249,7 @@ class _ChartState extends State<_ChartScreen> {
                     () => _saveCervicalDilation(
                       mainContext,
                       cervicalDilationController,
-                      selectedDateTime,
+                      DateFormat('dd/MM/yyyy HH:mm').parse(timeController.text),
                       remOrRam,
                       context,
                       formKey,
@@ -306,7 +301,6 @@ class _ChartState extends State<_ChartScreen> {
     final timeController = TextEditingController();
     Position? selectedPosition;
     HodgePlane? selectedHodgePlane;
-    DateTime? selectedDateTime = DateTime.now();
     final today = DateTime.now();
     timeController.text = DateFormat('HH:mm:ss').format(today);
     final formKey = GlobalKey<FormState>();
@@ -352,43 +346,7 @@ class _ChartState extends State<_ChartScreen> {
                     initialValue: selectedHodgePlane,
                   ),
                   const SizedBox(height: 16),
-                  GestureDetector(
-                    onTap: () async {
-                      final picked = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      );
-                      if (picked != null) {
-                        setState(() {
-                          selectedDateTime = DateTime(
-                            today.year,
-                            today.month,
-                            today.day,
-                            picked.hour,
-                            picked.minute,
-                          );
-                          timeController.text =
-                              DateFormat('HH:mm:ss').format(selectedDateTime!);
-                        });
-                      }
-                    },
-                    child: AbsorbPointer(
-                      child: TextFormField(
-                        controller: timeController,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.access_time),
-                          border: OutlineInputBorder(),
-                          labelText: 'Hora',
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Seleccione una hora';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
+                  DateTimePickerField(dateTimeController: timeController),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
@@ -397,7 +355,8 @@ class _ChartState extends State<_ChartScreen> {
                           mainContext,
                           selectedHodgePlane,
                           selectedPosition,
-                          selectedDateTime,
+                          DateFormat('dd/MM/yyyy HH:mm')
+                              .parse(timeController.text),
                           context,
                           formKey,
                         );
@@ -425,8 +384,7 @@ class _ChartState extends State<_ChartScreen> {
     if (selectedHodgePlane != null &&
         selectedPosition != null &&
         selectedDateTime != null) {
-
-final partographBloc = mainContext.read<PartographBloc>();
+      final partographBloc = mainContext.read<PartographBloc>();
 
       final partographId = (partographBloc.state is Loaded)
           ? (partographBloc.state as Loaded).partograph.partographId
@@ -459,20 +417,13 @@ final partographBloc = mainContext.read<PartographBloc>();
     String maternalPositionValue = '';
     String frequencyContractions = '';
     String pain = '';
-    final today = DateTime.now();
-    DateTime? selectedDateTime;
 
     Widget buildFormContent(BuildContext context) {
       return SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildTimePickerField(context, timeController, today, (time) {
-              setState(() {
-                selectedDateTime = today;
-                timeController.text = DateFormat('HH:mm:ss').format(time);
-              });
-            }),
+            DateTimePickerField(dateTimeController: timeController),
             const SizedBox(height: 20),
             _buildDropdownButton(
               labelText: 'Posición Materna',
@@ -536,7 +487,7 @@ final partographBloc = mainContext.read<PartographBloc>();
                 fetalHeartRateValue.value,
                 contractionsDurationValue.value,
                 frequencyContractions,
-                selectedDateTime!,
+                DateFormat('dd/MM/yyyy HH:mm').parse(timeController.text),
                 pain,
                 context,
                 formKey,
@@ -603,39 +554,6 @@ final partographBloc = mainContext.read<PartographBloc>();
     }
   }
 
-  Widget _buildTimePickerField(
-    BuildContext context,
-    TextEditingController controller,
-    DateTime today,
-    Function(DateTime) onTimeSelected,
-  ) {
-    return GestureDetector(
-      onTap: () async {
-        final time = await _selectTime(context);
-        if (time != null) {
-          onTimeSelected(time);
-        }
-      },
-      child: AbsorbPointer(
-        child: TextFormField(
-          controller: controller,
-          decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.calendar_today),
-            border: OutlineInputBorder(),
-            labelText: 'Hora',
-            hintText: 'Seleccione una hora',
-          ),
-          validator: (value) {
-            if (controller.text.isEmpty) {
-              return 'Por favor seleccione una hora';
-            }
-            return null;
-          },
-        ),
-      ),
-    );
-  }
-
   Widget _buildDialogActions(
     BuildContext context,
     VoidCallback callback,
@@ -690,17 +608,5 @@ final partographBloc = mainContext.read<PartographBloc>();
           value == null || value.isEmpty ? 'Por favor, ingrese un dato' : null,
       onChanged: onChanged,
     );
-  }
-
-  Future<DateTime?> _selectTime(BuildContext context) async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (picked != null) {
-      final now = DateTime.now();
-      return DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-    }
-    return null;
   }
 }
