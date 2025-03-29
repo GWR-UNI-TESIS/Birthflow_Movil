@@ -14,6 +14,8 @@ import 'package:birthflow_movil/src/data/partograph/datasources/partograph_servi
 import 'package:birthflow_movil/src/data/partograph/repositories/partograph_repository_imp.dart';
 import 'package:birthflow_movil/src/data/partograph_history/datasources/partograph_history_service.dart';
 import 'package:birthflow_movil/src/data/partograph_history/repositories/partograph_history_repository_imp.dart';
+import 'package:birthflow_movil/src/data/reports/datasources/report_service.dart';
+import 'package:birthflow_movil/src/data/reports/repository/report_repository.dart';
 import 'package:birthflow_movil/src/data/share/datasources/share_service.dart';
 import 'package:birthflow_movil/src/data/share/repository/share_repository_imp.dart';
 import 'package:birthflow_movil/src/domain/account/repository/account_repository.dart';
@@ -58,6 +60,8 @@ import 'package:birthflow_movil/src/domain/partograph/usecases/presentation_posi
 import 'package:birthflow_movil/src/domain/partograph/usecases/search_partographs_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph_history/repositories/partograph_history_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph_history/usecases/get_partograph_history_usecase.dart';
+import 'package:birthflow_movil/src/domain/reports/repository/reports_repository.dart';
+import 'package:birthflow_movil/src/domain/reports/usecases/get_partograph_pdf.dart';
 import 'package:birthflow_movil/src/domain/share/repository/share_repository.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/asign_user_group_usecase.dart';
 import 'package:birthflow_movil/src/domain/share/usecases/get_asign_user_group_usecase.dart';
@@ -284,8 +288,25 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-  locator
-      .registerSingleton<ShareService>(ShareService(locator<DioClient>().dio));
+  locator.registerSingleton<ReportService>(ReportService(
+    locator<DioClient>().dio,
+  ));
+
+  locator.registerSingleton<ReportsRepository>(
+    ReportsRepositoryImplementation(
+      reportService: locator<ReportService>(),
+    ),
+  );
+
+  locator.registerSingleton<GetPartographPdf>(
+    GetPartographPdfImplementation(
+      reportsRepository: locator<ReportsRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<ShareService>(ShareService(
+    locator<DioClient>().dio,
+  ));
 
   locator.registerSingleton<ShareRepository>(
     ShareRepositoryImplementation(

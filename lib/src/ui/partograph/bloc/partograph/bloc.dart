@@ -1100,8 +1100,10 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         // Intentar crear la nota de parto
         final newEntry = await _createChildbirthNoteUseCase.execute(
           partographId: event.partographId,
+          date: event.date,
           hour: event.hour,
           sex: event.sex,
+          peso: event.peso,
           apgar: event.apgar,
           temperature: event.temperature,
           caputto: event.caputto,
@@ -1171,8 +1173,10 @@ class PartographBloc extends Bloc<PartographEvent, PartographState> {
         // Intentar actualizar la nota de parto
         final updatedEntry = await _updateChildbirthNoteUseCase.execute(
           partographId: event.partographId,
+          date: event.date,
           hour: event.hour,
           sex: event.sex,
+          peso: event.peso,
           apgar: event.apgar,
           temperature: event.temperature,
           caputto: event.caputto,

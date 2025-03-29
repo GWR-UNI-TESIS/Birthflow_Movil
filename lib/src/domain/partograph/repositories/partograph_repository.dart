@@ -43,7 +43,6 @@ abstract class PartographRepository {
     required int hourFilterId,
   });
 
-
   Future<List<CervicalDilation>?> getCervicalDilation({
     required String partographId,
   });
@@ -175,7 +174,6 @@ abstract class PartographRepository {
     required bool favorite,
   });
 
-
   Future<AlertCurves?> getCurves({
     required String partographId,
   });
@@ -183,8 +181,10 @@ abstract class PartographRepository {
   Future<ChildbirthNote?> createChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,
@@ -206,8 +206,10 @@ abstract class PartographRepository {
   Future<ChildbirthNote?> updateChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,

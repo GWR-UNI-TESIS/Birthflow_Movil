@@ -1,8 +1,10 @@
 class ChildbirthNote {
   final String partographId;
   final String? description;
+  final String? date;
   final String? hour;
   final String? sex;
+  final String? peso;
   final String? apgar;
   final String? temperature;
   final String? caputto;
@@ -23,8 +25,10 @@ class ChildbirthNote {
   ChildbirthNote({
     required this.partographId,
     this.description,
+    this.date,
     this.hour,
     this.sex,
+    this.peso,
     this.apgar,
     this.temperature,
     this.caputto,

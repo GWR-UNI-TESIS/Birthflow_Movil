@@ -23,8 +23,10 @@ ChildbirthNoteResponse _$ChildbirthNoteResponseFromJson(
 mixin _$ChildbirthNoteResponse {
   String get partographId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get date => throw _privateConstructorUsedError;
   String? get hour => throw _privateConstructorUsedError;
   String? get sex => throw _privateConstructorUsedError;
+  String? get peso => throw _privateConstructorUsedError;
   String? get apgar => throw _privateConstructorUsedError;
   String? get temperature => throw _privateConstructorUsedError;
   String? get caputto => throw _privateConstructorUsedError;
@@ -61,8 +63,10 @@ abstract class $ChildbirthNoteResponseCopyWith<$Res> {
   $Res call(
       {String partographId,
       String? description,
+      String? date,
       String? hour,
       String? sex,
+      String? peso,
       String? apgar,
       String? temperature,
       String? caputto,
@@ -99,8 +103,10 @@ class _$ChildbirthNoteResponseCopyWithImpl<$Res,
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
+    Object? date = freezed,
     Object? hour = freezed,
     Object? sex = freezed,
+    Object? peso = freezed,
     Object? apgar = freezed,
     Object? temperature = freezed,
     Object? caputto = freezed,
@@ -127,6 +133,10 @@ class _$ChildbirthNoteResponseCopyWithImpl<$Res,
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
       hour: freezed == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -134,6 +144,10 @@ class _$ChildbirthNoteResponseCopyWithImpl<$Res,
       sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      peso: freezed == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String?,
       apgar: freezed == apgar
           ? _value.apgar
@@ -215,8 +229,10 @@ abstract class _$$ChildbirthNoteResponseImplCopyWith<$Res>
   $Res call(
       {String partographId,
       String? description,
+      String? date,
       String? hour,
       String? sex,
+      String? peso,
       String? apgar,
       String? temperature,
       String? caputto,
@@ -252,8 +268,10 @@ class __$$ChildbirthNoteResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
+    Object? date = freezed,
     Object? hour = freezed,
     Object? sex = freezed,
+    Object? peso = freezed,
     Object? apgar = freezed,
     Object? temperature = freezed,
     Object? caputto = freezed,
@@ -280,6 +298,10 @@ class __$$ChildbirthNoteResponseImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
       hour: freezed == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -287,6 +309,10 @@ class __$$ChildbirthNoteResponseImplCopyWithImpl<$Res>
       sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      peso: freezed == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String?,
       apgar: freezed == apgar
           ? _value.apgar
@@ -362,8 +388,10 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
   const _$ChildbirthNoteResponseImpl(
       {required this.partographId,
       this.description,
+      this.date,
       this.hour,
       this.sex,
+      this.peso,
       this.apgar,
       this.temperature,
       this.caputto,
@@ -389,9 +417,13 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
   @override
   final String? description;
   @override
+  final String? date;
+  @override
   final String? hour;
   @override
   final String? sex;
+  @override
+  final String? peso;
   @override
   final String? apgar;
   @override
@@ -427,7 +459,7 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
 
   @override
   String toString() {
-    return 'ChildbirthNoteResponse(partographId: $partographId, description: $description, hour: $hour, sex: $sex, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
+    return 'ChildbirthNoteResponse(partographId: $partographId, description: $description, date: $date, hour: $hour, sex: $sex, peso: $peso, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
   }
 
   @override
@@ -439,8 +471,10 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
                 other.partographId == partographId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.peso, peso) || other.peso == peso) &&
             (identical(other.apgar, apgar) || other.apgar == apgar) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
@@ -474,8 +508,10 @@ class _$ChildbirthNoteResponseImpl implements _ChildbirthNoteResponse {
         runtimeType,
         partographId,
         description,
+        date,
         hour,
         sex,
+        peso,
         apgar,
         temperature,
         caputto,
@@ -515,8 +551,10 @@ abstract class _ChildbirthNoteResponse implements ChildbirthNoteResponse {
   const factory _ChildbirthNoteResponse(
       {required final String partographId,
       final String? description,
+      final String? date,
       final String? hour,
       final String? sex,
+      final String? peso,
       final String? apgar,
       final String? temperature,
       final String? caputto,
@@ -542,9 +580,13 @@ abstract class _ChildbirthNoteResponse implements ChildbirthNoteResponse {
   @override
   String? get description;
   @override
+  String? get date;
+  @override
   String? get hour;
   @override
   String? get sex;
+  @override
+  String? get peso;
   @override
   String? get apgar;
   @override

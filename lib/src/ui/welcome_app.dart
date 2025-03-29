@@ -90,7 +90,7 @@ class WelcomeAppScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
-            ElevatedButton(
+            FilledButton(
               onPressed: () => _requestNotificationPermission(context),
               child: const Text('Continuar'),
             ),

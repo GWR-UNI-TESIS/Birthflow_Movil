@@ -8,9 +8,11 @@ class ChildbirthNoteRequest with _$ChildbirthNoteRequest {
   const factory ChildbirthNoteRequest({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
     required String apgar,
+    required String peso,
     required String temperature,
     required String caputto,
     required String circular,

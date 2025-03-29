@@ -5,8 +5,10 @@ abstract class UpdateChildbirthNoteUseCase {
   Future<ChildbirthNote?> execute({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+     required String peso,
     required String apgar,
     required String temperature,
     required String caputto,
@@ -37,8 +39,10 @@ class UpdateChildbirthNoteUseCaseImplementation implements UpdateChildbirthNoteU
   Future<ChildbirthNote?> execute({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,
@@ -59,8 +63,10 @@ class UpdateChildbirthNoteUseCaseImplementation implements UpdateChildbirthNoteU
     return await _partographRepository.updateChildbirthNote(
       partographId: partographId,
       description: description,
+      date: date,
       hour: hour,
       sex: sex,
+      peso: peso,
       apgar: apgar,
       temperature: temperature,
       caputto: caputto,

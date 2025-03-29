@@ -47,6 +47,7 @@ class PartographPath extends Param<PartographPath> {
   ChildbirthNotePath get childbirthNotePath => ChildbirthNotePath(this);
   ChartPath get chart => ChartPath(this);
   PartographHistoryPath get history => PartographHistoryPath(this);
+  Path get report => Path('report', parent: this);
 }
 
 class CervicalDilationPath extends Path<CervicalDilationPath> {

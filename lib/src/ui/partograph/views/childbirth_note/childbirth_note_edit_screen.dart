@@ -27,8 +27,10 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
   final _formKey = GlobalKey<FormState>();
 
   // Controladores para los campos
+  late final TextEditingController _dateController;
   late final TextEditingController _hourController;
   late final TextEditingController _sexController;
+  late final TextEditingController _pesoController;
   late final TextEditingController _apgarController;
   late final TextEditingController _temperatureController;
   late final TextEditingController _caputtoController;
@@ -51,9 +53,10 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
     super.initState();
 
     final note = widget.childbirthNote;
-
+    _dateController = TextEditingController(text: note?.date ?? '');
     _hourController = TextEditingController(text: note?.hour ?? '');
     _sexController = TextEditingController(text: note?.sex ?? '');
+    _pesoController = TextEditingController(text: note?.peso ?? '');
     _apgarController = TextEditingController(text: note?.apgar ?? '');
     _temperatureController =
         TextEditingController(text: note?.temperature ?? '');
@@ -107,8 +110,10 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
         bloc.add(
           CreateChildbirthNote(
             partographId: widget.partographId,
+            date: _dateController.text,
             hour: _hourController.text,
             sex: _sexController.text,
+            peso: _pesoController.text,
             apgar: _apgarController.text,
             temperature: _temperatureController.text,
             caputto: _caputtoController.text,
@@ -132,7 +137,9 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
         bloc.add(
           UpdateChildbirthNote(
             partographId: widget.partographId,
+            date: _dateController.text,
             hour: _hourController.text,
+            peso: _pesoController.text,
             sex: _sexController.text,
             apgar: _apgarController.text,
             temperature: _temperatureController.text,
@@ -186,8 +193,10 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
               key: _formKey,
               child: ListView(
                 children: [
+                  _buildTextField('Hora', _dateController),
                   _buildTextField('Hora', _hourController),
                   _buildTextField('Sexo', _sexController),
+                  _buildTextField('Sexo', _pesoController),
                   _buildTextField('APGAR', _apgarController),
                   _buildTextField('Temperatura', _temperatureController),
                   _buildTextField('Caputto', _caputtoController),

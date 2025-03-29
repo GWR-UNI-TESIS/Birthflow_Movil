@@ -11,8 +11,10 @@ _$ChildbirthNoteResponseImpl _$$ChildbirthNoteResponseImplFromJson(
     _$ChildbirthNoteResponseImpl(
       partographId: json['partographId'] as String,
       description: json['description'] as String?,
+      date: json['date'] as String?,
       hour: json['hour'] as String?,
       sex: json['sex'] as String?,
+      peso: json['peso'] as String?,
       apgar: json['apgar'] as String?,
       temperature: json['temperature'] as String?,
       caputto: json['caputto'] as String?,
@@ -36,8 +38,10 @@ Map<String, dynamic> _$$ChildbirthNoteResponseImplToJson(
     <String, dynamic>{
       'partographId': instance.partographId,
       'description': instance.description,
+      'date': instance.date,
       'hour': instance.hour,
       'sex': instance.sex,
+      'peso': instance.peso,
       'apgar': instance.apgar,
       'temperature': instance.temperature,
       'caputto': instance.caputto,

@@ -38,7 +38,7 @@ class _PartographState extends State<PartographScreen> {
   Widget build(BuildContext context) {
     final catalog = context.watch<CatalogCubit>().state;
 
-    return Scaffold(
+    return SafeArea(child: Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(135.0),
@@ -93,7 +93,7 @@ class _PartographState extends State<PartographScreen> {
             );
           },
         ),
-      ),
+      ),),
     );
   }
 
@@ -118,7 +118,9 @@ class _PartographState extends State<PartographScreen> {
               child: _buildAppBarContent(context, state),
             );
           }
-          return Container(height: 10,);
+          return Container(
+            height: 10,
+          );
         },
       ),
     );
@@ -126,7 +128,16 @@ class _PartographState extends State<PartographScreen> {
 
   List<Widget> _buildAppBarActions() {
     return [
-      IconButton(icon: const Icon(Icons.description), onPressed: () {}),
+      IconButton(
+        icon: const Icon(Icons.description),
+        onPressed: () => context
+          ..go(
+            AppPaths.home.partographPath
+                .define(widget.partographId)
+                .report
+                .path,
+          ),
+      ),
       IconButton(
         icon: const Icon(Icons.notifications),
         onPressed: () {

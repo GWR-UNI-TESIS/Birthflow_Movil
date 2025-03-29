@@ -824,8 +824,10 @@ class PartographRepositoryImplementation implements PartographRepository {
   Future<ChildbirthNote?> createChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,
@@ -850,8 +852,10 @@ class PartographRepositoryImplementation implements PartographRepository {
       final request = ChildbirthNoteRequest(
         partographId: partographId,
         description: description,
+        date: date,
         hour: hour,
         sex: sex,
+        peso: peso,
         apgar: apgar,
         temperature: temperature,
         caputto: caputto,
@@ -886,8 +890,10 @@ class PartographRepositoryImplementation implements PartographRepository {
   Future<ChildbirthNote?> updateChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,
@@ -912,8 +918,10 @@ class PartographRepositoryImplementation implements PartographRepository {
       final request = ChildbirthNoteRequest(
         partographId: partographId,
         description: description,
+        date: date,
         hour: hour,
         sex: sex,
+        peso: peso,
         apgar: apgar,
         temperature: temperature,
         caputto: caputto,
