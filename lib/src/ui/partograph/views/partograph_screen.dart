@@ -38,62 +38,66 @@ class _PartographState extends State<PartographScreen> {
   Widget build(BuildContext context) {
     final catalog = context.watch<CatalogCubit>().state;
 
-    return SafeArea(child: Scaffold(
-      key: _scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(135.0),
-        child: _buildAppBar(context),
-      ),
-      drawer: NotificationDrawer(partographId: widget.partographId),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          // Dispara el evento FetchPartographs para recargar los datos
-          context.read<PartographBloc>().add(
-                onFetchData(partographId: widget.partographId),
-              );
-        },
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: BlocBuilder<PartographBloc, PartographState>(
-                builder: (context, state) {
-                  if (state is Loaded) {
-                    return _buildContent(context, state, catalog);
-                  }
-                  if (state is Error) {
-                    return ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/503_error_service.png',
-                              height: 260.0,
-                              fit: BoxFit.fill,
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              'Ha ocurrido un error, vuelva intentarlo en otro momento ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-                  return const LinearProgressIndicator();
-                },
-              ),
-            );
-          },
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(135.0),
+          child: _buildAppBar(context),
         ),
-      ),),
+        drawer: NotificationDrawer(partographId: widget.partographId),
+        body: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              // Dispara el evento FetchPartographs para recargar los datos
+              context.read<PartographBloc>().add(
+                    onFetchData(partographId: widget.partographId),
+                  );
+            },
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: BlocBuilder<PartographBloc, PartographState>(
+                    builder: (context, state) {
+                      if (state is Loaded) {
+                        return _buildContent(context, state, catalog);
+                      }
+                      if (state is Error) {
+                        return ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/503_error_service.png',
+                                  height: 260.0,
+                                  fit: BoxFit.fill,
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'Ha ocurrido un error, vuelva intentarlo en otro momento ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      return const LinearProgressIndicator();
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 

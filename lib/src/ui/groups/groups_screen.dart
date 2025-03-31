@@ -39,7 +39,6 @@ class GroupsView extends StatelessWidget {
               error: (message) {
                 return RefreshIndicator(
                   onRefresh: () async {
-                    
                     context.read<GroupsBloc>().add(
                           const GroupsEvent.loadGroups(),
                         );
@@ -162,9 +161,9 @@ class GroupsList extends StatelessWidget {
     );
   }
 
-  Future<void> _showDeleteDialog(BuildContext context, int id) async {
+  Future<void> _showDeleteDialog(BuildContext mainContext, int id) async {
     return await showDialog<void>(
-      context: context,
+      context: mainContext,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
@@ -179,7 +178,7 @@ class GroupsList extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                context.read<GroupsBloc>().add(GroupsEvent.deleteGroup(id));
+                mainContext.read<GroupsBloc>().add(GroupsEvent.deleteGroup(id));
                 Navigator.of(context).pop();
               },
               child: const Text('Aceptar'),

@@ -1,4 +1,4 @@
-package com.example.birthflow_movil
+package com.birthflow.birthflow_movil
 
 import io.flutter.embedding.android.FlutterActivity
 

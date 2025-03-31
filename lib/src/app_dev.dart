@@ -119,6 +119,7 @@ class AppDev extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: AppEntry(),
       ),
     );

@@ -61,7 +61,11 @@ class PdfViewerScaffold extends StatelessWidget {
                   );
                   if (path != null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('PDF guardado en:\n$path')),
+                      SnackBar(
+                        content: Text('PDF guardado en:\n$path'),
+                        showCloseIcon: true,
+                        duration: const Duration(minutes: 1),
+                      ),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -74,15 +78,19 @@ class PdfViewerScaffold extends StatelessWidget {
           )
         ],
       ),
-      body: BlocBuilder<PdfBloc, PdfState>(
-        builder: (context, state) {
-          return state.when(
-            initial: () => const SizedBox(),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (pdfBytes) => Padding(padding: const EdgeInsets.all(7), child:  SfPdfViewer.memory(pdfBytes)),
-            error: (msg) => Center(child: Text(msg)),
-          );
-        },
+      body: SafeArea(
+        child: BlocBuilder<PdfBloc, PdfState>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => const SizedBox(),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              loaded: (pdfBytes) => Padding(
+                  padding: const EdgeInsets.all(7),
+                  child: SfPdfViewer.memory(pdfBytes)),
+              error: (msg) => Center(child: Text(msg)),
+            );
+          },
+        ),
       ),
     );
   }

@@ -42,19 +42,22 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
         child: _buildAppBar(context),
       ),
       drawer: _buildDrawer(context),
-      body: SingleChildScrollView(
-        child: BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
-          builder: (context, state) {
-            return state.when(
-              initial: () => const Center(child: Text('Inicializando...')),
-              loading: () => const LinearProgressIndicator(),
-              loaded: (versions, selectedVersion, previousVersion) {
-                // Aquí se obtiene la versión seleccionada (en JSON)
-                return _buildContent(context, selectedVersion, previousVersion);
-              },
-              error: (message) => Center(child: Text('Error: $message')),
-            );
-          },
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
+            builder: (context, state) {
+              return state.when(
+                initial: () => const Center(child: Text('Inicializando...')),
+                loading: () => const LinearProgressIndicator(),
+                loaded: (versions, selectedVersion, previousVersion) {
+                  // Aquí se obtiene la versión seleccionada (en JSON)
+                  return _buildContent(
+                      context, selectedVersion, previousVersion);
+                },
+                error: (message) => Center(child: Text('Error: $message')),
+              );
+            },
+          ),
         ),
       ),
     );

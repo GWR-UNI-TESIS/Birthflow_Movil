@@ -38,7 +38,7 @@ class _MedicalSurveillanceCreateScreenState
   String _maternalPositionValue = 'Lat. Derecho';
   String _frequencyContractions = '';
   String _pain = '';
-  
+
   @override
   void initState() {
     super.initState();
@@ -86,23 +86,25 @@ class _MedicalSurveillanceCreateScreenState
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Crear Vigilancia Médica')),
-      body: BlocListener<PartographBloc, PartographState>(
-        listener: (context, state) {
-          if (state is Loaded) {
-            showSnackbar(state.message);
-            Navigator.of(context).pop();
-          } else if (state is Error) {
-            showErrorSnackbar(state.errorMessage);
-          }
-        },
-        child: LoadingOverlay(
-          isLoading: isLoading,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: Form(
-              key: _formKey,
-              child: _buildFormContent(),
+      body: SafeArea(
+        child: BlocListener<PartographBloc, PartographState>(
+          listener: (context, state) {
+            if (state is Loaded) {
+              showSnackbar(state.message);
+              Navigator.of(context).pop();
+            } else if (state is Error) {
+              showErrorSnackbar(state.errorMessage);
+            }
+          },
+          child: LoadingOverlay(
+            isLoading: isLoading,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: Form(
+                key: _formKey,
+                child: _buildFormContent(),
+              ),
             ),
           ),
         ),

@@ -129,7 +129,7 @@ class _ChartState extends State<_ChartScreen> {
             child: SafeArea(
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final bool isTablet = constraints.maxWidth >= 600;
+                  final bool isTablet = constraints.maxWidth >= 900;
                   return Center(
                     child: SizedBox(
                       height: double.infinity,
@@ -217,7 +217,7 @@ class _ChartState extends State<_ChartScreen> {
         builder: (context, setState) => SimpleDialog(
           title: const Text('Nueva dilatacion cervical'),
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           children: [
             Form(
               key: formKey,
@@ -315,7 +315,7 @@ class _ChartState extends State<_ChartScreen> {
         builder: (context, setState) => SimpleDialog(
           title: const Text('Nueva Presentación (Plano Hodge)'),
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
           children: [
             Form(
               key: formKey,
@@ -348,21 +348,16 @@ class _ChartState extends State<_ChartScreen> {
                   const SizedBox(height: 16),
                   DateTimePickerField(dateTimeController: timeController),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState?.validate() ?? false) {
-                        _savePresentationPosition(
-                          mainContext,
-                          selectedHodgePlane,
-                          selectedPosition,
-                          DateFormat('dd/MM/yyyy HH:mm')
-                              .parse(timeController.text),
-                          context,
-                          formKey,
-                        );
-                      }
-                    },
-                    child: const Text('Guardar'),
+                  _buildDialogActions(
+                    context,
+                    () => _savePresentationPosition(
+                      mainContext,
+                      selectedHodgePlane,
+                      selectedPosition,
+                      DateFormat('dd/MM/yyyy HH:mm').parse(timeController.text),
+                      context,
+                      formKey,
+                    ),
                   ),
                 ],
               ),
@@ -419,81 +414,84 @@ class _ChartState extends State<_ChartScreen> {
     String pain = '';
 
     Widget buildFormContent(BuildContext context) {
-      return SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DateTimePickerField(dateTimeController: timeController),
-            const SizedBox(height: 20),
-            _buildDropdownButton(
-              labelText: 'Posición Materna',
-              items: const [
-                'Lat. Derecho',
-                'Lat. Izquierdo',
-                'Dorsal',
-                'Semisentada',
-                'Sentada',
-                'Parada o Caminando',
-              ],
-              initialValue: maternalPositionValue,
-              onChanged: (value) => maternalPositionValue = value,
-            ),
-            const SizedBox(height: 16),
-            ArterialPressureWidget(
-              label: 'Tensión Arterial',
-              initialValue: arterialPressureValue.value,
-              onChanged: (value) => arterialPressureValue.value = value,
-            ),
-            const SizedBox(height: 16),
-            FormElementWidget(
-              label: 'Pulso Materno',
-              initialValue: maternalPulseValue.value,
-              onChanged: (value) => maternalPulseValue.value = value,
-            ),
-            const SizedBox(height: 16),
-            FormElementWidget(
-              label: 'Frecuencia cardiaca fetal',
-              initialValue: fetalHeartRateValue.value,
-              onChanged: (value) => fetalHeartRateValue.value = value,
-            ),
-            const SizedBox(height: 16),
-            FormElementWidget(
-              label: 'Duración Contracciones',
-              initialValue: contractionsDurationValue.value,
-              onChanged: (value) => contractionsDurationValue.value = value,
-            ),
-            const SizedBox(height: 16),
-            _buildTextField(
-              label: 'Frec. Contracciones',
-              maxLength: 2,
-              initialValue: frequencyContractions,
-              onChanged: (value) => frequencyContractions = value,
-            ),
-            const SizedBox(height: 16),
-            UnifiedDropdownWidget(
-              locationValues: const ['Sacro', 'Suprapúbico'],
-              intensityValues: const ['Débil', 'Normal', 'Fuerte'],
-              initialValue: pain,
-              onValueChanged: (value) => pain = value,
-            ),
-            const SizedBox(height: 20),
-            _buildDialogActions(
-              context,
-              () => _saveItemTable(
-                mainContext,
-                maternalPositionValue,
-                arterialPressureValue.value,
-                maternalPulseValue.value,
-                fetalHeartRateValue.value,
-                contractionsDurationValue.value,
-                frequencyContractions,
-                DateFormat('dd/MM/yyyy HH:mm').parse(timeController.text),
-                pain,
-                context,
-                formKey,
+      return Padding(
+        padding: const EdgeInsets.all(15),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DateTimePickerField(dateTimeController: timeController),
+              const SizedBox(height: 20),
+              _buildDropdownButton(
+                labelText: 'Posición Materna',
+                items: const [
+                  'Lat. Derecho',
+                  'Lat. Izquierdo',
+                  'Dorsal',
+                  'Semisentada',
+                  'Sentada',
+                  'Parada o Caminando',
+                ],
+                initialValue: maternalPositionValue,
+                onChanged: (value) => maternalPositionValue = value,
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              ArterialPressureWidget(
+                label: 'Tensión Arterial',
+                initialValue: arterialPressureValue.value,
+                onChanged: (value) => arterialPressureValue.value = value,
+              ),
+              const SizedBox(height: 16),
+              FormElementWidget(
+                label: 'Pulso Materno',
+                initialValue: maternalPulseValue.value,
+                onChanged: (value) => maternalPulseValue.value = value,
+              ),
+              const SizedBox(height: 16),
+              FormElementWidget(
+                label: 'Frecuencia cardiaca fetal',
+                initialValue: fetalHeartRateValue.value,
+                onChanged: (value) => fetalHeartRateValue.value = value,
+              ),
+              const SizedBox(height: 16),
+              FormElementWidget(
+                label: 'Duración Contracciones',
+                initialValue: contractionsDurationValue.value,
+                onChanged: (value) => contractionsDurationValue.value = value,
+              ),
+              const SizedBox(height: 16),
+              _buildTextField(
+                label: 'Frec. Contracciones',
+                maxLength: 2,
+                initialValue: frequencyContractions,
+                onChanged: (value) => frequencyContractions = value,
+              ),
+              const SizedBox(height: 16),
+              UnifiedDropdownWidget(
+                locationValues: const ['Sacro', 'Suprapúbico'],
+                intensityValues: const ['Débil', 'Normal', 'Fuerte'],
+                initialValue: pain,
+                onValueChanged: (value) => pain = value,
+              ),
+              const SizedBox(height: 20),
+              _buildDialogActions(
+                context,
+                () => _saveItemTable(
+                  mainContext,
+                  maternalPositionValue,
+                  arterialPressureValue.value,
+                  maternalPulseValue.value,
+                  fetalHeartRateValue.value,
+                  contractionsDurationValue.value,
+                  frequencyContractions,
+                  DateFormat('dd/MM/yyyy HH:mm').parse(timeController.text),
+                  pain,
+                  context,
+                  formKey,
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -502,6 +500,7 @@ class _ChartState extends State<_ChartScreen> {
       context: mainContext,
       builder: (BuildContext context) => StatefulBuilder(
         builder: (context, setState) => SimpleDialog(
+          title: const Text('Creacion elemento tabla'),
           children: [
             Form(
               key: formKey,
@@ -567,7 +566,7 @@ class _ChartState extends State<_ChartScreen> {
             onPressed: () => Navigator.pop(context),
             child: const Text('Cancelar'),
           ),
-          TextButton(
+          FilledButton(
             onPressed: callback,
             child: const Text('Aceptar'),
           ),

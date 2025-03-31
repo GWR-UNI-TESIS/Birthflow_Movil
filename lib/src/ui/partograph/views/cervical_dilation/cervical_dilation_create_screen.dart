@@ -56,18 +56,20 @@ class _CervicalDilationCreateScreenState
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Crear Dilatación Cervical')),
-      body: BlocListener<PartographBloc, PartographState>(
-        listener: (context, state) {
-          if (state is Loaded) {
-            showSnackbar(state.message);
-            Navigator.of(context).pop();
-          } else if (state is Error) {
-            showErrorSnackbar(state.errorMessage);
-          }
-        },
-        child: LoadingOverlay(
-          isLoading: isLoading,
-          child: _buildForm(context),
+      body: SafeArea(
+        child: BlocListener<PartographBloc, PartographState>(
+          listener: (context, state) {
+            if (state is Loaded) {
+              showSnackbar(state.message);
+              Navigator.of(context).pop();
+            } else if (state is Error) {
+              showErrorSnackbar(state.errorMessage);
+            }
+          },
+          child: LoadingOverlay(
+            isLoading: isLoading,
+            child: _buildForm(context),
+          ),
         ),
       ),
     );

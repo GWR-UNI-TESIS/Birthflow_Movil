@@ -47,6 +47,7 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
   late final TextEditingController _tallaController;
   late final TextEditingController _brazaleteController;
   late final TextEditingController _huellaDigController;
+  late final TextEditingController _descriptionController;
 
   @override
   void initState() {
@@ -76,12 +77,16 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
     _tallaController = TextEditingController(text: note?.talla ?? '');
     _brazaleteController = TextEditingController(text: note?.brazalete ?? '');
     _huellaDigController = TextEditingController(text: note?.huellaDig ?? '');
+    _descriptionController =
+        TextEditingController(text: note?.description ?? '');
   }
 
   @override
   void dispose() {
+    _dateController.dispose();
     _hourController.dispose();
     _sexController.dispose();
+    _pesoController.dispose();
     _apgarController.dispose();
     _temperatureController.dispose();
     _caputtoController.dispose();
@@ -98,6 +103,7 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
     _tallaController.dispose();
     _brazaleteController.dispose();
     _huellaDigController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -193,10 +199,10 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
               key: _formKey,
               child: ListView(
                 children: [
-                  _buildTextField('Hora', _dateController),
+                  _buildTextField('Fecha', _dateController),
                   _buildTextField('Hora', _hourController),
                   _buildTextField('Sexo', _sexController),
-                  _buildTextField('Sexo', _pesoController),
+                  _buildTextField('Peso', _pesoController),
                   _buildTextField('APGAR', _apgarController),
                   _buildTextField('Temperatura', _temperatureController),
                   _buildTextField('Caputto', _caputtoController),
@@ -213,6 +219,12 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
                   _buildTextField('Talla', _tallaController),
                   _buildTextField('Brazalete', _brazaleteController),
                   _buildTextField('Huella Digital', _huellaDigController),
+                  _buildTextFieldDescription(
+                    controller: _descriptionController,
+                    label: 'Descripcion',
+                    hint: 'Descripcion',
+                    maxLength: 300,
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _saveNote,
@@ -223,6 +235,32 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldDescription({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required int maxLength,
+  }) {
+    return Container(
+      constraints: const BoxConstraints(minHeight: 100, maxHeight: 150),
+      child: TextFormField(
+        controller: controller,
+        expands: true,
+        textAlignVertical: TextAlignVertical.top,
+        maxLines: null,
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          labelText: label,
+          hintText: hint,
+        ),
+        maxLength: maxLength,
+        validator: (value) => value == null || value.isEmpty
+            ? 'Por favor, ingrese un valor'
+            : null,
       ),
     );
   }

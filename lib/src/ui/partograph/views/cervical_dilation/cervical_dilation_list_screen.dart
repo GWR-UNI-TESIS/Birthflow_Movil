@@ -23,19 +23,22 @@ class CervicalDilationListScreen extends StatelessWidget {
         elevation: 1,
         title: const Text('Dilataciones Cervicales'),
       ),
-      body: BlocBuilder<PartographBloc, PartographState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (partograph, _, d) =>
-                partograph.cervicalDilations?.isEmpty ?? true
-                    ? const Center(child: Text('No hay datos'))
-                    : _buildCervicalDilationList(partograph.cervicalDilations!),
-            error: (errorMessage) =>
-                Center(child: Text('Error: $errorMessage')),
-            orElse: () => const Center(child: CircularProgressIndicator()),
-          );
-        },
+      body: SafeArea(
+        child: BlocBuilder<PartographBloc, PartographState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              loaded: (partograph, _, d) => partograph
+                          .cervicalDilations?.isEmpty ??
+                      true
+                  ? const Center(child: Text('No hay datos'))
+                  : _buildCervicalDilationList(partograph.cervicalDilations!),
+              error: (errorMessage) =>
+                  Center(child: Text('Error: $errorMessage')),
+              orElse: () => const Center(child: CircularProgressIndicator()),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _navigateToCreate(context),
@@ -68,7 +71,8 @@ class CervicalDilationListScreen extends StatelessWidget {
     CervicalDilation item,
   ) {
     return ListTile(
-      title: Text('Valor: ${item.value} - Hora: ${DateFormat('dd/MM/yyyy hh:mm:ss').format(item.hour)}'),
+      title: Text(
+          'Valor: ${item.value} - Hora: ${DateFormat('dd/MM/yyyy hh:mm:ss').format(item.hour)}'),
       subtitle: item.remOrRam ? const Chip(label: Text('Ram O Rem')) : null,
       trailing: IconButton(
         icon: const Icon(Icons.delete),

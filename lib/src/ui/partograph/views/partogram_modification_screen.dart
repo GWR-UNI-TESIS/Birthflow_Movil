@@ -120,71 +120,73 @@ class PartogramModificationState extends State<PartogramModificationScreen>
       appBar: AppBar(
         title: const Text('Actualizar Partograma'),
       ),
-      body: BlocListener<PartographBloc, PartographState>(
-        listener: (context, state) {
-          if (state is Loaded) {
-            showSnackbar(state.message);
-            Navigator.of(context).pop();
-          } else if (state is Error) {
-            showErrorSnackbar(state.errorMessage);
-          }
-        },
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(22.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTextField(
-                  controller: _nameController,
-                  label: 'Nombre',
-                  hint: 'Ingrese el nombre',
-                  maxLength: 50,
-                ),
-                const SizedBox(height: 16),
-                _buildTextField(
-                  controller: _recordNameController,
-                  label: 'Número de Expediente',
-                  hint: 'Ingrese el número de expediente',
-                  maxLength: 50,
-                ),
-                const SizedBox(height: 16),
-                _buildDateField(
-                  controller: _dateController,
-                  label: 'Fecha',
-                  context: context,
-                ),
-                const SizedBox(height: 20),
-                _buildTextFieldObservation(
-                  controller: _observationController,
-                  label: 'Observaciones',
-                  hint: 'Ingrese las observaciones',
-                  maxLength: 300,
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Text(
-                    'Valores por defecto para la creacion de curva de alerta ',
-                    style: Theme.of(context).textTheme.titleSmall,
+      body: SafeArea(
+        child: BlocListener<PartographBloc, PartographState>(
+          listener: (context, state) {
+            if (state is Loaded) {
+              showSnackbar(state.message);
+              Navigator.of(context).pop();
+            } else if (state is Error) {
+              showErrorSnackbar(state.errorMessage);
+            }
+          },
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(22.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTextField(
+                    controller: _nameController,
+                    label: 'Nombre',
+                    hint: 'Ingrese el nombre',
+                    maxLength: 50,
                   ),
-                ),
-                WorkTimeTableWidget(
-                  currentWorkTime: _workTime!,
-                ),
-                const SizedBox(height: 25),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.icon(
-                    onPressed: _updatePartograph,
-                    label: const Text('Guardar Cambios'),
-                    icon: const Icon(
-                      Icons.save_alt,
+                  const SizedBox(height: 16),
+                  _buildTextField(
+                    controller: _recordNameController,
+                    label: 'Número de Expediente',
+                    hint: 'Ingrese el número de expediente',
+                    maxLength: 50,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildDateField(
+                    controller: _dateController,
+                    label: 'Fecha',
+                    context: context,
+                  ),
+                  const SizedBox(height: 20),
+                  _buildTextFieldObservation(
+                    controller: _observationController,
+                    label: 'Observaciones',
+                    hint: 'Ingrese las observaciones',
+                    maxLength: 300,
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Text(
+                      'Valores por defecto para la creacion de curva de alerta ',
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
-                ),
-              ],
+                  WorkTimeTableWidget(
+                    currentWorkTime: _workTime!,
+                  ),
+                  const SizedBox(height: 25),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.icon(
+                      onPressed: _updatePartograph,
+                      label: const Text('Guardar Cambios'),
+                      icon: const Icon(
+                        Icons.save_alt,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

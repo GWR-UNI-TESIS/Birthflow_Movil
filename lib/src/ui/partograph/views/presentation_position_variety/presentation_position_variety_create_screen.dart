@@ -76,22 +76,24 @@ class _PresentationPositionVarietyCreateScreenState
       appBar: AppBar(
         title: const Text('Crear Presentación'),
       ),
-      body: BlocListener<PartographBloc, PartographState>(
-        listener: (context, state) {
-          if (state is Loaded) {
-            showSnackbar(state.message);
-            Navigator.of(context).pop();
-          } else if (state is Error) {
-            showErrorSnackbar(state.errorMessage);
-          }
-        },
-        child: LoadingOverlay(
-          isLoading: isLoading,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: _buildFormContent(catalog),
+      body: SafeArea(
+        child: BlocListener<PartographBloc, PartographState>(
+          listener: (context, state) {
+            if (state is Loaded) {
+              showSnackbar(state.message);
+              Navigator.of(context).pop();
+            } else if (state is Error) {
+              showErrorSnackbar(state.errorMessage);
+            }
+          },
+          child: LoadingOverlay(
+            isLoading: isLoading,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: _buildFormContent(catalog),
+              ),
             ),
           ),
         ),

@@ -42,19 +42,21 @@ class _PartographReadOnlyState extends State<PartographReadOnlyScreen> {
         preferredSize: const Size.fromHeight(135.0),
         child: _buildAppBar(context),
       ),
-      body: SingleChildScrollView(
-        child: BlocBuilder<PartographBloc, PartographState>(
-          builder: (context, state) {
-            if (state is Loaded) {
-              return _buildContent(context, state, catalog);
-            }
-            if (state is Error) {
-              return const Center(
-                child: Text('Ha ocurrido un error'),
-              );
-            }
-            return const LinearProgressIndicator();
-          },
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: BlocBuilder<PartographBloc, PartographState>(
+            builder: (context, state) {
+              if (state is Loaded) {
+                return _buildContent(context, state, catalog);
+              }
+              if (state is Error) {
+                return const Center(
+                  child: Text('Ha ocurrido un error'),
+                );
+              }
+              return const LinearProgressIndicator();
+            },
+          ),
         ),
       ),
     );

@@ -141,23 +141,25 @@ class _MedicalSurveillanceEditScreenState
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Vigilancia Médica')),
-      body: BlocListener<PartographBloc, PartographState>(
-        listener: (context, state) {
-          if (state is Loaded) {
-            showSnackbar(state.message);
-            Navigator.of(context).pop();
-          } else if (state is Error) {
-            showErrorSnackbar(state.errorMessage);
-          }
-        },
-        child: LoadingOverlay(
-          isLoading: isLoading,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: Form(
-              key: _formKey,
-              child: _buildFormContent(context),
+      body: SafeArea(
+        child: BlocListener<PartographBloc, PartographState>(
+          listener: (context, state) {
+            if (state is Loaded) {
+              showSnackbar(state.message);
+              Navigator.of(context).pop();
+            } else if (state is Error) {
+              showErrorSnackbar(state.errorMessage);
+            }
+          },
+          child: LoadingOverlay(
+            isLoading: isLoading,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: Form(
+                key: _formKey,
+                child: _buildFormContent(context),
+              ),
             ),
           ),
         ),

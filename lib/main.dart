@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/firebase_options.dart';
 import 'package:birthflow_movil/src/app_dev.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
@@ -13,7 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await loadEnvConfig();
   await initializeDependencies();
   FirebaseMessaging.onBackgroundMessage(
@@ -70,6 +73,7 @@ class _MyAppState extends State<MyApp> {
         final bool isFirstTime = snapshot.data ?? false;
 
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: isFirstTime ? WelcomeAppScreen() : AppLoader(),
         );
       },
@@ -104,12 +108,14 @@ class _AppLoaderState extends State<AppLoader> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
           );
         } else if (snapshot.hasError) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: ConnectionErrorScreen(
                 onRetry: _retry,
