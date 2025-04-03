@@ -223,7 +223,7 @@ class HomeScreen extends StatelessWidget with SnackbarMixin {
             ),
             endDrawer: const NotificationsDrawer(),
             floatingActionButton: FloatingActionButton(
-              tooltip: 'Nuevo',
+              tooltip: 'Nuevo partograma',
               onPressed: () => _handleNewPartograph(context, userId),
               child: const Icon(Icons.add),
             ),
@@ -422,6 +422,10 @@ class NotificationsDrawer extends StatelessWidget {
                         );
                       },
                     ),
+                  );
+                } else if (state is NotificationsEmpty) {
+                  return const Center(
+                    child: Text('No tiene notificaciones disponibles'),
                   );
                 } else if (state is NotificationsError) {
                   return Center(

@@ -7,6 +7,11 @@ abstract class NotificationRepository {
     required String deviceInfo,
   });
 
+    Future<void> updateDeviceSilenceStatus({
+    required String token,
+    required bool isSilenced
+  });
+
   Future<List<Notification>> getNotifications();
 
   Future<List<Notification>> getPartographNotifications(String partographId);

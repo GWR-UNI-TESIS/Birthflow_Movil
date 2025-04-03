@@ -20,6 +20,7 @@ mixin _$NotificationsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() empty,
     required TResult Function(List<Notification> notifications) loaded,
     required TResult Function(String message) error,
   }) =>
@@ -28,6 +29,7 @@ mixin _$NotificationsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? empty,
     TResult? Function(List<Notification> notifications)? loaded,
     TResult? Function(String message)? error,
   }) =>
@@ -36,6 +38,7 @@ mixin _$NotificationsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? empty,
     TResult Function(List<Notification> notifications)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$NotificationsState {
   TResult map<TResult extends Object?>({
     required TResult Function(NotificationsInitial value) initial,
     required TResult Function(NotificationsLoading value) loading,
+    required TResult Function(NotificationsEmpty value) empty,
     required TResult Function(NotificationsLoaded value) loaded,
     required TResult Function(NotificationsError value) error,
   }) =>
@@ -53,6 +57,7 @@ mixin _$NotificationsState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NotificationsInitial value)? initial,
     TResult? Function(NotificationsLoading value)? loading,
+    TResult? Function(NotificationsEmpty value)? empty,
     TResult? Function(NotificationsLoaded value)? loaded,
     TResult? Function(NotificationsError value)? error,
   }) =>
@@ -61,6 +66,7 @@ mixin _$NotificationsState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NotificationsInitial value)? initial,
     TResult Function(NotificationsLoading value)? loading,
+    TResult Function(NotificationsEmpty value)? empty,
     TResult Function(NotificationsLoaded value)? loaded,
     TResult Function(NotificationsError value)? error,
     required TResult orElse(),
@@ -133,6 +139,7 @@ class _$NotificationsInitialImpl implements NotificationsInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() empty,
     required TResult Function(List<Notification> notifications) loaded,
     required TResult Function(String message) error,
   }) {
@@ -144,6 +151,7 @@ class _$NotificationsInitialImpl implements NotificationsInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? empty,
     TResult? Function(List<Notification> notifications)? loaded,
     TResult? Function(String message)? error,
   }) {
@@ -155,6 +163,7 @@ class _$NotificationsInitialImpl implements NotificationsInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? empty,
     TResult Function(List<Notification> notifications)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -170,6 +179,7 @@ class _$NotificationsInitialImpl implements NotificationsInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(NotificationsInitial value) initial,
     required TResult Function(NotificationsLoading value) loading,
+    required TResult Function(NotificationsEmpty value) empty,
     required TResult Function(NotificationsLoaded value) loaded,
     required TResult Function(NotificationsError value) error,
   }) {
@@ -181,6 +191,7 @@ class _$NotificationsInitialImpl implements NotificationsInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NotificationsInitial value)? initial,
     TResult? Function(NotificationsLoading value)? loading,
+    TResult? Function(NotificationsEmpty value)? empty,
     TResult? Function(NotificationsLoaded value)? loaded,
     TResult? Function(NotificationsError value)? error,
   }) {
@@ -192,6 +203,7 @@ class _$NotificationsInitialImpl implements NotificationsInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NotificationsInitial value)? initial,
     TResult Function(NotificationsLoading value)? loading,
+    TResult Function(NotificationsEmpty value)? empty,
     TResult Function(NotificationsLoaded value)? loaded,
     TResult Function(NotificationsError value)? error,
     required TResult orElse(),
@@ -251,6 +263,7 @@ class _$NotificationsLoadingImpl implements NotificationsLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() empty,
     required TResult Function(List<Notification> notifications) loaded,
     required TResult Function(String message) error,
   }) {
@@ -262,6 +275,7 @@ class _$NotificationsLoadingImpl implements NotificationsLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? empty,
     TResult? Function(List<Notification> notifications)? loaded,
     TResult? Function(String message)? error,
   }) {
@@ -273,6 +287,7 @@ class _$NotificationsLoadingImpl implements NotificationsLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? empty,
     TResult Function(List<Notification> notifications)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -288,6 +303,7 @@ class _$NotificationsLoadingImpl implements NotificationsLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(NotificationsInitial value) initial,
     required TResult Function(NotificationsLoading value) loading,
+    required TResult Function(NotificationsEmpty value) empty,
     required TResult Function(NotificationsLoaded value) loaded,
     required TResult Function(NotificationsError value) error,
   }) {
@@ -299,6 +315,7 @@ class _$NotificationsLoadingImpl implements NotificationsLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NotificationsInitial value)? initial,
     TResult? Function(NotificationsLoading value)? loading,
+    TResult? Function(NotificationsEmpty value)? empty,
     TResult? Function(NotificationsLoaded value)? loaded,
     TResult? Function(NotificationsError value)? error,
   }) {
@@ -310,6 +327,7 @@ class _$NotificationsLoadingImpl implements NotificationsLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NotificationsInitial value)? initial,
     TResult Function(NotificationsLoading value)? loading,
+    TResult Function(NotificationsEmpty value)? empty,
     TResult Function(NotificationsLoaded value)? loaded,
     TResult Function(NotificationsError value)? error,
     required TResult orElse(),
@@ -323,6 +341,129 @@ class _$NotificationsLoadingImpl implements NotificationsLoading {
 
 abstract class NotificationsLoading implements NotificationsState {
   const factory NotificationsLoading() = _$NotificationsLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$NotificationsEmptyImplCopyWith<$Res> {
+  factory _$$NotificationsEmptyImplCopyWith(_$NotificationsEmptyImpl value,
+          $Res Function(_$NotificationsEmptyImpl) then) =
+      __$$NotificationsEmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NotificationsEmptyImplCopyWithImpl<$Res>
+    extends _$NotificationsStateCopyWithImpl<$Res, _$NotificationsEmptyImpl>
+    implements _$$NotificationsEmptyImplCopyWith<$Res> {
+  __$$NotificationsEmptyImplCopyWithImpl(_$NotificationsEmptyImpl _value,
+      $Res Function(_$NotificationsEmptyImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NotificationsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$NotificationsEmptyImpl implements NotificationsEmpty {
+  const _$NotificationsEmptyImpl();
+
+  @override
+  String toString() {
+    return 'NotificationsState.empty()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NotificationsEmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() empty,
+    required TResult Function(List<Notification> notifications) loaded,
+    required TResult Function(String message) error,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? empty,
+    TResult? Function(List<Notification> notifications)? loaded,
+    TResult? Function(String message)? error,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? empty,
+    TResult Function(List<Notification> notifications)? loaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NotificationsInitial value) initial,
+    required TResult Function(NotificationsLoading value) loading,
+    required TResult Function(NotificationsEmpty value) empty,
+    required TResult Function(NotificationsLoaded value) loaded,
+    required TResult Function(NotificationsError value) error,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotificationsInitial value)? initial,
+    TResult? Function(NotificationsLoading value)? loading,
+    TResult? Function(NotificationsEmpty value)? empty,
+    TResult? Function(NotificationsLoaded value)? loaded,
+    TResult? Function(NotificationsError value)? error,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotificationsInitial value)? initial,
+    TResult Function(NotificationsLoading value)? loading,
+    TResult Function(NotificationsEmpty value)? empty,
+    TResult Function(NotificationsLoaded value)? loaded,
+    TResult Function(NotificationsError value)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NotificationsEmpty implements NotificationsState {
+  const factory NotificationsEmpty() = _$NotificationsEmptyImpl;
 }
 
 /// @nodoc
@@ -405,6 +546,7 @@ class _$NotificationsLoadedImpl implements NotificationsLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() empty,
     required TResult Function(List<Notification> notifications) loaded,
     required TResult Function(String message) error,
   }) {
@@ -416,6 +558,7 @@ class _$NotificationsLoadedImpl implements NotificationsLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? empty,
     TResult? Function(List<Notification> notifications)? loaded,
     TResult? Function(String message)? error,
   }) {
@@ -427,6 +570,7 @@ class _$NotificationsLoadedImpl implements NotificationsLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? empty,
     TResult Function(List<Notification> notifications)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -442,6 +586,7 @@ class _$NotificationsLoadedImpl implements NotificationsLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(NotificationsInitial value) initial,
     required TResult Function(NotificationsLoading value) loading,
+    required TResult Function(NotificationsEmpty value) empty,
     required TResult Function(NotificationsLoaded value) loaded,
     required TResult Function(NotificationsError value) error,
   }) {
@@ -453,6 +598,7 @@ class _$NotificationsLoadedImpl implements NotificationsLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NotificationsInitial value)? initial,
     TResult? Function(NotificationsLoading value)? loading,
+    TResult? Function(NotificationsEmpty value)? empty,
     TResult? Function(NotificationsLoaded value)? loaded,
     TResult? Function(NotificationsError value)? error,
   }) {
@@ -464,6 +610,7 @@ class _$NotificationsLoadedImpl implements NotificationsLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NotificationsInitial value)? initial,
     TResult Function(NotificationsLoading value)? loading,
+    TResult Function(NotificationsEmpty value)? empty,
     TResult Function(NotificationsLoaded value)? loaded,
     TResult Function(NotificationsError value)? error,
     required TResult orElse(),
@@ -560,6 +707,7 @@ class _$NotificationsErrorImpl implements NotificationsError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() empty,
     required TResult Function(List<Notification> notifications) loaded,
     required TResult Function(String message) error,
   }) {
@@ -571,6 +719,7 @@ class _$NotificationsErrorImpl implements NotificationsError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? empty,
     TResult? Function(List<Notification> notifications)? loaded,
     TResult? Function(String message)? error,
   }) {
@@ -582,6 +731,7 @@ class _$NotificationsErrorImpl implements NotificationsError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? empty,
     TResult Function(List<Notification> notifications)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -597,6 +747,7 @@ class _$NotificationsErrorImpl implements NotificationsError {
   TResult map<TResult extends Object?>({
     required TResult Function(NotificationsInitial value) initial,
     required TResult Function(NotificationsLoading value) loading,
+    required TResult Function(NotificationsEmpty value) empty,
     required TResult Function(NotificationsLoaded value) loaded,
     required TResult Function(NotificationsError value) error,
   }) {
@@ -608,6 +759,7 @@ class _$NotificationsErrorImpl implements NotificationsError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NotificationsInitial value)? initial,
     TResult? Function(NotificationsLoading value)? loading,
+    TResult? Function(NotificationsEmpty value)? empty,
     TResult? Function(NotificationsLoaded value)? loaded,
     TResult? Function(NotificationsError value)? error,
   }) {
@@ -619,6 +771,7 @@ class _$NotificationsErrorImpl implements NotificationsError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NotificationsInitial value)? initial,
     TResult Function(NotificationsLoading value)? loading,
+    TResult Function(NotificationsEmpty value)? empty,
     TResult Function(NotificationsLoaded value)? loaded,
     TResult Function(NotificationsError value)? error,
     required TResult orElse(),

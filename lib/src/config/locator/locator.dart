@@ -35,6 +35,7 @@ import 'package:birthflow_movil/src/domain/notification/repository/notification_
 import 'package:birthflow_movil/src/domain/notification/usecases/get_notifications_usecase.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/get_partograph_notifications_usecase.dart';
 import 'package:birthflow_movil/src/domain/notification/usecases/register_device_token_usecase.dart';
+import 'package:birthflow_movil/src/domain/notification/usecases/update_device_silence_status_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/alert_curves_get_usecase.dart';
 import 'package:birthflow_movil/src/domain/partograph/usecases/cervical_dilation_create_usecase.dart';
@@ -396,6 +397,12 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton<GetNotificationsUseCase>(
     GetNotificationsUseCaseImplementation(
+      notificationRepository: locator<NotificationRepository>(),
+    ),
+  );
+
+  locator.registerSingleton<UpdateDeviceSilenceStatusUseCase>(
+    UpdateDeviceSilenceStatusUseCaseImplementation(
       notificationRepository: locator<NotificationRepository>(),
     ),
   );

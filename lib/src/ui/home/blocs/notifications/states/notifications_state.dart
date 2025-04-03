@@ -7,6 +7,7 @@ part 'notifications_state.freezed.dart';
 class NotificationsState with _$NotificationsState {
   const factory NotificationsState.initial() = NotificationsInitial;
   const factory NotificationsState.loading() = NotificationsLoading;
+  const factory NotificationsState.empty() = NotificationsEmpty;
   const factory NotificationsState.loaded({
     required List<Notification> notifications,
   }) = NotificationsLoaded;

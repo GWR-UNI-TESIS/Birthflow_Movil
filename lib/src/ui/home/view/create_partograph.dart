@@ -126,7 +126,7 @@ class _CreatePartographState extends State<_CreatePartographPage>
             controller: _tabController,
             tabs: const <Widget>[
               Tab(
-                text: 'Datos enerales',
+                text: 'Datos Generales',
               ),
               Tab(
                 text: 'Construccion de la curva de alerta',

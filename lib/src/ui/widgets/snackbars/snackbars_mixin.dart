@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 mixin SnackbarMixin {
   void showSnackbar(
     String message, {
-    Duration duration = const Duration(seconds: 3),
+    Duration duration = const Duration(seconds: 5),
   }) {
     locator<GlobalKey<ScaffoldMessengerState>>().currentState?.showSnackBar(
           SnackBar(
             content: Text(message),
             duration: duration,
+            showCloseIcon: true,
           ),
         );
   }
@@ -19,6 +20,7 @@ mixin SnackbarMixin {
           SnackBar(
             content: Text(message),
             duration: const Duration(seconds: 5),
+            showCloseIcon: true,
           ),
         );
   }

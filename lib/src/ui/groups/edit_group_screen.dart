@@ -22,7 +22,10 @@ class EditGroupView extends StatelessWidget {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Nombre de grupo'),
+              decoration: const InputDecoration(
+                labelText: 'Nombre de grupo',
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(height: 16),
             ElevatedButton(

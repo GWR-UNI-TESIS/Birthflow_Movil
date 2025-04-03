@@ -35,6 +35,46 @@ class GroupsView extends StatelessWidget {
             return state.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               loaded: (groups) => GroupsList(groups: groups),
+              empty: () {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<GroupsBloc>().add(
+                          const GroupsEvent.loadGroups(),
+                        );
+                  },
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/no_data.png',
+                                  height: 260.0,
+                                  fit: BoxFit.fill,
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'No se encuentran grupos para su usuario',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
               actionSuccess: (_) => Container(),
               error: (message) {
                 return RefreshIndicator(

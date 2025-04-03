@@ -75,4 +75,22 @@ class NotificationRepositoryImplementation implements NotificationRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> updateDeviceSilenceStatus(
+      {required String token, required bool isSilenced}) async {
+    try {
+      final tokenGuardado = await _tokenStorage.getAccessToken();
+      final tokenAuth = 'Bearer $tokenGuardado';
+
+      await _notificationService.updateDeviceSilenceStatus(
+        tokenAuth,
+        token,
+        isSilenced,
+      );
+    } catch (e, stackTrace) {
+      _logger.e('Login exception', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
 }

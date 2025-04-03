@@ -7,6 +7,7 @@ part 'groups_state.freezed.dart';
 class GroupsState with _$GroupsState {
   const factory GroupsState.loading() = Loading;
   const factory GroupsState.loaded(List<Group> groups) = Loaded;
+  const factory GroupsState.empty() = Empty;
   const factory GroupsState.actionSuccess(String message) = ActionSuccess;
   const factory GroupsState.error(String message) = Error;
 }

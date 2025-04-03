@@ -1,6 +1,8 @@
 import 'package:app_settings/app_settings.dart';
+import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
+import 'package:birthflow_movil/src/domain/notification/usecases/update_device_silence_status_usecase.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -26,33 +28,36 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
   }
 
   Future<void> _loadNotificationPreference() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool isEnabled = prefs.getBool('notifications_enabled') ?? false;
+    final prefs = await SharedPreferences.getInstance();
+    final isEnabled = prefs.getBool('notifications_enabled') ?? false;
     setState(() {
       _notificationsEnabled = isEnabled;
     });
   }
 
   Future<void> _updateNotificationPreference(bool value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('notifications_enabled', value);
+
     setState(() {
       _notificationsEnabled = value;
     });
 
-    if (value) {
-      await NotificationHelper
-          .initialize(); // Reinicializar notificaciones locales
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    if (fcmToken != null) {
+      await locator<UpdateDeviceSilenceStatusUseCase>().execute(
+        token: fcmToken,
+        isSilenced: !value,
+      );
+    }
 
-      final NotificationSettings settings =
-          await FirebaseMessaging.instance.requestPermission();
+    if (value) {
+      await NotificationHelper.initialize();
+      final settings = await FirebaseMessaging.instance.requestPermission();
       if (settings.authorizationStatus == AuthorizationStatus.denied) {
         _showEnableNotificationsDialog();
-      } else {
-        await FirebaseMessaging.instance.subscribeToTopic('general');
       }
     } else {
-      await FirebaseMessaging.instance.unsubscribeFromTopic('general');
       await NotificationHelper.flutterLocalNotificationsPlugin.cancelAll();
     }
   }
@@ -133,20 +138,14 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                 },
               ),
               const Divider(),
-              const Text(
-                'Notificaciones',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              CheckboxListTile(
-                title: const Text('Habilitar Notificaciones'),
+              SwitchListTile(
+                title: const Text('Recibir notificaciones en este dispositivo'),
                 value: _notificationsEnabled,
-                onChanged: (bool? value) {
-                  if (value != null) {
-                    _updateNotificationPreference(value);
-                  }
+                onChanged: (bool value) {
+                  _updateNotificationPreference(value);
                 },
               ),
+              const SizedBox(height: 20),
               const Divider(),
               const Text(
                 'Cambio de Contraseña',
@@ -165,12 +164,13 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                   },
                 ),
               ),
+              const SizedBox(height: 20),
               const Divider(),
               const Text(
                 'Información de la Aplicación',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               FutureBuilder<String>(
                 future: _getAppVersion(),
                 builder: (context, snapshot) {
@@ -194,6 +194,14 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                     );
                   }
                 },
+              ),
+              const SizedBox(height: 30),
+              const Text(
+                'Birthflow Software\n'
+                'Desarrollado por la Universidad Nacional de Ingeniería\n'
+                'Proyecto de desarrollo institucional\n\n'
+                '© 2025 Universidad Nacional de Ingeniería. Todos los derechos reservados.',
+                textAlign: TextAlign.center,
               ),
             ],
           ),

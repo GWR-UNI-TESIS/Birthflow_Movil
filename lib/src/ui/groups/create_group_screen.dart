@@ -17,10 +17,13 @@ class CreateGroupView extends StatelessWidget {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Nombre del Grupo'),
+              decoration: const InputDecoration(
+                labelText: 'Nombre del Grupo',
+                border: OutlineInputBorder(),
+              ),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
+            FilledButton(
               onPressed: () {
                 final name = _nameController.text;
                 if (name.isNotEmpty) {

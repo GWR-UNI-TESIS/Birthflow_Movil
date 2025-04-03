@@ -21,6 +21,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  bool _obscureCurrentPassword = true;
+  bool _obscureNewPassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void dispose() {
@@ -63,7 +66,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget _buildPasswordField({
     required String label,
     required TextEditingController controller,
-    bool obscureText = true,
+    required bool obscureText,
+    required VoidCallback onToggleVisibility,
     String? Function(String?)? validator,
   }) {
     return TextFormField(
@@ -72,6 +76,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       decoration: InputDecoration(
         labelText: label,
         border: const OutlineInputBorder(),
+        suffixIcon: IconButton(
+          icon: Icon(
+            obscureText ? Icons.visibility : Icons.visibility_off,
+          ),
+          onPressed: onToggleVisibility,
+        ),
       ),
       validator: validator,
     );
@@ -121,18 +131,36 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     _buildPasswordField(
                       label: 'Contraseña Actual',
                       controller: _currentPasswordController,
+                      obscureText: _obscureCurrentPassword,
+                      onToggleVisibility: () {
+                        setState(() {
+                          _obscureCurrentPassword = !_obscureCurrentPassword;
+                        });
+                      },
                       validator: _validateCurrentPassword,
                     ),
                     const SizedBox(height: 20),
                     _buildPasswordField(
                       label: 'Nueva Contraseña',
                       controller: _newPasswordController,
+                      obscureText: _obscureNewPassword,
+                      onToggleVisibility: () {
+                        setState(() {
+                          _obscureNewPassword = !_obscureNewPassword;
+                        });
+                      },
                       validator: _validatePassword,
                     ),
                     const SizedBox(height: 20),
                     _buildPasswordField(
                       label: 'Confirmar Nueva Contraseña',
                       controller: _confirmPasswordController,
+                      obscureText: _obscureConfirmPassword,
+                      onToggleVisibility: () {
+                        setState(() {
+                          _obscureConfirmPassword = !_obscureConfirmPassword;
+                        });
+                      },
                       validator: _validateConfirmPassword,
                     ),
                     const SizedBox(height: 30),

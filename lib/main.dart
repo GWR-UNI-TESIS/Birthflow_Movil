@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: isFirstTime ? WelcomeAppScreen() : AppLoader(),
+          home: isFirstTime ? const WelcomeAppScreen() : AppLoader(),
         );
       },
     );
