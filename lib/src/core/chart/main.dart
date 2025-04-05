@@ -77,7 +77,6 @@ class MainChart extends StatelessWidget {
 
       defaultRenderer: charts.PointRendererConfig<num>(
         customSymbolRenderers: {
-          'circle': charts.CircleSymbolRenderer(),
           'rect': charts.RectSymbolRenderer(),
           'triangle': common.TriangleSymbolRenderer(),
           'OIIA': OiaSymbolRenderer(),

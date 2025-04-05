@@ -209,7 +209,7 @@ class _ChartState extends State<_ChartScreen> {
     final cervicalDilationController = TextEditingController();
     bool remOrRam = false;
     final today = DateTime.now();
-    timeController.text = DateFormat('HH:mm:ss').format(today);
+    timeController.text = DateFormat('dd/MM/yyyy HH:mm').format(today);
     final formKey = GlobalKey<FormState>();
     return await showDialog<DateTime?>(
       context: mainContext,
@@ -302,7 +302,7 @@ class _ChartState extends State<_ChartScreen> {
     Position? selectedPosition;
     HodgePlane? selectedHodgePlane;
     final today = DateTime.now();
-    timeController.text = DateFormat('HH:mm:ss').format(today);
+    timeController.text = DateFormat('dd/MM/yyyy HH:mm').format(today);
     final formKey = GlobalKey<FormState>();
 
     final catalog = mainContext.read<CatalogCubit>().state;
