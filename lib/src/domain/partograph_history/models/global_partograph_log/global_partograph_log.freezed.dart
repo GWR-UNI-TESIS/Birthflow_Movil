@@ -2001,10 +2001,14 @@ ChildbirthNoteLog _$ChildbirthNoteLogFromJson(Map<String, dynamic> json) {
 mixin _$ChildbirthNoteLog {
   @JsonKey(name: 'Description', fromJson: _stringFromJson)
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Date', fromJson: _stringFromJson)
+  String get date => throw _privateConstructorUsedError;
   @JsonKey(name: 'Hour', fromJson: _stringFromJson)
   String get hour => throw _privateConstructorUsedError;
   @JsonKey(name: 'Sex', fromJson: _stringFromJson)
   String get sex => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Peso', fromJson: _stringFromJson)
+  String get peso => throw _privateConstructorUsedError;
   @JsonKey(name: 'Apgar', fromJson: _stringFromJson)
   String get apgar => throw _privateConstructorUsedError;
   @JsonKey(name: 'Temperature', fromJson: _stringFromJson)
@@ -2049,8 +2053,10 @@ abstract class $ChildbirthNoteLogCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'Description', fromJson: _stringFromJson)
       String? description,
+      @JsonKey(name: 'Date', fromJson: _stringFromJson) String date,
       @JsonKey(name: 'Hour', fromJson: _stringFromJson) String hour,
       @JsonKey(name: 'Sex', fromJson: _stringFromJson) String sex,
+      @JsonKey(name: 'Peso', fromJson: _stringFromJson) String peso,
       @JsonKey(name: 'Apgar', fromJson: _stringFromJson) String apgar,
       @JsonKey(name: 'Temperature', fromJson: _stringFromJson)
       String temperature,
@@ -2084,8 +2090,10 @@ class _$ChildbirthNoteLogCopyWithImpl<$Res, $Val extends ChildbirthNoteLog>
   @override
   $Res call({
     Object? description = freezed,
+    Object? date = null,
     Object? hour = null,
     Object? sex = null,
+    Object? peso = null,
     Object? apgar = null,
     Object? temperature = null,
     Object? caputto = null,
@@ -2104,6 +2112,10 @@ class _$ChildbirthNoteLogCopyWithImpl<$Res, $Val extends ChildbirthNoteLog>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -2111,6 +2123,10 @@ class _$ChildbirthNoteLogCopyWithImpl<$Res, $Val extends ChildbirthNoteLog>
       sex: null == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String,
+      peso: null == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String,
       apgar: null == apgar
           ? _value.apgar
@@ -2175,8 +2191,10 @@ abstract class _$$ChildbirthNoteLogImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'Description', fromJson: _stringFromJson)
       String? description,
+      @JsonKey(name: 'Date', fromJson: _stringFromJson) String date,
       @JsonKey(name: 'Hour', fromJson: _stringFromJson) String hour,
       @JsonKey(name: 'Sex', fromJson: _stringFromJson) String sex,
+      @JsonKey(name: 'Peso', fromJson: _stringFromJson) String peso,
       @JsonKey(name: 'Apgar', fromJson: _stringFromJson) String apgar,
       @JsonKey(name: 'Temperature', fromJson: _stringFromJson)
       String temperature,
@@ -2208,8 +2226,10 @@ class __$$ChildbirthNoteLogImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? description = freezed,
+    Object? date = null,
     Object? hour = null,
     Object? sex = null,
+    Object? peso = null,
     Object? apgar = null,
     Object? temperature = null,
     Object? caputto = null,
@@ -2228,6 +2248,10 @@ class __$$ChildbirthNoteLogImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -2235,6 +2259,10 @@ class __$$ChildbirthNoteLogImplCopyWithImpl<$Res>
       sex: null == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String,
+      peso: null == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String,
       apgar: null == apgar
           ? _value.apgar
@@ -2294,8 +2322,10 @@ class _$ChildbirthNoteLogImpl implements _ChildbirthNoteLog {
   _$ChildbirthNoteLogImpl(
       {@JsonKey(name: 'Description', fromJson: _stringFromJson)
       this.description,
+      @JsonKey(name: 'Date', fromJson: _stringFromJson) required this.date,
       @JsonKey(name: 'Hour', fromJson: _stringFromJson) required this.hour,
       @JsonKey(name: 'Sex', fromJson: _stringFromJson) required this.sex,
+      @JsonKey(name: 'Peso', fromJson: _stringFromJson) required this.peso,
       @JsonKey(name: 'Apgar', fromJson: _stringFromJson) required this.apgar,
       @JsonKey(name: 'Temperature', fromJson: _stringFromJson)
       required this.temperature,
@@ -2326,11 +2356,17 @@ class _$ChildbirthNoteLogImpl implements _ChildbirthNoteLog {
   @JsonKey(name: 'Description', fromJson: _stringFromJson)
   final String? description;
   @override
+  @JsonKey(name: 'Date', fromJson: _stringFromJson)
+  final String date;
+  @override
   @JsonKey(name: 'Hour', fromJson: _stringFromJson)
   final String hour;
   @override
   @JsonKey(name: 'Sex', fromJson: _stringFromJson)
   final String sex;
+  @override
+  @JsonKey(name: 'Peso', fromJson: _stringFromJson)
+  final String peso;
   @override
   @JsonKey(name: 'Apgar', fromJson: _stringFromJson)
   final String apgar;
@@ -2370,7 +2406,7 @@ class _$ChildbirthNoteLogImpl implements _ChildbirthNoteLog {
 
   @override
   String toString() {
-    return 'ChildbirthNoteLog(description: $description, hour: $hour, sex: $sex, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar)';
+    return 'ChildbirthNoteLog(description: $description, date: $date, hour: $hour, sex: $sex, peso: $peso, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar)';
   }
 
   @override
@@ -2380,8 +2416,10 @@ class _$ChildbirthNoteLogImpl implements _ChildbirthNoteLog {
             other is _$ChildbirthNoteLogImpl &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.peso, peso) || other.peso == peso) &&
             (identical(other.apgar, apgar) || other.apgar == apgar) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
@@ -2408,8 +2446,10 @@ class _$ChildbirthNoteLogImpl implements _ChildbirthNoteLog {
   int get hashCode => Object.hash(
       runtimeType,
       description,
+      date,
       hour,
       sex,
+      peso,
       apgar,
       temperature,
       caputto,
@@ -2444,10 +2484,14 @@ abstract class _ChildbirthNoteLog implements ChildbirthNoteLog {
   factory _ChildbirthNoteLog(
       {@JsonKey(name: 'Description', fromJson: _stringFromJson)
       final String? description,
+      @JsonKey(name: 'Date', fromJson: _stringFromJson)
+      required final String date,
       @JsonKey(name: 'Hour', fromJson: _stringFromJson)
       required final String hour,
       @JsonKey(name: 'Sex', fromJson: _stringFromJson)
       required final String sex,
+      @JsonKey(name: 'Peso', fromJson: _stringFromJson)
+      required final String peso,
       @JsonKey(name: 'Apgar', fromJson: _stringFromJson)
       required final String apgar,
       @JsonKey(name: 'Temperature', fromJson: _stringFromJson)
@@ -2479,11 +2523,17 @@ abstract class _ChildbirthNoteLog implements ChildbirthNoteLog {
   @JsonKey(name: 'Description', fromJson: _stringFromJson)
   String? get description;
   @override
+  @JsonKey(name: 'Date', fromJson: _stringFromJson)
+  String get date;
+  @override
   @JsonKey(name: 'Hour', fromJson: _stringFromJson)
   String get hour;
   @override
   @JsonKey(name: 'Sex', fromJson: _stringFromJson)
   String get sex;
+  @override
+  @JsonKey(name: 'Peso', fromJson: _stringFromJson)
+  String get peso;
   @override
   @JsonKey(name: 'Apgar', fromJson: _stringFromJson)
   String get apgar;

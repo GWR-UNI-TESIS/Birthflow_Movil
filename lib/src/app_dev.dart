@@ -118,10 +118,7 @@ class AppDev extends StatelessWidget {
               PartographHistoryBloc(locator<GetPartographHistoryUsecase>()),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: AppEntry(),
-      ),
+      child: AppEntry(),
     );
   }
 }
@@ -161,23 +158,20 @@ class AppEntryState extends State<AppEntry> {
           final firebaseService = FirebaseService();
           final notificationBloc = context.read<NotificationBloc>();
           final notificationsBloc = context.read<NotificationsBloc>();
-          // Obtén el token del dispositivo
-          await registerDeviceToken(userId!, firebaseService, notificationBloc);
+
+          // Siempre registrar el token del dispositivo al iniciar sesión
+          final token = await firebaseService.getDeviceToken();
+          if (token != null) {
+            notificationBloc
+                .add(RegisterTokenEvent(userId: userId!, token: token));
+            print('Token registrado al iniciar sesión: $token');
+          }
 
           // Escucha cambios en el token
-          firebaseService.listenToTokenRefresh((newToken) async {
-            final prefs = await SharedPreferences.getInstance();
-            final savedToken = prefs.getString('device_token');
-
-            if (savedToken != newToken) {
-              context.read<NotificationBloc>().add(
-                    TokenRefreshedEvent(userId: userId, token: newToken),
-                  );
-              await prefs.setString('device_token', newToken);
-              print('Token actualizado y guardado localmente');
-            } else {
-              print('El token ya es válido. No se envía al servidor.');
-            }
+          firebaseService.listenToTokenRefresh((newToken) {
+            notificationBloc
+                .add(RegisterTokenEvent(userId: userId!, token: newToken));
+            print('Token actualizado y reenviado al backend: $newToken');
           });
 
           // Escucha mensajes en primer plano

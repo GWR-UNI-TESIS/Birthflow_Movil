@@ -354,6 +354,11 @@ class _PartographReadOnlyState extends State<PartographReadOnlyScreen> {
           style: Theme.of(context).textTheme.bodyMedium,
           children: [
             const TextSpan(
+              text: 'Fecha: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.date}\n'),
+            const TextSpan(
               text: 'Hora: ',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -367,7 +372,12 @@ class _PartographReadOnlyState extends State<PartographReadOnlyScreen> {
               text: 'APGAR: ',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            TextSpan(text: '${note.apgar}\n'),
+            TextSpan(text: '${note.peso}\n'),
+            const TextSpan(
+              text: 'Sexo: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.peso}\n'),
             const TextSpan(
               text: 'Temperatura: ',
               style: TextStyle(fontWeight: FontWeight.bold),

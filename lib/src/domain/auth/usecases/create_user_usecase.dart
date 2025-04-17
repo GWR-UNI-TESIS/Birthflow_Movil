@@ -28,6 +28,7 @@ class CreateUserUsecaseImplementation implements CreateUserUsecase {
       secondName: secondName,
       email: email,
       userName: userName,
+      phoneNumber: phoneNumber,
     );
   }
 }

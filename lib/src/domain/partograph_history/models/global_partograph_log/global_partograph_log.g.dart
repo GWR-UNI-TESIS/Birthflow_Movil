@@ -179,8 +179,10 @@ _$ChildbirthNoteLogImpl _$$ChildbirthNoteLogImplFromJson(
         Map<String, dynamic> json) =>
     _$ChildbirthNoteLogImpl(
       description: _stringFromJson(json['Description']),
+      date: _stringFromJson(json['Date']),
       hour: _stringFromJson(json['Hour']),
       sex: _stringFromJson(json['Sex']),
+      peso: _stringFromJson(json['Peso']),
       apgar: _stringFromJson(json['Apgar']),
       temperature: _stringFromJson(json['Temperature']),
       caputto: _stringFromJson(json['Caputto']),
@@ -199,8 +201,10 @@ Map<String, dynamic> _$$ChildbirthNoteLogImplToJson(
         _$ChildbirthNoteLogImpl instance) =>
     <String, dynamic>{
       'Description': instance.description,
+      'Date': instance.date,
       'Hour': instance.hour,
       'Sex': instance.sex,
+      'Peso': instance.peso,
       'Apgar': instance.apgar,
       'Temperature': instance.temperature,
       'Caputto': instance.caputto,

@@ -394,8 +394,10 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
         children: [
           if (note.description != null)
             Text('Descripción: ${note.description}'),
+          Text('Fecha: ${note.date}'),
           Text('Hora: ${note.hour}'),
           Text('Sexo: ${note.sex}'),
+          Text('Peso: ${note.peso}'),
           Text('APGAR: ${note.apgar}'),
           Text('Temperatura: ${note.temperature}'),
           Text('Caputto: ${note.caputto}'),

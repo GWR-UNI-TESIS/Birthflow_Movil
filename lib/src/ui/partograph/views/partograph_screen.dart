@@ -484,6 +484,11 @@ class _PartographState extends State<PartographScreen> {
         text: TextSpan(
           style: Theme.of(context).textTheme.bodyMedium,
           children: [
+             const TextSpan(
+              text: 'Fecha: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.date}\n'),
             const TextSpan(
               text: 'Hora: ',
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -499,6 +504,11 @@ class _PartographState extends State<PartographScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             TextSpan(text: '${note.apgar}\n'),
+             const TextSpan(
+              text: 'Peso: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.peso}\n'),
             const TextSpan(
               text: 'Temperatura: ',
               style: TextStyle(fontWeight: FontWeight.bold),

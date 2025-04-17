@@ -75,7 +75,7 @@ class MedicalSurveillanceWidget extends StatelessWidget {
                         Item(
                           value: i >= list!.length
                               ? ' '
-                              : DateFormat.Hm().format(DateTime.now()),
+                              : DateFormat.Hm().format(list![i].time),
                         ),
                     ],
                   ),

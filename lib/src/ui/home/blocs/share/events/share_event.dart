@@ -5,7 +5,7 @@ part 'share_event.freezed.dart';
 
 @freezed
 abstract class ShareEvent with _$ShareEvent {
-   const factory ShareEvent.getAsignUserGroup({required String partographId}) = GetAsignUserGroupEvent;
+  const factory ShareEvent.getAsignUserGroup({required String partographId}) = GetAsignUserGroupEvent;
   const factory ShareEvent.asignUserGroup({
     required String partographId,
     required int permissionTypeId,

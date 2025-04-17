@@ -27,10 +27,7 @@ Future<void> main() async {
 }
 
 Future<void> loadEnvConfig() async {
-  // Define la variable de entorno para determinar el entorno actual
   const String env = String.fromEnvironment('ENV', defaultValue: 'development');
-
-  // Cargar el archivo correspondiente
   if (env == 'production') {
     await dotenv.load(fileName: '.env.production');
   } else {
@@ -54,8 +51,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<bool> _checkFirstTime() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool isFirstTime = prefs.getBool('is_first_time') ?? true;
-    return isFirstTime;
+    return prefs.getBool('is_first_time') ?? true;
   }
 
   @override
@@ -65,6 +61,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
@@ -73,18 +70,22 @@ class _MyAppState extends State<MyApp> {
 
         final bool isFirstTime = snapshot.data ?? false;
 
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-           supportedLocales: const [
-          Locale('es', 'ES'),
-        ],
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-          home: isFirstTime ? const WelcomeAppScreen() : AppLoader(),
-        );
+        if (isFirstTime) {
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            supportedLocales: [
+              Locale('es', 'ES'),
+            ],
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            home: WelcomeAppScreen(),
+          );
+        } else {
+          return AppLoader(); // Aquí no usamos otro MaterialApp, AppEntry lo manejará.
+        }
       },
     );
   }

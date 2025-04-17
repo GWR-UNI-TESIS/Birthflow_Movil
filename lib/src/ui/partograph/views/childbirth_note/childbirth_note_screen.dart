@@ -73,7 +73,7 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
                   children: [
                     _buildDetailRow('Fecha', note.date),
                     _buildDetailRow('Hora', note.hour),
-                    _buildDetailRow('Peso', note.hour),
+                    _buildDetailRow('Peso', note.peso),
                     _buildDetailRow('Sexo', note.sex),
                     _buildDetailRow('APGAR', note.apgar),
                     _buildDetailRow('Temperatura', note.temperature),
