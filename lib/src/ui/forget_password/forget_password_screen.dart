@@ -5,6 +5,7 @@ import 'package:birthflow_movil/src/domain/account/usecases/validate_otp_use_cas
 import 'package:birthflow_movil/src/ui/forget_password/bloc/bloc.dart';
 import 'package:birthflow_movil/src/ui/forget_password/bloc/events/forgot_password_event.dart';
 import 'package:birthflow_movil/src/ui/forget_password/bloc/states/forgot_password_event.dart';
+import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,17 +42,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         listener: (context, state) {
           if (state is AccountError) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+              SnackBar(content: Text(state.message),showCloseIcon: true, duration: const Duration(seconds: 30),),
             );
           } else if (state is ResetPasswordSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+              SnackBar(content: Text(state.message),showCloseIcon: true, duration: const Duration(seconds: 30),),
             );
           }
-
           if (state is RequestResetCodeSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+              SnackBar(content: Text(state.message),showCloseIcon: true, duration: const Duration(seconds: 30),),
             );
           }
         },
@@ -60,146 +60,152 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           if (state is StepChanged) {
             currentStep = state.step;
           }
-
+          final isLoading = state is AccountLoading;
           return Scaffold(
             appBar: AppBar(
               title: const Text('Recuperar Contraseña'),
               centerTitle: true,
             ),
-            body: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Stepper(
-                  currentStep: currentStep,
-                  onStepContinue: () {
-                    if (currentStep == 0) {
-                      context.read<ForgotPasswordBloc>().add(
-                            RequestResetCodeEvent(email: _emailController.text),
-                          );
-                    } else if (currentStep == 1) {
-                      context.read<ForgotPasswordBloc>().add(
-                            ValidateOtpEvent(
-                              userId: '', // Actualizar con el userId real
-                              otpCode: _otpController.text,
-                            ),
-                          );
-                    } else if (currentStep == 2) {
-                      if (_newPasswordController.text ==
-                          _confirmPasswordController.text) {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          final bloc = context.read<ForgotPasswordBloc>();
+            body: LoadingOverlay(
+              isLoading: isLoading,
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Stepper(
+                    currentStep: currentStep,
+                    onStepContinue: () {
+                      if (currentStep == 0) {
+                        context.read<ForgotPasswordBloc>().add(
+                              RequestResetCodeEvent(
+                                  email: _emailController.text),
+                            );
+                      } else if (currentStep == 1) {
+                        context.read<ForgotPasswordBloc>().add(
+                              ValidateOtpEvent(
+                                userId: '', // Actualizar con el userId real
+                                otpCode: _otpController.text,
+                              ),
+                            );
+                      } else if (currentStep == 2) {
+                        if (_newPasswordController.text ==
+                            _confirmPasswordController.text) {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            final bloc = context.read<ForgotPasswordBloc>();
 
-                          bloc.add(
-                            ResetPasswordEvent(
-                              userId: '',
-                              otpCode: _otpController.text,
-                              newPassword: _newPasswordController.text,
-                            ),
-                          );
+                            bloc.add(
+                              ResetPasswordEvent(
+                                userId: '',
+                                otpCode: _otpController.text,
+                                newPassword: _newPasswordController.text,
+                              ),
+                            );
+                          }
                         }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Las contraseñas no coinciden'),
+                          ),
+                        );
                       }
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Las contraseñas no coinciden'),
-                        ),
-                      );
-                    }
-                  },
-                  onStepCancel: () {
-                    if (currentStep > 0) {
-                      context.read<ForgotPasswordBloc>().add(
-                            ResetPasswordStepChangeEvent(step: currentStep - 1),
-                          );
-                    }
-                  },
-                  steps: [
-                    // Paso 1: Enviar correo
-                    Step(
-                      title: const Text('Enviar correo'),
-                      content: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: TextFormField(
-                          controller: _emailController,
-                          decoration: const InputDecoration(
-                            labelText: 'Correo electrónico',
-                            border: OutlineInputBorder(),
-                          ),
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Ingrese su correo electrónico'
-                              : null,
-                        ),
-                      ),
-                      isActive: currentStep >= 0,
-                    ),
-                    // Paso 2: Ingresar código OTP
-                    Step(
-                      title: const Text('Ingresar código OTP'),
-                      content: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: TextFormField(
-                          controller: _otpController,
-                          decoration: const InputDecoration(
-                            labelText: 'Código OTP',
-                            border: OutlineInputBorder(),
-                          ),
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Ingrese el código OTP'
-                              : null,
-                        ),
-                      ),
-                      isActive: currentStep >= 1,
-                    ),
-                    // Paso 3: Ingresar nueva contraseña
-                    Step(
-                      title: const Text('Nueva contraseña'),
-                      content: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              controller: _newPasswordController,
-                              decoration: const InputDecoration(
-                                labelText: 'Nueva Contraseña',
-                                border: OutlineInputBorder(),
-                              ),
-                              obscureText: true,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Ingrese su nueva contraseña';
-                                }
-                                final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$');
-                                if (!passwordRegex.hasMatch(value)) {
-                                  return 'Debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, un número y un símbolo.';
-                                }
-                                return null;
-                              },
+                    },
+                    onStepCancel: () {
+                      if (currentStep > 0) {
+                        context.read<ForgotPasswordBloc>().add(
+                              ResetPasswordStepChangeEvent(
+                                  step: currentStep - 1),
+                            );
+                      }
+                    },
+                    steps: [
+                      // Paso 1: Enviar correo
+                      Step(
+                        title: const Text('Enviar correo'),
+                        content: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: TextFormField(
+                            controller: _emailController,
+                            decoration: const InputDecoration(
+                              labelText: 'Correo electrónico',
+                              border: OutlineInputBorder(),
                             ),
-                            const SizedBox(height: 20),
-                            TextFormField(
-                              controller: _confirmPasswordController,
-                              decoration: const InputDecoration(
-                                labelText: 'Confirmar Nueva Contraseña',
-                                border: OutlineInputBorder(),
-                              ),
-                              obscureText: true,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Confirme su nueva contraseña';
-                                }
-                                if (value != _newPasswordController.text) {
-                                  return 'Las contraseñas no coinciden';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Ingrese su correo electrónico'
+                                : null,
+                          ),
                         ),
+                        isActive: currentStep >= 0,
                       ),
-                      isActive: currentStep >= 2,
-                    ),
-                  ],
+                      // Paso 2: Ingresar código OTP
+                      Step(
+                        title: const Text('Ingresar código OTP'),
+                        content: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: TextFormField(
+                            controller: _otpController,
+                            decoration: const InputDecoration(
+                              labelText: 'Código OTP',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Ingrese el código OTP'
+                                : null,
+                          ),
+                        ),
+                        isActive: currentStep >= 1,
+                      ),
+                      // Paso 3: Ingresar nueva contraseña
+                      Step(
+                        title: const Text('Nueva contraseña'),
+                        content: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                controller: _newPasswordController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Nueva Contraseña',
+                                  border: OutlineInputBorder(),
+                                ),
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Ingrese su nueva contraseña';
+                                  }
+                                  final passwordRegex = RegExp(
+                                      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$');
+                                  if (!passwordRegex.hasMatch(value)) {
+                                    return 'Debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, un número y un símbolo.';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              TextFormField(
+                                controller: _confirmPasswordController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Confirmar Nueva Contraseña',
+                                  border: OutlineInputBorder(),
+                                ),
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Confirme su nueva contraseña';
+                                  }
+                                  if (value != _newPasswordController.text) {
+                                    return 'Las contraseñas no coinciden';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        isActive: currentStep >= 2,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
