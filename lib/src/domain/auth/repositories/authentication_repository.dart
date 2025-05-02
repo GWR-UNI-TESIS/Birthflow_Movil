@@ -6,7 +6,7 @@ abstract class AuthenticationRepository {
     required String secondName,
     required String email,
     required String userName,
-    double? phoneNumber,
+    String ? phoneNumber,
   });
 
   Future<Authentication> login({

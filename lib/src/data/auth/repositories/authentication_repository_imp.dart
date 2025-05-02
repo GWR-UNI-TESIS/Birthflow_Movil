@@ -94,7 +94,7 @@ class AuthenticationRepositoryImplementation
     required String name,
     required String secondName,
     required String email,
-    double? phoneNumber,
+    String ? phoneNumber,
     required String userName,
   }) async {
     try {

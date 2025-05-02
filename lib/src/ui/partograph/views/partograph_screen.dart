@@ -38,8 +38,7 @@ class _PartographState extends State<PartographScreen> {
   Widget build(BuildContext context) {
     final catalog = context.watch<CatalogCubit>().state;
 
-    return SafeArea(
-      child: Scaffold(
+    return  Scaffold(
         key: _scaffoldKey,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(135.0),
@@ -97,7 +96,6 @@ class _PartographState extends State<PartographScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 

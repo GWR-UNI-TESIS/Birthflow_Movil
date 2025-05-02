@@ -6,7 +6,7 @@ abstract class CreateUserUsecase {
     required String secondName,
     required String email,
     required String userName,
-    double phoneNumber,
+    String  phoneNumber,
   });
 }
 
@@ -21,7 +21,7 @@ class CreateUserUsecaseImplementation implements CreateUserUsecase {
     required String secondName,
     required String email,
     required String userName,
-    double? phoneNumber,
+    String ? phoneNumber,
   }) async {
     return await _authRepository.registerUser(
       name: name,

@@ -36,21 +36,24 @@ class _FetalHeartRateEditScreenState extends State<FetalHeartRateEditScreen>
   }
 
   void _initializeControllers() {
-    final fetalheartrates = context.watch<PartographBloc>().state.whenOrNull(
-          loaded: (partograph, message, isDeleteEvent) =>
-              partograph.contractionFrequencies,
-        );
+    final partographBloc = context.watch<PartographBloc>().state;
+    if (partographBloc is Loaded) {
+      final fetalheartrates = context.read<PartographBloc>().state.whenOrNull(
+            loaded: (partograph, message, isDeleteEvent) =>
+                partograph.fetalHeartRates,
+          );
 
-    final fetalHeartRate = fetalheartrates!
-        .where(
-          (e) => e.id == widget.fetalHeartRateEditData.fetalHeartRateId,
-        )
-        .first;
-    if (!_isInitialized) {
-      _fetalHeartRateValue = fetalHeartRate.value;
+      final fetalHeartRate = fetalheartrates!
+          .where(
+            (e) => e.id == widget.fetalHeartRateEditData.fetalHeartRateId,
+          )
+          .first;
+      if (!_isInitialized) {
+        _fetalHeartRateValue = fetalHeartRate.value;
 
-      initialDateTime = fetalHeartRate.time;
-      _isInitialized = true;
+        initialDateTime = fetalHeartRate.time;
+        _isInitialized = true;
+      }
     }
   }
 

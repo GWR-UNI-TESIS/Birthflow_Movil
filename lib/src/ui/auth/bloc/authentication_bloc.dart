@@ -101,7 +101,7 @@ class AuthenticationBloc
         secondName: event.apellidos,
         email: event.email,
         userName: event.nombreUsuario,
-        phoneNumber: double.tryParse(event.phoneNumber!)!,
+        phoneNumber: event.phoneNumber!,
       );
       emit(RegistrationSuccess(message: result));
     } catch (e) {
