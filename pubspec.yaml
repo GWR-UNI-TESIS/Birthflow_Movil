@@ -78,11 +78,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: 2.5.8
+  mocktail: ^1.0.0
   integration_test:
     sdk: flutter
   json_serializable: ^6.8.0
   lint: ^2.0.0
-  mocktail: ^1.0.4
   retrofit_generator: ^9.1.9
 
 flutter_icons:
