@@ -9,6 +9,6 @@ class ContractionFrequency {
     this.id,
     required this.partographId,
     required this.value,
-    required this.time,
+    required this.time, required DateTime hour, required String dateTime,
   });
 }

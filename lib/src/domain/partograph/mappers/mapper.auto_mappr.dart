@@ -565,7 +565,7 @@ class $Mappr implements _i1.AutoMapprInterface {
       partographId: model.partographId,
       value: model.value,
       hour: model.hour,
-      remOrRam: model.remOrRam,
+      remOrRam: model.remOrRam, dateTime: '', isRam: false,
     );
   }
 
@@ -640,7 +640,7 @@ class $Mappr implements _i1.AutoMapprInterface {
       id: model.id,
       partographId: model.partographId,
       value: model.value,
-      time: model.time,
+      time: model.time, hour: DateTime.parse('2024-04-30T10:00:00.000Z'), dateTime: '',
     );
   }
 
