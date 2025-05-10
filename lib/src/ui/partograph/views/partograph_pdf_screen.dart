@@ -7,6 +7,7 @@ import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/pdf/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/pdf/events/pdf_event.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/pdf/states/pdf_state.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -97,27 +98,33 @@ class PdfViewerScaffold extends StatelessWidget {
 
   Future<String?> guardarPdfEnDispositivo(
       Uint8List bytes, String filename) async {
-    // Pedir permisos (solo necesarios en Android)
+    final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+    final androidInfo = await deviceInfoPlugin.androidInfo;
     if (Platform.isAndroid) {
-      final status = await Permission.storage.request();
+      final androidVersion = int.parse(androidInfo.version.sdkInt.toString());
 
-      if (status.isGranted) {
-        print('Permiso concedido');
-      } else if (status.isPermanentlyDenied) {
-        await openAppSettings(); // ✅ Función incluida en permission_handler
-      } else {
-        print('Permiso denegado');
+      if (androidVersion <= 28) {
+        final status = await Permission.storage.request();
+        if (!status.isGranted) return null;
+      } else if (androidVersion >= 33) {
+        final status = await Permission.mediaLibrary
+            .request(); // o Permission.photos si aplica
+        if (!status.isGranted) return null;
       }
     }
 
     try {
-      final dir =
-          getDownloadDirectory(); // en Android: /storage/emulated/0/Android/data/<package>/files
-      final file = File('${dir.path}/$filename');
+      final dir = Directory('/storage/emulated/0/Download');
 
+      if (!await dir.exists()) {
+        await dir.create(recursive: true);
+      }
+
+      final file = File('${dir.path}/$filename');
       await file.writeAsBytes(bytes, flush: true);
       return file.path;
     } catch (e) {
+      print('Error al guardar PDF: $e');
       return null;
     }
   }

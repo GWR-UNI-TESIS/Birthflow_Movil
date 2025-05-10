@@ -267,7 +267,7 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
 
   Widget _buildTextField(String label, TextEditingController controller) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.only(top: 2, bottom: 16.0),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(

@@ -572,7 +572,7 @@ class PartographRepositoryImplementation implements PartographRepository {
         partographId: partographId,
         hodgePlane: hodgePlane,
         position: position,
-        time: DateTime.now(),
+        time: time,
       );
 
       final result = await _partographService.updatePresentationPositionVariety(

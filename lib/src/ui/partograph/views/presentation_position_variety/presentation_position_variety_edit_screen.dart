@@ -90,10 +90,10 @@ class _PresentationPositionVarietyEditScreenState
       final selectedDateTime =
           DateFormat('dd/MM/yyyy HH:mm').parse(_dateTimeController.text);
 
-      final event = UpdatePresentationPositionVariety(
-        id: widget.data.presentationPositionVarietyId!,
-        partographId: widget.data.partographId,
-        hodgePlane: _selectedHodgePlane!.id,
+        final event = UpdatePresentationPositionVariety(
+          id: widget.data.presentationPositionVarietyId!,
+          partographId: widget.data.partographId,
+          hodgePlane: _selectedHodgePlane!.id,
         position: _selectedPosition!.id,
         time: selectedDateTime,
       );
