@@ -124,9 +124,9 @@ class _MedicalSurveillanceEditScreenState
         maternalPosition: _maternalPositionValue,
         arterialPressure: _arterialPressureValue.value,
         maternalPulse: _maternalPulseValue.value,
-        fetalHeartRate: _fetalHeartRateValue.value,
+        fetalHeartRate: 'N/A',
         contractionsDuration: _contractionsDurationValue.value,
-        frequencyContractions: _frequencyContractions,
+        frequencyContractions: 'N/A',
         pain: _pain,
         time: selectedDateTime,
       );
@@ -202,24 +202,24 @@ class _MedicalSurveillanceEditScreenState
             initialValue: _maternalPulseValue.value,
             onChanged: (value) => _maternalPulseValue.value = value,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 16),/*
           FormElementWidget(
             label: 'Frecuencia cardiaca fetal',
             initialValue: _fetalHeartRateValue.value,
             onChanged: (value) => _fetalHeartRateValue.value = value,
-          ),
+          ),*/
           FormElementWidget(
             label: 'Duración Contracciones',
             initialValue: _contractionsDurationValue.value,
             onChanged: (value) => _contractionsDurationValue.value = value,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 16),/*
           _buildTextField(
             label: 'Frec. Contracciones',
             maxLength: 3,
             initialValue: _frequencyContractions,
             onChanged: (value) => _frequencyContractions = value,
-          ),
+          ),*/
           const SizedBox(height: 16),
           UnifiedDropdownWidget(
             locationValues: const ['Sacro', 'Suprapúbico'],

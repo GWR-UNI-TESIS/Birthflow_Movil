@@ -1,11 +1,11 @@
-import 'package:birthflow_movil/src/ui/configuration/screens/configuration_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:birthflow_movil/src/domain/auth/entities/user.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/authentication_bloc.dart';
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
-import 'package:birthflow_movil/src/domain/auth/entities/user.dart';
+import 'package:birthflow_movil/src/ui/configuration/screens/configuration_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockAuthenticationBloc extends Mock implements AuthenticationBloc {}
 

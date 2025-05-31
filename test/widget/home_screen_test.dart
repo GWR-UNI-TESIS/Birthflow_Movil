@@ -95,7 +95,7 @@ void main() {
     await tester
         .pumpWidget(createWidgetUnderTest(Loaded(partograms, 'Cargado')));
 
-    expect(find.text('BirthFlow'), findsOneWidget);
+    expect(find.text('Partogramas'), findsOneWidget);
     expect(find.byIcon(Icons.add), findsOneWidget); // FAB
     expect(find.textContaining('Partograma A'), findsOneWidget);
   });

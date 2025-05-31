@@ -2,10 +2,9 @@ import 'package:birthflow_movil/src/ui/groups/bloc/bloc.dart';
 import 'package:birthflow_movil/src/ui/groups/bloc/states/groups_state.dart';
 import 'package:birthflow_movil/src/ui/groups/create_group_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:birthflow_movil/src/ui/groups/bloc/bloc.dart';
 
 
 class MockGroupsBloc extends Mock implements GroupsBloc {}
@@ -15,8 +14,8 @@ void main() {
 
   setUp(() {
     mockGroupsBloc = MockGroupsBloc();
-    when(() => mockGroupsBloc.state).thenReturn(GroupsState.loaded([]));
-    when(() => mockGroupsBloc.stream).thenAnswer((_) => Stream.value(GroupsState.loaded([])));
+    when(() => mockGroupsBloc.state).thenReturn(const GroupsState.loaded([]));
+    when(() => mockGroupsBloc.stream).thenAnswer((_) => Stream.value(const GroupsState.loaded([])));
 
   });
 

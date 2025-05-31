@@ -131,7 +131,7 @@ class _WelcomeAppScreenState extends State<WelcomeAppScreen> {
               ),
               const SizedBox(height: 20),
               const Text(
-                '¡Bienvenido a Birthflow!',
+                '¡Bienvenido!',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

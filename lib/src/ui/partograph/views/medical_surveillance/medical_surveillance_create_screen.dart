@@ -36,7 +36,7 @@ class _MedicalSurveillanceCreateScreenState
   late final ValueNotifier<String> _contractionsDurationValue;
 
   String _maternalPositionValue = 'Lat. Derecho';
-  String _frequencyContractions = '';
+  //String _frequencyContractions = '';
   String _pain = '';
 
   @override
@@ -70,9 +70,9 @@ class _MedicalSurveillanceCreateScreenState
         maternalPosition: _maternalPositionValue,
         arterialPressure: _arterialPressureValue.value,
         maternalPulse: _maternalPulseValue.value,
-        fetalHeartRate: _fetalHeartRateValue.value,
+        fetalHeartRate: 'N/A',
         contractionsDuration: _contractionsDurationValue.value,
-        frequencyContractions: _frequencyContractions,
+        frequencyContractions: 'N/A',
         pain: _pain,
         time: selectedDateTime,
       );
@@ -147,11 +147,11 @@ class _MedicalSurveillanceCreateScreenState
             onChanged: (value) => _maternalPulseValue.value = value,
           ),
           const SizedBox(height: 16),
-          FormElementWidget(
+          /*FormElementWidget(
             label: 'Frecuencia cardiaca fetal',
             initialValue: _fetalHeartRateValue.value,
             onChanged: (value) => _fetalHeartRateValue.value = value,
-          ),
+          ),*/
           const SizedBox(height: 16),
           FormElementWidget(
             label: 'Duración Contracciones',
@@ -159,12 +159,12 @@ class _MedicalSurveillanceCreateScreenState
             onChanged: (value) => _contractionsDurationValue.value = value,
           ),
           const SizedBox(height: 16),
-          _buildTextField(
+          /*_buildTextField(
             label: 'Frec. Contracciones',
             maxLength: 3,
             initialValue: _frequencyContractions,
             onChanged: (value) => _frequencyContractions = value,
-          ),
+          ),*/
           const SizedBox(height: 16),
           UnifiedDropdownWidget(
             locationValues: const ['Sacro', 'Suprapúbico'],

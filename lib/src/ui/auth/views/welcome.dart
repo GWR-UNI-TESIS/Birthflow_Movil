@@ -14,7 +14,7 @@ class WelcomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-              'assets/birthflow_full_logo.png',
+              'assets/login-illustration.png',
               height: 220.0,
               fit: BoxFit.fill,
               
@@ -26,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(height: 5.0),
             Text(
               'Sistema de gestion de partogramas',
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 80.0),
             Column(

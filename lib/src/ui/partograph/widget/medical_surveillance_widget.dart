@@ -116,7 +116,7 @@ class MedicalSurveillanceWidget extends StatelessWidget {
                               i >= list!.length ? ' ' : list![i].maternalPulse,
                         ),
                     ],
-                  ),
+                  ),/*
                   TableRow(
                     children: [
                       const HeaderItem(
@@ -128,7 +128,7 @@ class MedicalSurveillanceWidget extends StatelessWidget {
                               i >= list!.length ? ' ' : list![i].fetalHeartRate,
                         ),
                     ],
-                  ),
+                  ),*/
                   TableRow(
                     children: [
                       const HeaderItem(
@@ -142,6 +142,7 @@ class MedicalSurveillanceWidget extends StatelessWidget {
                         ),
                     ],
                   ),
+                  /*
                   TableRow(
                     children: [
                       const HeaderItem(
@@ -154,7 +155,7 @@ class MedicalSurveillanceWidget extends StatelessWidget {
                               : list![i].frequencyContractions,
                         ),
                     ],
-                  ),
+                  ),*/
                   TableRow(
                     children: [
                       const HeaderItem(

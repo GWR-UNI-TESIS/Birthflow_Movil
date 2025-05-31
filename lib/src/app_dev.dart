@@ -166,14 +166,12 @@ class AppEntryState extends State<AppEntry> {
                 .add(RegisterTokenEvent(userId: userId!, token: token));
             print('Token registrado al iniciar sesión: $token');
           }
-
           // Escucha cambios en el token
           firebaseService.listenToTokenRefresh((newToken) {
             notificationBloc
                 .add(RegisterTokenEvent(userId: userId!, token: newToken));
             print('Token actualizado y reenviado al backend: $newToken');
           });
-
           // Escucha mensajes en primer plano
           firebaseService.listenToForegroundMessages((title, body, data) {
             final notification = notificaciones.Notification(
@@ -193,7 +191,7 @@ class AppEntryState extends State<AppEntry> {
         }
       },
       child: MaterialApp.router(
-        title: 'Birthflow',
+        title: 'Partogramas',
         locale: const Locale('es', 'ES'), // Establece el idioma a español
         supportedLocales: const [
           Locale('es', 'ES'),

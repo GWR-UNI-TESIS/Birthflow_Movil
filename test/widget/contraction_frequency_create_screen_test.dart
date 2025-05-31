@@ -1,9 +1,9 @@
-import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_create_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_create_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockPartographBloc extends Mock implements PartographBloc {}
@@ -21,7 +21,7 @@ void main() {
     return MaterialApp(
       home: BlocProvider<PartographBloc>.value(
         value: mockBloc,
-        child: ContractionFrequencyCreateScreen(partographId: 'p1'),
+        child: const ContractionFrequencyCreateScreen(partographId: 'p1'),
       ),
     );
   }

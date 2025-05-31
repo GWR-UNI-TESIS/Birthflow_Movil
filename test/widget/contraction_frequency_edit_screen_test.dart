@@ -1,15 +1,14 @@
-import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_edit_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:get_it/get_it.dart';
-
+import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
+import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/bloc.dart';
 import 'package:birthflow_movil/src/ui/partograph/bloc/partograph/state_events/partograph_state.dart';
 import 'package:birthflow_movil/src/ui/partograph/models/partograph_edit_data.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
-import 'package:birthflow_movil/src/domain/partograph/entities/contraction_frequency.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/contraction_frecuency/contraction_frequency_edit_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockPartographBloc extends Mock implements PartographBloc {}
 
@@ -21,8 +20,7 @@ void main() {
     id: 1,
     partographId: 'p1',
     value: '3',
-    dateTime: '2024-04-30T10:00:00.000Z',
-    hour: DateTime.parse('2024-04-30T10:00:00.000Z'), time: DateTime.parse('2024-04-30T10:00:00.000Z'),
+   time: DateTime.parse('2024-04-30T10:00:00.000Z'),
   );
 
   final contractionFrequencyEditData = ContractionFrequencyEditData(

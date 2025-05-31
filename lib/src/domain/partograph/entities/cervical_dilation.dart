@@ -14,6 +14,6 @@ class CervicalDilation {
     required this.value,
     required this.hour,
     required this.remOrRam,
-    this.alertCurves, required String dateTime, required bool isRam,
+    this.alertCurves,
   });
 }

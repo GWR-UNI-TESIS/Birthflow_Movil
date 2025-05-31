@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+//Pantalla de partograma en PDF
 class PdfViewPage extends StatelessWidget {
   final String partographId;
 
@@ -34,6 +35,7 @@ class PdfViewPage extends StatelessWidget {
   }
 }
 
+//Scaffold de la pantalla de PDF
 class PdfViewerScaffold extends StatelessWidget {
   final String partographId;
 

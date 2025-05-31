@@ -12,7 +12,7 @@ enum MaternalPosition {
 }
 
 enum PainLocation {
-  suprapublico('Suprapublico'),
+  suprapublico('Suprapúbico'),
   sacro('Sacro');
 
   const PainLocation(this.value);

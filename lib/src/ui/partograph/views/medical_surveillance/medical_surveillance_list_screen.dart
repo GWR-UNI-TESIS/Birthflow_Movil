@@ -16,7 +16,7 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tabla'),
+        title: const Text('Tabla de Vigilancia Medica'),
       ),
       body: BlocBuilder<PartographBloc, PartographState>(
         builder: (context, state) {
@@ -87,24 +87,24 @@ class MedicalSurveillanceListScreen extends StatelessWidget {
             (item) => item.maternalPulse,
             context,
           ),
-          _buildDataRow(
+          /*_buildDataRow(
             'Frec. Cardiaca Fetal',
             list,
             (item) => item.fetalHeartRate,
             context,
-          ),
+          ),*/
           _buildDataRow(
             'Duración Contracciones',
             list,
             (item) => item.contractionsDuration,
             context,
           ),
-          _buildDataRow(
+          /*_buildDataRow(
             'Frec. Contracciones',
             list,
             (item) => item.frequencyContractions,
             context,
-          ),
+          ),*/
           _buildDataRow(
             'Dolor',
             list,

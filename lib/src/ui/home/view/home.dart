@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget with SnackbarMixin {
           child: Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
-              title: const Text('BirthFlow'),
+              title: const Text('Partogramas'),
               automaticallyImplyLeading: false,
               elevation: 1,
               actions: <Widget>[

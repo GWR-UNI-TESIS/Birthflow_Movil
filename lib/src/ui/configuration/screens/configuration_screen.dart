@@ -197,7 +197,7 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
               ),
               const SizedBox(height: 30),
               const Text(
-                'Birthflow Software\n'
+                'GWR Software\n'
                 'Desarrollado por la Universidad Nacional de Ingeniería\n'
                 'Proyecto de desarrollo institucional\n\n'
                 '© 2025 Universidad Nacional de Ingeniería. Todos los derechos reservados.',
