@@ -22,6 +22,7 @@ class PartographScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _PartographState();
 }
 
+//Estado de la pantalla de partograma
 class _PartographState extends State<PartographScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(); // Clave para controlar el Scaffold
@@ -98,7 +99,8 @@ class _PartographState extends State<PartographScreen> {
         ),
     );
   }
-
+  
+  //Appbar de la pantalla
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 1,
@@ -128,6 +130,7 @@ class _PartographState extends State<PartographScreen> {
     );
   }
 
+  //Acciones del appbar
   List<Widget> _buildAppBarActions() {
     return [
       IconButton(
@@ -159,6 +162,7 @@ class _PartographState extends State<PartographScreen> {
     ];
   }
 
+  //Contenido del appbar
   Widget _buildAppBarContent(BuildContext context, Loaded state) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -198,6 +202,7 @@ class _PartographState extends State<PartographScreen> {
     );
   }
 
+  //Contenido del body de la pantalla
   Widget _buildContent(BuildContext context, Loaded state, Catalog catalog) {
     return Padding(
       padding: const EdgeInsets.all(10),

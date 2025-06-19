@@ -7,8 +7,11 @@ import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// Pantalla de la nota de parto
 class ChildbirthNoteEditScreen extends StatefulWidget {
+  //Id del partograma
   final String partographId;
+  //Nota de parto
   final ChildbirthNote? childbirthNote;
 
   const ChildbirthNoteEditScreen({
@@ -22,13 +25,18 @@ class ChildbirthNoteEditScreen extends StatefulWidget {
       _ChildbirthNoteEditScreenState();
 }
 
+//Estado de la pantalla de editar nota de parto
 class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
     with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
 
   // Controladores para los campos
+
+  //Fecha
   late final TextEditingController _dateController;
+  //Hora
   late final TextEditingController _hourController;
+  //Sexo
   late final TextEditingController _sexController;
   late final TextEditingController _pesoController;
   late final TextEditingController _apgarController;
@@ -47,6 +55,7 @@ class _ChildbirthNoteEditScreenState extends State<ChildbirthNoteEditScreen>
   late final TextEditingController _tallaController;
   late final TextEditingController _brazaleteController;
   late final TextEditingController _huellaDigController;
+  //Descripcion
   late final TextEditingController _descriptionController;
 
   @override

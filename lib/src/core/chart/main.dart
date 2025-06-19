@@ -7,9 +7,12 @@ import 'package:charts_common/common.dart' as common
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
+// Clase MainChart que extiende StatelessWidget para construir un gráfico
 class MainChart extends StatelessWidget {
   final List<charts.Series<dynamic, num>> seriesList;
+   // Indica si el gráfico se debe animar
   final bool animate;
+   // Fecha de inicio del gráfico (usada como referencia en el eje X)
   final DateTime startDate;
   const MainChart(
     this.seriesList,
@@ -20,6 +23,7 @@ class MainChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Formateador para las medidas secundarias
     final secondaryMeasureFormatter =
         charts.BasicNumericTickFormatterSpec((value) {
       if (value! >= 0 && value <= 11) {
@@ -28,7 +32,8 @@ class MainChart extends StatelessWidget {
         return '0';
       }
     });
-
+   
+   // Formateador para el dominio (eje X)
     final domainFormatter = charts.BasicNumericTickFormatterSpec((value) {
       final DateTime startTime = startDate;
 
@@ -40,6 +45,7 @@ class MainChart extends StatelessWidget {
           : '$result:${startTime.minute}';
     });
 
+  // Formateador para las medidas primarias (eje Y izquierdo)
     final primaryMeasureFormatter =
         charts.BasicNumericTickFormatterSpec((value) {
       if (value == 11) {
@@ -48,10 +54,12 @@ class MainChart extends StatelessWidget {
         return value!.round().toString();
       }
     });
+    
+     // Retorna un gráfico de dispersión (ScatterPlotChart)
     return charts.ScatterPlotChart(
       seriesList,
       animate: animate,
-
+      // Configuración del eje Y izquierdo
       primaryMeasureAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -59,7 +67,7 @@ class MainChart extends StatelessWidget {
         ),
         tickFormatterSpec: primaryMeasureFormatter,
       ),
-
+      // Configuración del eje Y derecho
       secondaryMeasureAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -67,6 +75,7 @@ class MainChart extends StatelessWidget {
         ),
         tickFormatterSpec: secondaryMeasureFormatter,
       ),
+      // Configuración del eje X
       domainAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -75,6 +84,8 @@ class MainChart extends StatelessWidget {
         tickFormatterSpec: domainFormatter,
       ),
 
+      // Configuración del renderizador por defecto para puntos
+      //( Se usa para los graficos de la altura de la presentacion)
       defaultRenderer: charts.PointRendererConfig<num>(
         customSymbolRenderers: {
           'rect': charts.RectSymbolRenderer(),
@@ -90,7 +101,7 @@ class MainChart extends StatelessWidget {
         },
       ),
 
-      // Custom renderer configuration for the line series.
+     // Configuración personalizada del renderizador para series de tipo línea
       customSeriesRenderers: [
         charts.LineRendererConfig(
           customRendererId: 'realCurveLine',

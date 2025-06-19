@@ -47,9 +47,6 @@ void main() {
       presentationPositionVarieties: [],
       fetalHeartRates: [],
       contractionFrequencies: [contraction],
-      childbirthNote: null,
-      partographState: null,
-      curves: null,
     );
 
     when(() => mockBloc.state).thenReturn(Loaded(partograph: partograph, message: ''));

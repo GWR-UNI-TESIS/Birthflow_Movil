@@ -41,6 +41,7 @@ class PdfViewerScaffold extends StatelessWidget {
 
   const PdfViewerScaffold({super.key, required this.partographId});
 
+  //Muestra el pdf en la pantalla
   @override
   Widget build(BuildContext context) {
     final documentName = context.watch<PartographBloc>().state.maybeWhen(
@@ -96,7 +97,7 @@ class PdfViewerScaffold extends StatelessWidget {
       ),
     );
   }
-
+  //Metodo para guardar el pdf en el dispositivo
   Future<String?> guardarPdfEnDispositivo(
       Uint8List bytes, String filename) async {
     // Pedir permisos (solo necesarios en Android)
@@ -124,6 +125,7 @@ class PdfViewerScaffold extends StatelessWidget {
     }
   }
 
+  //Obtiene el directorio donde se guarda el partograma en el dispositivo
   Directory getDownloadDirectory() {
     return Directory('/storage/emulated/0/Download');
   }

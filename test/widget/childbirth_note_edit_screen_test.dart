@@ -33,9 +33,6 @@ void main() {
       presentationPositionVarieties: [],
       fetalHeartRates: [],
       contractionFrequencies: [],
-      childbirthNote: null,
-      partographState: null,
-      curves: null,
     );
 
     when(() => mockBloc.state).thenReturn(Loaded(partograph: partograph, message: ''));
@@ -51,7 +48,6 @@ void main() {
       home: BlocProvider<PartographBloc>.value(
         value: mockBloc,
         child: const ChildbirthNoteEditScreen(
-          childbirthNote: null,
           partographId: 'p1',
         ),
       ),
