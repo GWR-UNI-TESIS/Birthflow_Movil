@@ -525,3 +525,43 @@ class OpSymbolRenderer extends common.SymbolRenderer {
   bool operator ==(Object other) =>
       other is OpSymbolRenderer && super == other;
 }
+
+class InSymbolRenderer extends common.SymbolRenderer {
+  InSymbolRenderer({super.isSolid = true});
+
+  @override
+  void paint(
+    common.ChartCanvas canvas,
+    Rectangle<num> bounds, {
+    List<int>? dashPattern,
+    common.Color? fillColor,
+    common.FillPatternType? fillPattern,
+    common.Color? strokeColor,
+    double? strokeWidthPx,
+  }) {
+    final center = Point(
+      bounds.left + (bounds.width / 2),
+      bounds.top + (bounds.height / 2),
+    );
+
+    final radius = min(bounds.width, bounds.height) / 2;
+    canvas.drawPoint(
+      point: center,
+      radius: radius,
+      fill: getSolidFillColor(fillColor),
+      stroke: strokeColor,
+      strokeWidthPx: getSolidStrokeWidthPx(strokeWidthPx),
+    );
+ 
+  }
+
+  @override
+  bool shouldRepaint(InSymbolRenderer oldRenderer) {
+    return this != oldRenderer;
+  }
+
+  @override
+  // ignore: hash_and_equals
+  bool operator ==(Object other) =>
+      other is InSymbolRenderer && super == other;
+}

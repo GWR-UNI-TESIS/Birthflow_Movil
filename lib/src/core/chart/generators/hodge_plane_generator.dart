@@ -41,16 +41,18 @@ class HodgePlaneGenerator implements IGenerator {
       final String position = catalog.positionCatalog
           .firstWhere((e) => e.id == hodgePlaneList[index].position)
           .code;
-      final currentPoint = ChartPoint(
-        x: timeResult,
-        y: y,
-        radius: 10,
-        strokeWidth: 2,
-        fillColor: charts.Color.transparent,
-        shape: position,
-      );
+      if (y != 0) {
+        final currentPoint = ChartPoint(
+          x: timeResult,
+          y: y,
+          radius: 10,
+          strokeWidth: 2,
+          fillColor: charts.Color.transparent,
+          shape: position,
+        );
 
-      points.add(currentPoint);
+        points.add(currentPoint);
+      }
     }
     _chartPoint = points;
   }
