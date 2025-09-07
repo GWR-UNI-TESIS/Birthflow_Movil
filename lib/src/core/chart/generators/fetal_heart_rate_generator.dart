@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/fetal_heart_rate.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+//Clase que genera los puntos de grafica sobre la frecuencia cardiaca fetal
 class FetalHeartRateGenerator implements IGenerator {
   FetalHeartRateGenerator({
     required List<FetalHeartRate> fetalHeartRateList,

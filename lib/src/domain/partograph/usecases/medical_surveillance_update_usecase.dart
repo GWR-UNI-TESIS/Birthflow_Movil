@@ -1,7 +1,9 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
+/// Caso de uso: actualizar una fila de vigilancia médica.
 abstract class UpdateMedicalSurveillanceUseCase {
+  /// Actualiza el registro y retorna la fila resultante.
   Future<MedicalSurveillanceTable?> execute({
     required int id,
     required String partographId,
@@ -17,14 +19,17 @@ abstract class UpdateMedicalSurveillanceUseCase {
   });
 }
 
+/// Implementación que delega en el repositorio de partograma.
 class UpdateMedicalSurveillanceUseCaseImplementation
     implements UpdateMedicalSurveillanceUseCase {
   final PartographRepository _partographRepository;
+
   UpdateMedicalSurveillanceUseCaseImplementation({
     required PartographRepository partographRepository,
   }) : _partographRepository = partographRepository;
 
   @override
+  /// Delega la actualización al repositorio.
   Future<MedicalSurveillanceTable?> execute({
     required int id,
     required String partographId,

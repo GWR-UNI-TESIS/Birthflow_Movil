@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+//Clase que genera los puntos de grafica sobre la altura de la presentacion
 class HodgePlaneGenerator implements IGenerator {
   final List<PresentationPositionVariety> hodgePlaneList;
   final DateTime startTime;

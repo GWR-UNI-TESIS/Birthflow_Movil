@@ -155,7 +155,7 @@ class MainChart extends StatelessWidget {
         ),
         charts.SelectNearest(),
       ],
-
+      // Ayuda a seleccionar cualquier punto y que muestre la hora de registro
       selectionModels: [
         charts.SelectionModelConfig(
           changedListener: (charts.SelectionModel model) {
@@ -186,6 +186,7 @@ class Data {
   static List<charts.Series<ChartPoint, double>> createSampleData(
     ChartData partograph,
   ) {
+    //Configuracion de nueva curva de alerta
     final nuevaCurvaAlerta = charts.Series<ChartPoint, double>(
       id: 'Nueva Curva Alerta',
       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
@@ -193,8 +194,8 @@ class Data {
       measureFn: (ChartPoint point, _) => point.y,
       data: partograph.newAlertCurve,
     )
-      // Configure our custom line renderer for this series.
       ..setAttribute(charts.rendererIdKey, 'alertNewCurveLine');
+    //Configuracion de curva de alerta
     final curvaAlerta = charts.Series<ChartPoint, double>(
       id: 'Curva de Alerta',
       colorFn: (_, __) => charts.MaterialPalette.purple.shadeDefault,
@@ -203,9 +204,8 @@ class Data {
       data: partograph.alertCurve,
     )
       ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId')
-      // Configure our custom line renderer for this series.
       ..setAttribute(charts.rendererIdKey, 'alertCurveLine');
-
+  //Configuracion de nueva curva de real
     final curvaReal = charts.Series<ChartPoint, double>(
       id: 'Curva Real',
       colorFn: (_, __) => charts.MaterialPalette.black,
@@ -213,6 +213,7 @@ class Data {
       measureFn: (ChartPoint point, _) => point.y,
       data: partograph.realCurve,
     )..setAttribute(charts.rendererIdKey, 'realCurveLine');
+    //Configuracion de puntos de tabla de vigilancia medica y altura de la presentacion
     final medicalSurveillancePoints = charts.Series<ChartPoint, double>(
       id: 'MedicalSurveillance',
       displayName: '',

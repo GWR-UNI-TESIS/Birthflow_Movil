@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveillance_table.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+//Clase que genera los puntos de grafica sobre la tabla de vigilancia medica
 class MedicalSurveillanceGenerator implements IGenerator {
   MedicalSurveillanceGenerator({
     required List<MedicalSurveillanceTable> medicalSurveillanceList,
@@ -11,7 +12,7 @@ class MedicalSurveillanceGenerator implements IGenerator {
   }) {
     _generate(medicalSurveillanceList, startTime);
   }
-
+  //Puntos de grafica
   List<ChartPoint>? _chartPoint;
 
   @override
@@ -45,6 +46,8 @@ class MedicalSurveillanceGenerator implements IGenerator {
       // Convierte la diferencia total en formato decimal (horas decimales)
       final timeResult = timeDifference / 60;
 
+
+      //Guarda un punto de grafico de la frecuencia cardiaca fetal
       final fetalHeartRateChartPoint = ChartPoint(
         x: timeResult,
         y: Helper.mapValue(fetalHeartRate!),
@@ -54,6 +57,7 @@ class MedicalSurveillanceGenerator implements IGenerator {
         shape: 'rect',
       );
 
+      //Guarda un punto de grafico de frecuencia de contracciones
       final frequencyContractionsPoint = ChartPoint(
         x: timeResult,
         y: frequencyContractions!,
@@ -62,7 +66,7 @@ class MedicalSurveillanceGenerator implements IGenerator {
         fillColor: charts.MaterialPalette.blue.shadeDefault,
         shape: 'triangle',
       );
-
+      //Los agrega a sus respectivas lista
       fetalHeartRateList.add(fetalHeartRateChartPoint);
       frequencyContractionsList.add(frequencyContractionsPoint);
     }

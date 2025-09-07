@@ -2,6 +2,7 @@ import 'package:birthflow_movil/src/core/chart/generators/i_generator.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 
+//Clase que genera los puntos de la curva real
 class RealCurveGenerator implements IGenerator {
   RealCurveGenerator({required List<CervicalDilation> cervicalList}) {
     _generate(cervicalList);

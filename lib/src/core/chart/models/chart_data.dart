@@ -1,12 +1,14 @@
 import 'package:birthflow_movil/src/core/chart/models/chart_point.dart';
 
+//Clase que funciona para guardar los graficos que seran utilizados en el partograma
 class ChartData {
+  //Curva real
   List<ChartPoint> _realCurve;
-
+  //Curva de alerta
   List<ChartPoint> _alertCurve;
-
+  //Nueva curva de alerta
   List<ChartPoint> _newAlertCurve;
-
+  //Otros (Puntos de frecuencia cardiaca fetal, duraccion de contraccione y plano de hodge)
   List<ChartPoint> _others;
 
   //Constructor

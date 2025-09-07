@@ -1,7 +1,9 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/childbirth_note.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
+/// Caso de uso: crear la nota de parto asociada a un partograma.
 abstract class CreateChildbirthNoteUseCase {
+  /// Crea la nota con los datos clínicos y administrativos del nacimiento.
   Future<ChildbirthNote?> execute({
     required String partographId,
     String? description,
@@ -28,6 +30,7 @@ abstract class CreateChildbirthNoteUseCase {
   });
 }
 
+/// Implementación: delega la creación en el repositorio de partograma.
 class CreateChildbirthNoteUseCaseImplementation implements CreateChildbirthNoteUseCase {
   final PartographRepository _partographRepository;
 
@@ -60,6 +63,7 @@ class CreateChildbirthNoteUseCaseImplementation implements CreateChildbirthNoteU
     required String brazalete,
     required String huellaDig,
   }) async {
+    // Delegación directa al repositorio.
     return await _partographRepository.createChildbirthNote(
       partographId: partographId,
       description: description,
