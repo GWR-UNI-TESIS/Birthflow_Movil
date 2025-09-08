@@ -24,145 +24,151 @@ class MedicalSurveillanceWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10),
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Table(
-              border: TableBorder.all(
-                color: Colors.black54,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              defaultColumnWidth: const IntrinsicColumnWidth(),
-              columnWidths: const {0: FixedColumnWidth(130)},
-              children: [
-                TableRow(
-                  children: [
-                    TableCell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 5,
-                          horizontal: 2,
-                        ),
-                        child: Text(
-                          ' ',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
-                    ),
-                    for (int i = 0; i <= 15; i++)
+          return SizedBox(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Table(
+                border: TableBorder.all(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                defaultColumnWidth: const IntrinsicColumnWidth(),
+                columnWidths: const {0: FixedColumnWidth(130)},
+                children: [
+                  TableRow(
+                    children: [
                       TableCell(
-                        verticalAlignment: TableCellVerticalAlignment.middle,
                         child: Container(
-                          alignment: Alignment.center,
                           padding: const EdgeInsets.symmetric(
-                            vertical: 1,
-                            horizontal: 10,
+                            vertical: 5,
+                            horizontal: 2,
                           ),
                           child: Text(
-                            String.fromCharCode(97 + i),
-                            style: Theme.of(context).textTheme.labelSmall,
+                            ' ',
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Tiempo',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value: i >= list!.length
-                            ? ' '
-                            : DateFormat.Hm().format(DateTime.now()),
+                      for (int i = 0; i <= 15; i++)
+                        TableCell(
+                          verticalAlignment: TableCellVerticalAlignment.middle,
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 1,
+                              horizontal: 10,
+                            ),
+                            child: Text(
+                              String.fromCharCode(97 + i),
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Tiempo',
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Posicion Materna',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value:
-                            i >= list!.length ? ' ' : list![i].maternalPosition,
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value: i >= list!.length
+                              ? ' '
+                              : DateFormat.Hm().format(list![i].time),
+                        ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Posicion Materna',
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Presion Arterial',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value:
-                            i >= list!.length ? ' ' : list![i].arterialPressure,
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value: i >= list!.length
+                              ? ' '
+                              : list![i].maternalPosition,
+                        ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Presion Arterial',
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Pulso Materno',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value: i >= list!.length ? ' ' : list![i].maternalPulse,
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value: i >= list!.length
+                              ? ' '
+                              : list![i].arterialPressure,
+                        ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Pulso Materno',
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Frec. Cardiaca Fetal',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value:
-                            i >= list!.length ? ' ' : list![i].fetalHeartRate,
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value:
+                              i >= list!.length ? ' ' : list![i].maternalPulse,
+                        ),
+                    ],
+                  ),/*
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Frec. Cardiaca Fetal',
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Duracion Contracciones',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value: i >= list!.length
-                            ? ' '
-                            : list![i].contractionsDuration,
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value:
+                              i >= list!.length ? ' ' : list![i].fetalHeartRate,
+                        ),
+                    ],
+                  ),*/
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Duracion Contracciones',
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Frec. Contracciones',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value: i >= list!.length
-                            ? ' '
-                            : list![i].frequencyContractions,
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value: i >= list!.length
+                              ? ' '
+                              : list![i].contractionsDuration,
+                        ),
+                    ],
+                  ),
+                  /*
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Frec. Contracciones',
                       ),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    const HeaderItem(
-                      value: 'Dolor',
-                    ),
-                    for (int i = 0; i <= 15; i++)
-                      Item(
-                        value: i >= list!.length ? ' ' : list![i].pain,
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value: i >= list!.length
+                              ? ' '
+                              : list![i].frequencyContractions,
+                        ),
+                    ],
+                  ),*/
+                  TableRow(
+                    children: [
+                      const HeaderItem(
+                        value: 'Dolor',
                       ),
-                  ],
-                ),
-              ],
+                      for (int i = 0; i <= 15; i++)
+                        Item(
+                          value: i >= list!.length ? ' ' : list![i].pain,
+                        ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -178,14 +184,21 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isTablet = MediaQuery.of(context).size.shortestSide >= 600;
+
     return TableCell(
       verticalAlignment: TableCellVerticalAlignment.middle,
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 2),
+        padding: EdgeInsets.symmetric(
+          vertical: isTablet ? 7 : 1,
+          horizontal: isTablet ? 5 : 2,
+        ),
         child: Text(
-          value!,
-          style: Theme.of(context).textTheme.bodySmall,
+          value ?? '',
+          style: isTablet
+              ? Theme.of(context).textTheme.bodyLarge
+              : Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );
@@ -199,12 +212,19 @@ class HeaderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isTablet = MediaQuery.of(context).size.shortestSide >= 600;
+
     return TableCell(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 4),
+        padding: EdgeInsets.symmetric(
+          vertical: isTablet ? 6 : 3,
+          horizontal: isTablet ? 10 : 5,
+        ),
         child: Text(
           value,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: isTablet
+              ? Theme.of(context).textTheme.bodyLarge
+              : Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );

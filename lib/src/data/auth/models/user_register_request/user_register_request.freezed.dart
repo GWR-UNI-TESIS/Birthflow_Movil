@@ -29,7 +29,7 @@ mixin _$UserRegisterRequest {
       throw _privateConstructorUsedError; // Nombre de usuario para inicio de sesión
   String get email =>
       throw _privateConstructorUsedError; // Correo electrónico del usuario
-  double? get phoneNumber => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
 
   /// Serializes this UserRegisterRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ abstract class $UserRegisterRequestCopyWith<$Res> {
       String secondName,
       String userName,
       String email,
-      double? phoneNumber});
+      String? phoneNumber});
 }
 
 /// @nodoc
@@ -102,7 +102,7 @@ class _$UserRegisterRequestCopyWithImpl<$Res, $Val extends UserRegisterRequest>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
     ) as $Val);
   }
 }
@@ -121,7 +121,7 @@ abstract class _$$UserRegisterRequestImplCopyWith<$Res>
       String secondName,
       String userName,
       String email,
-      double? phoneNumber});
+      String? phoneNumber});
 }
 
 /// @nodoc
@@ -168,7 +168,7 @@ class __$$UserRegisterRequestImplCopyWithImpl<$Res>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
     ));
   }
 }
@@ -203,7 +203,7 @@ class _$UserRegisterRequestImpl implements _UserRegisterRequest {
   final String email;
 // Correo electrónico del usuario
   @override
-  final double? phoneNumber;
+  final String? phoneNumber;
 
   @override
   String toString() {
@@ -255,7 +255,7 @@ abstract class _UserRegisterRequest implements UserRegisterRequest {
       required final String secondName,
       required final String userName,
       required final String email,
-      final double? phoneNumber}) = _$UserRegisterRequestImpl;
+      final String? phoneNumber}) = _$UserRegisterRequestImpl;
 
   factory _UserRegisterRequest.fromJson(Map<String, dynamic> json) =
       _$UserRegisterRequestImpl.fromJson;
@@ -272,7 +272,7 @@ abstract class _UserRegisterRequest implements UserRegisterRequest {
   @override
   String get email; // Correo electrónico del usuario
   @override
-  double? get phoneNumber;
+  String? get phoneNumber;
 
   /// Create a copy of UserRegisterRequest
   /// with the given fields replaced by the non-null parameter values.

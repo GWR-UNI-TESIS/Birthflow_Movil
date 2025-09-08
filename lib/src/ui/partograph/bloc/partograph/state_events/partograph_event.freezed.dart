@@ -79,8 +79,10 @@ mixin _$PartographEvent {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -101,8 +103,10 @@ mixin _$PartographEvent {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -178,8 +182,10 @@ mixin _$PartographEvent {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -200,8 +206,10 @@ mixin _$PartographEvent {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -277,8 +285,10 @@ mixin _$PartographEvent {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -299,8 +309,10 @@ mixin _$PartographEvent {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -555,8 +567,10 @@ class _$onFetchDataImpl implements onFetchData {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -577,8 +591,10 @@ class _$onFetchDataImpl implements onFetchData {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -657,8 +673,10 @@ class _$onFetchDataImpl implements onFetchData {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -679,8 +697,10 @@ class _$onFetchDataImpl implements onFetchData {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -759,8 +779,10 @@ class _$onFetchDataImpl implements onFetchData {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -781,8 +803,10 @@ class _$onFetchDataImpl implements onFetchData {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1102,8 +1126,10 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1124,8 +1150,10 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1205,8 +1233,10 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1227,8 +1257,10 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1308,8 +1340,10 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1330,8 +1364,10 @@ class _$ModifyingPartographImpl implements ModifyingPartograph {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1606,8 +1642,10 @@ class _$OnDeletePartographImpl implements OnDeletePartograph {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1628,8 +1666,10 @@ class _$OnDeletePartographImpl implements OnDeletePartograph {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1708,8 +1748,10 @@ class _$OnDeletePartographImpl implements OnDeletePartograph {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1730,8 +1772,10 @@ class _$OnDeletePartographImpl implements OnDeletePartograph {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1810,8 +1854,10 @@ class _$OnDeletePartographImpl implements OnDeletePartograph {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -1832,8 +1878,10 @@ class _$OnDeletePartographImpl implements OnDeletePartograph {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2128,8 +2176,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2150,8 +2200,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2230,8 +2282,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2252,8 +2306,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2332,8 +2388,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2354,8 +2412,10 @@ class _$SaveCervicalDilationImpl implements SaveCervicalDilation {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2671,8 +2731,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2693,8 +2755,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2773,8 +2837,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2795,8 +2861,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2876,8 +2944,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -2898,8 +2968,10 @@ class _$UpdateCervicalDilationImpl implements UpdateCervicalDilation {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3172,8 +3244,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3194,8 +3268,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3274,8 +3350,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3296,8 +3374,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3376,8 +3456,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3398,8 +3480,10 @@ class _$DeleteCervicalDilationImpl implements DeleteCervicalDilation {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3774,8 +3858,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3796,8 +3882,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3886,8 +3974,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3908,8 +3998,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -3998,8 +4090,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -4020,8 +4114,10 @@ class _$CreateMedicalSurveillanceImpl implements CreateMedicalSurveillance {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -4435,8 +4531,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -4457,8 +4555,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -4548,8 +4648,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -4570,8 +4672,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -4661,8 +4765,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -4683,8 +4789,10 @@ class _$UpdateMedicalSurveillanceImpl implements UpdateMedicalSurveillance {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5015,8 +5123,10 @@ class _$CreatePresentationPositionVarietyImpl
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5037,8 +5147,10 @@ class _$CreatePresentationPositionVarietyImpl
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5118,8 +5230,10 @@ class _$CreatePresentationPositionVarietyImpl
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5140,8 +5254,10 @@ class _$CreatePresentationPositionVarietyImpl
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5221,8 +5337,10 @@ class _$CreatePresentationPositionVarietyImpl
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5243,8 +5361,10 @@ class _$CreatePresentationPositionVarietyImpl
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5566,8 +5686,10 @@ class _$UpdatePresentationPositionVarietyImpl
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5588,8 +5710,10 @@ class _$UpdatePresentationPositionVarietyImpl
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5669,8 +5793,10 @@ class _$UpdatePresentationPositionVarietyImpl
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5691,8 +5817,10 @@ class _$UpdatePresentationPositionVarietyImpl
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5772,8 +5900,10 @@ class _$UpdatePresentationPositionVarietyImpl
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -5794,8 +5924,10 @@ class _$UpdatePresentationPositionVarietyImpl
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6087,8 +6219,10 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6109,8 +6243,10 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6189,8 +6325,10 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6211,8 +6349,10 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6291,8 +6431,10 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6313,8 +6455,10 @@ class _$CreateFetalHeartRateImpl implements CreateFetalHeartRate {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6611,8 +6755,10 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6633,8 +6779,10 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6713,8 +6861,10 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6735,8 +6885,10 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6815,8 +6967,10 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -6837,8 +6991,10 @@ class _$UpdateFetalHeartRateImpl implements UpdateFetalHeartRate {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7128,8 +7284,10 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7150,8 +7308,10 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7230,8 +7390,10 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7252,8 +7414,10 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7332,8 +7496,10 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7354,8 +7520,10 @@ class _$CreateContractionFrequencyImpl implements CreateContractionFrequency {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7654,8 +7822,10 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7676,8 +7846,10 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7756,8 +7928,10 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7778,8 +7952,10 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7858,8 +8034,10 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -7880,8 +8058,10 @@ class _$UpdateContractionFrequencyImpl implements UpdateContractionFrequency {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -8029,8 +8209,10 @@ abstract class _$$CreateChildbirthNoteImplCopyWith<$Res> {
   $Res call(
       {String partographId,
       String? description,
+      String date,
       String hour,
       String sex,
+      String peso,
       String apgar,
       String temperature,
       String caputto,
@@ -8064,8 +8246,10 @@ class __$$CreateChildbirthNoteImplCopyWithImpl<$Res>
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
+    Object? date = null,
     Object? hour = null,
     Object? sex = null,
+    Object? peso = null,
     Object? apgar = null,
     Object? temperature = null,
     Object? caputto = null,
@@ -8092,6 +8276,10 @@ class __$$CreateChildbirthNoteImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -8099,6 +8287,10 @@ class __$$CreateChildbirthNoteImplCopyWithImpl<$Res>
       sex: null == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String,
+      peso: null == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String,
       apgar: null == apgar
           ? _value.apgar
@@ -8174,8 +8366,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
   const _$CreateChildbirthNoteImpl(
       {required this.partographId,
       this.description,
+      required this.date,
       required this.hour,
       required this.sex,
+      required this.peso,
       required this.apgar,
       required this.temperature,
       required this.caputto,
@@ -8198,9 +8392,13 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
   @override
   final String? description;
   @override
+  final String date;
+  @override
   final String hour;
   @override
   final String sex;
+  @override
+  final String peso;
   @override
   final String apgar;
   @override
@@ -8236,7 +8434,7 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
 
   @override
   String toString() {
-    return 'PartographEvent.createChildbirthNote(partographId: $partographId, description: $description, hour: $hour, sex: $sex, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
+    return 'PartographEvent.createChildbirthNote(partographId: $partographId, description: $description, date: $date, hour: $hour, sex: $sex, peso: $peso, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
   }
 
   @override
@@ -8248,8 +8446,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
                 other.partographId == partographId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.peso, peso) || other.peso == peso) &&
             (identical(other.apgar, apgar) || other.apgar == apgar) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
@@ -8282,8 +8482,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
         runtimeType,
         partographId,
         description,
+        date,
         hour,
         sex,
+        peso,
         apgar,
         temperature,
         caputto,
@@ -8376,8 +8578,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -8398,8 +8602,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -8421,8 +8627,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     return createChildbirthNote(
         partographId,
         description,
+        date,
         hour,
         sex,
+        peso,
         apgar,
         temperature,
         caputto,
@@ -8498,8 +8706,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -8520,8 +8730,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -8543,8 +8755,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     return createChildbirthNote?.call(
         partographId,
         description,
+        date,
         hour,
         sex,
+        peso,
         apgar,
         temperature,
         caputto,
@@ -8620,8 +8834,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -8642,8 +8858,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -8667,8 +8885,10 @@ class _$CreateChildbirthNoteImpl implements CreateChildbirthNote {
       return createChildbirthNote(
           partographId,
           description,
+          date,
           hour,
           sex,
+          peso,
           apgar,
           temperature,
           caputto,
@@ -8787,8 +9007,10 @@ abstract class CreateChildbirthNote implements PartographEvent {
   const factory CreateChildbirthNote(
       {required final String partographId,
       final String? description,
+      required final String date,
       required final String hour,
       required final String sex,
+      required final String peso,
       required final String apgar,
       required final String temperature,
       required final String caputto,
@@ -8808,8 +9030,10 @@ abstract class CreateChildbirthNote implements PartographEvent {
 
   String get partographId;
   String? get description;
+  String get date;
   String get hour;
   String get sex;
+  String get peso;
   String get apgar;
   String get temperature;
   String get caputto;
@@ -8843,8 +9067,10 @@ abstract class _$$UpdateChildbirthNoteImplCopyWith<$Res> {
   $Res call(
       {String partographId,
       String? description,
+      String date,
       String hour,
       String sex,
+      String peso,
       String apgar,
       String temperature,
       String caputto,
@@ -8878,8 +9104,10 @@ class __$$UpdateChildbirthNoteImplCopyWithImpl<$Res>
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
+    Object? date = null,
     Object? hour = null,
     Object? sex = null,
+    Object? peso = null,
     Object? apgar = null,
     Object? temperature = null,
     Object? caputto = null,
@@ -8906,6 +9134,10 @@ class __$$UpdateChildbirthNoteImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -8913,6 +9145,10 @@ class __$$UpdateChildbirthNoteImplCopyWithImpl<$Res>
       sex: null == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String,
+      peso: null == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String,
       apgar: null == apgar
           ? _value.apgar
@@ -8988,8 +9224,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
   const _$UpdateChildbirthNoteImpl(
       {required this.partographId,
       this.description,
+      required this.date,
       required this.hour,
       required this.sex,
+      required this.peso,
       required this.apgar,
       required this.temperature,
       required this.caputto,
@@ -9012,9 +9250,13 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
   @override
   final String? description;
   @override
+  final String date;
+  @override
   final String hour;
   @override
   final String sex;
+  @override
+  final String peso;
   @override
   final String apgar;
   @override
@@ -9050,7 +9292,7 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
 
   @override
   String toString() {
-    return 'PartographEvent.updateChildbirthNote(partographId: $partographId, description: $description, hour: $hour, sex: $sex, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
+    return 'PartographEvent.updateChildbirthNote(partographId: $partographId, description: $description, date: $date, hour: $hour, sex: $sex, peso: $peso, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
   }
 
   @override
@@ -9062,8 +9304,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
                 other.partographId == partographId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.peso, peso) || other.peso == peso) &&
             (identical(other.apgar, apgar) || other.apgar == apgar) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
@@ -9096,8 +9340,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
         runtimeType,
         partographId,
         description,
+        date,
         hour,
         sex,
+        peso,
         apgar,
         temperature,
         caputto,
@@ -9190,8 +9436,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -9212,8 +9460,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     required TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -9235,8 +9485,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     return updateChildbirthNote(
         partographId,
         description,
+        date,
         hour,
         sex,
+        peso,
         apgar,
         temperature,
         caputto,
@@ -9312,8 +9564,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -9334,8 +9588,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     TResult? Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -9357,8 +9613,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     return updateChildbirthNote?.call(
         partographId,
         description,
+        date,
         hour,
         sex,
+        peso,
         apgar,
         temperature,
         caputto,
@@ -9434,8 +9692,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -9456,8 +9716,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
     TResult Function(
             String partographId,
             String? description,
+            String date,
             String hour,
             String sex,
+            String peso,
             String apgar,
             String temperature,
             String caputto,
@@ -9481,8 +9743,10 @@ class _$UpdateChildbirthNoteImpl implements UpdateChildbirthNote {
       return updateChildbirthNote(
           partographId,
           description,
+          date,
           hour,
           sex,
+          peso,
           apgar,
           temperature,
           caputto,
@@ -9601,8 +9865,10 @@ abstract class UpdateChildbirthNote implements PartographEvent {
   const factory UpdateChildbirthNote(
       {required final String partographId,
       final String? description,
+      required final String date,
       required final String hour,
       required final String sex,
+      required final String peso,
       required final String apgar,
       required final String temperature,
       required final String caputto,
@@ -9622,8 +9888,10 @@ abstract class UpdateChildbirthNote implements PartographEvent {
 
   String get partographId;
   String? get description;
+  String get date;
   String get hour;
   String get sex;
+  String get peso;
   String get apgar;
   String get temperature;
   String get caputto;

@@ -35,11 +35,50 @@ class GroupsView extends StatelessWidget {
             return state.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               loaded: (groups) => GroupsList(groups: groups),
+              empty: () {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<GroupsBloc>().add(
+                          const GroupsEvent.loadGroups(),
+                        );
+                  },
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/no_data.png',
+                                  height: 260.0,
+                                  fit: BoxFit.fill,
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'No se encuentran grupos para su usuario',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
               actionSuccess: (_) => Container(),
               error: (message) {
                 return RefreshIndicator(
                   onRefresh: () async {
-                    
                     context.read<GroupsBloc>().add(
                           const GroupsEvent.loadGroups(),
                         );
@@ -162,9 +201,9 @@ class GroupsList extends StatelessWidget {
     );
   }
 
-  Future<void> _showDeleteDialog(BuildContext context, int id) async {
-    return showDialog<void>(
-      context: context,
+  Future<void> _showDeleteDialog(BuildContext mainContext, int id) async {
+    return await showDialog<void>(
+      context: mainContext,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
@@ -179,7 +218,7 @@ class GroupsList extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                context.read<GroupsBloc>().add(GroupsEvent.deleteGroup(id));
+                mainContext.read<GroupsBloc>().add(GroupsEvent.deleteGroup(id));
                 Navigator.of(context).pop();
               },
               child: const Text('Aceptar'),

@@ -19,7 +19,12 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   ) async {
     try {
       final notifications = await _getNotificationsUseCase.execute();
-      emit(NotificationsState.loaded(notifications: notifications));
+
+      if (notifications.isEmpty) {
+        emit(const NotificationsState.empty());
+      } else {
+        emit(NotificationsState.loaded(notifications: notifications));
+      }
     } catch (e) {
       // Si falla, mantenemos el estado inicial
       emit(const NotificationsState.initial());

@@ -24,7 +24,11 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
     on<LoadGroups>((event, emit) async {
       try {
         final groups = await _getGroupsUseCase.execute();
-        emit(GroupsState.loaded(groups ?? []));
+        if (groups!.isEmpty) {
+          emit(const GroupsState.empty());
+        } else {
+          emit(GroupsState.loaded(groups));
+        }
       } catch (e) {
         emit(
           const GroupsState.error(

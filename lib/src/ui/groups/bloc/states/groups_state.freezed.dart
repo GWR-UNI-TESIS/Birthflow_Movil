@@ -20,6 +20,7 @@ mixin _$GroupsState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) actionSuccess,
     required TResult Function(String message) error,
   }) =>
@@ -28,6 +29,7 @@ mixin _$GroupsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? actionSuccess,
     TResult? Function(String message)? error,
   }) =>
@@ -36,6 +38,7 @@ mixin _$GroupsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? actionSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$GroupsState {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(Empty value) empty,
     required TResult Function(ActionSuccess value) actionSuccess,
     required TResult Function(Error value) error,
   }) =>
@@ -53,6 +57,7 @@ mixin _$GroupsState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(Empty value)? empty,
     TResult? Function(ActionSuccess value)? actionSuccess,
     TResult? Function(Error value)? error,
   }) =>
@@ -61,6 +66,7 @@ mixin _$GroupsState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(Empty value)? empty,
     TResult Function(ActionSuccess value)? actionSuccess,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -132,6 +138,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) actionSuccess,
     required TResult Function(String message) error,
   }) {
@@ -143,6 +150,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? actionSuccess,
     TResult? Function(String message)? error,
   }) {
@@ -154,6 +162,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? actionSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -169,6 +178,7 @@ class _$LoadingImpl implements Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(Empty value) empty,
     required TResult Function(ActionSuccess value) actionSuccess,
     required TResult Function(Error value) error,
   }) {
@@ -180,6 +190,7 @@ class _$LoadingImpl implements Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(Empty value)? empty,
     TResult? Function(ActionSuccess value)? actionSuccess,
     TResult? Function(Error value)? error,
   }) {
@@ -191,6 +202,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(Empty value)? empty,
     TResult Function(ActionSuccess value)? actionSuccess,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -282,6 +294,7 @@ class _$LoadedImpl implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) actionSuccess,
     required TResult Function(String message) error,
   }) {
@@ -293,6 +306,7 @@ class _$LoadedImpl implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? actionSuccess,
     TResult? Function(String message)? error,
   }) {
@@ -304,6 +318,7 @@ class _$LoadedImpl implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? actionSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -319,6 +334,7 @@ class _$LoadedImpl implements Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(Empty value) empty,
     required TResult Function(ActionSuccess value) actionSuccess,
     required TResult Function(Error value) error,
   }) {
@@ -330,6 +346,7 @@ class _$LoadedImpl implements Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(Empty value)? empty,
     TResult? Function(ActionSuccess value)? actionSuccess,
     TResult? Function(Error value)? error,
   }) {
@@ -341,6 +358,7 @@ class _$LoadedImpl implements Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(Empty value)? empty,
     TResult Function(ActionSuccess value)? actionSuccess,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -362,6 +380,129 @@ abstract class Loaded implements GroupsState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EmptyImplCopyWith<$Res> {
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmptyImplCopyWithImpl<$Res>
+    extends _$GroupsStateCopyWithImpl<$Res, _$EmptyImpl>
+    implements _$$EmptyImplCopyWith<$Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GroupsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$EmptyImpl implements Empty {
+  const _$EmptyImpl();
+
+  @override
+  String toString() {
+    return 'GroupsState.empty()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(List<Group> groups) loaded,
+    required TResult Function() empty,
+    required TResult Function(String message) actionSuccess,
+    required TResult Function(String message) error,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(List<Group> groups)? loaded,
+    TResult? Function()? empty,
+    TResult? Function(String message)? actionSuccess,
+    TResult? Function(String message)? error,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(List<Group> groups)? loaded,
+    TResult Function()? empty,
+    TResult Function(String message)? actionSuccess,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Empty value) empty,
+    required TResult Function(ActionSuccess value) actionSuccess,
+    required TResult Function(Error value) error,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Empty value)? empty,
+    TResult? Function(ActionSuccess value)? actionSuccess,
+    TResult? Function(Error value)? error,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Empty value)? empty,
+    TResult Function(ActionSuccess value)? actionSuccess,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Empty implements GroupsState {
+  const factory Empty() = _$EmptyImpl;
 }
 
 /// @nodoc
@@ -434,6 +575,7 @@ class _$ActionSuccessImpl implements ActionSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) actionSuccess,
     required TResult Function(String message) error,
   }) {
@@ -445,6 +587,7 @@ class _$ActionSuccessImpl implements ActionSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? actionSuccess,
     TResult? Function(String message)? error,
   }) {
@@ -456,6 +599,7 @@ class _$ActionSuccessImpl implements ActionSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? actionSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -471,6 +615,7 @@ class _$ActionSuccessImpl implements ActionSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(Empty value) empty,
     required TResult Function(ActionSuccess value) actionSuccess,
     required TResult Function(Error value) error,
   }) {
@@ -482,6 +627,7 @@ class _$ActionSuccessImpl implements ActionSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(Empty value)? empty,
     TResult? Function(ActionSuccess value)? actionSuccess,
     TResult? Function(Error value)? error,
   }) {
@@ -493,6 +639,7 @@ class _$ActionSuccessImpl implements ActionSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(Empty value)? empty,
     TResult Function(ActionSuccess value)? actionSuccess,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -586,6 +733,7 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Group> groups) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) actionSuccess,
     required TResult Function(String message) error,
   }) {
@@ -597,6 +745,7 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Group> groups)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? actionSuccess,
     TResult? Function(String message)? error,
   }) {
@@ -608,6 +757,7 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Group> groups)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? actionSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -623,6 +773,7 @@ class _$ErrorImpl implements Error {
   TResult map<TResult extends Object?>({
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(Empty value) empty,
     required TResult Function(ActionSuccess value) actionSuccess,
     required TResult Function(Error value) error,
   }) {
@@ -634,6 +785,7 @@ class _$ErrorImpl implements Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(Empty value)? empty,
     TResult? Function(ActionSuccess value)? actionSuccess,
     TResult? Function(Error value)? error,
   }) {
@@ -645,6 +797,7 @@ class _$ErrorImpl implements Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(Empty value)? empty,
     TResult Function(ActionSuccess value)? actionSuccess,
     TResult Function(Error value)? error,
     required TResult orElse(),

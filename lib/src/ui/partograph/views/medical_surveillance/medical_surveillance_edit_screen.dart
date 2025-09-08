@@ -124,9 +124,9 @@ class _MedicalSurveillanceEditScreenState
         maternalPosition: _maternalPositionValue,
         arterialPressure: _arterialPressureValue.value,
         maternalPulse: _maternalPulseValue.value,
-        fetalHeartRate: _fetalHeartRateValue.value,
+        fetalHeartRate: 'N/A',
         contractionsDuration: _contractionsDurationValue.value,
-        frequencyContractions: _frequencyContractions,
+        frequencyContractions: 'N/A',
         pain: _pain,
         time: selectedDateTime,
       );
@@ -141,23 +141,25 @@ class _MedicalSurveillanceEditScreenState
     final isLoading = context.watch<PartographBloc>().state is Loading;
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Vigilancia Médica')),
-      body: BlocListener<PartographBloc, PartographState>(
-        listener: (context, state) {
-          if (state is Loaded) {
-            showSnackbar(state.message);
-            Navigator.of(context).pop();
-          } else if (state is Error) {
-            showErrorSnackbar(state.errorMessage);
-          }
-        },
-        child: LoadingOverlay(
-          isLoading: isLoading,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: Form(
-              key: _formKey,
-              child: _buildFormContent(context),
+      body: SafeArea(
+        child: BlocListener<PartographBloc, PartographState>(
+          listener: (context, state) {
+            if (state is Loaded) {
+              showSnackbar(state.message);
+              Navigator.of(context).pop();
+            } else if (state is Error) {
+              showErrorSnackbar(state.errorMessage);
+            }
+          },
+          child: LoadingOverlay(
+            isLoading: isLoading,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: Form(
+                key: _formKey,
+                child: _buildFormContent(context),
+              ),
             ),
           ),
         ),
@@ -200,24 +202,24 @@ class _MedicalSurveillanceEditScreenState
             initialValue: _maternalPulseValue.value,
             onChanged: (value) => _maternalPulseValue.value = value,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 16),/*
           FormElementWidget(
             label: 'Frecuencia cardiaca fetal',
             initialValue: _fetalHeartRateValue.value,
             onChanged: (value) => _fetalHeartRateValue.value = value,
-          ),
+          ),*/
           FormElementWidget(
             label: 'Duración Contracciones',
             initialValue: _contractionsDurationValue.value,
             onChanged: (value) => _contractionsDurationValue.value = value,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 16),/*
           _buildTextField(
             label: 'Frec. Contracciones',
             maxLength: 3,
             initialValue: _frequencyContractions,
             onChanged: (value) => _frequencyContractions = value,
-          ),
+          ),*/
           const SizedBox(height: 16),
           UnifiedDropdownWidget(
             locationValues: const ['Sacro', 'Suprapúbico'],
@@ -247,26 +249,6 @@ class _MedicalSurveillanceEditScreenState
       labelText: labelText,
       onValueChanged: onChanged,
       initialValue: initialValue,
-    );
-  }
-
-  Widget _buildTextField({
-    required String label,
-    required int maxLength,
-    required ValueChanged<String> onChanged,
-    String? initialValue,
-  }) {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        labelText: label,
-      ),
-      initialValue: initialValue,
-      maxLength: maxLength,
-      validator: (value) =>
-          value == null || value.isEmpty ? 'Por favor, ingrese un dato' : null,
-      onChanged: onChanged,
     );
   }
 }

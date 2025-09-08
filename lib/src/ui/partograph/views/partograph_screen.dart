@@ -22,6 +22,7 @@ class PartographScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _PartographState();
 }
 
+//Estado de la pantalla de partograma
 class _PartographState extends State<PartographScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(); // Clave para controlar el Scaffold
@@ -38,65 +39,68 @@ class _PartographState extends State<PartographScreen> {
   Widget build(BuildContext context) {
     final catalog = context.watch<CatalogCubit>().state;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(135.0),
-        child: _buildAppBar(context),
-      ),
-      drawer: NotificationDrawer(partographId: widget.partographId),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          // Dispara el evento FetchPartographs para recargar los datos
-          context.read<PartographBloc>().add(
-                onFetchData(partographId: widget.partographId),
-              );
-        },
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: BlocBuilder<PartographBloc, PartographState>(
-                builder: (context, state) {
-                  if (state is Loaded) {
-                    return _buildContent(context, state, catalog);
-                  }
-                  if (state is Error) {
-                    return ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/503_error_service.png',
-                              height: 260.0,
-                              fit: BoxFit.fill,
-                            ),
-                            const SizedBox(height: 5),
-                            const Text(
-                              'Ha ocurrido un error, vuelva intentarlo en otro momento ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-                  return const LinearProgressIndicator();
-                },
-              ),
-            );
-          },
+    return  Scaffold(
+        key: _scaffoldKey,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(135.0),
+          child: _buildAppBar(context),
         ),
-      ),
+        drawer: NotificationDrawer(partographId: widget.partographId),
+        body: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              // Dispara el evento FetchPartographs para recargar los datos
+              context.read<PartographBloc>().add(
+                    onFetchData(partographId: widget.partographId),
+                  );
+            },
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: BlocBuilder<PartographBloc, PartographState>(
+                    builder: (context, state) {
+                      if (state is Loaded) {
+                        return _buildContent(context, state, catalog);
+                      }
+                      if (state is Error) {
+                        return ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/503_error_service.png',
+                                  height: 260.0,
+                                  fit: BoxFit.fill,
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'Ha ocurrido un error, vuelva intentarlo en otro momento ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      return const LinearProgressIndicator();
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
     );
   }
-
+  
+  //Appbar de la pantalla
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 1,
@@ -118,15 +122,27 @@ class _PartographState extends State<PartographScreen> {
               child: _buildAppBarContent(context, state),
             );
           }
-          return Container(height: 10,);
+          return Container(
+            height: 10,
+          );
         },
       ),
     );
   }
 
+  //Acciones del appbar
   List<Widget> _buildAppBarActions() {
     return [
-      IconButton(icon: const Icon(Icons.description), onPressed: () {}),
+      IconButton(
+        icon: const Icon(Icons.description),
+        onPressed: () => context
+          ..go(
+            AppPaths.home.partographPath
+                .define(widget.partographId)
+                .report
+                .path,
+          ),
+      ),
       IconButton(
         icon: const Icon(Icons.notifications),
         onPressed: () {
@@ -146,6 +162,7 @@ class _PartographState extends State<PartographScreen> {
     ];
   }
 
+  //Contenido del appbar
   Widget _buildAppBarContent(BuildContext context, Loaded state) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,6 +202,7 @@ class _PartographState extends State<PartographScreen> {
     );
   }
 
+  //Contenido del body de la pantalla
   Widget _buildContent(BuildContext context, Loaded state, Catalog catalog) {
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -469,6 +487,11 @@ class _PartographState extends State<PartographScreen> {
         text: TextSpan(
           style: Theme.of(context).textTheme.bodyMedium,
           children: [
+             const TextSpan(
+              text: 'Fecha: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.date}\n'),
             const TextSpan(
               text: 'Hora: ',
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -484,6 +507,11 @@ class _PartographState extends State<PartographScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             TextSpan(text: '${note.apgar}\n'),
+             const TextSpan(
+              text: 'Peso: ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: '${note.peso}\n'),
             const TextSpan(
               text: 'Temperatura: ',
               style: TextStyle(fontWeight: FontWeight.bold),

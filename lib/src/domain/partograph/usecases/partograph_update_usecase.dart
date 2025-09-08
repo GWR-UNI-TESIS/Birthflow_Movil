@@ -1,7 +1,9 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
+/// Caso de uso: actualizar datos básicos de un partograma.
 abstract class UpdatePartographUsecase {
+  /// Actualiza y retorna el partograma resultante (o null según implementación).
   Future<Partograph?> execute({
     required String partographId,
     required String name,
@@ -12,6 +14,7 @@ abstract class UpdatePartographUsecase {
   });
 }
 
+/// Implementación que delega en el PartographRepository (inyección de dependencias).
 class UpdatePartographUsecaseImplementation implements UpdatePartographUsecase {
   final PartographRepository _partographRepository;
 
@@ -20,6 +23,7 @@ class UpdatePartographUsecaseImplementation implements UpdatePartographUsecase {
   }) : _partographRepository = partographRepository;
 
   @override
+  /// Delega la actualización al repositorio.
   Future<Partograph?> execute({
     required String partographId,
     required String name,

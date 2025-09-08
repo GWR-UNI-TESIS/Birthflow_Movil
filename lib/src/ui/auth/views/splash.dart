@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido
         children: [
           Image.asset(
-            'assets/birthflow_full_logo.png',
+            'assets/login-illustration.png',
             height: 260.0,
             fit: BoxFit.fill,
           ),

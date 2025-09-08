@@ -7,22 +7,55 @@ import 'package:birthflow_movil/src/domain/partograph/entities/medical_surveilla
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph_state.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 
+/// Representa el partograma completo.
+/// 
+/// Contiene la información clínica registrada durante el trabajo de parto,
+/// incluyendo dilataciones cervicales, frecuencia cardíaca fetal, contracciones,
+/// notas de parto, estado del partograma y curvas de alerta.
 class Partograph {
+  /// Identificador único del partograma.
   final String? partographId;
+
+  /// Nombre principal asociado al partograma (ejemplo: nombre de la paciente).
   final String name;
+
+  /// Nombre del registro vinculado al partograma.
   final String recordName;
+
+  /// Fecha de creación o inicio del partograma.
   final DateTime date;
+
+  /// Observaciones generales sobre el partograma.
   final String observation;
+
+  /// Tiempo de trabajo de parto registrado (ejemplo: en horas).
   final String workTime;
+
+  /// Registros de dilatación cervical.
   final List<CervicalDilation>? cervicalDilations;
+
+  /// Registros de la tabla de vigilancia médica.
   final List<MedicalSurveillanceTable>? medicalSurveillanceTable;
+
+  /// Registros de la posición y variedad de la presentación fetal.
   final List<PresentationPositionVariety>? presentationPositionVarieties;
+
+  /// Registros de frecuencia cardíaca fetal.
   final List<FetalHeartRate>? fetalHeartRates;
+
+  /// Registros de la frecuencia de contracciones.
   final List<ContractionFrequency>? contractionFrequencies;
+
+  /// Nota de parto asociada al partograma.
   final ChildbirthNote? childbirthNote;
+
+  /// Estado actual del partograma.
   final PartographState? partographState;
+
+  /// Curvas de alerta vinculadas al partograma.
   final AlertCurves? curves;
 
+  /// Constructor de la clase [Partograph].
   Partograph({
     this.partographId,
     required this.name,
@@ -40,6 +73,8 @@ class Partograph {
     this.curves,
   });
 
+  /// Crea una copia de este [Partograph] permitiendo modificar
+  /// únicamente algunas propiedades sin alterar las demás.
   Partograph copyWith({
     String? partographId,
     String? name,
@@ -71,6 +106,7 @@ class Partograph {
       contractionFrequencies:
           contractionFrequencies ?? this.contractionFrequencies,
       childbirthNote: childbirthNote ?? this.childbirthNote,
+      partographState: partographState ?? this.partographState,
       curves: curves ?? this.curves,
     );
   }

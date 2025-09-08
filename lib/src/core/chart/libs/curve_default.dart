@@ -1,5 +1,6 @@
 import 'package:birthflow_movil/src/domain/worktime/worktime.dart';
 
+//Objeto que almacena los valores por defecto para la creacion de la curva de alerta
 class CurveDefaultData {
   final Duration time;
   final double cervicalDilation;
@@ -10,6 +11,7 @@ class CurveDefaultData {
   });
 }
 
+//Clase que guarda los valores por defecto para la creacion de la curva de alerta
 // ignore: avoid_classes_with_only_static_members
 class DefaultBuildValues {
   static final Map<String, List<CurveDefaultData>> curveDataMap = {

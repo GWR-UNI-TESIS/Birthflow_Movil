@@ -13,7 +13,7 @@ class UserRegisterRequest with _$UserRegisterRequest {
     required String secondName, // Apellidos del usuario
     required String userName, // Nombre de usuario para inicio de sesión
     required String email, // Correo electrónico del usuario
-    double? phoneNumber, // Número telefónico del usuario (opcional)
+    String ? phoneNumber, // Número telefónico del usuario (opcional)
     }) = _UserRegisterRequest;
 
   // Crea una instancia de UserRegisterRequest a partir de un JSON

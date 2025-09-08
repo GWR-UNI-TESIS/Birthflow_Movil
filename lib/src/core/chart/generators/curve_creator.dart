@@ -1,23 +1,24 @@
+// Archivo: curve_creator.dart — Utilidades para construir/componer series de curvas en el partograma.
+// Comentarios mínimos y de valor; no se altera el código.
 
 import 'package:birthflow_movil/src/core/chart/libs/curve_default.dart';
 import 'package:birthflow_movil/src/core/chart/models/curve_data.dart';
 
+// Clase CurveCreator: responsabilidad principal del módulo.
 class CurveCreator {
   final List<CurveDefaultData> curveCreationDefault;
 
   /* El primer punto de la curva real */
+
   final CurveData firstPoint;
 
   CurveCreator(this.firstPoint, this.curveCreationDefault);
 
   List<CurveData> alertCurve() {
-    //Varibale donde almacenara la lista generada
+    //Variable donde almacenara la lista generada
     final List<CurveData> generateList = [];
 
-/*
-  [0]: x:0, y:7 -> x
 
-*/
     generateList.add(firstPoint);
 
     for (int index = 0; index <= curveCreationDefault.length - 1; index++) {
@@ -49,6 +50,7 @@ class CurveCreator {
           firstPoint.cervicalDilation) {
         //Si el valor de y del punto actual es mayor al punto donde el ramorem es activo se cambia la lista donde estan los puntos rotos
         if (curveCreationDefault[index].cervicalDilation > fork) {
+
           final CurveData generatePoint = CurveData(
             time: generateList.last.time.add(breakList[index].time),
             cervicalDilation: breakList[index].cervicalDilation,
@@ -59,6 +61,7 @@ class CurveCreator {
          */
           generateList.add(generatePoint);
         } else {
+
           final CurveData generatePoint = CurveData(
             time: generateList.last.time.add(curveCreationDefault[index].time),
             cervicalDilation: curveCreationDefault[index].cervicalDilation,

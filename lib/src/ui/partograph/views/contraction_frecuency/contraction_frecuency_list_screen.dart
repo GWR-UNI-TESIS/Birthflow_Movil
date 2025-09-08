@@ -23,21 +23,23 @@ class ContractionFrequencyListScreen extends StatelessWidget {
         elevation: 1,
         title: const Text('Frecuencias Contracciones'),
       ),
-      body: BlocBuilder<PartographBloc, PartographState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (partograph, _, d) =>
-                partograph.contractionFrequencies?.isEmpty ?? true
-                    ? const Center(child: Text('No hay datos'))
-                    : _buildContractionFrequencyList(
-                        partograph.contractionFrequencies!,
-                      ),
-            error: (errorMessage) =>
-                Center(child: Text('Error: $errorMessage')),
-            orElse: () => const Center(child: CircularProgressIndicator()),
-          );
-        },
+      body: SafeArea(
+        child: BlocBuilder<PartographBloc, PartographState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              loaded: (partograph, _, d) =>
+                  partograph.contractionFrequencies?.isEmpty ?? true
+                      ? const Center(child: Text('No hay datos'))
+                      : _buildContractionFrequencyList(
+                          partograph.contractionFrequencies!,
+                        ),
+              error: (errorMessage) =>
+                  Center(child: Text('Error: $errorMessage')),
+              orElse: () => const Center(child: CircularProgressIndicator()),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),

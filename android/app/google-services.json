@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1017128864839:android:bad23acdb3a4dfb03d3562",
+        "mobilesdk_app_id": "1:1017128864839:android:f8e69af071774bcc3d3562",
         "android_client_info": {
-          "package_name": "com.example.birthflow_movil"
+          "package_name": "com.birthflow.birthflow_movil"
         }
       },
       "oauth_client": [],

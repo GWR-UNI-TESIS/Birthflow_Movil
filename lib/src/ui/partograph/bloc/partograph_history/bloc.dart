@@ -9,6 +9,7 @@ class PartographHistoryBloc
   final GetPartographHistoryUsecase _getPartographHistoryUsecase;
 
   PartographHistoryBloc(this._getPartographHistoryUsecase)
+  
       : super(const PartographHistoryState.initial()) {
     on<FetchHistory>(_onFetchHistory);
     on<SelectVersion>(_onSelectVersion);

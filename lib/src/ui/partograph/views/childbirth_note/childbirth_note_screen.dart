@@ -71,7 +71,9 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(15.0),
                 child: ListView(
                   children: [
+                    _buildDetailRow('Fecha', note.date),
                     _buildDetailRow('Hora', note.hour),
+                    _buildDetailRow('Peso', note.peso),
                     _buildDetailRow('Sexo', note.sex),
                     _buildDetailRow('APGAR', note.apgar),
                     _buildDetailRow('Temperatura', note.temperature),
@@ -89,6 +91,7 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
                     _buildDetailRow('Talla', note.talla),
                     _buildDetailRow('Brazalete', note.brazalete),
                     _buildDetailRow('Huella Digital', note.huellaDig),
+                    _buildDetailRow('Descripcion', note.description),
                   ],
                 ),
               );
@@ -112,7 +115,7 @@ class ChildbirthNoteViewScreen extends StatelessWidget {
           Expanded(
             child: Text(
               '$label:',
-              style:  const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(

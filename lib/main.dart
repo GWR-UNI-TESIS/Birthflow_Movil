@@ -1,3 +1,4 @@
+import 'package:birthflow_movil/firebase_options.dart';
 import 'package:birthflow_movil/src/app_dev.dart';
 import 'package:birthflow_movil/src/config/locator/locator.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
@@ -8,25 +9,36 @@ import 'package:birthflow_movil/src/ui/welcome_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await loadEnvConfig();
   await initializeDependencies();
   FirebaseMessaging.onBackgroundMessage(
     FirebaseService.backgroundMessageHandler,
   );
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarDividerColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark, // O light
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+  );
   runApp(MyApp());
 }
 
 Future<void> loadEnvConfig() async {
-  // Define la variable de entorno para determinar el entorno actual
   const String env = String.fromEnvironment('ENV', defaultValue: 'development');
-
-  // Cargar el archivo correspondiente
   if (env == 'production') {
     await dotenv.load(fileName: '.env.production');
   } else {
@@ -50,8 +62,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<bool> _checkFirstTime() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool isFirstTime = prefs.getBool('is_first_time') ?? true;
-    return isFirstTime;
+    return prefs.getBool('is_first_time') ?? true;
   }
 
   @override
@@ -61,6 +72,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
@@ -69,9 +81,22 @@ class _MyAppState extends State<MyApp> {
 
         final bool isFirstTime = snapshot.data ?? false;
 
-        return MaterialApp(
-          home: isFirstTime ? WelcomeAppScreen() : AppLoader(),
-        );
+        if (isFirstTime) {
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            supportedLocales: [
+              Locale('es', 'ES'),
+            ],
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            home: WelcomeAppScreen(),
+          );
+        } else {
+          return AppLoader(); // Aquí no usamos otro MaterialApp, AppEntry lo manejará.
+        }
       },
     );
   }
@@ -104,12 +129,14 @@ class _AppLoaderState extends State<AppLoader> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
           );
         } else if (snapshot.hasError) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: ConnectionErrorScreen(
                 onRetry: _retry,

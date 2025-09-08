@@ -11,9 +11,11 @@ _$ChildbirthNoteRequestImpl _$$ChildbirthNoteRequestImplFromJson(
     _$ChildbirthNoteRequestImpl(
       partographId: json['partographId'] as String,
       description: json['description'] as String?,
+      date: json['date'] as String,
       hour: json['hour'] as String,
       sex: json['sex'] as String,
       apgar: json['apgar'] as String,
+      peso: json['peso'] as String,
       temperature: json['temperature'] as String,
       caputto: json['caputto'] as String,
       circular: json['circular'] as String,
@@ -36,9 +38,11 @@ Map<String, dynamic> _$$ChildbirthNoteRequestImplToJson(
     <String, dynamic>{
       'partographId': instance.partographId,
       'description': instance.description,
+      'date': instance.date,
       'hour': instance.hour,
       'sex': instance.sex,
       'apgar': instance.apgar,
+      'peso': instance.peso,
       'temperature': instance.temperature,
       'caputto': instance.caputto,
       'circular': instance.circular,

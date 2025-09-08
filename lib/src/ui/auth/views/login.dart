@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+// Pantalla de login
 class LoginScreen extends StatelessWidget with SnackbarMixin {
   const LoginScreen({super.key});
 
@@ -34,13 +35,18 @@ class _LoginView extends StatefulWidget {
   _LoginViewState createState() => _LoginViewState();
 }
 
+//Estado de la pantalla
 class _LoginViewState extends State<_LoginView> {
   final _formKey = GlobalKey<FormState>();
+  // Controladores de texto para los campos del formulario
 
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  // Estado para controlar la visibilidad de la contraseña
   bool _obscurePassword = true;
 
+  //Build de los componentes Hijos
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -63,12 +69,18 @@ class _LoginViewState extends State<_LoginView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/birthflow_full_logo.png',
-                      height: 150.0,
+                      'assets/login-illustration.png',
+                      height: 200.0,
                       fit: BoxFit.fill,
+                    ),
+                    const SizedBox(height: 5.0),
+                    Text(
+                      'Sistema de gestion de partogramas',
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      key: const Key('username_field'),
                       controller: _usernameController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
@@ -84,6 +96,7 @@ class _LoginViewState extends State<_LoginView> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      key: const Key('password_field'),
                       controller: _passwordController,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
@@ -120,6 +133,7 @@ class _LoginViewState extends State<_LoginView> {
                     SizedBox(
                       width: size.width / 1.3,
                       child: FilledButton(
+                        key: const Key('login_button'),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             final username = _usernameController.text;

@@ -23,9 +23,11 @@ ChildbirthNoteRequest _$ChildbirthNoteRequestFromJson(
 mixin _$ChildbirthNoteRequest {
   String get partographId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String get date => throw _privateConstructorUsedError;
   String get hour => throw _privateConstructorUsedError;
   String get sex => throw _privateConstructorUsedError;
   String get apgar => throw _privateConstructorUsedError;
+  String get peso => throw _privateConstructorUsedError;
   String get temperature => throw _privateConstructorUsedError;
   String get caputto => throw _privateConstructorUsedError;
   String get circular => throw _privateConstructorUsedError;
@@ -61,9 +63,11 @@ abstract class $ChildbirthNoteRequestCopyWith<$Res> {
   $Res call(
       {String partographId,
       String? description,
+      String date,
       String hour,
       String sex,
       String apgar,
+      String peso,
       String temperature,
       String caputto,
       String circular,
@@ -99,9 +103,11 @@ class _$ChildbirthNoteRequestCopyWithImpl<$Res,
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
+    Object? date = null,
     Object? hour = null,
     Object? sex = null,
     Object? apgar = null,
+    Object? peso = null,
     Object? temperature = null,
     Object? caputto = null,
     Object? circular = null,
@@ -127,6 +133,10 @@ class _$ChildbirthNoteRequestCopyWithImpl<$Res,
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -138,6 +148,10 @@ class _$ChildbirthNoteRequestCopyWithImpl<$Res,
       apgar: null == apgar
           ? _value.apgar
           : apgar // ignore: cast_nullable_to_non_nullable
+              as String,
+      peso: null == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String,
       temperature: null == temperature
           ? _value.temperature
@@ -215,9 +229,11 @@ abstract class _$$ChildbirthNoteRequestImplCopyWith<$Res>
   $Res call(
       {String partographId,
       String? description,
+      String date,
       String hour,
       String sex,
       String apgar,
+      String peso,
       String temperature,
       String caputto,
       String circular,
@@ -251,9 +267,11 @@ class __$$ChildbirthNoteRequestImplCopyWithImpl<$Res>
   $Res call({
     Object? partographId = null,
     Object? description = freezed,
+    Object? date = null,
     Object? hour = null,
     Object? sex = null,
     Object? apgar = null,
+    Object? peso = null,
     Object? temperature = null,
     Object? caputto = null,
     Object? circular = null,
@@ -279,6 +297,10 @@ class __$$ChildbirthNoteRequestImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -290,6 +312,10 @@ class __$$ChildbirthNoteRequestImplCopyWithImpl<$Res>
       apgar: null == apgar
           ? _value.apgar
           : apgar // ignore: cast_nullable_to_non_nullable
+              as String,
+      peso: null == peso
+          ? _value.peso
+          : peso // ignore: cast_nullable_to_non_nullable
               as String,
       temperature: null == temperature
           ? _value.temperature
@@ -361,9 +387,11 @@ class _$ChildbirthNoteRequestImpl implements _ChildbirthNoteRequest {
   const _$ChildbirthNoteRequestImpl(
       {required this.partographId,
       this.description,
+      required this.date,
       required this.hour,
       required this.sex,
       required this.apgar,
+      required this.peso,
       required this.temperature,
       required this.caputto,
       required this.circular,
@@ -388,11 +416,15 @@ class _$ChildbirthNoteRequestImpl implements _ChildbirthNoteRequest {
   @override
   final String? description;
   @override
+  final String date;
+  @override
   final String hour;
   @override
   final String sex;
   @override
   final String apgar;
+  @override
+  final String peso;
   @override
   final String temperature;
   @override
@@ -426,7 +458,7 @@ class _$ChildbirthNoteRequestImpl implements _ChildbirthNoteRequest {
 
   @override
   String toString() {
-    return 'ChildbirthNoteRequest(partographId: $partographId, description: $description, hour: $hour, sex: $sex, apgar: $apgar, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
+    return 'ChildbirthNoteRequest(partographId: $partographId, description: $description, date: $date, hour: $hour, sex: $sex, apgar: $apgar, peso: $peso, temperature: $temperature, caputto: $caputto, circular: $circular, lamniotico: $lamniotico, miccion: $miccion, meconio: $meconio, pa: $pa, expulsivo: $expulsivo, placenta: $placenta, alumbramiento: $alumbramiento, huellaPlantar: $huellaPlantar, pc: $pc, talla: $talla, brazalete: $brazalete, huellaDig: $huellaDig)';
   }
 
   @override
@@ -438,9 +470,11 @@ class _$ChildbirthNoteRequestImpl implements _ChildbirthNoteRequest {
                 other.partographId == partographId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.sex, sex) || other.sex == sex) &&
             (identical(other.apgar, apgar) || other.apgar == apgar) &&
+            (identical(other.peso, peso) || other.peso == peso) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
             (identical(other.caputto, caputto) || other.caputto == caputto) &&
@@ -473,9 +507,11 @@ class _$ChildbirthNoteRequestImpl implements _ChildbirthNoteRequest {
         runtimeType,
         partographId,
         description,
+        date,
         hour,
         sex,
         apgar,
+        peso,
         temperature,
         caputto,
         circular,
@@ -514,9 +550,11 @@ abstract class _ChildbirthNoteRequest implements ChildbirthNoteRequest {
   const factory _ChildbirthNoteRequest(
       {required final String partographId,
       final String? description,
+      required final String date,
       required final String hour,
       required final String sex,
       required final String apgar,
+      required final String peso,
       required final String temperature,
       required final String caputto,
       required final String circular,
@@ -541,11 +579,15 @@ abstract class _ChildbirthNoteRequest implements ChildbirthNoteRequest {
   @override
   String? get description;
   @override
+  String get date;
+  @override
   String get hour;
   @override
   String get sex;
   @override
   String get apgar;
+  @override
+  String get peso;
   @override
   String get temperature;
   @override

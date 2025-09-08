@@ -27,4 +27,11 @@ abstract class NotificationService {
     @Header('Authorization') String token,
     @Path('partographId') String partographId,
   );
+
+  @POST('/api/notification/silenced-notification')
+  Future<ApiResponse<String>> updateDeviceSilenceStatus(
+    @Header('Authorization') String authToken,
+    @Query('token') String deviceToken,
+    @Query('isSilenced') bool isSilenced,
+  );
 }

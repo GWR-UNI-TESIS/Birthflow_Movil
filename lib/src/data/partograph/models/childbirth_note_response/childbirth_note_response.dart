@@ -8,8 +8,10 @@ class ChildbirthNoteResponse with _$ChildbirthNoteResponse {
   const factory ChildbirthNoteResponse({
     required String partographId,
     String? description,
+    String? date,
     String? hour,
     String? sex,
+    String? peso,
     String? apgar,
     String? temperature,
     String? caputto,

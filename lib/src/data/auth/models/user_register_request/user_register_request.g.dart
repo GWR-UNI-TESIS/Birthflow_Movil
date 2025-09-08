@@ -14,7 +14,7 @@ _$UserRegisterRequestImpl _$$UserRegisterRequestImplFromJson(
       secondName: json['secondName'] as String,
       userName: json['userName'] as String,
       email: json['email'] as String,
-      phoneNumber: (json['phoneNumber'] as num?)?.toDouble(),
+      phoneNumber: json['phoneNumber'] as String?,
     );
 
 Map<String, dynamic> _$$UserRegisterRequestImplToJson(

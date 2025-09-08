@@ -7,6 +7,7 @@ import 'package:birthflow_movil/src/ui/auth/bloc/events/authentication_event.dar
 import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
@@ -33,6 +34,8 @@ class AuthenticationBloc
   ) async {
     emit(const AuthLoading());
     try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('device_token');
       await _logoutUsecase.execute();
       emit(const Unauthenticated());
     } catch (e) {
@@ -70,7 +73,10 @@ class AuthenticationBloc
 
       if (result.authenticationCode == AuthenticationCode.success) {
         final isPasswordTemporal = result.message.contains('Temporal');
-        emit(Authenticated(response: result.user!, message: result.message, isPasswordTemporal: isPasswordTemporal));
+        emit(Authenticated(
+            response: result.user!,
+            message: result.message,
+            isPasswordTemporal: isPasswordTemporal));
       }
 
       if (result.authenticationCode == AuthenticationCode.unauthorized) {
@@ -95,7 +101,7 @@ class AuthenticationBloc
         secondName: event.apellidos,
         email: event.email,
         userName: event.nombreUsuario,
-        phoneNumber: double.tryParse(event.phoneNumber!)!,
+        phoneNumber: event.phoneNumber!,
       );
       emit(RegistrationSuccess(message: result));
     } catch (e) {

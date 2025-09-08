@@ -708,8 +708,10 @@ class $Mappr implements _i1.AutoMapprInterface {
     return _i22.ChildbirthNote(
       partographId: model.partographId,
       description: model.description,
+      date: model.date,
       hour: model.hour,
       sex: model.sex,
+      peso: model.peso,
       apgar: model.apgar,
       temperature: model.temperature,
       caputto: model.caputto,
@@ -774,8 +776,10 @@ class $Mappr implements _i1.AutoMapprInterface {
     return _i22.ChildbirthNote(
       partographId: model.partographId,
       description: model.description,
+      date: model.date,
       hour: model.hour,
       sex: model.sex,
+      peso: model.peso,
       apgar: model.apgar,
       temperature: model.temperature,
       caputto: model.caputto,

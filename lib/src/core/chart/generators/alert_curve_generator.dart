@@ -7,6 +7,7 @@ import 'package:birthflow_movil/src/core/chart/models/curve_data.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/worktime/worktime.dart';
 
+//Clase que genera los puntos de las curvas de alerta
 class AlertCurveGenerator implements IGenerator {
   AlertCurveGenerator({
     required WorkTime workTime,

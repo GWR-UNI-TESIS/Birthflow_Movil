@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+// Clase principal de la pantalla que muestra el historial del partograma.
+// Extiende StatefulWidget para permitir un manejo dinámico del estado.
 class PartographHistoryScreen extends StatefulWidget {
   final String partographId;
 
@@ -42,24 +44,28 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
         child: _buildAppBar(context),
       ),
       drawer: _buildDrawer(context),
-      body: SingleChildScrollView(
-        child: BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
-          builder: (context, state) {
-            return state.when(
-              initial: () => const Center(child: Text('Inicializando...')),
-              loading: () => const LinearProgressIndicator(),
-              loaded: (versions, selectedVersion, previousVersion) {
-                // Aquí se obtiene la versión seleccionada (en JSON)
-                return _buildContent(context, selectedVersion, previousVersion);
-              },
-              error: (message) => Center(child: Text('Error: $message')),
-            );
-          },
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
+            builder: (context, state) {
+              return state.when(
+                initial: () => const Center(child: Text('Inicializando...')),
+                loading: () => const LinearProgressIndicator(),
+                loaded: (versions, selectedVersion, previousVersion) {
+                  // Aquí se obtiene la versión seleccionada (en JSON)
+                  return _buildContent(
+                      context, selectedVersion, previousVersion);
+                },
+                error: (message) => Center(child: Text('Error: $message')),
+              );
+            },
+          ),
         ),
       ),
     );
   }
-
+  
+  // Construye la barra superior de la aplicación
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 1,
@@ -108,7 +114,8 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
       ],
     );
   }
-
+  
+  // Construye el Drawer lateral (menú)
   Widget _buildDrawer(BuildContext context) {
     return BlocBuilder<PartographHistoryBloc, PartographHistoryState>(
       builder: (context, state) {
@@ -162,7 +169,8 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
       },
     );
   }
-
+  
+  // Contenedor principal del contenido
   Widget _buildContent(
     BuildContext context,
     PartographVersion? selectedVersion,
@@ -216,7 +224,8 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
       ),
     );
   }
-
+  
+  // Muestra una tarjeta genérica con información
   Widget _buildGenericCard(
     BuildContext context, {
     required String title,
@@ -238,10 +247,12 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     );
   }
 
+  // Muestra un mensaje cuando no hay datos disponibles
   Widget _buildNoDataMessage() {
     return const Center(child: Text('No existen datos'));
   }
 
+  // Contenido relacionado a la dilatación cervical, usando el modelo del historial
   Widget _buildCervicalDilationContent(GlobalPartographLog model) {
     final list = model.cervicalDilationLog;
 
@@ -272,6 +283,7 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     );
   }
 
+  // Contenido de vigilancia médica
   Widget _buildMedicalSurveillanceContent(GlobalPartographLog model) {
     final list = model.medicalSurveillanceTableLog;
     if (list.isEmpty) {
@@ -280,6 +292,7 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     return MedicalSurveillanceLogWidget(list: list);
   }
 
+  // Contenido que muestra la posición de presentación fetal
   Widget _buildPresentationPositionContent(
     GlobalPartographLog model,
     Catalog catalog,
@@ -335,6 +348,7 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     );
   }
 
+  // Contenido de frecuencia de contracciones
   Widget _buildContractionFrequencyContent(
     GlobalPartographLog model,
   ) {
@@ -358,6 +372,7 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     );
   }
 
+  // Contenido del ritmo cardíaco fetal
   Widget _buildFetalHeartRateContent(GlobalPartographLog model) {
     final list = model.fetalHeartRateLog;
     if (list.isEmpty) {
@@ -379,6 +394,7 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
     );
   }
 
+  // Contenido relacionado al nacimiento del niño
   Widget _buildChildbirthNoteContent(GlobalPartographLog model) {
     final note = model.childbirthNoteLog;
     if (note == null) {
@@ -391,8 +407,10 @@ class _PartographHistoryViewState extends State<PartographHistoryScreen> {
         children: [
           if (note.description != null)
             Text('Descripción: ${note.description}'),
+          Text('Fecha: ${note.date}'),
           Text('Hora: ${note.hour}'),
           Text('Sexo: ${note.sex}'),
+          Text('Peso: ${note.peso}'),
           Text('APGAR: ${note.apgar}'),
           Text('Temperatura: ${note.temperature}'),
           Text('Caputto: ${note.caputto}'),

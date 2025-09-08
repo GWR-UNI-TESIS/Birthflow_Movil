@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+//Clase que genera los puntos de grafica sobre la altura de la presentacion
 class HodgePlaneGenerator implements IGenerator {
   final List<PresentationPositionVariety> hodgePlaneList;
   final DateTime startTime;
@@ -41,16 +42,18 @@ class HodgePlaneGenerator implements IGenerator {
       final String position = catalog.positionCatalog
           .firstWhere((e) => e.id == hodgePlaneList[index].position)
           .code;
-      final currentPoint = ChartPoint(
-        x: timeResult,
-        y: y,
-        radius: 10,
-        strokeWidth: 2,
-        fillColor: charts.Color.transparent,
-        shape: position,
-      );
+      if (y != 0) {
+        final currentPoint = ChartPoint(
+          x: timeResult,
+          y: y,
+          radius: 10,
+          strokeWidth: 2,
+          fillColor: charts.Color.transparent,
+          shape: position,
+        );
 
-      points.add(currentPoint);
+        points.add(currentPoint);
+      }
     }
     _chartPoint = points;
   }

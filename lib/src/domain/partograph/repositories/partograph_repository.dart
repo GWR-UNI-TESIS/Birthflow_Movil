@@ -9,11 +9,15 @@ import 'package:birthflow_movil/src/domain/partograph/entities/partograph_list.d
 import 'package:birthflow_movil/src/domain/partograph/entities/partograph_state.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/presentation_position_variety.dart';
 
+/// Contrato del repositorio de partograma: CRUD y consultas de todos los submódulos.
 abstract class PartographRepository {
+  /// Lista partogramas visibles del usuario.
   Future<List<PartographList>?> getPartographs({required String userId});
 
+  /// Obtiene un partograma por id (detalle completo).
   Future<Partograph> getPartograph({required String partographId});
 
+  /// Crea un partograma.
   Future<Partograph?> createPartograph({
     required String partogramaId,
     required String name,
@@ -23,6 +27,7 @@ abstract class PartographRepository {
     required String worktime,
   });
 
+  /// Actualiza datos básicos del partograma.
   Future<Partograph?> updatePartograph({
     required String partographId,
     required String name,
@@ -32,10 +37,12 @@ abstract class PartographRepository {
     required String worktime,
   });
 
+  /// Elimina (o marca como eliminado) un partograma.
   Future<Partograph> deletePartograph({
     required String partographId,
   });
 
+  /// Búsqueda de partogramas por criterios (nombre/filtros/actividad/horas).
   Future<List<PartographList>?> searchPartographs({
     required String name,
     required int filterId,
@@ -43,11 +50,14 @@ abstract class PartographRepository {
     required int hourFilterId,
   });
 
+  // --- Dilatación cervical ---
 
+  /// Lista registros de dilatación cervical del partograma.
   Future<List<CervicalDilation>?> getCervicalDilation({
     required String partographId,
   });
 
+  /// Crea un registro de dilatación cervical.
   Future<CervicalDilation?> createCervicalDilation({
     required String partographId,
     required double value,
@@ -55,6 +65,7 @@ abstract class PartographRepository {
     required bool remOrRam,
   });
 
+  /// Actualiza un registro de dilatación cervical.
   Future<CervicalDilation?> updateCervicalDilation({
     required int id,
     required String partographId,
@@ -63,14 +74,19 @@ abstract class PartographRepository {
     required bool remOrRam,
   });
 
+  /// Elimina un registro de dilatación cervical.
   Future<CervicalDilation?> deleteCervicalDilation({
     required int id,
   });
 
+  // --- Vigilancia médica (tabla) ---
+
+  /// Lista filas de vigilancia médica.
   Future<List<MedicalSurveillanceTable>?> getMedicalSurveillance({
     required String partographId,
   });
 
+  /// Crea una fila de vigilancia médica.
   Future<MedicalSurveillanceTable?> createMedicalSurveillance({
     required String partographId,
     required String letter,
@@ -84,6 +100,7 @@ abstract class PartographRepository {
     required DateTime time,
   });
 
+  /// Actualiza una fila de vigilancia médica.
   Future<MedicalSurveillanceTable?> updateMedicalSurveillance({
     required int id,
     required String partographId,
@@ -98,14 +115,19 @@ abstract class PartographRepository {
     required DateTime time,
   });
 
+  /// Elimina una fila de vigilancia médica.
   Future<MedicalSurveillanceTable?> deleteMedicalSurveillance({
     required int id,
   });
 
+  // --- Plano de Hodge / presentación-posicion-variedad ---
+
+  /// Lista registros de presentación/posición/variedad.
   Future<List<PresentationPositionVariety>?> getPresentationPositionVariety({
     required String partographId,
   });
 
+  /// Crea un registro de presentación/posición/variedad.
   Future<PresentationPositionVariety?> createPresentationPositionVariety({
     required String partographId,
     required int hodgePlane,
@@ -113,6 +135,7 @@ abstract class PartographRepository {
     required DateTime time,
   });
 
+  /// Actualiza un registro de presentación/posición/variedad.
   Future<PresentationPositionVariety?> updatePresentationPositionVariety({
     required int id,
     required String partographId,
@@ -121,20 +144,26 @@ abstract class PartographRepository {
     required DateTime time,
   });
 
+  /// Elimina un registro de presentación/posición/variedad.
   Future<PresentationPositionVariety?> deletePresentationPositionVariety({
     required int id,
   });
 
+  // --- FCF (frecuencia cardiaca fetal) ---
+
+  /// Lista registros de FCF.
   Future<List<FetalHeartRate>?> getFetalHeartRate({
     required String partographId,
   });
 
+  /// Crea un registro de FCF.
   Future<FetalHeartRate?> createFetalHeartRate({
     required String partographId,
     required String value,
     required DateTime time,
   });
 
+  /// Actualiza un registro de FCF.
   Future<FetalHeartRate?> updateFetalHeartRate({
     required int id,
     required String partographId,
@@ -142,20 +171,26 @@ abstract class PartographRepository {
     required DateTime time,
   });
 
+  /// Elimina un registro de FCF.
   Future<FetalHeartRate?> deleteFetalHeartRate({
     required int id,
   });
 
+  // --- Frecuencia de contracciones ---
+
+  /// Lista registros de frecuencia de contracciones.
   Future<List<ContractionFrequency>?> getContractionFrequency({
     required String partographId,
   });
 
+  /// Crea un registro de frecuencia de contracciones.
   Future<ContractionFrequency?> createContractionFrequency({
     required String partographId,
     required String value,
     required DateTime time,
   });
 
+  /// Actualiza un registro de frecuencia de contracciones.
   Future<ContractionFrequency?> updateContractionFrequency({
     required int id,
     required String partographId,
@@ -163,10 +198,14 @@ abstract class PartographRepository {
     required DateTime time,
   });
 
+  /// Elimina un registro de frecuencia de contracciones.
   Future<ContractionFrequency?> deleteContractionFrequency({
     required int id,
   });
 
+  // --- Estado del partograma ---
+
+  /// Actualiza flags de estado (archivado, silenciado, favorito, etc.).
   Future<PartographState?> updatePartographState({
     required String partographId,
     required bool isAchived,
@@ -175,16 +214,23 @@ abstract class PartographRepository {
     required bool favorite,
   });
 
+  // --- Curvas (alerta/acción reales/teóricas) ---
 
+  /// Obtiene curvas de referencia/alerta asociadas.
   Future<AlertCurves?> getCurves({
     required String partographId,
   });
 
+  // --- Nota de parto ---
+
+  /// Crea la nota de parto asociada al partograma.
   Future<ChildbirthNote?> createChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,
@@ -203,11 +249,14 @@ abstract class PartographRepository {
     required String huellaDig,
   });
 
+  /// Actualiza la nota de parto.
   Future<ChildbirthNote?> updateChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,

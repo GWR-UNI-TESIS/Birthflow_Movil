@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/core/chart/models/curve_data.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/alert_curves.dart';
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 
+//Clase que ayuda a mappear los datos crudos a objetos para la creacion de puntos graficos
 // ignore: avoid_classes_with_only_static_members
 class ChartMapper {
   static CurveData transformToCurveData(CervicalDilation cervicalDilation) {

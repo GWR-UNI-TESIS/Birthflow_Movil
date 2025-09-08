@@ -4,6 +4,7 @@ import 'package:birthflow_movil/src/ui/auth/bloc/states/authentication_state.dar
 import 'package:birthflow_movil/src/ui/widgets/loading_overlay.dart';
 import 'package:birthflow_movil/src/ui/widgets/snackbars/snackbars_mixin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterScreen extends StatelessWidget with SnackbarMixin {
@@ -121,6 +122,12 @@ class _RegisterView extends StatelessWidget {
                       if (value == null || value.isEmpty) {
                         return 'Por favor ingrese un email';
                       }
+                      // Expresión regular para validar email básico
+                      final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+                      if (!emailRegex.hasMatch(value)) {
+                        return 'Ingrese un email válido';
+                      }
+
                       return null;
                     },
                   ),
@@ -132,6 +139,9 @@ class _RegisterView extends StatelessWidget {
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.phone),
                     ),
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(8),
+                    ],
                     keyboardType: TextInputType.phone,
                   ),
                   const SizedBox(height: 20),

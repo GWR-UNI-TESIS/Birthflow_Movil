@@ -1,3 +1,4 @@
+// Clase estatica que funciona para ayudar a los generadores de grafico
 // ignore: avoid_classes_with_only_static_members
 class Helper {
   static double transformToDecimal(DateTime dateTime) {

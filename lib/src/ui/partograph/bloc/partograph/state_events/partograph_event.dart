@@ -112,8 +112,10 @@ class PartographEvent with _$PartographEvent {
   const factory PartographEvent.createChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,
@@ -135,8 +137,10 @@ class PartographEvent with _$PartographEvent {
   const factory PartographEvent.updateChildbirthNote({
     required String partographId,
     String? description,
+    required String date,
     required String hour,
     required String sex,
+    required String peso,
     required String apgar,
     required String temperature,
     required String caputto,

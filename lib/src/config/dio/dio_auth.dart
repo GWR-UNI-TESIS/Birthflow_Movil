@@ -31,7 +31,7 @@ Dio buildDioAuth(String base, String deviceInfo) {
       onResponse: (response, handler) {
         handler.next(response);
       },
-      onError: (error, handler) async {
+      onError: (error, handler) {
         return handler.next(error);
       },
     ),

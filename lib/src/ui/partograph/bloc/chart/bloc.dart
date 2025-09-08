@@ -1,7 +1,6 @@
 import 'package:birthflow_movil/src/core/chart/generators/contraction_frequency_generator.dart';
 import 'package:birthflow_movil/src/core/chart/generators/fetal_heart_rate_generator.dart';
 import 'package:birthflow_movil/src/core/chart/generators/hodge_plane_generator.dart';
-import 'package:birthflow_movil/src/core/chart/generators/medical_surveillance_generator.dart';
 import 'package:birthflow_movil/src/core/chart/generators/real_curve_generator.dart';
 import 'package:birthflow_movil/src/core/chart/libs/mapper.dart';
 import 'package:birthflow_movil/src/core/chart/models/chart_data.dart';
@@ -25,7 +24,6 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
     try {
       final partograph = event.partograph;
       final cervicalDilations = partograph.cervicalDilations;
-      final medicalsurveillanceData = partograph.medicalSurveillanceTable;
       final presentationPositionVarietyData =
           partograph.presentationPositionVarieties;
 
@@ -43,8 +41,9 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
         final realCurvePoints =
             RealCurveGenerator(cervicalList: cervicalDilations).chartPoint;
 
-        List<ChartPoint>? otherPointsPoints = [];
+        final List<ChartPoint> otherPointsPoints = [];
 
+        /*
         if (medicalsurveillanceData != null &&
             medicalsurveillanceData.isNotEmpty) {
           otherPointsPoints = MedicalSurveillanceGenerator(
@@ -52,7 +51,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
             startTime: startTime,
           ).chartPoint;
         }
-
+        */
         if (presentationPositionVarietyData != null &&
             presentationPositionVarietyData.isNotEmpty) {
           final hodgePlanePoints = HodgePlaneGenerator(
@@ -61,7 +60,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
             catalog: catalogState,
           ).chartPoint;
 
-          otherPointsPoints!.addAll(hodgePlanePoints!);
+          otherPointsPoints.addAll(hodgePlanePoints!);
         }
 
         if (fetalHeartRateData != null && fetalHeartRateData.isNotEmpty) {
@@ -69,7 +68,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
             fetalHeartRateList: fetalHeartRateData,
             startTime: startTime,
           ).chartPoint;
-          otherPointsPoints!.addAll(fetalHeartRate!);
+          otherPointsPoints.addAll(fetalHeartRate!);
         }
 
         if (contractionFrequencyData != null &&
@@ -78,7 +77,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
             contractionFrequencyList: contractionFrequencyData,
             startTime: startTime,
           ).chartPoint;
-          otherPointsPoints!.addAll(contractionFrequency!);
+          otherPointsPoints.addAll(contractionFrequency!);
         }
 
         final alertCurvePoints =  (alertcurve != null || alertcurve!.isEmpty) ? ChartMapper.transformToChartPoint(
@@ -98,7 +97,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
               realCurvePoints!,
               alertCurvePoints,
               newAlertCurvePoints,
-              otherPointsPoints!,
+              otherPointsPoints,
             ),
             firstItem: cervicalDilations.first.hour,
           ),

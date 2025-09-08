@@ -1,5 +1,6 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 
+//Objeto que se utliza en la grafica
 class ChartPoint {
   final double x;
   final double y;

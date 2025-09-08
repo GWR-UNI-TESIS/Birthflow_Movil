@@ -26,7 +26,7 @@ class _ContractionFrequencyEditScreenState
     extends State<ContractionFrequencyEditScreen> with SnackbarMixin {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _valueController;
-  late final TextEditingController _dateTimeController;
+  late final TextEditingController _dateTimeController = TextEditingController();
   DateTime? initialDateTime;
   bool _isInitialized = false; // Bandera para evitar sobrescribir valores
 
@@ -36,27 +36,30 @@ class _ContractionFrequencyEditScreenState
   }
 
   void _initializeControllers() {
-    final contractionFrequencies =
-        context.watch<PartographBloc>().state.whenOrNull(
-              loaded: (partograph, message, isDeleteEvent) =>
-                  partograph.contractionFrequencies,
-            );
+    final partographBloc = context.watch<PartographBloc>().state;
+    if (partographBloc is Loaded) {
+      final contractionFrequencies =
+          context.watch<PartographBloc>().state.whenOrNull(
+                loaded: (partograph, message, isDeleteEvent) =>
+                    partograph.contractionFrequencies,
+              );
 
-    final contractionFrequency = contractionFrequencies!
-        .where(
-          (e) =>
-              e.id ==
-              widget.contractionFrequencyEditData.contractionFrequencyId,
-        )
-        .first;
-    if (!_isInitialized) {
-      _valueController = TextEditingController(
-        text: contractionFrequency.value,
-      );
+      final contractionFrequency = contractionFrequencies!
+          .where(
+            (e) =>
+                e.id ==
+                widget.contractionFrequencyEditData.contractionFrequencyId,
+          )
+          .first;
+      if (!_isInitialized) {
+        _valueController = TextEditingController(
+          text: contractionFrequency.value,
+        );
 
-      // ignore: unnecessary_null_comparison
-      initialDateTime = contractionFrequency.time;
-      _isInitialized = true;
+        // ignore: unnecessary_null_comparison
+        initialDateTime = contractionFrequency.time;
+        _isInitialized = true;
+      }
     }
   }
 

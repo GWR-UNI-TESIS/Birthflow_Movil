@@ -126,7 +126,7 @@ class _CreatePartographState extends State<_CreatePartographPage>
             controller: _tabController,
             tabs: const <Widget>[
               Tab(
-                text: 'Datos enerales',
+                text: 'Datos Generales',
               ),
               Tab(
                 text: 'Construccion de la curva de alerta',
@@ -280,7 +280,7 @@ class _CreatePartographState extends State<_CreatePartographPage>
     );
   }
 
-  Future<bool?> _showBackDialog() async => showDialog<bool>(
+  Future<bool?> _showBackDialog() async => await showDialog<bool>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text('Desea volver? '),

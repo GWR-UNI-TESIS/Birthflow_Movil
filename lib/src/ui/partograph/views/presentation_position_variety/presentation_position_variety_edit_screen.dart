@@ -41,37 +41,40 @@ class _PresentationPositionVarietyEditScreenState
   }
 
   void _initializeControllers() {
-    final presentationPositionVarieties =
-        context.watch<PartographBloc>().state.whenOrNull(
-              loaded: (partograph, message, isDeleteEvent) =>
-                  partograph.presentationPositionVarieties,
-            );
+    final partographBloc = context.watch<PartographBloc>().state;
+    if (partographBloc is Loaded) {
+      final presentationPositionVarieties =
+           context.read<PartographBloc>().state.whenOrNull(
+                loaded: (partograph, message, isDeleteEvent) =>
+                    partograph.presentationPositionVarieties,
+              );
 
-    final item = presentationPositionVarieties!
-        .where(
-          (e) => e.id == widget.data.presentationPositionVarietyId,
-        )
-        .first;
-    if (!_isInitialized) {
-      initialValue = item.time;
+      final item = presentationPositionVarieties!
+          .where(
+            (e) => e.id == widget.data.presentationPositionVarietyId,
+          )
+          .first;
+      if (!_isInitialized) {
+        initialValue = item.time;
 
-      final catalog = context.read<CatalogCubit>().state;
-      // ignore: unnecessary_null_comparison
-      _selectedPosition = item != null
-          ? catalog.positionCatalog.firstWhere(
-              (position) => position.id == item.position,
-              orElse: () => catalog.positionCatalog.first,
-            )
-          : catalog.positionCatalog.first;
+        final catalog = context.read<CatalogCubit>().state;
+        // ignore: unnecessary_null_comparison
+        _selectedPosition = item != null
+            ? catalog.positionCatalog.firstWhere(
+                (position) => position.id == item.position,
+                orElse: () => catalog.positionCatalog.first,
+              )
+            : catalog.positionCatalog.first;
 
-      // ignore: unnecessary_null_comparison
-      _selectedHodgePlane = item != null
-          ? catalog.hodgePlanesCatalog.firstWhere(
-              (hodgePlane) => hodgePlane.id == item.hodgePlane,
-              orElse: () => catalog.hodgePlanesCatalog.first,
-            )
-          : catalog.hodgePlanesCatalog.first;
-      _isInitialized = true;
+        // ignore: unnecessary_null_comparison
+        _selectedHodgePlane = item != null
+            ? catalog.hodgePlanesCatalog.firstWhere(
+                (hodgePlane) => hodgePlane.id == item.hodgePlane,
+                orElse: () => catalog.hodgePlanesCatalog.first,
+              )
+            : catalog.hodgePlanesCatalog.first;
+        _isInitialized = true;
+      }
     }
   }
 

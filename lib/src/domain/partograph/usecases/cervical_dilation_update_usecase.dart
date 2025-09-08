@@ -1,7 +1,9 @@
 import 'package:birthflow_movil/src/domain/partograph/entities/cervical_dilation.dart';
 import 'package:birthflow_movil/src/domain/partograph/repositories/partograph_repository.dart';
 
+/// Caso de uso: actualizar un registro de dilatación cervical.
 abstract class UpdateCervicalDilationUseCase {
+  /// Ejecuta la actualización y retorna el registro actualizado.
   Future<CervicalDilation?> execute({
     required int id,
     required String partographId,
@@ -11,6 +13,7 @@ abstract class UpdateCervicalDilationUseCase {
   });
 }
 
+/// Implementación que delega en el PartographRepository.
 class UpdateCervicalDilationUseCaseImplementation
     implements UpdateCervicalDilationUseCase {
   final PartographRepository _partographRepository;
@@ -20,6 +23,7 @@ class UpdateCervicalDilationUseCaseImplementation
   }) : _partographRepository = partographRepository;
 
   @override
+  /// Delega la actualización del registro al repositorio.
   Future<CervicalDilation?> execute({
     required int id,
     required String partographId,

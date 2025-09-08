@@ -8,7 +8,6 @@ import 'package:birthflow_movil/src/config/router/path.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/bloc.dart';
 import 'package:birthflow_movil/src/core/firebase/bloc/event/notification_event.dart';
 import 'package:birthflow_movil/src/core/firebase/firebase_service.dart';
-import 'package:birthflow_movil/src/core/firebase/notification_helper.dart';
 import 'package:birthflow_movil/src/domain/catalog/entities/catalog.dart';
 import 'package:birthflow_movil/src/domain/notification/models/notification.dart'
     as notificaciones;
@@ -119,9 +118,7 @@ class AppDev extends StatelessWidget {
               PartographHistoryBloc(locator<GetPartographHistoryUsecase>()),
         ),
       ],
-      child: MaterialApp(
-        home: AppEntry(),
-      ),
+      child: AppEntry(),
     );
   }
 }
@@ -161,33 +158,22 @@ class AppEntryState extends State<AppEntry> {
           final firebaseService = FirebaseService();
           final notificationBloc = context.read<NotificationBloc>();
           final notificationsBloc = context.read<NotificationsBloc>();
-          // Obtén el token del dispositivo
-          await registerDeviceToken(userId!, firebaseService, notificationBloc);
 
+          // Siempre registrar el token del dispositivo al iniciar sesión
+          final token = await firebaseService.getDeviceToken();
+          if (token != null) {
+            notificationBloc
+                .add(RegisterTokenEvent(userId: userId!, token: token));
+            print('Token registrado al iniciar sesión: $token');
+          }
           // Escucha cambios en el token
-          firebaseService.listenToTokenRefresh((newToken) async {
-            final prefs = await SharedPreferences.getInstance();
-            final savedToken = prefs.getString('device_token');
-
-            if (savedToken != newToken) {
-              context.read<NotificationBloc>().add(
-                    TokenRefreshedEvent(userId: userId, token: newToken),
-                  );
-              await prefs.setString('device_token', newToken);
-              print('Token actualizado y guardado localmente');
-            } else {
-              print('El token ya es válido. No se envía al servidor.');
-            }
+          firebaseService.listenToTokenRefresh((newToken) {
+            notificationBloc
+                .add(RegisterTokenEvent(userId: userId!, token: newToken));
+            print('Token actualizado y reenviado al backend: $newToken');
           });
-
           // Escucha mensajes en primer plano
           firebaseService.listenToForegroundMessages((title, body, data) {
-            NotificationHelper.showNotification(
-              id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
-              title: title,
-              body: body,
-            );
-
             final notification = notificaciones.Notification(
               notificationId: int.parse(data['NotificationId'].toString()),
               title: data['Title']?.toString() ?? title,
@@ -205,7 +191,7 @@ class AppEntryState extends State<AppEntry> {
         }
       },
       child: MaterialApp.router(
-        title: 'Birthflow',
+        title: 'Partogramas',
         locale: const Locale('es', 'ES'), // Establece el idioma a español
         supportedLocales: const [
           Locale('es', 'ES'),

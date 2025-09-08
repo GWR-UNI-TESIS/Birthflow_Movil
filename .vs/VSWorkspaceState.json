@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\lib",
+    "\\lib\\src",
+    "\\lib\\src\\ui",
+    "\\lib\\src\\ui\\auth",
+    "\\lib\\src\\ui\\auth\\views"
+  ],
+  "SelectedNode": "\\lib\\src\\ui\\auth\\views\\login.dart",
+  "PreviewInSolutionExplorer": false
+}

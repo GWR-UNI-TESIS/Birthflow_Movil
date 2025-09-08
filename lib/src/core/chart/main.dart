@@ -7,9 +7,12 @@ import 'package:charts_common/common.dart' as common
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
+// Clase MainChart que extiende StatelessWidget para construir un gráfico
 class MainChart extends StatelessWidget {
   final List<charts.Series<dynamic, num>> seriesList;
+   // Indica si el gráfico se debe animar
   final bool animate;
+   // Fecha de inicio del gráfico (usada como referencia en el eje X)
   final DateTime startDate;
   const MainChart(
     this.seriesList,
@@ -20,6 +23,7 @@ class MainChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Formateador para las medidas secundarias
     final secondaryMeasureFormatter =
         charts.BasicNumericTickFormatterSpec((value) {
       if (value! >= 0 && value <= 11) {
@@ -28,7 +32,8 @@ class MainChart extends StatelessWidget {
         return '0';
       }
     });
-
+   
+   // Formateador para el dominio (eje X)
     final domainFormatter = charts.BasicNumericTickFormatterSpec((value) {
       final DateTime startTime = startDate;
 
@@ -40,6 +45,7 @@ class MainChart extends StatelessWidget {
           : '$result:${startTime.minute}';
     });
 
+  // Formateador para las medidas primarias (eje Y izquierdo)
     final primaryMeasureFormatter =
         charts.BasicNumericTickFormatterSpec((value) {
       if (value == 11) {
@@ -48,10 +54,12 @@ class MainChart extends StatelessWidget {
         return value!.round().toString();
       }
     });
+    
+     // Retorna un gráfico de dispersión (ScatterPlotChart)
     return charts.ScatterPlotChart(
       seriesList,
       animate: animate,
-
+      // Configuración del eje Y izquierdo
       primaryMeasureAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -59,7 +67,7 @@ class MainChart extends StatelessWidget {
         ),
         tickFormatterSpec: primaryMeasureFormatter,
       ),
-
+      // Configuración del eje Y derecho
       secondaryMeasureAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -67,6 +75,7 @@ class MainChart extends StatelessWidget {
         ),
         tickFormatterSpec: secondaryMeasureFormatter,
       ),
+      // Configuración del eje X
       domainAxis: charts.NumericAxisSpec(
         tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           dataIsInWholeNumbers: true,
@@ -75,9 +84,10 @@ class MainChart extends StatelessWidget {
         tickFormatterSpec: domainFormatter,
       ),
 
+      // Configuración del renderizador por defecto para puntos
+      //( Se usa para los graficos de la altura de la presentacion)
       defaultRenderer: charts.PointRendererConfig<num>(
         customSymbolRenderers: {
-          'circle': charts.CircleSymbolRenderer(),
           'rect': charts.RectSymbolRenderer(),
           'triangle': common.TriangleSymbolRenderer(),
           'OIIA': OiaSymbolRenderer(),
@@ -88,10 +98,11 @@ class MainChart extends StatelessWidget {
           'OIDP': OdpSymbolRenderer(),
           'OS': OsSymbolRenderer(),
           'OP': OpSymbolRenderer(),
+          'IND': InSymbolRenderer(),
         },
       ),
 
-      // Custom renderer configuration for the line series.
+     // Configuración personalizada del renderizador para series de tipo línea
       customSeriesRenderers: [
         charts.LineRendererConfig(
           customRendererId: 'realCurveLine',
@@ -144,7 +155,7 @@ class MainChart extends StatelessWidget {
         ),
         charts.SelectNearest(),
       ],
-
+      // Ayuda a seleccionar cualquier punto y que muestre la hora de registro
       selectionModels: [
         charts.SelectionModelConfig(
           changedListener: (charts.SelectionModel model) {
@@ -175,6 +186,7 @@ class Data {
   static List<charts.Series<ChartPoint, double>> createSampleData(
     ChartData partograph,
   ) {
+    //Configuracion de nueva curva de alerta
     final nuevaCurvaAlerta = charts.Series<ChartPoint, double>(
       id: 'Nueva Curva Alerta',
       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
@@ -182,8 +194,8 @@ class Data {
       measureFn: (ChartPoint point, _) => point.y,
       data: partograph.newAlertCurve,
     )
-      // Configure our custom line renderer for this series.
       ..setAttribute(charts.rendererIdKey, 'alertNewCurveLine');
+    //Configuracion de curva de alerta
     final curvaAlerta = charts.Series<ChartPoint, double>(
       id: 'Curva de Alerta',
       colorFn: (_, __) => charts.MaterialPalette.purple.shadeDefault,
@@ -192,9 +204,8 @@ class Data {
       data: partograph.alertCurve,
     )
       ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId')
-      // Configure our custom line renderer for this series.
       ..setAttribute(charts.rendererIdKey, 'alertCurveLine');
-
+  //Configuracion de nueva curva de real
     final curvaReal = charts.Series<ChartPoint, double>(
       id: 'Curva Real',
       colorFn: (_, __) => charts.MaterialPalette.black,
@@ -202,6 +213,7 @@ class Data {
       measureFn: (ChartPoint point, _) => point.y,
       data: partograph.realCurve,
     )..setAttribute(charts.rendererIdKey, 'realCurveLine');
+    //Configuracion de puntos de tabla de vigilancia medica y altura de la presentacion
     final medicalSurveillancePoints = charts.Series<ChartPoint, double>(
       id: 'MedicalSurveillance',
       displayName: '',

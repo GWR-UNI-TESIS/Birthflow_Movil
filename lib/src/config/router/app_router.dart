@@ -44,6 +44,7 @@ import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/med
 import 'package:birthflow_movil/src/ui/partograph/views/medical_surveillance/medical_surveillance_list_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partogram_modification_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_history_screen.dart';
+import 'package:birthflow_movil/src/ui/partograph/views/partograph_pdf_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_readonly_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/partograph_screen.dart';
 import 'package:birthflow_movil/src/ui/partograph/views/presentation_position_variety/presentation_position_variety_create_screen.dart';
@@ -437,6 +438,16 @@ class AppRouter {
                   );
                 },
               ),
+              GoRoute(
+                path: AppPaths.home.partographPath.report.goRoute,
+                builder: (context, state) {
+                  final partographId =
+                      state.pathParameters[AppPaths.home.partographPath.id]!;
+                  return PdfViewPage(
+                    partographId: partographId,
+                  );
+                },
+              ),
             ],
           ),
         ],
@@ -540,5 +551,6 @@ class _StreamToListenable extends ChangeNotifier {
     super.dispose();
   }
 
+  // ignore: strict_top_level_inference
   void _tt(event) => notifyListeners();
 }
